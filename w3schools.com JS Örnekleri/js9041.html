@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js9041.html: JS ve jQuery ile html DOM örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JS ve jQuery DOM</h4>
+    <p id="göster">Paragraf</p>
+
+    <script src="js9011x.js"></script>
+    <p id="konum1">Selam Türkiye!</p>
+    <p id="konum2">Selam Avustralya!</p>
+
+    <script>
+        function fonk2() {
+            var eleman = document.getElementById ("konum1");
+            setTimeout (()=>{eleman.parentNode.removeChild (eleman);}, 5000);
+            setTimeout (()=>{$ ("#konum2").remove();}, 5000);
+        } // func sonu...
+        function fonk3() {
+            return "JS ile: " + document.getElementById ("konum1").parentNode.nodeName +
+                "; jQuery ile: " + $ ("#konum2").parent().prop ("nodeName");
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Konum-id'le bir html DOM eleman (yumrusunu) silmeyi JS document.getElementById('konum').parentNode.removeChild(yumru) \
+            ile yaparken jQuery kýsaca $('#konum').remove()'la yapmaktadýr: " + fonk2() +
+            "<br>2) Bir konumun ebeveyn yumrusunu döndürmek için JS document.getElementById('konum').parentNode.nodeName \
+            kodlamasýný kullanýrken jQuery kýsaca $('#konum').parent().prop('nodeName') kullanmaktadýr: " + fonk3()
+    </script>
+</body>
+</html>

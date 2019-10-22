@@ -1,0 +1,87 @@
+<rss version="2.0">
+<channel>
+    <title>w3resource.com recent updates</title>
+    <link>recent-updates.xml</link>
+    <description>w3resource.com recent updates.</description>
+<item>
+    <title>Ajax Tutorial</title>
+    <link>https://www.w3resource.com/ajax/introduction.php</link>
+    <description>In this tutorial we will see how to make Ajax work with PHP and MySQL. We will create a small web application. In that, as soon as you start typing an alphabet in the given input field, a request goes to the PHP file via Ajax, a query is made to the MySQL table, it returns some results and then those results are fetched by Ajax and displayed.</description> 
+</item>
+<item>
+    <title>Working with Ajax, PHP and MySQL</title>
+    <link>https://www.w3resource.com/ajax/working-with-PHP-and-MySQL.php</link>
+    <description>This is the first tutorial of the series of Ajax tutorials which covers the introduction to Ajax. The tutorial will help you to get started with Ajax.</description> 
+</item>
+<item>
+    <title>JSON Schema Tutorial</title>
+    <link>https://www.w3resource.com/JSON/JSON-Schema.php</link>
+    <description>In this tutorial we will discuss JSON Schema, a proposed Internet draft defining a JSON media type (application/schema+json). Internet Engineering Task Force defines JSON Schema as follows:</description>
+</item>
+<item>
+    <title>Create Responsive Image and Content Slider with Orbit</title>
+    <link>https://www.w3resource.com/zurb-foundation3/orbit.php</link>
+    <description>Orbit is a JavaScript Image and Content Slider from Zurb Foundation 3, to create image and content slider easily. This tutorial unfolds the nuances of using Orbit.</description>
+</item>
+<item>
+    <title>Create Modal or Popup Windows with Reveal</title>
+    <link>https://www.w3resource.com/zurb-foundation3/reveal.php</link>
+    <description>You may create Modal or Popup Windows using Reveal - A Jquery Plugin form Zurb Foundaiton 3. In this tutorial, we will see how to use Reveal.</description>
+</item>
+<item>
+    <title>Responsive Web Design with Twitter Bootstrap</title>
+    <link>https://www.w3resource.com/twitter-bootstrap/responsive-design.php</link>
+    <description>This tutorial is about how to apply responsive design feature into your web layout. And in the course, you will also learn about Responsive Web Design. With the proliferation of mobile devices, it has become almost unavoidable that you don't have a version of your website which users can view well when browsing through mobile devices. And Responsive Web Design is a very efficient way to serve the purpose.</description>
+</item>
+<item>
+    <title>Zurb Foundation 3 Navigation</title>
+    <link>https://www.w3resource.com/zurb-foundation3/navigation.php</link>
+    <description>In this tutorial you will see how to create Navigations with Zurb Foundation 3. The framework offers navigations for various context and they are capable to be rendered across various devices.</description>
+</item>
+<item>
+    <title>Creating text effects with CSS3 text-shadow</title>
+    <link>https://w3resource.com/gallery/css3/text-effects-with-css3-text-shadow-property/</link>
+    <description>With CSS3 text-shadow property, it is much more easier now to create text effects like glowing effect, blurring effect, outlining, flaming effect etc. This document shows how to create text effects with CSS3 text shadow property.</description>
+</item>
+<item>
+    <title>SQL question answer</title>
+    <link>https://www.w3resource.com/sql/question-answer.php</link>
+    <description>This document is a collection of questions with short and simple answers useful for learning sql as well as for interviews.</description>
+</item>
+<item>
+    <title>HTML5 embed element</title>
+    <link>https://www.w3resource.com/html5/embed-element.php</link>
+    <description>HTML5 embed element represents external non-HTML application or interactive content. A good example is, when embed element is used to represent a flash movie(SWF file).</description>
+</item>
+<item>
+    <title>PostgreSQL JOIN</title>
+    <link>https://w3resource.com/PostgreSQL/postgresql-join.php</link>
+    <description>The main concept which is focusing on a join is that, two or more data sets, when joined, combined there columns into a new set of rows, including each of the columns requested from each of the data sets.</description>
+</item>
+<item>
+    <title>Zurb Foundation 3 Forms</title>
+    <link>https://www.w3resource.com/zurb-foundation3/forms.php</link>
+    <description>In this tutorial you will see how to create Forms with Zurb Foundation 3. The way Forms can be created with Foundation 3, is versatile. Let's begin with a simple example.</description>
+</item>
+<item>
+    <title>Zurb Foundation 3 Buttons</title>
+    <link>https://www.w3resource.com/zurb-foundation3/buttons.php</link>
+    <description>In this tutorial you will see how to create Buttons with Zurb Foundation 3. Foundation 3 Buttons are easy to use and customize.</description>
+</item>
+<item>
+    <title>Create multi-device layouts with Zurb Foundation 3 Grid</title>
+    <link>https://www.w3resource.com/zurb-foundation3/grid-to-create-multi-device-layout.php</link>
+    <description>In this tutorial you will see how to create multi-device layouts with Zurb Foundation 3 Grid. The Grid is 12 column. You may also nest Grids with this Grid system.</description>
+</item>
+<item>
+    <title>Introduction to Zurb Foundation 3</title>
+    <link>https://w3resource.com/zurb-foundation3/introduction.php</link>
+    <description>Zurb Foundation 3 is a responsive front-end framework to build web sites and apps fast. It has all the basic as 	 well as advanced features for rapid prototyping. In this document you will get an overview of what this framework may offer.</description>
+</item>
+<item>
+    <title>A Twitter Bootstrap based simple table generator</title>
+    <link>https://w3resource.com/gallery/javascript/a-twitter-bootstrap-based-simple-table-generator/</link>
+    <description>This gallery item presents a Twitter Bootstrap based simple table generator. If you are new to front end development, this may help you to understand how to create and manipulate DOM with JavaScript. For others, we hope that it may come handy when you need to create HTML tables quickly for your next project.</description>
+</item>
+</channel>
+</rss>

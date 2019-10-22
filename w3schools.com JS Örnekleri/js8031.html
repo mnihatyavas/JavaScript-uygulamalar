@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8031.html: JSON'a karþý XML örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON ve XML</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            // .json dosyasý:
+            jsonNesnesi = {"iþgörenler": [
+                {"ad": "John", "soyad": "Doe"},
+                {"ad":"Anna", "soyad":"Smith"},
+                {"ad":"Peter", "soyad":"Jones"}
+            ]}; // json sonu...
+
+            /* .xml dosyasý:
+                <iþgörenler>
+                    <iþgören>
+                        <ad>John</ad>
+                        <lastName>Doe</soyad>
+                    </iþgören>
+                    <iþgören>
+                        <ad>Anna</ad>
+                        <soyad>Smith</soyad>
+                    </iþgören>
+                    <iþgören>
+                        <ad>Peter</ad>
+                        <soyad>Jones</soyad>
+                    </iþgören>
+                </iþgörenler>
+            */
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON ve XML sunucudan veri alýþveriþi için kullanýlýr. Örn.Her ikisi de 3 iþgörenli \
+            bir iþgörenler nesnesi içersin: " + fonk2() +
+            "<br>XML verilerine AJAX XMLHttpRequest() nesnesi ve xhr.responseXML dosya \
+            verisi iþlenerek ulaþýlýr. JSON verileri ise JSON.parse() çevrimiyle JS nesnesine \
+            çevrilir." +
+            "<br>2) AJAX uygulamalarýnda, XML için xhr.responseXML etiket adlarýyla ayýrtedilip \
+            xhr.responseXML.getElementsByTagName('dýþ-etiket')[i].getElementsByTagName('iç-etiket')[0].firstChild.data \
+            ile görünür bilgiye çevrilir." +
+            "<br>JSON içinse JSON.parse (xhr.responseText) ile çevrilir."
+    </script>
+</body>
+</html>

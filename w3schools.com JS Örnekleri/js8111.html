@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8111.html: AJAX XMLHttpRequest yerine JSONP kullanýmý örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script src="js8111x.js"></script>  <!--"js8111x.php"-->
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSONP</h4>
+    <p id="göster">Paragraf</p>
+
+    <button onclick="fonk2()">PHP kayýtlarý için týkla beni!</button>
+
+    <script>
+        function fonk2() {
+            var taslak = document.createElement ("script");
+            taslak.src = "js8111x.js";
+            // taslak.src = "https://www.w3schools.com/demo_jsonp2.php?callback=fonksiyonum";
+            document.body.appendChild (taslak);
+            fonk3();
+        } // func sonu...
+        function fonk3() {
+        var nesnem = JSON.parse (fonksiyonum() );
+        console.log (nesnem);
+        var i;
+        for (i = 0; i < nesnem.iþgörenler.length; i++) {
+            console.log (
+                "Ýsim: " + nesnem.iþgörenler [i].isim +
+                "; Yaþ: " + nesnem.iþgörenler [i].yaþ +
+                ", Ýkamet: " + nesnem.iþgörenler [i].þehir + "\n");
+            } // for sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSONP (JSON with Padding/Tampon), sunucuyla veri alýþveriþinde \
+            bulunurken JSON gibi AJAX XMLHttpRequest kullanmaz; bunun yerine \
+            sadece script etiketini kullanýr. " + fonk3() +
+            "<br>2) Benzer þekilde aþaðýdaki http düðmesini týklayarak sanal script yaratýp \
+            PHP dosyasýný okutup, iþaret edilen fonksiyonu iþleterek de kayýtlara ulaþabiliriz:" +
+            "<br>3) Sunucunun hangi fonksiyon adýyla bize dönüþ yapacaðýný bilemeyebiliriz. \
+            Bunun için dönüþ fonksiyon adýný 'callback' olarak tanýmlayýp kendi fonksiyon \
+            adýmýza eþitlersek bu sorun da çözülür."
+    </script>
+</body>
+</html>

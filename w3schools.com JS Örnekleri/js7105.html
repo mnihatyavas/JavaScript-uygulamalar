@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7105.html: Lokal sunucunun ajax php dosyasýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-5</h4>
+    <p id="göster">Paragraf</p>
+
+    <div id="göster2">
+        <p>Bu DIV kutusunu içi sunucudan gelecek cevapla yerdeðiþtirecektir.</p>
+    </div>
+    <button type="button" onclick="fonk2()">Ad ve soyadý göster</button>
+
+    <script>
+        function fonk2() {
+            var xhr = new XMLHttpRequest();
+            xhr.open ("GET", "js7105x.php?fname=M.Nihat&lname=Yavaþ");
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById ("göster2").innerHTML = this.responseText;
+                    alert (this.responseText);
+                    try {alert (JSON.parse (this.response) );
+                    }catch (ist) {console.log ("Ýstisna hatasý:", ist);}
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.send();
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML ="HATA: PHP dosyasý JSON'la da çevrilemiyor."
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"isim": "M.Nihat Yavaş", "yaş": 62, "şehir": "Mersin"}

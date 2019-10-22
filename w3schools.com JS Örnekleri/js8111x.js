@@ -1,0 +1,3 @@
+function fonksiyonum() {return (
+    ' { "iþgörenler": [ {"isim": "M.Nihat Yavaþ", "yaþ": 62, "þehir": "Mersin"}, {"isim": "Sevim Yavaþ", "yaþ": 56, "þehir": "Bursa"}, {"isim": "Canan Candan", "yaþ": 44, "þehir": "Antalya"} ] }' );
+} // func sonu...

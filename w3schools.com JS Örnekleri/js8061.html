@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8061.html: JSON stringify ile JS nesnesinden sunucu dizgesine çevirme örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON.stringify()</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var jsNesnesi = {isim: "M.Nihat Yavaþ", doðum: new Date ("1957-04-17"), yaþ: function() {return 2019 - 1957;}, ikamet: "Toroslar-Mersin" };
+            console.log ("Ýsim: " + jsNesnesi.isim + "; Doðum tarihi: " + jsNesnesi.doðum + "; Yaþ: " + eval ("("+jsNesnesi.yaþ+")")() + "; Ýkamet: " + jsNesnesi.ikamet);
+            jsNesnesi.yaþ = jsNesnesi.yaþ.toString();
+            var jsonDizgesi = JSON.stringify (jsNesnesi);
+            console.log ("JSON dizgesi: " + jsonDizgesi);
+        } // func sonu...
+        function fonk3() {
+            var jsDizisi = [
+                ["M.Nihat Yavaþ", new Date ("1957-04-17"), "function() {return 2019 - 1957;}", "Toroslar-Mersin"],
+                ["Sevim Yavaþ", new Date ("1963-01-01"), "function() {return 2019 - 1963;}", "Yýldýrým-Bursa"],
+                ["Canan Candan", new Date ("1975-01-01"), "function() {return 2019 - 1975;}", "Kaleiçi-Antalya"] ];
+            console.log ("Ýsim: " + jsDizisi [0] [0] + "; Doðum tarihi: " + jsDizisi [0] [1] + "; Yaþ: " + eval ("("+jsDizisi [0] [2]+")")() + "; Ýkamet: " + jsDizisi [0] [3]);
+            var jsonDizgesi = JSON.stringify (jsDizisi);
+            console.log ("JSON dizgesi: " + jsonDizgesi);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Sunucuyla iletiþim verileri metin tipinde olmalýdýr. Bu yüzden JS nesnesi \
+            JSON.stringify(jsNesnesi) ile sunucuya gönderilmeye hazýr dizgeye çevrilmelidir: " + fonk2() +
+            "<br>JS dizileri de ayný þekilde sunucu metnine çevrilir: " + fonk3() +
+            "<br>2) JSON.stringify() new Date() tarih fonksiyonunun fonksiyonluðunu çeviremez \
+            ve çevrilen verili tarihin sabit dizgesine dönüþür: " + JSON.stringify ({þuan: new Date()+"" }) +
+            "<br>3) JSON.stringify(), fonksiyonlarý dizgeleþtiremez ve anahtar-deðer çiftini siler: " +
+            JSON.stringify ({yaþ: function() {return 2019 - 1957;} }) +
+            "<br>Bu silinmeyi önlemek için çevrim öncesi fonksiyonlar týrnak içine alýnýp \
+            dizgeleþtirilmeli ve icabederse eval() kullanarak dizgeden tekrar fonksiyonunun \
+            icra edilebileceði JS kodlamasýna dönüþtürülmelidir. Yaþ: " + eval ("(" + "function(){return 2019 - 1963}" + ")")()
+    </script>
+</body>
+</html>

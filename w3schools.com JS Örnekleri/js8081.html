@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8081.html: JSON dizilerinde ekleme, deðiþiklik, silme ve döküm örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON Dizileri</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "doðum": "1957-04-17", "hayatta": true, "yaþ": (2019 - 1957),
+                "arabalar": ["Ford", "Fiat", "Daiatsu", "Toyoto", "Peugeo"] };
+            return "Ýsim: " + jsonNesnesi ["isim"] + "; Ýlk arabam: " + jsonNesnesi.arabalar [0];
+        } // func sonu...
+        function fonk3() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "doðum": "1957-04-17", "hayatta": true, "yaþ": (2019 - 1957),
+                "arabalar": ["Ford", "Fiat", "Daiatsu", "Toyoto", "Peugeo"] };
+            var a = jsonNesnesi.arabalar, sonuç = "<br>";
+            for (b in a) {sonuç += a [b] + ", ";}
+            sonuç += "<br>";
+            for (var i = 0; i < a.length; i++) {sonuç += a [i] + ", ";}
+            return sonuç;
+        } // func sonu...
+        function fonk4() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "doðum": "1957-04-17", "hayatta": true, "yaþ": (2019 - 1957),
+                arabalar: [
+                    {"isim": "Ford", "modeller": ["1982 17M Makaslý Station", "Fiesta", "Focus", "Mustang"]},
+                    {"isim": "BMW", "modeller": ["320", "X3", "X5"]},
+                    {"isim": "Fiat", "modeller": ["1984 Þahin", "500", "Panda"]} ] };
+            var a = jsonNesnesi.arabalar, i, j, sonuç = "";
+            for (i in a) {sonuç += "<br><b>" + a [i].isim + "</b>: ";
+                for (j in a [i].modeller) {sonuç += a [i].modeller [j] + ", ";}
+            } // dýþ-for sonu...
+            return sonuç;
+        } // func sonu...
+        function fonk5() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "doðum": "1957-04-17", "hayatta": true, "yaþ": (2019 - 1957),
+                arabalar: [
+                    {"isim": "Ford", "modeller": ["1982 17M Makaslý Station", "Fiesta", "Focus", "Mustang"]},
+                    {"isim": "BMW", "modeller": ["320", "X3", "X5"]},
+                    {"isim": "Fiat", "modeller": ["1984 Þahin", "500", "Panda"]} ] };
+            // Ýlaveler...
+            jsonNesnesi.arabalar [jsonNesnesi.arabalar.length] = {"isim": "Audi", "modeller": ["2020", "Z2050"] };
+            jsonNesnesi.arabalar [2].modeller [jsonNesnesi.arabalar[2].modeller.length] = "Koala";
+            // Deðiþiklik...
+            jsonNesnesi.arabalar [2].modeller [0] = "1983 Þahin";
+            // Silme...
+            delete jsonNesnesi.arabalar [1].modeller [1];
+            // Döküm...
+            var a = jsonNesnesi.arabalar, i, j, sonuç = "";
+            for (i in a) {sonuç += "<br><b>" + a [i].isim + "</b>: ";
+                for (j in a [i].modeller) {sonuç += a [i].modeller [j] + ", ";}
+            } // dýþ-for sonu...
+            return sonuç;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON nesnesi dizileri, nesne içinde bir özelliðe çoklu deðer atamasý yapabilir. \
+            Dizi deðerleri dizge, sayý, ikili, null, dizi ve nesne olabilir. JS nesne dizi deðerleri \
+            ise bunlara ilaveten, fonksiyon, tarih, undefined ve geçerli herhangibir JS kodlama \
+            ifadesi olabilir. Dizi deðerlerine eriþim, özellik sonrasý endeksli []'le saðlanýr: " + fonk2() +
+            "<br>2) Çoklu özellikler ise for-in yada normal for döngüsüyle taranabilir: " + fonk3() +
+            "<br>3) Bir dizi deðeri, içinde alt dizi deðerleri, hatta alt nesne anahtar-deðer çiftleri \
+            içerebilir. Bunlarýn toplam taranmasý içiçe 2 for döngüsüyle yapýlabilir: " + fonk4() +
+            "<br>4) Dizi deðerlerinde deðiþiklik, ilave ve silmeler [endeks]'leriyle yapýlýr: " + fonk5()
+    </script>
+</body>
+</html>

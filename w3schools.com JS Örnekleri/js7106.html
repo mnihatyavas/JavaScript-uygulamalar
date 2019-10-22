@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7106.html: Lokal sunucunun ajax php dosyasýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #formum {
+            padding:20px;
+            width:50%;
+            background-color:DarkKhaki;
+            border: solid 2px Magenta;}
+        textarea {
+            background-color:Linen;
+            color:Green;
+            width: 100%;
+            height:200px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-6</h4>
+    <p id="göster">Paragraf</p>
+
+    <form id="formum">
+        <label>Ad ve soyad:</label>
+        <div><input type="text" name="isim"></div>
+        <br>
+        <label>Açýklamalarýnýz:</label>
+        <div><textarea name="yorum"></textarea></div>
+        <p><button type="button" onclick="fonk2()">Formu gönder</button></p>
+    </form>
+    <br/>
+    <div id="göster2" style="background-color:Blue; color:Yellow;">
+        <p>Bu DIV kutusunun içi sunucu cevabýyla yerdeðiþtirecektir.</p>
+    </div> 
+
+    <script>
+        function fonk2() {
+            var xhr = new XMLHttpRequest();
+            xhr.open ("GET", "js7106x.php");
+            xhr.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById ("göster2").innerHTML = this.responseText;
+                } // if sonu...
+            }; // xhr sonu...
+            var formum = document.getElementById ("formum");
+            var formVerileri = new FormData (formum);
+            xhr.send (formVerileri);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML ="JS AJAX, PHP komutlarýný metin olarak algýlýyor, yorumlayamýyor."
+    </script>
+</body>
+</html>

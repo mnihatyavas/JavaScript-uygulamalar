@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8051.html: JSON parse ile dizgeden JS kodlamasýna çevirme örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON.parse()</h4>
+    <p id="göster">Paragraf</p>
+
+    <p>Nesne içeriðini görmek istersen baðlantýyý týkla: <a href="js8051x1.txt" target="_">js8051x1.txt</a></p>
+    <p>Dizi içeriðini görmek istersen baðlantýyý týkla: <a href="js8051x2.txt" target="_">js8051x2.txt</a></p>
+
+    <script>
+        function fonk2() {
+            var sunucuMetni = '{"isim":"M.Nihat Yavaþ", "yaþ": "function() {return 2019 - 1957;}", "þehir":"Mersin"}';
+            var jsNesnesi = JSON.parse (sunucuMetni);
+            console.log ("Ýsim: " + jsNesnesi.isim + "; Yaþ: " + eval ("("+jsNesnesi.yaþ+")")() );
+        } // func sonu...
+        function fonk3() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsNesnesi = JSON.parse (xhr.responseText);
+                    console.log ("Ýsim: " + jsNesnesi.isim + "; Yaþ: " + eval ("("+jsNesnesi.yas+")")() + "; Þehir: " + jsNesnesi.sehir);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "js8051x1.txt", true);
+            xhr.send (null);
+        } // func sonu...
+        function fonk4() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsDizisi = JSON.parse (xhr.responseText);
+                    console.log ("Ýsim: " + jsDizisi [0] + "; Doðum tarihi: " + new Date (jsDizisi [1]) + "; Yaþ: " + eval("("+jsDizisi [2]+")")() + "; Þehir: " + jsDizisi [3]);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "js8051x2.txt", true);
+            xhr.send (null);
+        } // func sonu...
+        function fonk5() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsNesnesi = JSON.parse (xhr.responseText);
+                    console.log ("Ýsim: " + jsNesnesi.isim + "; Yaþ: " + eval ("("+jsNesnesi.yas+")")() + "; Þehir: " + jsNesnesi.sehir + "; Doðum Tarihi: " + jsNesnesi.dogum);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "js8051x1.txt", true);
+            xhr.send (null);
+        } // func sonu...
+        function fonk6() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsNesnesi = JSON.parse (xhr.responseText);
+                    var jsNesnesi = JSON.parse (xhr.responseText, function (anahtar, deðer) {
+                        if (anahtar == "dogum") {return new Date (deðer);
+                        }else {return deðer;}
+                    }); // var sonu...
+                    console.log ("Ýsim: " + jsNesnesi.isim + "; Yaþ: " + eval ("("+jsNesnesi.yas+")")() + "; Þehir: " + jsNesnesi.sehir + "; Doðum Tarihi: " + jsNesnesi.dogum);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "js8051x1.txt", true);
+            xhr.send (null);
+        } // func sonu...
+        function fonk7() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsNesnesi = JSON.parse (xhr.responseText);
+                    var jsNesnesi = JSON.parse (xhr.responseText, function (anahtar, deðer) {
+                        if (anahtar == "dogum") {return new Date (deðer);
+                        }else if (anahtar == "yas") {return eval ("("+deðer+")");
+                        }else {return deðer;}
+                    }); // var sonu...
+                    console.log ("Ýsim: " + jsNesnesi.isim + "; Yaþ: " + jsNesnesi ["yas"]() + "; Þehir: " + jsNesnesi.sehir + "; Doðum Tarihi: " + jsNesnesi.dogum);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "js8051x1.txt", true);
+            xhr.send (null);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Sunucunun size sunduðu bilgi daima dizgedir. Þayet JS kodlamasý \
+            içerdiði düþünülüyorsa JSON.parse() ile dizgeden kodlamaya çevrilir. " + fonk2() +
+            "<br>2) http.server'la localhost:8000 sunucunun sunduðu disk dosya metin içeriði \
+            AJAX XMLHttpRequest nesnesiyle açýlýp xhr.responseText ile okunur ve JSON.parse() \
+            ile JS kodlamasýna çevrilerek içerdiði bilgiler yansýtýlabilir: " + fonk3() +
+            "<br>3) Þayet sunucu dosyasýndaki veri JSON nesnesi formatýnda deðil dizi ise \
+            çevrilen JS kodlamasýna dizi olarak iþlem yapýlmalýdýr: " + fonk4() +
+            "<br>4) Tarih nesneleri JSON.parse() tarafýndan çevrilemiyor. Bu yüzden varsa \
+            bunlar dizge olarak konulmalýdýr: " + fonk5() +
+            "<br>==>Yada JSON.parse(metin, function(anahtar,deðer){..}) reviver/canlandýrýcý \
+            fonksiyonla metnin herbir isim-deðer çiftini irdeleyip icabýnda tarihe dönüþtürme \
+            özelliðini kullanabilirsiniz: " + fonk6() +
+            "<br>5) JSON.parse() nesneiçi fonksiyonlarý tanýmaz, bu yüzden varsa bunlarý \
+            dizge olarak yazýp, sonra icabýnda eval() ile tekrar JS fonksiyonuna dönüþtürebilirsiniz: " + fonk7()
+    </script>
+</body>
+</html>

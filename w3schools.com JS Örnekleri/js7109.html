@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7109.html: Lokal sunucunun ajax'la metin ve xml dosyalarýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <!--<input type="button" value="Sil" onClick="fonk1()">-->
+    <h4>AJAX Örnek-9</h4>
+    <p id="göster">Paragraf</p>
+
+    <FORM name="ajax" method="POST" action="">
+        <input type="BUTTON" value="Metin dosyasýný oku"  onClick="fonk2()">
+    </FORM>
+    <FORM name="ajax2" method="POST" action="">
+        <INPUT type="BUTTON" value="Aþamalarý izle" ONCLICK="fonk3 ('js7109x.txt')">
+    </FORM>
+    <FORM name="ajax3" method="POST" action="">
+        <INPUT type="BUTTON" value="Dosyayý kontrol et" ONCLICK="fonk4 (document.ajax3.filename.value)">
+        <INPUT type="text" name="filename" value="js7109x.txt" maxlength="40">
+    </FORM>
+    <FORM name="form1" method="POST" action="">
+        <INPUT type="BUTTON" value="XML dosyadan doldur"  ONCLICK="fonk5()">
+        <INPUT type="text" name="bir" size="20" value="">
+        <INPUT type="text" name="iki">
+        <INPUT type="text" name="üç">
+    </FORM>
+    <FORM name="ajax4" method="POST" action="">
+        <INPUT type="BUTTON" value="HTML'yi al ve göster" ONCLICK="fonk7 ('js7109.html')">
+    </FORM>
+
+    <script>
+        function fonk2() {
+            var xhr = new XMLHttpRequest();
+            xhr.open ("GET", "js7109x.txt", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {console.log (xhr.responseText);} 
+            }; // xhr sonu...
+            xhr.send (null); 
+        } // func sonu...
+        function fonk3 (yurel) {
+            xhr = new XMLHttpRequest();
+            console.log ("Baþladý...");
+            xhr.open ("GET", yurel, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    console.log (xhr.readyState);
+                    if (xhr.status == 200) {
+                        console.log ("Tamamlandý...");
+                        alert (xhr.responseText);
+                    } // if sonu...
+                    else {alert ("HATA: " + xhr.status);}
+                }else {console.log (xhr.readyState);}
+            } // xhr sonu...
+            xhr.send (null);
+        } // func sonu...
+        function fonk4 (yurel) { 
+            xhr = new XMLHttpRequest();
+            xhr.open ("GET", yurel, true); // "HEAD"
+            xhr.onreadystatechange = function() {
+                console.log ("Sunucuyu bekliyor...");
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {console.log ("Bu disk dosyasý mevcut...");
+                    }else {
+                        if (xhr.status == 404) console.log ("Aranan dosya mevcut deðil!");
+                        else console.log ("HATA, durumu: " + xhr.status);
+                    } // else sonu...
+                    alert (xhr.responseText);
+                } // if sonu...
+            } // xhr sonu...
+            xhr.send (null);
+        } // func sonu...
+        function fonk6 (xmlDökümaný) {
+            document.form1.bir.value= xmlDökümaný.getElementsByTagName ("bir") [0].firstChild.data;
+            document.form1.iki.value= xmlDökümaný.getElementsByTagName ("iki") [0].firstChild.data;
+            document.form1.üç.value= xmlDökümaný.getElementsByTagName ("üç").item (0).firstChild.nodeValue;
+        } // func sonu...
+        function fonk5() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {fonk6 (this.responseXML);
+                }else {console.log ("HATA; hata kodu: " + xhr.status + ", " + xhr.statusText);}
+            }; // xhr sonu...
+            xhr.open ("GET", "js7109x.xml", true);
+            xhr.send (null); 
+        } // func sonu...
+        function fonk7 (yurel) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {console.log (this.responseHTML); };
+            } // xhr sonu...
+            xhr.open ("GET", yurel, true);
+            xhr.send (null);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML ="xhr.responseText haricinde xhr.responseXML ve xhr.responseHTML tanýnmýyor!.."
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7104.html: Lokal sunucunun ajax php dosyasýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-4</h4>
+    <p id="göster">Paragraf</p>
+
+    <label>Ýsminizi girin:
+        <input type="text" id="ajaxDizgesi" />
+    </label>
+    <span id="ajaxDüðmesi" style="cursor: pointer; text-decoration: underline">
+        Bir ajax php talebi yapalým
+    </span>
+
+    <script>
+        ( function() {
+            var xhr; // XmlHttpRequest...
+            document.getElementById ("ajaxDüðmesi").onclick = function() {
+                var kullanýcý = document.getElementById ("ajaxDizgesi").value;
+                talepYap ('js7104x.php', kullanýcý);
+            }; // doc.. sonu...
+
+            function talepYap (yurel, ad) {
+                xhr = new XMLHttpRequest();
+                if (! xhr) {
+                    alert ('Sonlandýrýyorum: (XMLHTTP tiplemesi yaratamýyorum');
+                    return false;
+                } // if sonu...
+                xhr.onreadystatechange = içeriðiAlertÝleGöster;
+                xhr.open ('GET', 'js7104x.php'); // true:asenkron varsayýlý...
+                xhr.setRequestHeader ('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send ('isim=' + encodeURIComponent (ad) );
+            } // func sonu...
+
+            function içeriðiAlertÝleGöster() {
+                try {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {// === 4
+                        if (xhr.status === 200) {
+                            //var cevap = JSON.parse (xhr.responseText);
+                            alert (xhr.responseText); // cevap.computedString
+                        }else {alert ('Taleple ilgili bir problem var!..'); }
+                    } // if sonu...
+                }catch (ist) {alert ('Ýstisna yakalandý: ' + ist.description); }
+            } // func sonu...
+        })(); // ana func sonu...
+
+        document.getElementById ("göster").innerHTML ="PHP çalýþmýyor."
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8021.html: JSON sözdizimi örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON Sözdizimi</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var jsNesnesi = {isim: "M.NihatYavaþ", yaþ: 62, þehir: "Mersin" };
+            console.log ("Ýsim: " + jsNesnesi.isim);
+            console.log ("Ýsim: " + jsNesnesi ["isim"]);
+            jsNesnesi.isim = "Mahmut Nihat Yavaþ";
+            console.log ("Ýsim: " + jsNesnesi.isim);
+            jsNesnesi ["þehir"] = "Malatya";
+            console.log ("Þehir: " + jsNesnesi.þehir);
+            var jsonNesnesi = {"isim": "M.NihatYavaþ", "yaþ": 62, "þehir": "Mersin" };
+            console.log ("Ýsim: " + jsonNesnesi.isim);
+            console.log ("Ýsim: " + jsonNesnesi ["isim"]);
+            jsonNesnesi.isim = "M.N.Yavaþ";
+            console.log ("Ýsim: " + jsonNesnesi.isim);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON nesnesi kývrýmlý parantezlerle, dizisi ise köþeli parantezlerle çevrilidir. \
+            Veriler 'isim':deðer çiftlerinden oluþur ve birbirlerinden virgülle ayrýlýrlar. JSON \
+            isimleri týrnak içindedir, JS isimleri ise týrnak gerektirmez: " + fonk2() +
+            "<br>2) JSON deðeri, bir dizge, sayý, JSON nesnesi, dizi, ikili ve null/hiç olabilir. \
+            JS deðeri ise bunlara ilaveten bir fonksiyon, tarih ve undefined/tanýmsýz olabilir." +
+            "<br>3) JSON dosya uzantýlarý '.json', JSON metni MIME tipleri ise 'application/json' \
+            þeklindedir."
+    </script>
+</body>
+</html>
+

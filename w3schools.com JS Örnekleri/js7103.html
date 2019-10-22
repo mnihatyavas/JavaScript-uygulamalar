@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7103.html: Lokal sunucunun ajax xml dosyasýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-3</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <button id="ajaxDüðmesi" type="button">Lokal sunucuya bir XML ajax talebi yapalým</button>
+
+    <script>
+        ( function() {
+            var xhr; // XmlHttpRequest...
+            document.getElementById ("ajaxDüðmesi").addEventListener ('click', talepYap);
+
+            function talepYap() {
+                xhr = new XMLHttpRequest();
+                if (! xhr) {
+                    alert ('Sonlandýrýyorum: (XMLHTTP tiplemesi yaratamýyorum');
+                    return false;
+                } // if sonu...
+                xhr.onreadystatechange = içeriðiAlertÝleGöster;
+                xhr.open ('GET', 'js7103x.xml'); // true:asenkron varsayýlý...
+                xhr.send();
+            } // func sonu...
+
+            function içeriðiAlertÝleGöster() {
+                try {
+                    if (xhr.readyState === 4) {// === XMLHttpRequest.DONE
+                        if (xhr.status === 200) {// Türkçe karakteri veriyor...
+                            var xmlDökümaný = xhr.responseXML;
+                            var kök_yumru = xmlDökümaný.getElementsByTagName ('kök').item (0);
+                            alert (kök_yumru.firstChild.nodeValue); // nodeValue=data
+                        }else {alert ('Taleple ilgili bir problem var!..'); }
+                    } // if sonu...
+                }catch (ist) {alert ('Ýstisna yakalandý: ' + ist.description); }
+            } // func sonu...
+        })(); // ana func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

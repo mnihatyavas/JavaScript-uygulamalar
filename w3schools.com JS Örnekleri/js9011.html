@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js9011.html: JS'e karþý jQuery seçicileri örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>jQuery Seçicileri</h4>
+    <p id="göster">Paragraf</p>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <p id="konum-1" class="selam" style="display:none;">Merhaba Dünya!</p>
+    <p id="konum-2" class="selam" style="display:none;">Merhaba Türkiye!</p>
+    <p id="konum-3" class="selam" style="visibility:hidden;">Merhaba Avustralya!</p>
+    <p id="göster2">Paragraf-2</p>
+    <p id="göster3">Paragraf-3</p>
+    <p id="göster4">Paragraf-4</p>
+    <p id="göster5">Paragraf-5</p>
+
+    <script>
+        function fonk2() {
+            $ (document).ready (function() {// window.onload = function(){..}, veya (function(){..})() ile ayný...
+                var eleman = $ ("#konum-1") [0];
+                $ ("#göster2").text ("Paragraf konum-1, konum-2 ve konum-3 cümleleri: " +
+                    eleman.innerHTML + "; " + $ ("#konum-2") [0].innerHTML + "; " + $ ("#konum-3") [0].innerHTML);
+            }); // $.. sonu...
+            window.onload = function() {
+                var eleman = document.getElementById ("konum-1").innerHTML;
+                document.getElementById ("göster3").innerHTML =
+                    "Paragraf konum-1, konum-2 ve konum-3 cümleleri: " +
+                    eleman + "; " +
+                    document.getElementById ("konum-2").innerHTML + "; " +
+                    document.getElementById ("konum-3").innerHTML;
+            }; // win.. sonu...
+        } // func sonu...
+        function fonk3() {
+            $ (document).ready (function() {// Çalýþmasý için jquery.min.js gerekmektedir...
+                var elemanlar = $ ("p");
+                $("#göster4").text ("Bulunan 2.paragraf: " + elemanlar [1].innerHTML);
+            }); // $.. sonu...
+            (function() {
+                var elemanlar = document.getElementsByTagName ("p");
+                document.getElementById ("göster5").innerHTML =
+                    "Bulunan son paragraf: " + elemanlar [elemanlar.length - 1].innerHTML;
+            }) (); // (.. sonu...
+        } // func sonu...
+        function fonk4() {
+            var sonuç = "";
+            (function() {// $'lý function içteki sonuç'u dýþa yansýtmadý...
+                var elemanlar = $ (".selam");
+                sonuç += elemanlar [0].innerHTML;
+            })(); // (.. sonu...
+            (function() {
+                var elemanlar = document.getElementsByClassName ("selam");
+                sonuç += "; " + elemanlar [elemanlar.length - 1].innerHTML;
+            })(); // (.. sonu...
+            return sonuç;
+        } // func sonu...
+        function fonk5() {
+            var sonuç = "";
+            (function() {
+                var elemanlar = $ ("p.selam");
+                sonuç += elemanlar [elemanlar.length - 1].innerHTML;
+            })(); // (.. sonu...
+            (function() {
+                var elemanlar = document.querySelectorAll ("p.selam");
+                sonuç += "; " + elemanlar [0].innerHTML;
+            })(); // (.. sonu...
+            return sonuç;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) jQuery 2006 yýlýnda John Resig tarafýndan tarayýcý uyumsuzluklarýný \
+            yönetme, HTML DOM iþlemlerini basitleþtirme, olay yönetimi, canlandýrma \
+            ve AJAX için geliþtirilmiþ; çok popüler olmuþ, ancak JS-5 (2009) sürümünün \
+            jQuery kullanýmlarýný birkaç satýrlýk kodlamayla yapmalarý üzerine eski \
+            önemini nisbeten yitirmiþtir." +
+            "<br>2) JS'in document.getElementById('konum') yerine jQuery kýsaca \
+            $('#konum') notasyonunu kullanmaktadýr: " + fonk2() +
+            "<br>3) JS'in document.getElementsByTagName('p') yerine jQuery kýsaca \
+            $('p') gösterimini kullanmaktadýr: " + fonk3() +
+            "<br>4) JS'in document.getElementsByClassName('sýnýf') yerine jQuery kýsaca \
+            $('.sýnýf') gösterimini kullanmaktadýr: " + fonk4() +
+            "<br>5) JS'in document.querySelectorAll('p.selam') yerine jQuery kýsaca \
+            $('p.selam') gösterimini kullanmaktadýr: " + fonk5()
+    </script>
+</body>
+</html>

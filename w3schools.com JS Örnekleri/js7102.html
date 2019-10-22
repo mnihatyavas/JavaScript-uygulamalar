@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7102.html: Ajax lokal sunucunun html dosyasýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-2</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <button id="ajaxDüðmesi" type="button">Lokal sunucuya bir ajax talebi yapalým</button>
+
+    <script>
+        ( function() {
+            var xhr; // XmlHttpRequest...
+            document.getElementById ("ajaxDüðmesi").addEventListener ('click', talepYap);
+
+            function talepYap() {
+                xhr = new XMLHttpRequest();
+                if (! xhr) {
+                    alert ('Sonlandýrýyorum: (XMLHTTP tiplemesi yaratamýyorum');
+                    return false;
+                } // if sonu...
+                xhr.onreadystatechange = içeriðiAlertÝleGöster;
+                xhr.open ('GET', 'js7102x.html'); // true:asenkron varsayýlý...
+                xhr.setRequestHeader ('Content-Type', 'charset="iso:8859-9 Türkçe" '); // Etkisiz...
+                xhr.send();
+            } // func sonu...
+
+            function içeriðiAlertÝleGöster() {
+                try {
+                    if (xhr.readyState === 4) {// === XMLHttpRequest.DONE
+                        if (xhr.status === 200) {
+                            alert (xhr.responseText);
+                            console.log (xhr.getAllResponseHeaders() );
+                        }else {alert ('Taleple ilgili bir problem var!..'); }
+                    } // if sonu...
+                }catch (ist) {alert ('Ýstisna yakalandý: ' + ist.description); }
+            } // func sonu...
+
+        })(); // ana func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

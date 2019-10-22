@@ -1,0 +1,1 @@
+{"isim": "M.Nihat Yavaþ", "dogum": "1957-04-17", "yas": "function() {return 2019 - 1957;}", "sehir": "Mersin"}

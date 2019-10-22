@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8101.html: JSON kayýtlarýyla HTML sayfasýna dökümleme örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        select {
+            background-color:Navy;
+            color:Fuchsia;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON ve HTML</h4>
+    <p id="göster">Paragraf</p>
+
+    <h4>Aþaðýya açýlan menüyle seçenekli tablo verilerini görebilirsiniz</h4>
+    <select id="seçimim" onchange="fonk2 (this.value)">
+        <option value="">Dökümlenecek birini seçin:</option>
+        <option value="customers">Müþteriler</option>
+        <option value="products">Ürünler</option>
+        <option value="suppliers">Tedarikçiler</option>
+    </select>
+    <p id="göster2"></p>
+
+    <script>
+        function fonk2 (seç) {
+            var nesne, vtParametresi, xhr, nesnem, x, metin = "";
+            nesne = {table: seç, limit: 20};
+            vtParametresi = JSON.stringify (nesne);
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    nesnem = JSON.parse (this.responseText);
+                    metin += "<table border='1'>";
+                    for (x in nesnem) {metin += "<tr><td>" + nesnem [x].isim + "</td></tr>";}
+                    metin += "</table>";
+                    document.getElementById ("göster2").innerHTML = metin;
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("POST", "https://www.w3schools.com/json_demo_db_post.php", true);
+            xhr.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+            xhr.send ("x=" + vtParametresi);
+        } // func sonu...
+        function fonk3 (seç) {
+            var nesne, vtParametresi, xhr, nesnem, x, metin = "";
+            nesne = {table: seç, limit: 20};
+            vtParametresi = JSON.stringify (nesne);
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    nesnem = JSON.parse (this.responseText);
+                    metin += "<select>";
+                    for (x in nesnem) {metin += "<option>" + nesnem [x].isim;}
+                    metin += "</select>";
+                    document.getElementById ("göster2").innerHTML = metin;
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("POST", "https://www.w3schools.com/json_demo_db_post.php", true);
+            xhr.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+            xhr.send ("x=" + vtParametresi);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) PHP sunucu veritabanýndan alýnan müþteri ve ürünler kayýtlarý JSON.parse() ile, \
+            JS'e kolayca çevrilir, ve JS'le de html dosyanýzda script etiketi içinde að \
+            sayfanýzý þekillendirebilir, örneðin alýnan kayýtlarý bir tablo olarak dökümleyebilirsiniz: " +
+            "<br>2) Okunan verileri table-tr-td yerine select-option olarak da sarkan \
+            menüye yerleþtirebilrsiniz: " + fonk3 ("suppliers")
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7101.html: Ajax resim büyütme örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #görseller {
+            position:relative;
+            height:932px;
+            min-heigth:932px;
+            margin:10px;
+            overflow:auto;}
+        #solgörsel {
+            position:absolute;
+            top:0px;}
+        #büyükgörsel {
+            position:absolute;
+            top:0px;
+            left: 300px;
+            /* background-color:inherit; */
+            width:400px;
+            min-height:400px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-1</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <h3>Resim görüntüsünü büyüten ajax kodlamasý</h3>
+
+    <div id="görseller">
+        <div id="solgörsel">
+            <p><img src="resim/týrnak-kýz.gif" width="199" height="152" onmouseover="büyüt (this)"> </p>
+            <p><img src="resim/týrnak-düþünce.gif" width="198" height="173" onmouseover="büyüt (this)"></p>
+            <p><img src="resim/týrnak-kumsal.gif" width="200" height="196" onmouseover="büyüt (this)"></p>
+            <p><img src="resim/týrnak-deniz.gif" width="200" height="348" onmouseover="büyüt (this)"></p>
+        </div>
+        <div id="büyükgörsel" onclick="alert (decodeURIComponent (this.innerHTML));">Kaynak ismi için týklayýn</div>
+    </div>
+
+    <script>
+/* Gereksiz kodlama; dolayýsýyla gereksiz ajax örneði. Html-css-js örneði...
+        küçükleriYükle ("resim/büyük-kýz.gif");
+        küçükleriYükle ("resim/büyük-düþünce.gif");
+        küçükleriYükle ("resim/büyük-deniz.gif");
+        küçükleriYükle ("resim/büyük-kumsal.gif");
+
+        function küçükleriYükle (yurel) {
+            var xhttpTalebi = new XMLHttpRequest;
+            xhttpTalebi.onreadystatechange = function() {
+                if (xhttpTalebi.readyState == 4) {
+                    var metinDökümaný = xhttpTalebi.responseText;
+                    var resim = new Image();
+                    resim.src = metinDökümaný;
+                } // if sonu...
+            }; // xht.. sonu...
+            xhttpTalebi.open ("GET", yurel , true); // asenkron aç...
+            xhttpTalebi.send (null);
+        } // func sonu...
+*/
+
+        function büyüt (yurel) {
+            var tamYol = yurel.src; // "http://.../resim/...gif" tam yollu resim dosyasý adý...
+            ad = dosyaAdý (tamYol); // yol'suz dosyaadý...
+            ad = ad.slice (12); // baþtaki esc"týrnak-"=12krk kýsmýný çýkar...
+            ad = "resim/büyük-" + ad; // baþa "resim-büyük-" ekle...
+            var dizge = "<img src=' " + ad + " ' >";
+            document.getElementById ("büyükgörsel").innerHTML = dizge;
+        } // func sonu...
+        function dosyaAdý (yurel) {// baþtaki yol dizin adlarý kýrpýlacak...
+           var x = yurel.lastIndexOf ("/");
+            yurel = yurel.slice (x + 1);
+            return yurel;
+        } // func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

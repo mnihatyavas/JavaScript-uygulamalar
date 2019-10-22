@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8071.html: JSON nesneleri örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON Nesneleri</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsNesnesi = JSON.parse (xhr.responseText);
+                    console.log ("JS nesnesi: " + jsNesnesi);
+                    console.log ("Ýsim: " + jsNesnesi.kisi1 ["isim"] + "; Yaþ: " + jsNesnesi.kisi1.yas + "; Arabasý: " + jsNesnesi.kisi1.araba + "; Halen yaþýyor mu? " + jsNesnesi.kisi1.hayatta);
+                    console.log ("Memet Yavaþ hayatta mý? " + jsNesnesi.kisi4.hayatta);
+                    console.log ("Canan Candan'ýn araba modeli: " + jsNesnesi.kisi3 ["araba"]);
+
+                    console.log ("\njs8071x.txt dosyasýndaki bütün verilerin listesi:");
+                    for (a in jsNesnesi) {
+                        var b = jsNesnesi [a];
+                        var kiþi = "";
+                        for (c in b) {kiþi += b [c] + ", ";}
+                        console.log (kiþi);
+                    } // for sonu...
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "js8071x.txt", true);
+            xhr.send (null);
+        } // func sonu...
+        function fonk3() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "yaþ": (2019-1957), "arabalar":
+                {"araba1": "Ford", "araba2": "BMW", "araba3":
+                    {"model1": "Fiat klasik 1981", "model2": "Fiat 2019", "model3": "Fiat 2020"}
+                } }; // var sonu...
+            return jsonNesnesi.arabalar.araba1 + "; " + jsonNesnesi.arabalar.araba3 ["model1"];
+        } // func sonu...
+        function fonk4() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "yaþ": (2019-1957), "arabalar":
+                {"araba1": "Ford", "araba2": "BMW", "araba3":
+                    {"model1": "Fiat klasik 1981", "model2": "Fiat 2019", "model3": "Fiat 2020"}
+                } }; // var sonu...
+            var a = jsonNesnesi.arabalar.araba3;
+            var fiatlar = "";
+            for (b in a) {fiatlar += a [b] + ", ";}
+            return fiatlar;
+        } // func sonu...
+        function fonk5() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "yaþ": (2019-1957), "arabalar":
+                {"araba1": "Ford", "araba2": "BMW", "araba3":
+                    {"model1": "Fiat klasik 1981", "model2": "Fiat 2019", "model3": "Fiat 2020"}
+                } }; // var sonu...
+            var a = jsonNesnesi.arabalar.araba1 = "Audi";
+            var b = jsonNesnesi.arabalar.araba3 ["model2"] = "Fiat 2015";
+            return a + "; " + b;
+        } // func sonu...
+        function fonk6() {
+            var jsonNesnesi = {"isim": "M.Nihat Yavaþ", "yaþ": (2019-1957), "arabalar":
+                {"araba1": "Audi", "araba2": "BMW", "araba3":
+                    {"model1": "Fiat klasik 1981", "model2": "Fiat 2015", "model3": "Fiat 2020"}
+                } }; // var sonu...
+            jsonNesnesi.arabalar.araba3.model4 = "Fiat 2018"; // Özellik ilavesi...
+            delete jsonNesnesi.arabalar.araba3.model3; // Özellik silme...
+            var a = jsonNesnesi.arabalar.araba3, fiatlar = "";
+            for (b in a) {fiatlar += a [b] + ", ";}
+            return fiatlar;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON nesneleri kývrýmlý parantezlerle çevrilidir. Birbirlerinden virgülle ayrýk \
+            anahtar-deðer çiftlerinden oluþur. Anahtar dizge, deðer ise dizge, sayý, ikili, null/hiç, \
+            fonksiyon, dizi ve nesne olabilir. Anahtar-deðer arasýnda 2 nokta üstüste (kolon) vardýr." +
+            "<br>2) Herhangibir js nesne deðerine eriþim ./noktalý veya []/köþeli parantez içi týrnaklý \
+            yapýlabilir: " + fonk2() +
+            "<br>3) Çoklu kayýtlar ve kayýt özellikleri for(a in b) döngüsüyle taranabilir. Burada \
+            a, b nesnesinin anahtarýdýr. Deðere ulaþmak içinse b[a] kullanýlmalýdýr." +
+            "<br>4) Ýçiçe JSON nesneleri yaratýlabilir. Deðere eriþim yine noktalý veya köþe \
+            parantezli mümkündür: " + fonk3() +
+            "<br>Ayrýca for-in'le herhangibir içiçe seviye verileri taranabilir: " + fonk4() +
+            "<br>5) Verilerde deðiþiklik için yine heriki .[] notasyon da kullanýlabilir: " + fonk5() +
+            "<br>6) JSON nesnesinden özellik silme delete ile sona eklenti ise doðrudan yapýlýr: " + fonk6()
+    </script>
+</body>
+</html>

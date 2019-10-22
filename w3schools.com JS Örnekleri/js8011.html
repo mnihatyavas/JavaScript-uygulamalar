@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8011.html: JSON ile sunucu veri alýþveriþi ve depolama örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON'a Giriþ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            // Sunucuya gönder...
+            var jsNesnesi = {isim: "M.Nihat Yavaþ", yaþ: 62, þehir: "Mersin"};
+            var jsonDizgesi = JSON.stringify (jsNesnesi);
+            //window.location = "js801x.php?x=" + jsonDizgesi;
+            console.log (jsNesnesi + "=" + jsonDizgesi);
+
+            // Sunucudan al...
+            var jsNesnesi = JSON.parse (jsonDizgesi);
+            console.log (jsNesnesi + "; Ýsim: " + jsNesnesi.isim);
+
+            // Lokal depoya sakla ve sonra da al...
+            localStorage.setItem ("lokalDepo1", jsonDizgesi);
+            dizge1 = localStorage.getItem ("lokalDepo1");
+            var jsNesnesi = JSON.parse (dizge1);
+            console.log (dizge1 + "; Nesne: " + jsNesnesi + "; Ýsim: " + jsNesnesi.isim);
+            localStorage.removeItem ("lokalDepo1");
+            //localStorage.clear(); // Hepsini siler...
+        } //func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON: JavaScriptObjectNotation/JSNesneGösterimi. JSON verileri lokal \
+            depoda saklama ve sunucuyla deðiþtokuþ sözdizimidir." +
+            "<br>JSON ile JS kodlarýný dizgeye çevirip sunucuya yollar, ondan gelen dizgeyi de \
+            tekrar JS kodlamasýna çevirip iþletiriz. Böylece sunucuyla müþteri arasýndaki \
+            bilgi iletiþimi JSON aracýlýðýyla saðlanmýþ olur." + fonk2()
+    </script>
+</body>
+</html>
+

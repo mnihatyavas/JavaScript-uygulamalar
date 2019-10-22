@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8091.html: JSON nesnelerinin PHP ile iliþkisi örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON ve PHP</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //alert (this.responseText);
+                    nesnem = JSON.parse (this.responseText);
+                    console.log ("Ýsim: " + nesnem.isim);
+                } // if sonu..
+            }; // xhr sonu...
+            //xhr.open ("GET", "js8091x1a.php", true);
+            xhr.open ("GET", "js8091x1b.php", true);
+            xhr.send();
+        } // func sonu...
+        function fonk3() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //alert (this.responseText);
+                    nesnem = JSON.parse (this.responseText);
+                    console.log ("Ýsim: " + nesnem [nesnem.length - 1]);
+                } // if sonu..
+            }; // xhr sonu...
+            //xhr.open ("GET", "js8091x2a.php", true);
+            xhr.open ("GET", "js8091x2b.php", true);
+            xhr.send();
+        } // func sonu...
+        function fonk4() {
+            var nesne, vtParametresi, xhr, nesnem, x, metin="";
+            nesne = {"table": "customers", "limit":10};
+            vtParametresi = JSON.stringify (nesne);
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log (this.responseText);
+                    nesnem = JSON.parse (this.responseText);
+                    for (x in nesnem) {metin += nesnem [x].isim + "<br>";}
+                    console.log (metin);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("GET", "https://www.w3schools.com/json_demo_db.php?x=" + vtParametresi, true);
+            xhr.send();
+        } // func sonu...
+        function fonk5() {
+            var nesne, vtParametresi, xhr, nesnem, x, metin = "";
+            // Ayný veritabanýndan "customers" yanýsýra "products" verileri de alýnabilir...
+            nesne = {"table": "customers", "limit": 10};
+            vtParametresi = JSON.stringify (nesne);
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    nesnem = JSON.parse (this.responseText);
+                    for (x in nesnem) {metin += nesnem [x].isim + "<br>";}
+                    console.log (metin);
+                } // if sonu...
+            }; // xhr sonu...
+            xhr.open ("POST", "https://www.w3schools.com/json_demo_db_post.php", true);
+            xhr.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+            xhr.send ("x=" + vtParametresi);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON, bir PHP sunucusunun .php dosyasýndan veri okuyabilir. AJAX \
+            XMLHttpRequest ile bir .php dosyasýný xhr.responseText olarak okuyup \
+            içerdiði kayýt alanlarýna eriþelim: " + fonk2() +
+            "<br>==>NOT: (Lokal) sunucu PHP olmayýnca php komutlarýný JSON.parse \
+            çeviremiyor." +
+            "<br>==>Ayný þekilde PHP dizi verilerini de JSON nesnesine çevirir: " + fonk3() +
+            "<br>2) PHP sunucu veritabanýndan müþteriler listesini 10 adetle sýnýrlayýp \
+            talep edebiliriz: " + fonk4() +
+            "<br>3) PHP sunucuyla GET deðil POST metoduyla veri alýþveriþinde bulunulduðunda \
+            parametrik deðer open() deðil send() metoduyla gönderilir: " + fonk5()
+    </script>
+</body>
+</html>

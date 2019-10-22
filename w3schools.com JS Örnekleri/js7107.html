@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7107.html: Lokal sunucunun ajax php dosyasýný okuma örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        body {padding-top: 40px; padding-left: 25%}
+        li {list-style: none; margin:5px 0 5px 0; color:#FF0000}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Örnek-7</h4>
+    <p id="göster">Paragraf</p>
+
+    <form class="well-home span6 form-horizontal" name="xml-ajax" id="xml-ajax" onsubmit="onay()">
+        <div class="control-group">
+            <label class="control-label" for="userid">Kullanýcý</label>
+            <div class="controls">
+                <input type="text" id="userid" placeholder="5-12 krk, gerekli">
+                <li id="msg1"></li>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Þifre</label>
+            <div class="controls">
+                <input type="password" id="password" placeholder="7-12 krk, gerekli">
+                <li id="msg2"></li>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="name">Ad soyad</label>
+            <div class="controls">
+                <input type="text" id="name" placeholder="harfler & boþluk, gerekli">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="country">Ülke</label>
+            <div class="controls">
+                <select class="span3" id="country" style="background-color:Moccasin;">
+                    <option>HÝNDÝSTAN</option>
+                    <option>ABD</option>
+                    <option>BK</option>
+                    <option>KANADA</option>
+                    <option>FRANSA</option>
+                    <option>AVUSTRALYA</option>
+                    <option>TÜRKÝYE</option>
+                </select>
+            </div>
+        </div> 
+        <div class="control-group">
+            <label class="control-label" for="zip">Posta kodu</label>
+            <div class="controls">
+                <input type="text" id="zip" placeholder="6 haneli rakam, gerekli">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="email">Eposta</label>
+            <div class="controls">
+                <input type="text" id="email" placeholder="Gerekli">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="mfg">Cinsiyet</label>
+            <div class="controls">
+                <label class="checkbox inline">
+                    <input type="checkbox" id="c1" value="option1"> Erkek
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="c2" value="option2"> Diþi
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="lang">Lisan</label>
+            <div class="controls">
+                <label class="radio">
+                    <input type="radio" name="optionsRadios" id="l1" value="option1" checked> Ýngilizce
+                </label>
+                <label class="radio">
+                    <input type="radio" name="optionsRadios" id="l2" value="option2"> Baþka
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="tn tn-success">Gönder</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function onay() {
+            var userid, password, name, country, zip, email, xmlString, data;
+            userid = document.getElementById ("userid").value;
+            password = document.getElementById ("password").value;
+            name = document.getElementById ("name").value;
+            country = document.getElementById ("country").value;
+            zip = document.getElementById ("zip").value;
+            email = document.getElementById ("email").value;
+
+            xhr = new XMLHttpRequest();
+            xmlString = // Lisan ve cinsiyet nerede...
+                "<userinfo>" +
+                    "    <userid>" + escape (userid) + "</userid>" +
+                    "    <password>" + escape (password) + "</password>" +
+                    "    <name>" + escape (name) + "</name>" +
+                    "    <country>" + escape (country) + "</country>" +
+                    "    <zip>" + escape (zip) + "</zip>" +
+                    "    <email>" + escape (email) + "</email>" +
+                "</userinfo>";
+
+            alert (xmlString);
+            var url = "js7107x.php";
+            xhr.open ("POST", url, true);
+            xhr.setRequestHeader ("Content-Type", "text/xml");
+            xhr.send (xmlString);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML ="PHP kodlamasý çalýþtýrýlamýyor..."
+    </script>
+</body>
+</html>
+

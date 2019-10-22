@@ -1,0 +1,1 @@
+["M.Nihat Yavaþ", "1957-04-17", "function() {return 2019 - 1957;}", "Mersin"]

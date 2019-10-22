@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js9031.html: JS ve jQuery ile CSS stilleme örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JS ve jQuery CSS</h4>
+    <p id="göster">Paragraf</p>
+
+    <script src="js9011x.js"></script>
+    <p id="konum1">Selam Türkiye!</p>
+    <p id="konum2">Selam Avustralya!</p>
+
+    <script>
+        function fonk2() {
+            document.getElementById ("konum2").style.visibility = "hidden";
+            $ ("#konum1").hide();
+        } // func sonu...
+        function fonk3() {
+            setTimeout (()=>{document.getElementById ("konum2").style.visibility = "visible";}, 5000);
+            setTimeout (()=>{$ ("#konum1").show();}, 5000);
+        } // func sonu...
+        function fonk4() {
+            document.getElementById ("konum2").style.fontSize = "30px";
+            document.getElementById ("konum2").style.backgroundColor = "DarkRed";
+            document.getElementById ("konum2").style.color = "Yellow";
+            document.getElementById ("konum2").style.width = "250px";
+            $ ("#konum1").css ("font-size", "35px");
+            $ ("#konum1").css ("background-color", "Yellow");
+            $ ("#konum1").css ("color", "DarkRed");
+            $ ("#konum1").css ("width", "250px");
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) CSS bir elemaný saklamak için document.getElementById('konum').style.display='none' \
+            (veya visibility='hidden') kullanýrken jQuery kýsaca $('#konum).hide() kullanmaktadýr: " + fonk2() +
+            "<br>Tabi, ayrýca jQuery $ komutlarýnýn tanýnmasý için jquery.min.js çevrimiçi \
+            yada indirilip script src kaynaðý yukardaki gibi iþaret edilmelidir." +
+            "<br>2) CSS saklý bir elemaný göstermek için document.getElementById('konum').style.display='block' \
+            (veya display='' yada visibility='visible') kullanýrken jQuery kýsaca $('#konum').show() kullanmaktadýr: " + fonk3() +
+            "<br>3) Hertür style CSS stilleme komutunun hem JS hem de jQuery karþýlýðý \
+            vardýr. Örneðin, selam satýrlarýnýnýn ebat, alt ve üst renklerini deðiþtirelim: " + fonk4()
+    </script>
+</body>
+</html>

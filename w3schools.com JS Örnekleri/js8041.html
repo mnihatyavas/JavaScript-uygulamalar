@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js8041.html: JSON veri tipleri örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON Veri Tipleri</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            jsonNesnesi = {"iþgörenler": {
+                "iþgören1": {"adsoyad": "Mahmut Yavaþ", "göbekad": "Nihat", "yaþ": 62, "yaþýyorMu": true},
+                "iþgören2": {"adsoyad": "Sevim Yavaþ", "göbekad": null, "yaþ": 56, "yaþýyorMu": true},
+                "iþgören3": {"adsoyad": "Haným Yavaþ", "göbekad": "Amanat", "yaþ": 83, "yaþýyorMu": false} } };
+            console.log (jsonNesnesi.iþgörenler.iþgören1.adsoyad);
+            console.log (jsonNesnesi.iþgörenler.iþgören3.yaþýyorMu);
+
+            jsonNesnesi2 = {"iþgörenler": {// Baþlýk isimleri/anahtarlarý nesne...
+                "iþgören1": ["Mahmut Yavaþ", "Nihat", 62, true], // Deðerler dizi...
+                "iþgören2": ["Sevim Yavaþ", null, 56, true],
+                "iþgören3": ["Haným Yavaþ", "Amanat", 83, false] } };
+            console.log (jsonNesnesi2.iþgörenler.iþgören2 [0]);
+            console.log (jsonNesnesi2.iþgörenler.iþgören2 [1]);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON veri tipleri bir dizge, sayý, ikili, null/hiç, nesne ve dizi olabilir. " + fonk2() +
+            "<br>Örnekte, adsoyad ve göbekad deðerleri dizge," +
+            "<br>yaþ deðeri tamsayý/kayannokta sayý," +
+            "<br>yaþýyorMu deðeri ikili true/false," +
+            "<br>bazý göbekad deðeri null/hiç," +
+            "<br>{..} tipli isim-deðer çiftleri nesne ve" +
+            "<br>[..] tipli virgülle ayrýk deðerler listesi ise dizidir."
+    </script>
+</body>
+</html>
+

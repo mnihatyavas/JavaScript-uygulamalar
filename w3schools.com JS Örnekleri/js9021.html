@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js9021.html: JS ve jQuery HTML örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JS ve jQuery HTML</h4>
+    <p id="göster">Paragraf</p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <p id="konum1">Selam Türkiye!</p>
+    <p id="konum2">Selam Avustralya!</p>
+
+    <script>
+        function fonk2() {
+            setTimeout ( function() {$ ("#konum1").text ("Selam Avustralya!..");}, 5000);
+            setTimeout ( () => {document.getElementById ("konum2").innerHTML = "Selam Türkiye!..";}, 5000);
+        } // func sonu...
+        function fonk3() {
+            var sonuç = $ ("#konum1").text();
+            sonuç += "; " + (document.getElementById ("konum2").innerHTML ||
+                document.getElementById ("konum2").innerText ||
+                document.getElementById ("konum2").textContent);
+            return sonuç;
+        } // func sonu...
+        function fonk4() {
+            setTimeout ( ()=>{$ ("#konum1").html ("<p><b><i>Selam Almanya!</i></b></p>");}, 5000);
+            setTimeout ( () => {document.getElementById ("konum2").innerHTML = "<p><b><i>Selam Hollanda!</i></b></p>";}, 5000);
+        } // func sonu...
+        function fonk5() {
+            var sonuç = $ ("#konum1").html();
+            sonuç += "; " + document.getElementById ("konum2").innerHTML;
+            return sonuç;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS'in document.getElementById('konum')='metin...' gösterimiyle yeni metin içeriði \
+            atamasý, jQuery ile kýsaca $('#konum').text('metin...') ile yapýmaktadýr: " + fonk2() +
+            "<br>2) JS'in eleman deðerini document.getElementById('konum').innerHTML || \
+            document.getElementById('konum').textContent \
+            || document.getElementById('konum').innerText yöntemiyle almasýný jQuery \
+            kýsaca $('#konum').text() ile almaktadýr: " + fonk3() +
+            "<br>3) HTML içerik atamasýný JS document.getElementById('konum')='html metni' \
+            ile yaparken jQuery kýsaca $('#konum).html('html metni') ile yapmaktadýr: " + fonk4() +
+            "<br>4) HTML içeriðini almayý JS document.getElementById('konum').innerHTML \
+            ile yaparken jQuery kýsaca $('#konum).html() ile yapmaktadýr: " + fonk5()
+    </script>
+</body>
+</html>

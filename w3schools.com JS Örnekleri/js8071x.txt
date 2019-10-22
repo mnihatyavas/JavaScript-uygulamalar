@@ -1,0 +1,4 @@
+{   "kisi1": {"isim": "M.Nihat Yavaş", "yas": 62, "araba": null, "hayatta": true},
+    "kisi2": {"isim": "Sevim Yavaş", "yas": 56, "araba": "Opel", "hayatta": true},
+    "kisi3": {"isim": "Canan Candan", "yas": 44, "araba": "BMW", "hayatta": true},
+    "kisi4": {"isim": "Memet Yavaş", "yas": 83, "araba": null, "hayatta": false} }

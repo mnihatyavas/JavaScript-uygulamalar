@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5181.html: HTML vasıfları ve DOM özellikleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        .sipariş[data-input-durumu = "yeni"] {color: DarkGreen;}
+        .sipariş[data-input-durumu = "beklemede"] {color: Yellow;}
+        .sipariş[data-input-durumu = "iptal"] {color: FireBrick;}
+        .sipariş[data-input-durumu = "tamamlandı"] {color: Navy;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body id="body" vasıf1="standart-dışı" type="standart-dışı">
+    <input id="input" type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4 id="başlık">VASIFLAR ve ÖZELLİKLER</h4>
+    <p id="göster">Paragraf</p>
+
+    <div id="eleman1" hakkında="Fil" style="color:red; font-size:120%"></div>
+
+    <input id="giriş1" type="checkbox" checked>Çentikli Kutu<br>
+
+    <a id="çapa" href="#selam"></a>
+
+    <br><span yer-işareti="ad"> </span>
+    <span yer-işareti="soyad"> </span>
+    <span yer-işareti="yaş"></span><br>
+    <span yer-işareti="ikamet"></span><br>
+
+    <br><div id="sipariş" class="sipariş" data-input-durumu="yeni">
+        Yeni alınan sipariş.
+    </div>
+
+    <br><div data-bileşen-adı="menü">Cinsiyetinizi çentikleyin</div>
+
+    <br><a name="liste">İnternet adresleri listesi</a>
+    <ul>
+        <li><a href="http://google.com" target="_">http://google.com</a></li>
+        <li><a href="/eğitim" target="_">/eğitim.html</a></li>
+        <li><a href="yerel/yol" target="_">lokal/yol</a></li>
+        <li><a href="ftp://ftp.com/benim.zip" target="_">ftp://ftp.com/benim.zip</a></li>
+        <li><a href="http://yumrujs.org" target="_">http://yumrujs.org</a></li>
+        <li><a href="http://dahili.com/test" target="_">http://dahili.com/test</a></li>
+    </ul>
+
+    <script>
+        function fonk2() {
+            document.body.verilerim = {adı:"Sezar", ünvanı:"İmparator", tabiyeti:"Roma"};
+            return document.body.verilerim.adı + "->" + document.body.verilerim.ünvanı +
+                "->" + document.body.verilerim.tabiyeti;
+        } // func sonu...
+        function fonk3() {
+            let dizge1 = "";
+            for (let vasıf of eleman1.attributes) {dizge1 += `${vasıf.name}=${vasıf.value}`  + "; ";}
+            return dizge1;
+        } // func sonu...
+        function fonk4() {
+            let bölüm = document.querySelector ('div');
+            // vasıf => özellik
+            bölüm.setAttribute ('id', 'eleman2');
+            return bölüm.id;
+        } // func sonu...
+        function fonk5() {
+            let bölüm = document.querySelector ('div');
+            // özellik => vasıf
+            bölüm.id = 'eleman3';
+            return bölüm.getAttribute ('id');
+        } // func sonu...
+        function fonk6() {
+            let giriş = document.querySelector ('input');
+            // vasıf => özellik
+            giriş.setAttribute ('value', 'Yenile');
+            return giriş.value; // Günceller...
+        } // func sonu...
+        function fonk7() {
+            let giriş = document.querySelector ('input');
+            // özellik => vasıf GEÇERSİZ DEĞİL...
+            giriş.value = 'Sayfayı Yenile';
+            return giriş.getAttribute ('value'); // Güncellmiş...
+        } // func sonu...
+        function fonk8() {
+            return "vasıf:" + giriş1.getAttribute ('checked') + "; özellik:" + giriş1.checked;
+        } // func sonu...
+        function fonk9() {
+            return  "vasıf:[" + eleman3.getAttribute ('style') +
+                "]; özellik: " + eleman3.style +
+                "; detay:" + eleman3.style.color;
+        } // func sonu...
+        function fonk10() {
+            return "vasıf:[" + çapa.getAttribute ('href') + "]; özellik:[" + çapa.href + "]";
+        } // func sonu...
+        function fonk11() {
+            let kişi = {ad:"Nihat", soyad:"Yavaş", yaş:62, ikamet:"Toroslar-Mersin"};
+            for (let konum of document.querySelectorAll ('[yer-işareti]') ) {
+                let alan = konum.getAttribute ('yer-işareti');
+                konum.innerHTML = kişi [alan];
+            } // for sonu...
+        } // func sonu...
+        function fonk12() {
+            let öncekiDurum = sipariş.dataset.inputDurumu;
+            sipariş.dataset.inputDurumu = "iptal";
+            return "önce:[" + öncekiDurum + "]; şimdi:[" + sipariş.dataset.inputDurumu + "]";
+        } // func sonu...
+        function fonk13() {
+            let eleman = document.querySelector ('[data-bileşen-adı]');
+            return "özellik=" + eleman.dataset.bileşenAdı +
+                "; vasıf=" + eleman.getAttribute ("data-bileşen-adı");
+        } // func sonu...
+        function fonk14() {
+            let bağlantılar = document.querySelectorAll ('a');
+            for (let bağ of bağlantılar) {
+                let referans = bağ.getAttribute ('href');
+                if (!referans) continue; // href'siz a
+                if (!referans.includes ('://')) continue; // protokolsüz href
+                if (referans.startsWith ('http://dahili.com')) continue; // istisna referans
+                bağ.style.color = 'purple';
+            } // for sonu...
+        } // func sonu...
+        function fonk15() {
+            let seçici = 'a[href*="/"]:not([href*="://"]):not([href^="http://dahili.com"])';
+            let bağlantılar = document.querySelectorAll (seçici);
+            bağlantılar.forEach (bağlantılar => bağlantılar.style.color = 'pink');
+        } // func sonu...
+
+        document.body.etiketAdınıSöyle = function() {return this.tagName;};
+
+        Element.prototype.merhabaDe = function() {return `Merhaba, ben ${this.tagName} elemanıyım!..`;};
+
+        eleman1.setAttribute ('Deneme', 123);
+        eleman1.setAttribute ('yaş', 15);
+        eleman1.setAttribute ('köken', "Afrika");
+
+        let bağlantı = document.querySelectorAll ('a');
+        for (let bağ of bağlantı) {bağ.style.color = 'orange';}
+
+        document.getElementById ("göster").innerHTML =
+            "1) Tarayıcı ağ sayfasını yüklerken HTML vasıflarını DOM nesnesi özelliklerine \
+            çevirir (parse). Örneğin html (body id='sayfa') body.id='sayfa' olur. Bu vasıf-özellik \
+            çevrimi bazen farklı bazen de aynıdır." +
+            "<br>2) Pek çok DOM (yumrularının) hazır özellik ve metodları vardır. Bunlara \
+            kendimizinkileri de ekleyebiliriz." +
+            "<br>==>Örn.document.body yumru elemanına yeni 3 özellik katalım: " + fonk2() +
+            "<br>==>Aynı elemana etiketAdınıSöyle() metodunu da ekleyelim: " + document.body.etiketAdınıSöyle() +
+            "<br>3) Element.prototype gibi hazır prototipleri değiştirip tüm elemanlara \
+            yeni bir metod ekleyebiliriz." +
+            "<br>==>Örn.Tüm etiketli elemanlara kendilerini tanıttıran metod ekleyelim: " +
+            document.documentElement.merhabaDe() + "; " + document.body.merhabaDe() +
+            "; " + document.head.merhabaDe() +
+            "<br>4) HTML etiket vasıflarının standart veya kendimize özel standart-dışı \
+            vasıfları olabilir. Standart vasıflara doğrudan erişebilir, standart-dışı dahil tümüne \
+            de eleman.hasAttribute(ad), eleman.getAttribute(ad), eleman.setAttribute(ad,değer) ve \
+            eleman.removeAttribute(ad) metodlarıyla erişebiliriz. Html ad ve değer'leri \
+            büyük-küçük harfe duyarsızdır ve tırnak-içi dizge olarak belirtilmelidir." +
+            "<br>==>Örn.body elemanının stardart id kimlik ile standart-dışı vasıf1 \
+            vasıflarına doğrudan erişelim: " + document.body.id + "; " + document.body.vasıf1 +
+            "<br>==>Standart dışı vasıf1'e doğrudan erişemedik, getAttribute'ü kullanalım: " +
+            document.body.getAttribute ("vasıf1") +
+            "<br>==>Bir vasıf bir eleman için geçerliyken diğeri için standart dışı olabilir. \
+            Örn.type vasfı input elemanı için standart, ancak body elemanı içinse standart \
+            dışıdır; ve ancak getAttribute'la erişilebilir: " + input.type + "; " + body.type + "; " +
+            document.body.getAttribute ("type") +
+            "<br>==>Örn.eleman1 kimliğine ait tüm vasıfların isim-değer tespitini yapalım: " + fonk3() +
+            "<br>5) Standart HTML vasfı ile DOM özelliği arasında bazı küçük istisnalar \
+            dışında senkronize uyum vardır. Yani birinde yapılan değişiklik otomatikmen \
+            diğerinde de güncellenir." +
+            "<br>==>Örn.İlk div elemanı id kimlik vasfını değiştirip özelliğe bakalım: " + fonk4() +
+            "<br>Şimdi de özelliği değiştirip vasfa bakalım: " + fonk5() +
+            "<br>==>Örn.İlk input.value değişikliği sadece vasıf-->özellik için geçerlidir \
+            tersi değil: " + fonk6() +
+            "<br>Ancak gözlemde tersi için de geçerli çıkıyor: " + fonk7() +
+            "<br>6) DOM özellikleri genelde dizgedir, ancak bazen istisnaları da vardır." +
+            "<br>==>Örn.Aşağıdaki kontrol kutusunun checked vasfı boş, özelliği ise ikili true'dur: " + fonk8() +
+            "<br>==>Örn.div style vasfı dizge; özelliğiyse genelde nesne, detayda dizgedir: " + fonk9() +
+            "<br>==>href vasfı tırnak-içi dizge, özelliği tam uzunlukta yurel adresidir: " + fonk10() +
+            "<br>7) Bazen standart-dışı html vasıfları JS için konum işaretlerdir." +
+            "<br>==>Örn.ad, soyad ve yaş konumları id yerine standart-dışı yer-işareti vasıflı div/span \
+            konumlarıyla JS'ye bildirilmek istensin: " + fonk11() +
+            "<br>8) Standart-dışı vasıfların başına data-getirerek standart vasıfları bile \
+            özel vasıf olarak kullanabiliriz. CSS tireli vasıf adları büyükharfli özellik adına çevrilir." +
+            "<br>==>Örn.style sınıflamalı sipariş renklerini JS ile değiştirelim: " + fonk12() +
+            "<br>Dikkat ederseniz aşağıdaki yeşil renkli yeni sipariş kırmızı iptale çevrildi." +
+            "<br>9) Örn.Alttaki standart-dışı bileşen-adı'na vasıf ve özellik olarak ulaşalım: " + fonk13() +
+            "<br>10) Örn.Alttaki turuncu renkli a->href bağlantılarından // içeren ve dahili.com \
+            olmayanları seçip lacivert renkle gösterelim: " + fonk14() +
+            "<br>==>Şimdi de regex'le protokol içermeyen ve dahili olmayan bağlantıları \
+            seçip pembe renkle gösterelim: " + fonk15()
+    </script>
+</body>
+</html>

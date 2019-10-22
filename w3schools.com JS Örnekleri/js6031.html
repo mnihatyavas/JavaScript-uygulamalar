@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6031.html: BOM location tarayıcı pencere konum özellikleri ve metodu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM LOCATION</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) window.location nesnesi aktüel URL/yurel sayfa adresini alıp tarayıcıyı yeni bir \
+            sayfaya yöneltebilir (window öneksiz de kullanılabilir). Şu özelliklere sahiptir:" +
+            "<br>==>window.location.href, aktüel sayfanın href yurel adresini verir: " + window.location.href +
+            "<br>==>window.location.hostname, aktüel sayfanın (varsa) müşteri adresini verir: " + location.hostname +
+            "<br>==>window.location.pathname, aktüel sayfanın href yurel adres yolunu verir: " + location.pathname +
+            "<br>==>window.location.protocol, aktüel sayfanın (varsa) ağ protokolünü (file: veya http:) verir: " + location.protocol +
+            "<br>==>window.location.assign, aktüel sayfaya yeni bir döküman (açıksa internet sayfası veya dosya) yükler: " +
+            //location.assign ("C:\\Users\\pc\\Desktop\\MyFiles\\4. Dersler\\javascript\\js6031.html")
+            //location.assign ("http://www.w3schools.com")
+            //location.assign ("file://C:\\Users\\pc\\Desktop\\MyFiles\\4. Dersler\\javascript\\işli örnekler\\js6021.html")
+            location.assign ("#")
+    </script>
+</body>
+</html>

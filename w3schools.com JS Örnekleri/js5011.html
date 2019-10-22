@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5011.html: HTML DOM elemanını değiştirme ve silme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>HTML DOM'A GİRİŞ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) DOM: Document Object Model (Döküman Nesne Modeli). HTML DOM \
+            ile JS tarayıcı sayfasındaki tüm HTML elemanlarını, vasıflarını, CSS \
+            kodlamasını ve olaylarını değiştirebilir, silebilir veya ekleyebilirsiniz." +
+            "<br/>DOM bir W3C (World Wide Web Consortium: Dünya Çaplı Ağ \
+            Konsorsiyumu) standardıdır. Standardın 3 parçası: Nüve, XML ve HTML \
+            DOM'dur. HTML DOM elemanları nesnedir; değiştirilebilir, silinebil ve \
+            eklenebilir özellikleri, metodları ve olayları vardır." +
+            "<br/>2) Şu anda innerHTML ile HTML p=paragraf elemanının 'Paragraf' \
+            adlı içeriğini bu açıklamalarla değiştirmiş bulunmaktayız." +
+            "<br/>Sil tuşuna basarsanız da p HTML eleman içeriği silinmiş olur."
+    </script>
+</body>
+</html>

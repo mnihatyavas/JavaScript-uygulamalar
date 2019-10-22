@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5081.html: HTML DOM olayları ve tepkime kodlamaları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+        function fonk2 (konum) {konum.innerHTML = "Hooops... Yavaş ol!..";}
+        function fonk3() {document.getElementById ("göster2").innerHTML = Date();}
+        function fonk5() {
+            var çerezler = "";
+            if (navigator.cookieEnabled == true) {çerezler = "Çerezler etkinleştirilmiştir.";}
+            else {çerezler = "Çerezler etkin değildir.";}
+            document.getElementById ("göster3").innerHTML = çerezler;
+            alert ("Sayfa onlod/yüklendi ve çerez kontrolu yapıldı: " + çerezler);
+        } // func sonu...
+        function fonk6a() {
+            var isim2 = document.getElementById ("isim");
+            isim2.value = isim2.value.toUpperCase();
+        } // func sonu...
+        function fonk6b() {
+            var isim = document.getElementById ("isim");
+            isim.style.background = "Yellow";
+            isim.style.color = "Blue";
+        } // func sonu...
+        function fonk7a (nesne) {nesne.innerHTML = "Hoşgeldiniz, arzunuz?"}
+        function fonk7b (nesne) {nesne.innerHTML = "Güle güle, tekrar bekleriz!.."}
+        function fonk8a (nesne) {nesne.style.backgroundColor = "Blue"; nesne.innerHTML = "Hala basılı tuttuğunuzun farkındamısınız?"}
+        function fonk8b (nesne) {nesne.style.backgroundColor = "MidnightBlue"; nesne.innerHTML = "Ohhh, nihayet serbest bırakıp rahatlattınız beni!.."}
+        function fonk9a() {document.getElementById ('lambam').src = "resim/lambaAçık.gif";}
+        function fonk9b() {document.getElementById ('lambam').src = "resim/lambaKapalı.gif";}
+    </script>
+</head>
+<body onload="fonk5()">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4 style="width:170px;" onmouseover="style.color='Red'"onmouseout="style.color='Cyan'">DOM OLAYLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) JS, HTML olaylarına tepki verebilir; bu olaylar: farenin düğme üzerinde \
+            tıklanması, bir internet sayfasının yüklenmesi, bir resmin yüklenmesi, farenin \
+            bir html elemanı üzerinde gezinmeesi, bir veri giriş alan içeriğinin değişmesi, \
+            bir html formunun gönderilmesi veya belirli bir tuşa basılması vb olabilir." +
+            "<br>2) Alttaki ilk h3 metni tıklanınca içerik innerHTML'yle değiştirilir:" +
+            "<br>==>Alttaki ikinci h3 metni tıklanınca içerik JS fonksiyonuyla değiştirilir:" +
+            "<br>3) Olaylar html elemanlarına olay vasfıyla atanabilir. Aşağıda düğme \
+            tıklama olayı JS tarih değerini yine aynı düğme elemanına atamıştır:" +
+            "<br>==>İkinci düğmede ise tıklama olayı JS tarih değerini düğme konumu \
+            vasıtasıyla bir HTML DOM elemanı olan başka konumdaki harici bir paragrafa atamıştır:" +
+            "<br>4) Unload/sayfaAçıldı ve onunload/sayfaKapandı olayları bir JS fonksiyonuyla \
+            örneğin ağ sayfasına girerken veya çıkarken çerezlerin kontrolunda kullanılabilir: " +
+            "<br>5) Onchange olayıyla kullanıcı bir veri alan içeriğini değiştirirken JS \
+            fonksiyonuna yönlendirip dizgesel veri içeriğini büyük harfe çevirebilir:" +
+            "<br>6) Onmouseover ve onmouseout olaylarıyla fare bir html elemanı üzerinde \
+            veya uzaklaşırsa ilişkili bir JS fonksiyonu işletilebilir:" +
+            "<br>7) OnmouseDown ve onmouseup olayları fare tuşu basılı tutulur ve sonra \
+            serbest bırakılırsa ilgili JS fonksiyonlarını işletebilir:" +
+            "<br>8) Tüm HTML olayları listesi: abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, \
+            dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, \
+            hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, \
+            mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, \
+            ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, \
+            touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel."
+    </script>
+
+    <h3 style="color:DeepPink;" onclick="this.innerHTML='Hooop... Yavaş ol!..'">Bu 'h3' başlık metnini tıklayın!</h3>
+    <h3 style="color:Pink;" onclick="fonk2 (this)">Bu 'h3' başlık metnini tıklayın!</h3>
+
+    <button id="göster2" onclick="fonk3()">Aktüel tarih içerde</button>
+    <br><button id="buton">Aktüel tarih dışarda</button>
+
+    <br><br>Ad ve soyadınızı girin: <input type="text" id="isim" value="M.Nihat Yavaş" onfocus=fonk6b() onchange="fonk6a()">[Ent:]
+
+    <br><br><div onmouseover="fonk7a (this)" onmouseout="fonk7b (this)"
+        style="background-color:Purple; color: Azure; width:300px; height:20px; padding:5px;">
+        Fareyi Lütfen Üzerimde Dolaştırın
+    </div>
+
+    <br><span onmousedown="fonk8a (this)" onmouseup="fonk8b (this)"
+        style="background-color:RebeccaPurple; color: MintCream; width:550px; height:20px; padding:5px;">
+        Fareyi Üzerimde veya Lambada Basılı Tutun ve Sonra Bırakın
+    </span>
+    <img id="lambam" onmousedown="fonk9a()" onmouseup="fonk9b()" src="resim/lambaKapalı.gif" width="100" height="180" />
+
+    <p id="göster3"></p>
+
+    <script>
+        document.getElementById("buton").onclick = fonk4;
+        function fonk4() {document.getElementById ("göster3").innerHTML = Date();}
+    </script>
+</body>
+</html>

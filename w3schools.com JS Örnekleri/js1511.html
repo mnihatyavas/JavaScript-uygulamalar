@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1511.html: Çok sık yapılan JS kusurları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>GENEL KUSURLAR</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2 (n) {
+            switch (n) {
+                case 0: gün = "Pazar"; break;
+                case 1: gün = "Pazartesi"; break;
+                case 2: gün = "Salı"; break;
+                case 3: gün = "Çarşamba"; break;
+                case 4: gün = "Perşembe"; break;
+                case 5: gün = "Cuma"; break;
+                case 6: gün = "Cumartesi"; break;
+                default: gün = "Mümkünatsız";
+            } // swi.. sonu
+            return "Bugün günlerden " + gün + " günüdür.";
+        } // fun.. sonu...
+
+        function fonk3 (yaş) {
+            if (yaş > 64); {return yaş + "=Mağdufsunuz,TCDD ile %50 indirimli seyahat edebilirsiniz.";}
+            return "Bu kodlamaya ulaşılmaz!";
+        } // func sonu...
+
+        function fonk4 (yaş) {
+            if (yaş > 64) {return yaş + "=Mağdufsunuz,TCDD ile %50 indirimli seyahat edebilirsiniz.";}
+            return
+                "Bu kodlamaya ulaşılmaz!";
+        } // func sonu...
+
+        var x = 0, y = 0;
+        var isim1 = "M." +
+            " Nihat" +
+            " Yavaş";
+        var isim2 = "M. \
+            Nihat \
+            Yavaş";
+/*      var isim3 = "M.
+            Nihat
+            Yavaş";
+hatalı yazılım... */
+
+        var şahıs1 = ["Nihat", "Yavaş", (2019 - 1957)];
+        var şahıs2 = []; şahıs2 ["ad"] = "Nihat"; şahıs2 ["soyad"] = "Yavaş"; şahıs2 ["yaş"] = (2019 - 1957);
+
+        var şahıs3 = [ "Nihat", "Yavaş", (2019 - 1957), , ];
+        //var şahıs4 = {ad:"Nihat", soyad:"Yavaş", yaş: 46, ,}; // Hata...
+
+        var nesne1 = null;
+
+        for (var endeks = 0, toplam = 0; endeks < 10; endeks++) {toplam +=endeks; var tpl = toplam;}
+
+        document.getElementById ("göster").innerHTML =
+            "1) if eşitlik kontrolunda == yerine yanlışlıkla = atama işlemcisi kullanılabilir \
+            ve sürpriz sonuçlar türetir: " + (x == 10) + "; " + (y = x == 10? 5: 1) + "; " +
+            (y = x = 10? 5: 1) +
+            "<br/>2) Eşitlik kıyasında sadece değer sözkonusuysa ==, veri tipi de \
+            gözönünde bulundurulacaksa === kullanılır: " + x + "; " + (y = x == "5"? 7: 2) + "; " +
+            (y = x === "5"? 7: 2) +
+            "<br/>switch-case kıyasında === değer-tip eşitliği kullanılır." +
+            fonk2 (new Date().getDay() ) + "; " + fonk2 (new Date().getDay().toString() ) +
+            "<br/>3) Sayısal toplama ve dizgesel concat/ekleme aynı + işlemciyle yapıldığından \
+            bazen karışıklık çıkar: " + (x = 10 + 5) + "; " + (x = 10 + "5") +
+            "<br/>4) JS sayıları küsurat-64 olarak saklandığından bazen şaşırtıcı küsüratlar \
+            türer; sayıları 10'la çarpıp bölmek işe yarayabilir: " + (0.1 + 0.2) + "; " +
+            ((0.1 * 10 + 0.2 * 10) / 10) +
+            "<br/>5) Uzun dizgeler satırı taşarsa ya + yada \\ ile alt satırdan devam edilebilir: " +
+            isim1 + "; " + isim2 +
+            "<br/>6) if kıyası sonrası yanlışlıkla ; kullanılırsa her halukarda {} blok kodları \
+            işletilir: " + fonk3 (19) +
+            "<br/>7) return sonrasını ;'süz kırıp alta alırsanız, JS alttakileri ihmal eder: " +
+            fonk4 (79) + "; " + fonk4 (19) +
+            "<br/>8) Dizi elemanlarına endeksleriyle erişilir, dizi elemanlarına nesneler \
+            gibi anahtarkelimeleriyle erişmek isterseniz hata verir. Ancak dizi elemanlarını \
+            tek-tek anahtarkelimeleriyle girerseniz, JS diziyi nesne yapar ve anahtarkelimeli \
+            erişime izin verir; bu durumda da artık dizi özelliği yok olmuştur: " + şahıs1 + " ; " +
+            şahıs1[1] + "; " + şahıs1.length +
+            "<br/>" + şahıs2 ["ad"] + "; " + şahıs2 ["yaş"] + "; " + şahıs2 [1] + "; " + şahıs2.length +
+            "<br/>9) Dizi ve nesnenin son elemanından sonra hiç virgül koymayın, şaşırabilir: " +
+            şahıs1.length + "; " + şahıs3.length + "; " + //şahıs4.length // Hata...
+            "<br/>10) undefined tanımsız değişkenler, fonksiyonlar ve metodlar içindir; \
+            null ise tanımlı fakat değersiz nesneler. Bu yüzden önce tanımlılık sonra da \
+            değer içerip içermediği kontrol edilmelidir, tersi değil: " + (typeof nesne1) +
+            "; " + (nesne1 === null) + "; " + (typeof nesne2) + "; " + //(nesne2 === null) // Hata...
+            "<br/>11) Döngü içindeki var tanımlı lokal değişkenler dışarda undefined bilinir, \
+            fakat JS için değil: " + endeks + "; " + toplam + "; " + tpl
+    </script>
+</body>
+</html>

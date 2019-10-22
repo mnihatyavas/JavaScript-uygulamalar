@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5171.html: Yumru özellikleri type tag content örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    DOM YUMRU ÖZELLİKLERİ
+    <!-- Bu bir body giriş yorumudur -->
+    <input name="yenileme düğmesi" id="eleman3" type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4 id="başlık">DOM YUMRU ÖZELLİKLERİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <img src="resim/yumruÖzellikleri.png" alt="Yumru Özellikleri" height=250 />
+    <p id="göster2">M.Nihat Yavaş</p>
+
+    <div style="display:none;">Bu bölümlerin hiçbiri görünmez</div>
+    <div hidden>Zira "hidden" ile gizlenmiş vasıflıdır.</div>
+    <div id="eleman">JavaScript bu elemana "hidden" ile görünmezlik özelliği atamıştır.</div>
+
+    <div id="eleman2">Görünüp kaybolan div bölüm elemanı</div>
+
+        <ul hidden>
+            <li>Liste 1
+                <li>Liste 1.1
+                    <li>Liste 1.1.1
+                    </li>
+                </li>
+            </li>
+            <li>Liste 2
+                <li>Liste 2.1
+                    <li>Liste 2.1.1
+                    </li>
+                </li>
+            </li>
+            <li>Liste 3
+                <li>Liste 3.1
+                    <li>Liste 3.1.1
+                    </li>
+                </li>
+            </li>
+        </ul>
+
+    <script>
+        function fonk2() {
+            document.getElementById ("göster2").innerHTML += "<div>Merhaba<img src='resim/tebessüm.gif'/>!..</div>";
+            document.getElementById ("göster2").innerHTML += "<br>Nasıl gidiyor?";
+        } // func sonu...
+        function fonk3() {
+            let metin = document.body.firstChild;
+            return metin.data + "; " + metin.nextSibling.nodeValue;
+        } // func sonu...
+        function fonk4() {
+            let dizge = "";
+            for (let liElemanı of document.querySelectorAll ('li') ) {
+                let başlık = liElemanı.firstChild.data;
+                dizge += başlık + " + ";
+            } // for sonu...
+            return dizge + "=" + document.querySelectorAll ('li').length;
+        } // func sonu...
+
+        eleman.hidden = true;
+        setInterval ( () => eleman2.hidden = ! eleman2.hidden, 1000);
+
+        document.getElementById ("göster").innerHTML =
+            "1) Herbir DOM yumrusunun ait olduğu sınıfı ve mirasladığı üst sınıfları vardır. \
+            Herbir sınıfın da metodları ve özellikleri. Aşağıda yumrular hiyerarşisi görülmektedir. \
+            Örneğin input elemanı HTMLInputElement sınıfına aittir ve mirasladığı sınıfların da \
+            metod ve özelliklerini şu hiyerarşiyle kullanabilir: HTMLInputElement, HTMLElement, \
+            Element, Node, EventTarget ve Object (hasOwnProperty gibi nesne metodları)." +
+            "<br>2) Herhangibir yumrunun sınıfını, sınıf kurucusundan öğrenebiliriz." +
+            "<br>==>Örn.document.body elemanının sınıfı: " + document.body.constructor.name +
+            "; " + document.body +
+            "<br>==>document.body elemanı sırasıyla HTMLBodyElement, HTMLElement, \
+            Elment, Node, EventTarget ve Object tiplemesi midir? " +
+            (document.body instanceof HTMLBodyElement) + "; " +
+            (document.body instanceof HTMLElement) + "; " +
+            (document.body instanceof Element) + "; " +
+            (document.body instanceof Node) + "; " +
+            (document.body instanceof EventTarget) + "; " +
+            (document.body instanceof Object) +
+            "<br>3) Bir eleman özelliklerinin konsol çıktısını da alabiliriz." +
+            "<br>==>document.body elemanı: " + console.dir (document.body) +
+            "<br>==>JS nesneleri için console.dir ve console.log aynıdır; ancak DOM\
+            elemanları için console.log elemanın DOM hiyerarşi ağacını gösterirken \
+            console.dir elemanı DOM nesnesi olarak özellikleri bakımından sergiler: " +
+            console.log (document.body) +
+            "<br>4) nodeType da instanceof gibi yumrunun (toplamda 12) tipini rakam \
+            olarak belirtir; 1=eleman, 2=yorum, 3=metin, 9=nesne vb." +
+            "<br>==>Örn.document.body=1, firstChild=3 ve document.nodeType=9: " +
+            document.body.nodeType + "; " + document.body.firstChild.nodeType + "; " +
+            document.nodeType +
+            "<br>5) Tüm yumru adını nodeName, eleman adını tagName verir; \
+            elemanlar için herikisi de aynıdır, fakat metin, yorum, nesne gibi diğer yumrular \
+            içinse sadece nodeName kullanılmalıdır." +
+            "<br>==>Örn.document.body elemanı: " + document.body.nodeName + "; " +
+            document.body.tagName +
+            "<br>==>Metin yumrusu için: " + document.body.firstChild.nodeName + "; " + document.body.firstChild.tagName +
+            "<br>==>document nesnesi için: " + document.nodeName + "; " + document.tagName +
+            "<br>6) innerHTML, elemanların metin yumrularını alır veya değiştirir." +
+            "<br>==>Örn.alert (document.body.innerHTML): + alert (document.body.innerHTML)" +
+            "<br>==>innerHTML += önceki içeriği alır, arkasına yeni metni ilave eder ve \
+            eskisini silerek yenisiyle değiştirir. Örn.tebessüm resmi ekleyelim: " + fonk2() +
+            "<br>7) outerHTML hem innerHTML'yi ve hem de elemanın kendisini verir. \
+            Sadece metni innerHTML gibi değiştiremezsiniz, ancak komple eleman ve \
+            metin bütünlüğü değiştirilebilir." +
+            "<br>==>Örn.'göster2' id-kimlikli elemanı innerHTML ve outerHTML ile görelim: " +
+            alert (başlık.innerHTML) + "; " + alert (başlık.outerHTML) +
+            "<br>==>Örn.Başlığı değiştirelim: " + (başlık.outerHTML = '<span id="başlık">YENİ BAŞLIK</span>') +
+            "<br>Sayfa başındaki başlık değişmiştir." +
+            "<br>8) innerHTML sadece eleman metin değerlerini verir, (metin, yorum vb gibi) \
+            diğer yumruların değil. Diğer yumru değerleri nodeValue ve data ile alınabilir." +
+            "<br>==>Örn.body girişindeki metni ve yorumu alalım: " + fonk3() +
+            "<br>9) textContent verili konumdaki (tüm etiket adları, src gibi html süslerden \
+            arınmış) sadece yalın ve rafine metin verilerini döndürür." +
+            "<br>==>Örn.'göster2' kimlikli konumdakilere önce textContent ile yalın bakalım, \
+            sonra da innerHTML ile süslenmiş olarak: " + göster2.textContent + "<br>" + göster2.innerHTML +
+            "<br>10) hidden ve style='display:none' aynıdır, fakat ilki daha kısa." +
+            "<br>==>Örn.script'in hemen üstündeki 3 div elemanı da görünmez kılınmıştır: " +
+            "<br>==>Örn.Görünmez 3 div elemanının altındaki 4.div elemanı ise her saniye göz kırpar (altta): " +
+            "<br>11) type, value, name, id ile bir elemanın ilgili özellikleri alınabilir. Tarayıcı \
+            F12 debugger'da console.dir (eleman) ile yada Elements->Properties fişinde tüm \
+            nesne sınıfları özellikleri listesini görebiliriz." +
+            "<br>==>Örn.İlk input elemanının bu özelliklerine bakalım: " + eleman3.type + "; " +
+            eleman3.value + "; " + eleman3.name + "; " + eleman3.id +
+            "<br>12) ul/li örneği; tüm li başlıkları ve toplam li eleman sayıları: " + fonk4() +
+            "<br>13) document.body.lastChild.nodeType rakamı nedir (1=script elemanı)? " + document.body.lastChild.nodeType +
+            "<br>14) document'ın sınıfı, hiyerarşideki yeri ve kimlerden mirasladığı: " + console.dir (document) + "; " + document + "; " + document.constructor.name + "; " +
+            (HTMLDocument.prototype.constructor === HTMLDocument) + "; " + HTMLDocument.prototype.constructor.name + "; " +
+            HTMLDocument.prototype.__proto__.constructor.name + "; " + HTMLDocument.prototype.__proto__.__proto__.constructor.name + "; " +
+            HTMLDocument.prototype.__proto__.__proto__.__proto__.constructor.name + "; " +
+            HTMLDocument.prototype.__proto__.__proto__.__proto__.__proto__.constructor.name
+    </script>
+</body>
+</html>

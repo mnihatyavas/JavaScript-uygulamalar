@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5131.html: HTML DOM yumru listeleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM YUMRU LİSTESİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <p>Merhaba, HTML DOM yumru listeleri!..</p>
+    <p>M.Nihat Yavaş</p>
+
+    <button onclick="fonk2()">Eleman-p yazı renklerini değiştir</button><br>
+    <button onclick="fonk4()">Eleman-p zemin renklerini değiştir</button><br>
+    <button onclick="fonk5()">Eleman-p yazı ve zemin renklerini değiştir</button>
+
+    <script>
+        function fonk2() {for (var i = 0; i < pListesi.length; i++) {pListesi [i].style.color = fonk3();}}
+        function fonk3() {return "#" + parseInt(Math.random()*16).toString(16) + parseInt(Math.random()*16).toString(16) + parseInt(Math.random()*16).toString(16);}
+        function fonk4() {for (var i = 0; i < pListesi.length; i++) {pListesi [i].style.backgroundColor = fonk3();}}
+        function fonk5() {for (var i = 0; i < pListesi.length; i++) {pListesi [i].style.backgroundColor = fonk3(); pListesi [i].style.color = fonk3();}}
+
+        var pListesi = document.querySelectorAll ("p");
+
+        document.getElementById ("göster").innerHTML =
+            "1) Yumru listeleri HTMLColection gibidir; childNodes veya querySelectorAll() \
+            metodlarıyla html elemanları listesini oluşturur: " + pListesi + "; " + pListesi [1].innerHTML +
+            "<br>2) length özelliğiyle yumru liste uzunluğunu tespit edebilirsiniz: " +
+            pListesi.length + "; " + pListesi [pListesi.length - 1].innerHTML +
+            "<br>3) Yumru liste elemanlarının yazı ve/veya zemin renklerini aşağıdaki \
+            düğmelerle tesadüfi değiştirebilirsiniz; deneyin: " +
+            "<br>4) Döküman yumru listesi ve html eleman koleksiyonu birbirlerine ve \
+            dizinin endeks-uzunluk özellikleri benzerdir fakat aralarında bazı farklar vardır. \
+            Koleksiyona isim, kimlik ve endeksle, listeye sadece endeksle erişilir. Sadece \
+            listenin vasıf ve metin yumrusu vardır. Koleksiyonun kullanamadığı dizi metodlarını \
+            liste de kullanamaz."
+    </script>
+</body>
+</html>

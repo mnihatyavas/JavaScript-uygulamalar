@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5041.html: HTML DOM elemanlarını bulma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM ELEMANI</h4>
+    <p id="göster">Paragraf</p>
+
+    <main id="blok" style="display:none;">
+        <p class="göster">Nisan 17, 1957</p>
+        <span id="göster3">M.Nihat Yavaş</span>
+        <div class="göster">Memet ve Hanım oğlu</div>
+        <h6 id="göster5">Yeşilyurt-Malatya</h6>
+        <p class="göster">Toroslar-Mersin</p>
+    </main>
+
+    <form id="form1" action="#" style="display:none;">
+        Adınız: <input type="text" name="ad" value="Nihat"><br>
+        Soyadınız: <input type="text" name="soyad" value="Yavaş"><br>
+        Yaşınız: <input type="number" name="yaş" value=62><br><br>
+        <input type="submit" value="Gönder">
+    </form> 
+
+    <div  style="display:none;">
+        <a name="js" href="#" target="_">JS Dersleri</a><br>
+        <a name="html" href="#" target="_">HTML Dersleri</a><br>
+        <a name="css" href="#" target="_">CSS Dersleri</a><br>
+        <a name="xml" href="#" target="_">XML Dersleri</a><br>
+    </div>
+
+    <div  style="display:none;">
+        <embed src="resim/araba.gif"/>
+        <embed src="resim/lambaAçık.gif"/>
+        <embed src="resim/lambaKapalı.gif"/>
+    </div>
+
+    <div  style="display:none;">
+        <img src="resim/secere.gif" width="486" height="266" alt="html soy ağacı">
+        <img src="resim/miras.gif" width="362" height="255" alt="yavru ebeveyn ilişkisi">
+    </div>
+
+    <script>
+        var eleman1 = document.getElementById ("göster5");
+        var eleman2 = document.getElementsByTagName ("p");
+
+        var x = document.getElementById ("blok");
+        var y = x.getElementsByTagName ("div");
+
+        var f = document.forms ["form1"];
+        var metin = "";
+        var i;
+        for (i = 0; i < f.length; i++) {metin += f.elements [i].value + ", ";}
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML sayfasındaki elemanlar nasıl bulunur ve erişilir? Bulmak: id kimlik, \
+            tag etiket adı, class sınıf adı, CSS seçiciler ve  HTML nesne koleksiyonlar \
+            vasıtasıyla sağlanır." +
+            "<br/>==>'document.getElementById()' ile: " + eleman1.innerHTML + "; " +
+            document.getElementById ("göster3").innerHTML +
+            "<br/>==>'document.getElementsByTagName()' ile: " + eleman2 [1].innerHTML +
+            "; " + y[0].innerHTML +
+            "<br/>==>'document.getElementsByClassName()' ile: " +
+            document.getElementsByClassName ("göster") [1].innerHTML +
+            "<br/>==>'document.querySelectorAll()' ile: " +
+            document.querySelectorAll ("p.göster") [1].innerHTML +
+            "<br/>==>'document.forms' nesne değerleri/value koleksiyonu ile: " +
+            metin + "; Form sayısı: " + document.forms.length +
+            "<br/>==>'document.anchors' ile; Sayfadaki a(nchor) sayısı: " +
+            document.anchors.length + "; İlk a: " + document.anchors [0].innerHTML +
+            "<br/>==>'document.body' ile; Tüm gövde elemanları: " +
+            alert (document.body.innerHTML) +
+            "<br/>==>'document.documentElement' ile; Tüm sayfa elemanları: " +
+            alert (document.documentElement.innerHTML) +
+            "<br/>==>'document.embeds' ile; Sayfaya gömülü/embed sayısı: " +
+            document.embeds.length +
+            "<br/>==>'document.head' ile; Head kısmındaki elemanlar: " + alert (document.head.innerHTML) +
+            "<br/>==>'document.images' ile; Toplam resim sayısı: " + document.images.length +
+            "<br/>==>'document.links' ile; Toplam internet bağlantı sayısı: " + document.links.length +
+            "; 2.bağlantının adı: " + document.links[1].innerHTML +
+            "<br/>==>'document.scripts' ile; Script bloğu sayısı: " + document.scripts.length +
+            "; İlk script blok içeriği: " + alert (document.scripts[0].innerHTML) +
+            "<br/>==>'document.title' ile; Bu dökümanın başlığı: " + document.title
+    </script>
+</body>
+</html>

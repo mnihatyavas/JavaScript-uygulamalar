@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3041.html: Get-set alıcı-koyuculu nesne erişimcileri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE ERİŞİMCİLERİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var şahıs = {ad: "Nihat", soyad: "Yavaş", lisan: "tr",
+            get dil() {return this.lisan;},
+            set dil (değer) {this.lisan = değer;},
+            get dil2() {return this.lisan.toUpperCase();},
+            set dil2 (değer) {this.lisan = değer.toUpperCase();},
+            adSoyad1: function() {return (this.ad + " " + this.soyad);},
+            get adSoyad2() {return (this.ad + " " + this.soyad);} };
+
+        var nesne1 = {sayaç: 0, // Değer gerektiriyorsa set, gerektirmiyorsa get kullanılabilir...
+            get sıfırla() {this.sayaç = 0;},
+            get birArtır() {this.sayaç++;},
+            get birAzalt() {this.sayaç--;},
+            set ekle (değer) {this.sayaç += değer;},
+            set çıkar (değer) {this.sayaç -= değer;} };
+        nesne1.sıfırla;
+        nesne1.ekle = 15;
+        nesne1.çıkar = 3;
+        nesne1.birArtır;
+        nesne1.birAzalt;
+        nesne1.birArtır;
+
+        var nesne2 = {sayaç: 0}; // ='siz anahtar-değer çiftinde this.kullanılmaz...
+        Object.defineProperty (nesne2, "sıfırla", {get: function() {this.sayaç = 0;} });
+        Object.defineProperty (nesne2, "birArtır", {get: function() {this.sayaç++;} });
+        Object.defineProperty (nesne2, "birAzalt", {get: function() {this.sayaç--;} });
+        Object.defineProperty (nesne2, "ekle", {set: function (değer) {this.sayaç += değer;} });
+        Object.defineProperty (nesne2, "çıkar", {set: function (değer) {this.sayaç -= değer;} });
+        nesne2.sıfırla;
+        nesne2.ekle = 15;
+        nesne2.çıkar = 3;
+        nesne2.birArtır;
+        nesne2.birAzalt;
+        nesne2.birArtır;
+
+        document.getElementById ("göster").innerHTML =
+            "1) Get-set/al-koy ile ES5-2009 sürümden itibaren nesne erişimcileri tanımlanabilir. \
+            Metodlar vasıtasıyla get ve set özellik değerlerini metod sembolu () kullanılmadan alır \
+            ve koyar: " + şahıs.dil + "; " + (şahıs.dil = "en") + "; " + şahıs.dil + "; " + şahıs.lisan +
+            "<br/>2) Bileşik nesne özellik verilerine fonksiyonel metod isimleri () ile, yada kısaca \
+            () kullanmadan get özellik alıcıyla erişilebilir: " + şahıs.adSoyad1 + "; " + şahıs.adSoyad1() +
+            "; " + şahıs.adSoyad2 +
+            "<br/>3) get-set'lerde veri kalitesini artırıcı metodlar da kullanılabilir: " + (şahıs.dil = "fr") +
+            "; " + şahıs.dil2 + "; " + (şahıs.dil2 = "gr") + "; " + şahıs.dil +
+            "<br/>4) get-set'lerle nesne özellik değeri üzerinde arka planda işlemler yapabiliriz: " +
+            nesne1.sayaç +
+            "<br/>5) Object.defineProperty ile özelliksiz bir nesneye istediğimiz (get-set'le) \
+            özellikleri tanımlayabiliriz: " + nesne2.sayaç
+    </script>
+</body>
+</html>

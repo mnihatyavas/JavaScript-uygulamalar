@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6021.html: BOM screen tarayıcı pencere ekranı özellikleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM SCREEN</h4>
+    <p id="göster">Paragraf</p>
+
+    <div id="tampon" style="margin-top:1000px; margin-left:1500px;">***</div>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) window.screen pencere ekranı window öneksiz de kullanılabilir ve şu özellikleri \
+            vardır:" +
+            "<br>==>screen.width: Piksel cinsinden tam-açık ekran genişliğini verir: " + window.screen.width +
+            "<br>==>screen.height: Piksel cinsinden tam-açık ekran yüksekliğini verir: " + screen.height +
+            "<br>==>screen.availWidth: Piksel cinsinden tam-açık ekran genişliğini (dikey görev çubuğu hariç) verir: " + screen.availWidth +
+            "<br>==>screen.availHeight: Piksel cinsinden tam-açık ekran yüksekliğini (yatay görev çubuğu hariç) verir: " + screen.availHeight +
+            "<br>==>(Not: Bu ölçeklerde dikey/yatay kaydıraçlar kaale alınmaz.)" +
+            "<br>==>screen.colorDepth: Tarayıcınızın elan kullandığı 2^derinlikBit farklı #rrggbb renk adedini \
+            (2^8=256, 2^16=65.536, 2^24=16,777,216 veya 2^32= 4,294,967,296) verir: " + screen.colorDepth +
+            "<br>==>screen.pixelDepth: Tarayıcınızın elan kullandığı 2^derinlikBit farklı piksel adedini \
+            (2^8=256, 2^16=65.536, 2^24=16,777,216 veya 2^32= 4,294,967,296) verir: " + screen.pixelDepth +
+            "<br>==>(Not: Modern tarayıcılarda colorDepth=pixelDepth.)"
+    </script>
+</body>
+</html>

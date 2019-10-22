@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5121.html: HTML DOM koleksiyonuları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM KOLEKSİYONLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <p>Merhaba HTML DOM Elemanları Koleksiyonu!</p>
+    <p>M.Nihat Yavaş</p>
+    <p>Toroslar-MERSİN</p>
+
+    <button onclick="fonk2()">Eleman-p yazı renklerini değiştir</button><br>
+    <button onclick="fonk4()">Eleman-p zemin renklerini değiştir</button><br>
+    <button onclick="fonk5()">Eleman-p yazı ve zemin renklerini değiştir</button>
+
+    <script>
+        function fonk2() {for (var i = 0; i < pKoleksiyonu.length; i++) {pKoleksiyonu [i].style.color = fonk3();}}
+        function fonk3() {return "#" + parseInt(Math.random()*16).toString(16) + parseInt(Math.random()*16).toString(16) + parseInt(Math.random()*16).toString(16);}
+        function fonk4() {for (var i = 0; i < pKoleksiyonu.length; i++) {pKoleksiyonu [i].style.backgroundColor = fonk3();}}
+        function fonk5() {for (var i = 0; i < pKoleksiyonu.length; i++) {pKoleksiyonu [i].style.backgroundColor = fonk3(); pKoleksiyonu [i].style.color = fonk3();}}
+
+        var pKoleksiyonu = document.getElementsByTagName ("p");
+
+        document.getElementById ("göster").innerHTML =
+            "1) getElementsByTagName metodu dizi şeklinde html pKoleksiyonuu döndürür. \
+            İlk dizi elemanı 0'dan başlar ve lenght ile toplam eleman sayısı öğrenilebilir." +
+            "<br>==>İlk ve ikinci p elemanı ve içeriği: " + pKoleksiyonu [0] + "; " +
+            pKoleksiyonu[0].innerHTML + "; " + pKoleksiyonu[1].innerHTML +
+            "<br>2) lenght özelliğiyle pKoleksiyonudaki eleman sayısı tespit edilebilir: " +
+            pKoleksiyonu.length + "; " + pKoleksiyonu [pKoleksiyonu.length - 1].innerHTML +
+            "<br>3) pKoleksiyonu[].style.color ile istenilen pKoleksiyonu elemanı renk stili \
+            değiştirilebilir: " + (pKoleksiyonu [0].style.color = "Coral") +
+            "<br>==>Hatta alttaki butonları her tıklamanızda, herbir p elemanı yazı ve/veya \
+            zemin rengi tesadüfi #fff renk kalıbıyla devamlı ve kolayca değiştirilebilir; deneyin." +
+            "<br>4) HTMLColection dizi gibiyse de valueOf(), pop(), push(), join() vb dizi \
+            metodları kullanılamaz."
+    </script>
+</body>
+</html>

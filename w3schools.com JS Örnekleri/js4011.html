@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js4011.html: Fonksiyon ifade ve beyan tanımları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FONKSİYON TANIMLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x0 = fonk2 (Math.sin (45), Math.cos (45)) * 180 / Math.PI; // fonk2 tanımı (enüstlenmeli) sonradır...
+
+        var x1 = function (a, b) {return (a**(1/b));}; // (İsimsiz anonim) fonksiyon ifadesi...
+        var y1 = x1 (Math.PI, Math.E);
+
+        var x2 = new Function ("a", "b", "return a**(1/b);" );
+        var y2 = x2 (Math.PI, Math.E);
+
+        function fonk2 (a, b) {return (a**(1/b));} // Fonksiyon beyanı...
+
+        function fonk3 (a, b, c) {return arguments.length;}
+
+        document.getElementById ("göster").innerHTML =
+            "1) Fonksiyonlar JS'te function anahtarkelimeyle tanımlanır. Fonksiyonlar \
+            sonradan ve çoklu çağrılabilecek ayrı bir beyan şeklinde yada kodlama \
+            içinde tek satırlık ve bir kez kullanılacak ifade şeklinde tanımlanabilirler." +
+            "<br/>Fonksiyon beyanı: " + fonk2 (3578, 7) + "; " + fonk2 (27.8*2, -0.65/0.007) +
+            "<br/>Fonksiyon ifadesi: " + y1 + "; " + x1 (Math.E, Math.PI) +
+            "<br/>2) Fonksiyonlar function anahtarkelimesiyle yada JS hazır kurucu \
+            fonksiyon 'new Function' ile tanımlanabilir: " + y2 + "; " + x2 (Math.E, Math.PI) +
+            "<br/>3) Değişken tanımları gibi fonksiyon tanımları (fonksiyon ifadeleri değil) \
+            da JS kapsam enüstlenme özelliklidir; bu yüzden tanımlanmadan daha önce \
+            çağrılabilirler, hata vermez: " + x0 +
+            "<br/>4) Parantez-içli fonksiyon ifadesi (tanımı değil) sonuna () gelirse otomatik \
+            kendini-çağıran özellik kazanır: " +
+            (function() {return "Merhaba, ben anonim kendini çağıran fonksiyonum!!";}) + "=" +
+            (function() {return "Merhaba, ben anonim kendini çağıran fonksiyonum!!";}) () +
+            "<br/>5) Fonksiyonlar nesnedir, özellik ve metodlara sahiptir. Argüman uzunluğu \
+            arguments.length ile döndürülebilir: " + fonk3 (1,2,3) +
+            "<br/>Tipi: " + (typeof fonk3) + "; Nesne mi? " + (fonk3 instanceof Object) +
+            "<br/>Fonksiyon dönüşleri toString()'le dizgeye çevrilebilir: " + (typeof fonk2 (2,2)) +
+            "; " + fonk2(2,2).toString() + "=" + (typeof fonk2(2,2).toString()) +
+            "<br/>6) Yeni nesneler yaratan fonksiyona nesne kurucu fonksiyon, adSoyad gibi \
+            nesneye özellik ekleyen fonksiyona ise nesne metodu fonksiyon denir."
+    </script>
+</body>
+</html>

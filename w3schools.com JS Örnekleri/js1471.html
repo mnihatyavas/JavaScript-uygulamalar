@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1471.html: JS class beyanlı sınıf kuruculu özellik ve metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function sınıf1() {
+            try {return arabam.selam ("Hey");
+            }catch (hata) {return "HATA (" + hata + ")";}
+            return "Hatasız...";
+        } // func.. sonu...
+
+        class Araba {// sınıf...
+            constructor (x, y, z) {// kurucu...
+                this.arabaadı = x;
+                this.modeli = y;
+                this.rengi = z;}
+            sunum1() {return "Benim " + this.modeli + " model " + this.rengi + " bir " + this.arabaadı + "'im var ki!";}
+            sunum2 (argüman) {return argüman + "Benim " + this.modeli + " model " + this.rengi + " bir " + this.arabaadı + "'im var ki!";}
+            static selam (arg) {return "Selam size, " + arg;}
+            alAdı() {return this.arabaadı;}
+            alModeli() {return this.modeli;}
+            alRengi() {return this.rengi;}
+            koyAdı (x) {this.arabaadı = x;}
+            koyModeli (x) {this.modeli = x;}
+            koyRengi (x) {this.rengi = x;}
+            get ad() {return this.arabaadı;}
+            get model() {return this.modeli;}
+            get renk() {return this.rengi;}
+            set ad (x) {this.arabaadı = x;}
+            set model (x) {this.modeli = x;}
+            set renk (x) {this.rengi = x;}
+
+        } // sınıf sonu...
+
+        class Araba2 extends Araba {// sınıf...
+            constructor (a1,a2,a3, b1, b2) {// kurucu...
+                super (a1, a2, a3); // Ebeveyn kurucu değişkenler tek super'le parametrenmeli...
+                this.yaşı = b1;
+                this.fiyatı = b2;}
+            göster () {return this.modeli + " model " + this.rengi + " " + this.arabaadı + " henüz " + this.yaşı + " yaşında ve " + this.fiyatı + " TL.";}
+        } // sınıf sonu...
+
+        class Laptop {
+            constructor (a, b, c) {
+                this.markası = a;
+                this.belleği = b;
+                this.diski = c;}
+            set marka (x) {this._markası = x;}
+            set bellek (x) {this._belleği = x;}
+            set disk (x) {this._diski = x;}
+            get marka() {return this._markası;}
+            get bellek() {return this._belleği;}
+            get disk() {return this._diski;}
+        } // sınıf sonu...
+
+        var  arabam = new Araba ("Citroen", "2019", "yeşil");
+        var  arabam2 = new Araba2 ("Ford", "2018", "siyah", "1", "25 000");
+        var bilgisayarım = new Laptop();
+
+        document.getElementById ("göster").innerHTML =
+            "1) Class/sınıf bir fonksiyondur, ancak fonksiyonlar 'function' anahtarkelimeli \
+            iken sınıf 'class'ı kullanır ve özellik-ler eklemeyi sınıf kurucusu olan 'constructor' \
+            metodu içinde yapar: " + new Araba ("Ford").arabaadı + "; " +
+            new Araba ("", "2019").modeli + "; " + new Araba ("", "", "Siyah").rengi +
+            "<br>Kurucu/constructor belirtilmezse JS sınıf'a gizli boş bir kurucu ekler." +
+            "<br>2) Sınıf'a kurucu sonrası istenildiği kadar metod eklenebilir: " +
+            arabam.sunum1() +
+            "<br>Metoda istenildiği sayıda argüman aktarılabilir: " + arabam.sunum2 ("Selam JS'liler. ") +
+            "<br>3) Statik/durgun metod 'static' anahtarkelimelidir, new nesne adıyla değil, \
+            sadece sınıf adıyla çağrılabilir: " + Araba.selam ("statik duruklar.") +
+            "<br>Bu yüzden özelliklendirilmiş nesne verilerine erişilmez: " + sınıf1() +
+            "<br>4) Ancak arabam nesnesini statik metoda argüman olarak aktarabilirsiniz: " +
+            Araba.selam (arabam.modeli + " " + arabam.rengi + " " + arabam.arabaadı + "'ciler.") +
+            "<br>5) Bir sınıf diğer bir sınıfın özellik ve metodlarını 'extends' anahtarkelimeyle \
+            miras alabilir. Ebeveyn özellikleri super metoduyla üst kurucudan alınabilir: " +
+            arabam2.arabaadı + "; " + arabam2.rengi + "; " + arabam2.fiyatı + "<br/>" +
+            arabam2.göster() + "<br/>Adı ve yaşı: " + new Araba2 ("Audi","","","3","").arabaadı +
+            " " + new Araba2 ("","","","5").yaşı +
+            "<br>6) Alıcı koyucularla, sınıf özellik değerlerini alır veya değiştirebiliriz: " + 
+            arabam.alAdı() + "; " + arabam.alRengi() + "; " + arabam.alModeli() +
+            "<br>" + arabam.koyRengi ("Füme") + arabam.koyAdı ("Hundai") + "=" +
+            arabam.alRengi() + "-" + arabam.alAdı() +
+            "<br>7) get/al set /koy anahtarkelimelerini kullandığımızda metodu çağırırken \
+            () kullanmamız da gerekmez: " + arabam.ad + "-" + arabam.model +
+            "<br>" + (arabam.ad = "Toyoto") + "=" + arabam.ad + "; "  + (arabam.renk = "gri") +
+            "=" + arabam.renk +
+            "<br>8) Bir değişken 'var'la beyan etmeden (strict kipi değilse) kullanılabilir, ancak \
+            sınıfı kullanmak için 'class' beyanı şarttır, yoksa hata verir: " + (bilgisayarım.marka =
+            "Casper") + "=" + bilgisayarım.marka
+    </script>
+</body>
+</html>

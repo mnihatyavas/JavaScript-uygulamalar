@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1561.html: JS sürüm ES6 yeni metod ve özellikleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>SÜRÜM ES6 YENİLİKLERİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x = 10;
+        {let x = 5; x = 2;}
+        {const x = 5; //x = 2;// Değerinin değiştirilmesine hata verir...
+        } // blok sonu...
+        let x1 = function (a, b) {return a * b;}
+        let x2 = (a, b) => a * b;
+        const x3 = (a, b) => {return a * b };
+
+        class Araba {constructor (adı) {this.ad = adı;} }
+        arabam = new Araba ("Ford");
+
+        function fonk2 (a, b=2.72) {return (a ** b).toFixed (4);}
+
+        var sayılar = [4, 9, 16, 25, 29, 3.14, 2.72];
+        var ilkEleman = sayılar.find (fonk3);
+        var ilkEndeks = sayılar.findIndex (fonk3);
+        function fonk3 (eleman, endeks, dizi) {return eleman > 15;}
+
+        document.getElementById ("göster").innerHTML =
+            "1) ES6-2015=JS6 yeni özellikleri: let, const, ok fonksiyon, class/sınıf, \
+            varsayılı parametrik değer, dizi.find(fonk), dizi.findIndex(fonk) ve ** üs" +
+            "<br/>==> let lokal/blokal kapsamlı değişken tanımlar: " + x +
+            "<br/>==> const da let gibi kapsamına sınırlıdır, ancak değeri değiştirilemez: " + x +
+            "<br/>==> arrow/oklu fonksiyon tek ifadelik fonksiyonların kısaltılmışıdır: " + x1 (10, 3) +
+            "; " + x2 (15.78, -3.34) + "; " + x3 (3.14, 2.72) +
+            "<br/>==> Fonksiyon tipli class/sınıf özellik this.değişkenlerini içeren constructor/kurucu \
+            metoduna sahiptir ve new Class her yaratılışta varsa otomatikmen çağrılır, \
+            yoksa da gizli yaratılır: " + arabam.ad +
+            "<br/>==> Eşleşen argüman geçirilmezse fonksiyon varsayılı parametrik değeri \
+            kullanılır: " + fonk2 (3.14) +
+            "<br/>==> dizi.find(fonk) fonksiyonda taratılan elemanlardan testi geçen ilki \
+            döndürülür: " + ilkEleman +
+            "<br/>==> dizi.findIndex(fonk) fonksiyonda taratılan elemanlardan testi geçen \
+            ilkinin endeksi döndürülür: " + ilkEndeks +
+            "<br/>==> ** üs işlemcisi Math.pow(a,b) ile aynıdır: " + 2**.5 + "; " + Math.pow (2, .5) +
+            "<br/>2) ES6 Number/Sayı nesnesine şu özellikleri eklemiştir: EPSILON, \
+            MIN_SAFE_INTEGER -(2^53-1) ve MAX_SAFE_INTEGER +(2^53-1): " +
+            Number.EPSILON + "; " + Number.MIN_SAFE_INTEGER+ "; " +
+            Number.MAX_SAFE_INTEGER +
+            "<br/>==> Number nesnesine 2 yeni metod katılmıştır: Number.isInteger() ve \
+            Number.isSafeInteger(): " + Number.isInteger (413) + "; " + Number.isInteger (3.14) + "; " +
+            Number.isSafeInteger (9007199254740991) + "; " + Number.isSafeInteger (9007199254740992) +
+            "<br/>==> Number nesnesine 2 yeni global metod katılmıştır: isFinite() ve \
+            isNaN(): " + isFinite (10 / 0) + "; " + isFinite (10 / "Nihat") + "; " + isNaN (10 / "Nihat") +
+            "; " + isNaN (10 / "1957")
+    </script>
+</body>
+</html>

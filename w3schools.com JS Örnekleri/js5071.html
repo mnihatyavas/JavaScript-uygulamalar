@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5071.html: HTML DOM kutu ve balık animasyonları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #kab1 {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background: Khaki;}
+        #canlandır1 {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: Brown;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM ANİMASYONU</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        // Kutu Animasyonu...
+        function ilerle() {
+            function kutu() {
+                if (konum == 350) {
+                    konum = 0;
+                    eleman.style.top = konum + "px";
+                    eleman.style.left = konum + "px";
+                    clearInterval (işlet);} // Her 5mS'de bir, kutu fonksiyonunun işletilmesini durdurur...
+                else {
+                    konum++;
+                    eleman.style.top = konum + "px";
+                    eleman.style.left = konum + "px";
+                } // else sonu...
+            } // iç-func sonu...
+            var eleman = document.getElementById ("canlandır1");   
+            var konum = 0;
+            var işlet = setInterval (kutu, 5); // 5 mS...
+        } // func sonu...
+        function sil1() {document.getElementById ("kab1").style.display="none";}
+        function göster1() {document.getElementById ("kab1").style.display="block";}
+
+        // Balık Animasyonu...
+        window.onload = başlat;
+        var balık = null;
+        var canlandır; // Her 0.1 saniyede otomatik hareketi tekrarlatalım...
+        function başlat() {
+            balık = document.getElementById ("Balık");
+            balık.style.position= "relative";
+            balık.style.left = "0px";
+            balık.style.top = "0px";
+        } // fonksiyon sonu...
+        function dur() {clearTimeout (canlandır);}
+        function sağa() {canlandır = setTimeout (sağa, 100); balık.style.left = parseInt (balık.style.left) + 10 + "px";}
+        function sola() {canlandır = setTimeout (sola, 100); balık.style.left = parseInt (balık.style.left) - 10 + "px";}
+        function yukarı() {canlandır = setTimeout (yukarı, 100); balık.style.top = parseInt (balık.style.top) - 10 + "px";}
+        function aşağı() {canlandır = setTimeout (aşağı, 100); balık.style.top = parseInt (balık.style.top) + 10 + "px";}
+        function sağYukarı() {canlandır = setTimeout (sağYukarı, 100); balık.style.left = parseInt (balık.style.left) + 10 + "px"; balık.style.top = parseInt (balık.style.top) - 10 + "px";}
+        function sağAşağı() {canlandır = setTimeout (sağAşağı, 100); balık.style.left = parseInt (balık.style.left) + 10 + "px"; balık.style.top = parseInt (balık.style.top) + 10 + "px";}
+        function solYukarı() {canlandır = setTimeout (solYukarı, 100); balık.style.left = parseInt (balık.style.left) - 10 + "px"; balık.style.top = parseInt (balık.style.top) - 10 + "px";}
+        function solAşağı() {canlandır = setTimeout (solAşağı, 100); balık.style.left = parseInt (balık.style.left) - 10 + "px"; balık.style.top = parseInt (balık.style.top) + 10 + "px";}
+        function sil2() {document.getElementById ("Balık").style.display="none";}
+        function göster2() {document.getElementById ("Balık").style.display="block";}
+
+        document.getElementById ("göster").innerHTML =
+            "1) Animasyon/canlandırma bir HTML eleman stilindeki ardışık değişiklik \
+            vasıtasıyla gerçekleştirilir. Değişiklikler arası zaman dilimi yeterince küçükse \
+            sürekli hareket gibi algılanır. Bu değişiklik setInterval(fonksiyon, süre) fonksiyonuyla \
+            her süre sonrası fonksiyon tekrar-tekrar işletilerek gerçekleştirilir. clearInterval(süre) \
+            fonksiyonuyla da animasyonu sonlandırırız (kutu animasyonu)." +
+            "<br>2) Benzer şekilde setTimeout(fonksiyon,süre) ile her süre ms aralıklarla \
+            fonksiyon() tekrar-tekrar işletilir. clearTimeout() ile de canlandırma durdurulur \
+            (balık animasyonu)."
+    </script>
+
+    <p> <!-- Kutu Animasyonu -->
+        <button onclick="göster1()">Kutuyu Göster</button>
+        <button onclick="ilerle()">Canlandır Beni</button>
+        <button onclick="sil1()">Sil Beni</button>
+    </p>
+    <div id ="kab1">
+        <div id ="canlandır1"></div>
+    </div>
+
+    <p> <!-- Balık Animasyonu -->
+        <button onclick="göster2()">Balığı Göster</button>
+        <input type="button" value="D U R" onclick="dur();" />
+        <input type="button" value="Sağa" onclick="sağa();" />
+        <input type="button" value="Sola" onclick="sola();" />
+        <input type="button" value="Yukarı" onclick="yukarı();" />
+        <input type="button" value="Aşağı" onclick="aşağı();" />
+        <input type="button" value="Sağ Yukarı" onclick="sağYukarı();" />
+        <input type="button" value="Sağ Aşağı" onclick="sağAşağı();" />
+        <input type="button" value="Sol Yukarı" onclick="solYukarı();" />
+        <input type="button" value="Sol Aşağı" onclick="solAşağı();" />
+        <button onclick="sil2()">Sil Beni</button>
+    </p>
+    <img id="Balık" src="resim/balık.jpg" width=100;/>
+
+    <script>sil1(); sil2();</script>
+</body>
+</html>

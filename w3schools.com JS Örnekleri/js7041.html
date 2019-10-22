@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7041.html: responseText ve responseXML cevapları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>Response</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var nesne = new XMLHttpRequest();
+            nesne.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {console.log (this.responseText); }
+            }; // nes.. sonu...
+            nesne.open ("GET", "js7011x.asp", true);
+            nesne.setRequestHeader ("Content-Type", "text/plain;charset=ISO-8859-9");
+            //nesne.setRequestHeader ("Accept-Charset", "ISO-8859-9");
+            nesne.send();
+        } // func sonu...
+        function fonk3 (yurel, fonk) {
+            var xhttp;
+            xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {fonk4 (this);}
+            }; // xht.. sonu...
+            xhttp.open ("GET", yurel, true);
+            xhttp.setRequestHeader ("Content-Type", "text/plain;charset=ISO-8859-9");
+            xhttp.send();
+        } // func sonu...
+        function fonk4 (xhttp) {console.log (xhttp.responseText); }
+        function fonk5() {
+            var xhttp, xmlDöküman, metin, x, i;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    xmlDöküman = this.responseXML;
+                    dizge = "";
+                    x = xmlDöküman.getElementsByTagName ("ARTIST"); // Sadece artist adları...
+                    for (i = 0; i < x.length; i++) {dizge = dizge + x [i].childNodes [0].nodeValue + "\n";}
+                    console.log (dizge);
+                } // if sonu...
+            }; // xht.. sonu...
+            xhttp.open ("GET", "js7011x.xml", true);
+            xhttp.send();
+        } // func sonu...
+        function fonk6() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                console.log (this.getAllResponseHeaders() );
+                console.log (this.getResponseHeader ("Last-Modified") );
+            } // xht..sonu...
+            xhttp.open ("GET", "js7011x.xml", true);
+            xhttp.send();
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "0) console.log() çıktı sonuçlarını görebilmeniz için açık tutulmalıdır." +
+            "<br>1) Hazır durum özellikleri: onreadystatechange/fonksiyonlu, readyState/0-1-2-3-4, \
+            status/200-403-404 ve statusText/OK-NotFound." +
+            "<br>readyState==4&&status==200 ise response/cevap hazırdır." + fonk2() +
+            "<br>2) Callback/geriyeçağıran fonksiyon bir başka fonksiyona parametre \
+            olarak geçirilen fonksiyondur." + fonk3 ("js7011x.txt", fonk4) +
+            "<br>3) Sunucu cevap özellikleri: responseText ve responseXML." +
+            "<br>Metodları ise: getResponseHeader() ve getAllResponseHeaders()." +
+            "<br>xhttp.responseText metin cevabını önceki örneklerde uyguladık; şimdi \
+            de cevabın XML dönüşünü görelim: " + fonk5() +
+            "<br>4) Şimdi de metnin getAllResponseHeaders ve getResponseHeader \
+            metodlarını uygulayalım: " + fonk6()
+    </script>
+</body>
+</html>
+
+<!--<?xml version = '1.0' encoding = 'iso-8859-1' standalone = 'no' ?>
+<?xml version="version_number" encoding="encoding_declaration" standalone="standalone_status" ?>
+-->

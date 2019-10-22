@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7031.html: GET/POST ve send ile senkron/asenkron talep gönderme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>Request Send</h4>
+    <p id="göster">Paragraf</p>
+
+        <script>
+        function fonk2() {
+            var xhttpTalebi = new XMLHttpRequest();
+            xhttpTalebi.onreadystatechange = function() {console.log (this.responseText);}
+            xhttpTalebi.open ("GET", "js7011x.asp", true);
+            xhttpTalebi.send();
+        } // func sonu...
+        function fonk3() {
+            var xhttpTalebi = new XMLHttpRequest();
+            xhttpTalebi.onreadystatechange = function() {console.log (this.responseText);}
+            xhttpTalebi.open ("GET", "js7011x.asp?t=" + Math.random(), true);
+            xhttpTalebi.send();
+        } // func sonu...
+        function fonk4() {
+            var xhttpTalebi = new XMLHttpRequest();
+            xhttpTalebi.onreadystatechange = function() {console.log (this.responseText);}
+            xhttpTalebi.open ("GET", "js7011x.asp?adı=M.Nihat&soyadı=Yavaş", true);
+            xhttpTalebi.send();
+        } // func sonu...
+        function fonk5() {
+            var xhttpTalebi = new XMLHttpRequest();
+            xhttpTalebi.onreadystatechange = function() {console.log (xhttpTalebi.responseText);}
+            xhttpTalebi.open ("GET", "js7011x.txt", true);
+            xhttpTalebi.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+            //xhttpTalebi.setRequestHeader ("Content-Type", "text/plain;charset=ISO-8859-9");
+            //xhttpTalebi.setRequestHeader ("Charset", "ISO-8859-9");
+            xhttpTalebi.send ("adı=M.Nihat&soyadı=Yavaş");
+        } // func sonu...
+        function fonk6() {
+            var xhttpTalebi = new XMLHttpRequest();
+            xhttpTalebi.open ("GET", "js7011x.txt", false); // Modası geçmiş...
+            xhttpTalebi.send();
+            console.log (xhttpTalebi.responseText); // Sonuç veriyor...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) open('GET',) ile sunucudan talep edilen responseText/cevapMetni alınır: " + fonk2() +
+            "<br>Alınan değer güncel değil cash bellek değeri olabilir. Bunu önlemek için \
+            yurel disk dosya adresine yegane kn/id/kimlik-no eklenebilir: " + fonk3() +
+            "<br>2) GET ile sunucuya veri gönderilmek istenirse yurel adresi dizgesine eklenir: " + fonk4() +
+            "<br>3) POST ile sunucuya veri göndermek için setRequestHeader(..) ve send(..) kullanılır:" + fonk5() +
+            "<br>4) asynchronous=true (varsayılı) yapılarak JS'in cevap için beklemeden \
+            işlemlerini sürdürmesini ve cevap arkaplanda hazır olduğunda ilgilenmesini sağlar. \
+            Şayet async=false yaparsanız, onreadystate durumuna gerek yoktur, ancak \
+            JS başka işlem yapamaz ve bundan sonuç alıncaya dek bekler: " + fonk6()
+    </script>
+</body>
+</html>

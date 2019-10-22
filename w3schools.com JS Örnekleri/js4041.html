@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js4041.html: Bir fonksiyonun this'ine ve parametresine call ile argüman aktarma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FONKSİYON ÇAĞIRAN CALL</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var kişi1 = {ad:"Nihat", soyad:"Yavaş", adSoyad:function() {return this.ad + " " + this.soyad;} };
+        var kişi11 = {adSoyad: function() {return this.ad + " " + this.soyad;} };
+        var kişi111 = {adSoyad: function (a, b) {return this.ad + " " + this.soyad + ", " + a + "-" + b;} };
+
+        function fonk2 (a, b) {return a + " " + b;}
+        var kişi2 = fonk2 ("Nihat", "Yavaş");
+        var kişi3 = fonk2.call (fonk2, "Nihat", "Yavaş");
+
+        var kişi4 = kişi11.adSoyad.call ({ad:"Nihat", soyad:"Yavaş"});
+        var kişi5 = kişi11.adSoyad.call ({ad:"Hilal", soyad:"Göktürk"});
+        var kişi6 = kişi1.adSoyad.call ({ad:"Atilla", soyad:"Göktürk"})
+
+        var kişi7 = {ad:"Yücel", soyad:"Küçükbay"};
+        var kişi8 = {ad:"Nur", soyad:"Küçükbay"};
+
+        var kişi9 = kişi111.adSoyad.call ({ad:"Hilal", soyad:"Göktürk"}, "İnönü Üniversite Hastanesi", "Malatya");
+        var kişi10 = kişi111.adSoyad.call ({soyad:"Göktürk", ad:"Atilla"}, "3 No'lu Sağlık Ocağı", "Şırnak");
+        // Nesne anahtar-değer sıralaması önemli değildir...
+
+        document.getElementById ("göster").innerHTML =
+            "1) kişi1 nesnesinin biri metodlu 3 özelliği vardır. Fonksiyonlar bir nesne \
+            metodu değilse global window nesnesinin metodudur. adSoyad özellik \
+            fonksiyonundaki this, kişi1 nesnesini işaret eder. Yani this.ad = kişi1.ad'dır: " +
+            kişi1.ad + "; " + kişi1.adSoyad() +
+            "<br/>2) fonk2() fonksiyonu direk veya call metoduyla yürütülebilir: " +kişi2 +
+            "=" + kişi3 +
+            "<br/>3) Bir fonksiyonu call'la yürütebildiğimiz gibi kişi11 nesnesinin adSoyad \
+            özellik metodu fonksiyonunu da call'la yürütebiliriz: " + kişi4 + "; " + kişi5 +
+            "<br/>Hatta kişi1'in adSoyad'ını da call'layabiliriz; bu, kişi1 nesnesi içeriklerini \
+            değişitirmez, sadece onun adSoyad fonksiyonuyla call argümanlarının döndürdüğünü \
+            kişi6 dizgesine atar: " + kişi6 + "; " + (typeof kişi6) + "; " + kişi1.ad +
+            "<br/>4) call argümanlarını direk {} içinde nesnel olarak aktardığımız gibi \
+            ayrı nesne oluşturarak da aktarabiliriz: " + kişi11.adSoyad.call (kişi7) + "; " +
+            kişi11.adSoyad.call (kişi8) +
+            "<br/>5) call ile nesnel ve-veya ilkel argüman da aktarabiliriz: " + kişi9 + "; " +
+            kişi10 +
+            "<br/>Nesneyi ayrı tanımlar, argümanları da sayısal geçirebiliriz: " +
+            kişi111.adSoyad.call (kişi7, "Çarşamba", "Bursa") + "; " +
+            kişi111.adSoyad.call (kişi8, 1972, (2019-1972))
+    </script>
+</body>
+</html>

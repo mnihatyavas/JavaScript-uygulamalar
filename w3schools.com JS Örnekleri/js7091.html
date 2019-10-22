@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7091.html: XML uygulamalarý-1 örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>XML Uygulamalarý-1</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <button type="button" onclick="fonk2()">CD koleksiyonum</button>
+    <br>
+    <table id="göster2"></table>
+
+    <script>
+        function fonk2() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {if (this.readyState == 4 && this.status == 200) {fonk (this); }}
+            xhttp.open ("GET", "js7011x.xml", true);
+            xhttp.send();
+        } // func sonu...
+        function fonk (nesne) {
+            var i;
+            var xmlDöküman = nesne.responseXML;
+            var tablo = "<tr><th>Þarkýcý</th><th>Albümü</th></tr>";
+            var x = xmlDöküman.getElementsByTagName ("CD");
+            for (i = 0; i <x.length; i++) {
+                tablo += "<tr><td>" +
+                    x [i].getElementsByTagName ("ARTIST") [0].childNodes [0].nodeValue +
+                    "</td><td>" +
+                    x [i].getElementsByTagName ("TITLE") [0].childNodes [0].nodeValue +
+                    "</td></tr>";
+            } // for sonu...
+            document.getElementById ("göster2").innerHTML = tablo;
+        } // func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

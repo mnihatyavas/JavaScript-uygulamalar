@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7051.html: XML dosyası ve türkçe karakterler örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>XML</h4>
+    <p id="göster">Paragraf</p>
+
+    <p id="göster2">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {fonk (this);}
+            }; // xht.. sonu...
+            xhttp.open ("GET", "js7011x.xml", true);
+            xhttp.send();
+        } // func sonu...
+        function fonk (nesne) {
+            var i;
+            var xmlDökümanı = nesne.responseXML;
+            var tablo="<table><tr><th>ARTIST Sanatçı</th><th>TITLE Albümü</th></tr>";
+            konsol = "";
+            var x = xmlDökümanı.getElementsByTagName ("CD");
+            for (i = 0; i <x.length; i++) {
+                tablo += "<tr><td>" +
+                    x [i].getElementsByTagName ("ARTIST") [0].childNodes [0].nodeValue +
+                    "</td><td>" +
+                    x [i].getElementsByTagName ("TITLE") [0].childNodes [0].nodeValue +
+                    "</td></tr>";
+                konsol += x [i].getElementsByTagName ("ARTIST") [0].childNodes [0].nodeValue +
+                    "==> " + x [i].getElementsByTagName ("TITLE") [0].childNodes [0].nodeValue +
+                    "\n";
+            } // for sonu...
+            tablo += "</table>";
+            document.getElementById ("göster2").innerHTML = tablo;
+            console.log (konsol);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) AJAX, XML dosyalarıyla iletiş amaçlı kullanılabilmektedir." +
+            "<br>==>Bu örnek, bir XML dosyasından CD etiketleri arasındaki ARTIST, \
+            TITLE gibi alt başlık bilgilerini sergilemektedir: " + fonk2() +
+            "<br>Not: Türkçe karakterler için XML dosyası ilk satırına:<br/>?xml version = '1.0' \
+            encoding = 'iso-8859-9' standalone = 'no' ?<br/>etiket bilgileri verilmelidir."
+    </script>
+</body>
+</html>
+
+<!--<?xml version = '1.0' encoding = 'iso-8859-' standalone = 'no' ?>-->

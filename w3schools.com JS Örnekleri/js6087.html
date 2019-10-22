@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6087.html: Tutorialspoint ile olay-tabanlı indexedDB örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <!--<input type="button" value="Sil" onClick="fonk1()">-->
+    <h4>Tutorialspoint indexedDB</h4>
+    <p id="göster">Paragraf</p>
+
+    <button onclick = "arşivKayıtlarınıEkle()">Arşiv kayıtlarını ekle</button>
+    <button onclick = "birKayıtEkle()">Bir işgören kaydı ekle</button>
+    <button onclick = "birKayıtDeğiştir()">Bir işgören kaydını değiştir</button>
+    <button onclick = "birKayıtOku()">Bir işgören kaydını göster</button>
+    <button onclick = "tümKayıtlarıOku()">Tüm kayıtları göster</button>
+    <button onclick = "birKayıtSil()">Bir işgören kaydını sil</button>
+    <button onclick = "tümKayıtlarıSil()">Tüm işgören kayıtlarını sil</button>
+
+    <script>
+        const işgörenKaydı = [
+            ["00-01", "M.Nihat Yavaş", (2019-1957), "mnyavas@hotmail.com"],
+            ["00-02", "Z.Nihal Candan", (2019-1955), "zncandan@gmail.com"],
+            ["00-03", "Hatice Yavaş Kaçar", (2019-1951), "hykacar@yahoo.com"],
+            ["00-04", "Süheyla Özbay", (2019-1953), "sozbay@gmail.com"],
+            ["00-05", "Songül Yavaş Göktürk", (2019-1959), "sygokturk@hotmail.com"],
+            ["00-06", "Sevim Yavaş", (2019-1963), "syavas@yahoo.com"],
+            ["00-07", "M.Nedim Yavaş", (2019-1961), "mnyavas@gmail.com"],
+            ["01-08", "Memet Yavaş", (2019-1934), "myavas@gmail.com"],
+            ["01-09", "Hanım Amanat Yavaş", (2019-1931), "hayavas@yahoo.com"],
+            ["02-10", "Bekir Yavaş", (2019-1888), "byavas@hotmail.com"],
+            ["02-11", "Fadime Yavaş", (2019-1891), "fyavas@yahoo.com"]
+        ]; // con.. sonu...
+
+        var vt;
+        if (prompt ("Veri tabanını yeniden yaratmak istiyor musun? ", "h").toLowerCase() == "e") {indexedDB.deleteDatabase ("betteşlerVeritabanı"); }
+        yaratmaTalebi = window.indexedDB.open ("betteşlerVeritabanı", 1);
+        yaratmaTalebi.onerror = function (olay) {console.log ("HATA: " + yaratmaTalebi.error);};
+        yaratmaTalebi.onsuccess = function (olay) {
+            vt = yaratmaTalebi.result;
+            console.log ("betteşlerVeritabanı'nın yaratılması başarılı: "+ vt);
+        }; // yar.. sonu...
+        yaratmaTalebi.onupgradeneeded = function (olay) {
+            var vt1 = olay.target.result;
+            if (! vt1.objectStoreNames.contains ("işgörenler")) {var nesneDeposu = vt1.createObjectStore ("işgörenler", {keyPath: "bordoNo"}); }
+        } // yar.. sonu...
+
+        function arşivKayıtlarınıEkle() {
+            for (var i in işgörenKaydı) {
+                var eklemeTalebi = vt.transaction ("işgörenler", "readwrite")
+                    .objectStore ("işgörenler")
+                    .add ({bordoNo: işgörenKaydı [i] [0], isim: işgörenKaydı [i] [1], yaş: işgörenKaydı [i] [2], eposta: işgörenKaydı [i] [3] });
+            } // for sonu...
+            eklemeTalebi.onsuccess = function (olay) {alert ("Arşiv kayıtlarınızın veritabanı dosyasına eklenmesi başarılı."); };
+            eklemeTalebi.onerror = function (olay) {alert ("HATA: Arşiv kayıtlarınız veritabanı dosyasına eklenemedi!\n" + eklemeTalebi.error);}
+        } // func sonu...
+        function birKayıtOku() {
+            var bordoNo = prompt ("Görmek istediğiniz elemanın bordo no'sunu girin: ", "00-00");
+            var okumaTalebi = vt.transaction ("işgörenler").objectStore ("işgörenler").get (bordoNo)
+            okumaTalebi.onsuccess = function (olay) {
+                if (okumaTalebi.result != undefined) {console.log (okumaTalebi.result);
+                }else {alert ("Bu eleman dosyada mevcut değil!.."); }
+            } // oku.. sonu...
+            okumaTalebi.onerror = function (olay) {console.log ("HATA: " + okumaTalebi.error); }
+        } // func sonu...
+        function tümKayıtlarıOku() {
+            var nesneDeposu1 = vt.transaction ("işgörenler").objectStore ("işgörenler");
+            var sayaç=0;
+            nesneDeposu1.openCursor().onsuccess = function (olay) {// Belleğin dolmaması için imleç tek-tek okuyacak...
+                var imleç = olay.target.result;
+                if (imleç) {// Okunacak kayıt kalmayıncaya dek tekrarlar...
+                    console.log ("Bordo no: " + imleç.key + ", İsim: " + imleç.value.isim + ", Yaş: " + imleç.value.yaş + ", Eposta: " + imleç.value.eposta);
+                    sayaç +=1;
+                    imleç.continue(); // Birsonraki kaydı getir...
+                } // if sonu...
+            }; // nes.. sonu...
+            setTimeout (function() {console.log ("\nToplam " + sayaç + " adetlik tüm kayıtlar okundu!")}, 500);
+        } // func sonu...
+        function birKayıtEkle() {
+            var eklemeTalebi = vt.transaction ("işgörenler", "readwrite")
+                .objectStore ("işgörenler")
+                .add ({bordoNo: prompt ("Eklenecek kaydın bordo no'sunu girin: ", "00-00"),
+                    isim: prompt ("Eklenecek kaydın ad ve soyadını girin: "),
+                    yaş: prompt ("Eklenecek kaydın yaşını girin: "),
+                    eposta: prompt ("Eklenecek kaydın epostasını girin: ") } );
+            eklemeTalebi.onsuccess = function (olay) {alert ("Kaydınızın veritabanı dosyasına eklenmesi başarılı."); };
+            eklemeTalebi.onerror = function (olay) {alert ("HATA: : " + eklemeTalebi.error);}
+        } // func sonu...
+        function birKayıtDeğiştir() {
+            var bordoNo = prompt ("Bilgileri değiştirilecek elemanın bordo no'sunu girin: ", "00-00");
+            var mevcutMu = vt.transaction ("işgörenler").objectStore ("işgörenler").get (bordoNo);
+            mevcutMu.onsuccess = function (olay) {
+                if (mevcutMu.result == undefined) {alert ("Değiştirilecek kayıt dosyada mevcut değil!..");
+                }else {
+                    var değiştirmeTalebi = vt.transaction ("işgörenler", "readwrite")
+                        .objectStore ("işgörenler")
+                        .put ({bordoNo: bordoNo,
+                            isim: prompt ("Değişecek elemanın yeni ismini girin: "),
+                            yaş: prompt ("Yeni yaşını girin: "),
+                            eposta: prompt ("Yeni epostasını girin: ") } );
+                } // else sonu...
+            } // mev.. sonu...
+            mevcutMu.onerror = function (olay) {console.log ("HATA: " + mevcutMu.error); }
+        } // func sonu...
+        function birKayıtSil() {
+            var bordoNo  = prompt ("İşgörenler dosyasından silinecek elemanın bordo no'sunu girin: ", "00-00");
+            var mevcutMu = vt.transaction ("işgörenler").objectStore ("işgörenler").get (bordoNo);
+            mevcutMu.onsuccess = function (olay) {
+                if (mevcutMu.result != undefined) {
+                    var cevap = prompt ("DİKKAT... Bu eleman dosyadan silinecek.\nEmin misiniz [e/h]:", "h");
+                    if (cevap.toLowerCase() == "e") {
+                        try {vt.transaction ("işgörenler", "readwrite").objectStore ('işgörenler').delete (bordoNo);
+                        } catch (hata) {alert ("HATA: Bu elemanı silemedim.\n" + hata);}
+                    } // if sonu...
+                } else {alert ("Silmek istediğiniz eleman, işgörenler veritabanı dosyasında mevcut değil."); } }
+            mevcutMu.onerror = function (olay) {alert ("HATA: " + mevcutMu.error); }
+        } // func sonu...
+        function tümKayıtlarıSil() {
+            var cevap = prompt ("DİKKAT... Veritabanı dosyanızdaki tüm işgören kayıtları silinecek.\nEmin misiniz [e/h]:", "h");
+            if (cevap.toLowerCase() == "e") {vt.transaction ('işgörenler', 'readwrite').objectStore ('işgörenler').clear();}
+        } // func sonu...
+
+        window.addEventListener ('unhandledrejection', olay => {alert ("HATA: " + olay.reason.message); });
+
+        document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

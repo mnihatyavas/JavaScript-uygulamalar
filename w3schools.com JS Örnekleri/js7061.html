@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7061.html: PHP dosyası örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>PHP</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <h4>Alttaki verigiriş kutusuna bir ad girin:</h4>
+    <p>Tavsiyeler: <span id="tavsiye">Çalışmayan PHP örneği.</span></p>
+    <p>Ad: <input type="text" id="giriş" onkeyup="fonk2 (this.value)"></p>
+
+    <script>
+        function fonk2 (dizge) {
+            if (dizge.length == 0) {document.getElementById ("tavsiye").innerHTML = ""; return;}
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {document.getElementById ("tavsiye").innerHTML = this.responseText;};
+            xhttp.open ("GET", "js7011x.php?q="+dizge, true);
+            xhttp.send();
+        } // func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

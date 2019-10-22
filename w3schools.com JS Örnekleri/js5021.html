@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5021.html: HTML DOM metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h4>DOM METODLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <button type="button" onclick='document.getElementById ("göster").innerHTML = "Merhaba JavaScript!"'>Değiştir Beni</button><br/>
+    <button type="button" onClick="document.getElementById ('göster').innerHTML =''">Sil Beni</button><br/>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) HTML metodu, bir HTML elemanını silme veya ekleme gibi işlemleri \
+            yapan eylemlerdir. HTML özelliği ise get-set al-koy ile bir HTML eleman \
+            vasıflarının değiştirilebilmesidir. Örneğin getElementById() bir HTML DOM \
+            metodu; innerHTML ise p, html, body, h1 gibi bir HTML elemanının vasıflarını \
+            değiştirebilen özelliktir." +
+            "<br/>2) getElementById() metodu ve innerHTML özelliğiyle paragraf içeriğini \
+            değişitirebilir: (Değiştir Beni), silebilir: (Sil Beni), src özelliğiyle bir resmi \
+            başka bir resimle değiştirebilir: (Aç Beni ve Kapa Beni), style.display \
+            özelliğiyle resmi gizler veya gösterebilir: (Gizle Beni ve Göster Beni), \
+            display.fontSize özelliğiyle yazıyı büyütür veya küçültür: (Büyüt Beni ve \
+            Küçült Beni), hatta yazı rengini değiştirebilirsiniz: (Pembeleştir Beni ve Ağart Beni)."
+    </script>
+
+    <button onclick="document.getElementById ('göster2').src='resim/lambaAçık.gif'">Aç Beni</button>
+    <button onclick="document.getElementById ('göster2').src='resim/lambaKapalı.gif'">Kapa Beni</button><br/>
+    <img id="göster2" src="resim/lambaKapalı.gif"><br/>
+
+    <button type="button" onclick="document.getElementById ('göster2').style.display='none'">Gizle Beni</button>
+    <button type="button" onclick="document.getElementById ('göster2').style.display='block'">Göster Beni</button><br/>
+
+    <button type="button" onclick="document.getElementById ('göster').style.fontSize='35px'">Büyüt Beni</button>
+    <button type="button" onclick="document.getElementById ('göster').style.fontSize='10px'">Küçült Beni</button><br/>
+
+    <button type="button" onclick="document.getElementById ('göster').style.color='Pink'">Pembeleştir Beni</button>
+    <button type="button" onclick="document.getElementById ('göster').style.color='Azure'">Ağart Beni</button>
+</body>
+</html>

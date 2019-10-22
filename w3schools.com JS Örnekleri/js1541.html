@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1541.html: JS güncellemeleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>GÜNCELLEMELER</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) JavaScript 1995 yılında Brendan Eich tarafından sunuldu ve 1997 \
+            yılında ECMA standardı oldu. ECMAScript JS'in resmi adıdır. 2015 sonrası \
+            ECMAScript sürüm yılıyla anılmaya başladı (ECMAScript 2015 gibi). \
+            ECMAScript genelde kısaca ES olarak anılır." +
+            "<br/>2) Chrome-68 ve Opera-55 ES7 (ECMAScript 2016)'yı desteklemektedir." +
+            "<br/>3) JS'i ilk koşturan tarayıcı 1996 yılında Netscape-2 olmuştur." +
+            "<br/>4) Chrome-23, IE-10 ve Safari-6 ES5'i tam destekleyen ilk tarayıcılardır."
+    </script>
+</body>
+</html>

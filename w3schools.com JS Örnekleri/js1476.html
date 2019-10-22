@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1476.html: Hazır miras ve sınıf instanceof kontrolu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ-instanceof</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        class Dizim extends Array {
+            boşMu() {return this.length === 0;}
+            //static get [Symbol.species]() {return Array;}// gizli kurucuyu değiştirir...
+        } //sınıf sonu...
+        let dizim = new Dizim (1, 2, 5, 10, 50);
+        let süzgeçliDizim = dizim.filter (eleman => eleman >= 10);
+
+        class Hayvan {}
+        class Tavşan extends Hayvan {} // sınıf...
+        let tavşan = new Tavşan(); // sınıf tipli nesne...
+
+        function Tavşan2(){}
+
+        let dizim2 = [1, 2, 3];
+
+        let nesneTipi = Object.prototype.toString;
+
+        document.getElementById ("göster").innerHTML =
+            "1) Array, Map vb gibi hazır sınıflar kendi sınıflarımıza extends'le ebeveyn \
+            yapılabilirler: " + dizim.boşMu() +
+            "<br/>2) filter, forEach, reduce vb hazır metodlar, kısaca arrow'lu yavru \
+            diziyi test edebilirler: " + süzgeçliDizim + "; " + süzgeçliDizim.boşMu() +
+            "<br/>3) Beyan edilmemiş olsa da 'new Sınıf()' gizli kurucu kullanır: " +
+            (dizim.constructor === Dizim) +
+            "<br/><br/>4) 'nesnem instanceof Class' = nesnem Sınıf veya Sınıfı miraslayan \
+            bir tipleme midir? " + (tavşan instanceof Tavşan) +
+            "<br/>Aynı durum fonksiyon sınıf ve nesne tiplemesi için de geçerlidir: " +
+            (new Tavşan2() instanceof Tavşan2) +
+            "<br/>Ve Object sınıf tipli Array nesneleri için de: " + (dizim2 instanceof Array) + "; " +
+            (dizim2 instanceof Object) +
+            "<br/>5) instanceof testinde önce mevcutsa 'static[Symbol.hasInstance](obj)' \
+            true/false, sonra Class.prototype zinciri sırasıyla kontrol edilir: " +
+            (tavşan instanceof Hayvan) + "; " + (tavşan instanceof Tavşan) + "; " +
+            (tavşan instanceof Object) +
+            "<br/>6) Nasıl ki 'nesne instanceof Object' ile tiplemelerin nesneliğini test \
+            ediyorsak 'Object.prototype.toString.call()' ile de nesnelerin alt detay tiplerini \
+            (Number, Boolean, Array, Null, Undefined vb) ayırtedebiliriz: " + nesneTipi.call ([]) +
+            "; " + nesneTipi.call (2019) + "; " + nesneTipi.call (undefined) + "; " +
+            nesneTipi.call (null) + "; " + nesneTipi.call (false) + "; " + nesneTipi.call ({}) + "; " +
+            nesneTipi.call (new Date()) + "; " + nesneTipi.call ("Nihat") + "; " + nesneTipi.call (NaN)
+             + "; " + nesneTipi.call (alert) +
+            "<br/>Bilindiği üzere 'typeof' normalen ilkel tiplemelerde kullanılır: " + 
+            (typeof dizim) + "; " + (typeof 2019) + "; " + (typeof true) + "; " + (typeof "Nihat")
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5141.html: DOM ağacı ve F12 tarayıcı geliştirici örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM AĞACI</h4>
+    <p id="göster">Paragraf</p>
+
+    <img src="resim/secere2.png", alt="Secere", height="200" />
+    <!-- #comment yorum yumrusu -->
+    <script>
+        function fonk2() {
+            document.body.style.backgroundColor = "Black";
+            setTimeout ( () => document.body.style.backgroundColor = "", 5000);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML dökümanı iskeleti etiket nesneleridir. JS herbir etikete erişir. Örneğin \
+            bu örnek, açılışta body etiket nesnesi zemin rengini 5 sn için siyah yapacak \
+            sonra eski ayarına dönecektir: " + fonk2() +
+            "<br>2) DOM, HTML'yi etiketli ağaç yapısı olarak temsil eder." +
+            "<br>==>Kasdi veya yanlışlıkla /body veya /html sonrası girileni DOM otomatikmen \
+            body/gövde içine alır; dikkat edilmelidir." +
+            "<br>==>Siz eksik girseniz de tarayıcı html dom yapısını kendisi tamamlar. \
+            Örneğin, editörle sadece 'Merhaba' yazıp selam.html olarak saklayıp, sonra da \
+            tıklar açarsanız, tarayıcınız sayfasında 'Merhaba'yı görüntüler, ancak kendi \
+            içinde html-head-body ağacını tastamam yapılandırır." +
+            "<br>==>Table-tr-td girişindeyse mutlaka table-tbody-tr-td yapısını kurar." +
+            "<br>==>#text metin yumrusu gibi #comment yorum yumrusu da DOM ağaç \
+            yapısında alıkonulur." +
+            "<br>3) 12 ayrı tip yumru mevcuttur, fakat daha ziyade ilk 4'ü kullanılır: \
+            1=döküman, 2=eleman, 3=metin ve 4=yorum yumruları." +
+            "<br>4) F12 degugger penceresini açıp Elements tıklar ve üst pencere \
+            aralığını artırırsanız alt resimdeki dom html eleman ağaç yapısını kendi \
+            çalıştığınız örnek üzerinde aynen görürsünüz." +
+            "<br>==>Yada debugger kapalıyken herhangibir html noktasında sağ tıklayıp \
+            en alttaki inceleyi seçerseniz F12-debugger kendilinden açılır ve tıkladığınız \
+            yumru detayalarının Elements ve Styles pencereleri açılır. Buradan da ekleme, \
+            silme, değiştirme gibi işlemler yapabilirsiniz (örn.sağ tıkla, Edit-HTML seç)." +
+            "<br>5) Altta açık Console penceresinden bire-bir komut girebilirsiniz. Örneğin, \
+            Elements üzerine tıklayıp sonra da DOM AĞACI başlığını tıklayıp seçer ve \
+            alt konsoldan >$0 backgroundColor='Red' [Ent] ile >$0 color='Blue' [Ent] \
+            girerseniz başlığınız artık tam satır kırmızı zeminde mavi yazılıdır. Satır \
+            etkinliğini kısaltmak için ise >$0.style.width='150px' [Ent] yeterlidir."
+    </script>
+</body>
+<br>M.Nihat Yavaş (#text metin yumrusu)
+</html>
+<br>Toroslar-MERSİN (#text metin yumrusu)

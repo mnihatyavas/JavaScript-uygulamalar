@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5161.html: Dökümandaki yumru ve elemanları araştırma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM'DA ARAŞTIRMA</h4>
+    <p id="göster">Paragraf</p>
+
+    <div id="bölümGirişi">
+        <div id="bölüm-içeriği">Bölüm içeriği metin yumrusu</div>
+    </div>
+
+    <div class="bölüm">
+        <ul class="liste">
+            <li class="liste1">Bu</li>
+            <li class="liste1">liste</li>
+        </ul>
+        <ul class="liste">
+            <li class="liste2">halihazırda</li>
+            <li class="liste2">yayınlanmıştır.</li>
+        </ul>
+    </div>
+
+    <a href="http://misal1.com/dosya.zip" target="_">http://misal1.com/dosya.zip</a><br>
+    <a href="http://ya.ru" target="_">http://ya.ru</a><br>
+    <a href="http://misal2.com/dosya.zip" target="_">http://misal2.com/dosya.zip</a>
+    <br><br>
+    <table id="yaş-tablosu">
+        <tr>
+            <td>Yaş kategorinizi girin:</td>
+            <td>
+                <label>
+                    <input type="radio" name="yaş" value="küçük">18'den küçük
+                </label>
+                <label>
+                    <input type="radio" name="yaş" value="kamil">18-60 arası
+                </label>
+                <label>
+                    <input type="radio" name="yaş" value="kadim" checked>60'dan büyük
+                </label>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <form name="formum">
+        <div class="makale">Günlük makale</div>
+        <div class="uzun makale">Günlük uzun köşe yazısı</div>
+    </form>
+
+    <script>
+        function fonk2() {
+            let dizge = "";
+            let elemanlarListesi = document.querySelectorAll (`ul > li:last-child`);
+            for (let eleman of elemanlarListesi) {dizge += eleman.innerHTML + " ";}
+            return dizge;
+        } // func sonu...
+        function fonk3() {
+            let dizge = "<br>Arşiv referansları: ";
+            let i = 1;
+            for (let eleman of document.body.children) {
+                if (eleman.matches ('a[href$="zip"]')) {dizge += "<br>" + i + "==[" + eleman.href + "]"; i +=1;}
+            } // for sonu...
+            return dizge;
+        } // func sonu...
+        function fonk4() {
+            let liste1 = document.querySelector ('.liste1');
+            return liste1.closest ('.liste').nodeName + "; " + liste1.closest ('.bölüm').nodeName;
+        } // func sonu...
+
+        let divKoleksiyonu = document.getElementsByTagName ("div");
+        let liKoleksiyonu = document.getElementsByTagName ("li");
+        let inputKoleksiyonu = document.getElementsByTagName ("input");
+        inputKoleksiyonu [2].value = "genç";
+        let inputDeğerleri=""; for (let eleman of inputKoleksiyonu) {inputDeğerleri += "{" + eleman.value + "} ";}
+
+        let formElemanı = document.getElementsByName ("formum") [0];
+        let makaleKoleksiyonu = formElemanı.getElementsByClassName ("makale");
+
+        let divDinamikKoleksiyonu = document.getElementsByTagName ("div");
+        let divStatikListesi = document.querySelectorAll ('div');
+
+        let tablo = document.getElementById ("yaş-tablosu")
+        let yaşButonları = document.getElementsByName ("yaş")
+
+        document.getElementById ("göster").innerHTML =
+            "1) Eğer bir elemanın id kimliği varsa kolayca erişilebilir." +
+            "<br>==>Örn.Altta görünen bölümGirişi'ni sorgulayalım: " + bölümGirişi + "; " +
+            bölümGirişi.nodeName + "; " + window.bölümGirişi.nodeName +
+            "<br>==>Şimdi de aynı bölümün (JS'te kullanılamayan) tireli 'bölüm-içeriği'ne \
+            erişmeye çalışalım: " + window ["bölüm-içeriği"] + "; " + window ["bölüm-içeriği"].nodeName +
+            "; " + window ["bölüm-içeriği"].innerHTML +
+            "<br>==>Ancak, id ile aynı adla bir JS değişkeni mevcutsa öncelik JS değişkeninedir. \
+            Bu yüzden eniyisi getElementById'yi kullanmaktır: " +
+            (document.getElementById ("bölüm-içeriği").style.backgroundColor = "Navy") +
+            "<br>2) Verimli bir arayıcı querySelectorAll(yumru)'dur." +
+            "<br>==>Örn.Alttaki iki ayrı listenin son elemanlarını listeleyip dökelim \
+            (ul>li:last-child tırnakları için tek-çift tırnak değil AltGr->;->boşluk kullanın): " + fonk2() +
+            "<br>==>Hızlı querySelector ise querySelectorAll [0] ile aynıdır: " +
+            document.querySelector(`ul>li:last-child`).innerHTML +
+            "<br>3) RegExp matches yöntemi de aramalarda kullanılabilecek elverişli \
+            bir yöntemdir." +
+            "<br>==>Örn.Alttaki internet sayfalarından .zip uzantılı dosyalar içeren adresleri bulalım: " + fonk3() +
+            "<br>4) CSS arayıcı closest en yakın ebeveyni bulur. Bu arayış ebeveynsiz \
+            döküman köküne kadar sürer." +
+            "<br>==>Örn.Alttaki listemizde liste1 sınıflı elemanın enyakın liste ve bölüm \
+            ebeveynlerini bulalım: " + fonk4() +
+            "<br>5) getElementsBy* ailesinde tek eleman döndüren getElementById(kimlikID)'den \
+            başka getElementsByTagName(etiketAdı/*), getElementsByClassName(cssSınıfAdı) \
+            ve getElementsByName(nameAdı) metodları da vardır. Ancak yukardaki \
+            querySelectorAll ve getElementsByName gibi liste değil HTMLCollection döndürür." +
+            "<br>==>Örn.Sayfadaki tüm div elemanlarını bulalım: " + divKoleksiyonu + "; " +
+            divKoleksiyonu.length + "; " + divKoleksiyonu [0].nodeName + "; " + divKoleksiyonu [1].innerHTML +
+            "<br>==>Şimdi de sayfadaki tüm li elemanlarını bulalım: " + liKoleksiyonu + "; " +
+            liKoleksiyonu.length + "; " + liKoleksiyonu [0].innerHTML + "; " + liKoleksiyonu [liKoleksiyonu.length -1].innerHTML +
+            "<br>==>Üstteki yükle-sil ve alttaki radyo düğmeleri örneği dahil sayfadaki \
+            tüm input elemanları ve değerlerini bulalım: " +  inputKoleksiyonu + "; " +
+            inputKoleksiyonu.length + "; " + inputDeğerleri + ":" + inputKoleksiyonu [inputKoleksiyonu.length -1].checked +
+            "<br>==>Koleksiyondaki tek eleman değeri değiştirilebilir: " + (inputKoleksiyonu [2].value="küçük") +
+            "=" + inputKoleksiyonu [2].value +
+            "<br>==>Alttaki form örneğinde ByClassName ve ByName koleksiyonlarını\
+            birlikte kullanarak form içindeki makale sınıflarını tespit edelim: " + formElemanı + "; " +
+            formElemanı.name + "; " + makaleKoleksiyonu + "; " + makaleKoleksiyonu.length + "; " +
+            makaleKoleksiyonu [0].innerHTML + "; " + makaleKoleksiyonu [1].innerHTML +
+            "<br>6) contains ile bir elemanın diğerini içerip içermediği (ebeveyni) kontrol \
+            edilebilir. Örn.formElemanı makaleKoleksiyonu[0] elemanını içeriyor mu yada tersi? " +
+            formElemanı.contains (makaleKoleksiyonu [0]) + "; " +
+            makaleKoleksiyonu [0].contains (formElemanı) +
+
+            "<br>7) Aşağıdaki yaş tablosuyla ilgili birkaç egzersiz yapalım." +
+            "<br>=>Yaş tablosu elemanı: " + tablo +
+            "<br>=>Tablodaki tüm label elemanları koleksiyonu ve sayısı: " +
+            tablo.getElementsByTagName ('label') + "; " + tablo.getElementsByTagName ('label').length +
+            "<br>=>Tablodaki tüm label elemanları listesi ve sayısı: " +
+            tablo.querySelectorAll  ('label') + "; " + tablo.querySelectorAll ('label').length +
+            "<br>=>İlk td elemanı ve metni: " + tablo.rows [0].cells [0] + "; " + tablo.rows [0].cells [0].innerHTML +
+            "<br>==>veya: " + tablo.getElementsByTagName ('td') [0] + "; " + tablo.getElementsByTagName ('td') [0].innerHTML +
+            "<br>==>veya: " + tablo.querySelector ('td') + "; " + tablo.querySelector ('td').innerHTML +
+            "<br>=>name ismi yaş olan elemanlar listesi ve uzunluğu: " + yaşButonları + "; " + yaşButonları.length +
+            "<br>==>İlkinin değeri ve tipi: " + yaşButonları [0].value + "; " + yaşButonları [0].type +
+            "<br>=>veya: " + document.querySelector ('input[name="yaş"]') + "; " + document.querySelector ('input[name="yaş"]').value +
+            "; " + document.querySelector ('input[name="yaş"]').type +
+            "<br>=>İlk label elemanı ve metni: " + tablo.getElementsByTagName ("label") [0] +
+            "; " + tablo.getElementsByTagName ("label") [0].innerHTML +
+            "<br>=>veya: " + tablo.querySelector ("label") + "; " + tablo.querySelector ("label").innerHTML +
+            "<br>=>Son label elemanı ve metni: " + (liste=tablo.querySelectorAll("label") ) + 
+            "; " + liste [liste.length-1] + "; " + liste [liste.length-1].innerHTML +
+            "<br>8) getElementsBy* dinamik koleksiyondur ve güncellemeleri otomatikmen \
+            işler, lakin querySelectorAll ise statik listedir ve güncellemeleri otomatik işlemez." +
+            "<br>==>Örn.Bu script'deki div elemanlarının uzunluk tespitinden sonra yeni bir div \
+            ekleyip bir sonraki script'te hangisi uzunluğu otomatik güncellemiş bakalım: " +
+            divDinamikKoleksiyonu.length + "=" + divStatikListesi.length
+    </script>
+
+    <br><div>Sonradan eklenen div bölümü</div>
+
+    <script>
+        document.getElementById ("göster").innerHTML += "; " + divDinamikKoleksiyonu.length + " > " + divStatikListesi.length
+    </script>
+</body>
+</html>

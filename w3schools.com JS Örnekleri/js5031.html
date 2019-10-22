@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5031.html: HTML DOM Döküman-1 örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM DÖKÜMANI-1</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x = document.createElement ("INPUT");
+        x.setAttribute ("type", "button");
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML DOM dökümanı ağ sayfasının nesnesi olup, sayfadaki diğer \
+            bütün nesnelerin sahibidir. Sayfaya herhangibir şekilde erişim öncelikle \
+            'document' nesnesiyle başlar: " + document +
+            "<br/>2) HTML elemanlarına 3 metodla erişilebilir:" +
+            "<br/>==>getElementById(): Sayfa içinde sabit 'göster' veya 'demo' gibi \
+            'id' adlarla: " + document.getElementById ("göster") +
+            "<br/>==>getElementByTagName(): Sayfadaki p, h1, a, div gibi etiket \
+            adlarıyla: " + document.getElementsByTagName ("p") +
+            "<br/>==>getElementsByClassName(). Sayfada 'style' CSS kısmında \
+            tanımlı sınıf adlarıyla: " + document.getElementsByClassName ("çerçeve") +
+            "<br/>3) HTML elemanları 4 şekilde değiştirilebilir:" +
+            "<br/>==>eleman.innerHTML = 'yeni içerik': " +
+            (document.getElementById ("göster").innerHTML = "yeni değer") +
+            "<br/>==>eleman.vasıf = 'yeni değer': " + (document.getElementById ("göster").src
+            = "<br/><img src='resim/araba.gif' />") +
+            "<br/>==>eleman.setAttribute (vasıf, değer) elemanın vasfını değiştirir: " + x +
+            "<br/>==>eleman.style.özellik= 'yeni özellik' elemanın CSS stilini değiştirir: " +
+            (document.getElementById ("göster").style.color = "Gold")
+    </script>
+</body>
+</html>

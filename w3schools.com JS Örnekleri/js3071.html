@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3071.html: ES5 metodlarıyla nesne özelliği al-koy örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE ES5</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var kişi1 = {ad: "Nihat", soyad: "Yavaş", yaş: (2019-1957), lisan: "tr", okul: "İlkokul"};
+        Object.defineProperty (kişi1, "lisan", {value:"YO"});
+
+        Object.defineProperty (kişi1, "lisan", {writable: true, enumerable: false, configurable: true});
+        var metin = "", x; for (x in kişi1) {metin +=x + ":" + kişi1 [x] + ", ";}
+
+        Object.defineProperty (kişi1, "gözRengi", {value: "ela"} );
+        Object.defineProperty (kişi1, "adSoyad", {get: function() {return (this.ad + " " + this.soyad);} });
+
+        Object.defineProperty (kişi1, "okulAl", {get: function() {return this.okul;} });
+        Object.defineProperty (kişi1, "okulKoy", {set: function (a) {this.okul = a;} });
+
+        var Sayaç = {sayaç: 0};
+        Object.defineProperty (Sayaç, "başlat", {set: function (a) {this.sayaç = a;} });
+        Object.defineProperty (Sayaç, "birArtır", {get: function () {this.sayaç++;} });
+        Object.defineProperty (Sayaç, "birAzalt", {get: function () {this.sayaç--;} });
+        Object.defineProperty (Sayaç, "ekle", {set: function (a) {this.sayaç += a;} });
+        Object.defineProperty (Sayaç, "çıkar", {set: function (a) {this.sayaç -= a;} });
+        Sayaç.başlat = 1957; // Doğum yılını gir...
+        Sayaç.ekle = 65; // Yaşını gir...
+        Sayaç.çıkar = 2;
+        Sayaç.birArtır;
+        Sayaç.birAzalt;
+        Sayaç.birAzalt; // Güncel yıla ulaş...
+
+        document.getElementById ("göster").innerHTML =
+            "1) ES5 JS'e birçok yeni nesne metodları ekledi: defineProperty/özellikTanımla, \
+            getOwnPropertyDescriptor/kendiÖzellikTanımlayıcınıAl, getOwnPropertyNames/\
+            kendiÖzellikAdlarınıAl, getPrototypeOf/prototipiniAl, preventExtensions/\
+            uzantılarıEngelle, isExtensible/genişleyebilirMi, isSealed/mühürlüMü, freeze/dondur \
+            ve isFrozen/donukMu." +
+            "<br/>2) Object.defineProperty metoduyla bir nesnenin özellik değeri değiştirilebilir: " +
+            kişi1.ad + "; " + kişi1.lisan +
+            "<br/>Bu metodla sadece özellik değerleri değil writable:true (değiştirilebilir), \
+            enumerable:true (dökümlenebilir) ve configurable:true (şekillendirilebilir) gibi \
+            özellik meta/katalog-tanıtım verileri de ayarlanabilir. Taranabilir anahtar-değer \
+            çifti: " + metin +
+            "<br/>Tüm anahtar adları: " + Object.getOwnPropertyNames (kişi1) +
+            "<br/>Sadece taranabilir anahtar adları: " + Object.keys (kişi1) +
+            "<br/>3) Object.defineProperty metoduyla bir nesneye yeni bir özellik veya \
+            metod ekleyebiliriz: " + kişi1.gözRengi + "; " + kişi1.adSoyad +
+            "<br/>4) Get-set ile özelliği okuyabilir yada değiştirebiliriz: " +
+            (kişi1.okulKoy = "Üniversite") + "; " + kişi1.okulAl +
+            "<br/>Get-set'li bir sayaç örneği: " + Sayaç.sayaç
+    </script>
+</body>
+</html>

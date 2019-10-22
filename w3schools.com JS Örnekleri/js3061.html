@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3061.html: Nesne kurucu fonksiyonlu prototipi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE PROTOTİPİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function Kişi (ad, soyad, yıl, renk) {
+            this.ad = ad;
+            this.soyad = soyad;
+            this.yaş = (2019 - yıl);
+            this.gözRengi = renk;
+            this.boy = 1.71;
+            this.isim = function() {return (this.ad + " " + this.soyad);}; }
+        kardeşim = new Kişi ("Nihal", "Candan", 1955, "ela");
+        yeğenim = new Kişi ("Canan", "Candan", 1975, "kara");
+
+        yeğenim.meslek = "Mühendis";
+        kardeşim.adSoyad = function() {return (this.ad + " " + this.soyad);};
+
+        Kişi.boyu = 1.85;
+
+        Kişi.prototype.okul = "İlkokul";
+        Kişi.prototype.medeni = function (durum) {return ("Medeni hali: " + durum);};
+
+        document.getElementById ("göster").innerHTML =
+            "1) Her JS nesnesinin bir prototipi (ilktipleme, ilkörnek) vardır. Tüm (yavru) \
+            nesneler özellik ve metodlarını ebeveyn prototiplerinden miraslar. Nesne \
+            sabitesi {} veya new Object()'le yaratılan yavru nesnelerin miraslandıkları \
+            prototip Object.prototype ve new Date() yavru nesnesininki Date.prototype; \
+            ayrıca tüm JS yavru nesnelerinin (Date, Array, RegExp, Function) enüst \
+            tepe ebeveyni Object.prototype'dır." +
+            "<br/>2) Özel nesne prototipi fonksiyon kurucusudur. Örnekte Kişi fonksiyonu \
+            new Kişi() ile yaratılan yavru nesnelerin ebeveyn prototipidir: " + kardeşim.yaş +
+            "<br/>3) Yeni özellik veya metod ilavesini tek bir yavru nesneye de ekleyebilir \
+            veya nesne kurucu fonksiyon prototipine de: " + yeğenim.ad + "=" + yeğenim.meslek +
+            "=" + yeğenim.adSoyad + "; " + kardeşim.adSoyad + "=" + kardeşim.adSoyad() +
+            "=" + kardeşim.gözRengi + "=" + kardeşim.meslek +
+            "<br/>Prototipe özellik veya metod nesnedeki gibi nesne adıyla değil (etkisiz kalır) \
+            kurucu fonksiyon içine eklemeyle yapılabilir: " + yeğenim.boyu + "; " +
+            yeğenim.boy + "; " + yeğenim.isim + "=" + yeğenim.isim() +
+            "<br/>4) Fonksiyon kurucu içinden özellik ve metod ilavesi yapılabildiği \
+            gibi haricen Object.prototype.property ile de yapılabilir: " + yeğenim.okul +
+            "; " + (yeğenim.okul = "Master") + yeğenim.okul + "=" + yeğenim.medeni ("Dul") +
+            "; " + kardeşim.okul + "=" + kardeşim.medeni ("Evli")
+    </script>
+</body>
+</html>

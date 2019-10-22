@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6071.html: BOM zamanlama olaylı JS metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #saat {
+            border: solid 5px sienna;
+            background:Moccasin;
+            color:Navy;
+            width:300px;
+            text-align:center;
+            font-family:Arial;
+            font-weight:bold;
+            font-size:70px;
+            border-radius:20px;
+            padding:20px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM ZAMANLAMA OLAYLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Saatı başlat" onClick="zaman = setInterval ( () => document.getElementById ('saat').innerHTML = new Date().toLocaleTimeString(), 1000);">
+    <input type="button" value="Saatı durdur" onClick="clearInterval (zaman);"><br>
+    <input type="button" value="10 sn sonra selamı yansıt" onClick="selam=setTimeout ( () => alert ('Merhaba JS Dünyası!..\nNasılsınız?'), 10000);">
+    <input type="button" value="Selamı iptal et" onClick="clearTimeout (selam);"><br>
+    <div id="saat">Saat</div>
+    <br>
+    <input type="button" value="3 ayrı zamanlama" onClick="fonk2();"><br>
+    <input type="button" value="Dakik saat" onClick="fonk3()">
+    <input type="button" value="Saatı durdur" onClick="clearInterval (zaman2);">
+    <div id="bölüm"></div>
+
+    <script>
+        function fonk2() {
+            function geciktirme1() {document.getElementById ("bölüm").innerHTML = "1 saniye geçti";}
+            function geciktirme5() {document.getElementById ("bölüm").innerHTML = "5 saniye geçti";}
+            function geciktirme10() {document.getElementById ("bölüm").innerHTML = "10 saniye geçti";}
+            setTimeout (geciktirme1, 1000) 
+            setTimeout (geciktirme5, 5000) 
+            setTimeout (geciktirme10, 10000) 
+        } // func sonu...
+        function fonk3() {
+            function kontrol (i) {if (i < 10) {i = "0" + i}; return i;}
+            var tarih = new Date();
+            var saat = tarih.getHours()+1;
+            var dakika = tarih.getMinutes();
+            var saniye = tarih.getSeconds();
+            dakika = kontrol (dakika);
+            saniye = kontrol (saniye);
+            document.getElementById ('bölüm').innerHTML =
+                saat + ":" + dakika + ":" + saniye;
+            zaman2 = setTimeout (fonk3, 500); // var'sız global zaman2 özyinelemeli setInterval() yapıldı...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Html DOM window nesnelerinden setTimeout() ve setInterval() metodları \
+            milisaniyeyle ilişkili fonksiyon yürütürler." +
+            "<br>==>setTimeout (fonk(), mS) metodu fonksiyonu mS süresince bekledikten sonra yürütür." +
+            "<br>==>clearTimeout(değişken), değişkene atalı setTimeout henüz yürütülmemişse iptal eder." +
+            "<br>==>setInterval (fonk(), mS) fonksiyon icrasını her mS aralıklarla biteviye sürdürür." +
+            "<br>==>clearInterval(değişken), değişkene atalı setInterval biteviye yürütümünü iptal eder." +
+            "<br>==>Örn.Alttaki tuşlarla bu iki fonksiyonun icrasını gözlemleyebilirsiniz: " +
+            "<br>==>Örn.Zamanlama olaylarıyla ilgili alttaki diğer 2 düğmeyi de deneyebilirsiniz:"
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5091.html: HTML DOM olay dinleyici ekleme ve silme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #bölüm1, #bölüm2 {
+            background-color: coral;
+            color: Blue;
+            padding: 1px;}
+        #paragraf1, #paragraf2 {
+            background-color: Azure;
+            font-size: 20px;
+            border: 2px solid DeepPink;
+            padding: 1px;}
+        #bölüm3 {
+            background-color: Purple;
+            border: 3px solid Magenta;
+            padding: 10px;
+            color: SpringGreen;
+            font-size: 20px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM OLAY DİNLEYİCİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <button id="düğme1">Dahilde güncel tarih?</button><br><br>
+
+    <div id="bölüm1">
+        <h2>Kabarcık Yöntemi</h2>
+        <p id="paragraf1">Tıklarsan=>Önce İÇTEKİ paragraf!..</p>
+    </div>
+    <br>
+    <div id="bölüm2">
+        <h2>İşgal Yöntemi</h2>
+        <p id="paragraf2">Tıklarsan=>Önce DIŞTAKİ bölüm!..</p>
+    </div>
+
+    <br>
+    <h4 style="color:RebeccaPurple;" id="göster2">Tesadüfi sayılar</h4>
+    <div id="bölüm3">
+        <p>Bu div html elemanının ekli olay dinleyicisi, fare bu lacivert bölümde her hareketinde üstteki paragrafta gelişigüzel sayılar üretir.</p>
+        <p>Ancak hemen alttaki sil düğmesini tıklarsanız div elemanının olay yöneticisi silinecektir.</p>
+        <button onclick="fonk9()">Tesadüfi sayı üretimini iptal et</button>
+    </div>
+
+    <script>
+        function fonk2() {document.getElementById ("düğme1").innerHTML = Date();}
+        function fonk3() {alert ("Merhaba Dünya!..\n(Harici fonksiyonla)");}
+        function fonk4() {document.getElementById ("düğme1").innerHTML += "<br>Fare halihazırda üzerimde";}
+        function fonk5() {document.getElementById ("düğme1").innerHTML += "<br>Fare artık buradan ayrıldı";}
+        function fonk6() {document.getElementById ("düğme1").innerHTML += "<br>Beni tıkladığınızın farkında mısınız?";}
+        function fonk7(a, b, c) {document.getElementById ("göster").innerHTML +=
+            "<br><span style='color:blue;'>3, 5.25 ve -13.72 sayılarının ardışık üstleri: " + (a**b**c) + "=~1 çıkması ilginç değil mi?";}
+        function fonk8() {document.getElementById ("göster2").innerHTML = Math.random();}
+        function fonk9() {document.getElementById ("bölüm3").removeEventListener ("mousemove", fonk8);}
+
+        document.getElementById ("düğme1").addEventListener ("click", fonk2);
+        document.getElementById ("düğme1").addEventListener ("click", function() {alert ("Merhaba Dünya!..\n(Dahili fonksiyonla)");});
+
+        document.getElementById ("düğme1").addEventListener ("click", function() {fonk7 (3, 5.25, -13.72);});
+
+        var x = document.getElementById ("düğme1");
+        x.addEventListener ("mouseover", fonk4);
+        x.addEventListener ("click", fonk6);
+        x.addEventListener ("mouseout", fonk5);
+
+        window.addEventListener ("resize", function() {document.getElementById ("göster").innerHTML +=
+            "<br><span style='color:FireBrick;'>Tarayıcı ebatı değişti...</span>";});
+
+        document.getElementById ("paragraf1").addEventListener ("click", function() {alert ("Beyaz elemanı tıkladınız!");}, false);
+        document.getElementById ("bölüm1").addEventListener ("click", function() {alert ("Turuncu elemanı tıkladınız!");}); // Varsayılı false=kabarcık'tır...
+        document.getElementById ("paragraf2").addEventListener ("click", function() {alert ("Beyaz elemanı tıkladınız!");}, true);
+        document.getElementById ("bölüm2").addEventListener ("click", function() {alert ("Turuncu elemanı tıkladınız!");}, true); // Değiştirmek için true=işgal'dır...
+
+        document.getElementById ("bölüm3").addEventListener ("mousemove", fonk8);
+
+        document.getElementById ("göster").innerHTML =
+            "1) Herhangibir html elemanına onevent/onclick/olayüzere işlem yaptırdığınız gibi \
+            elemana addEventListener(olay/click, fonksiyon) ile olay dinleyicisi ekleyip \
+            olay vukuunda fonksiyonu işlettirebilirsiniz." +
+            "<br>==>Aynı elemana çoklu aynı veya farklı olay yöneticisi eklenebilir. Örneğin \
+            düğme1 kimlikli butona tıklandığında tarih yanısıra dahili ve harici alert mesajcı \
+            fonksiyonlar da ekleyelim." +
+            "<br>==>Aynı elemana 3 click olayı yanısıra mouseover/fareüzerimde, \
+            mouseout/faredışarda ve tekrar click/tıkla olaylarını da ekleyelim." +
+            "<br>2) Olay eklemeyi sadece html elemanlarına değil window/pencere \
+            nesnesine de yapabiliriz. Örn; window tarayıcı ebatı değiştiğinde bunu \
+            bir beyanla belirtelim." +
+            "<br>3) Html buton elemanına click olayı eklerken 3 argümanı geçiren \
+            bir fonksiyon işletelim." +
+            "<br>==>Ancak bildiğiniz gibi özel fonksiyon adı yalın kullanılıyor. Bu yüzden \
+            önce argümansız anonim fonksiyon kullanarak, sonra içinde argümanlı \
+            özel fonksiyonumuzu yerleştirebiliriz." +
+            "<br>4) İç-içe ekli olay dinleyicili html elemanları varsa, dıştakını değil, lakin \
+            içtekini etkinleştirdiğinizde, belirtmez veya false'larsanız varsayılı yöntem \
+            bubble/kabarcık=false olup önce içteki elemanın olay fonksiyonu işletilir, \
+            sonra da dıştaki; fakat bilhassa true=capture/işgal olarak belirtilseniz, işgalde \
+            öncelik endış sınır olduğundan (eniçtekini tıkladığınız halde) eleman olay \
+            fonksiyonları dıştan içe işletilir. Örneği test edebilirsiniz." +
+            "<br>5) Html elemanlarına olay dinleyicisi eklediğiniz gibi, istediğiniz tanımlı \
+            olay yöneticisini removeEventListener(olay,fonksiyon) ile de silebilirsiniz. \
+            Örn; En alttaki tesadüfi sayılar üretim olayını silme düğmesini tıkladığınızda \
+            artık üretmeyeceğini göreceksiniz."
+    </script>
+</body>
+</html>

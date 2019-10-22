@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6081.html: BOM tarayıcının JS çerezleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+
+        function çereziYarat (çadı, çdeğeri, ötelenenGün) {
+            var t = new Date();
+            t.setTime (t.getTime() + (ötelenenGün*24*60*60*1000));
+            var son = "expires=" + t.toUTCString();
+            document.cookie = çadı + "=" + çdeğeri + "; " + son;
+        } // func sonu...
+        function çereziOku (çadı) {
+            var ad = çadı + "=";
+            var ça = document.cookie.split (';');
+            for (var i = 0; i < ça.length; i++) {
+                var ç = ça [i];
+                while (ç.charAt (0) == ' ') {ç = ç.substring (1);}
+                if (ç.indexOf (ad) == 0) {
+                    document.getElementById ("göster2").innerHTML = ç.substring (ad.length, ç.length);
+                    return ç.substring (ad.length, ç.length);
+                } // if sonu...
+            } // for sonu...
+            return "";
+        } // func sonu...
+        function çerezKontrolü() {
+            var kullanıcı = çereziOku ("kullanıcıAdı");
+            if (kullanıcı != "") {alert ("Tekrar aramıza hoşgeldin sayın [" + kullanıcı +"]");
+            } else {
+                kullanıcı = prompt ("Lütfen kullanıcı adını girin:", "");
+                if (kullanıcı != "" && kullanıcı != null) {çereziYarat ("kullanıcıAdı", kullanıcı, 365);}
+            } // else sonu...
+        } // func sonu...
+    </script>
+</head>
+<body onload="çerezKontrolü()">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM ÇEREZLERİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Çerez kontrolü" onClick="çerezKontrolü()">
+    <p id="göster2">Paragraf-2</p>
+    
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Çerezler, kullanıcının ağ sayfasına ait bilgileri disk üzerine bir txt metin \
+            dosyasına (daha sonra aynı sayfayı tekrar ziyaret ettiğinde hatırlamak amacıyla) \
+            yüklemesini sağlar. Çerezler (kullanıcıAdı = M.Nihat Yavaş) şeklinde ad-değer \
+            çifti olarak saklanır." +
+            "<br>2) JS, document.cookie özelliğiyle bir çerezi yaratır, okur ve siler." +
+            "<br>==>document.cookie='kullanıcı=M.Nihat Yavaş'; ile bir çerez yaratılır: " +
+            (document.cookie = "kullanıcı=M.Nihat Yavaş") +
+            "<br>==>" + document.cookie +
+            "<br>==>Normalen tarayıcı kapandığında çerez de silinir, ancak yaratılırken çereze \
+            bir sontarih eklenirse, o tarihe kadar silinmez: " +
+            (document.cookie = "ad1=M.Nihat Yavaş; expires=Wed, 18 Dec 2019 12:00:00 UTC") +
+            "<br>==>" + document.cookie +
+            "<br>3) Aynı kullanıcıadı ile girilen yeni çerez, öncekinin içeriğini değiştirir." +
+            "<br>==>Örn.'path=/' ile bir önceki çerezin yolunun varsayılı aktüel sayfa olduğu belirtelim: " +
+            (document.cookie = "ad1=M.Nihat Yavaş; expires=Wed, 18 Dec 2019 12:00:00 UTC; path=/") +
+            "<br>==>" + document.cookie +
+            "<br>4) Mevcut bir çerezinizi silmek isterseniz, sadece expires/sontarih için geçmiş bir tarih girmeniz yeterlidir." +
+            "<br>==>Örn.kullanıcı anahtarkelimeli çereze geçmiş tarih ekleyip, silinmiş mi, bakalım: " +
+            (document.cookie = "kullanıcı=M.Nihat Yavaş; expires=Thu, 01 Jan 1970 00:00:00 UTC") +
+            "<br>==>" + document.cookie
+    </script>
+</body>
+</html>

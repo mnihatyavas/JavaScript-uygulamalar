@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1481.html: JS F12 debugger hataayıklayıcı konsolu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DEBUGGİNG Hata Ayıklama</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        debugger;
+        document.getElementById ("göster").innerHTML =
+            "1) JS hata verdiğinde suskun kalır, hatanın nedenini göremeyiz. Ancak \
+            F12 tuşuyla tarayıcının hazır debugger-console (hata ayıklayıcı konsol) \
+            çıktı mesajlarını takip edebiliriz. Çıktıları console.log(x) ile görebiliriz: " +
+            console.log (2**4) + "=16; " + console.log (Math.pow (Math.PI, Math.E)) +
+            "=22.45915771836104" +
+            "<br>2) JS program akışını duraksatmak için 'debugger' anahtarkelimesi \
+            kullanılır. Tarayıcı penceresinin üstünde (Paused in debugger; Play; Step \
+            over next) duraksatma ve devam için tıklama seçenekleri sunar." +
+            "<br>3) F12 benzeri tarayıcı sağ-üst ayarlar->araçlar->geliştiriciler->console \
+            adımlarıyla da hataayıklayıcı konsol penceresini açabilirsiniz. Tekrar F12 \
+            veya sağ-üst X tuşu ayıklayıcıyı kapar."
+    </script>
+</body>
+</html>

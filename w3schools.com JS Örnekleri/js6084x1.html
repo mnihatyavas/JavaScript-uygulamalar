@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js6084x1.html: Sarmalayýcý-tabanlý idb.min.js kodlamasý olan indexedDB kitap kayýt veritabaný örneði.</title>
+    <style>
+        body {
+            background-color:DarkKhaki;
+            color: Navy;
+            font-size:20px;
+            margin:2em;}
+        input {
+            background-color:Moccasin;
+            color:Green;}
+       button {
+            background-color:Navy;
+            color:Yellow;}
+    </style>
+    <script src="js6084x2.js"></script>
+</head>
+<body>
+    <button onclick="kitapEkle()">Yeni bir kitap ekle</button>
+    <button onclick="tümKitaplarýGör()">Tüm kitaplarý gör</button>
+    <button onclick="tekKitabýGör()">Tek bir kitabý gör</button>
+    <button onclick="deðiþtir()">Tek bir kitap fiyatýný deðiþtir</button>
+    <button onclick="tekKitabýSil()">Tek bir kitabý SÝL</button>
+    <button onclick="kitaplarýSil()">Tüm kitaplarý SÝL</button>
+
+    <p>Kitaplarýn listesi:</p>
+    <ul id="listeElemaný"></ul>
+
+    <script>
+        let vt;
+        baþlat();
+
+        async function baþlat() {
+            vt = await idb.openDb ('kitaplarVT', 1, vt => {vt.createObjectStore ('kitapDeposu', {keyPath: 'kitapAdý'}); });
+            listeElemaný.innerHTML = "Kütüphanenizdeki kitaplarý görmek için ilgili düðmeyi týklayýn."
+        } // func sonu...
+
+        async function listele() {
+            let iþlem = vt.transaction ('kitapDeposu');
+            let kitapDepo = iþlem.objectStore ('kitapDeposu');
+            let kitaplar = await kitapDepo.getAll();
+            if (kitaplar.length) {
+                listeElemaný.innerHTML = kitaplar.map (kitap =>
+                  `<li>Kitabýn adý: ${kitap.kitapAdý}; Fiyatý: ${kitap.kitapFiyatý} TL</li>`).join("");
+                listeElemaný.innerHTML += "<br>Kütüphanenizdeki toplam kitap sayýsý: " + kitaplar.length;
+            } else {listeElemaný.innerHTML = "Kütüphanenizde henüz hiç kitabýnýz yok, ekleyin.";}
+        } // func sonu...
+
+        async function kitapEkle() {
+            let kitapAdý = prompt ("Kitap adý?");
+            let kitapFiyatý = prompt("Fiyatý, TL?");
+            try {await vt.transaction ('kitapDeposu', 'readwrite').objectStore ('kitapDeposu').add ({kitapAdý, kitapFiyatý});
+                await listele();
+            } catch (hata) {
+                if (hata.kitapAdý == "ConstraintError") {alert ("Bu kitap kütüphanenizde mevcut!.."); await kitapEkle();
+                } else {throw hata;}
+            } // try-catch sonu...
+        } // func sonu...
+
+        async function tümKitaplarýGör() {await listele();}
+
+        async function tekKitabýGör() {
+            let kitapAdý = prompt ("Görmek istediðiniz kitabýn adýný girin:");
+            let kitap = await vt.transaction ('kitapDeposu').objectStore ('kitapDeposu').getAll (kitapAdý)
+            if (kitap.length) {listeElemaný.innerHTML = kitap.map (kitap =>`<li>Kitabýn adý: ${kitap.kitapAdý}; Fiyatý: ${kitap.kitapFiyatý} TL</li>`);
+            } else {listeElemaný.innerHTML = "Kütüphanenizde bu kitap mevcut deðil.";}
+        } // func sonu...
+
+        async function deðiþtir() {
+            let kitapAdý = prompt ("Kitap adý?");
+            let kitap = await vt.transaction ('kitapDeposu').objectStore ('kitapDeposu').getAll (kitapAdý);
+            if (kitap.length) {
+                let kitapFiyatý = prompt("Fiyatý, TL?");
+                try {await vt.transaction ('kitapDeposu', 'readwrite').objectStore ('kitapDeposu').put ({kitapAdý, kitapFiyatý});
+                } catch (hata) {
+                    if (hata.kitapAdý == "ConstraintError") {alert ("Bu kitap kütüphanenizde mevcut!.."); await kitapEkle();
+                    } else {throw hata;}
+                } // try-catch sonu...
+                await listele();
+            } else {listeElemaný.innerHTML = "Fiyatýný deðiþtirmek istediðiniz kitap kütüphanenizde mevcut deðil.";}
+        } // func sonu...
+
+        async function tekKitabýSil() {
+            let kitapAdý = prompt ("Kitap adý?");
+            let kitap = await vt.transaction ("kitapDeposu").objectStore ('kitapDeposu').getAll (kitapAdý);
+            if (kitap.length) {
+                let cevap = prompt ("DÝKKAT... Bu kitap kütüphanenizden silinecek.\nEmin misiniz [e/h]:", "h");
+                if (cevap.toLowerCase() == "e") {
+                    try {await vt.transaction ("kitapDeposu", "readwrite").objectStore ('kitapDeposu').delete(kitapAdý);
+                    } catch (hata) {alert ("HATA: Bu kitabý silemedim\n" + hata);}
+                } // if sonu...
+                await listele();
+            } else {listeElemaný.innerHTML = "Silmek istediðiniz kitap kütüphanenizde mevcut deðil.";}
+        } // func sonu...
+
+        async function kitaplarýSil() {
+            let cevap = prompt ("DÝKKAT... Kütüphanenizdeki tüm kitaplar silinecek.\nEmin misiniz [e/h]:", "h");
+            if (cevap.toLowerCase() == "e") {await vt.transaction ('kitapDeposu', 'readwrite').objectStore ('kitapDeposu').clear();}
+            await listele();
+        } // func sonu...
+
+        window.addEventListener ('unhandledrejection', olay => {alert ("HATA: " + olay.reason.message); });
+    </script>
+</body>
+</html>

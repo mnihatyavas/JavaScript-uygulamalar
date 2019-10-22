@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6086.html: Blob&FileReader&File/Damla-DosyaOkuyucu-Dosya örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <!--<input type="button" value="Sil" onClick="fonk1()">-->
+    <h4>Blob&FileReader&File</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Blob/Damla Kurucusu" onClick="fonk2()"><br>
+    <input type="button" value="Damla Verisi ve Özellikleri" onClick="fonk3()"><br>
+    <input type="button" value="Damla Tiplamesi" onClick="fonk4()"><br>
+    <input type="button" value="Damla slice Metodu" onClick="fonk5()"><br><br>
+
+    <input type="button" value="File/Dosya Kurucusu" onClick="fonk13()"><br><br>
+
+    Resim dosyası seç: <input type="file" accept="image/*" onchange="fonk6 (event)"><br>
+    Abort/Error: <input type="file" accept="image/*" onchange="fonk7 (event)"><br>
+    Detaylı Abort/Error: <input type="file" accept="image/*" onchange="fonk12 (event)"><br>
+    Okuma safhaları: <input type="file" accept="image/*" onchange="fonk8 (event)"><br>
+    Aşama olayları: <input type="file" accept="image/*" onchange="fonk11 (event)"><br>
+    Okunan byte sayısı: <input type="file" onchange="fonk9 (event)"><br>
+    Metin dosyası seç: <input type="file" onchange="fonk10 (event)"><br>
+    Dosya adı ve son değişiklik tarihi: <input type="file" onchange="fonk14 (event)" /><br><br>
+
+    <img id="resim1" height="200" alt="" />
+
+    <script>
+        function fonk2() {
+            var damla = new Blob();
+            console.log (damla.size);
+            console.log (damla.type);
+        } // func sonu...
+        function fonk3() {
+            var damla = new Blob(["Mahmut", 'Nihat', 'Yavaş']);
+
+            console.log ('ebat=' + damla.size);
+            console.log ('tip=' + damla.type);
+
+            var deneme = function (dizge, sonuç) {
+                var damla = new Blob ([dizge], {type: 'plain/text', endings: sonuç});
+                var okuyucu = new FileReader();
+                okuyucu.readAsText (damla, "iso:8859-9 Türkçe");
+
+                okuyucu.onload = function (olay) {
+                    console.log (JSON.stringify (dizge) + "'nin " + sonuç + ' => ' + JSON.stringify (okuyucu.result) );
+                }; // oku.. sonu...
+            }; // den.. sonu...
+
+            deneme ('Nihat\nYavaş',   'native');
+            deneme ('Nihat\r\nYavaş', 'native');
+            deneme ('Nihat\nYavaş',   'transparent');
+            deneme ('Nihat\r\nYavaş', 'transparent');
+        } // func sonu...
+        function fonk4() {
+            var damla = new Blob (["M.", 'Nihat ', 'Yavaş'], {type: 'plain/text', endings: 'native' });
+            console.log (damla);
+            console.log (damla.size);
+            console.log (damla.type);
+            console.log (damla.endings);
+            var okuyucu = new FileReader();
+            okuyucu.readAsText (damla, "iso:8859-9 Türkçe");
+            okuyucu.onload = function (olay) {console.log (okuyucu.result);}
+        } // func sonu...
+        function fonk5() {
+            var damla = new Blob (['Mahmut ', 'Nihat ', "Yavaş\n", 1957], {type: 'plain/text', endings: 'native' });
+            console.log ('Damla ebatı:', damla.size);
+            console.log ('Damla tipi:', damla.type);
+            var okuyucu1 = new FileReader();
+            okuyucu1.readAsText (damla, "iso:8859-9 Türkçe");
+            okuyucu1.onload = function (olay) {console.log ("Damla:", okuyucu1.result);}
+
+            var kopya = damla.slice()
+            console.log ('Kopya ebatı:', kopya.size);
+            console.log ('Kopya tipi:', kopya.type);
+            var okuyucu2 = new FileReader();
+            okuyucu2.readAsText (kopya, "iso:8859-9 Türkçe");
+            okuyucu2.onload = function (olay) {console.log ("Kopya:", okuyucu2.result);}
+
+            var dilim = damla.slice (0, 6, 'Mahmut')
+            console.log ('Dilim Ebatı:', dilim.size);
+            console.log ('Dilim tipi:', dilim.type);
+            var okuyucu3 = new FileReader();
+            okuyucu3.readAsText (dilim, "iso:8859-9 Türkçe");
+            okuyucu3.onload = function (olay) {console.log ("Dilim:", okuyucu3.result);}
+        } // func sonu...
+        function fonk6(olay) {
+            var veri = olay.target;
+            var okuyucu = new FileReader();
+            okuyucu.readAsDataURL (veri.files [0]);
+            okuyucu.onload = function() {
+                var sonuç = okuyucu.result;
+                var çıktı = document.getElementById ("resim1");
+                çıktı.src = sonuç;
+            }; // oku.. sonu...
+        } // func sonu...
+        function fonk7(olay) {
+            var veri = olay.target;
+            var oku = new FileReader();
+            oku.readAsDataURL (veri.files[0]);
+            oku.onloadstart = function() {oku.abort();};
+            oku.onloadend = function() {console.log ("HATA:", oku.error.message);};
+        } // func sonu...
+        function fonk8(olay) {
+            var durumAdları = {};
+            durumAdları [FileReader.EMPTY]   = 'BOŞ';
+            durumAdları [FileReader.LOADING] = 'YÜKLÜYOR';
+            durumAdları [FileReader.DONE]    = 'TAMAMLANDI';
+
+            var veri = olay.target;
+            var okur = new FileReader();
+
+            okur.onload = function() {console.log ('Yükleme sonrası: ' + durumAdları [okur.readyState]);};
+            console.log ('Okuma öncesi: ' + durumAdları [okur.readyState]);
+            okur.readAsDataURL (veri.files [0]);
+            console.log ('Okuma sonrası: ' + durumAdları [okur.readyState]);
+        } // func sonu...
+        function fonk9 (olay) {
+            var veri = olay.target;
+            var okuyucu = new FileReader();
+            okuyucu.readAsArrayBuffer (veri.files [0]);
+            okuyucu.onload = function() {
+                var diziTamponu = okuyucu.result;
+                console.log ("Dizi tamponu byte uzunluğu:", diziTamponu.byteLength);
+            }; // oku.. sonu...
+        } // func sonu...
+        function fonk10 (olay) {
+            var veri = olay.target;
+            var okuyucu = new FileReader();
+            okuyucu.readAsText (veri.files [0], "iso_8859-9");
+            okuyucu.onload = function() {console.log (okuyucu.result); };
+        } // func sonu...
+        function fonk11 (olay) {
+            console.log ('openFile() ile dosya açılıyor...');
+            var veri = olay.target;
+
+            var olayTipiniYaz = function (olay) {console.log ('Yakalanan olay: ' + olay.type); };
+
+            var okuyucu = new FileReader();
+            console.log ('==>Okuma başlatılıyor...');
+            okuyucu.readAsDataURL (veri.files [0]);
+            console.log('==>openFile() terkediliyor...');
+            okuyucu.onloadstart = olayTipiniYaz;
+            okuyucu.onprogress = olayTipiniYaz;
+            okuyucu.onload = olayTipiniYaz;
+            okuyucu.onloadend = olayTipiniYaz;
+        } // func sonu...
+        function fonk12 (olay) {
+            console.log ('openFile() ile dosya açılıyor...');
+            var veri = olay.target;
+
+            var olayTipiniYaz = function (olay) {
+                console.log ('Yakalanan olay: ' + olay.type);
+                if (olay.type === 'loadstart') {okuyucu.abort();}
+                if (olay.type === 'loadend') {console.log ("HATA:", okuyucu.error.message);}
+            }; // ola.. sonu...
+
+            var okuyucu = new FileReader();
+            okuyucu.onloadstart = olayTipiniYaz;
+            okuyucu.onprogress = olayTipiniYaz;
+            okuyucu.onload = olayTipiniYaz;
+            okuyucu.onloadend = olayTipiniYaz;
+            okuyucu.onabort = olayTipiniYaz;
+            okuyucu.onerror = olayTipiniYaz;
+
+            console.log ('==>Okuma başlatılıyor...');
+            okuyucu.readAsDataURL (veri.files [0]);
+            console.log('==>openFile() terkediliyor...');
+        } // func sonu...
+        function fonk13 (olay) {// Blob'la aynıdır...
+            var dosya = new File (['M.', 'Nihat', "Yavaş", 1957], 'mny1.txt');
+
+            console.log ('Dosya ebatı=' + dosya.size);
+            console.log ('Dosya tipi=' + dosya.type);
+            console.log ('Dosya adı=' + dosya.name);
+            //------------------------------------------------------------------------------------------
+            function deneme (dizge, sonekler) {
+                var dosya = new File ([dizge], {type: 'plain/text', endings: sonekler});
+                var okuyucu = new FileReader();
+                okuyucu.readAsText (dosya, "iso:8859-9 Türkçe");
+                okuyucu.onload = function (olay) {
+                    console.log (dizge + "'nin sonekleri: " + sonekler +'\n=>Okunan metin: ' + okuyucu.result);
+                }; // oku..sonu...
+            }; // func sonu...
+
+            deneme ('M.Nihat\nYavaş', 'native');
+            deneme ('M.Nihat\r\nYavaş', 'native');
+            deneme ('M.Nihat\nYavaş',   'transparent');
+            deneme ('M.Nihat\r\nYavaş', 'transparent');
+            deneme (['M.', "Nihat", "Yavaş", 1957], 'native');
+        } // func sonu...
+        function fonk14 (olay) {
+            var veri = olay.target;
+            var dosya = veri.files [0];
+            console.log ("Dosyanın adı: " + dosya.name + "\nSon değişiklik tarihi: " +
+                new Date (dosya.lastModifiedDate) );
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

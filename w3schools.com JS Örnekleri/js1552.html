@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1552.html: JS sürüm ES5 alıcı ve koyucular örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>SÜRÜM ES5: ALICI-KOYUCU</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            Object.defineProperty (kişi, "dil", {value: "FR", writable: true, enumerable: true, configurable: true});
+            var metin = "", x; for (x in kişi) {metin +=x + ":" + kişi [x] + ", ";} return metin;
+        } // func sonu...
+
+        function fonk3() {
+            Object.defineProperty (kişi, "dil", {value: "FR", writable: true, enumerable: false, configurable: true});
+            var metin = "", x; for (x in kişi) {metin +=x + ":" + kişi [x] + ", ";} return metin;
+        } // func sonu...
+
+        function fonk4() {
+            Object.defineProperty (kişi, "dil", {
+                get: function() {return dil;},
+                set : function (değer) {dil = değer.toUpperCase();} } );
+        } // func sonu...
+
+        var kişi = {ad: "Nihat", soyad : "Yavaş", dil: "TR",
+            get adSoyad() {return this.ad + " " + this.soyad;},
+            set lisan (dil) {this.dil = dil.toUpperCase();},
+            get lisan() {return this.dil;} };
+
+        var dizge = "Merhaba JS \
+            sürüm ES5 Dünyası!";
+        var dizge2 = "Merhaba JS " +
+            "sürüm ES5 Dünyası!";
+
+        var şahıs = {};
+        try {şahıs = JSON.parse ('{"ad": "Nihat", "soyad" : "Yavaş", "yaş": 62, }'); // Son virgül hatası...
+        }catch (ist) {şahıs = JSON.parse ('{"ad": "Nihat", "soyad" : "Yavaş", "yaş": 62}');}
+        var şahıs2 = {this:"Nihat", new:"Yavaş", parse:62};
+
+        document.getElementById ("göster").innerHTML =
+            "1) get ve set nesne özellik değişkenlerini metodlar vasıtasıyla almamızı ve \
+            koymamızı sağlarlar: " + kişi.adSoyad + "; " + kişi.dil + "; " + (kişi.lisan = "ing") +
+            "; " + kişi.lisan +
+            "<br/>2) Object.defineProperty metoduyla bir nesne özellik değişken değerlerini \
+            veya metaverilerini tanımlayabilir yada değiştirebiliriz: " + fonk2() +
+            "<br/>Özellik tanımlarken taratmayı gizleyebiliriz: " + fonk3() +
+            "<br/>3) Object.defineProperty metoduyla özelliğe get-set tanımlayabilir \
+            ve set'de büyükharfli değeri atayabiliriz: " + fonk4() + "; " + (kişi.dil = "fr") +
+            "; " + kişi.dil +
+            "<br/>4) ES5 birçok yeni nesne metodları yayımlamıştır: defineProperty, \
+            defineProperties, getOwnPropertyDescriptor, getOwnPropertyNames, \
+            getPrototypeOf, preventExtensions, isExtensible, isSealed ve isFrozen" +
+            "<br/>5) charAt(endeks) metoduyla endeksteki dizge karakterine erişilir: " +
+            dizge.charAt (8) + dizge [9] +
+            "<br/>6) ES5 nesne ve dizi son elemanı müteakip virgüle izin verir. parse (kişi) \
+            atıl virgüle hata verir: " + şahıs.ad + "; " + şahıs.yaş +
+            "<br/>7) Dizge satır sonunda \\ ile kırılıp sonraki satırdan devam edebilir: " +
+            dizge +
+            "<br/>Tarayıcı izin vermiyorsa tırnak ve + ile kırıp devam edilebilir: " + dizge2 +
+            "<br/>8) ES5 ayrılmış kelimelerin nesne özellik adı olarak kullanılmasına izin \
+            verir: " + şahıs2.this + "; " + şahıs2.parse
+    </script>
+</body>
+</html>

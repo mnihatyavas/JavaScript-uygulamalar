@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5051.html: DOM HTML eleman değer ve vasıflarını değiştirme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>HTML ELEMAN DEĞİŞTİR</h4>
+    <h6 id="göster3">Değişecek Başlık</h6>
+    <p id="göster">Paragraf</p>
+    <p id="göster2">Paragraf No: 2</p>
+    <img id="göster4" src="resim/tebessüm.gif" alt=""><br/>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) document.write(dizge) ile HTML çıktı akışı eleman içeriğini değiştirebilirsiniz: " +
+            document.write ("<span style='color:DeepPink;'>M.Nihat Yavaş</span>") +
+            "<br>" + document.write ("<br>Tarih: " + Date() ) +
+            "<br>2) document.getElementById ('göster2').innerHTML ile göster2 konumlu \
+            HTML p paragraf elemanı içeriğini değiştirebilirsiniz: " + 
+            (document.getElementById ("göster2").innerHTML = "Yeşilyurt-Malatya") +
+            "<br>==>göster3 konumlu h6 html başlık eleman içeriği değişiyor: " +
+            (document.getElementById ("göster3").innerHTML = "Toroslar-Mersin") +
+            "<br>3) document.getElementById ('göster4').src = 'resim/manzara.jpg' \
+            ile göster4 konumdaki img html elemanının src vasfı yeni bir resimle \
+            değiştirilmektedir: " + (document.getElementById ("göster4").src = "resim/manzara.jpg")
+    </script>
+</body>
+</html>

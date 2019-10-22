@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1472.html: JS sınıf ve fonksiyonun karşılaştırılması örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ-2</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        class Kullanıcı {
+            adı = "Sınıf"; // Gerçek sınıf özellikleri; diğerleri metoddur...
+            soyadı = "Kullanıcı";
+            constructor (ad, soyad) {this.ad = ad; this.soyad = soyad;}
+            kimlik () {return "Benim ismim " + this.ad + " " + this.soyad + "'dır.";}
+            selam1() {return this.ad + " " + this.soyad + "'dan herkese Merhabalar!..";}
+            selam2() {return this.adı + " " + this.soyadı + "'sından herkese selamlar!..";} // `${this.adı} ${this.soyadı}'dan herkese Selamlar!`
+            get ad() {return this._ad;}
+            get soyad() {return this._soyad;}
+            set ad (değer) {if (değer.length < 2)
+               {alert ("Adınız çok kısa, hata olmalı!"); return;}
+                this._ad = değer;}
+            set soyad (değer) {if (değer.length < 2)
+               {alert ("Soyadınız çok kısa, hata olmalı!"); return;}
+                this._soyad = değer;}
+        } // sınıf sonu...
+
+        function Kullanıcı2 (ad, soyad) {this.ad = ad; this.soyad = soyad;}
+        Kullanıcı2.prototype.kimlik = function() {return "Benim ismim " + this.ad + " " + this.soyad + "'dır.";}
+        Kullanıcı2.prototype.selam = function() {return this.ad + " " + this.soyad + "'dan herkese Merhabalar!..";}
+
+        let kullanıcı = new Kullanıcı ("Nihat", "Yavaş");
+        let kullanıcı2 = new Kullanıcı2 ("Nihat", "Yavaş");
+
+        document.getElementById ("göster").innerHTML =
+            "1) new anahtarkelimesi otomatikmen sınıf Kullanıcı nesnesinin kurucusunu \
+            işletir: " + kullanıcı.selam1() +
+            "<br>2) Sınıf tipini JS function olarak verir: " + (typeof Kullanıcı) +
+            "<br>3) Sınıf, kurucu metot demektir: " + (Kullanıcı === Kullanıcı.prototype.constructor) +
+            "<br>4) Metodlar sınıf özellikleridir: " + kullanıcı.kimlik() +
+            "<br>5) Sınıf mevcut metod adlarına erişebiliriz: " + Object.getOwnPropertyNames
+            (Kullanıcı.prototype) +
+            "<br>6) Sınıf ve metodlarını aynen fonksiyon ve özellikleri olarak da tanımlayabiliriz: " +
+            kullanıcı2.kimlik() +
+            "<br>7) Sınıf for..in'le taranamaz. Ayrıca otomatikmen 'use strict' kiplidir." +
+            "<br>8) get ve set anahtarkelimeleriyle sınıf özelliklerini alır veya değiştiririz: " +
+            (kullanıcı.soyad = "Savaş") + "; " + (kullanıcı.ad + "-" + kullanıcı.soyad) +
+            "<br>9) Sınıf bloğu içinde metodsuz ilk değişkenler gerçek sınıf özellikleridir ve \
+            kurucu değişkenlerine benzer şekilde this anahtarkelimesiyle erişilebilirler: " +
+            kullanıcı.selam2() + "; " + new Kullanıcı ("a12", "b12").selam2()
+    </script>
+</body>
+</html>

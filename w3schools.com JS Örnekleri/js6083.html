@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6083.html: localStorage ve sessionStorage nesneleriyle tarayıcıda veri saklama örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        textarea {
+            padding:5px;
+            width:500px;
+            height: 100px;
+            background-color:Moccasin;
+            color: Blue;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>localStorage/sessionStorage</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Tüm lokal depoyu gör" onClick="fonk2()">
+    <input type="button" value="Tümünü sil" onClick="localStorage.clear()"><br>
+    <input type="button" value="Tek lokal depoyu gör" onClick="fonk3()"><br>
+    <input type="button" value="Lokal depo gir/değiştir" onClick="fonk4()">
+    <p id="göster2">Paragraf-2</p>
+
+    <textarea id="metin" placeholder="Buraya girdiğiniz açıklamalar localStorage ile tarayıcıda saklanır, kaybolmaz...">
+    </textarea>
+    
+<br>
+
+    <button onclick="localStorage.removeItem ('metin'); metin.value=''";>Temizle</button>
+
+    <script>
+        function fonk2() {
+            let sonuç = "";
+            for (let i=0; i<localStorage.length; i++) {
+                let anahtar = localStorage.key (i);
+                sonuç += "<br>" + `${anahtar}: ${localStorage.getItem (anahtar)}`;
+            } // for sonu...
+            //document.getElementById ("göster2").innerHTML = sonuç;
+
+            sonuç = "";
+            for (let anahtar in localStorage) {
+                if ( !localStorage.hasOwnProperty (anahtar)) {continue;}
+                sonuç += "<br>" + `${anahtar}: ${localStorage.getItem (anahtar)}`;
+            } // for sonu...
+            //document.getElementById ("göster2").innerHTML = sonuç;
+
+            sonuç = "";
+            let anahtarlar = Object.keys (localStorage);
+            for (let anahtar of anahtarlar) {
+                sonuç += "<br>" + `${anahtar}: ${localStorage.getItem (anahtar)}`;
+            } // for sonu...
+            sonuç +="<br>Toplam lokal bilgi sayısı: " + localStorage.length;
+            document.getElementById ("göster2").innerHTML = sonuç;
+        } // func sonu..
+        function fonk3() {
+            let anahtar = prompt ("Görmek istediğiniz anahtar değeri gir:", "deneme");
+            document.getElementById ("göster2").innerHTML = localStorage.getItem (anahtar);
+        } // func sonu..
+        function fonk4() {
+            let anahtar = prompt ("Değiştirmek/Girmek istediğiniz anahtar değeri gir:", "deneme");
+            let değer = prompt ("İçerik değerini girin:", "M.Nihat Yavaş");
+            localStorage.setItem (anahtar, değer);
+        } // func sonu..
+
+        window.onstorage = olay => {// Diğer programlardaki değişikliği buraya yansıtır...
+            if (olay.key != 'now') return;
+            alert (olay.key + ':' + olay.newValue + " adres " + olay.url);
+        }; // win sonu...
+        localStorage.setItem ('now', Date.now());
+
+        metin.value = localStorage.getItem ('metin');
+        metin.oninput = () => {localStorage.setItem ('metin', metin.value)
+};
+
+        document.getElementById ("göster").innerHTML =
+            "1) Ağ depolama nesneleri olan localStorage/yerelSaklama ve sessionStorage/celseSaklama \
+            tarayıcıda anahtar/değer çifti bilgisi saklar. Ancak sayfa yenilendiğinde sessionStorage, \
+            tarayıcı değiştiğinde de localStorage silinir. Çerezden farklı olarak 2MB'den fazla bilgi depolayabilir, \
+            http protokolüyle sunucuya bağlanmadan (http://localhost/.. kipinde değil, basitçe file:///c:/.. dosya kipinde) \
+            JS tarafından gerçekleştirilir,  farklı protokoller birbirlerinin depoladıklarına erişemezler, \
+            giriş adet sınırı yoktur, çerez gibi sonlanma tarihi yoktur yani siz silmedikce kalır." +
+            "<br>Kullandığı bazı metod ve özellikler: setItem(anahtar,değer)/sakla, getItem (anahtar)/al, \
+            removeItem(anahtar)/sil, clear()/tümünüSil, key(endeks)/konumdakiAnahtar, length/saklananSayısı." +
+            "<br>2) [localStorage.setItem('deneme', 'M.Nihat Yavaş - 1957')] ile deneyelim: " +
+            localStorage.setItem ("deneme1", "M.Nihat Yavaş - 1957") + "=" +
+            localStorage.getItem ('deneme1') +
+            "<br>==>localStorage.getItem('deneme') ile aynı tarayıcıda olmak üzere, başka bir \
+            programdan (tarayıcı aç/kapa sonrası) bu değere erişilmektedir." +
+            "<br>3) Atanan değer, sayı da olsa dizgeye çevrilir. Aynı işlemi değişkene değer \
+            atarmışcasına da yapabiliriz: " +
+            (localStorage.deneme2 = 1957) + "=" + localStorage.deneme2 +
+            "<br>4) localStorage.removeItem('deneme3') veya delete localStorage.deneme3 \
+            ile bir anahtar/değer çiftini silebiliriz: " + (localStorage.deneme3=2019) + "=" +
+            localStorage.deneme3 + "; " + (delete localStorage.deneme3) + "=?" + localStorage.deneme3 +
+            "<br>5) localStorage taranabilir değildir, ama yine de birkaç farklı şekilde localStorage \
+            içindeki bütün anahtarları (bizim yaratmadıklarımızı da) süzgeçleyip değerlerine erişebiliriz." +
+            "<br>==>Alttaki düğmelerle lokal depolama tek/tüm anahtar-değer çiftlerini görebilir, \
+            tek/tüm silebilir, yeni giriş/değişiklik yapabilirsiniz:" +
+            "<br>6) sessionStorage da localStorage gibi, ancak daha kısıtlıdır. Tarayıcı kapandığında \
+            yada başka programdan çağrıldığında bilgiler kaybolur. " +
+            sessionStorage.setItem ('deneme1', 20190922) + "= " + sessionStorage.getItem ("deneme1") +
+            "<br>7) Mevcut anahtar değerleri kolayca değiştirilebilir: " +
+            (localStorage ["deneme"] = "Mahmut Nihat Yavaş, 1957 Yeşilyurt-Malatya doğumlu") +
+            "<br>==>Hatta bu değişiklikler window.onStorage kontroluyla farklı programlara da \
+            alert ikazıyla uyarıp orada da yansıyan değerler güncellenebilir. js6083x.html alt-programla \
+            eşgüdümlü olarak bu otomatik güncellemeyi test edebilirsiniz." +
+            "<br>8) Alttaki metin kutusuna yazdığınız herşey anında localStorage'a kaydedildiğinden \
+            dolayı elektrik kesintisi veya bilgisayar arızalarından kaybolmaz; başka zaman yine \
+            aynı tarayıcından girerek verilerinize ulaşırsınız."
+    </script>
+</body>
+</html>
+
+<!--Alttaki küçük kodlamayı başka bir js6083x.html programıyla aynı tarayıcıda çalıştırıp deneyin:
+<script>
+    window.onstorage = olay => {// Diğer programlardaki değişikliği buraya yansıtır...
+        if (olay.key != 'now') return;
+        alert (olay.key + ':' + olay.newValue + " adres " + olay.url);
+    }; // win sonu...
+   localStorage.setItem ('now', Date.now() );
+
+    document.write (localStorage.getItem ('deneme') );
+    document.write ("<br>" + localStorage.getItem ('deneme1') );
+    document.write ("<br>" + localStorage.deneme2);
+    document.write ("<br>" + localStorage.metin);
+    
+    document.write ("<br><br>" + sessionStorage.deneme1);
+</script>
+-->

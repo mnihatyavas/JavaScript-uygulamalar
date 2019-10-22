@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1551.html: JS sürüm ES5 metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>SÜRÜM ES5 METODLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        "use strict";
+        var meyveler = ["Muz", "Portakal", "Elma", "Mango", "Kivi", "Elma"];
+        var sayılar1 = [45, 4, 9, 16, 25, 3.14];
+
+        function fonk3() {var dizge = "     Merhaba JS'liler!     "; return dizge.trim();}
+        function fonk4() {return Array.isArray (meyveler);}
+        function fonk5() {
+            function fonk (eleman) {metin = metin + eleman + "+"; toplam += eleman;}
+            var metin = "", toplam = 0;
+            sayılar1.forEach (fonk);
+            for (var i = 0, uz = metin.length - 1, metin2 = ""; i < uz; i++) {metin2 += metin[i];}
+            return metin2 + "=" + toplam;
+        } // func sonu...
+        function fonk6() {
+            function fonk (eleman, endeks, dizi) {return (eleman**(1/Math.PI)).toFixed (2);}
+            var sayılar2 = sayılar1.map (fonk);
+            return sayılar2;
+        } // func sonu...
+        function fonk7() {
+            function fonk (eleman, endeks, dizi) {return eleman > 15;}
+            var sayılar2 = sayılar1.filter (fonk);
+            return sayılar2;
+        } // func sonu...
+        function fonk8a() {
+            function fonk (sonuç, eleman, endeks, dizi) {return sonuç + Math.sqrt (eleman);}
+            var sonuç = sayılar1.reduce (fonk);
+            return sonuç.toFixed (2);
+        } // func sonu...
+        function fonk8b() {
+            function fonk (sonuç, eleman, endeks, dizi) {return sonuç + Math.sqrt (eleman);}
+            var sonuç = sayılar1.reduce (fonk, 0);
+            return sonuç.toFixed (2);
+        } // func sonu...
+        function fonk9a() {
+            function fonk (sonuç, eleman, endeks, dizi) {return sonuç + Math.sqrt (eleman);}
+            var sonuç = sayılar1.reduceRight (fonk);
+            return sonuç.toFixed (2);
+        } // func sonu...
+        function fonk9b() {
+            function fonk (sonuç, eleman, endeks, dizi) {return sonuç + Math.sqrt (eleman);}
+            var sonuç = sayılar1.reduceRight (fonk, 0);
+            return sonuç.toFixed (2);
+        } // func sonu...
+        function fonk10() {
+            function fonk (eleman, endeks, dizi) {return eleman > 15;}
+            return sayılar1.every (fonk);
+        } // func sonu...
+        function fonk11() {
+            function fonk (eleman, endeks, dizi) {return eleman > 15;}
+            return sayılar1.some (fonk);
+        } // func sonu...
+        function fonk12() {return meyveler.indexOf ("mango");}
+        function fonk13() {return meyveler.lastIndexOf ("Elma");}
+        function fonk14() {
+            var metin = '{"ad":"Nihat", "yaş":62, "ikamet":"Mersin"}';
+            var nesne = JSON.parse (metin);
+            return nesne.yaş + " yaşındaki " + nesne.ad + " " + nesne.ikamet + "'de ikamet ediyor.";
+        } // func sonu...
+        function fonk15() {
+            var nesne = {ad:"Nihat", yaş:62, ikamet:"Mersin"};
+            return JSON.stringify (nesne);
+        } // func sonu...
+
+
+        document.getElementById ("göster").innerHTML =
+            "1) ECMAScript/ES5'in özellikleri:" +
+            "<br/>'use strict' String.trim() Array.isArray() Array.forEach() Array.map() \
+            Array.filter() Array.reduce() Array.reduceRight() Array.every() Array.some() \
+            Array.indexOf() Array.lastIndexOf() JSON.parse() JSON.stringify() Date.now() \
+            'alıcılar ve koyucular özelliği' 'yeni nesne özelliği metodları'" +
+            "<br/>2) 'use strict' dizgesel talimat olup tanımsız değişken kullanımına \
+            hata vererek daha temiz JS kodlaması gerektirir." +
+            "<br/>3) dizge.trim() dizge'nin baş ve sonundaki boşlukları kırpar: " + fonk3() +
+            "<br/>4) Array.isArray(nesne) bir nesnenin dizi olup olmadığını test eder: " + fonk4() +
+            "<br/>5) dizi.forEach(fonk) dizinin tüm elemanlarını fonksiyona taratır: " + fonk5() +
+            "<br/>6) dizi.map(fonk) dizinin tüm elemanlarını fonksiyona taratıp yeni bir \
+            dizi yaratır: " + fonk6() +
+            "<br/>7) dizi.filter(fonk) dizinin tüm elemanlarını fonksiyonda süzgeçler: " + fonk7() +
+            "<br/>8) dizi.reduce(fonk) dizinin tüm elemanlarını tek-tek ilk parametreye yığar: " + fonk8a() +
+            "<br/> İlk değer de işleme tabi tutulacaksa, bir ilk değer gönderilir: " + fonk8b() +
+            "<br/>9) dizi.reduceRight(fonk) dizinin tüm elemanlarını tek-tek son parametreye yığar: " + fonk9a() +
+            "<br/> Son değer de işleme tabi tutulacaksa, bir ilk değer gönderilir: " + fonk9b() +
+            "<br/>10) dizi.every(fonk) dizinin tüm elemanları kriteri geçerse true, yoksa false döndürür: " + fonk10() +
+            "<br/>11) dizi.some(fonk) dizinin enaz bir elemanı kriteri geçerse true, yoksa false döndürür: " + fonk11() +
+            "<br/>12) dizi.indexOf(değer) değer dizideyse ilk endeksini, değilse -1 döndürür: " + fonk12() +
+            "<br/>13) dizi.lastIndexOf(değer) değerin dizideki son endeksini, yoksa -1 döndürür: " + fonk13() +
+            "<br/>14) JSON.parse(metin) sunucunun gönderdiği metni JS nesnesine çevirir: " + fonk14() +
+            "<br/>15) JSON.stringify (nesne) sunucuya gönderilecek nesneyi metne çevirir: " + fonk15() +
+            "<br/>16) Date.now() şimdiki zamanı 1.1.1970'den milisaniyeyi döndürür: " + Date.now() + "; " +
+            new Date() + " = " + new Date().getTime()
+    </script>
+</body>
+</html>

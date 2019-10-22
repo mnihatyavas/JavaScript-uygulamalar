@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1491.html: JS kodlamasını biçimleme rehberi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>Kod Biçimleme Rehberi</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function F_C (fahrenhayt) {return (5 / 9) * (fahrenhayt - 32);}
+        function döngü (a) {var x = 0; for (i = 0; i < a; i++) {x += i;} return x;}
+
+        var ad = "Nihat";
+        var soyad = "Yavaş";
+        var fiyat = 19.90;
+        var vergiOranı = 0.12;
+        var toplam_tutar = fiyat + (fiyat * vergiOranı);
+        var meyveler = ["elma", "şeftali", "kiraz", "üzüm", "muz"];
+        var kişi = {ad: "Nihat", soyad: "Yavaş", yaş: (2019 - 1957), göz: "ela"};
+
+        document.getElementById ("göster").innerHTML =
+            "1) Değişken ve fonksiyon adlandırılması; boşluk, kertikleme ve yorumlar; \
+            kodlamanın okunurluğu ve bakımı JS kod biçimleme rehberi kapsamındadır." +
+            "<br/>Değişken adları genellikle küçük harfle başlar, çoklu kelimeli değişken \
+            adlarında araya ya _:altçizgi konur, yada büyük harfle başlar. " +
+            toplam_tutar.toFixed (2) + " TL." +
+            "<br/>+/- gibi aritmetik ve = atama işlemcileri ile , eleman ayraçları arasına \
+            birer boşluk bırakın." + meyveler +
+            "<br/>Kertiklemeyi tab-ulator'la değil alt-uzun boşluk tuşuyla ve 5, 9, 13, 17, 21, 25 vb \
+            4'er aralıkla içerletin: 100 F = " + F_C (100).toFixed (2) + " C derecedir." +
+            "<br/>Herbir JS ifadesi sonuna ; koyun: " + kişi.yaş +
+            "<br/>Fonksiyon, döngü veya şart {} bloğu açarken önüne bir boşluk koyun, \
+            kapatınca da arkasına ; koymayın: " + döngü (10) +
+            "<br/>2) Nesne tanımında her değişken gibi önüne var koyun, nesne başlatıcı { \
+            sonrası boşluksuz alt satır 4 içeri kertikle herbir anahtarkelime-değer arasına \
+            : ve sonrası bir boşluk, herbir eleman sonrası , ve bir boşluk, son elemandan \
+            sonra virgülsüz }, ve sonrası boşluksuz ve ;'lü olmalıdır. Kısa nesneler uygun \
+            ara boşluk kurallarıyla tek bir satıra sığdırılabilir: " + kişi.ad + " " + kişi.soyad +
+            "<br/>3) Okunabilirlik açısından hersatır 80 karakteri taşmamalıdır. Kesinti \
+            konumları işlemci veya virgül sonrasıdır." +
+            "<br/>4) HTML içine harici JS kodu script satırında src='js_kodum.js' ile, \
+            dahili kodlamaları ise basitçe 2 script arasına kondururuz." +
+            "<br/>HTML'nin herhangi bir konumuna document.getElementById \
+            ('konum').innerHTML ile rahatça uzanabiliriz." +
+            "<br/>5) HTML dosya uzantıları .html, CSS'inkiler .css ve JS'inkiler de .js \
+            ile tanımlanırlar." +
+            "<br/>Dosya adları daha ziyade küçük harfle yazılmalıdır, çünkü bazı sunucular \
+            küçük/büyük harfe duyarlıdır."
+    </script>
+</body>
+</html>

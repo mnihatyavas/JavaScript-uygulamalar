@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js4061.html: Fonksiyon saklayışları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FONKSİYON SAKLAYIŞLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {var a = 5, b = 3; return a * b;} // a ve lokal...
+
+        function fonk3() {var a = 5; return a * b;} // a lokal, b ise global...
+        var b = 4; // hoisting: enüstleme...
+
+        function fonk4() {var d = 10; a = 5;} // a global, fakat yürütülmediğinden dışarda geçersiz...
+        fonk4(); // a artık dışarda da geçerli...
+        var c = a * b;
+
+        function fonk5() {var sayaç = 0;
+            function birArtır() {sayaç += 1;}
+            function birAzalt() {sayaç -= 1;}
+            birArtır(); birArtır(); birArtır(); birArtır();
+            birAzalt();
+            return sayaç;
+        } // func sonu...
+
+        var birArtır = (function() {var sayaç = 0; return function() {return sayaç += 1;} }) ();
+        var beşArtır = (function() {var sayaç = 0; return function() {return sayaç += 5;} }) ();
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS değişkenleri global ve lokal kapsamlı olabilir. Saklayışlarla özel \
+            değişkenler yapılması mümkündür." +
+            "<br/>Bir fonksiyon içinde tanımlı lokal değişkenlere erişebilir: " + fonk2() +
+            "<br/>Ancak içerde olmayan fakat adı (içerde olmayıp) dışarda tanımlı \
+            globallere de erişebilir: " + fonk3() +
+            "<br/>Ayrıca fonksiyon içinde var'sız tanımlı değişkenler de globaldir, ve \
+            fonksiyon dışından da erişilebilir: " + c +
+            "<br/>2) Lokallerin yaşam süresi blok veya fonksiyon kapanınca biter, \
+            globallerin ise html sayfası kapatıldığında." + (typeof d) +
+            "<br/>3) Her alt kapsam üstte tanımlı değişkenleri tanır, ancak alttaki lokaller \
+            üstte tanınmaz. İç-içe fonksiyonla, window global penceresinde tanınmayan, \
+            dolayısıyla da değeri değiştirilemeyen, ancak altındaki iç fonksiyonca tanınıp \
+            değeri değiştirilen sayaç'la fonksiyonu her çağrışımızda sayaca aynı değeri \
+            döndürürüz: " + fonk5() + "; " + fonk5() + "; " + fonk5() +
+            "<br/>4) Problemimiz hala çözülmedi; istediğimiz her keresinde aynı sonuç \
+            değil, sayacın önceki kapanış değerinin saklanıp, üzerine 1 eklenmesiydi; yani \
+            fonksiyonu kapattığımız halde önceki sayaç değerinin saklanmasıydı. Buna \
+            saklayan fonksiyon diyoruz. Birer artır: " + birArtır() + "; " + birArtır() + "; " + birArtır() + "; "
+             + birArtır() + "; " + birArtır() +
+            "<br/>Beşer artır: " + beşArtır() + "; " + beşArtır() + "; " + beşArtır() + "; "
+             + beşArtır() + "; " + beşArtır()
+    </script>
+</body>
+</html>

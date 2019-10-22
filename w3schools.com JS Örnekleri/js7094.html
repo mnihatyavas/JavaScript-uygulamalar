@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7094.html: XML uygulamalarý-4 örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        table,th,td {
+            border : 1px solid black;
+            border-collapse: collapse;}
+        th,td {padding: 5px;}
+        th {background-color:navy; color:yellow;}
+        tr:nth-child(even) {background-color: Khaki; color: DeepPink;}
+        tr:nth-child(odd) {background-color: DarkKhaki; color:Pink;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>XML Uygulamalarý-4</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <p>Albüm detaylarýný görmek istediðiniz CD satýrýný týklayýn:</p>
+    <p id='göster2'></p>
+    <table id="göster3"></table>
+
+    <script>
+        var x, xhttp, xmlDökümaný;
+        xhttp = new XMLHttpRequest();
+        xhttp.open ("GET", "js7011x.xml", false); // Senkron; onreadystatechange gerekmez...
+        xhttp.send();
+        xmlDökümaný = xhttp.responseXML; 
+        x = xmlDökümaný.getElementsByTagName ("CD");
+        var tablo="<tr><th>Þarkýcý</th><th>Albümü</th></tr>";
+        for (i = 0; i <x.length; i++) {
+            tablo += "<tr style="cursor:pointer;" onclick='fonk (" + i + ")'><td>" +
+                x [i].getElementsByTagName ("ARTIST") [0].childNodes [0].nodeValue +
+                "</td><td>" +
+                x [i].getElementsByTagName ("TITLE") [0].childNodes[0].nodeValue +
+                "</td></tr>";
+        } // func sonu...
+        document.getElementById ("göster3").innerHTML = tablo;
+        function fonk (i) {
+            document.getElementById("göster2").innerHTML =
+                "CD no: " + i +
+                "<br/>Þarkýcý: " + x [i].getElementsByTagName ("ARTIST") [0].childNodes [0].nodeValue +
+                "<br>Albümü: " + x [i].getElementsByTagName ("TITLE") [0].childNodes [0].nodeValue +
+                "<br>Yýl: " + x [i].getElementsByTagName ("YEAR") [0].childNodes [0].nodeValue +
+                "<br>Þirket: " + x [i].getElementsByTagName ("COMPANY") [0].childNodes [0].nodeValue +
+                "<br>CD fiyatý: $" + x [i].getElementsByTagName ("PRICE") [0].childNodes [0].nodeValue +
+                "<br>Ülke: " + x [i].getElementsByTagName ("COUNTRY") [0].childNodes [0].nodeValue;
+        } // func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

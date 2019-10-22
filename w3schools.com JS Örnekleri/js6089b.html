@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6089b.html: Rush stüdyo albümleri 74-85, indexedDB örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: SkyBlue; font-size:20px; margin:3em;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: MidnightBlue; color: Gold; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        html {
+            font-family: sans-serif;
+            font-size: 10px;
+            background-color:DarkGreen;}
+        body {
+            max-width: 800px;
+            padding: 10px;
+            background: linear-gradient(to bottom, rgba(150,150,255,0.8), rgba(255,150,100,0.6));}
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 5px rgb(150,30,30);}
+        ul {
+            text-align: center;
+            list-style-type: none;}
+        li {
+            font-size: 2rem;
+            padding-bottom: 1rem;
+            color: rgb(150, 100, 0, 0.85);}
+        li strong {color: DarkRed;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <!--<input type="button" value="Sil" onClick="fonk1()">-->
+    <h4>indexedDB</h4>
+
+    <p id="göster">Paragraf</p>
+
+    <h1>Temel IDBCursor örneği - Rush stüdyo albümleri 74-85</h1>
+
+    <ul></ul>
+
+    <button class="hepsiniGöster">Tüm albümleri görelim</button>
+    <button class="atlayarakGör">Birer atlayarak görelim</button>
+    <button class="tekKaydıSil">Grace'i listelemizden silelim</button>
+    <button class="tekKaydıDeğiştir">'A farewell..'in yılını öteleyelim</button>
+    <button class="terstenSırala">Albümleri tepetakla yapalım</button>
+
+    <script>
+        var vt;
+        var kayıtlar = [
+            {albümBaşlığı: 'Power windows', yıl: 1985},
+            {albümBaşlığı: 'Grace under pressure', yıl: 1984},
+            {albümBaşlığı: 'Signals', yıl: 1982},
+            {albümBaşlığı: 'Moving pictures', yıl: 1981},
+            {albümBaşlığı: 'Permanent waves', yıl: 1980},
+            {albümBaşlığı: 'Hemispheres', yıl: 1978},
+            {albümBaşlığı: 'A farewell to kings', yıl: 1977},
+            {albümBaşlığı: '2112', yıl: 1976},
+            {albümBaşlığı: 'Caress of steel', yıl: 1975},
+            {albümBaşlığı: 'Fly by night', yıl: 1975},
+            {albümBaşlığı: 'Rush', yıl: 1974}
+        ]; // kay.. sonu...
+        var listele = document.querySelector ('ul');
+        var hepsiniGör = document.querySelector ('.hepsiniGöster');
+        var atlayarakGör = document.querySelector ('.atlayarakGör');
+        var kayıtSil = document.querySelector ('.tekKaydıSil');
+        var tekKaydıDeğiştir = document.querySelector ('.tekKaydıDeğiştir');
+        var tersSırala = document.querySelector ('.terstenSırala');
+
+        window.onload = function() {// Tüm programı bu blokta tamamla...
+            window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+            window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+            window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+            var vtAçmaTalebi = window.indexedDB.open ('albümlerVeritabanı', 1);
+            vtAçmaTalebi.onsuccess = function (olay) {
+                vt = vtAçmaTalebi.result; // veya 'olay.target.result'
+                kayıtlarıEkle();
+            }; // vtA.. sonu...
+            vtAçmaTalebi.onupgradeneeded = function (olay) {
+                var vt = olay.target.result;
+                vt.onerror = function (olay) {console.log ("Veritabanını yükleme hatası.");};
+                var nesneDeposu = vt.createObjectStore ('rushAlbümDosyası', {keyPath: 'albümBaşlığı'});
+                nesneDeposu.createIndex ('yıl', 'yıl', {unique: false});
+            }; // vtA.. sonu...
+
+            function kayıtlarıEkle() {
+                var işlem = vt.transaction (['rushAlbümDosyası'], "readwrite");
+                var nesneDeposu = işlem.objectStore ('rushAlbümDosyası');
+                for (i = 0; i < kayıtlar.length ; i++) {var talep = nesneDeposu.put (kayıtlar [i]);}
+                işlem.oncomplete = function() {kayıtlarıGöster();}
+            } // func sonu...
+
+            function kayıtlarıGöster() {
+                listele.innerHTML = '';
+                var işlem = vt.transaction (['rushAlbümDosyası'], 'readonly');
+                 var nesneDeposu = işlem.objectStore ('rushAlbümDosyası');
+                nesneDeposu.openCursor().onsuccess = function (olay) {
+                    var imleç = olay.target.result;
+                    if (imleç) {
+                        var listeBirimi = document.createElement ('li');
+                        listeBirimi.innerHTML = '<strong>' + imleç.value.albümBaşlığı + '</strong>, ' + imleç.value.yıl;
+                        listele.appendChild (listeBirimi);
+                        //console.log (imleç.source);
+                        //console.log (imleç.key);
+                        //console.log (imleç.primaryKey);
+                        //console.log (imleç.value);
+                        imleç.continue();
+                    }else {console.log ('Tüm kayıtlar gösterildi.');}
+                }; // nes.. sonu...
+            } // func sonu...
+
+            hepsiniGör.onclick = function() {kayıtlarıGöster();};
+            atlayarakGör.onclick = function() {atlayarakGörelim();};
+            kayıtSil.onclick = function() {kaydıSilelim();};
+            tekKaydıDeğiştir.onclick = function() {tekKaydıDeğiştirelim();};
+            tersSırala.onclick = function() {tersten();}
+
+            function atlayarakGörelim() {
+                listele.innerHTML = '';
+                var işlem = vt.transaction (['rushAlbümDosyası'], 'readonly');
+                var nesneDeposu = işlem.objectStore ('rushAlbümDosyası');
+                nesneDeposu.openCursor().onsuccess = function (olay) {
+                    var imleç = olay.target.result;
+                    if (imleç) {
+                        var listeBirimi = document.createElement ('li');
+                        listeBirimi.innerHTML = '<strong>' + imleç.value.albümBaşlığı + '</strong>, ' + imleç.value.yıl;
+                        listele.appendChild (listeBirimi);
+                        imleç.advance (2);
+                    }else {console.log ('Atlamalı kayıtlar gösterildi.');}
+                }; // nes.. sonu...
+            } // func sonu...
+
+            function kaydıSilelim() {
+                listele.innerHTML = '';
+                var işlem = vt.transaction (['rushAlbümDosyası'], 'readwrite');
+                var nesneDeposu = işlem.objectStore ('rushAlbümDosyası');
+                nesneDeposu.openCursor().onsuccess = function (olay) {
+                    var imleç = olay.target.result;
+                    if (imleç) {
+                        if (imleç.value.albümBaşlığı === 'Grace under pressure') {
+                            var talep = imleç.delete();
+                            talep.onsuccess = function() {console.log ("!984'ün vasat albümü silindi. 'Power windows' albümü bile daha iyidir."); };
+                        }else {
+                            var listeBirimi = document.createElement ('li');
+                            listeBirimi.innerHTML = '<strong>' + imleç.value.albümBaşlığı + '</strong>, ' + imleç.value.yıl;
+                            listele.appendChild (listeBirimi);   
+                        } // else sonu...
+                        imleç.continue();
+                    }else {console.log ("Grace'siz listeleme tamamlandı");}
+                }; // nes.. sonu...
+            } // func sonu...
+
+            function tekKaydıDeğiştirelim() {
+                listele.innerHTML = '';
+                var işlem = vt.transaction (['rushAlbümDosyası'], 'readwrite');
+                var nesneDeposu = işlem.objectStore ('rushAlbümDosyası');
+                nesneDeposu.openCursor().onsuccess = function (olay) {
+                    var imleç = olay.target.result;
+                    if (imleç) {
+                        if (imleç.value.albümBaşlığı === 'A farewell to kings') {
+                            var değişen = imleç.value;
+                            değişen.yıl = 2050;
+                            var talep = imleç.update (değişen);
+                            talep.onsuccess = function() {console.log ('Ütobik bir albüm yılı?..'); };
+                        } // iç-if sonu...
+                        var listeBirimi = document.createElement ('li');
+                        listeBirimi.innerHTML = '<strong>' + imleç.value.albümBaşlığı + '</strong>, ' + imleç.value.yıl;
+                        listele.appendChild (listeBirimi);
+                        imleç.continue();
+                    }else {console.log ('Güncel liste tamamlandı.'); }
+                }; // nes.. sonu...
+            } // func sonu...
+
+            function tersten() {
+                listele.innerHTML = '';
+                var işlem = vt.transaction (['rushAlbümDosyası'], 'readonly');
+                var nesneDeposu = işlem.objectStore ('rushAlbümDosyası');
+                nesneDeposu.openCursor (null, 'prev').onsuccess = function (olay) {// "prev" sondan başa okur...
+                    var imleç = olay.target.result;
+                    if (imleç) {
+                        var listeBirimi = document.createElement ('li');
+                        listeBirimi.innerHTML = '<strong>' + imleç.value.albümBaşlığı + '</strong>, ' + imleç.value.yıl;
+                        listele.appendChild (listeBirimi);
+                        imleç.continue();
+                    }else {console.log ('Kayıtlar tersten listelendi.');}
+                }; // nes.. sonu...
+            } // func sonu...
+        }; // win.. sonu...
+
+        document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

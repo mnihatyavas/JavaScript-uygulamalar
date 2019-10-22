@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1501.html: JS eniyi pratik uygulamaları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>Eniyi Pratikler</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2 (x, y) {
+            if (y === undefined) y = 0;
+            return y / x;
+        } // func sonu...
+
+        function fonk3() {
+            switch (new Date().getDay()) {
+                case 0: gün = "Pazar"; break;
+                case 1: gün = "Pazartesi"; break;
+                case 2: gün = "Salı"; break;
+                case 3: gün = "Çarşamba"; break;
+                case 4: gün = "Perşembe"; break;
+                case 5: gün = "Cuma"; break;
+                case 6: gün = "Cumartesi"; break;
+                default: gün = "Mümkünatsız";
+            } // swi.. sonu
+            return "Bugün günlerden " + gün + " günüdür.";
+        } // fun.. sonu...
+
+        // var ad, soyad, fiyat, iskonto, vergiliFiyat;
+        var ad = "",
+            soyad = "",
+            fiyat = 0,
+            iskonto = 0,
+            vergiliFiyat = 0,
+            dizim = [],
+            nesnem = {};
+
+        var x1 = {}; // new Object() yerine...
+        var x2 = ""; // new String() yerine...
+        var x3 = 0; // new Number() yerine...
+        var x4 = false; // new Boolean() yerine...
+        var x5 = []; // new Array() nesnesi yerine...
+        var x6 = /()/; // new Regexp() nesnesi yerine...
+        var x7 = function(){}; // new Function() nesnesi yerine...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Global değişkenleri, new nesne yaratıcısını, == değersel eşitlik kıyaslamasını ve \
+             eval() kodlama işleticisini kullanırken dikkatli olun." +
+            "<br/>Fonksiyon ve nesneleri de kapsayan global değişkenler başka programların \
+            aynı adlı globallerince esgeçilebilir; mümkün mertebe lokal değişken kullanın, zira \
+            lokallerin hükmü ait oldukları yerel kapsamla sınırlıdır. Lokal değişkenleri var veya \
+            let'le tanımlayın, aksi halde var'sız global kabul edilir (strict kipi var'sız hata verir)." +
+            "<br/>Lokal değişkenleri (döngü değişkenleri dahil) kodlamanın başında, topluca \
+            tanımlayın. Varsayılı olarak JS tüm değişken beyanlarını başa taşır (hoisting). \
+            Değişkenleri tanımlarken, ilk değer atamaları iyidir." +
+            "<br/>2) Dizge, sayı ve ikili için ilkel değişkenleri kullanın. new ile yaratılan \
+            nesne tipleri hem işlem hızını düşürür, hem de nahoş sürprizler türetir. Değer \
+            eşitliği: " + ("Nihat" == new String ("Nihat")) + "; Tip eşitliği: " + ("Nihat" === new
+            String ("Nihat")) + "; Nesnel eşitlik: " + (new String ("Nihat") === new String ("Nihat")) +
+            "<br/>new nesnel tanımlar yerine: var x1={}, x2='', x3=0, x4=false, x5=[], \
+            x6=/()/ ve x7=function(){} ilkel tanımları uygulayın." +
+            "<br/>3) JS veri tiplemesi gevşek olup, aynı değişken farklı işlemler sonucu \
+            farklı tiplere dönüşebilirler: " +
+            "<br/>" + (x = "Merhaba") + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/>" + (x = 5 + 7) + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/>" + (x = 5 + "7") + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/>" + (x = "5" + 7) + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/>" + (x = 5 - 7) + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/>" + (x = "5" - 7) + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/>" + (x = 5 - "x") + "; " + x.valueOf() + "; " + (typeof x) +
+            "<br/> Dizgeden dizge çıkarılılırsa hata değil NaN döner: " + ("Nihat" - "Yavaş") +
+            "<br/>4) Değer kıyaslaması == yerine değer ve tip kıyaslaması === kullanın \
+            çünkü == kıyası kıyas öncesi tip çevrimi yapar ve farklı tipleri eşit gösterir. (0 == ''): " +
+            (0 == "") + "; (1 == '1'): " + (1 == "1") + "; (1 == true): " + (1 == true) +
+            "; (0 === ''): " +(0 === "") + "; (1 == '1'): " + (1 === "1") + "; (1 === true): " + (1 === true) +
+            "<br/>5) Fonksiyon çağırmalarda, eksik argüman unedefined kabul edilir ve \
+            hatalı sonuçlar türetebilir; bu yüzden parametrelere undefined kontrolu \
+            yapılıp varsayılı değer ataması yapılmalıdır: " + fonk2 (5, 10) + "; " + fonk2 (7) +
+            "<br/>6) switch-case bloğunu, ihtimal dışı da olsa default'la sonlandırın: " + fonk3() +
+            "<br/>7) eval() dizgedeki JS kodlamasını çözümleyerek işletir, ancak güvenirlik problemleri \
+            oluşturabileceğinden, yerine dizgeden sayıya çevrim için parseInt(), parseFloat() ve \
+            Number(), dizgeden nesneye çevrim için de parse() kullanılmalıdır. " +
+            eval ("x = 2.019 - 1.957**(-0.345);") + "; " + eval ("bugün = fonk3();") + "; " +
+            eval ("(Math.pow (3.2, 2.67) / Math.PI).toFixed (2);")
+    </script>
+</body>
+</html>

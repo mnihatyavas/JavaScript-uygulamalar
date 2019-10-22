@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1521.html: JS işlem hızı performansı örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>İŞLEM HIZI PERFORMANSI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        window.onload = indir;
+        function indir() {
+            var eleman = document.createElement ("script");
+            eleman.src = "js1521x.js";
+            document.body.appendChild (eleman);
+            return this;
+        } // func sonu...
+
+        function fonk2 (n) {
+            var dizi = [];
+            var i;
+            for (i = 0; i < n; i++) {dizi [i] = Math.floor (Math.random() * 100) - 50;}
+            var toplam = 0;
+            var uz = dizi.length; // uz=dizi.length for içinde olsaydı uz=n kere tekrar hesaplanacaktı...
+            for (i = 0; i < uz; i++) {toplam +=dizi [i];}
+            return toplam;
+        } // func  sonu...
+
+        var nesne1 = document.getElementById ('göster').innerHTML;
+
+        var ad = "Nihat", soyad = "Yavaş", isim = ad + " " + soyad; // isim'i tanımlamak gereksiz...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Performans JS işlem hızının nasıl artırılabileceğidir." +
+            "<br/>Döngülerde, her döngü kere gereksizce tekrarlanacaklar döngü dışına \
+            konulmalıdır: " + fonk2 (20) +
+            "<br/>2) HTML DOM (document.getElementById) çok yavaş olduğundan \
+            sık kullanılacaksa, bir nesneye yükleyip kullanmak her kerelik erişim süresinden \
+            kazandırır: " + (nesne1 +="-Selam") + "; " + (nesne1 +="-Merhabalar") +
+            "<br/>3) Sık kullanılmayacak değişkenleri yaratmayın: " + (ad + " " + soyad) +
+            "; " + isim +
+            "<br/>4) JS script kodlamasını tarayıcıya HTML sayfası yüklendikten sonra \
+            indirilmelidir. Hatta 'window.onload = indirJS'le harici .js dosyasından html \
+            sonrası otomatikmen indirilmesi daha uygundur: " + indir() +
+            "<br/>5) Hız üzerindeki negatif etkisinden dolayı this anahtarkelimesini \
+            (ilişkili üst nesnesi window'dur) çok gerekmedikçe kullanmayın: " + this
+    </script>
+</body>
+</html>

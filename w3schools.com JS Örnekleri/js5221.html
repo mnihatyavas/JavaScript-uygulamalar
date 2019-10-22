@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5221.html: Window ebatları ve kaydıraç örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:0px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #bölüm1 {height:1000px; width:1000px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>WINDOW EBATLARI ve KAYDIRAÇ</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Aşağı +10 artırımlı kaydır" onClick="window.scrollBy (0, +10);">
+    <input type="button" value="Yukarı -10 azaltımlı kaydır" onClick="window.scrollBy (0, -10);"><br>
+
+    <input type="button" value="Aşağı ve sağa mutlak/150 kaydır" onClick="window.scrollTo (150, 150);">
+    <input type="button" value="Yukarı mutlak/0 kaydır" onClick="window.scrollTo (0, 0);">
+    <input type="button" value="Sona mutlak kaydır" onClick="window.scrollTo (10000, 10000);"><br>
+
+    <input type="button" value="Pencere tepesi" onClick="this.scrollIntoView();">
+    <input type="button" value="Pencere dibi" onClick="this.scrollIntoView (false);"><br>
+
+    <input type="button" value="Kaydıraçları gizle" onClick="document.body.style.overflow='hidden';">
+    <input type="button" value="Kaydıraçları göster" onClick="document.body.style.overflow='';">
+
+
+    <div id="bölüm1"></div> <!-- Kaydıraç tamponu -->
+
+    <script>
+        function fonk2() {
+            let kaydıraçBoyu = Math.max (
+                document.body.scrollHeight, document.documentElement.scrollHeight,
+                document.body.offsetHeight, document.documentElement.offsetHeight,
+                document.body.clientHeight, document.documentElement.clientHeight);
+            return "<br>==>Kayan kısım da dahil tam döküman yüksekliği=" + kaydıraçBoyu;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Pencere ebatları ve kaydıraç için daha ziyade html kök döküman elemanı \
+            olan document.documentElement kullanılır." +
+            "<br>2) clientWidth/Height ile mevcut görünen pencerenin eni boyu öğrenilebilir." +
+            " En=" + document.documentElement.clientWidth + "; Boy=" +
+            document.documentElement.clientHeight +
+            "<br>3) window.innerWidth/Height da aynen kullanılabilir, ancak önceki mevcutsa \
+            kaydıracı düşerken, sonraki kapsar." + " En=" + window.innerWidth + "; Boy=" +
+            window.innerHeight +
+            "<br>==>Not: !'DOCTYPE Html'yi ihmal ederseniz garip sonuçlar türetebilir." +
+            "<br>4) scrollHeight ile clientHeight aynı olmalıdır; fakat bazen kaydıraç yokken \
+            ilki ikincisinden küçük bile olabiliyor. Bu yüzden güvenilir döküman yüksekliği bilgisi \
+            için eniyisi bunların azamisini kullanmaktır. " + fonk2() +
+            "<br>5) Herhangibir html elemanı için eleman.scrollLeft/Top kullanılmaktaydı. \
+            kök döküman için de document.documentElement/document.body.scrollLeft/Top \
+            kullanılabilir, ancak bazı tarayıcılar debug hatası verebiliyor. Eniyisi window.pageXOffset/\
+            pageYOffset özelliğini kullanmak." +
+            ('<br>==>Aktüel kaydıraç üst aralığı: ' + window.pageYOffset) +
+            ('<br>==>Aktüel kaydıraç sol aralığı: ' + window.pageXOffset) +
+            "<br>6) window.scrollBy(x,y) her tıklamada +/-xpx kadar artırarak/azaltarak birikimli \
+            kaydırırken window.scrollTo(sayfaX, sayfaY) ise tek hamlede sayfanın belirtilen \
+            kordinatlarına taşınır." +
+            "<br>==>Örn.Alttaki düğmelerle birikimli/mutlak kaydırma yapabilirsiniz:" +
+            "<br>7) eleman.scrollIntoView(true)/varsayılı, elemanı pencere tepesine hizalandırırken \
+            eleman.scrollIntoView(false) dibe hizalandırır." +
+            "<br>==>Örn.Alttaki düğmelerle ilgili düğme elemanını tepede veya mevcut döküman \
+            sonunda görüntüleyebilirsiniz:" +
+            "<br>8) (document.body.style.overflow = 'hidden') ile aktüel ekranı kaydıraçtan \
+            yalıtılarak dondurabilir ve (document.body.style.overflow = '') ile de kaydıracı \
+            tekrar görünür kılabilirsiniz. Bu, sadece body değil tüm html elemanları için \
+            geçerlidir. Ayrıca kaydıraç gizlendiğinde oluşan 17px döküman kaymaları \
+            istenirse clientWidth JS kodlamasıyla telafi edilebilir." +
+            "<br>==>Örn.Alttaki düğmelerle kaydıraçları aktüel ekranda gizleyebilir sonra \
+            tekrar gösterebilirsiniz:"
+    </script>
+</body>
+</html>

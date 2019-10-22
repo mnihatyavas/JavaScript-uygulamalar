@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6051.html: BOM navigator seyrüsefer metod ve özellikleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM NAVIGATOR</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Öneksiz de kullanılabilen window.navigator nesnesi kullanılan tarayıcı seyrüsefer \
+            bilgilerini yansıtan özelliklere sahiptir." +
+            "<br>==>navigator.cookieEnabled, şayet çerezlere izin verildiyse 'true' döndürür: " + window.navigator.cookieEnabled +
+            "<br>==>Kullanılan tarayıcının adını 'navigator.appName' döndürür: "  + navigator.appName +
+            "<br>==>Kullanılan tarayıcının kodadını da 'navigator.appCodeName' döndürür: "  + navigator.appCodeName +
+            "<br>==>Kullanılan tarayıcının motor/ürün adını 'navigator.product' döndürür: " + navigator.product +
+            "<br>==>Kullanılan tarayıcının sürümün bilgilerini 'navigator.appVersion' döndürür: " + navigator.appVersion +
+            "<br>==>'navigator.userAgent' da aynı bilgileri içerir: " + navigator.userAgent +
+            "<br>==>navigator.platform, tarayıcının platformunu (işletim sistemini) döndürür: " + navigator.platform +
+            "<br>==>navigator.language, tarayının o anda kullandığı dili döndürür: " + navigator.language +
+            "<br>==>navigator.javaEnabled(), tarayıcı ayarlarıyla JS'in etkin kılınıp kılınmadığını söyler: " + navigator.javaEnabled()
+    </script>
+</body>
+</html>

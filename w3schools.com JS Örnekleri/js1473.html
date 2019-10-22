@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1473.html: JS sınıf ve nesnelerde extends ebeveyne super gönderme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ-MİRAS</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        //"use strict" sınıflar için varsayılı...
+        class Hayvan {
+            constructor (ad) {
+                this.hız = 0;
+                this.ad = ad;}
+            koş (hız) {
+                this.hız += hız;
+                return `${this.ad}, saatte ${this.hız} km hızla koşuyor.`;}
+            dur() {
+                this.hız = 0;
+                return `${this.ad} şimdi durdu.`;}
+            dur2() {
+                this.hız = 0;
+                alert (this.ad + " 5 sn'lik gecikmeyle şimdi durdu.");}
+        } // sınıf sonu...
+
+        class Tavşan extends Hayvan {
+            constructor (ad, kulak) {
+                super (ad);
+                this.kulak = kulak;}
+            saklan() {return `${this.ad} saklanmış!`;}
+            dur() {return super.dur() + " " +  this.saklan();
+            } // metod sonu...
+            dur2() {return setTimeout (() => super.dur2(), 5000)==1;} // Ebeveyn dur()'u 1 sn sonra çağır...call parent stop after 1sec
+            dinle() {console.log (this.kulak + " sm kulaklı " + this.ad + " kulak kabartıp dinlemede!");
+                return "F12 ile konsol çıktısını takip edin!";}
+        } // sınıf sonu...
+
+        let hayvan = new Hayvan ("Av tazım"); // var:global, let:private...
+        let tavşan = new Tavşan ("Yaban tavşanı", 30);
+
+        function fonk2 (ibare) {
+            return class {selam() {return ibare;} }
+        } // fonk sonu...
+        class Kullanıcı extends fonk2 ("Merhaba, ebeveyn sınıf üreten fonksiyon!") {}
+
+        let hayvan2 = {ad:"Hayvanlar", yer(){return this.ad + " yemek yerler.";} };
+        let tavşan2 = {__proto__:hayvan2, ad: "Tavşanlar", yer(){return super.yer();} };
+        let yavru2 = {__proto__:tavşan2, ad:"Yavru Tavşanlar", yer(){return super.yer();} };
+
+        document.getElementById ("göster").innerHTML =
+        "1) İki ayrı sınıf kendi kurucu değişkenlerini ve metodlarını kullanabilir: " +
+            hayvan.koş (100) + "; " + hayvan.dur() +
+        "<br/>2) Bir yavru sınıf diğerini extends/genişler anahtarkelimesiyle miraslarsa \
+        ebeveynin tüm kurucu değişkenlerini ve metodlarını kendisinde yoksa \
+        kullanabilir: " + tavşan.koş (50) + "; " + tavşan.dur() + "; " + tavşan.saklan() +
+        "<br/>3) Bir sınıf sadece başka bir sınıfı değil herhangibir ifadeyi extends \
+        yapabilir; örneğin ebeveyn sınıfı üreten bir fonksiyonu extends'leyebilir: " +
+        new Kullanıcı().selam() +
+        "<br/>4) Ebeveyndeki metod yavruda da varsa, ebeveyndeki override/esgeçilerek \
+        öncelik yavrudakinedir. Bu durumda ebeveyn metodu super.metod(), yavru \
+        metodu ise this.metod() farklılığıyla çağrılır: " + tavşan.koş (65) + "; " +
+        tavşan.dur() +
+        "<br/>5) => arrow fonksiyonlu ve alert mesajlı setTimeout'la işlem istenildiği \
+        süreyle bekletilebilir: " + tavşan.dur2() +
+        "<br/>6) Yavru sınıf kurucusu yokken, yavru ebeveynin tüm kurucu değişkenlerini \
+        boş-gizli kurucuyla kullanıyordu. Yeni yavru kurucu değişken tanımlanmak istendiğinde \
+        önce super(argümanlar)'la ebeveyninkiler tanıtılır, altına da this'le yavru değişkenler \
+        konur: " + tavşan.dinle() +
+        "<br/>7) Nesne ({}=sözlük) değişkenlerde de super.metod()'la ebeveyn metoda \
+        gönderme yapabiliriz: " + hayvan2.yer() + "; " + tavşan2.yer() + "; " + yavru2.yer()
+    </script>
+</body>
+</html>

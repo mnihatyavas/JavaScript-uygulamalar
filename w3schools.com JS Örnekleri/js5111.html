@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5111.html: HTML DOM yumru elemanları yaratma, silme ve yerdeğiştirme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM YUMRU Elemanları</h4>
+    <p id="göster">Paragraf</p>
+
+    <div id="bölüm1">
+        <p id="paragraf1">Bu mevcut ilk paragrafımızdır.</p>
+        <p id="paragraf2">Bu mevcut ikinci paragrafımızdır.</p>
+        <p id="paragraf3">Bu mevcut fakat silinecek üçüncü paragrafımızdır.</p>
+        <p id="paragraf4">Bu mevcut fakat silinecek dördüncü paragrafımızdır.</p>
+        <p id="paragraf5">Bu mevcut fakat yerdeğiştirilecek olan beşinci paragrafımızdır.</p>
+    </div>
+
+    <script>
+        function fonk2() {
+            var paragrafElemanı = document.createElement ("p");
+            var metinYumrusu = document.createTextNode ("Bu yeni yaratılacak 1.paragraf elemanının metin yumrusudur.");
+            paragrafElemanı.appendChild (metinYumrusu); // Yeni metinli paragraf yaratıldı...
+            var bölümElemanı = document.getElementById ("bölüm1"); // Mevcut bölüm elemanı...
+            bölümElemanı.appendChild (paragrafElemanı); // Metinli yeni paragraf elemanı mevcut bölüm elemanı sonuna eklendi...
+        } // func sonu...
+        function fonk3() {
+            var paragraf0Elemanı = document.createElement ("p");
+            var metinYumrusu = document.createTextNode ("Bu yeni yaratılacak 2.paragraf elemanının metin yumrusudur.");
+            paragraf0Elemanı.appendChild (metinYumrusu); // Yeni metinli paragraf yaratıldı...
+            var bölümElemanı = document.getElementById ("bölüm1"); // Mevcut bölüm elemanı...
+            var paragraf1Elemanı = document.getElementById ("paragraf1"); // Mevcut paragraf1 konumu...
+            bölümElemanı.insertBefore (paragraf0Elemanı, paragraf1Elemanı); // Metinli yeni paragraf elemanı mevcut bölüm elemanı başına eklendi...
+        } // func sonu...
+        function fonk4() {
+            var paragrafElemanı = document.createElement ("p");
+            var metinYumrusu = document.createTextNode ("Bu yeni yaratılacak 3.paragraf elemanının metin yumrusudur.");
+            paragrafElemanı.appendChild (metinYumrusu); // Yeni metinli paragraf yaratıldı...
+            var bölümElemanı = document.getElementById ("bölüm1"); // Mevcut bölüm elemanı...
+            var paragraf2Elemanı = document.getElementById ("paragraf2"); // Mevcut paragraf1 konumu...
+            bölümElemanı.insertBefore (paragrafElemanı, paragraf2Elemanı); // Metinli yeni paragraf elemanı mevcut bölüm elemanı başına eklendi...
+        } // func sonu...
+        function fonk5() {
+            var ebeveyn = document.getElementById ("bölüm1");
+            var yavru = document.getElementById ("paragraf3");
+            ebeveyn.removeChild (yavru);
+        } // func sonu...
+        function fonk6() {
+            var çocuk = document.getElementById ("paragraf4");
+            çocuk.parentNode.removeChild (çocuk);
+        } // func sonu...
+        function fonk7() {
+            var paragrafElemanı = document.createElement ("p");
+            var metinYumrusu = document.createTextNode ("Bu yeni yaratılıp mevcut 5.paragraf'la yerdeğiştirecek olan 4.paragraf metin yumrusudur.");
+            paragrafElemanı.appendChild (metinYumrusu); // Yeni metinli paragraf yaratıldı...
+            var ebeveyn = document.getElementById ("bölüm1"); // Mevcut bölüm elemanı...
+            var yavru = document.getElementById ("paragraf5");
+            ebeveyn.replaceChild (paragrafElemanı, yavru); // Metinli yeni paragraf elemanı mevcut bölüm elemanı paragraf5'le yerdeğiştirdi...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Yeni bir elemanı mevcut HTML DOM'a eklemek için önce yeni eleman(lar) \
+            yaratılır, sonra da (birbirleriyle veya) mevcut html DOM elemanına eklenir: " + fonk2() +
+            "<br>==>Üstteki örnek yeni yaratılan paragrafı bölüm1 elemanının sonuna ekledi \
+            (appendChild); isterseniz (ayrıca) başına da ekleyebilirsiniz (insertBefore): " + fonk3() +
+            "<br>==>Hatta yenisini mevcut 1.ve 2.paragraf arasına da (ayrıca) sokabiliriz: " + fonk4() +
+            "<br>2) Mevcut bir html elemanını silmek için onun ebeveyninin konumunu \
+            bilmelisiniz: " + fonk5() +
+            "<br>==>Aslında yavrunun ebeveynini bırakın kendisi bulsun: " + fonk6() +
+            "<br>3) Yeni yaratılan elemanla mevcutu değiştirmek için ebeveyn.replaceChild(mevcut, yeni) \
+            metodunu kullanabilirsiniz: " + fonk7()
+    </script>
+</body>
+</html>

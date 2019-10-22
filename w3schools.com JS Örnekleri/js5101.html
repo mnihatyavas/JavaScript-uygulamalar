@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5101.html: HTML DOM yumruları arasında seyrüsefer örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4 id="başlık">DOM SEYRÜSEFERİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            var metin1 = document.getElementById ("göster2").childNodes [0].nodeValue;
+            var metin2 = document.getElementById ("göster3").firstChild.nodeValue;
+            document.getElementById ("göster2").innerHTML = metin2;
+            document.getElementById ("göster3").innerHTML = metin1;
+        } // func sonu...
+
+        var yumruAdı = document.getElementById ("göster").nodeName;
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML DOM ile yumru/eleman miras ilişkilerini kullanarak yumru ağacı \
+            (eleman seceresi) hiyerarşisinde seyrüsefer/gezinti yapabilirsiniz. Bir html \
+            dökümanındaki herşey bir node/yumru/eleman'dır (DOM dökümanı, HTML \
+            elemanları, eleman içi metinler, html vasıfları ve yorumlar gibi). JS, html secere \
+            ağacındaki yüm yumrulara erişebilir. Yeni yumrular yaratılabilir, değiştirilebilir \
+            ve silinebilir." +
+            "<br>2) Kök yumru html'dir. Her yumrunun (kök html hariç) bir üst ebeveyni, \
+            çoklu alt çocukları (head, body) olabilir. Çocuklar (h1, p, div) birbirlerinin kardeşidir." +
+            "<br>3) Yumrular arasındaki miras ilişkisini kullanarak, JS kodlamasıyla ebeveyn, \
+            yavru[yumruNo], ilkYavru, sonYavru, sonrakiKardeş ve öncekiKardeş yumruları \
+            arasında seyrüsefer yapabilirsiniz." +
+            "<br>4) title, p, h1, div, span, button elemanlarının metinleri metin değil, metin \
+            yumrusudur ve innerHTML özelliği veya yumruDeğeri'yle erişilebilir." +
+            "<br>Alttaki h4<-->p metin yumruları yerdeğiştirme örneğinde, h4 ve p kardeş \
+            eleman; getElementById metod; childNodes, nodeValue ve innerHTML ise \
+            özelliktir. firstChild ile childNodes[0] aynıdır." +
+            "<br>5) document.body ile tüm gövde elemanlarına, document.documentElement \
+            ile de tüm html dökümanı elemanlarına erişilebilir. " + alert (document.body.innerHTML) +
+            "; " + alert (document.documentElement.innerHTML) +
+            "<br>6) nodeName/yumruAdı: sadece-okunur, eleman yumrusunda etilet adıdır \
+            ve büyük harfle başlar, vasıf yumrusunda vasıf adıdır, metin yumrusunda daima \
+            #metin'dir, döküman yumrusunda ise daima #döküman'dır. " + yumruAdı + "; " +
+            document.getElementById ("başlık").nodeName +
+            "<br>7) nodeValue eleman yumrularında null, metin yumrularında metnin \
+            kendisi, vasıf yumrularında ise vasfın değeridir." +
+            "<br>8) nodetype yumrunun tipini rakam olarak döndürür. " +
+            document.getElementById ("göster").nodeType +
+            "<br>Önemli nodeType rakamları: eleman=1, vasıf=2, metin=3, yorum=8, \
+            döküman=9 ve Doctype=10. " + document.getElementById ("başlık").nodeType
+    </script>
+
+    <img src="resim/secere.gif" width=300 alt=""/>
+    <img src="resim/miras.gif" height=165 alt=""/>
+
+    <h4 id="göster2">Ben h4 Başlığım</h4>
+    <p id="göster3">Ben p paragrafım!..</p>
+    <button onclick="fonk2()">h4 ile p metin yumrularını yerdeğiştir</button>
+</body>
+</html>

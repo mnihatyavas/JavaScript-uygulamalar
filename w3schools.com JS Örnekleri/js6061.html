@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6061.html: BOM tarayıcı fırlayan iletişim kutuları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM İLETİŞİM KUTULARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Alert/İkaz" onClick="alert ('Bu bir tarayıcı ikaz\nbilgilendirme kutusudur.');">
+    <input type="button" value="Confirm/Onay" onClick="fonk2();">
+    <input type="button" value="Prompt/Verigirişi" onClick="fonk3();">
+
+    <div id="bölüm1"></div>
+
+    <script>
+        function fonk2() {
+            let cevap = confirm ("Anlaşmayı onaylıyor musunuz?");
+            bölüm1.innerHTML = "Onay'dan gelen cevap: " + cevap;
+        } // func sonu...
+        function fonk3() {
+            let cevap = prompt ("Lütfen ad ve soyadınızı girin:");
+            if (cevap) {bölüm1.innerHTML = "Girilen veri: " + cevap;}
+            else {bölüm1.innerHTML = "";}
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) 3 çeşit JS tarayıcı fırlayan iletişim kutusu vardır: alert/ikaz, confirm/onay ve prompt/verigirişi." +
+            "<br>2) window.alert, hertürlü dizgesel bilgiyi gösterir, 'Tamam' düğmesiyle kapanır." +
+            "<br>3) window.confirm, sizden onay ister, tamam tuşuyla true, iptalle de false döndürür." +
+            "<br>4) window.prompt, girdiğiniz dizgesel veriyi aynen size döndürür."
+            "<br>==>Örn.Alttaki bu iletişim kutularını açan düğmeleri deneyebilirsiniz:"
+    </script>
+</body>
+</html>

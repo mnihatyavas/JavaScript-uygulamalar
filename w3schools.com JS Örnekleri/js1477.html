@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1477.html: Sınıfa sonradan metod katma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ-Metod katma</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        class Kullanıcı {constructor (a, b) {this.ad = a; this.memleket = b;} }
+        let katkıMetodları = {
+            selamlaşma() {return `Merhabalar ${this.memleket}'lı ${this.ad}'a!..`;},
+            vedalaşma() {return `Hoşçakal ${this.memleket}'lı ${this.ad}!..`;} };
+        Object.assign (Kullanıcı.prototype, katkıMetodları);
+        let kullanıcı = new Kullanıcı ("Nihat", "Malatya");
+
+        let olayKatkıları = {
+            aç (olayAdı, kontrol) {
+                if (!this._olayKontrolleri) this._olayKontrolleri = {};
+                if (!this._olayKontrolleri [olayAdı]) {this._olayKontrolleri [olayAdı] = [];}
+                this._olayKontrolleri [olayAdı].push (kontrol); }, // aç sonu...
+            kapa (olayAdı, kontrol) {
+                let kontroller = this._olayKontrolleri && this._olayKontrolleri [olayAdı];
+                if (!kontroller) return;
+                for (let i = 0; i < kontroller.length; i++) {
+                    if (kontroller [i] === kontrol) {kontroller.splice (i--, 1);}
+                } // for sonu...
+            }, // kapa sonu...
+            tetikle (olayAdı, ...argümanlar) {
+                if (!this._olayKontrolleri || !this._olayKontrolleri [olayAdı]) {return;}
+                this._olayKontrolleri [olayAdı].forEach (kontrol => kontrol.apply (this, argümanlar));
+            } // tetik sonu...
+        }; // let sonu...
+        class Menü {seçim (değer) {this.tetikle ("seç", değer);} }
+        Object.assign (Menü.prototype, olayKatkıları);
+        let menü = new Menü();
+        
+        document.getElementById ("göster").innerHTML =
+            "1) Yarattığımız bir özel sınıfa sonradan metod katabiliriz: " +
+            kullanıcı.selamlaşma() + "; " + kullanıcı.vedalaşma() +
+            "<br/>Not: ${değişken} yönteminde tek/çift-tırnak yerine AltGr-virgül=` \
+            tuşu kullanılmalı." +
+            "<br/>2) Olay yakalayıcı trigger/tetikle, aç ve kapa olay metodlarını seçilen \
+            değer girişli bir menüye bağlayalım. Olay dinleyici kapalıyken menü seçimleri \
+            duyarsızdır, ancak açıkken, girilen menü seçim değeri aynen alert/ikaz kutusunda \
+            yansıtılacaktır (menü açık): " + menü.aç ("seç", değer => alert (`Seçilen değer: ${değer}`)) +
+            "; " + menü.seçim ("123") + "; " + menü.seçim ("12.07.2019 Cuma, 00:30")
+    </script>
+</body>
+</html>

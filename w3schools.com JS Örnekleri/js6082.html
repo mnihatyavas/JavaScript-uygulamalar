@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6082.html: BOM tarayıcının JS çerezleri-2 örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM ÇEREZLERİ-2</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Mevcut bir çerezi ara" onClick="fonk2()">
+    <input type="button" value="Mevcut bir çerezi değiştir veya yenisini yarat" onClick="fonk3()">
+    <input type="button" value="Mevcut bir çerezi sil" onClick="fonk4()">
+    <input type="button" value="Tüm çerezler" onClick="document.getElementById ('göster2').innerHTML = decodeURIComponent (document.cookie)">
+    <p id="göster2">Paragraf-2</p>
+
+    <script>
+        function fonk2() {
+            function çereziBul (ad) {
+                let eşleşenler = "";
+                if (ad) {eşleşenler = document.cookie.match (new RegExp (
+                    "(?:^|; )" + ad.replace (/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)") );}
+                return eşleşenler ? decodeURIComponent (eşleşenler [1]) : undefined;
+            } // func sonu...
+            kullanıcı = prompt ("Bulmak istediğiniz çerezin adını girin:", "kullanıcıadı");
+            document.getElementById ("göster2").innerHTML = çereziBul (kullanıcı);
+        } // func sonu...
+        function fonk3() {
+            function çereziDeğiştirYarat (ad, değer, seçenekler) {
+                // seçenekler için: path, domain, secure vb girilebilir...
+                let güncelÇerez = ad + "=" + değer;
+                for (let anahtar in seçenekler) {
+                    güncelÇerez += "; " + anahtar;
+                    let seçenekDeğeri = seçenekler [anahtar];
+                    if (seçenekDeğeri) {güncelÇerez += "=" + seçenekDeğeri;}
+                } // for sonu...
+                document.cookie = güncelÇerez;
+                document.getElementById ("göster2").innerHTML = decodeURIComponent (güncelÇerez);
+            } // func sonu...
+            let kullanıcı = encodeURIComponent (prompt ("Değiştirmek istediğiniz çerezin adını girin:", "kullanıcıadı") );
+            let değer = encodeURIComponent (prompt ("Çerezin değerini girin [HTML efekti yapılabilir]:", "M.Nihat Yavaş") );
+            let tarih = prompt ("Sona erme tarihini girin:", "Tue, 19 Jan 2038 03:14:07 UTC");
+            çereziDeğiştirYarat (kullanıcı, değer, {expires:tarih, "max-age":3600, özel1:"Yeşilyurt-Malatya", özel2: "Memet oğlu, 1957 doğumlu"} );
+        } // func sonu...
+        function fonk4() {
+            let kullanıcı = prompt ("Silmek istediğiniz çerezin adını girin:", "kullanıcıadı");
+            document.cookie = kullanıcı + "=; max-age=-1";
+            document.getElementById ("göster2").innerHTML = decodeURIComponent (document.cookie);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "0) JS ve .html dosyaları üzerinde çift tıklanınca seçili tarayıcıda çalışırlar. \
+            Ancak (file:///c:/User...) yoluyla başlayan bu program dosyaları açıldıkları \
+            tarayıcıda çerez yaratamazlar. Tarayıcının çerez yaratabilmesi için .html \
+            JS programlarının (http://localhost:8000/örnek.html) şeklinde lokalsunucu \
+            kipinde çalıştırılması gerekmektedir. Bunun en pratik çözümü Python'un \
+            http.server modülünü kullanmaktır. (>python -m http.server) komutuyla \
+            aynı dizindeki python cmd penceresinde giriş yaparak http servisi başlatılır \
+            ve adres satırındaki (file:///C:/Users/pc/Desktop/MyFiles/4. Dersler/javascript/örnek.html) \
+            yerine (http://localhost:8000/örnek.html) girilirse, artık tarayıcı çerez yaratacaktır." +
+            "<br>1) Çerezler doğrudan tarayıcıya yüklenen çerez1=değer1, çerez2=değer2,.. \
+            şeklindeki kullanıcı-değer bilgi çiftleridir. document.cookie ile tarayıcıdaki varsa \
+            mevcut çerezler okunabilir: " + 
+            "<br>==>" + window.document.cookie +
+            "<br>2) (document.cookie='kullanıcı=mny1') ile tarayıcıdaki mevcut çerezlere \
+            kullanıcı-mny çerez-değer bilgi çifti de eklenmiş olur. Eklenmiş mi bakalım: " +
+            (document.cookie="kullanıcı=mnyavaş") +
+            "<br>==>" + decodeURIComponent (document.cookie) +
+            "<br>3) kullanıcı=değer için her şey yazılabilir, encodeURIComponent arşiv \
+            fonksiyonu girilen karakterlerin icapedenlerini escape'e otomatikmen çevirir. \
+            Örneğin.(benim adım = M.Nihat Yavaş) girelim ve decodeURIComponent()'siz sonucu görelim: " +
+            (document.cookie = encodeURIComponent ("benim adım") + "=" + encodeURIComponent ("M.Nihat Yavaş, 1957 Yeşilyurt - Malatya doğumlu") ) +
+            "<br>==>" + decodeURIComponent (document.cookie) +
+            "<br>4) Bir çerez azami 4kb ebatlı olabilir. Ayrıca toplam çerez kapasitesi de 20+ adetle \
+            sınırlıdır. Çerezin herbir anahtar=değer grubu birbirinden (;) ile ayrılır." +
+            "<br>==>(path=/) çerezi kök sayfada yaratır; istediğimiz sayfa kategorisini oluşturabiliriz. \
+            Örn. (path=/yönetim), (path=/yönetim/özel), (path=/anasayfa) vb..." +
+            "<br>==>(domain=bloğum.com), (domain=site2019.com),... Varsayılı olarak bir sitede \
+            yaratılan çerezler diğerinden veya altsitelerden görülmez. Altsitelerden görülmesini \
+            istersek (domain=site.com) belirttiğimizde altsitesi forum.site.com'dan çerezler görünür." +
+            "<br>==>Normalen çerezler celseliktir, yani tarayıcı kapandığında otomatikmen \
+            silinirler. Ancak expires veya max-age ile silinmesini öteleyebiliriz. Örn.\
+            (expires=Tue, 19 Jan 2038 03:14:07 GMT) o tarihte siler, veya yaratıldığından 1 gün sonra silinecek \
+            (document.cookie = 'kullanıcı=Nihat; expires=' + new Date(Date.now() + 86400e3).toUTCString() ). \
+            Yaratıldığından 1 saat sonra silinecek (document.cookie='kullanıcı=Nihat; max-age=3600')." +
+            "<br>5) Silmek istediğimiz çereze geçmiş veya anın tarihi atanabilir." +
+            "<br>==>Örn.Mevcut (benim adım) ve username çerezlerini silip sonucu görelim: " +
+            (document.cookie = encodeURIComponent ("benim adım") + "=''; expires=Sun, 1 Sep 2019 0:00:00 GMT") + "; " +
+            (document.cookie = "username=''; max-age=0") +
+            "<br>==>" + decodeURIComponent (document.cookie) +
+            "<br>6) Güventi https protokolünden örn. site.com sayfasında yarattığımız çerezlerin \
+            açık http protoküyle görülmesini istemiyorsak https'deyken (document.cookie = 'kullanıcı=Nihat; secure') \
+            güvenli/secure bayrağıyla http protokolünden görülmesini engelleyebiliriz." +
+            "<br>7) Örn. Alttaki düğmeyle anahtaradı girilen çerezin mevcudiyetini kontrol edebilirsiniz:" +
+            "<br>==>Örn.Alttaki düğmeyle bir çerezin içerik değerlerini değiştirebilirsiniz:" +
+            "<br>==>Örn.Alttaki düğmeyle bir çerezi negatif tarihle silebilirsiniz:"
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js7092.html: XML uygulamalarý-2 örneði.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>XML Uygulamalarý-2</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <div id='göster2'></div>
+
+    <script>
+        var cevap = Math.abs (parseInt (prompt ("Kaçýncý CD'yi görmek istiyorsun: ", "0")));
+        if (isNaN (cevap)) cevap = 0;
+        fonk2 (cevap);
+
+        function fonk2 (i) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {if (this.readyState == 4 && this.status == 200) {fonk (this, i);}};
+            xhttp.open ("GET", "js7011x.xml", true);
+            xhttp.send();
+        } // func sonu...
+        function fonk (nesne, i) {
+            var xmlDöküman = nesne.responseXML;
+            x = xmlDöküman.getElementsByTagName ("CD");
+            if (i >= x.length) i = x.length-1;
+            console.log ("CD no:", i);
+            document.getElementById ("göster2").innerHTML =
+                "Þarkýcý: " + x [i].getElementsByTagName ("ARTIST") [0].childNodes [0].nodeValue +
+                "<br>Albümü: " + x [i].getElementsByTagName ("TITLE") [0].childNodes [0].nodeValue +
+                "<br>Yýl: " + x [i].getElementsByTagName ("YEAR") [0].childNodes [0].nodeValue +
+                "<br>Þirket: " + x [i].getElementsByTagName ("COMPANY") [0].childNodes [0].nodeValue +
+                "<br>CD fiyatý: $" + x [i].getElementsByTagName ("PRICE") [0].childNodes [0].nodeValue +
+                "<br>Ülke: " + x [i].getElementsByTagName ("COUNTRY") [0].childNodes [0].nodeValue;
+        } // func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

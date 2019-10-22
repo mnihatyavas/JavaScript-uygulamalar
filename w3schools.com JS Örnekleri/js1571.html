@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1571.html: JSON metnini JS nesnesine çevirme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JSON METNİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var dizgeJSON1 = '{"işgörenler":[\
+            {"ad":"Nihat", "soyad":"Yavaş", "doğum":1957},\
+            {"ad":"Nihal", "soyad":"Candan", "doğum":1955},\
+            {"ad":"Songül", "soyad":"Göktürk", "doğum":1959} ]}';
+
+        var dizgeJSON2 = '{"işgörenler":[' +
+            '{"ad":"Nihat", "soyad":"Yavaş", "doğum":1957},' +
+            '{"ad":"Nihal", "soyad":"Candan", "doğum":1955},' +
+            '{"ad":"Songül", "soyad":"Göktürk", "doğum":1959} ]}';
+
+        nesne1 = JSON.parse (dizgeJSON1);
+        nesne2 = JSON.parse (dizgeJSON2);
+
+        document.getElementById ("göster").innerHTML =
+            "1) JSON: JavaScriptObjectNotation/JSNesneGösterimi. Daha ziyade ağ sunucusu \
+            ve müşterisi arasında veri alış-verişini sağlayan dizgesel biçim." +
+            "<br/>JSON dözdizim kuralı: Veriler anahtar:değer ikilisidir; her veri çifti \
+            virgüllerle ayrıktır; nesneleri kıvrımlı parantez, dizileri de köşeli parantez \
+            içerir. Uzun dizgeyi \\ ile kırabiliriz: " + dizgeJSON1 +
+            "<br/>Uzun bir JSON metni + işlemcisiyle eklemlenebilir: " + dizgeJSON2 +
+            "<br/>2) JSON metnini JSON.parse(metin) metoduyla nomal JS nesnesine \
+            çevirebiliriz: " + nesne1 + "; " + nesne2.işgörenler [1].ad + "; " +
+            nesne1.işgörenler[2].soyad +
+            "<br/>3) Nesne anahtarları JSON metninde çift-tırnaklı, JS nesnesinde \
+            tırnaksızdır; sayısal veriler her ikisinde de tırnaksız olabilir: " +
+            nesne1.işgörenler [2].doğum
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5201.html: Stiller ve sınıflar örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:0px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        .selam1 {
+
+            position: fixed;
+
+            z-index: 1000;
+
+            padding: 5px;
+
+            border: 1px solid black;
+
+            font-size: 20px;
+      
+     background: white;
+    
+       text-align: center;
+}
+
+        
+.selam2 {
+
+            background: #b80000;
+
+            color: yellow;
+}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body class="gövde sayfa">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <span id="silDüğmesi"><input type="button" value="Sil" onClick="fonk1()"></span>
+    <input type="button" value="Konum Değiştir" onClick="fonk2()">
+    <h4>STİLLER ve SINIFLAR</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Gövde zemin rengini değiştir" onClick="fonk4()"><br>
+
+    <input type="button" value="Görüntü göz kırpsın" onClick="fonk5()"><br>
+
+    <div id="bölüm1">M.Nihat Yavaş</div>
+    <input type="button" value="Çoklu özellik-1" onClick="fonk6()">
+    <input type="button" value="Çoklu özellik-2" onClick="fonk7()">
+    
+    <script>
+        function fonk2() {
+            silDüğmesi.style.position = "relative";
+            silDüğmesi.style.left = Math.round (Math.random()*600) +"px";
+            silDüğmesi.style.top = Math.round (Math.random()*600) +"px";
+        } // func sonu...
+        function fonk3() {
+            let dizge = "", i = 1;
+            for (let ad of document.body.classList) {dizge += i + ":" + ad + " "; i +=1;}
+            return dizge;
+        } // func sonu...
+        function fonk4() {document.body.style.backgroundColor = prompt ("Gövde zemin rengini değiştirebilirsiniz:", "Olive");}
+        function fonk5() {
+            document.body.style.display = "none";
+            setTimeout ( () => document.body.style.display = "", 1000);
+        } // func sonu...
+        function fonk6() {
+            bölüm1.style.cssText=
+                `color: DarkRed !important;
+                background-color: yellow;
+                font-size:30px;
+                font-weight:bold;
+                width: 200px;
+                text-align: center;
+                padding:20px;
+                border: solid 2px blue;
+                margin:10px;`;
+        } // func sonu...
+        function fonk7() {
+            bölüm1.setAttribute ("style",
+                `color: Yellow !important;
+                background-color: DarkRed;
+                font-size: 30px;
+                font-weight: bold;
+                font-style: italic;
+                width: 200px;
+                text-align: center;
+                padding:20px;
+                border: solid 2px Cyan;
+                margin:10px;`);
+        } // func sonu...
+        function fonk8() {
+            function göster ({üst=0, sağ=0, sınıfAdı, html}) {
+                let bölüm = document.createElement ('div');
+                bölüm.className = "selam1";
+                if (sınıfAdı) {bölüm.classList.add (sınıfAdı);}
+                bölüm.style.top = üst + 'px';
+                bölüm.style.right = sağ + 'px';
+                bölüm.innerHTML = html;
+                document.body.append (bölüm);
+                setTimeout ( () => bölüm.remove(), 500); // Her saniyede yarım saniye sonra silinsin...
+            } // func sonu...
+            let i = 1;
+            setInterval ( () => {göster ({üst:10, sağ:10, html:"Merhaba " + i++, sınıfAdı:"selam2"});}, 1000);
+            // Her saniye göz kırpsın...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML stili yaratmanın 2 yöntemi vardır:" +
+            "<br>==>Çoğunlukla div class='...' şeklinde CSS style kodlamasıyla." +
+            "<br>==>Veya div style='...' şeklinde doğrudan style kodlamasıyla." +
+            "<br>JS hem sınıf hem syle özelliklerini değiştirebilir." +
+            "<br>==>Örn.Üstteki sil düğmesinin konumu sağındakini her tıkladığımızda farklı değiştirilebilir:" +
+            "<br>2) eleman.clasName sınıfAdı değiştirilebilir. eleman.classList sınıfListesi \
+            eklenir, silinir, toggle/ekle-sil, contains/içerir özelliklerine sahiptir." +
+            "<br>==>Örn.body elemanı sınıf adını görelim: " + document.body.className +
+            "<br>==>Örn.body elemanı sınıf adını değiştip görelim: " + 
+            (document.body.className = "sayfa gövde ayar") + "; " + document.body.className +
+            "<br>==>Örn.body elemanı sınıf listesine makale sınıfı ekleyip görelim: " +
+            document.body.classList.add ("makale") + "; " + document.body.className +
+            "<br>==>Örn.body elemanı sınıf listesi taranabilirini for..of'la taratalım: " + fonk3() +
+            "<br>3) CSS stil vasıfları JS ile çift tırnaklıdır. 'width:200px;' için eleman.style.width='200px' \
+            kullanılır. Ayrıca -tireli vasıflar JS ile büyük harflidir. 'background-color=red' için \
+            eleman.style.backgroundColor='red' kullanılır." +
+            "<br>==>Örn.Alttaki düğmeyi tıklarsak document.body.style.backgroundColor ile \
+            gövde zemin rengini değiştirebiliriz:" +
+            "<br>==>Örn.Alttaki düğmeyi tıklarsak gövde document.body.style.display='none' \
+            ile silinir, 1 sn sonra tekrar document.body.style.display='' ile eski görüntüsüne geri döner:" +
+            "<br>==>Örn.Alttaki düğmeyi tıklarsak div bölüm elemanına cssText ile çoklu \
+            özellik atayabiliriz (tek/çift tırnak yerine AltGr;boşluk tırnağı kullanılmalıdır):" +
+            "<br>==>Veya aynı işlemi div.setAttribute('style', 'vasıflar') ile de yapabiliriz:" +
+            "<br>4) Stil ölçeklerinde vasıfarda kullanılan birimler de dahil edilmelidir; yoksa \
+            boş farzeder." +
+            "<br>==>Örn.Gövde marjı '20' girerseniz, etkisiz/0 farzeder; '20px' girilmelidir: " +
+            (document.body.style.margin = "20") + "; " + document.body.style.margin + "; " +
+            (document.body.style.margin = "20px") + "; " + document.body.style.margin + "; " +
+            document.body.style.marginTop +
+            "<br>5) Özellik stil atamaları görülebilir, ancak CSS stil atamalarını eleman.style ile \
+            görebilmek için getComputedStyle kullanılmalıdır, yoksa boş gösterir." +
+            "<br>==>Örn.body CSS stillerinden color, backgroundColor ve margin'i görelim: " +
+            "Renk:" + document.body.style.color + "; " + "Zemin:" + document.body.style.backgroundColor + "; " +
+            "Marj:" + document.body.style.margin +
+            "<br>==>Şimdi de getComputedStyle metodunu kullanalım: " +
+            (özellikler = getComputedStyle (document.body) ) + "; " +
+            "Renk:" + özellikler.color + "; " + "Zemin:" + özellikler.backgroundColor + "; " +
+            "Marj:" + özellikler.margin +
+            "<br>6) Örn.Ekranın sağ-üst köşesinde göz-kırpan bir Merhaba sayacı yaratalım: " + fonk8()
+    </script>
+</body>
+</html>

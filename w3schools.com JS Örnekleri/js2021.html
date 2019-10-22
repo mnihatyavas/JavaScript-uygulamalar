@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js2021.html: Form DOM metod ve özellikleriyle veri giriş kontrolu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FORM DOM</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function yaşKontrolu1() {
+            var yaşNesnesi = document.getElementById ("yaş1");
+            if (!yaşNesnesi.checkValidity()) {
+                document.getElementById ("göster").innerHTML += "<br/><br/>" + yaşNesnesi.validationMessage;}
+            else {document.getElementById ("göster").innerHTML += "<br/><br/>Doğru giriş.";}
+        } // func sonu...
+
+        function yaşKontrolu2() {
+            var yaşNesnesi = document.getElementById ("yaş2");
+            if (yaşNesnesi.validity.rangeOverflow) {
+                document.getElementById ("göster").innerHTML += "<br/><br/>120'den büyük yaş giremezsiniz.";}
+            else {document.getElementById ("göster").innerHTML += "<br/><br/>Doğru giriş.";}
+        } // func sonu...
+
+        function yaşKontrolu3() {
+            var yaşNesnesi = document.getElementById ("yaş3");
+            if (yaşNesnesi.validity.rangeUnderflow) {
+                document.getElementById ("göster").innerHTML += "<br/><br/>1'den küçük yaş giremezsiniz.";}
+            else {document.getElementById ("göster").innerHTML += "<br/><br/>Doğru giriş.";}
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) DOM metodu checkValidity() ile veri giriş kontrolu yapılabilir: " +
+            "<br/>2) DOM checkValidity() metoduyla birlikte DOM özelliklerinden validity, \
+            validationMessage ve willValidate de kullanılabilir." +
+            "<br/>validity'ye bağlı şu veri geçerliliği özellikleri mevcuttur: customError, \
+            patternMismatch, rangeOverflow, rangeUnderflow, stepMismatch, tooLong, \
+            typeMismatch, valueMissing ve valid." +
+            "<br/>validity.rangeOverflow max sınırını geçilince ikaz verir." +
+            "<br/>validity.rangeUnderflow ise min sınırının altına düşünce ikaz verir."
+    </script>
+
+    Yaşınız: <input id="yaş1" type="number" min="0" max="120" required>
+    <button onclick="yaşKontrolu1()">Tamam</button>
+    <span>Eğer (0 >=Yaş >=120) girilirse hata mesajı verir.</span>
+    <br/>
+    Yaşınız: <input id="yaş2" type="number" max="120" required>
+    <button onclick="yaşKontrolu2()">Tamam</button>
+    <span>Eğer Yaş >=120 girilirse hata mesajı verir.</span>
+    <br/>
+    Yaşınız: <input id="yaş3" type="number" min="1" required>
+    <button onclick="yaşKontrolu3()">Tamam</button>
+    <span>Eğer Yaş <=1 girilirse hata mesajı verir.</span>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6084.html: IndexedDB örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>IndexedDB</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Veritabanını aç" onClick="fonk2()">
+    <input type="button" value="SİL" onClick="fonk3()"><br>
+    <input type="button" value="Kayıt dosyasını yarat" onClick="fonk4()">
+    <input type="button" value="SİL" onClick="fonk5()"><br>
+    <input type="button" value="Kayıt Ekle" onClick="fonk6()"><br><br>
+    <a href="js6084x1.html" target="_">(idb-await-promise örneği) Tıkla ve çalıştır</a>
+
+    <script>
+        let açışTalebi;
+        let vt;
+        let dosyaAdı = "Kitaplar";
+        let kitapAdı;
+        function fonk2() {
+            let vtAdı = prompt ("Veri tabanı adını girin:", "mny1");
+            let sürümü = prompt ("Sürüm no:", "2");
+            açışTalebi = indexedDB.open (vtAdı, sürümü);
+
+            açışTalebi.onerror = function() {console.error ("HATA: " + açışTalebi.error); };
+
+            açışTalebi.onupgradeneeded = function() {
+                // Mevcut veritabanı sürümü 2'den küçük veya mevcut değil...
+                console.log ("Güncelleme gerekiyor...");
+                vt = açışTalebi.result;
+                switch (vt.version) {// mevcut vt/veriTabanı sürüm tamsayı no'su...
+                    case 0:
+                        console.log ("Sürüm=0, müşterinin veritabanı yok, yeniden başlat...");
+                        break;
+                    case 1: console.log ("Sürüm=1, güncelle...");
+                } // swi sonu...
+            }; // açış sonu...
+
+            açışTalebi.onsuccess = function() {
+                vt = açışTalebi.result;
+                console.log ("Veritabanı açılışı başarılı: " + vt);
+                vt.onversionchange = function() {
+                    vt.close();
+                    alert ("Veritabanı sürümü eski.\nLütfen sayfayı yeniden yükleyip sürüm=2'yle yeniden açın!");
+                }; // vt sonu...
+            }; // açış sonu...
+        } // func sonu...
+        function fonk3() {
+            let ad = prompt ("Silinecek veri tabanı adını girin:", "mny1");
+            let silmeTalebi= indexedDB.deleteDatabase (ad);
+            silmeTalebi.onerror = function() {console.error ("HATA: " + silmeTalebi.error); };
+            silmeTalebi.onsuccess = function() {
+                let vtSil = silmeTalebi.result;
+                console.log ("Veritabanı silinmiştir: " + vtSil); };
+        } // func sonu...
+        function fonk4() {
+            dosyaAdı = prompt ("Veritabanında kayıtların ekleneceği dosya adını girin:", "kitaplar");
+            açışTalebi.onupgradeneeded = function() {
+                vt = açışTalebi.result;
+                if (! vt.objectStoreNames.contains (dosyaAdı)) { // Eğer veritabanında kitaplar dosyası yoksa...
+                    vt.createObjectStore (dosyaAdı, {keyPath: 'kitapAdı'}); // Anahtar kitapAdı olacak...
+                } // if sonu...
+            } // açış sonu...
+        } // func sonu...
+        function fonk5() {
+            dosyaAdı = prompt ("Veritabanında silinecek dosya adını girin:", "kitaplar");
+            açışTalebi.onupgradeneeded = function() {
+                vt = açışTalebi.result;
+                vt.deleteObjectStore (dosyaAdı);
+            } // açış sonu...
+        } // func sonu...
+        function fonk6() {
+            let işlem = vt.transaction (dosyaAdı, "readwrite");
+            let kitaplar = işlem.objectStore (dosyaAdı);
+            let kitap = {
+                kitapAdı: prompt ("Kitap adını girin:", "JavaScript"),
+                fiyatı: prompt ("Fiyatını girin: TL", "10"),
+                tarih: new Date()
+            }; // kit sonu...
+            let talep = kitaplar.add (kitap);
+
+            talep.onsuccess = function() {console.log ("Kitap kaydı dosyaya eklendi", talep.result); };
+            talep.onerror = function() {console.log ("HATA", talep.error); };
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) indexedDB tarayıcının localStorage'dan daha güçlü ve güvenilir bir indisli veritabanı \
+            olanağı olup tekli/çoklu anahtar kabul eder, endeksli ve taranabilirdir, daha çok \
+            anahtar-değer çifti saklayabilir, çevrim-dışı işlem yapar. Olay-tabanlı/event-based ve \
+            ayrıca da  sarmal-tabanlı/wrapper-based'dır." +
+            "<br>2) Öncelikle veritabanı açış talebinde bulunulur." +
+            "<br>let açışTalebi = indexedDB.open(ad, sürümNo);" +
+            "<br>Ad, veritabanının adıdır; pozitif tamsayı olan varsayılı sürümNo=1'dir. Açış talebi \
+            sonrası olaylar dinlenir: açışTalebi.onupgradeneeded olayı, veritabanının hazır \
+            olduğunu, ancak güncelleme gerektirdiği belirtilir; açışTalebi.onerror olayı, hata \
+            bildirir, veritabanı açılışı başarısızdır; açışTalebi.onsuccess olayıysa veritabanının \
+            açık ve hazır olduğunu bildirir." +
+            "<br>==>Alttaki düğmelerle bir veritabanı açabilir veya silebilirsiniz:" +
+            "<br>3) Aynı veritabanının paralel sekmelerdeki kullanımlarında sürüm farklılığı oluşursa," +
+            "<br>vt.onversionchange = function(){vt.close();} ile veri tabanını (icabında alert ikazlı) \
+            kapar, yeni sürümle açarak olası program çökme hatalarını yönetebiliriz." +
+            "<br>4) Veritabanı açıldıktan sonra, kayıtların girileceği dosya adı ve anahtarı onupgradeneeded \
+            olayında createObjectStore ile (önceden tanımlanmamışsa) tanımlanır." +
+            "<br>if (!vt.objectStoreNames.contains (dosyaAdı)){vt.createObjectStore (dosyaAdı, {keyPath: 'kitapAdı'}) }" +
+            "<br>Nesne depolarının yaratma/silme/değiştirme işlemleri ancak onupgradeneeded \
+            fonksiyonu içinde, tek tek kayıtların ekleme/silme/güncelleme işlemleri ise haricen yapılabilir." +
+            "<br>5) Mevcut açık veritabanındaki nesne deposu kayıt dosyasına kayıtlar add veya put ile yapılabilir." +
+            "<br>vt.transaction(dosyaAdı,'readwrite').objectStore(dosyaAdı).add(kayıtAdı)/.put(kayıtAdı)" +
+            "<br>ile kayıtlar dosyaya kayıtanahtarı/kitapAdı anahtarıyla eklenir; önceden aynı \
+            kayıt girilmişse add hata verir, put ise önceki içeriği değiştirir." +
+            "<br>6) Kayıt ekleme transaction işleminin tamamlandığını transaction.oncomplete \
+            olayıyla test edebiliriz. Kayıt ekleme değişikliklerini yapılmadan, anlık terketmek için \
+            transaction.abort() girebiliriz. Program sonlanması veya fetch gibi makro görevler \
+            işlemi tamamlayarak bitirir." +
+            "<br>7) Kayıt ekleme hatası, işlemi abort/terkeder. Olayı yönetip, örn.yeni kayıtanahtarı denemek istersek:" +
+            "<br>talep.onerror=function(olay){if (talep.error.name=='ConstraintError') {olay.preventDefault();}}" +
+            "<br>hata yönetimiyle yeni bir anahtarla kayıt eklemeyi tekrarlayabiliriz." +
+            "<br>8) Bir nesne deposundaki kayıtlar birkaç yöntemle erişilebilir:" +
+            "<br>==>dosyaAdı.get('js'); // Mevcutsa tek kaydı döndürür." +
+            "<br>==>dosyaAdı.getAll(IDBKeyRange.bound('css', 'html')); // css ve html arasındakileri döndürür." +
+            "<br>==>dosyaAdı.getAll(IDBKeyRange.lowerBound('html', true)); // html ve sonralarını döndürür." +
+            "<br>==>dosyaAdı.getAll(); // Dosyada mevcut tüm kayıtları döndürür." +
+            "<br>==>books.getAllKeys(IDBKeyRange.lowerBound('js', true)); // js ve sonraki anahtarları döndürür." +
+            "<br>9) Kayıtlar dosyada kitapAdı anahtarıyla versayılı artan sıralı erişilebildiği \
+            gibi, ayrıca kitap fiyatı'na göre fiyatı:kitapAdı ikinci endeksi de yaratılır ve istenilen \
+            fiyatı endeksli kitapAdı'larına erişilebilir:" +
+            "<br>==>openRequest.onupgradeneeded=function() {\
+            let kitaplar=db.createObjectStore('kitaplar', {keyPath: 'kitapAdı'});\
+            let endeks=inventory.createIndex('fiyatEndeksi', 'fiyatı'); };" +
+            "<br>==>let endeks=vt.transaction('kitaplar').transaction.objectStore('kitaplar').index('fiyatEndeksi');"+
+            "<br>==>let talep=endeks.getAll(10);\
+            talep.onsuccess = function() {\
+                if (talep.result !== undefined) {console.log('Kitaplar', talep.result);\
+                } else {console.log('Aranan kriterli kitaplar bulunamadı!..');} };" +
+            "<br>==>let request = endeks.getAll(IDBKeyRange.upperBound(5));" +
+            "<br>10) Kayıtlar, arama kriteriyle kitaplar'da kitapAdı veya endeks'te fiyatı ile erişilip silinebilir:" +
+            "<br>==>kitaplar.delete('js');" +
+            "<br>==>let talep = endeks.getKey(5);\
+            talep.onsuccess = function() {\
+                let ad = talep.result;\
+                let silTalebi = kitaplar.delete(ad); };" +
+            "<br>==>kitaplar.clear(); // Tüm kayıtları siler..." +
+            "<br>11) dosyaAdı.getAll() dizisi ile şayet kayıt fazlalığından hafıza yetersiz kalırsa \
+            cursor/imleç kullanılır. İmleç şarta uygun kayıtları tümden dizi olarak değil, ardışık tek-tek \
+            next/sonraki-varsayılı, prev/önceki, nextunique/sonrakiYegane ve prevunique/öncekiYegane \
+           hafızaya alır. Örneklersek:" +
+            "<br>==>let talep = vt.transaction('kitaplar').objectStore('kitaplar').openCursor();\
+            talep.onsuccess = function() {// Şarta uyan tüm kayıtlar için tekrarlanır...\
+                let imleç = talep.result;\
+                if (imleç) {\
+                    let anahtar = imleç.key;\
+                    let değer = imleç.value;\
+                    console.log(anahtar, değer);\
+                    imleç.continue();\
+                } else {console.log('Başka kitap kalmadı!..');} };" +
+            "<br>==>imleç.advance(sayı) metodu sayı kadar ileriye atlar; imleç.continue([anahtar]) \
+            metodu da ilk anahtar'a kadar atlar." +
+            "<br>==>İmleç, depo anahtarı için olduğu gibi endeks için de çalışır. Örneğin: " +
+            "<br>==>let talep = endeks.openCursor(IDBKeyRange.upperBound(5));\
+            talep.onsuccess = function() {// Herbir kayıt için tekrarlar...\
+                let imleç = talep.result;\
+                if (imleç) {\
+                    let anahtar = imleç.primaryKey; // sonraki depo nesne anahtarı (kitapAdı)\
+                    let değer = imleç.value;\
+                    let anahtar = imleç.anahtar; // sonraki endeks anahtarı (fiyatı)\
+                    console.log(anahtar, değer);\
+                    imleç.continue();\
+                } else {console.log('Başka kayıt kalmadı!..');} };" +
+            "<br>12) Herbir talebe onsuccess/onerror eklemek yorucu denilirse, olay-tabanlı \
+            yerine ambalaj-tabanlı idb await/beklemede promise/vaat kullanılır." +
+            "<br>src='https://cdn.jsdelivr.net/npm/idb@3.0.2/build/idb.min.js" +
+            "<br>script'te çevrimiçi kaynak gösterilerek yada indirilip src='idb.js' şeklinde \
+            script'e gömerek çevrimdışı indeksDB ambalajı olarak kullanılabilir. Örneğin:" +
+            "<br>==>let vt = await idb.openDb('mny1', 1, vt => {if (vt.oldVersion == 0) {vt.createObjectStore('kitaplar', {keyPath: 'kitapAdı'});}});\
+            let işlem = vt.transaction('kitaplar', 'readwrite');\
+            let kitaplar = işlem.objectStore('kitaplar');\
+            try {await kitaplar.add(...); await kitaplar.add(...); await işlem.complete; console.log('kitaplar saklandı');\
+            } catch(hata) {console.log('HATA:', hata.message);}" +
+            "<br>==>Örn.Alttaki link'le kitap ekleme idb-await-promise ambalaj-tabanlı programı deneyebilirsiniz:"
+    </script>
+</body>
+</html>

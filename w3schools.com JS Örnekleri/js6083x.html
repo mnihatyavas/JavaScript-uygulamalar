@@ -1,0 +1,16 @@
+<!-- js6083x.html: localStorage ve sessionStorage programlararasý deðer aktarýmý ve otomatik güncelleme alt-örneði. -->
+
+<script>
+    window.onstorage = olay => {// Diðer programlardaki deðiþikliði buraya yansýtýr...
+        if (olay.key != 'now') return;
+        alert (olay.key + ':' + olay.newValue + " adres " + olay.url);
+    }; // win sonu...
+   localStorage.setItem ('now', Date.now() );
+
+    document.write (localStorage.getItem ('deneme') );
+    document.write ("<br>" + localStorage.getItem ('deneme1') );
+    document.write ("<br>" + localStorage.deneme2);
+    document.write ("<br>" + localStorage.metin);
+    
+    document.write ("<br><br>" + sessionStorage.deneme1);
+</script>

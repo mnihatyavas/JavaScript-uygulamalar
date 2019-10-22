@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1475.html: JS sınıf _korumalı/protected ve #özel/private değişkenleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ-Korumalı/Özel</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        class KahveMakinesi {
+            _suSeviyesi = 0;
+            #suSeviyesi1 = 0;
+            #suSeviyesi2 = 350;
+            seviyeKontrol (değer) {
+                if (değer < this.#suSeviyesi1) return "Negatif su seviye hatası";
+                if (değer > this.#suSeviyesi2) return"Aşırı su seviye hatası";}
+            get miktar() {return this._suSeviyesi;}
+            set miktar (değer) {
+                if (değer < this.#suSeviyesi1) alert ("Negatif su seviyesi olmaz!..");
+                if (değer > this.#suSeviyesi2) alert ("Aşırı su seviyesi olmaz!..");
+                this._suSeviyesi = değer;}
+            miktarıAl() {return this._suSeviyesi;}
+            miktarıKoy (değer) {
+                if (değer < this.#suSeviyesi1) alert ("Negatif su seviyesi olmaz!..");
+                if (değer > this.#suSeviyesi2) alert ("Aşırı su seviyesi olmaz!..");
+                this._suSeviyesi = değer;}
+            constructor (volt) {
+                try {if (volt != 220) {this._voltaj = 0; throw new Error ("Yeni yarattığınız kahve makinesinin takılacağı fiş 220 V olmalı!");}
+                    else {this._voltaj = volt; return alert ("Doğru fişe takılı!");}
+                }catch (hata) {alert (hata.name + "=" + hata.message); } }
+            get gerilim() {return this._voltaj;}
+        } // sınıf sonu...
+        let kahveci1 = new KahveMakinesi (100);
+        let kahveci2 = new KahveMakinesi (220);
+        kahveci2.miktar = -200;
+        kahveci2._suSeviyesi = 200;
+
+        document.getElementById ("göster").innerHTML =
+            "1) Sınıf kurucu değişkeni de kontrollu girilebilir; ayrıca sınıf tip değişkeni \
+            değeri kolayca değiştirilebilir: " + kahveci1._voltaj + "; " + kahveci2._voltaj +
+            "; " + kahveci2._suSeviyesi +
+            "<br/>2) Koruma amaçlı olarak korumalı/protected sınıf değişken adları \
+            genelde _altçizgili tanımlanırlar. Değer alma-okuma ise get-set'le sağlanır \
+            ve metod olmalarına rağmen özellikmişcesine ()'suz kullanılabilirler: " +
+            kahveci2.miktar + "; " + (kahveci2.miktar = 250) + "=" + kahveci2.miktar +
+            "<br/>3) Kurucu gerilim voltaj koy metodu yazılmayarak, yaratılırkenki değeri \
+            muhafaza edilip, değiştirilemez sadece-okunabilir kılınmıştır. Ancak this._voltaj'la \
+            değiştirilebilir: " + (kahveci1._voltaj = 100) + "=" + kahveci1.gerilim +
+            "<br/>4) Su seviyesi get-set yerine normal metodla da tanımlanabilir: " +
+            kahveci2.miktarıKoy (300) + "=" + kahveci2.miktarıAl() +
+            "<br/>5) Korumalı _değişkenler gibi özel/private #değişkenler de \
+            tanımlanabilir; onlara dışardan erişilemez veya değiştirilemez, ancak içerden \
+            yapılabilir; korumalı _suSeviyesi yanısıra özel #suSeviyesi de tanımlayalım: " +
+            kahveci1.seviyeKontrol (400) + "; " + kahveci1.seviyeKontrol (-400)
+    </script>
+</body>
+</html>

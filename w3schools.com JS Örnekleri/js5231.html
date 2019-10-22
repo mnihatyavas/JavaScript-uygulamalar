@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5231.html: Elemanları pencere ve dökümanın istenilen kordinatlarına konumlandırma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #saha {
+            overflow: hidden;
+            width: 200px;
+            height: 150px;
+            margin-left:20px;
+            border-top: 10px solid black;
+            border-right: 10px solid gray;
+            border-bottom: 10px solid gray;
+            border-left: 10px solid black;
+            background-color: Green;
+            font: 10px/1.2 monospace;}
+        .sağ-üçgen {
+            position: relative;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 20px solid red;
+            text-indent: -20px;
+            font: 12px/1 monospace;}
+        body {cursor:pointer;}
+
+        .etiket {
+            position: fixed;
+            z-index: 1000;
+            padding: 5px;
+            border: 2px solid black;
+            background-color: yellow;
+            color:tomato;
+            text-align: center;
+            font: italic 14px serif;}
+        .etiket2 {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px;
+            border: 2px solid black;
+            background-color: yellow;
+            color:tomato;
+            text-align: center;
+            font: italic 14px serif;}
+        .etiket3 {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px;
+            border: 2px solid black;
+            background-color: yellow;
+            color:tomato;
+            text-align: center;
+            font: italic 14px serif;
+            opacity: .8;}
+        #fıkra {
+            overflow: auto;
+            background-color: Sienna;
+            width:90%;
+            border-left: 10px solid #888;
+            margin:20px;
+            padding: 0.5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+            display: inline-block;
+            /* white-space: pre; */}
+        #fıkra:before { /* Sol-üstteki aç alıntı işareti için */
+            color: RoyalBlue;
+            content: open-quote;
+            font-size: 4em;
+            line-height: .1em;
+            margin-right: .25em;
+            vertical-align: -.4em;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>KORDİNATLAR</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Resim-1 Göster" onClick="resim1.style.display='block';">
+    <input type="button" value="Gizle" onClick="resim1.style.display='none';">
+    <i  id="resim1" style="display:none;"><img src="resim/kordinat1.png" alt="" /></i>
+
+    <br><input type="button" id="düğme2" value="Düğme-2 (Tıkla ve kordinatlarımı gör)" onClick="fonk2();">
+    <br><input type="button" id="düğme3" value="Düğme-3 (Tıkla ve orta elemanın yazı/zemin rengini değiştir)" onClick="fonk3();">
+    <br><input type="button" id="düğme4" value="Düğme-4 (Tıkla ve sabit pencere konumlu mesaj altta 10 sn görünsün)" onClick="fonk4();">
+    <br><input type="button" id="düğme5" value="Düğme-5 (Tıkla ve göreceli döküman konumlu mesaj altta 10 sn görünsün)" onClick="fonk5();">
+
+    <br><input type="button" id="düğme6" value="Düğme-6 (Tıkla ve flama ucu kordinatlarını gör)" onClick="fonk6();">
+    <div id="kordinatlar">(Tüm HTML sayfasında tıklanan konumun kordinatları burada görünecek...)</div>
+    <div id="saha">
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . .
+    </div>
+    <div class="sağ-üçgen" style="left:0px;top:-176px">1</div>
+    <div class="sağ-üçgen" style="left:10px;top:-178px">3</div>
+    <div class="sağ-üçgen" style="left:210px;top:-40px">4</div>
+    <div class="sağ-üçgen" style="left:220px;top:-42px">2</div>
+
+    <input type="button" id="düğme7" value="Fıkra için tıkla ve FIXED notları 10 sn gör)" onClick="fonk7();">
+    <input type="button" value="GİZLE" onClick="fıkra.style.display='none';"><br>
+    <div id="fıkra">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandaeesse sequi officia sapiente.</p>
+        <hr/>
+        <blockquote>
+            <br>Öğretmen: Neden derse geç kaldın?
+            <br>Öğrenci: Yüz dolarlık banknotunu kaybeden bir adam vardı.
+            <br>Öğretmen: Güzel. Demek onu bulmasında adama yardımcı oluyordun!..
+            <br>Öğrenci: Hayır. Üzerinde durarak adamın gitmesini bekledim.
+        </blockquote>
+        <hr/>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae esse sequi officia sapiente.</p>
+    </div>
+    <input type="button" id="düğme8" value="Fıkra için tıkla ve ABSOLUTE notları 10 sn gör)" onClick="fonk8();"><br>
+    <input type="button" id="düğme8" value="Fıkra için tıkla ve İÇERDE/DIŞARDA ABSOLUTE notları 10 sn gör)" onClick="fonk9();">
+
+    <script>
+        function fonk2() {
+            x = düğme2.getBoundingClientRect().x;
+            y = düğme2.getBoundingClientRect().y;
+            en = düğme2.getBoundingClientRect().width;
+            boy = düğme2.getBoundingClientRect().height;
+            sol = x;
+            sağ = x + en;
+            üst = y;
+            alt = y + boy;
+            alert ("x=sol=" + x + ", y=üst=" + y + "\nen=" + en + ", boy=" + boy + "\nsağ=x+en=" + sağ + ", alt=y+boy=" + alt);
+        } // func sonu...
+        function fonk3() {
+            let xOrta = document.documentElement.clientWidth / 2;
+            let yOrta = document.documentElement.clientHeight / 2;
+            let eleman = document.elementFromPoint (xOrta, yOrta);
+            eleman.style.backgroundColor = "Navy";
+            eleman.style.color = "Magenta";
+            alert (eleman.tagName);
+        } // func sonu...
+        function fonk4() {
+            function mesajıAltaYazdır (elem, html) {
+                let mesaj = document.createElement ('div');
+                mesaj.style.cssText = "position:fixed; color: red; font-size:80px;";
+                let kordinatlar = elem.getBoundingClientRect();
+                mesaj.style.left = kordinatlar.left + "px";
+                mesaj.style.top = kordinatlar.bottom + "px";
+                mesaj.innerHTML = html;
+                return mesaj;
+            } // func sonu...
+            let eleman = document.getElementById ("düğme4");
+            let mesajım = mesajıAltaYazdır (eleman, "Merhaba JS Dünyası!");
+            document.body.append (mesajım);
+            setTimeout(() => mesajım.remove(), 10000);
+        } // func sonu...
+        function fonk5() {
+            function mesajıAltaYazdır (elem, html) {
+                function kordinatlarıAl (elem) {
+                    let düğme = elem.getBoundingClientRect();
+                    return {
+                        üst: düğme.top + pageYOffset,
+                        sol: düğme.left + pageXOffset};
+                } // func sonu...
+                let mesaj = document.createElement ('div');
+                mesaj.style.cssText = "position:absolute; color: Magenta; font-size:80px;";
+                let kordinatlar = kordinatlarıAl (elem);
+                mesaj.style.left = kordinatlar.sol + "px";
+                mesaj.style.top = kordinatlar.üst + "px";
+                mesaj.innerHTML = html;
+                return mesaj;
+            } // func sonu...
+            let eleman = document.getElementById ("düğme5");
+            let mesajım = mesajıAltaYazdır (eleman, "Merhaba JS Dünyası!");
+            document.body.append (mesajım);
+            setTimeout(() => mesajım.remove(), 10000);
+        } // func sonu...
+        function fonk6() {
+            let sahaKordinatları = saha.getBoundingClientRect();
+            let cevap = [
+                [ // 1
+                    "(" + sahaKordinatları.left + ", " +
+                    sahaKordinatları.top + ")"
+                ],
+                [ // 2
+                    "(" + sahaKordinatları.right + ", " +
+                    sahaKordinatları.bottom + ")"
+                ],
+                [ // 3
+                    "(" + (sahaKordinatları.left + saha.clientLeft) + ", " +
+                    (sahaKordinatları.top + saha.clientTop) + ")"
+                ],
+                [ // 4
+                    "(" + (sahaKordinatları.left + saha.clientLeft + saha.clientWidth) + ", " +
+                    (sahaKordinatları.top + saha.clientTop + saha.clientHeight) + ")"
+                ]
+            ]; // cevap sonu...
+            alert ("Sahanın 1-2-3 ve 4 no'lu işaretli kordinatları:\n" + cevap.join ('; ') +
+                "\n\nDoğruluğunu test etmek için işaretlerin üzerini tıklayıp, bunlarla (yaklaşık olarak) kıyaslayın.");
+        } // func sonu...
+        document.onclick = function (olay) { // tıklanan konum kordinatlarını göster
+            kordinatlar.innerHTML = olay.clientX + ':' + olay.clientY;
+        }; // doc.. sonu...
+        function fonk7() {
+            function konumlandır (çapa, konum, eleman) {
+                let çapaKordinatları = çapa.getBoundingClientRect();
+                switch (konum) {
+                    case "üst":
+                        eleman.style.left = çapaKordinatları.left + "px";
+                        eleman.style.top = çapaKordinatları.top - eleman.offsetHeight + "px";
+                        break;
+                    case "sağ":
+                        eleman.style.left = çapaKordinatları.left + çapa.offsetWidth + "px";
+                        eleman.style.top = çapaKordinatları.top + "px";
+                        break;
+                    case "alt":
+                        eleman.style.left = çapaKordinatları.left + "px";
+                        eleman.style.top = çapaKordinatları.top + çapa.offsetHeight + "px";
+                        break;
+                } // case sonu...
+            } // func sonu...
+            function notuGöster (çapa, konum, metin) {
+                let etiketim = document.createElement ('div');
+                etiketim.className = "etiket";
+                etiketim.innerHTML = metin;
+                document.body.append (etiketim);
+                setTimeout ( () => etiketim.remove(), 10000);
+                konumlandır (çapa, konum, etiketim);
+            } // func sonu...
+            fıkra.style.display = "block";
+            let fıkram = document.querySelector ('blockquote');
+            notuGöster (fıkram, "üst", "not üstte");
+            notuGöster (fıkram, "sağ", "not sağda");
+            notuGöster (fıkram, "alt", "not altta");
+        } // func sonu...
+        fıkra.style.display="none";
+        function fonk8() {
+            function kordinatlarıAl (çapa) {
+                let çapaBölümü = çapa.getBoundingClientRect();
+                return {
+                    üst: çapaBölümü.top + pageYOffset,
+                    sol: çapaBölümü.left + pageXOffset
+                }; // çapa sonu...
+            } // func sonu...
+            function etiketiGöster (çapa, konum, fiş) {
+                let etiket = document.createElement ('div');
+                etiket.className = "etiket2";
+                etiket.innerHTML = fiş;
+                document.body.append (etiket);
+                setTimeout ( () => etiket.remove(), 10000);
+                etiketiKonumlandır (çapa, konum, etiket);
+            } // func sonu...
+            function etiketiKonumlandır (çapa, konum, eleman) {
+                let çapaKordinatları = kordinatlarıAl (çapa);
+                switch (konum) {
+                    case "üst":
+                        eleman.style.left = çapaKordinatları.sol + "px";
+                        eleman.style.top = çapaKordinatları.üst - eleman.offsetHeight + "px";
+                        break;
+                    case "sağ":
+                        eleman.style.left = çapaKordinatları.sol + çapa.offsetWidth + "px";
+                        eleman.style.top = çapaKordinatları.üst + "px";
+                        break;
+                    case "alt":
+                        eleman.style.left = çapaKordinatları.sol + "px";
+                        eleman.style.top = çapaKordinatları.üst + çapa.offsetHeight - eleman.offsetHeight + "px";
+                        break;
+                } // switch sonu...
+            } // func sonu...
+            fıkra.style.display = "block";
+            let fıkram = document.querySelector ('blockquote');
+            etiketiGöster (fıkram, "üst", "üstteki etiket");
+            etiketiGöster (fıkram, "sağ", "sağdaki etiket");
+            etiketiGöster (fıkram, "alt", "alttaki etiket");
+        } // func sonu...
+        function fonk9() {
+            function kordinatlarıAl (çapa) {
+                let çapaBölümü = çapa.getBoundingClientRect();
+                return {
+                    üst: çapaBölümü.top + pageYOffset,
+                    sol: çapaBölümü.left + pageXOffset
+                }; // çapa sonu...
+            } // func sonu...
+            function etiketiGöster (çapa, konum, fiş) {
+                let etiket = document.createElement ('div');
+                etiket.className = "etiket3";
+                etiket.innerHTML = fiş;
+                document.body.append (etiket);
+                setTimeout ( () => etiket.remove(), 10000);
+                etiketiKonumlandır (çapa, konum, etiket);
+            } // func sonu...
+            function etiketiKonumlandır (çapa, konum, eleman) {
+                let çapaKordinatları = kordinatlarıAl (çapa);
+                switch (konum) {
+                    case "üst-dışarda":
+                        eleman.style.left = çapaKordinatları.sol + "px";
+                        eleman.style.top = çapaKordinatları.üst - eleman.offsetHeight + "px";
+                        break;
+                    case "sağ-dışarda":
+                        eleman.style.left = çapaKordinatları.sol + çapa.offsetWidth + "px";
+                        eleman.style.top = çapaKordinatları.üst + "px";
+                        break;
+                    case "alt-dışarda":
+                        eleman.style.left = çapaKordinatları.sol + "px";
+                        eleman.style.top = çapaKordinatları.üst + çapa.offsetHeight + "px";
+                        break;
+                    case "üst-içerde":
+                        eleman.style.left = çapaKordinatları.sol + "px";
+                        eleman.style.top = çapaKordinatları.üst + "px";
+                        break;
+                    case "sağ-içerde":
+                        eleman.style.width = '150px';
+                        eleman.style.left = çapaKordinatları.sol + çapa.offsetWidth - eleman.offsetWidth + "px";
+                        eleman.style.top = çapaKordinatları.üst + "px";
+                        break;
+                    case "alt-içerde":
+                        eleman.style.left = çapaKordinatları.sol + "px";
+                        eleman.style.top = çapaKordinatları.üst + çapa.offsetHeight - eleman.offsetHeight + "px";
+                        break;
+                } // switch sonu...
+            } // func sonu...
+            fıkra.style.display = "block";
+            let fıkram = document.querySelector ('blockquote');
+            etiketiGöster (fıkram, "üst-içerde", "üst-içerdeki etiket");
+            etiketiGöster (fıkram, "üst-dışarda", "üst-dışardaki etiket");
+            etiketiGöster (fıkram, "sağ-dışarda", "sağ-dışardaki etiket");
+            etiketiGöster (fıkram, "alt-içerde", "alt-içerdeki etiket");
+          } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Elemanları sayfa içinde taşıyabilmek için kordinatlara aşina olmalıyız. Bunun \
+            için 2 farklı metotdan yaralanabiliriz:" +
+            "<br>==>a. Window'a göreceli, 'position:fixed' benzeri, pencerenin üst-sol yada \
+            clientY-clientX kordinatları," +
+            "<br>==>b. Dökümana göreceli, 'position:absolute' benzeri, dökümanın üst-sol \
+            yada pageY-pageX kordinatlarıdır." +
+            "<br>==>Sayfa başındayken window göreceli ve döküman göreceli üst-sol \
+            aynıdır. Ancak sayfa kaydıraçla aşağıya ve sağa kaydırılırsa döküman göreceli \
+            üst-sol değişmezken, window göreceli değişir." +
+            "<br>==>Örn.Alttaki Resim-1 görüntülenirse, döküman aşağı kaydırıldıldığında \
+            elemanın döküman göreceli pageY aynı kalırken, pencere göreceli clientY'nin \
+            kısaldığı anlaşılacaktır." +
+            "<br>2) eleman.getBoundingClientRect() metodu elemanın (x,y) ve (width,height) \
+            değerlerini döndürür. Bu değerlerden üst=y, alt=y+height, sol=x ve sağ=x+width \
+            türetilebilir. Kendisi de top, bottom, left ve right türetmektedir." +
+            "<br>==>Örn.Alttaki Düğme-2 tıklanırsa, sözü edilen değerleri okuyabilirsiniz:" +
+            "<br>==>Not: Aşağı kaydırılınca pencere dışına taşan elemanın y=üst değeri \
+            negatif okunabilir." +
+            "<br>3) document.elementFromPoint(x, y) metodu, o anda verili (x,y) kordinatına \
+            tesadüf eden elemanı verir." +
+            "<br>==>Örn.Düğme-3'e tıkladığımızda kaydıraçla değişen o anki görünür pencere \
+            orta konum elemanının yazı ve zemin rengini değiştirelim:" +
+            "<br>4) eleman.getBoundingClientRect() ile kordinatlarını aldığımız elemanın \
+            hemen altına mesaj.style.cssText = 'position:fixed' sabit pencere konumlu bir mesaj \
+            yazdırırsak, kaydıraçla aşağı-yukarı oynadığımızda, eleman kayarken mesajın \
+            konumu sabit kalacaktır." +
+            "<br>==>Örn.Alttaki Düğme-4'ü tıkladığımızda sabit pencere konumlu 'Merhaba JS Dünyası!' \
+            mesajı düğme altında yansıtılsın:" +
+            "<br>5) 'position:fixed' sabit pencere konumlaması yerine, 'position:absolute' \
+            göreceli döküman konumlaması atadığımızda, kaydıraç hareketleri elemanla \
+            birlikte elemana göreceli mesajı da aynen kaydıracaktır." +
+            "<br>==>Örn.Alttaki Düğme-5'ü tıkladığımızda göreceli döküman konumlu 'Merhaba JS Dünyası!' \
+            mesajı düğme altında yansıtılsın:" +
+            "<br>6) Bir futbol sahası çiziminin iç/dış sol-üst ile sağ-alt köşeleri, ayrıca \
+            tıklanan tüm html sayfası konumlarının kordinatlarını veren kodlama yapalım." +
+            "<br>==>Örn.Alttaki 'Kırmızı flamalı saha' düğmesi bu işlevi gerçekleştirsin:" +
+            "<br>7) Bir elemanın üstüne, altına ve sağına küçük notlar yapıştıralım." +
+            "<br>==>Örn.Alttaki fıkra düğmesini tıkladığımızda bu not-FIXED'li bir fıkrayı \
+            görelim yada gizleyelim:" +
+            "<br>==>Örn.Alttaki 2.fıkra düğmesini tıkladığımızda bu not-ABSOLUTE'lu \
+            bir fıkrayı görelim yada gizleyelim:" +
+            "<br>==>Örn.Alttaki 3.fıkra düğmesini tıkladığımızda bu İÇERDE/DIŞARDA \
+            not-ABSOLUTE'lu bir fıkrayı görelim yada gizleyelim:"
+    </script>
+</body>
+</html>

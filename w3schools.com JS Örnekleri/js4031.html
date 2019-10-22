@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js4031.html: Bir fonksiyonun 4 farklı şekilde yürütülmesi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FONKSİYONUN YÜRÜTÜLMESİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2 (a, b) {return Math.log (a) / Math.log10 (b);} // e=2.72 ve 10 tabanlı...
+        function fonk3() {return this;}
+        var a = fonk3();
+
+        var kişi = {ad:"Nihat", soyad:"Yavaş", adSoyad: function() {return this.ad + " " + this.soyad;} };
+
+        function fonk4 (a,b,c) {this.ad=a; this.soyad=b; this.yaş=(2019-c);}
+        kişi1 = new fonk4 ("Nihat", "Yavaş", 1957);
+
+        var nesne1 = fonk2.call (nesne1, 10, 2*5);
+        var nesne2 = fonk2.apply (nesne2, [1000, (2*5)**3]); // Aktarılan argümanlar dizidir...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Fonksiyonun çağrılması ve yürütülmesi farklıdır; fonksiyon çağrılmadan \
+            yürütülebilir. Fonksiyon kodları tanımlandığında değil, yürütüldüğünde \
+            işletilir. Bir fonksiyon, fonksiyonun sahibini işaret eden this anahtarkelimesine \
+            göre 4 şekilde yütütülebilir: fonksiyon olarak, nesne metodu olarak, \
+            kurucu fonksiyon olarak ve (call ve apply gibi) fonksiyon metoduyla." +
+            "<br/>2) Fonksiyon olarak çağrıldığında, fonksiyon varsayılı global nesne \
+            olan tarayıcı HTML sayfasına aittir; dolayısıyla da window pencereye: " +
+            fonk2 (Math.E, 10) + "; " + fonk2 (0, 1) + "; " + window.fonk2 (Math.E, 1) +
+            "<br/>Değişkenli fonksiyon sahibi nesnel değişken, değişkensizin de global nesnedir: " +
+            a + "; " + fonk3() + "; " + window.fonk3() +
+            "<br/>3) Fonksiyon bir nesne metodu olarak işletilebilir: " + kişi.adSoyad + "=" +
+            kişi.adSoyad() +
+            "<br/>4) Fonksiyon new ile yeni bir nesne yaratacak olan bir kurucu nesne \
+            olarak işletilebilir: " + kişi1.ad + "=" + kişi1.yaş +
+            "<br/>5) Fonksiyon başka bir fonksiyon tarafından yürütülebilir. Hazır JS fonksiyon \
+            metodları başka bir fonksiyonu çağırdığında, ilk argüman sahiplenen nesne \
+            adı olmalıdır: " + nesne1 + "=" + nesne2
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5151.html: DOM içinde yumru ve elemanlar arası gezintisi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>DOM GEZİNTİSİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <button onclick="fonk2()">Gövde Yumruları</button>
+    <button onclick="fonk3()">Gövde İlk-Son Yavruları</button><br><br>
+
+    <img src="resim/domYumruları.png" alt="DOM Yumruları" height="300" />
+
+    <table id="tablo">
+        <tr>
+            <td>0.satır 0.hücre</td>
+            <td>0.satır 1.hücre</td>
+        </tr>
+        <tr>
+            <td>1.satır 0.hücre</td>
+            <td>1.satır 1.hücre</td>
+        </tr>
+    </table>
+
+    <script>
+        function fonk2() {
+            for (let i = 0; i < document.body.childNodes.length; i++) {
+                alert (document.body.childNodes [i] + "=" + document.body.childNodes [i].innerHTML);}
+        } // func sonu...
+        function fonk3() {
+            eleman = document.body;
+            alert ( eleman.firstChild + ": İlk eleman mı? " + (eleman.childNodes [0] == eleman.firstChild) + " " +
+            "\n" + eleman.lastChild + ": Son eleman mı? " + (eleman.childNodes [eleman.childNodes.length - 1] == eleman.lastChild) + " " +
+            "\nGövde/body elemanları mevcut mu? " + (eleman.hasChildNodes() ) )
+        } // func sonu...
+        function fonk4() {
+            var toplam1 = "<br>", toplam2 = "<br>";
+            for (let yumru of document.body.childNodes) {toplam1 +=yumru + "; ";}
+            for (let yumru in document.body.childNodes) {toplam2 +=yumru + "; ";}
+            return toplam1 + toplam2;
+        } // func sonu...
+        function fonk5() {
+            var toplam = "";
+            var eleman = document.getElementById ("göster");
+            while (eleman = eleman.parentElement) {toplam += eleman + "; ";}
+            return toplam;
+        } // func sonu...
+        function fonk6() {
+            var toplam = "<br>";
+            for (let eleman of document.body.children) {toplam += eleman + "; ";}
+            return toplam;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS'le tüm DOM elemanlarına erişebilir, değiştirebiliriz. DOM yumrularını \
+            gezinti şeması aşağıdaki şekildeki gibidir." +
+            "<br>2) Şemadaki yumrular yukardan aşağıya sırayla: " + (html=document.documentElement) +
+            "; " + (body=document.body) + "; " + (head=document.head) +
+            "<br>3) body.childNodes ile gövdede mevcut (metinler dahil) bütün yumruların \
+            nesne adlarının ve içeriklerinin listesini alırız (alttaki ilk düğmeyi deneyin):"+
+            "<br>4) eleman.firstChild ve eleman.lastChild ile ilk ve son yumruları, eleman.hasChildNodes() \
+            ile de yavru mevcudiyet kontrolunu yapabiliriz (alttaki ikinci düğmeyi deneyin):" +
+            "<br>5) childNodes listesi dizinin endeks, length/uzunluk ve taranabilir for \
+            özelliklerini kullansa da örn.filter, reduce vb metodlarını kullanamaz, dizi değildir. \
+            Şimdi for-of yavru nesneler ve  for-in nesne endeksleriyle özellikler taranabilirliğini \
+            örnekleyip farkını görelim: " + fonk4() +
+            "<br>5) Sibling aynı elemanın kardeşleridir; nextSibling sonraki, previousSibling ise \
+            önceki kardeşi döndürür." +
+            "<br>==>body'nin ebeveyni html midir? " + (document.body.parentNode === document.documentElement) +
+            "<br>==>head'in birsonraki kardeşi kimdir? " + document.head.nextElementSibling.nodeName + //.nodeValue
+            "<br>==>body'nin birönceki kardeşi kimdir? " + document.body.previousElementSibling +
+            "<br>6) 12 çeşit yumrudan sadece 1 no'lu ilki eleman yumrusudur. Biz sadece \
+            eleman adı/tagName'yla işlem yapmak istersek: children, firstElementChild, \
+            lastElementChild, previousElementSibling, nextElementSibling ve parentElement \
+            özelliklerini kullanırız." +
+            "<br>==>parentNode ile parentElement sadece kök html'de fark gösterir: " +
+           document.documentElement.parentNode + "; " + document.documentElement.parentElement +
+            "<br>==>Bu farktan yararlanarak bulunulan elemandan html elemanına kadar \
+            (döküman değil) ebeveyn elemanları tarayabiliriz: " + fonk5() +
+            "<br>==>Önceki gövde yumruları yerine gövde elemanlarını taratalım: " + fonk6() +
+            "<br>7) Bu arada aşağıda görünen table/tablo gövde elemanına ait bir örnek verelim. \
+            Tablo'nun 2.satırındaki 1.hücre değerini alalım: " + 
+            document.getElementById ("tablo").rows [1].cells [0].innerHTML
+    </script>
+</body>
+</html>

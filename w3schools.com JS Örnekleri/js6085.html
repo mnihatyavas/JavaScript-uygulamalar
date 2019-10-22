@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6085.html: FileReader ile disk dosyalarını okuma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FileReader</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="file" onchange="dosyayıGöster (this)"><br>
+    <input type="file" onchange="dosyayıOku(this)">
+    <p id="göster2"></p>
+
+    <script>
+        function dosyayıGöster (veri) {
+            let dosya = veri.files [0];
+            alert ("Dosya adı: " + dosya.name + "\nSon değişiklik tarihi: " + new Date (dosya.lastModified).toUTCString() );
+        } // func sonu...
+        function dosyayıOku (veri) {
+            let dosya = veri.files [0];
+            let okuyucu = new FileReader();
+            okuyucu.readAsText (dosya, "ISO_8859-9"); // Türkçe karakterler için...
+
+            okuyucu.onload = function() {
+                //document.getElementById ("göster2").innerHTML = okuyucu.result;
+                console.log (okuyucu.result); // konsol penceresi açık olmalı...
+                //alert (okuyucu.result); // Uzun dosya içeriklerinin sonunu kırpıyor...
+            } // oku.. sonu...
+            okuyucu.onerror = function() {alert (okuyucu.error);};
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) (input type='file' onchange='fonk(this)') ekrana, (Dosya Seç|Dosya Seçilmedi) \
+            verigiriş kutusunu getirir. Hernangibir (resim, döküman) dosyası seçildiğinde, alert \
+            ile seçilen dosyanın adı ve son değişiklik tarihi yansıtılabilir." +
+            "<br>Örn.Alttaki (Dosya Seç) düğmesini herhangibir tür dosya için deneyin:" +
+            "<br>2) Dosya içeriklerini okumak için (new FileReader()) kullanılır. Okuyucu, dosyaları \
+            Text/metin, ArrayBuffer/diziTampon veya DataURL/veriYureli seçenekli okuyabilir." +
+            "<br>Örn.Alttaki ikinci (Dosya Seç) düğmesini metin dosyası için deneyin:"
+    </script>
+</body>
+</html>

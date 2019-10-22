@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3031.html: Nesne özelliği metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE METODLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var kişi1 = {ad:"Nihat", soyad:"Yavaş", yaş:(2019-1957), gözRengi:"ela",
+            adSoyad:function() {return (this.ad + " " + this.soyad);} };
+
+        function kişi (ad, soyad, doğumYılı, renk) {
+            this.ad = ad;
+            this.soyad = soyad;
+            this.yaş = (2019 - doğumYılı);
+            this.gözRengi = renk;
+            this.adSoyad = function() {return (this.ad + " " + this.soyad);};
+            this.soyadıDeğiştir = function (x) {this.soyad = x;};
+            this.yaşıDeğiştir = function (x) {this.yaş = (2019 - x)}
+        } // func sonu...
+        var babam = new kişi ("Memet", "Yavaş", 1934, "ela");
+        var annem = new kişi ("Hanım", "Amanat", 1931, "siyah");
+
+        document.getElementById ("göster").innerHTML =
+            "1) Metodlar nesneler üzerinde işlem yapan eylemlerdir. Bir metod fonksiyon \
+            tanımlı nesne özelliğidir. Metodlar nesne özelliklerini depolayan fonksiyonlardır: " +
+            kişi1.adSoyad + "=" + kişi1.adSoyad() +
+            "<br/>2) dizge.toUpperCase() hazır dizge nesnesi metodu verili dizgeyi \
+            büyükharfe çevirir: " + "M.Nihat Yavaş".toUpperCase() + "; " +
+            "M.Nihat Yavaş".toLowerCase() +
+            "<br/>3) Kurucu fonksiyonla nesneler yaratır, nesne özelliklerini değiştirebiliriz: " +
+            babam.adSoyad() + "; " + babam.yaş + "; " + annem.adSoyad() + "; " + annem.yaş +
+            "<br/>Yaşı değiştirelim: " + babam.yaşıDeğiştir (1933) + "; " + babam.yaş +
+            "<br/>Soyadı değiştirelim: " + annem.soyadıDeğiştir ("Yavaş") + "; " + annem.adSoyad()
+    </script>
+</body>
+</html>

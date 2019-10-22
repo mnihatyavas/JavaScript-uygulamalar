@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3011.html: Nesne tanımları ve yaratımları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE TANIMLARI</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var isim = "M.Nihat Yavaş";
+        var nesne = {ad:"Nihat", soyad:"Yavaş", yaş:(2019-1957), gözRengi : "ela",
+            adSoyad:function() {return this.ad + " " + this.soyad;}};
+        var kişi1 = {ad:"Nihat", soyad:"Yavaş", yaş:(2019-1957)};
+        var kişi2 = new Object();
+            kişi2.ad = "Nihat";
+            kişi2.soyad = "Yavaş";
+            kişi2.yaş = 62;
+            kişi2.gözRengi = "ela";
+        var kişi3 = Object.create ({ad:"Nihat", soyad:"Yavaş", yaş:(2019 - 1957), gözRengi:"ela"});
+
+        function kişi (a, b, c, d) {this.ad=a;this.soyad=b;this.yaş=c;this.gözRengi=d;}
+        var babam = new kişi ("Memet", "Yavaş", 83, "ela");
+        var annem = new kişi ("Hanım", "Yavaş", 81, "siyah");
+
+        var x1 = new Object(), x2 = new String(), x3 = new Number(), x4 = new Boolean(),
+            x5 = new Array(), x6 = new RegExp(), x7 = new Function(), x8 = new Date();
+        var y1 = {}, x2 = "", x3 = 0, x4 = false, x5 = [], x6 = /()/, x7 = function(){};
+
+        var nesne2 = nesne; // nesne'yle aynı adresteki değerleri görürler...
+        nesne2.gözRengi = "kahve";
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS'te kral nesnedir; nesneyi anlarsanız JS'i de anlarsınız. JS'te hemen \
+            herşey nesnedir: nesneler, fonksiyonlar, sınıflar, diziler, RegEx, Math ve \
+            tarih daima; ayrıca ikili, sayı, dizge verileri nesne olarak muamele görürler. \
+            JS'te ilkel veriler hariç tüm veriler nesnedir." +
+            "<br/>İlkel veriler:  dizgeler ('M.Nihat Yavaş'), sayılar (3.14), ikililer (true, \
+            false), hiç (null) ve tanımsız (undefined)." +
+            "<br/>2) JS değişkenleri tek değer içerirler: " + isim +
+            "<br/>Nesneler de değişkendir, ancak tek değil çok değer ve değişken \
+            içerebilirler; kıvrımlı parantez/blok içinde virgüllerle ayrık anahtar:değer \
+            çiftlerinden oluşurlar: " + nesne + "; " + nesne.yaş +
+            "<br/>Nesne anahtarlı değerler koleksiyonudur. Anahtarlı değerler özellik \
+            olarak adlandırılır." +
+            "<br/>3) Metodlar nesneler üzerinde işlem yapan eylemlerdir. Nesne özellikleri \
+            ilkel değer, diğer bir nesne veya fonksiyon olabilir. Nesne metodu bir fonksiyon \
+            tanımı içeren nesne özelliğidir: " + nesne.adSoyad + "=" + nesne.adSoyad() +
+            "<br/>Nesneler özellik ve metod diye adlandırılan anahtarlı değer çifleri kabıdır." +
+            "<br/>4) JS nesneleri 4 şekilde yaratılabilir: a) {} nesne sabitesiyle: " + kişi1.ad +
+            "<br/>b) 'new Object()' new anahtar kelimesiyle: " + kişi2.gözRengi +
+            "<br/>c) Bir nesne kurucu fonksiyon kullanarak: " + annem.ad + "; " + babam.ad +
+            "<br/>d) ES% Object.create() metoduyla: " + kişi3.yaş +
+            "<br/>5) Özel nesne kurucu (kişi) fonksiyonu tanımladığımız gibi, JS hazır nesne \
+            kurucuları da vardır: " + x7 +
+            "<br/>Global bir nesne olduğundan Math nesnesi için new kullanılmaz: " + Math.E +
+            "<br/>6) İlkel sabitelerle kurabildiğimiz nesneler new ile kuracaklarımızdan \
+            daha hızlı ve daha az bellekli olduklarından tercih edilmelidir: " + x7 +
+            "<br/>7) JS nesne anahtarları değil, ama değerleri değiştirilebilir. Birbiriyle \
+            ilişkili nesnelerde birindeki değer değişikliği diğerine de aynen yansır: " +
+            nesne.gözRengi
+    </script>
+</body>
+</html>

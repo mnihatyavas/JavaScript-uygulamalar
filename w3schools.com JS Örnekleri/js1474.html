@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1474.html: JS sınıf statik özellik ve metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>class NESNESİ-STATİK</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        class Makale {
+            static yayımcı = "M.Nihat Yavaş";
+            constructor (başlık, tarih) {this.başlık = başlık; this.tarih = tarih;}
+            static kıyasla (makaleA, makaleB) {return makaleA.tarih - makaleB.tarih;}
+            static gününMakalesi() {return new this ("Günün haberleri", new Date() );}
+        } //sınıf sonu...
+        let makaleler = [
+            new Makale ("HTML", new Date (2019, 1, 28) ),
+            new Makale ("CSS", new Date (2019, 0, 31) ),
+            new Makale ("Sigil", new Date (2019, 6, 3) ),
+            new Makale ("JavaScript", new Date (2019, 11, 1) ) ];
+        makaleler.sort (Makale.kıyasla); // Küçükten büyüğe (ilktarihten sontarihe)...
+
+        class Hayvan {
+            constructor (ad, hız) {this.hız = hız; this.ad = ad;}
+            koş (hız = 0) {this.hız += hız; return this.ad + " saaatte " + this.hız + " km hızla koşar.";}
+            static karşılaştır (hayvanA, hayvanB) {return hayvanA.hız - hayvanB.hız;}
+        } // sınıf sonu...
+        class Tavşan extends Hayvan {
+            saklan() {return this.ad + " şuanda saklanmaktadır!";}
+        } // sınıf sonu...
+        let tavşanlar = [
+            new Tavşan ("Beyaz Tavşan", 20),
+            new Tavşan ("Siyah Tavşan", 15),
+            new Tavşan ("Benekli Tavşan", 35),
+            new Tavşan ("Gri Tavşan", 5) ];
+        tavşanlar.sort (Tavşan.karşılaştır);
+
+        document.getElementById ("göster").innerHTML =
+            "1) Statik metodlar nesnenin kurucu özelliklerini ve metodlarını kullanamazlar, \
+            ancak argüman olarak kendi veya başka nesneleri geçirebilirler: " +
+            makaleler[0].başlık + "; " + makaleler[0].tarih +
+            "<br/>2) Kendi özelliklerini kullanamaz ama kendine argüman gönderebilirler: " +
+            Makale.gününMakalesi().başlık + "; " + Makale.gününMakalesi().tarih +
+            "<br/>3) Sınıf tip değişkenleri gibi statik değişkenleri de tanımlanabilir: " +
+            Makale.yayımcı +
+            "<br/>4) Ebeveyni miraslayan varsa statiklerini de miraslar: " +
+            "<br/>En yavaş tavşan: " + tavşanlar[0].koş() +
+            "<br/>En hızlı tavşan: " + tavşanlar[tavşanlar.length - 1].koş()
+    </script>
+</body>
+</html>

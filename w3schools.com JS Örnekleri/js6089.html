@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6089.html: Seçilen disk dosyalarını indexedDB vasıtasıyla saklama örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        html {
+            padding: 0;
+            margin: 0;}
+        body {
+            padding: 0 0 0 2em;
+            margin: 0;}
+        button {
+            margin-right: 1em;
+            box-shadow: 2px 5px 12px Purple;}
+        #mesajlar {
+            border: 5px solid #aaa;
+            width: 30em;
+            margin-top: 1em;
+            padding: 0 1em;}
+        #dosyaSeçici {
+            display: none;
+            width: 33em;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <!--<input type="button" value="Sil" onClick="fonk1()">-->
+    <h4>indexedDB</h4>
+
+    <h2>Seçilen Dosyaları indexedDB ile Saklama</h2>
+    <div>
+        <button id="açDüğmesi">VT'nı Yarat/Aç</button>
+        <!-- VT mevcutsa açar, yoksa yaratır. -->
+        <button id="ekleDükmesi">VT'na Ekle</button>
+        <button id="gösterDüğmesi">VT'nı Göster</button>
+        <!--<button id="kaydıSilDüğmesi">Bir Kaydı Sil</button>-->
+        <button id="silDüğmesi">VT'nı Sil</button>
+    </div>
+
+    <div id="mesajlar">
+        <p>Eğer VT/VeriTabanı mevcut değilse, <strong>VT'nı Yarat/Aç</strong> tıklandığında yaratır. Yok eğer mevcutsa onu (içerdiği kayıtlarla) açar.</p>
+        <p>Programı ilk yükleyişte, şayet yeni kayıt eklemek istiyorsanız <strong>VT'na Ekle</strong> düğmesinden önce her halukarda <strong>VT'nı Yarat/Aç</strong> düğmesini tıklamalısınız.</p>
+    </div>
+
+    <p>
+        <input type="file" id="dosyaSeçici" multiple size="24">
+        <!-- Veri tabanı yaratılmış/açık ve sonrası her göster düğmesine tıklanınca bu düğme görünecektir. -->
+    </p>
+
+    <div id="listelemeElemanı"></div>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var globalVT = {}; // indexedDB ile alakalı tüm global değişkenler bu nesnede toplanacaktır.
+        globalVT.vt = null; // VT nesnesi burada depolanacaktır.
+        globalVT.açıklama = "Bu veritabanı seçilen dosyaları lokal depolamaktadır."; // VT'nın açıklaması.
+        globalVT.VTadı = "Lokal dosya deposu"; // VT'nın adı.
+        globalVT.sürümü = 1; // Daima >= 1. Müşteriler açısından, eşzamanlı çoklu kullanılsa da aynı isimli veritabanının ancak tek bir sürüm numarası olabilir.
+        globalVT.depoAdı = "depo nesnesi-1"; // Veritabanındaki çoklu olabilen depo nesnesi kayıt dosyası adı.
+        globalVT.mesaj = ""; // Gerektiğinde görünen ve 1-2 satırlık bilgi içeren 'mesajlar' DIV kutusu mesajı.
+        globalVT.boşMu = true; // İlk yaratılışta boş olan ve VT'nin kayıt içerip içermediğini gösteren değişken.
+// ---------------------------------------------------------------------------------------------------
+
+        if (gerekliDestekÖzellikleri() ) {
+            // Tarayıcıdaki 4 VT işlemleriyle ilgili düğmeleri burada olay dinleyicisine duyarlayalım...
+            document.getElementById ('açDüğmesi').addEventListener ('click', açVT, false);
+            document.getElementById ('ekleDükmesi').addEventListener ('click', ekleVT, false);
+            document.getElementById ('gösterDüğmesi').addEventListener ('click', gösterVT, false);
+            //document.getElementById ('kaydıSilDüğmesi').addEventListener ('click', silKayıt, false);
+            document.getElementById ('silDüğmesi').addEventListener ('click', silVT, false);
+
+            // Ayrıca VT'na Ekle tıklandığında görünür kılınan dosyaSeçici düğmesini de dinleyiciye duyarlayalım...
+            document.getElementById ('dosyaSeçici').addEventListener ('change', dosyaSeçilmesiniYönet, false);
+        } // if sonu...
+
+        function gerekliDestekÖzellikleri() {return true; // Esgeçelim...
+            switch (window.location.protocol) {// Çalışabilmesi için http.server'da yürütülmesidir...
+                case "http:": break;
+                case "https:": break;
+                case "ms-wwa-web:": break;
+                case "ms-wwa:": break;
+                default:
+                    document.getElementById ('listelemeElemanı').innerHTML = "<h4>indexedDB sayfaları http:// veya https:// protokolunda çalıştırılmaktadır - bu sorunu halledip tekrar deneyin.</h4>";
+                    return false;
+            } // swi.. sonu...
+
+            if (! document.getElementById ('dosyaSeçici').files) {
+                document.getElementById ('listelemeElemanı').innerHTML = "<h3>Input 'file' tipi desteklenmiyor - tarayıcınızı güncelleyin.</h3>";
+                return false;
+            } // if sonu...
+
+            if (! window.indexedDB) {
+                if (window.mozIndexedDB) {window.indexedDB = window.mozIndexedDB;
+                } else if (window.webkitIndexedDB) {
+                        window.indexedDB = webkitIndexedDB;
+                        IDBCursor = webkitIDBCursor;
+                        IDBDatabaseException = webkitIDBDatabaseException;
+                        IDBRequest = webkitIDBRequest;
+                        IDBKeyRange = webkitIDBKeyRange;
+                        IDBTransaction = webkitIDBTransaction;
+                    } else {
+                            document.getElementById ('listelemeElemanı').innerHTML = "<h3>Tarayıcınız indexedDB' desteklemiyor - güncelleyin.</h3>";
+                            return false;
+                        } // else sonu...
+            } // if sonu...
+
+            if (! window.indexedDB.deleteDatabase) {// VT silme metodu tüm tarayıcılarcadesteklenmiyor, test etmeliyiz.
+                document.getElementById ('listelemeElemanı').innerHTML = "<h3>Gerekli indexedDB sürümüne sahip değilsiniz.</h3>";
+                return false;
+            } // if sonu...
+
+            return true;
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------    
+
+        function açVT() {
+            console.log ("açVT()");
+            mesajıGöster ("<p>Talebiniz sıraya konuldu.</p>"); // Normalen, bu mesaj anlık bir sonrakiyle değiştirilecektir.
+
+            if (! window.indexedDB.open) {
+                console.log("açVT() fonksiyonunda window.indexedDB.open değeri null'dur");
+                return;
+            } // if sonu...
+
+            try {var açTalebi = window.indexedDB.open (globalVT.VTadı, globalVT.sürümü); // VT adı ve sürümü başta verilmişti...
+                açTalebi.onerror = function (olay) {console.log ("açVT() içinde açTalebi.onerror HATA fırlattı: " + (olay.target.error ? olay.target.error : olay.target.errorCode) ); }
+                açTalebi.onblocked = açVT_bloklandı; // Veritabanı başka bir işlemle açılmış olabilir.
+                açTalebi.onupgradeneeded = açVT_güncellemeihtiyacı; // Ya veritabanı yok, yada çoklu kullanım gereği sürüm numarası uyuşmuyor.
+                açTalebi.onsuccess = açVT_başarılı; // Veritabanı verili sürüm numarasıyla açılmıştır.        
+            } catch (ist) {console.log ("açVT() içinde window.indexedDB.open İSTİSNASI: " + ist.message); }
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function mesajıGöster (mesaj) {document.getElementById ('mesajlar').innerHTML = mesaj; }
+// ---------------------------------------------------------------------------------------------------
+
+        function açVT_bloklandı (olay) {
+            console.log ("açVT_güncellemeihtiyacı() bloklanma HATASI");
+
+            var mesaj = "<p>Veritabanı bloke edildi - HATA: " + (olay.target.error ? olay.target.error : olay.target.errorCode) + "</p>";
+            mesaj += "</p>Eğer bu sayfa tarayıcının diğer penceresinde de açıksa, onlar kapatılmalı.</p>";
+            mesajıGöster (mesaj);
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function açVT_güncellemeihtiyacı (olay) {
+            console.log ("açVT_güncellemeihtiyacı()");
+            mesajıGöster ("<p>Talebiniz sıraya konuldu.</p>"); // Anlık mesaj geçişi.
+
+            var vt = globalVT.vt = olay.target.result; // Açılan ve nesne deposu yaratılacak olan veritabanı globale de atanıyor...
+            if (! vt) {
+                console.log ("açVT_güncellemeihtiyacı() içinde vt (yani, olay.target.result) null/hiçlik'tir.");
+                return;
+            } // if sonu...
+
+            try {vt.createObjectStore (globalVT.depoAdı, {keyPath: "kimlik", autoIncrement: true});
+                // Yukarda verili adla nesne deposu, otomatik artacak kimlik anahtarıyla yaratılmaktadır; böylece put'la aynı dosya farklı kimlik'le yüklenebilir.
+            } catch (ist) {
+                console.log ("açVT_güncellemeihtiyacı() içinde İSTİSNA: " + ist.message);
+                return;}
+
+            globalVT.mesaj = "<p>Veritabanı ve nesne deposu yaratılmıştır.</p>"; // Bu saklı global mesaj, onsuccess'de yansıtılacaktır.
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function açVT_başarılı (olay) {
+            console.log ("açVT_başarılı()");
+            mesajıGöster ("<p>Talebiniz sıraya konmuştur.</p>"); // Spontane mesaj.
+
+            var vt = globalVT.vt = olay.target.result;
+
+            if (!vt) {
+                console.log ("açVT_başarılı() içinde vt (yani, olay.target.result) null/hiçlik durumu.");
+                return;
+            } // if sonu...
+
+            globalVT.mesaj += "<p>Veritabanının açılışı başarılıdır.</p>";
+            mesajıGöster (globalVT.mesaj);
+            globalVT.mesaj = ""; // Mesaj yansıtılmıştır, içeriği temizlenebilir.
+        } // açVTsuccess
+// ---------------------------------------------------------------------------------------------------
+
+        function ekleVT() {
+            console.log ("ekleVT()");
+
+            if (! globalVT.vt) {
+                mesajıGöster ("<p>Veritabanı henüz yaratılmadı/açılmadı.</p>");
+                console.log ("ekleVT() içinde vt (yani, globalVT.vt) null/hiç'tir.");
+                return;
+            } // if sonu...
+
+            document.getElementById ('dosyaSeçici').style.display = "block";
+            // Geçerli ev açık veritabanı ve nesne deposu mevcut olduğuna göre artık dosya eklemesi yapılabilir.
+
+            var mesaj = "<p>Alttaki <strong>Dosyaları Seç</strong> düğmesini tıklayarak, diskinizdeki herhangibir dosyayı seçip veritabanı kayıt dosyasına ekleyebilirsiniz.</p>";
+            mesaj += "<p>Bilahare <strong>VT'nı Göster</strong> düğmesiyle veritabanı deposundaki kayıtlı dosyaların listesini görebilirsiniz.</p>";
+            mesajıGöster (mesaj);
+    } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function gösterVT() {
+            console.log ("gösterVT()");
+
+            var vt = globalVT.vt;
+
+            if (! vt) {
+                mesajıGöster ("<p>Gösterilecek veritabanı yok.</p>");
+                console.log ("gösterVT() içinde vt (yani, globalVT.vt) null/hiç'tir.");
+                return;
+            } // if sonu...
+
+            try {var işlem = vt.transaction (globalVT.depoAdı, (IDBTransaction.READ_ONLY ? IDBTransaction.READ_ONLY : 'readonly'));
+                // Bu ifade başarılıdır yada istisna fırlatır. Üçlü işlemci sadece READ_ONLY okuma kipini destekleyen tarayıcılar içindir.
+            }catch (ist) {console.log ("gösterVT() içinde vt.transaction() İSTİSNASI: " + ist.mesaj);
+                return;}
+
+            try {var nesneDeposu = işlem.objectStore (globalVT.depoAdı);
+                try {var imleçTalebi = nesneDeposu.openCursor();
+
+                    imleçTalebi.onerror = function (olay) {console.log ("gösterVT() içinde imleçTalebi.onerror'un fırlattığı HATA: " + (olay.target.error ? olay.target.error : olay.target.errorCode) ); }
+
+                    var htmlDosyalarListesi = "<p><strong>Veritabanındaki dosya(lar): </strong></p><ul style='margin: -0.5em 0 1em -1em;'>";
+                    // Dikkat edilirse, veritabanı boşsa (null) bu değişken hiç kullanılmadan dönülecektir.
+
+                    imleçTalebi.onsuccess = function (olay) {
+                        console.log ("gösterVT() içinde imleçTalebi.onsuccess fırlatıldı.");
+
+                         var imleç = olay.target.result; // Nesne deposundan mevcut ilk nesne alınır.
+
+                        if (imleç) {
+                            globalVT.boşMu = false; // Buraya ulaşıldığında veritabanı boş değil, yani enaz bir kayıt var demektir.
+                            htmlDosyalarListesi += "<li>" + imleç.value.name;
+                            htmlDosyalarListesi += "<p style='margin: 0 0 0 0.75em;'>" + imleç.value.lastModifiedDate + "</p>";
+                            htmlDosyalarListesi += "<p style='margin: 0 0 0 0.75em;'>" + imleç.value.size + " byte</p>";
+                            imleç.continue(); // Nesne deposundaki birsonraki kayda geçerek if içinde döngü yapar.
+                        }else {
+                            htmlDosyalarListesi += "</ul>";
+                            mesajıGöster (htmlDosyalarListesi);
+                        } // else sonu...
+
+                        if (globalVT.boşMu) {mesajıGöster ("<p>Veritabanı boştur &ndash; ve gösterilecek kayıt yoktur.</p>"); }
+                   } // iml.. sonu...
+                }catch (ist) {console.log ("gösterVT() içinde iç-try İSTİSNASI: " + ist.message); }
+            }catch (ist) {console.log ("gösterVT() içinde dış-try İSTİSNASI: " + ist.message); }
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function silKayıt() {
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function silVT() {
+            var cevap = prompt ("Tüm veri tabanı ve içerdiği depo ve kayıtları tamamen silinecek.\nEmin misin [e/h]: ", "h");
+            if (cevap.toLowerCase() != "e") {return;}
+
+            console.log ("silVT");
+            mesajıGöster ("<p>Talebiniz sıraya konulmuştur.</p>"); // Anlık mesaj...
+
+            try { // Eğer veritabanı açıksa, silinmeden önce kapatılmalıdır, yoksa biteviye bekletilir.
+                if (globalVT.vt) {globalVT.vt.close();
+                }else {return;} // Veritabanı yoksa, dönülür...
+
+                var silmeTalebi = window.indexedDB.deleteDatabase (globalVT.VTadı);
+
+                silmeTalebi.onerror = function (olay) {console.log ("silVT() içinde silmeTalebi.onerror HATASI: " + (olay.target.error ? olay.target.error : olay.target.errorCode) ); }
+
+                silmeTalebi.onsuccess = function() {
+                    globalVT.vt = null;
+                    globalVT.boşMu = true;
+                    globalVT.mesaj = "";
+                    mesajıGöster("<p>Veritabanı, nesne depoları ve içerilen tüm kayıtları silindi.</p><p>Veritabanının çalışması için programı reload/yenidenyükle'yin.</p>");
+                } // sil.. sonu...
+            }catch (ist) {console.log ("silVT() içinde fırlatılan İSTİSNA: " + ist.mesaj);}
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        function dosyaSeçilmesiniYönet (olay) {
+            console.log ("dosyaSeçilmesiniYönet()");
+
+            var seçilenDosya_lar = olay.target.files; // Tek yada çoklu dosya seçilebilir...
+            if (! seçilenDosya_lar) {
+                mesajıGöster ("<p>Seçilen dosyaların enza biri hatalı - klasör seçilemez.</p><p>Lütfen yeniden seçin ve deneyin.</p>");
+                return;
+            } // if sonu...
+
+            var vt = globalVT.vt;
+            if (! vt) {console.log ("dosyaSeçilmesiniYönet() içinde vt (yani, globalVT.vt) null/hiç'tir."); return;}
+
+            try {var işlem = vt.transaction (globalVT.depoAdı, (IDBTransaction.READ_WRITE ? IDBTransaction.READ_WRITE : 'readwrite'));
+            }catch (ist) {console.log ("dosyaSeçilmesiniYönet() içinde vt.transaction İSTİSNASI: " + ist.message); return; }
+
+            işlem.onerror = function (olay) {console.log ("dosyaSeçilmesiniYönet() içinde işlem.onerror'ın fırlattığı HATA: " + (olay.target.error ? olay.target.error : olay.target.errorCode) ); }
+            işlem.onabort = function() {console.log ("dosyaSeçilmesiniYönet() içinde işlem.onabort fırlatıldı."); }
+            işlem.oncomplete = function() {console.log ("dosyaSeçilmesiniYönet() içinde işlem.oncomplete fırlatıldı."); }
+
+            try {var nesneDeposu = işlem.objectStore (globalVT.depoAdı); // Herbir işlemde çoklu put()'lar olabilir.
+                for (var i = 0, dosya; dosya = seçilenDosya_lar [i]; i++) {
+                    var koyTalebi = nesneDeposu.put (dosya); // add() aynı anahtarlı 2.kaydı reddederken put() günceller.
+                    koyTalebi.onsuccess = function() {globalVT.boşMu = false;} // Enaz bir kayıt varsa veritbanı artık boş değildir.
+                    koyTalebi.onerror = function (olay) {console.log ("dosyaSeçilmesiniYönet() içinde koyTalebi.onerror'ın fırlattığı HATA: " + (olay.target.error ? olay.target.error : olay.target.errorCode) ); }
+                } // for sonu...
+            }catch (ist) {console.log ("dosyaSeçilmesiniYönet() içinde put() İSTİSNASI: " + ist.message); return;}
+
+            document.getElementById ('dosyaSeçici').style.display = "none"; // Dosya seçimi sonrası yeni ekleVT tıklanıncaya dek seçici gizlenir.
+        } // func sonu...
+// ---------------------------------------------------------------------------------------------------
+
+        document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>
+
+<!--Not: Bu program "gerekliDestekÖzellikleri(){return true;" ilk "return true; ifadesi iptal edilirse, http protokolünde çalıştırılmalıdır:
+>python -m http.server
+komutlu
+http://localhost:8000/js6089.html
+yurel adresiyle çalışmaktadır...
+-->

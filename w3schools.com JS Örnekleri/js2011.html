@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js2011.html: Form geçerlilemenin JS, HTML, CSS ve DOM yöntemleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FORMLAR</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function formuGeçerlile() {
+            var isim = document.forms ["formum"]["isim"].value;
+            var ikamet = document.forms ["formum"]["ikamet"].value;
+            yıl = document.forms ["formum"] ["yıl"].value;
+            if (isim == "") {alert ("Ad ve soyad girilmelidir!..");}
+            else if (ikamet == "") {alert ("İkamet şehrinizi girmeyi unutmuşsunuz!..");}
+            else if (isNaN (yıl) || yıl < 1920 || yıl > 2019) {alert ("Geçersiz yıl!..");}
+            else return true;
+            return false;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Form veri girişleri yapılmamışsa JS geçerlilik kontrolu formu gönderme \
+            aşamasında ikaz verir." +
+            "<br/>2) Rakamsal verilere min-max ve boş veri kontrolu yapılabilir." +
+            "<br/>3) Veri girişinin gerekliliği 'required' ile tarayıcıya öncelikli olarak ve \
+            otomatikmen yaptırılabilir." +
+            "<br/>4) Form geçerlilemenin HTML (disabled, max, min, pattern, required, \
+            type), CSS (:disabled, :invalid, :optional, :required, :valid) ve DOM özellik \
+            ve metodlarıyla sınırlama yöntemleri vardır."
+    </script>
+
+    <form name="formum" action="#" onsubmit="return formuGeçerlile()" method="post">
+        Ad ve soyadınız: <input type="text" name="isim"><br/>
+        İkamet şehriniz: <input type="text" name="ikamet"><br/>
+        Doğum yılınız: <input type="number" name="yıl"><br/>
+        Mezuniyetiniz: <input type="text" name="okul" required>
+        <input type="submit" value="Gönder">
+    </form>
+</body>
+</html>

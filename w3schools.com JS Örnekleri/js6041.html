@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6041.html: BOM history tarayıcı pencere özgeçmiş geri ve ileri metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>BOM HISTORY</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Birönceki sayfa" onClick="window.history.back();">
+    <input type="button" value="Birsonraki sayfa" onClick="history.forward();">
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) window.history nesnesi öneksiz de kullanılabilir." +
+            "<br>==>history.back() metodu 'Geri' seçeneğiyle aynıdır; mevcutsa belleğindeki birönceki yurel sayfasına geri döner."+
+            "<br>==>history.forward() metodu 'İleri' seçeneğiyle aynıdır; mevcutsa belleğindeki birsonraki yurel sayfasına geri döner." +
+            "<br>==>Örn.Alttaki 2 düğme sayfayı geri ve ileri yönlendirir:"
+    </script>
+</body>
+</html>

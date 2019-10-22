@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7021.html: AJAX XMLHttpRequest talep nesnesi yaratma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>XMLHttpRequest Nesnesi</h4>
+    <p id="göster">Paragraf</p>
+
+    <p id="göster2" onmouseover="fonk2()">AJAX bu paragraf metnini, üzerine dolaşırsanız değiştirecek.</p>
+    <p id="göster3" style="cursor:pointer;" onclick="fonk3()">AJAX bu paragraf metnini, üzerinde tıklarsanız değiştirecek.</p>
+        <script>
+        function fonk2() {
+            var xhttpNesnesi = new XMLHttpRequest();
+            xhttpNesnesi.onreadystatechange = function() {
+                document.getElementById ("göster2").innerHTML = this.responseText;
+            }; // xht.. sonu...
+            xhttpNesnesi.open ("GET", "js7011x.txt", true);
+            xhttpNesnesi.send();
+        } // func sonu...
+        function fonk3() {
+            var xhttp;
+            if (window.XMLHttpRequest) {xhttp = new XMLHttpRequest();
+            }else {xhttp = new ActiveXObject ("Microsoft.XMLHTTP");}
+            xhttp.onreadystatechange = function() {
+                document.getElementById ("göster3").innerHTML = this.responseText;
+            }; // xht.. sonu...
+            xhttp.open ("GET", "js7011x.txt", true);
+            xhttp.send();
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Modern tarayıcılarda hazır XMLHttpRequest AJAX nesnesi vardır. Yaratmak \
+            için 'new XMLHttpRequest()' JS komutu yeterlidir." +
+            "<br>2) Eski tarayıcılar XMLHttpRequest yerine ActiveXObject nesnesini desteklemekteydi. \
+            Programa bu kodlama kontrolü eklenebilir." +
+            "<br>3) XMLHttpRequest nesnesi metodları şunlardır: new XMLHttpRequest(), \
+            abort()-iptal, getAllResponseHeaders(), getResponseHeader(), open(metod-GET/POST,\
+            yurel, asenkron-tru/false,yol, şifre), send()-GET için, send(dizge)-POST için ve \
+            setRequestHeader()" +
+            "<br>==>Özellikleri: onreadystatechange, readyState/0-1-2-3-4, responseText, \
+            responseXML, status/200-403-404 ve statusText"
+    </script>
+</body>
+</html>

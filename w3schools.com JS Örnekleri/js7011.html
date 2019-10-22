@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7011.html: AJAX'la sayfada asenkron değişiklik yapma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        #göster2 {
+            overflow: auto;
+            width:90%;
+            height:100px;
+            border: solid 5px DarkRed;
+            border-radius:10px 0 0 10px;
+            background-color:tan;
+            color:blue;
+            font-size: 25px;
+            font-family:arial;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX'a GİRİŞ</h4>
+    <p id="göster">Paragraf</p>
+    
+    <div id="göster2">
+        <p>Alttaki düğmeyi tıklarsanız XMLHttpRequest Object talebiyle "js7011x.txt"
+            dosya içerik metniyle görünen içerik değiştirilecektir:</p>
+        <button type="button" onclick="fonk2()">Değişecek İçerik</button>
+    </div>
+
+    <script>
+        function fonk2() {
+            var xhttpNesnesi = new XMLHttpRequest();
+            xhttpNesnesi.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {document.getElementById ("göster2").innerHTML = this.responseText;}
+            }; // xht.. sonu...
+            xhttpNesnesi.open ("GET", "js7011x.txt", true);
+            xhttpNesnesi.send();
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) AJAX: AsynchronousJavascriptAndXml çevrimiçi işlevi, dinlenen bir olay \
+            duyarlılığında (tıklama, fare üzerinde vb), ağ sayfasının tamamını yeniden \
+            yüklemeden sadece belirli parçasını asenkron arkaplanda bir ağ sunucusuna \
+            XMLHttpRequest talebiyle XML, sade veya JSON metni transferiyle ve JS \
+            kodlama yönlendirmesiyle güncelleyebilir." +
+            "<br>==>Programın çalışabilmesi için ya çevrimiçi bağlı olunmalı yada http.server \
+            hizmetiyle (>python -m http.server) http protokolüne girilmelidir." +
+            "<br>2) AJAX XMLHttpRequest tarayıcı nesnesiyle http protokolünde hertürlü \
+          disk metin dosyası yaratılır; veri girişi, değişiklik ve silme yapılabilir."
+    </script>
+</body>
+</html>

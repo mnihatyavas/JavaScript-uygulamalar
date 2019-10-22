@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js7081.html: ASP ile AJAX veritabanı örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        table, th, td {
+            border : 1px solid black;
+            border-collapse: collapse;}
+        th,td {padding: 5px;}
+        select, option {
+            background-color:teal;
+            color:DeepPink;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>AJAX Veritabanı</h4>
+    <!--<p id="göster">Paragraf</p>-->
+
+    <form action=""> 
+        <select name="müşteriler" onchange="fonk2 (this.value)">
+            <option value="">Bir müşteri seçin:</option>
+            <option value="ALFKI">Alfreds Futterkiste</option>
+            <option value="NORTS ">North/South</option>
+            <option value="WOLZA">Wolski Zajazd</option>
+        </select>
+    </form>
+    <br>
+    <div id="göster2">Müşteri bilgileri burada listelenecektir...( Çalışmayan örnek)</div>
+
+    <script>
+        function fonk2 (dizge) {
+            if (dizge == "") {document.getElementById ("göster2").innerHTML = ""; return;}
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {document.getElementById ("göster2").innerHTML = this.responseText;}
+            xhttp.open ("GET", "js7011x.asp?q="+dizge, true);
+            xhttp.send();
+        } // func sonu...
+
+        //document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

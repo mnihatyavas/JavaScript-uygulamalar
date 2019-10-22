@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3051.html: Nesne kurucu fonksiyonu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE KURUCUSU</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function Şahıs (a, b, c, d) {this.ad=a; this.soyad=b; this.yaş=(2019-c); this.gözRengi=d;
+            this.eğitim = "İlkokul";
+            this.adSoyad = function() {return (this.ad + " " + this.soyad);};
+            this.eğitimiDeğiştir = function (a) {this.eğitim = a}; }
+        var babam = new Şahıs ("Memet", "Yavaş", 1934, "ela");
+        var ben = new Şahıs ("Nihat", "Yavaş", 1957, "ela");
+
+        babam.tabiyet = "İngiliz";
+        ben.lisan = "EN";
+
+        babam.adSoyad = function() {return (this.ad + " " + this.soyad);};
+
+        Şahıs.eğitimi = "İlkokul";
+
+        var x1 = new Object(),  x2 = new String(), x3 = new Number(), x4 = new Boolean(),
+            x5 = new Array(), x6 = new RegExp(), x7 = new Function(), x8 = new Date();
+        var y1 = {}, y2 = "", y3 = 0, y4 = false, y5 = [], y6 = /()/, y7 = function(){};
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nesne kurucu fonksiyon, new ile aynı tipte yeni nesneler yaratmakta bir \
+            şablon olarak kullanılır: " + babam.yaş + "; " + ben.soyad +
+            "<br/>Sınıf ve kurucu adlarını büyük harfle başlatmak gelenektir." +
+            "<br/>Kurucu fonksiyondaki this anahtarkelimesi, new ile yaratılacak yeni \
+            nesneyi işaret eder." +
+            "<br/>2) Yaratılan bir nesneye kolaylıkla özellik ilavesi yapılabilir, ancak bu \
+            ilave özellik sadece o nesneye aittir, kurucu fonksiyonla yaratılan diğer \
+            nesnelere ait değil: " + babam.tabiyet + "; " + ben.lisan +
+            "<br/>3) Nesneye fonksiyonlu metod özelliği de ilave edilebilir: " + babam.adSoyad +
+            "=" + babam.adSoyad() +
+            "<br/>4) Kurucu fonksiyona haricen özellik ilave edilemez: " + babam.eğitimi +
+            "<br/>Ancak kurucu fonksiyon içine yeni varsayılı değerli özellik eklenebilir. \
+            Bu sabit özellik değeri yaratılan tüm nesnelere şamil olur: " + babam.eğitim +
+            "; " + ben.eğitim +
+            "<br/>Varsayılı değer değiştirilebilir: " + (ben.eğitim = "Lise") + "; " + ben.eğitim +
+            "<br/>5) Mevcut kurucu fonksiyona (tüm yaratılmış nesnelerine şamil) metod \
+            ilavesi de yapılabilir: " + ben.adSoyad() +
+            "<br/>İlave metod, set/koy gibi mevcut bir özellik değiştirmeye yönelik de \
+            olabilir: " + ben.eğitimiDeğiştir ("Üniversite") + "; " + ben.eğitim +
+            "<br/>6) JS hazır nesne kurucuları: new Object() / String() / Number() / Boolean() / \
+            Array() / RegExp() / Function() / Date()" +
+            "<br/>" + (typeof x8) + "=" + (x8 instanceof Date) +
+            "<br/>" + (typeof Math) + "; Math global nesnedir, new ile yaratılamaz." +
+            "<br/>Nesne yaratırken new yerine sabite kullanmak tercih edilmelidir:" +
+            "<br/>" + (typeof y6) + "=" + (y6 instanceof RegExp) +
+            "<br/>7) İlkeller new nesnelere tercih edilmelidir (değer eşitliği tip eşitliği değildir): " +
+            "<br/>" + ((ad = "Nihat") == (ad = new String ("Nihat")) ) + "; " + ((ad = "Nihat") === (ad = new String ("Nihat")) ) +
+            "<br/>" + ((yaş = 62) == (yaş = new Number (62)) ) + "; " + ((yaş = 62) === (yaş = new Number (62)) ) +
+            "<br/>" + ((doğru = true) == (doğru = new Boolean (true)) ) + "; " + ((doğru = true) === (doğru = new Boolean (doğru)) )
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js4051.html: Nesne metodu this'lerine apply ile değer ve argüman aktarma örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>FONKSİYON ÇAĞIRAN APPLY</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var şahıs = {ad:"Nihat", soyad:"Yavaş", adSoyad:function(){return this.ad + " " + this.soyad;}, yaş:(2019-1957)};
+        var kişi1 = {tamAdSoyad: function() {return (this.ad + " " + this.göbekAd + " " + this.soyad);} };
+        var kişi2 = {tamAdSoyad: function (a, b, c, d) {return (this.ad + " " + this.göbekAd + " " + this.soyad +
+            "; " + a + ", " + b + "-" + c + " / " + d);} };
+
+        var dizge1 = kişi1.tamAdSoyad.apply ({göbekAd:"Nihat", soyad:"Yavaş", ad:"Mahmut"});
+        var nesne1 = {soyad:"Atatürk", göbekAd:"Kemal", ad:"Mustafa"};
+
+        var nesne2 = {soyad:"Candan", göbekAd:"Nihal", ad:"Zeliha"};
+        var dizi2 = ["Hıroğlu Mh. Azapoğlu Sk. No: 7", "Yeşilyurt", "Malatya", "Türkiye"];
+        var dizge2 = kişi2.tamAdSoyad.apply (nesne2, dizi2);
+
+        document.getElementById ("göster").innerHTML =
+            "1) apply da call gibi, icabında nesne özellik metod fonksiyonu parametresiz \
+            this'lerine nesnel anahtar-değer çiftleri aktarmak için kullanılır: " + şahıs.adSoyad() +
+            "; " + şahıs.yaş +
+            "<br/>" + dizge1 + "=" + (typeof dizge1) +
+            "<br/>" + kişi1.tamAdSoyad.apply ({soyad:"Yavaş", ad:"Mustafa", göbekAd: "Nedim"}) +
+            "<br/>" + kişi1.tamAdSoyad.apply (nesne1) +
+            "<br/>2) Aralarındaki fark, call (this anahtar-değer çiftleri nesnesini değil) argümanları \
+            virgüllerle ayrık olarak, apply ise dizi içinde geçirir: " + dizge2 +
+            "<br/>" + kişi2.tamAdSoyad.apply ({soyad:"Göktürk", ad:"Songül", göbekAd:"Yavaş"},
+            ["Emeksiz", "Malatya", (2019 - 1959), 1959]) +
+            "<br/>" + kişi2.tamAdSoyad.call ({soyad:"Özbay", ad:"Süheyla", göbekAd:"Yavaş"},
+            "Yakınca", "Malatya", (2019 - 1953), 1953) +
+            "<br/>3) Çoklu argümanlı Math.max() ile apply() metodlarını kıyaslayalım: " +
+            Math.max (-3, 0, 5, 6.98, 213, 75, 3.1415) + "=" +
+            Math.max.apply (null, [-3, 0, 5, 6.98, 213, 75, 3.1415]) + "=" +
+            Math.max.apply (Math, [-3, 0, 5, 6.98, 213, 75, 3.1415]) + "=" +
+            Math.max.apply ("Nihat Yavaş", [-3, 0, 5, 6.98, 213, 75, 3.1415]) + "=" +
+            Math.max.apply ((2019 - 1957), [-3, 0, 5, 6.98, 213, 75, 3.1415])
+    </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js6089a.html: Tüm tablo kolonlarının endekslenebildiği indexedDB örneği.</title>
+    <link href='http://fonts.googleapis.com/css?family=Arvo|Bevan' rel='stylesheet' type='text/css'>
+    <!--Çevrimdışı link verilerini almaktadır...-->
+    <style>
+        body {background-color:OliveDrab; ccolor: Cyan; font-size:20px; margin:1em;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        html {
+           font-family: 'Arvo', serif;
+            font-size: 10px;}
+        h1 {
+            text-align: center;
+            font-family: 'Bevan', cursive;
+            font-size: 4rem; /* 1rem=0.5em */
+            letter-spacing: 0.2rem;
+            text-shadow:
+                1px 1px 1px #eee4fe,
+                2px 2px 1px #eee4fe,
+                3px 3px 1px #7b62ae,
+                4px 4px 1px #7b62ae,
+                5px 5px 1px #261758,
+                6px 6px 1px #261758;}
+        table {
+            width: 90%;
+            font-size: 1.3rem;
+            letter-spacing: 0.1rem;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);}
+        table, thead {background: white;}
+        tbody {border: 2px solid #eee4fe;}
+        thead {border: 2px solid #261758;}
+        th {
+            font-size: 1.7rem;
+            padding: 1.2rem;
+            text-align: left;
+            background: linear-gradient(to bottom, #261758, #868798);
+            color: white;
+            text-shadow: 2px 2px 2px black;
+            cursor: pointer;}
+        th:hover, th:focus {color: Tomato;}
+        th:active {color: Lime;}
+        td {
+            padding: 1rem;
+            border-left: 1px solid #7b62ae;
+            border-right: 1px solid #7b62ae;}
+        td:first-child {border-left: none;}
+        td:last-child {border-right: none;}
+        tr:nth-child(odd) {background: Khaki;}
+        tr:nth-child(even) {background: DarkKhaki;}
+        p {
+            font-size: 1.5rem;
+            text-align: center;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <!--<input type="button" value="Sil" onClick="fonk1()">-->
+    <h4>indexedDB</h4>
+
+    <p id="göster">Paragraf</p>
+
+    <h1>Temel IDBIndex örneği — iletişim ajandası</h1>
+    <table>
+        <thead>
+            <tr>
+      <th>No</th>
+      <th>Soyadı</th>
+      <th>Adı</th>
+      <th>Yaşı</th>
+      <th>Ünvanı</th>
+      <th>Şirketi</th>
+      <th>E-postası</th>
+      <th>GSM'i</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <p>Kolon verilerini (artan) sıralamak için herbir tablo başlığını tıklayın/odaklanın.</p>
+
+    <script>
+        var vt; // Nesne deposu kayıtları için bie vt/veritabanı yaratalım...
+        var aktifEndeks;
+        var tabloVerisi = document.querySelector ('tbody');
+        var veriler = [// Uygulamada sadece bu veriler kullanılacak, başkaca veri ekleme, silme, değiştirme yapılmayacak...
+            {no: 1, ad: 'Brian', soyad: 'Damage', yaş: 37, ünvan: 'Master of Synergies', şirket: 'Acme', eposta: 'brian@acme.com', gsm: '+441210000000'},
+            {no: 2, ad: 'Ted', soyad: 'Maul', yaş: 46, ünvan: 'Chief Reporter', şirket: 'Brass eye', eposta: 'ted@itsthenews.co.uk', gsm: '+442081111111'},
+            {no: 3, ad: 'Mr', soyad: 'Bungle', yaş: 50, ünvan: 'Bad Clown', şirket: 'Stub a Dub', eposta: 'bungle@maiof.com', gsm: '+1508888888'},
+            {no: 4, ad: 'Richard', soyad: 'James', yaş: 43, ünvan: 'Sound Engineer', şirket: 'Aphex Twin', eposta: 'richard@drukqs.com', gsm: '+1517777777'},
+            {no: 5, ad: 'Brian', soyad: 'Umlaut', yaş: 40, ünvan: 'Shredmeister', şirket: 'Minions of metal', eposta: 'brian@raiseyourhorns.com', gsm: '+14086666666'},
+            {no: 6, ad: 'Jonathan', soyad: 'Crane', yaş: 38, ünvan: 'Freelance Psychologist', şirket: 'Arkham', eposta: 'jon@arkham.com', gsm: 'yok'},
+            {no: 7, ad: 'Julian', soyad: 'Day', yaş: 43, ünvan: 'Schedule Keeper', şirket: 'Arkham', eposta: 'julian@arkham.com', gsm: 'var'},
+            {no: 8, ad: 'Bolivar', soyad: 'Trask', yaş: 55, ünvan: 'Head of R&D', şirket: 'Trask', eposta: 'bolivar@trask.com', gsm: '+14095555555'},
+            {no: 9, ad: 'Cloud', soyad: 'Strife', yaş: 24, ünvan: 'Weapons Instructor', şirket: 'Avalanche', eposta: 'cloud@avalanche.com', gsm: '+17083333333'},
+            {no: 10, ad: 'Bilbo', soyad: 'Bagshot', yaş: 43, ünvan: 'Comic Shop Owner', şirket: 'Fantasy Bazaar', eposta: 'bilbo@fantasybazaar.co.uk', gsm: '+12084444444'},
+            {no: 11, ad: "M.Nihat", soyad: "Yavaş", yaş: (2019-1957), ünvan: "Ar-Ge'ci", şirket: "İflas", eposta: "mnyavas@hotmail.com", gsm: "+905515559464"},
+            {no: 12, ad: "Sevim", soyad: "Yavaş", yaş: (2019-1963), ünvan: "Mimar", şirket: "Sevimli İnşaat", eposta: "sevimyavas@yahoo.com", gsm: "+905365864761"},
+            {no: 13, ad: "N.Zafer", soyad: "Candan", yaş: (2019-1977), ünvan: "Genetik Mühendisi", şirket: "Tüpbebek", eposta: "nzcandan@gmail.com", gsm: "+905325573750"},
+            {no: 14, ad: "Hilal", soyad: "Göktürk", yaş: (2019-1985), ünvan: "Fiziktedavi Doktor", şirket: "T.Özal Hastanesi", eposta: "hgokturk@hotmail.com", gsm: "+905557449709"}
+        ]; // ver.. sonu...
+
+        window.onload = function() {// Bu program her yüklenişte bu işlemler yapılır...
+            window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+            window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+            window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+            var vtAçmaTalebi = window.indexedDB.open ('verilerDeposu', 1);
+
+            vtAçmaTalebi.onsuccess = function (olay) {
+                vt = vtAçmaTalebi.result;
+                verileriDepoyaKoy();
+            }; // vt.. sonu...
+
+            vtAçmaTalebi.onupgradeneeded = function (olay) {
+                var vt = olay.target.result;
+                vt.onerror = function (olay) {console.log ('Veritabanı yükleme hatası.');}
+
+                var nesneDeposu = vt.createObjectStore ('verilerDeposu', {keyPath: 'no'}); // Anahtarlı nesneDeposu...
+                nesneDeposu.createIndex ('soyad', 'soyad', {unique: false}); // Her kolon için ayrı, endeksli nesneDepoları...
+                nesneDeposu.createIndex ('ad', 'ad', {unique: false});
+                nesneDeposu.createIndex ('yaş', 'yaş', {unique: false});
+                nesneDeposu.createIndex ('ünvan', 'ünvan', {unique: false});
+                nesneDeposu.createIndex ('şirket', 'şirket', {unique: false});
+                nesneDeposu.createIndex ('eposta', 'eposta', {unique: true}); // Dünyada herkesin epostası farklıdır...
+                nesneDeposu.createIndex ('gsm', 'gsm', {unique: true}); // true'yu ka'ale almıyor...
+            }; // vt.. sonu...
+
+            function verileriDepoyaKoy() {
+                var işlem = vt.transaction ("verilerDeposu", 'readwrite');
+                var nesneDeposu = işlem.objectStore ('verilerDeposu');
+                for (i = 0; i < veriler.length ; i++) {nesneDeposu.put (veriler [i]); }
+                işlem.oncomplete = function() {anahtarlıVerileriGöster();} 
+            } // func sonu...
+
+            function anahtarlıVerileriGöster() {
+                tabloVerisi.innerHTML = '';
+                var işlem = vt.transaction ("verilerDeposu", 'readonly');
+                var nesneDeposu = işlem.objectStore ('verilerDeposu');
+
+                nesneDeposu.openCursor().onsuccess = function (olay) {
+                        var imleç = olay.target.result;
+                        if (imleç) {
+                            var tabloSatırı = document.createElement ('tr');
+                            tabloSatırı.innerHTML =
+                                        '<td>' + imleç.value.no + '</td>'
+                                        + '<td>' + imleç.value.soyad + '</td>'
+                                        + '<td>' + imleç.value.ad + '</td>'
+                                        + '<td>' + imleç.value.yaş + '</td>'
+                                        + '<td>' + imleç.value.ünvan + '</td>'
+                                        + '<td>' + imleç.value.şirket + '</td>'
+                                        + '<td>' + imleç.value.eposta + '</td>'
+                                        + '<td>' + imleç.value.gsm + '</td>';
+                            tabloVerisi.appendChild (tabloSatırı);  
+                            imleç.continue();
+                        }else {console.log ('Tüm içerikler gösterildi.');}
+                }; // nes.. sonu...
+            } // func sonu...
+
+            var başlıkTıklamaKontrolleri = document.querySelectorAll ('th');
+            for (i = 0; i < başlıkTıklamaKontrolleri.length; i++) {// Tüm th başlık sayısı: 8 adet...
+                var aktifBaşlık = başlıkTıklamaKontrolleri [i];
+                aktifBaşlık.onclick = function (olay) {// Hangi başlık tıklanır/aktiflenirse onun endeksiyle görüntülenecek...
+                        aktifEndeks = olay.target.innerHTML;
+                        if (aktifEndeks == 'No') {anahtarlıVerileriGöster();
+                        }else {
+                            if (aktifEndeks == "Soyadı") {endeksliVerileriGöster ('soyad');
+                            }else if (aktifEndeks == "Adı") {endeksliVerileriGöster ('ad');
+                            }else if (aktifEndeks == "Yaşı") {endeksliVerileriGöster ('yaş');
+                            }else if (aktifEndeks == "Ünvanı") {endeksliVerileriGöster ('ünvan');
+                            }else if (aktifEndeks == "Şirketi") {endeksliVerileriGöster ('şirket');
+                            }else if (aktifEndeks == "E-postası") {endeksliVerileriGöster ('eposta');
+                            }else if (aktifEndeks == "GSM'i") {endeksliVerileriGöster ('gsm');}
+                        } // else sonu...
+                }; // akt.. sonu...
+            } // for sonu...
+
+            function endeksliVerileriGöster (aktifEndeks) {
+                tabloVerisi.innerHTML = '';
+                var işlem = vt.transaction ("verilerDeposu", 'readonly');
+                var nesneDeposu = işlem.objectStore ('verilerDeposu');
+                var aktifEndeksim = nesneDeposu.index (aktifEndeks);
+
+                console.log (aktifEndeksim.name); // aktiflenen endeksin adı...
+                console.log (aktifEndeksim.objectStore); // nesne deposu adı...
+                console.log (aktifEndeksim.keyPath); // endeks anahtarı...
+                console.log (aktifEndeksim.multiEntry); // çoklu enkeks mi?
+                console.log (aktifEndeksim.unique); // yegane mi?
+
+                var kayıtSayısıTalebi = aktifEndeksim.count();
+                kayıtSayısıTalebi.onsuccess = function() {console.log (kayıtSayısıTalebi.result);}
+
+                if (aktifEndeks == 'ad') {
+                        var alTalebi = aktifEndeksim.get ("M.Nihat");
+                        alTalebi.onsuccess = function() {console.log (alTalebi.result);}
+                } // if sonu...
+                if (aktifEndeks == 'soyad') {
+                        var alAnahtarTalebi = aktifEndeksim.getKey ("Yavaş");
+                        alAnahtarTalebi.onsuccess = function() {console.log (alAnahtarTalebi.result);}
+                } // if sonu...
+
+                aktifEndeksim.openCursor().onsuccess = function (olay) {
+                        var imleç = olay.target.result;
+                        if (imleç) {
+                            var tabloSatırı = document.createElement ('tr');
+                            tabloSatırı.innerHTML =
+                                        '<td>' + imleç.value.no + '</td>'
+                                        + '<td>' + imleç.value.soyad + '</td>'
+                                        + '<td>' + imleç.value.ad + '</td>'
+                                        + '<td>' + imleç.value.yaş + '</td>'
+                                        + '<td>' + imleç.value.ünvan + '</td>'
+                                        + '<td>' + imleç.value.şirket + '</td>'
+                                        + '<td>' + imleç.value.eposta + '</td>'
+                                        + '<td>' + imleç.value.gsm + '</td>';
+                            tabloVerisi.appendChild (tabloSatırı);
+                            imleç.continue();
+                        }else {console.log ('Tüm içerikler gösterildi.');}
+                }; // akt.. sonu...
+            } // func sonu...
+        }; // win.. sonu...
+
+        document.getElementById ("göster").innerHTML =""
+    </script>
+</body>
+</html>

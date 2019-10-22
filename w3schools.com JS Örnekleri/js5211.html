@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5211.html: Eleman ebatları ve kaydıraç örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px; margin:0px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        * {
+            margin: 0;
+            padding: 0;}
+        #örnek1 {
+            display: none;
+            width: 300px;
+            height: 200px;
+            overflow: auto; /* taşmada kaydıraçlı */
+            border: 25px solid #E8C48F;
+            padding: 20px;}
+        .anahtar {
+            cursor: pointer;
+            text-decoration: underline;}
+
+        #futbolSahası {
+            display: none;
+            margin:5px;
+            width: 400px;
+            height: 220px;
+            border: 10px groove black;
+            background-color: #00aa00;
+            position: relative;}
+        #topum {position: absolute;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>ELEMAN EBATLARI ve KAYDIRAÇ</h4>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="Örneği Göster" onClick="fonk2()">
+    <input type="button" value="Gizle" onClick="fonk3()">
+    <input type="button" value="Yüksekliği Tam Aç" onClick="örnek1.style.height = `${örnek1.scrollHeight-2*20}px`">
+    <input type="button" value="Varsayılı Yükseklik" onClick="örnek1.style.height = '200px'">
+    <div id="örnek1">
+        <h3>TANITIM</h3>
+        <p>This Ecma Standard is based on several originating technologies, the most
+            well known being JavaScript (Netscape) and JScript (Microsoft). The language
+            was invented by Brendan Eich at Netscape and first appeared in that company's
+            Navigator 2.0 browser. It has appeared in all subsequent browsers from Netscape
+            and in all browsers from Microsoft starting with Internet Explorer 3.0. The development
+            of this Standard started in November 1996. The first edition of this Ecma Standard
+            was adopted by the Ecma General Assembly of June 1997.</p>
+        <p>That Ecma Standard was submitted to ISO/IEC JTC 1 for adoption under the fast-track
+            procedure, and approved as international standard ISO/IEC 16262, in April 1998.
+            The Ecma General Assembly of June 1998 approved the second edition of ECMA-262
+            to keep it fully aligned with ISO/IEC 16262. Changes between the first and the second
+            editionare editorial in nature.</p>
+        <p>The third edition of the Standard introduced powerful regular expressions, better
+            string handling, new control statements, try/catch exception handling, tighter definition
+            of errors, formatting for numeric output and minor changes in anticipation of forthcoming
+            internationalisation facilities and future language growth. The third edition of the ECMAScript
+            standard was adopted by the Ecma General Assembly of December 1999 and published
+            as ISO/IEC 16262:2002 in June 2002.</p>
+    </div>
+    <div id="fareKapsamı" style="display:none;">Fare kordinatları: <span id="fare">...</span></div>
+    <div id="bilgi"></div>
+
+    <input type="button" value="Resimleri Göster" onClick="function göster() {resimler.style.display='block';}; göster();">
+    <input type="button" value="Gizle" onClick="function gizle() {resimler.style.display='none';}; gizle();">
+    <div id="resimler" style="display:none;"><img src="resim/ölçüler.png"><img src="resim/geometri.png"></div><br>
+
+    <input type="button" value="MAIN Göster" onClick="esas.style.display='block';">
+    <input type="button" value="Gizle" onClick="esas.style.display='none';">
+    <main id="esas" style="position: relative; color:Blue;">MAIN
+        <div id="örnek2" style="position: absolute; left: 180px; top: 180px">Örnek2 div elemanı konumu</div>
+    </main><br>
+
+    <input type="button" value="Sahayı Göster" onClick="futbolSahası.style.display='block'; fonk6();">
+    <input type="button" value="Gizle" onClick="futbolSahası.style.display='none';">
+    <div id="futbolSahası">
+        <img src="resim/top.svg" width="40" height="40" id="topum"">
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script>
+        function fonk2() {
+            örnek1.style.display = "block";
+            fareKapsamı.style.display = "block";
+            bilgi.style.display = "block";
+            let özellikler = {
+                geometri: ['clientLeft', 'clientTop', 'clientWidth', 'clientHeight', 'offsetWidth', 'offsetHeight', 'scrollWidth', 'scrollHeight'],
+                kaydıraç: ['scrollLeft', 'scrollTop'],
+                ebeveyn: ['offsetParent', 'offsetLeft', 'offsetTop'] };
+            bilgi.innerHTML = '<h3>Görmek istediğiniz değerleri tıklayın:</h3>';
+            for (let k in özellikler) {
+                bilgi.innerHTML += `<h4>${k}</h4>`;
+                let özellik = özellikler [k];
+                for (let i = 0; i < özellik.length; i++) {
+                    bilgi.innerHTML += "<span class='anahtar'>" + özellik [i] + '</span>: <span id="' + özellik [i] + '">&nbsp;</span>' + " ";
+                    i++;
+                    if (i < özellik.length) {bilgi.innerHTML += "<span class='anahtar'>" + özellik [i] + '</span>: <span id="' + özellik [i] + '">&nbsp;</span>';}
+                    bilgi.innerHTML += "<br/>";
+                } // for sonu...
+            } // for sonu...
+            document.onclick = function (olay) {
+                let hedef = olay.target;
+                if (! hedef.classList.contains ('anahtar')) return;
+                let özellik = hedef.innerHTML;
+                let değer = örnek1 [özellik];
+                değer = değer.tagName || değer;
+                document.getElementById (özellik).innerHTML = değer;
+            }; // doc.. sonu...
+            document.onmousemove = function (o) {document.getElementById ('fare').innerHTML = Math.round (o.clientX) + ':' + Math.round (o.clientY);};
+        } // func sonu...
+        function fonk3() {
+            örnek1.style.display = "none";
+            fareKapsamı.style.display = "none";
+            bilgi.style.display = "none";
+        } // func sonu...
+        function fonk4() {return örnek2.offsetParent.id + ", " + örnek2.offsetLeft + "px, " + örnek2.offsetTop + "px";}
+        function fonk5() {
+            let bölüm = document.createElement ('div');
+            bölüm.style.overflowY = 'scroll';
+            bölüm.style.width = '50px';
+            bölüm.style.height = '50px';
+            document.body.append (bölüm);
+            let kaydıraçEni = bölüm.offsetWidth - bölüm.clientWidth;
+            bölüm.remove();
+            return kaydıraçEni;
+        } // func sonu...
+        function fonk6() {// Topu sahada ortalatalım...
+            topum.style.left = Math.round (futbolSahası.clientWidth / 2 - topum.offsetWidth / 2) + 'px';
+            topum.style.top = Math.round (futbolSahası.clientHeight / 2 - topum.offsetHeight / 2) + 'px';
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Elemanın en, boy ve diğer geometri (tampon, marj, dışhat, sınır vb) bilgileri, onun \
+            tarayıcı sayfasına konumlandırılmasında önemlidir." +
+            "<br>==>Örn.aşağıda bir örnek1 kimlikli div bölüm elemanının kaydıraçlı konumlandırlması \
+            ve çeşitli geometri, kaydıraç, ebeveyn özellik değerleri göster/gizle düğmeleriyle \
+            görülmekte veya gizlenmektedir:" +
+            "<br>2) offsetParent, offsetLeft ve offsetTop değerleri elemanın enyakın ebeveyni \
+            ve ebeveynle sol ile üst aralığı vermektedir." +
+            "<br>==>Örn.Marj'sız ebeveynde 0px iken, alttaki MAIN içinde 180px'dir: " + fonk4() +
+            "; " + (esas.style.display="none") +
+            "<br>3) offsetWidth=width(content+scroll)+padding+border=(283+17)+2*20+2*25=390px ve \
+            offsetHeight=height+padding+border=200+2*20+2*25=290px. Bu değerler, ancak \
+            eleman veya ebeveyni gizli değil (görünürse) geçerlidir; yoksa 0/null'dur." +
+            "<br>==>Örn.Göster düğmesiyle bu değerleri tıklayıp görün: " + (örnek1.style.display="block") + "; " +
+             örnek1.offsetWidth + "; " + örnek1.offsetHeight + "; " + (örnek1.style.display="none") +
+            "<br>==>Örn.Örnek1 halihazırda görünmez m? " + (örnek1.offsetWidth==0 && örnek1.offsetHeight==0) +
+            "<br>4) clientTop=borderTop=25 ve clientLeft=borderLeft=25; ancak arapça/ibranice'de \
+            kaydırma sağda olacağından clientLeft=borderLeft+scroll=25+17=42 olacaktı." +
+            "<br>==>Örn.Görünür örnek1 için clientTop/Left: " + (örnek1.style.display="block") + "; " +
+             örnek1.clientTop + "; " + örnek1.clientLeft + "; " + (örnek1.style.display="none") +
+            "<br>5) clientWidth=width-scroll+padding=300-17+2*20=323 ve clientHeight=height+padding\
+            =200+2*20=240" +
+            "<br>==>Örn.Görünür örnek1 için clientWidth/Height: " + (örnek1.style.display="block") + "; " +
+             örnek1.clientWidth + "; " + örnek1.clientHeight + "; " + (örnek1.style.display="none") +
+            "<br>6) scrollWidth=clientWidth=323 ve scrollHeight=contentHeight=1079 yani görünür ile \
+            görünmez tüm metin içeriğinin yüksekliğidir." +
+            "<br>==>Örn.Görünür örnek1 için scrollWidth/Height: " + (örnek1.style.display="block") + "; " +
+             örnek1.scrollWidth + "; " + örnek1.scrollHeight + "; " + (örnek1.style.display="none") +
+            "<br>==>Örn.Alttaki düğmeyi tıklarsanız, örnek1 elemanını kaydırmasız tam yüksekliğiyle açarsınız:" +
+            "<br>7) scrollLeft ve scrollTop kaydıracın o anki (varsa) sola veya aşağı kaydırma \
+            mesafesini verir: " + örnek1.scrollLeft + "; " + örnek1.scrollTop +
+            "<br>==>Örn.Alttaki örnek1 kaydıracını dibe indirip scrollTop'ı görelim: " + (örnek1.style.display="block") + "; " +
+             (örnek1.scrollTop+=10000) + "; " + örnek1.scrollTop + "; " + (örnek1.scrollTop-=10000) + "; " +
+            (örnek1.style.display="none") +
+            "<br>8) Bu açıklanan ölçekler yerine CSS ölçeklerini gösteren getComputedStyle(eleman).ölçek \
+            kullanılabilir ancak CSS box-sizing/auto değişkenliğiyle arada farklar olacaktır; bu yüzden \
+            CSS ölçekleri pek tavsiye edilmez: " + getComputedStyle(örnek1).padding +
+            "<br>==>Örn.eleman.clientWidth ile getComputedStyle(eleman).width arasında şu \
+            farklar vardır:" +
+            "<br>==>İlki sayısal, ikincisi sonu px'li dizgedir." +
+            "<br>==>İkincisi bazen (width:auto) sayısal veri döndürmez." +
+            "<br>==>İlki padding'li metin eni'dir, ikincisi padding'i içermez." +
+            "<br>==>İlki mevcutsa kaydıracı içermez, ikincisi bazı tarayıcılarda içerebilir." +
+            "<br>9) scrollBottom yok fakat (toplamUzunluk-üsttenKaydırma-görünenMetin) \
+            hesabıyla bulunur." +
+            "<br>==>Örn.Örnek1'i geçici görünür kılıp, biraz scrollTop ekleyip, sonra da \
+            scrollTop ve scrollBotton'ı soralım: " + (örnek1.style.display="block") + "; " +
+            (örnek1.scrollTop+=200) + "; scrollTop=" + örnek1.scrollTop + "; scrollBottom=" +
+            (örnek1.scrollHeight-örnek1.scrollTop-örnek1.clientHeight) + "; " + (örnek1.style.display="none") +
+            "<br>10) scrollWidth/kaydıraçEni tarayıcısına göre 12-20px arasındadır ve \
+            hesaplamayla bulunur. Yani padding ve border yoksa (kaydıraçEni=offsetWidth-clientWidth) olur." +
+            "<br>==>Örn.Geçici bir kaydıraçlı div bölüm elemanı yaratıp, gövdeye ekleyip, \
+            sorgulayıp sonra da silelim: kaydıraçEni=" + fonk5() +
+            "<br>11) Altta Göster/Gizle düğmeli futbol sahasının ortasına (CSS değil JS kodlamasıyla) \
+            bir top yerleştirelim. Top ve saha ölçekleri için değişken kullanalım: "
+    </script>
+</body>
+</html>

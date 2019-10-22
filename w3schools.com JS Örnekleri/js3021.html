@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js3021.html: Nesne anahtar-değer çiftli özellikleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>NESNE ÖZELLİKLERİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var kişi = {ad:"Nihat", soyad:"Yavaş", yaş:(2019-1957), gözRengi:"ela"};
+        kişi.tabiyet = "Türk";
+        x = "yaş";
+
+        var metin1 = ""; for (i in kişi) {metin1 +=i + " ";}
+        var metin2 = ""; for (i in kişi) {metin2 +=kişi[i] + " ";}
+        var metin3 = ""; for (i in kişi) {metin3 +=i + ":" + kişi[i] + " ";}
+
+        function fonk2() {
+            Object.defineProperty (kişi, "dil", {value: "FR", writable: true, enumerable: true, configurable: true});
+            var metin = "", x; for (x in kişi) {metin +=x + ":" + kişi [x] + ", ";} return metin;
+        } // func sonu...
+
+        function fonk3() {
+            Object.defineProperty (kişi, "dil", {
+                get: function() {return dil;},
+                set : function (değer) {dil = değer.toUpperCase();} } );
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS nesne özellikleri sıralamasız ve virgüllerle ayrık anahtar-değer çiftleri \
+            koleksiyonudur. Özellikler eklenebilir, silinebilir veya değiştirilebilir ama \
+            bazıları sadece-okunabilir'dir." +
+            "<br/>Nesne değerine erişim: nesne.özellik, nesne['özellik'] veya nesne[ifade] \
+            (ifade bir özellik döndürmelidir) ile mümkündür: " + kişi.ad + "; " + kişi ["soyad"] +
+            "; " + kişi [x] +
+            "<br/>2) for-in döngüsü nesne özellik anahtarlarını tek-tek tarar: " + metin1 +
+            "<br/>Bu anahtarları for-in'de kullanarak özellik değerlerine de ulaşabiliriz: " + metin2 +
+            "<br/>Yada birlikte çıktı sağlayabiliriz: " + metin3 +
+            "<br/>3) Mevcut bir nesneye yeni anahtar-değer çiftli özellik ekleyebiliriz: " + kişi.tabiyet +
+            "<br/>4) delete ile bir nesne özelliğini (anahtar-değer çifti) silebiliriz: " +
+            (delete kişi.tabiyet) + "; " + kişi.tabiyet +
+            "<br/>5) Bir nesne özellik vasıfları: value/değer, enumerable/taranma, \
+            configurable/şekillendirilme, writable/değiştirilme: " + fonk2() +
+            "<br/>ES5'in tüm özellik vasıflarına al/get ve koy/set metodları vardır: " +
+            fonk3() + "; " + (kişi.dil = "tr") + "; " + kişi.dil +
+            "<br/>6)Bir nesne kurucu fonksiyonu prototype (prototip, ilk örnek) olup \
+            tanımlandıkları özellikleri/property ve vasıfları/attribute eklenebilir, değiştirilebilir \
+            ve silinebilir. Ancak miraslanmış prototip özelliğini silerseniz, onun tüm yavruları \
+            da etkilenecektir. Ayrıca hazır arşiv nesne özelliklerinin silinmesi program \
+            çöküşlerine yol açabilir."
+    </script>
+</body>
+</html>

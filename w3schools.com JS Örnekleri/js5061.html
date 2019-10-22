@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js5061.html: DOM HTML CSS stillerini değiştirme örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: FireBrick; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4 id="göster2">Html Css Değiştir</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) JS HTML elemanlarının stillerini değiştirebilir." +
+            "<br>==>document.getElementById ('göster2').style.color = 'Pink' ile göster2 \
+            konumdaki h4 html başlık elemanının renk stili pembe yapılmaktadır: " +
+            (document.getElementById ('göster2').style.color = 'Pink') +
+            "<br>==>document.getElementById ('göster2').style.fontFamily = 'Segoe Script' ile göster2 \
+            konumdaki h4 html başlık elemanının yazı ailesi stili 'segoe script' yapılmaktadır: " +
+            (document.getElementById ('göster2').style.fontFamily = 'Segoe Script') +
+            "<br>==>document.getElementById ('göster2').style.fontSize = 'larger' ile göster2 \
+            konumdaki h4 html başlık elemanının yazı ebatı daha büyük yapılmaktadır: " +
+            (document.getElementById ('göster2').style.fontSize = 'larger') +
+            "<br>2) Olaylar, html elemanlarını şunlar olduğunda tarayıcı tarafından \
+            üretilirler: Bir elemanın tıklanması, html sayfasının yüklenmesi, veya veri \
+            giriş alan içeriklerinin değiştirilmesi." +
+            "<br>==>Aşağıdaki Koyu Pembeleştir düğmesini tıklama olayıyla göster2 \
+            konumdaki h4 html başlık elemanı renk stili değiştirilmektedir:" +
+            "<br>3) Benzer şekilde Başlığı Göster ve Gizle düğmeleriyle de başlık elemanı \
+            tamamen kaybolmakta ve sonra tekrar görüntülenmektedir:"
+    </script>
+
+    <button type="button" onclick="document.getElementById ('göster2').style.color = 'DeepPink'">Koyu Pembeleştir</button>
+    <br>
+    <input type="button" value="Başlığı Sakla" onclick="document.getElementById ('göster2').style.visibility='hidden'">
+    <input type="button" value="Başlığı Göster" onclick="document.getElementById ('göster2').style.visibility='visible'">
+    <!-- Veya style.display="block/none" da kullanılabilir. -->
+</body>
+</html>

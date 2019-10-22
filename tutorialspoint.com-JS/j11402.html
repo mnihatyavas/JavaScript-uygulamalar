@@ -1,0 +1,18 @@
+<html (j11402.html)>
+<head>
+    <meta charset="iso-8859-9 Türkçe"/>
+    <script>
+        window.onerror = function (mesaj, yurel, satır) {// Varsayılı onerror mesaj argümanları...
+            document.write ("<body style='background:Chocolate; color:Azure; font-size:20px;'/>")
+            document.write ("Sistemin varsayılı hata mesajı: " + mesaj);
+            document.write ("<br/>Hatalı yurel dosyası tam-adı: " + yurel);
+            document.write ("<br/>Hatanın tespit edildiği satır no: " + satır);
+        } // function(..) sonu...
+    </script>
+</head>
+<body style="background:BlueViolet; color:Bisque;"> <!-- #8a2be2 -->
+    <h3>Varsayılı hata mesaj içeriklerini görmek için düğmeyi tıklayın</h3>
+    <br/>
+    <button style="background:Chartreuse; color:Brown; font-size:20px;" type="button" onclick="hata()">"On Error" Hata Mesajı</button>
+</body>
+</html>

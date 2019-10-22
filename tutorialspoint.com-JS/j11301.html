@@ -1,0 +1,22 @@
+<html (j11301.html)>
+<head>
+    <script>
+        function selam1() {document.write ("<b style='font-size:30px;background:pink;color:blue;'><i>Hey, herkese Merhaba!</b></i>");}
+        function selam2() {alert ("Hey, herkese Merhabalar!..");}
+        function selam3() {document.getElementById ("*").innerHTML = "Hey, hepinize Selamlar!";}
+    </script>
+</head>
+<body style="background:#189a7f">
+    <h3 style="color:maroon">Parametresiz selam fonksiyonlarýný çaðýrmak için düðmeyi týklayýn</h3>
+
+    <form>
+        <input type="button" onclick="selam1()" value="Selam 1">
+        <input type="button" onclick="selam2()" value="Selam 2">
+        <input type="button" onclick="selam3()" value="Selam 3">
+    </form>
+
+    <p style="font-size:30px; color:white;" id="*"></p>
+
+    <p style="color:red">Selamlama için farklý cümleler kullanabilirsiniz...</p>
+</body>
+</html>

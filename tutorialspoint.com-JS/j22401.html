@@ -1,0 +1,38 @@
+<html (j22401.html: Array/Dizi nesnesi yaratma ve hazır/özel-tanımlı özellikleri örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+            var dizi = new Array ("elma", "armut", "şeftali", "kaysı", "kiraz", "üzüm", "erik", "ceviz", "nar", "hurma", "portakal", "mandalina");
+            document.getElementById ("*").innerHTML = "Yaratılan meyve dizisi nesnesi: " + dizi;
+        } // fonk1() sonu...
+
+        function fonk2() {
+            var dizi = ["hıyar", "domates", "biber", "maydonoz", "soğan", "havuç", "marul", "kavun", "karpuz"];
+            document.getElementById ("*").innerHTML = "Sebze dizisinin tesadüfi elemanı: " + dizi[Math.round (Math.random()*(dizi.length-1))];
+        } // fonk2() sonu...
+
+        function fonk3() {
+            var dizi = ["hıyar", "domates", "biber", "maydonoz", "marul", "kavun", "karpuz"];
+            Array.prototype.uzunluk = null;
+            Array.prototype.eleman = null;
+            dizi.uzunluk = dizi.length;
+            dizi.eleman = dizi[Math.round (Math.random()*(dizi.length-1))];
+            document.getElementById ("*").innerHTML =
+                "Dizi nesnesinin dizi.constructor kurucusu özelliği: " + dizi.constructor +
+                "<br/>Dizi nesnesinin dizi.length uzunluk özelliği: " + dizi.length +
+                "<br/>Dizi nesnesinin özel-tanımlı uzunluk özelliği: " + dizi.uzunluk +
+                "<br/>Dizi nesnesinin özel-tanımlı eleman özelliği: " + dizi.eleman;
+        } // fonk3() sonu...
+    </script>
+</head>
+<body style="background:Olive;">
+    <h2><a  style="color:MistyRose;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:yellow; font-size:16;" type="button" onclick="fonk1()">Yeni bir dizi nesnesi yaratmak içinTıkla</button>
+    <br/><button style="background:Navy; color:yellow; font-size:16;" type="button" onclick="fonk2()">Tek tek tesadüfi dizi elemanı içinTıkla</button>
+    <br/><button style="background:Navy; color:yellow; font-size:16;" type="button" onclick="fonk3()">Dizi nesnesi özellikleri içinTıkla</button>
+
+    <br/><p style="background:MediumVioletRed; color:Lime; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

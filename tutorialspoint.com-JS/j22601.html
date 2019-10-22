@@ -1,0 +1,33 @@
+<DOCTYPE! html (j22601.html: Math/Matematik statik nesnesi ve çeşitli özellikleri örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+            document.getElementById ("*").innerHTML =
+                "Math constructor'sızdır ve yaratılmaz, metod ve özellikleri statiktir ve birlikte (Math.PI veya Math.sin(x)) çağrılır.";
+        } // fonk1() sonu...
+
+        function fonk2() {
+            document.getElementById ("*").innerHTML =
+                "Math.E, Euler sabiti özelliği: " + Math.E +
+                "<br/>Math.LN2, 2'nin doğal logaritması: " + Math.LN2 +
+                "<br/>Math.LN10, 10'nun doğal logaritması: " + Math.LN10 +
+                "<br/>Math.LOG2E, E'nin 2 tabanlı doğal logaritması: " + Math.LOG2E +
+                "<br/>Math.LOG10E, E'nin 10 tabanlı doğal logaritması: " + Math.LOG10E +
+                "<br/>Math.PI, dairenin çevresinin çapına oranı: " + Math.PI +
+                "<br/>Math.SQRT1_2, 1/2'nin karekökü: " + Math.SQRT1_2 +
+                "<br/>Math.SQRT2, 2'nin karekökü: " + Math.SQRT2;
+        } // fonk2() sonu...
+
+    </script>
+</head>
+<body style="background:MediumAquaMarine;">
+    <h2><a  style="color:LightSalmon;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk1()">Matematik nesnesinin yaratılması için Tıkla</button>
+    <br/><button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk2()">Statik matematik özellikleri için Tıkla</button>
+
+    <br/><p style="background:SlateGray; color:LightYellow; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

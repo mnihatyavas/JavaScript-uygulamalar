@@ -1,0 +1,34 @@
+<html (j11305.html)>
+<head>
+    <script>
+        var fonk1 = new Function ("x", "y", "return x*y;"); // "new Function" nesne kuruculu isimsiz anonim fonksiyon...
+
+        function hesapla1() {
+            var a = Math.round (Math.random()*1000);
+            var b = Math.round (Math.random()*1000);
+            var sonuç = fonk1 (a, b);
+            document.getElementById ("*").innerHTML= a + " * " + b + " = " + sonuç;
+        } // hesapla1() fonksiyonu sonu...
+
+        var fonk2 = function (x, y) {return x*y;} // "function" ibareli isimsiz anonim fonksiyon...
+
+        function hesapla2() {
+            var a = Math.round (Math.random()*1000);
+            var b = Math.round (Math.random()*1000);
+            var sonuç = fonk2 (a, b);
+            document.getElementById ("**").innerHTML= a + " * " + b + " = " + sonuç;
+        } // hesapla2() fonksiyonu sonu...
+    </script>
+</head>
+<body style="background:Brown;"> <!-- #a52a2a -->
+    <h3 style="color:Aqua;">"new Function" kuruculu anonim fonksiyon kullanýmý</h3> <!-- #00ffff -->
+
+    <form>
+        <input type="button" onclick="hesapla1()" value="'new Function'la 2 sayý çarpýmý">
+        <input type="button" onclick="hesapla2()" value="'function'la 2 sayý çarpýmý">
+    </form>
+
+    <p style="font-size:20px; color:AntiqueWhite;" id="*"></p> <!-- #faebd7 -->
+    <p style="font-size:20px; color:AliceBlue;" id="**"></p> <!-- #f0f8ff -->
+</body>
+</html>

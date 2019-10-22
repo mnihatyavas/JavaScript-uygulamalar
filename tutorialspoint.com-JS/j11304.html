@@ -1,0 +1,22 @@
+<html (j11304.html)>
+<head>
+    <script>
+        function hipotenüs() {document.getElementById ("*").innerHTML=
+            "Karekök (12.5^2 + 25.67^2) = " + hesapla (12.5, 25.67);}
+        function hesapla (a,b) {return karekök (a,b);}
+        function karekök (x,y) {
+            function kare(k) {return k*k;} // Ýç-içe fonksiyon...
+            return Math.sqrt (kare (x) + kare (y));
+        } // karekök(..) fonksiyonu sonu...
+    </script>
+</head>
+<body style="background:#189a7f">
+    <h3 style="color:maroon">Ýç-içe fonksiyonda farklý deðerler koyarak hipotenüsünü hesaplayabilirsiniz</h3>
+
+    <form>
+        <input type="button" onclick="hipotenüs()" value="Hipotenüs">
+    </form>
+
+    <p style="font-size:20px; color:lightgray;" id="*"></p>
+</body>
+</html>

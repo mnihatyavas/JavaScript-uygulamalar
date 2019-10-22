@@ -1,0 +1,41 @@
+<DOCTYPE! html (j32902.html: Hata yakalama try-catch-finally ve onerror örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        window.onerror = function (mesaj, yurel, satır) {
+            alert ("Hata oluştu, detayları aşağıdadır:" +
+                "\nMesaj: " + mesaj +
+                "\nURL adresi: " + yurel +
+                "\nSatır no: " + satır);
+        } // fonksiyon sonu...
+
+        function fonk() {
+            var a = 100, b=0, c;
+            try {document.gettElementById ("*").innerHTML =
+                "Burada kasti tırnak kapatma hatası oluşturalım...";
+            }catch (istisna) {alert ("HATA: " + istisna);
+            }finally {document.getElementById ("*").innerHTML =
+                "'finally' bloğu hata oluşsun/oluşmasın daima işletilir...";}
+
+            try {if (b == 0) throw ("Sıfıra bölüm hatası.");
+                else c = a/b;
+            }catch (ist) {alert ("HATA: " + ist);}
+        } // fonk() sonu...
+
+        function fonk3() {document.write ("<body style='background:MidnightBlue; color:MintCream; text-align:center; margin-top:100px;' />" +
+            "<img src='resim/222.jpg' width=50% alt='resim/222.jpg' onerror = fonk4() />");
+        } // fonk3() sonu...
+        function fonk4() {alert ("HATA: resim/222.jpg yükleme hatası!\nResmin konumu ve adını tekrar kontrol edin lütfen!..");}
+    </script>
+</head>
+<body style="background:OliveDrab;">
+    <h2><a  style="color:MintCream;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:Orange; font-size:16;" type="button" onclick="fonk()">Hata yakalama try-catch-finally için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:Orange; font-size:16;" type="button" onclick="fonk2()">window.onerror hatası yakalamak için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:Orange; font-size:16;" type="button" onclick="fonk3()">Resim yükleme hatası yakalamak için Tıkla</button>
+
+    <br/><p style="background:Peru; color:LightGreen; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

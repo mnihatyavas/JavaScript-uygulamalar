@@ -1,0 +1,48 @@
+<DOCTYPE! html (j33001.html: Tablolama özellikli form oluşturma örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>//Form javascript kontrol yazılımı...</script>
+    <style>
+        td {background:Orange; color: Green;}
+        input {background: cyan; color:Brown; font-style:italic;}
+    </style>
+</head>
+<body style="background:MediumAquaMarine; color:Maroon;">
+    <h2 style="color:Peru;text-align:center;"><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <form style="margin-left:30%;" action="/cgi-bin/test.cgi" name="formum" onsubmit="return (validate());">
+        <table cellspacing="3" cellpadding="0" border="2">
+            <tr>
+                <td align="right">Ad ve Soyad</td>
+                <td><input type="text" name="isim" /></td>
+            </tr>
+            <tr>
+                <td align="right">E Posta</td>
+                <td><input type="text" name="eposta" /></td>
+            </tr>
+            <tr>
+                <td align="right">Posta Kodu</td>
+                <td><input type="text" name="pkod" /></td>
+            </tr>
+            <tr>
+                <td align="right">Ülke</td>
+                <td>
+                    <select style="background:Magenta;" name="ülke">
+                        <option value="-1" selected>[bir ülke seç]</option>
+                        <option value="1">ABD</option>
+                        <option value="2">İngiltere</option>
+                        <option value="3">Avustralya</option>
+                        <option value="4">Hindistan</option>
+                        <option value="5">Türkiye</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Kontrol</td>
+                <td><input type="submit" value="Gönder" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

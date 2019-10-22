@@ -1,0 +1,21 @@
+<DOCTYPE! html (j22402b.html: Array/Dizi nesnesi hazır metodu forEach örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizi1 = new Array ("elma", "armut", "şeftali", "kaysı", "kiraz", "üzüm", "erik", "ceviz", "nar", "hurma", "portakal", "mandalina");
+            var dizi2 = ["hıyar", "domates", "biber", "maydonoz", "soğan", "havuç", "marul", "kavun", "karpuz"];
+            dizi1.concat (dizi2).forEach (tektekYaz);
+            function tektekYaz (eleman, endeks, dizi) {document.write ("<body style='background:black; color:yellow;'/>" + endeks + ": " + eleman + "<br/>");}
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:OliveDrab;">
+    <h2><a  style="color:MediumSpringGreen;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Orchid; color:Gold; font-size:16;" type="button" onclick="fonk()">forEach metodu altalta birleşik listesi için Tıkla</button>
+
+    <br/><p style="background:NavajoWhite; color:OrangeRed; font-size:25; font-family:arial;" id="**"></p>
+</body>
+</html>

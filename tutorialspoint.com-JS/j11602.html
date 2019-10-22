@@ -1,0 +1,24 @@
+<html (j11602.html)>
+<head>
+    <meta charset="coding:iso-8859-9 Türkçe">
+    <script>
+        function yönlendir1() {window.location="https://mnihatyavas.wordpress.com";}
+
+        function yönlendir2() {
+            document.getElementById ("*").innerHTML=
+                "Ýþlemlerinizi tamamlayýn, zira 15 saniye içinde anasayfama geçilecek!..";
+            setTimeout ("yönlendir1()", 15000);
+        } // yönlendir2() fonksiyonu sonu...
+    </script>
+</head>
+<body style="background:Maroon; color:LightYellow;"> <!-- #800000, #ffffe0 -->
+    <h3>Düðmeyi týkladýðýnýzda anasayfama yönlendirileceksiniz:</h3>
+
+    <form>
+        <input type="button" value="Hemen Ana Sayfa" onclick="yönlendir1()"/>
+        <input type="button" value="Gecikmeli Ana Sayfa" onclick="yönlendir2()"/>
+    </form>
+
+    <p id="*" style="color:LightSkyBlue;"/> <!-- #87cefa -->
+</body>
+</html>

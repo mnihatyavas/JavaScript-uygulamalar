@@ -1,0 +1,39 @@
+<DOCTYPE! html (j22501.html: Date/Tarih nesnesi yaratma ve hazır/kullanıcı-tanımlı özellikleri örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var tarih = new Date();
+            Date.prototype.yıl = null;
+            Date.prototype.ay = null;
+            Date.prototype.gün = null;
+            Date.prototype.saat = null;
+            Date.prototype.dakika = null;
+            Date.prototype.saniye = null;
+            tarih.yıl = tarih.getFullYear();
+            tarih.ay = tarih.getMonth() + 1;
+            tarih.gün = tarih.getDate();
+            tarih.saat = tarih.getHours();
+            tarih.dakika = tarih.getMinutes();
+            tarih.saniye = tarih.getSeconds();
+            document.getElementById ("*").innerHTML =
+                "Güncel standart tarih ev zaman: " + tarih +
+                "<br/>tarih.constructor kurucu özelliği: " + tarih.constructor +
+                "<br/>tarih.yıl kullanıcı tanımlı özellik: " + tarih.yıl +
+                "<br/>tarih.ay kullanıcı tanımlı özellik: " + tarih.ay +
+                "<br/>tarih.gün kullanıcı tanımlı özellik: " + tarih.gün +
+                "<br/>tarih.saat kullanıcı tanımlı özellik: " + tarih.saat +
+                "<br/>tarih.dakika kullanıcı tanımlı özellik: " + tarih.dakika +
+                "<br/>tarih.saniye kullanıcı tanımlı özellik: " + tarih.saniye;
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:MediumVioletRed;">
+    <h2><a  style="color:AquaMarine;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk()">Tarih nesnesi yaratma ve özellikleri için Tıkla</button>
+
+    <br/><p style="background:MediumAquaMarine; color:OrangeRed; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

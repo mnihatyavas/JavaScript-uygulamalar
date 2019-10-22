@@ -1,0 +1,26 @@
+<html (j11502.html)>
+<head>
+    <meta charset="coding:iso-8859-9 Türkçe">
+    <script>
+        function çereziOku() {
+            var çerezler = document.cookie;
+            document.writeln ("Tüm çerezler: " + çerezler + "<br/>");
+
+            // Þimdi de çerez anahtar-deðer çiftini diziye alýp, içeriðini tek-tek yansýtalým...
+            çerezDizisi = çerezler.split (";");
+            for (var i=0; i < çerezDizisi.length; i++) {
+                anahtar = çerezDizisi[i].split ("=")[0];
+                deðer = çerezDizisi[i].split ("=")[1];
+                document.writeln ("Anahtar: " + anahtar + ", ve Deðer: " + deðer + "<br/>");
+           } // for döngüsü sonu...
+        } // çereziOku() fonksiyonu sonu...
+</script>
+</head>
+<body style="background:Magenta; color:MediumAquaMarine ;"> <!-- #ff00ff, #66cdaa -->
+    <form name="formum" action="">
+        <input type="button" value="Çerezleri Al" onclick="çereziOku()"/>
+    </form>
+
+    <br/><h3>Maalesef çerezleri okutamadým!..</h3>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html (j11701.html)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function mesaj1() {
+            alert ("Bu, alert tarayıcı fonksiyonlu bir ikaz mesajıdır!");
+            window.alert ("Bu 'Tamam' düğmeli ikaz kutusu içinin\n renk ve yazı stillerine mühahale edemezsiniz.");}
+        function mesaj2() {console.log ("Bu bir console.log tarayıcı mesajıdır! F12->Console seçenekleriyle görülebilir.");}
+        function mesaj3() {document.write ("<body style='color:yellow; background:black;'>Bu, JavaScript document.write fonksiyonlu bir mesajdır!</body>");}
+        function mesaj4() {document.getElementById ("*").innerHTML =
+                "Bu, JavaScript document.getElementById('*').innerHTML='....'; fonksiyonlu bir mesajdır!";}
+        function mesaj5() {
+            var cevap = confirm ("Mesaj yazısı 40px olsun mu?");
+            if (cevap == true) document.getElementById ("**").innerHTML = "Onay/confirm kutusunda 'Tamam' tıklanmıştır.";
+            else document.getElementById ("***").innerHTML = "Onay kutusunda 'İptal' tıklanmıştır.";}
+        function mesaj6() {
+            var dizge = prompt ("Lütfen ad ve soyadınızı girin: ", "M.Nihat Yavaş");
+            document.getElementById ("*").innerHTML =
+                "İleti/prompt diyalog kutusundan geri dönen değer: [" + dizge + "]";}
+    </script>
+</head>
+<body style="background:LightSeaGreen; color:LightGreen;"> <!-- #20b2aa, #90ee90 -->
+    <h3>Tıklayın ve JavaScript mesaj çeşitlerini görün:</h3>
+
+    <form>
+        <input type="button" value="alert Mesajı" onclick="mesaj1();" />
+        <input type="button" value="log Mesajı" onclick="mesaj2();" />
+        <input type="button" value="write Mesajı" onclick="mesaj3();" />
+        <input type="button" value="getElementById Mesajı" onclick="mesaj4();" />
+        <input type="button" value="confirm Mesajı" onclick="mesaj5();" />
+        <input type="button" value="prompt Mesajı" onclick="mesaj6();" />
+         <input type = "button" value = "Yazıcı" onclick = "window.print()" /> <!-- Sayfayı yazıcıya aktarma diyalog kutusu gelir. -->
+    </form>
+
+    <p id="*" style="font-size:20px; color:LightSalmon"; /> <!-- #ffa07a -->
+    <p id="**" style="font-size:40px; color:Salmon"; /> <!-- #fa8072 -->
+    <p id="***" style="font-size:10px; color:pink"; />
+</body>
+</html>

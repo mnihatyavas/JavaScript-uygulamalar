@@ -1,0 +1,22 @@
+<html (j11801.html)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function değerAl() {
+            var a, b=5, c=7;
+            a = void (b*c % 8);
+            document.getElementById ("*").innerHTML='a=' + a + ', b=' + b + ', c=' + c;
+        } // değerAl() fonksiyonu sonu...
+</script>
+    <style>
+        a {background:DarkKhaki; color:DarkRed; text-decoration:none;}
+    </style>
+<body style="background:DarkBlue; color:CornSilk">
+    <h3>Düğmeleri tıklayın, fakat void içi fonksiyonlar dışarıya değer yansıtmazlar:</h3>
+    <a href="javascript:void (document.write (“Merhabalar: Ben 1957 doğumlu M.Nihat Yavaş”) )">Tıkla-1</a>
+    <a href="javascript:void (0)">Tıkla-2</a>
+    <br/><br/>
+    <button style="background:Crimson; color:DarkCyan; font-size:25px;" type="button" onclick="değerAl()">Değer Al</button>
+    <br/><p style="color:DarkOrange; font-size:15px;" id="*"/>
+</body>
+</html>

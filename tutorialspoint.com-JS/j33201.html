@@ -1,0 +1,21 @@
+<DOCTYPE! html (j33201.html: Kullandığınız tarayıcının hazırda kurulu fişlerin tablosu örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <style>h2{background:red; width:25%;}</style>
+</head>
+<body style="background:MediumSeaGreen; color:Orange;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <table style="background:Cyan; color:Blue;" border="4"  cellspacing="3" cellpadding="5">
+        <tr><th>Fiş Adı</th><th>Dosya Adı</th><th>Açıklama</th></tr>
+        <script>
+            for (i=0; i < navigator.plugins.length; i++) {
+                document.write ("<tr><td>" + navigator.plugins[i].name +
+                "</td><td>" + navigator.plugins[i].filename +
+                "</td><td>" + navigator.plugins[i].description + "</td></tr>");
+            } // for sonu...
+        </script>
+    </table>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html (j11501.html)>
+<head>
+    <meta charset="coding:iso-8859-9 Türkçe">
+    <script>
+        function çereziYaz() {
+            if (document.formum.müþteri.value == "" ) {
+                alert ("Lütfen bir çerez adý girin!");
+                return;
+            } // if kararý sonu...
+            çerezDeðeri = escape (document.formum.müþteri.value) + ";";
+            document.cookie = "çerezAdý=" + çerezDeðeri;
+            document.getElementById ("*").innerHTML =
+                "Çereziniz: [" + "çerezAdý=" + çerezDeðeri + "] isim-deðer çiftiyle kuruldu!";
+        } // çereziYaz() fonksiyonu sonu...
+</script>
+</head>
+<body style="background:Magenta; color:MediumAquaMarine ;"> <!-- #ff00ff, #66cdaa -->
+    <form name="formum" action="">
+        Bir çerez adý girin: <input type="text" name="müþteri"/>
+        <input type="button" value="Çerezi Kur" onclick="çereziYaz();"/>
+    </form>
+
+    <br/>
+    <p id="*" style="font-size:20px; color:MediumOrchid;">Çerez açýklamasý==></p> <!-- #ba5503 -->
+</body>
+</html>

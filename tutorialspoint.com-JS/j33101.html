@@ -1,0 +1,45 @@
+<DOCTYPE! html (j33101.html: Resmin manuel olarak her yöne hareket ettirilmesi örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        window.onload = başlat;
+        var resmim = null;
+
+        function başlat() {
+            resmim = document.getElementById ("Balık");
+            resmim.style.position= "relative";
+            resmim.style.left = "0px";
+            resmim.style.top = "0px";
+        } // fonksiyon sonu...
+
+        function sağa() {resmim.style.left = parseInt (resmim.style.left) + 10 + "px";}
+        function sola() {resmim.style.left = parseInt (resmim.style.left) - 10 + "px";}
+        function yukarı() {resmim.style.top = parseInt (resmim.style.top) - 10 + "px";}
+        function aşağı() {resmim.style.top = parseInt (resmim.style.top) + 10 + "px";}
+        function sağYukarı() {resmim.style.left = parseInt (resmim.style.left) + 10 + "px"; resmim.style.top = parseInt (resmim.style.top) - 10 + "px";}
+        function sağAşağı() {resmim.style.left = parseInt (resmim.style.left) + 10 + "px"; resmim.style.top = parseInt (resmim.style.top) + 10 + "px";}
+        function solYukarı() {resmim.style.left = parseInt (resmim.style.left) - 10 + "px"; resmim.style.top = parseInt (resmim.style.top) - 10 + "px";}
+        function solAşağı() {resmim.style.left = parseInt (resmim.style.left) - 10 + "px"; resmim.style.top = parseInt (resmim.style.top) + 10 + "px";}
+    </script>
+    <style>
+        input {background:Blue; color:Yellow;}
+    </style>
+</head>
+<body style="background:MediumAquaMarine; color:Maroon;">
+    <h2 style="color:Peru;text-align:center;"><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <form>
+        <img id="Balık" src="resim/balık.jpg" width=200;/>
+        <p>Hangi yöne hareket isterseniz ilgili düğmeyi tıklayın:</p>
+        <input type="button" value="Sağa" onclick="sağa();" />
+        <input type="button" value="Sola" onclick="sola();" />
+        <input type="button" value="Yukarı" onclick="yukarı();" />
+        <input type="button" value="Aşağı" onclick="aşağı();" />
+        <input type="button" value="Sağ Yukarı" onclick="sağYukarı();" />
+        <input type="button" value="Sağ Aşağı" onclick="sağAşağı();" />
+        <input type="button" value="Sol Yukarı" onclick="solYukarı();" />
+        <input type="button" value="Sol Aşağı" onclick="solAşağı();" />
+    </form>
+</body>
+</html>

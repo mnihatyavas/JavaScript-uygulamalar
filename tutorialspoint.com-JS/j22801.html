@@ -1,0 +1,48 @@
+<DOCTYPE! html (j22801.html: Kalıtsal DOM/DocumentObjectModel/DökümanNesnesiModeli nesnesinin çeşitli özellik ve metodları örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <title>Legacy DOM Document Object Model</title>
+    <script>
+        function fonk1() {
+            document.getElementById ("*").innerHTML =
+                "Hiyerarşi: Window->DOM/DocumentObjectModel->Form->Button/CheckBox/etc" +
+                "<br/>3 çeşit DOM vardır: 1.Kalıtsal DOM, 2.W3C/WorldWideWebConsortium DOM, 3.IE/InternetExplorer DOM" +
+                "<br/>1) Kalıtsal DOM özellikleri:" +
+                "<br/>document.anchors[]/applets[]/bgColor/cookie/domain/embeds/fgColor/forms[]/images[]/lastModified/links[]/referrer/titleURL: <br/>" +
+                document.lastModified + "<br/>" + document.title + "<br/>" + document.URL +
+                "<br/>Kalıtsal DOM metodları: document.open()/close()/write(..)/writeln(..)";
+        } // fonk1() sonu...
+
+        function fonk2() {
+            alert ("Dökümanın başlığı: " + document.title);
+            alert ("Dökümanın Yurel adresi: " + document.URL);
+            alert ("Dökümanın formları: \n" + document.forms[0] + "\n" + document.forms[1] + "\n" + document.forms[2]);
+            alert ("İlk formun ilk elementi: " + document.forms[0].elements[0]);
+            alert ("İkinci formun ikinci elementi: " + document.forms[1].elements[1]);
+            alert ("Üçüncü formun ilk elementi: " + document.forms[2].elements[0]);
+        } // fonk2() sonu...
+    </script>
+</head>
+<body style="background:Grey;">
+    <h1>Kalıtsal DOM Özellik ve Metodları</h1>
+    <p>Aşağıdaki düğmeleri tıklayıp sonuçlarını görebilirsiniz:</p>
+
+    <h2><a  style="color:OldLace;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <form name="İlkFormum">
+        <button style="background:MidnightBlue; color:Gold; font-size:16;" type="button" onclick="fonk1()">Kalıtsal DOM nesnesinin yaratılması ve özellikleri için Tıkla</button>
+    </form>
+
+    <form name="İkinciFormum">
+        <input type="button" value="Tıkla Beni" onclick="fonk2();" />
+        <input type="button" value="İptal">
+    </form>
+
+    <form name="ÜçüncüFormum">
+        <input type="button" value="Beni Tıklama"/>
+    </form>
+
+    <br/><p style="background:DeepSkyBlue; color:FireBrick; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

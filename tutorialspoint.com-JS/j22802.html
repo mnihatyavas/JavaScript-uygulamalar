@@ -1,0 +1,38 @@
+<DOCTYPE! html (j22802.html: W3C DOM/DocumentObjectModel/DökümanNesnesiModeli nesnesinin çeşitli özellik ve metodları örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <title>W3C DOM Özellik ve Metodları</title>
+    <script>
+        function fonk() {
+            var başlık1 = document.getElementsByTagName ("title");
+            var başlık2 = document.getElementById ("başlık");
+            var başlık3 = document.getElementsByClassName ("sınıf");
+
+            document.getElementById ("*").innerHTML =
+                "2) W3C/WorldWideWebConsortium/DünyaÇaplıAğBirliği DOM Özellikleri:" +
+                "<br/>Tüm kalıtsal DOM özellikleri desteklenir, ayrıca:" +
+                "<br/>document.body: " + document.body +
+                "<br/>document.defaultView: " + document.defaultView +
+                "<br/>document.documentElement2/13/2019: " + document.documentElement2/13/2019 +
+                "<br/>document.implementation: " + document.implementation +
+                "<br/><br/>Tüm kalıtsal modeller desteklenir, ayrıca:" +
+                "<br/>document.createAttribute(ad)/createComment(metin)/createDocumentFragment()/createElement(etiket)/createTextNode(metin)/importNode(a,b)" +
+                "<br/>document.getElementsByTagName('title'): " + başlık1[0].text +
+                "<br/>document.getElementById('başlık'): " + başlık2.innerHTML +
+                "<br/>document.getElementsByClassName('sınıf')[0].innerHTML: " + başlık3[0].innerHTML +
+                "<br/>document.getElementsByClassName('sınıf')[1].innerHTML: " + başlık3[1].innerHTML +
+                "<br/>document.getElementsByClassName('sınıf')[2].innerHTML: " + başlık3[2].innerHTML;
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:PaleGoldenRod; color:Red;">
+    <h1 id="başlık" class="sınıf">Esas Başlığımız Budur</h1>
+
+    <h2><a  style="color:Purple;" href="javascript:location.reload (true)" class="sınıf">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:Orange; font-size:16;" type="button" onclick="fonk()" class="sınıf">W3C DOM nesnesinin yaratılması ve özellikleri için Tıkla</button>
+
+    <br/><p style="background:Peru; color:LightGreen; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

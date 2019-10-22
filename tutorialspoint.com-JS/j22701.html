@@ -1,0 +1,29 @@
+<DOCTYPE! html (j22701.html: RegExp/Düzenliİfade nesnesi ve özellikleri örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizge = "JavaScript enteresan bir script/taslak programlama dilidir.";
+            var re = new RegExp ("script", "gi");
+            document.getElementById ("*").innerHTML =
+                "Yaratılan re adlı RegExp nesnesi: " + re +
+                "<br/>re.constructor özelliği: " + re.constructor +
+                "<br/>re.global özelliği: " + re.global +
+                "<br/>re.ignoreCase özelliği: " + re.ignoreCase +
+                "<br/>İlk re.test(dizge) ve re.lastIndex özelliği: " + re.test (dizge) + "-->" + re.lastIndex +
+                "<br/>Tekrar re.test(dizge) ve re.lastIndex özelliği: " + re.test (dizge) + "-->" + re.lastIndex +
+                "<br/>re.multiline özelliği: " + re.multiline +
+                "<br/>re.source özelliği: " + re.source;
+
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Grey;">
+    <h2><a  style="color:MintCream;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Green; color:Gold; font-size:16;" type="button" onclick="fonk()">RegExp nesnesi ve özellikleri için Tıkla</button>
+
+    <br/><p style="background:DeepSkyBlue; color:FireBrick; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

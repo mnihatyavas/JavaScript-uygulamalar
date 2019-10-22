@@ -1,0 +1,49 @@
+<DOCTYPE! html (j22502.html: Date/Tarih nesnesinin çeşitli metodları örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var tarih = new Date(); // veya " new Date (2019,2,6,21,48,59,876);"
+            document.getElementById ("*").innerHTML =
+                "Güncel standart tarih ve zaman: " + tarih +
+                "<br/>Ayın rakamsal günü (1->31): " + tarih.getDate() +
+                "<br/>Haftanın rakamsal günü (1:Pzt->7): " + tarih.getDay() +
+                "<br/>Yılın ayı (1->12): " + tarih.getMonth() +
+                "<br/>4 rakamlı yıl (-+1900): " + tarih.getFullYear() +
+                "<br/>Günün saatı (0->23): " + tarih.getHours() +
+                "<br/>Günün dakikası (0->59): " + tarih.getMinutes() +
+                "<br/>Günün saniyesi (0->59): " + tarih.getSeconds() +
+                "<br/>Günün milisaniyesi (0->999): " + tarih.getMilliseconds() +
+                "<br/>1.1.1970'den itibaren geçen mili saniye: " + tarih.getTime() +
+                "<br/>GMT dakika farkı: " + tarih.getTimezoneOffset() +
+                "<br/>UTC al (aygünü, haftagünü, ay,  yıl, saat, dakika, saniye, milisaniye): " + tarih.getUTCDate() + ", " + tarih.getUTCDay() + ", " + tarih.getUTCMonth() + ", " + tarih.getUTCFullYear() + ", " + tarih.getUTCHours() + ", " + tarih.getUTCMinutes() + ", " + tarih.getUTCSeconds() + ", " + tarih.getUTCMilliseconds() +
+                "<br/>UTC koy (aygünü, ay,  yıl, saat, dakika, saniye, milisaniye): " + tarih.setUTCDate(tarih.getUTCDate()) + ", " + tarih.setUTCMonth(tarih.getUTCMonth()) + ", " + tarih.setUTCFullYear(tarih.getUTCFullYear()) + ", " + tarih.setUTCHours(tarih.getUTCHours()) + ", " + tarih.setUTCMinutes(tarih.getUTCMinutes()) + ", " + tarih.setUTCSeconds(tarih.getUTCSeconds()) + ", " + tarih.setUTCMilliseconds(tarih.getUTCMilliseconds()) +
+                "<br/>Geçen yıl farkı (şimdi - 1900): " + tarih.getYear() +
+                "<br/>Yıl koy: " + tarih.setYear(2019) +
+                "<br/>Tarih koy (aygünü=1, ay=1,  yıl=2019, saat=0, dakika=0, saniye=0, milisaniye=0): " + tarih.setDate(1) + ", " + tarih.setMonth(1) + ", " + tarih.setFullYear(2019) + ", " + tarih.setHours(0) + ", " + tarih.setMinutes(0) + ", " + tarih.setSeconds(0) + ", " + tarih.setMilliseconds(0) +
+                "<br/>Yeni ayarlı tarih: " + tarih +
+                "<br/>Yeni tarih koy: " + tarih.setTime (1549481032326) +
+                "<br/>Yeni ayarlı tarih: " + tarih +
+                "<br/>Zamansız tarih dizgesi: " + tarih.toDateString() +
+                "<br/>Zamansız lokal tarih dizgesi: " + tarih.toLocaleDateString() +
+                "<br/>Tarihsiz lokal zaman dizgesi: " + tarih.toLocaleTimeString() +
+                "<br/>Tarihsiz zaman dizgesi: " + tarih.toTimeString() +
+                "<br/>Lokal dizge: " + tarih.toLocaleString() +
+                //"<br/>Lokal formatlı tarih: " + tarih.toLocaleFormat ("%A, %B %e, %Y") +
+                //"<br/>Tarih kaynağı: " + tarih.toSource() +
+                "<br/>GMT tarih: " + tarih.toGMTString() +
+                "<br/>UTC tarih: " + tarih.toUTCString() +
+                "<br/>Tarih dizgesi: " + tarih.toString() +
+                "<br/>Tarih 1.1.1970'den milisaniye tamsayısı: " + tarih.valueOf();
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:MediumVioletRed;">
+    <h2><a  style="color:AquaMarine;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk()">Tarih nesnesinin çeşitli metodları için Tıkla</button>
+
+    <br/><p style="background:MediumAquaMarine; color:OrangeRed; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

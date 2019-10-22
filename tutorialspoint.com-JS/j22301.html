@@ -1,0 +1,33 @@
+<html (j22301.html: Dizge nesnesi yaratma ve özellikleri örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+            dizge = new String ("M.Nihat Yavaş");
+            document.getElementById ("*").innerHTML = dizge;
+        } // fonk1() sonu...
+
+        function fonk2() {
+            dizge = new String ("JavaScript dizge nesnesi özellikleri");
+            String.prototype.düzenleyen = null; // Kullanıcı-tanımlı özellik atama...
+            String.prototype.tarih = null;
+            dizge.düzenleyen = "M.Nihat Yavaş";
+            dizge.tarih = "28.01.2019";
+            document.getElementById ("*").innerHTML =
+                "dizge = " + dizge +
+                "<br/>dizge.constructor = " + dizge.constructor +
+                "<br/>dizge.length = " + dizge.length +
+                "<br/>dizge.düzenleyen = " + dizge.düzenleyen +
+                "<br/>dizge.tarih = " + dizge.tarih;
+        } // fonk2() sonu...
+    </script>
+</head>
+<body style="background:Peru;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk1()">Yeni bir String nesnesi yaratmak için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk2()">Çeşitli (hazır veya tanımlanan) dizge özelliği için Tıkla</button>
+
+    <br/><p style="background:SeaGreen; color:Orchid; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

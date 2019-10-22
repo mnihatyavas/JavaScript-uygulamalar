@@ -1,0 +1,27 @@
+<DOCTYPE! html (j22402a.html: Array/Dizi nesnesi hazır metodları-1 örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizi1 = new Array ("elma", "armut", "şeftali", "kaysı", "kiraz", "üzüm", "erik", "ceviz", "nar", "hurma", "portakal", "mandalina");
+            var dizi2 = ["hıyar", "domates", "biber", "maydonoz", "soğan", "havuç", "marul", "kavun", "karpuz"];
+            var birleşik = dizi1.concat (dizi2);
+            function uzunMu (eleman, endeks, dizi) {return (eleman.length >= 5);}
+            document.getElementById ("*").innerHTML =
+                "Her iki diziyi birleştiren dizi1.concat(dizi2) metodu: " + birleşik +
+                "<br/>Her bir dizi1 elemanlarını 'len>=5' ile test eden dizi1.every(uzunMu) metodu: " + dizi1.every (uzunMu) +
+                "<br/>Her bir dizi2 elemanlarını 'len>=5' ile test eden dizi2.every(uzunMu) metodu: " + dizi2.every (uzunMu) +
+                "<br/>Tüm dizi1 elemanlarını 'len>=5' ile filitre eden dizi1.filter(uzunMu) metodu: " + dizi1.filter (uzunMu) +
+                "<br/>Tüm dizi2 elemanlarını 'len>=5' ile filitre eden dizi2.filter(uzunMu) metodu: " + dizi2.filter (uzunMu);
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:OliveDrab;">
+    <h2><a  style="color:MediumSpringGreen;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Orchid; color:Gold; font-size:16;" type="button" onclick="fonk()">Çeşitli dizi metodları-1 için Tıkla</button>
+
+    <br/><p style="background:NavajoWhite; color:OrangeRed; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

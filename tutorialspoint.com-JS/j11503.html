@@ -1,0 +1,30 @@
+<html (j11503.html)>
+<head>
+    <meta charset="coding:iso-8859-9 Türkçe">
+    <script>
+        function çereziYaz() {
+            if (document.formum.müþteri.value == "" ) {
+                alert ("Lütfen bir çerez adý girin!");
+                return;
+            } // if kararý sonu...
+            var þimdi = new Date();
+            þimdi.setMonth (þimdi.getMonth() + 1);
+            // Eðer "þimdi.setMonth (þimdi.getMonth() - 1);" negatif ay girerseniz, program sonlandýðýnda çerez de otomatikmen silinecektir...
+            çerezDeðeri = escape (document.formum.müþteri.value) + ";"
+            document.cookie = "ad=" + çerezDeðeri;
+            document.cookie = "expires=" + þimdi.toUTCString() + ";"
+            document.getElementById ("*").innerHTML = 
+                "Çerez: [ad=" + çerezDeðeri + " ve expires=" + þimdi.toUTCString() + ";] anahtar-deðer ve bitiþ tarihi'yle KURULDU";
+        } // çereziYaz() fonksiyonu sonu...
+</script>
+</head>
+<body style="background:Maroon; color:MediumAquaMarine;"> <!-- #800000, #66cdaa -->
+    <form name="formum" action="">
+        Bir çerez adý girin: <input type="text" name="müþteri"/>
+        <input type="button" value="Çerezi Kur" onclick="çereziYaz()"/>
+    </form>
+
+    <br/>
+    <p id="*" style="font-size:20px; color:MediumOrchid;">Çerez açýklamasý==></p> <!-- #ba5503 -->
+</body>
+</html>

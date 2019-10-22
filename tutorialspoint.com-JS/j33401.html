@@ -1,0 +1,42 @@
+<DOCTYPE! html (j33401.html: Resim haritalama ile konuma duyarlı yönlendirme örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function dersAdınıGöster (ad) {document.formum.ders.value = ad;}
+    </script>
+    <style>
+        h2{background:LightGray; width:25%;}
+        h3 {color:Gold;}
+        p {color:MintCream; font-size:16px;}
+        input {background:Olive; color:OrangeRed; font-size:20px;}
+    </style>
+</head>
+<body style="background:MediumSeaGreen;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <p>Aşağıdaki kutu içi her resmin üzerinde gezinin ve tıklayıp derse başlayın.</p>
+    <form name="formum">
+        <input type="text" name="ders" size="20" />
+    </form>
+
+    <img src="resim/haritala.gif" alt="HTML Haritalama" border="0" usemap="#dersler"/>
+
+    <map name="dersler">
+        <area shape="poly" coords="74, 0, 113, 29, 98, 72, 52, 72, 38, 27"
+            href="C:/Users/pc/Desktop/MyFiles/4. Dersler/durağan/perl/perl.html" alt="Perl Kursu" target="_"
+            onMouseOver="dersAdınıGöster ('Şimdiki Dersimiz Perl')"
+            onMouseOut="dersAdınıGöster('')"/>
+
+        <area shape="rect" coords="22, 83, 126, 125"
+            href="C:/Users/pc/Desktop/MyFiles/4. Dersler/durağan/perl/html.html" alt="HTML Kursu" target="_"
+            onMouseOver="dersAdınıGöster ('Sıradaki Dersimiz HTML')"
+            onMouseOut="dersAdınıGöster('')"/>
+
+        <area shape="circle" coords="73, 168, 32"
+            href="C:/Users/pc/Desktop/MyFiles/4. Dersler/durağan/perl/php.html" alt="PHP Kursu" target="_"
+            onMouseOver="dersAdınıGöster ('Son Dersimiz PHP')"
+            onMouseOut="dersAdınıGöster('')"/>
+    </map>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html (j11401.html)>
+<head>
+    <script>
+        window.onerror = function() {
+            document.getElementById ("*").innerHTML=
+                "onerror() olayý: window bir HATA yakaladý!"
+        } // anonim fonksiyon sonu...
+
+      function olay1() {
+            document.getElementById ("*").innerHTML=
+                "onclick() olayý: farenin sol düðmesiyle TIKLADINIZ!"
+        } // olay1() fonksiyonu sonu...
+
+        function olay2() {
+            document.getElementById ("*").innerHTML=
+                "onsubmit() olayý: formunuz maalesef GEÇERSÝZ!"
+            return false;
+        } // olay2() fonksiyonu sonu...
+
+        function olay3() {
+            document.getElementById ("*").innerHTML=
+                "onmouseover() olayý: fareyi kutu ÜZERÝNE getirdiniz!"
+        } // olay3() fonksiyonu sonu...
+
+        function olay4() {
+            document.getElementById ("*").innerHTML=
+                "onmouseout() olayý: fareyi kutu DIÞINA çýkardýnýz!"
+        } // olay4() fonksiyonu sonu...
+
+        function olay5() {
+            document.getElementById ("*").innerHTML=
+                "ondblclick() olayý: farenin sol düðmesiyle ÇÝFT týkladýnýz!"
+        } // olay5() fonksiyonu sonu...
+
+        function olay7() {
+            document.getElementById ("*").innerHTML=
+                "onmousewheel() olayý: farenin TEKERÝ döndü!"
+        } // olay5() fonksiyonu sonu...
+
+    </script>
+</head>
+<body style="background:BlueViolet;"> <!-- #8a2be2 -->
+    <h3 style="color:BurlyWood;">Olaylarý görmek için ilgili düðmeye basýn</h3> <!-- #deb887 -->
+
+    <div onmouseover="olay3()" onmouseout="olay4()" onmousewheel="olay7()"
+        style="background:black; color:yellow; padding:30px; text-align:center; margin:20px;">
+        <h2>Kutu içine fare üzerindeXçýktýXteker kontrolu</h2>
+    </div>
+
+    <form method="POST" action="www.tutorialspoint.com" onsubmit="return olay2()">
+        <input type="submit" value="On Submit" />
+        <input type="button" onclick="olay1()" value="On Click" />
+        <input type="button" ondblclick="olay5()" value="On Dbl Click" />
+        <input type="button" onclick="olay6()" value="On Error" />
+        <input type="button" onmousewheel="olay7()" value="On Mouse Wheel" />
+    </form>
+
+    <p style="color:DarkRed;font-size:30px;" id="*">OLAY==></p> <!-- #8b0000 -->
+</body>
+</html>

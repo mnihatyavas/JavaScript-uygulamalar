@@ -1,0 +1,27 @@
+<DOCTYPE! html (j33202.html: Çoklu-ortam embed src ile dökümanınıza film müzik resim ve roman konuşlandırma örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <style>
+        h2{background:LightGray; width:25%;}
+        input {background:Purple; color:Gold;}
+    </style>
+
+    <script>
+        function fonk1() {document.getElementById("*").innerHTML="<embed src='müzik1.mp3'>";}
+        function fonk2() {document.getElementById("*").innerHTML="<embed src='epub1.epub'>";}
+        function fonk3() {document.getElementById("*").innerHTML="<embed src='resim/22.jpg'>";}
+        function fonk4() {document.getElementById("*").innerHTML="<embed src='film1.mp4'>";}
+    </script>
+</head>
+<body style="background:MediumSeaGreen; color:Orange;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <input type="button" value="Müzik" onclick="fonk1()"/>
+    <input type="button" value="Epub Roman" onclick="fonk2()"/>
+    <input type="button" value="Yayla Evi Resmi" onclick="fonk3()"/>
+    <input type="button" value="Animasyon Filmi" onclick="fonk4()"/>
+
+    <br/><br/><p id="*"></p>
+</body>
+</html>

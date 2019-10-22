@@ -1,0 +1,108 @@
+<html (j22001.html)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <title>JavaScript nesnelerinin, fonksiyon, metod ve özellikleri</title>
+    <script>
+        function fonk1() {
+            var dizge = document.title; // document nesnesinin title özelliğinin değeri...
+            document.write ("<body style='background:black; color:LightSeaGreen; font-size:20px;'/>")
+            document.write ("document nesnesinin write metoduyla (title/başlıklı) dizge değeri:<br/>" + dizge);
+        } // fonk1() sonu...
+
+        function fonk2() {
+            document.write ("<body style='background:black; color:LightSeaGreen; font-size:20px;'/>")
+            document.write ("Fonksiyon bağımsız bir ifadedir," +
+                "<br/>metod ise nesneye '.' ile bağlıdır ve this anahtar kelimesiyle referanslanabilir." +
+                "<br/>Bu örnek bir document nesnesinin write metoduyla yansıtılmaktadır.");
+        } // fonk2() sonu...
+
+        function fonk3() {
+            document.write ("<body style='background:black; color:LightSeaGreen; font-size:20px;'/>")
+            document.write ("Object() bir js arşiv fonksiyonudur," +
+                "<br/>new anahtar kelimesiyle yeni bir nesne yaratır," +
+                "<br/>ve bu nesneye çeşitli özellikler atanabilir. Örnek:<br/>");
+
+            var kitap = new Object(); // Kullanıcı tanımlı kitap nesnesi, js arşiv fonksiyonu Object() ile yaratıldı...
+            kitap.adı = "İlk kelime işlemciler: WordStar ve WordPerfect"; // kitap nesnesine özellikler atanabilir...
+            kitap.yazarı = "M.Nihat Yavaş";
+            kitap.tarihi = "Balıkesir, 1987";
+
+        document.write ("<p style='color:Cyan;'/>Kitabın adı: " + kitap.adı + "<br>");
+        document.write ("Yazarı: " + kitap.yazarı + "<br>");
+        document.write ("Basım yeri ve tarihi: " + kitap.tarihi);
+        } // fonk3() sonu...
+
+        function fonk4() {
+            function kitap (ismi, derleyeni, basım) {
+                this.ismi = ismi;
+                this.derleyeni = derleyeni;
+                this.basım = basım;
+            } // kitap(..) fonksiyonu sonu...
+
+            var kitabım1 = new kitap ("Lotus123, dBase-IV ve Clipper", "M.Nihat Yavaş", "Bursa, 1990");
+            var kitabım2 = new kitap ("PL/I, Turbo Pascal ve C", "M.Nihat Yavaş", "Bursa, 1991");
+            var kitabım3 = new kitap ("VB, MS Word, Excel ve Access", "M.Nihat Yavaş", "Bursa, 1992");
+
+            document.write ("<body style='background:black; color:magenta; font-size:20px;'/>")
+            document.write ("Parametreli kitap fonksiyonunu new kitap(argümanlar)'la yaratıp," +
+                "<br/>this anahtar kelimeli kitap özelliklerini atayıp," +
+                "<br/>sonra da bu bilgileri yansıtabilirsiniz. Örnek:");
+
+            document.write ("<br/><p style='color:yellow;'/>Kitabın adı: " + kitabım1.ismi + "<br>Derleyeni: " + kitabım1.derleyeni + "<br>Basım yeri ve tarihi: " + kitabım1.basım);
+            document.write ("<br/><p style='color:yellow;'/>Kitabın adı: " + kitabım2.ismi + "<br>Derleyeni: " + kitabım2.derleyeni + "<br>Basım yeri ve tarihi: " + kitabım2.basım);
+            document.write ("<br/><p style='color:yellow;'/>Kitabın adı: " + kitabım3.ismi + "<br>Derleyeni: " + kitabım3.derleyeni + "<br>Basım yeri ve tarihi: " + kitabım3.basım);
+        } // fonk4() sonu...
+
+        // Bir metod olarak kullanılacak fiyat fonksiyonu tanımı...
+        function fiyatı (tutar) {this.fiyat = tutar;}
+
+        function fonk5() {
+            function kitap (ismi, derleyeni, basım) {
+                this.ismi = ismi;
+                this.derleyeni = derleyeni;
+                this.basım = basım;
+                this.fiyatı = fiyatı; // Metod özellik olarak atanıyor...
+            } // kitap(..) fonksiyonu sonu...
+
+            var kitabım = new kitap ("AutoCAD, PowerPoint, İnternet ve Ticari Paket Programlar", "M.Nihat Yavaş", "Bursa, 1995");
+            kitabım.fiyatı (20)
+
+            document.write ("<body style='background:black; color:magenta; font-size:20px;'/>")
+            document.write ("Parametreli kitap fonksiyonunu new kitap (argümanlar)'la yaratıp," +
+                "<br/>this anahtar kelimeli kitap özelliklerini atayıp," +
+                "<br/>ayrıca da fonksiyon tanımlı fiyat metodunu kitap nesnesine ayrıca atayabiliriz. Örnek:");
+
+            document.write ("<br/><p style='color:yellow;'/>Kitabın adı: " + kitabım.ismi + "<br>Derleyeni: " + kitabım.derleyeni + "<br>Basım yeri ve tarihi: " + kitabım.basım);
+            document.write ("<br/>Fiyatı: " + kitabım.fiyat + " TL'dir.");
+        } // fonk5() sonu...
+
+        function fiyatı2 (a) {with (this) {fiyat = a;}}
+        function fonk6() {
+            function kitap (a, b, c) {
+                this.ismi=""; this.derleyeni=""; this.basım=""; this.fiyat=0;
+                with (this) {ismi = a; derleyeni = b; basım = c;}
+                this.fiyatı2 = fiyatı2;
+            } // kitap(..) fonksiyonu sonu...
+
+            var kitabım = new kitap ("AutoCAD, PowerPoint, İnternet ve Ticari Paket Programlar", "M.Nihat Yavaş", "Bursa, 1995");
+            kitabım.fiyatı2 (20)
+
+            document.write ("<body style='background:black; color:magenta; font-size:20px;'/>")
+            document.write ("Parametreli kitap fonksiyonunu new kitap (argümanlar)'la yaratıp," +
+                "<br/>this anahtar kelimeli kitap özelliklerini atayıp," +
+                "<br/>ayrıca da fonksiyon tanımlı fiyat metodunu kitap nesnesine ayrıca atayabiliriz. Örnek:");
+
+            document.write ("<br/><p style='color:yellow;'/>Kitabın adı: " + kitabım.ismi + "<br>Derleyeni: " + kitabım.derleyeni + "<br>Basım yeri ve tarihi: " + kitabım.basım);
+            document.write ("<br/>Fiyatı: " + kitabım.fiyat + " TL'dir.");
+        } // fonk6() sonu...
+    </script>
+</head>
+<body style="background:LightCoral;">
+    <button style="background:SlateGray; color:LightGoldenRodYellow; font-size:25px;" type="button" onclick="fonk1()">Nesne Özelliği için Tıkla</button><br/>
+    <button style="background:SlateGray; color:LightGoldenRodYellow; font-size:25px;" type="button" onclick="fonk2()">Nesne Metodu için Tıkla</button><br/>
+    <button style="background:SlateGray; color:LightGoldenRodYellow; font-size:25px;" type="button" onclick="fonk3()">Construct() js arşiv Fonksiyonu için Tıkla</button><br/>
+    <button style="background:SlateGray; color:LightGoldenRodYellow; font-size:25px;" type="button" onclick="fonk4()">Kullanıcı tanımlı fonksiyonla bir nesne yaratmak için Tıkla</button><br/>
+    <button style="background:SlateGray; color:LightGoldenRodYellow; font-size:25px;" type="button" onclick="fonk5()">Nesneye fonksiyon metodu atamak için Tıkla</button><br/>
+    <button style="background:SlateGray; color:LightGoldenRodYellow; font-size:25px;" type="button" onclick="fonk6()">'with' anahtarkelimeli özellikli nesneye metod atamak için Tıkla</button><br/>
+</body>
+</html>

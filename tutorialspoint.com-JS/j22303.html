@@ -1,0 +1,31 @@
+<html (j22303.html: Dizgeyi çeşitli HTML etiketiyle sarma metodları örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizge1 = new String ("Dizgeyi çeşitli HTML etiketine sarma metodları");
+            var dizge2 = "href='https://mnihatyavas.wordpress.com' target='_'";
+            document.getElementById ("*").innerHTML =
+                alert (dizge2.anchor("a etiketi")) + ": içerikte görüldüğü gibi a: anchor() etiketiyle sarmalandı.<br/>" +
+                dizge1.big() + ": görüldüğü gibi big() fonu etiketiyle sarmalandı.<br/>" +
+                dizge1.small() + ": görüldüğü gibi small() fonu etiketiyle sarmalandı.<br/>" +
+                alert (dizge1.blink()) + ": görüldüğü gibi blink() etiketiyle sarmalandı.<br/>" +
+                dizge1.bold() + ": görüldüğü gibi bold() etiketiyle sarmalandı.<br/>" +
+                dizge1.fixed() + ": görüldüğü gibi fixed('tt') etiketiyle sarmalandı.<br/>" +
+                dizge1.fontcolor ("OldLace") + ": görüldüğü gibi fontcolor('OldLace') etiketiyle sarmalandı.<br/>" +
+                dizge1.fontsize (1) + ": görüldüğü gibi fontsize(1->7) etiketiyle sarmalandı.<br/>" +
+                alert (dizge1.italics()) + ": görüldüğü gibi italics() etiketiyle sarmalandı.<br/>" +
+                dizge1.link ("https://mnihatyavas.wordpress.com/") + ": görüldüğü gibi link('https://mnihatyavas.wordpress.com/') etiketiyle sarmalandı.<br/>" +
+                dizge1.strike() + ": görüldüğü gibi strike() etiketiyle sarmalandı.<br/>" +
+                dizge1.sub() + ": görüldüğü gibi sub() etiketiyle sarmalandı.<br/>" +
+                dizge1.sup() + ": görüldüğü gibi sup() etiketiyle sarmalandı.<br/>";
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Peru;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk()">Dizgeyi çeşitli HTML etiketiyle sarma metodları için Tıkla</button>
+
+    <br/><p style="background:Maroon; color:Lime; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

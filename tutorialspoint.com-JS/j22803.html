@@ -1,0 +1,40 @@
+<DOCTYPE! html (j22803.html: IE4 DOM/DocumentObjectModel/DökümanNesnesiModeli nesnesinin çeşitli özellik ve metodları örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var a = document.all["başlık"];
+            var b = document.all ["paragraf"];
+            //var c = document.all.tags("P"); // Tarayıcı kabul etmiyor...
+            document.getElementById ("*").innerHTML =
+                "2a) IE4/InternetExplorer DOM Özellikleri:" +
+                "<br/>document.activeElement: " + document.activeElement +
+                "<br/>document.all[]: " + document.all + ", " + document.all[0] + 
+                ", " + document.all[1] + ", " + document.all[2] + ", " + document.all[3] +
+                ", " + document.all[4] + ", " + document.all[5] + ", " + document.all[6] +
+                ", " + document.all[7] + ", " + document.all[8] + ", " + document.all[9] +
+                ", " + document.all[10] + ", " + document.all[11] +
+                "<br/>document.charset: " + document.charset +
+                "<br/>document.defaultCharset: " + document.defaultCharset +
+                "<br/>document.children[]: " + document.children + ", " + document.children[0] + ", " + document.children[1] +
+                "<br/>document.expando: " + document.expando +
+                "<br/>document.parentWindow: " + document.parentWindow +
+                "<br/>document.readyState/uninitialized/loadind/interactice/complete: " + document.readyState +
+                "<br/><br/>2b) IE4/InternetExplorer DOM Metodları:" +
+                "<br/>document.all['başlık'].innerHTML: " + a.innerHTML +
+                "<br/>document.all['paragraf'].innerHTML: " + b.innerHTML;
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Maroon; color:Moccasin;">
+    <h1 id="başlık">Esas IE4 DOM Başlığı</h1>
+    <p id="paragraf">Sonuçları görmek için düğmeyi tıklayın:</p>
+
+    <h2><a  style="color:MintCream;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:Orange; font-size:16;" type="button" onclick="fonk()">IE4 DOM nesnesinin yaratılması ve özellikleri için Tıkla</button>
+
+    <br/><p style="background:Peru; color:LightGreen; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

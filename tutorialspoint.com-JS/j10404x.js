@@ -1,0 +1,1 @@
+function selam() {alert ("Merhaba 'Java Script' Dünyasý!\nM.Nihat Yavaþ")}

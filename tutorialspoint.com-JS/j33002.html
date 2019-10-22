@@ -1,0 +1,82 @@
+<DOCTYPE! html (j33002.html: Form geçerliliğini herbir veri girişi için kontrol etme örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function geçerlile() {
+            if (document.formum.isim.value == "" ) {
+                alert ("Lütfen ad ve soyadınızı girin!");
+                document.formum.isim.focus();
+                return false;
+            }
+            if (document.formum.eposta.value == "") {
+                alert ("Lütfen eposta sanal adresinizi girin!");
+                document.formum.eposta.focus();
+                return false;
+            }
+            var epostam = document.formum.eposta.value;
+            şapkaKonumu = epostam.indexOf ("@");
+            noktaKonumu = epostam.lastIndexOf (".");
+            if (şapkaKonumu < 1 || (noktaKonumu - şapkaKonumu < 2 )) {
+                alert ("Lüften epostanızın @ ve noktasını doğru girin!")
+                document.formum.eposta.focus();
+                return false;
+            }
+            if (document.formum.telefon.value == "" ||
+                    isNaN (document.formum.telefon.value) ||
+                    document.formum.telefon.value.length != 12) {
+                alert ("Lütfen GSM telefonunuzu 12 rakamlı girin!");
+                document.formum.telefon.focus();
+                return false;
+            }
+            if (document.formum.ülke.value == "-1") {
+                alert ("Lütfen tabiyetinizi belirtin!" );
+                return false;
+            }
+
+            return( true );
+        } // fonksiyon sonu...
+    </script>
+    <style>
+        td {background:Orange; color: Green;}
+        input {background: cyan; color:Brown; font-style:italic;}
+    </style>
+</head>
+<body style="background:MediumAquaMarine; color:Maroon;">
+    <h2 style="color:Peru;text-align:center;"><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <form style="margin-left:30%;" action="/cgi-bin/test.cgi" name="formum" onsubmit="return (geçerlile());">
+        <table cellspacing="3" cellpadding="0" border="2">
+            <tr>
+                <td align="right">Ad ve Soyad</td>
+                <td><input type="text" name="isim" /></td>
+            </tr>
+            <tr>
+                <td align="right">E Posta</td>
+                <td><input type="text" name="eposta" /></td>
+            </tr>
+            <tr>
+                <td align="right">GSM</td>
+                <td><input type="text" name="telefon" /></td>
+            </tr>
+            <tr>
+                <td align="right">Ülke</td>
+                <td>
+                    <select style="background:Magenta;" name="ülke">
+                        <option value="-1" selected>[bir ülke seç]</option>
+                        <option value="1">ABD</option>
+                        <option value="2">İngiltere</option>
+                        <option value="3">Avustralya</option>
+                        <option value="4">Hindistan</option>
+                        <option value="5">Türkiye</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Kontrol</td>
+                <td><input type="submit" value="Gönder" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

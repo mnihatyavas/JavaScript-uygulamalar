@@ -1,0 +1,22 @@
+<DOCTYPE! html (j22503.html: Date/Tarih nesnesinin çeşitli statik metodları örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var tarih = new Date();
+            document.getElementById ("*").innerHTML =
+                "Güncel standart tarih ve zaman: " + tarih +
+                "<br/>1.1.1970'den beri mili saniye tamsayısı: " + Date.parse (tarih) +
+                "<br/>1.1.1970'den beri mili saniye UTC tamsayısı: " + Date.UTC (tarih.getFullYear(), tarih.getMonth(), tarih.getDate(), tarih.getHours(), tarih.getMinutes(), tarih.getSeconds(), tarih.getMilliseconds());
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:MediumAquaMarine;">
+    <h2><a  style="color:Brown;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk()">Tarih nesnesinin çeşitli statik metodları için Tıkla</button>
+
+    <br/><p style="background:SlateGray; color:LightYellow; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

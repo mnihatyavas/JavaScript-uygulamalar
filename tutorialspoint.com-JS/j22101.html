@@ -1,0 +1,61 @@
+<html (j22101.html: Sayı nesnesi ve özellikleri örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+            var sayı = new Number (Math.round (Math.random()*10000 - 5000));
+            document.getElementById ("*").innerHTML = "[-5000->5000] arası tesadüfi tamsayı = " + sayı;
+        } // fonk1() sonu...
+
+        function fonk2() {
+            var sayı = Number.MAX_VALUE;
+            document.getElementById ("*").innerHTML = "Number.MAX_VALUE=" + sayı;
+        } // fonk2() sonu...
+
+        function fonk3() {
+            var sayı = Number.MIN_VALUE;
+            document.getElementById ("*").innerHTML = "Number.MIN_VALUE=" + sayı;
+        } // fonk3() sonu...
+
+        function fonk4() {
+            var ayGünü = 32;
+            if (ayGünü < 1 || ayGünü > 31) {
+                alert (">> " + ayGünü + "<<\nHATA: Ay günleri 1 ve 31 arasında olmalıdır!..\nSonuç: NaN/Not-a-Number/Bir-sayı-değil...");
+                ayGünü = Number.NaN;
+            } // if kararı sonu...
+            document.getElementById ("*").innerHTML = "Verilen ay-günü = " + ayGünü;
+
+            if (isNaN(ayGünü)) ayGünü = 31;
+            document.getElementById ("**").innerHTML = "Doğru ay-günü: " + ayGünü + " olabilir!..";
+        } // fonk4() sonu...
+
+        function fonk5() {
+            var sayı = -Number.MAX_VALUE*2;
+            if (sayı == Number.NEGATIVE_INFINITY)
+                alert ("DİKKAT: Sayı çok küçük olup, rakamsal karşılığı yoktur!..\nSayı = Negatif Sonsuz");
+            document.getElementById ("*").innerHTML = "-Number.MAX_VALUE*2 = " + sayı;
+        } // fonk5() sonu...
+
+        function fonk6() {
+            var sayı = Number.MAX_VALUE*2;
+            if (sayı == Number.POSITIVE_INFINITY)
+                alert ("DİKKAT: Sayı çok büyük olup, rakamsal karşılığı yoktur!..\nSayı = Pozitif Sonsuz");
+            document.getElementById ("*").innerHTML = "Number.MAX_VALUE*2 = " + sayı;
+        } // fonk6() sonu...
+
+    </script>
+</head>
+<body style="background:MediumSeaGreen;">
+    <h1><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h1>
+
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk1()">Yeni bir sayı nesnesi yaratmak için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk2()">Azami JS pozitif değer özelliği için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk3()">Asgari JS negatif değer özelliği için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk4()">Geçersiz ay-günü için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk5()">Negatif sonsuz değer özelliği için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk6()">Pozitif sonsuz değer özelliği için Tıkla</button>
+
+    <br/><p style="color:Magenta; font-size:30; font-family:arial;" id="*"></p>
+    <p style="color:Red; font-size:30; font-family:arial;" id="**"></p>
+</body>
+</html>

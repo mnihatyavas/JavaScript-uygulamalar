@@ -1,0 +1,30 @@
+<DOCTYPE! html (j22702.html: RegExp/Düzenliİfade nesnesinin çeşitli metodları örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizge = "JavaScript enteresan bir script/taslak programlama dilidir.";
+            var kalıp1 = new RegExp ("taslak", "gi");
+            var kalıp2 = new RegExp ("taşlık", "gi");
+            document.getElementById ("*").innerHTML =
+                "dizge=" + dizge +
+                "<br/>kalıp1=" + kalıp1 + "; kalıp1.exec(dizge)=" + kalıp1.exec (dizge) +
+                "<br/>kalıp2=" + kalıp2 + "; kalıp2.exec(dizge)=" + kalıp2.exec (dizge) +
+                "<br/>new RegExp('bir','gim').test(dizge)=" + new RegExp ("bir", "gim").test (dizge) +
+                "<br/>new RegExp('bar','gim').test(dizge)=" + new RegExp ("bar", "gim").test (dizge) +
+                //"<br/>new RegExp('enteresan','gim').toSource(dizge)=" + new RegExp ("enteresan", "gim").toSource (dizge);
+                "<br/>new RegExp('enteresan','gim').toString(dizge)=" + new RegExp ("enteresan", "gim").toString (dizge);
+                
+
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Grey;">
+    <h2><a  style="color:MintCream;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Green; color:Gold; font-size:16;" type="button" onclick="fonk()">RegExp nesnesinin çeşitli metodları için Tıkla</button>
+
+    <br/><p style="background:DeepSkyBlue; color:FireBrick; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

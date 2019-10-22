@@ -1,0 +1,39 @@
+<DOCTYPE! html (j22402d.html: Array/Dizi nesnesi hazır metodları-4 örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizi1 = new Array ("elma", "armut", "şeftali", "kaysı", "kiraz", "üzüm", "erik", "ceviz", "nar", "hurma", "portakal", "mandalina");
+            var dizi2 = ["hıyar", "domates", "biber", "maydonoz", "soğan", "havuç", "marul", "kavun", "karpuz"];
+            var birleşik = dizi1.concat (dizi2);
+            var eleman1 = birleşik[Math.round (Math.random()*birleşik.length)]; // length.eleman olmayınca -1 döndürecektir...
+            uz = Math.round (Math.random()*100);
+            var dizi3 = new Array (uz)
+            for (i=0; i<=uz; i++) {dizi3[i]=Math.round (Math.random()*100);}
+            var silinen = "";
+            for (i=0; i<5; i++) {silinen = silinen + dizi2.shift() + ", ";}
+            document.getElementById ("*").innerHTML =
+                "Birleşik dizinin a-z sıralanması: " + birleşik.sort() +
+                "<br/>Birleşik dizinin revers'le z-a sıralanması: " + birleşik.sort().reverse() +
+                "<br/>" + uz + " adet gelişigüzel tamsayı dizinin artan sıralanması: " + dizi3.sort (function (a,b){return a-b}) +
+                "<br/>" + uz + " adet gelişigüzel tamsayı dizinin azalan sıralanması: " + dizi3.sort (function (a,b){return b-a}) +
+                "<br/>" + uz + " adet gelişigüzel tamsayı dizinin reverse'le azalan sıralanması: " + dizi3.sort(function (a,b){return a-b}).reverse() +
+                "<br/>dizi2.shift() ile baştan silinen 5 eleman: " + silinen + " Ve kalan dizi2: " + dizi2 +
+                "<br/>dizi2.unshift(silinen) ile baştan silinen " + dizi2.unshift (silinen) + " elemanın tekrar başa ilavesi: " + dizi2 +
+                "<br/>z-a sıralı birleşik.slice(9, 17) ile aradan alınan elemanlar dilimi: " + birleşik.slice (9, 17) +
+                "<br/>dizi1'de 1-4 harfli eleman var mı? " + dizi1.some (function (a,b,c) {return a.length <= 4}) +
+                "<br/>Peki dizi2'de 1-4 harfli eleman var mı? " + dizi2.some (function (a,b,c) {return a.length <= 4}) +
+                "<br/>birleşik.splice(3,4,silinen) ile dizinin 3.endeksinden şu 4 elemanı silip: " + birleşik.splice(3,4,silinen) + "; Aynı endekse önceki silinen 5'i ekleyelim: " + birleşik +
+                "<br/>dizi2.toString().slice(8,30) ile dizgeye çevrilen dizi içeriğinden bir parça görünteleyelim: " + dizi2.toString().substr (25, 38);
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Peru;">
+    <h2><a  style="color:Olive;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk()">Çeşitli dizi metodları-4 için Tıkla</button>
+
+    <br/><p style="background:PaleGreen; color:OrangeRed; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

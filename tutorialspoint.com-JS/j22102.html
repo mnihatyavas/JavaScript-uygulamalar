@@ -1,0 +1,66 @@
+<html (j22102.html: Sayı nesnesi özellik ve metodları örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+               function kitap (adı, yazarı, şehir) {
+                    this.adı = adı;
+                    this.yazarı = yazarı;
+                    this.şehir = şehir;
+                } // kitap() sonu...
+
+            var kitabım = new kitap ("JavaScript", "www.tutorialspoint.com'dan Mohtashim", "Mersin");
+            kitap.prototype.fiyatı = null;
+            kitabım.fiyatı = 30;
+            kitap.prototype.yılı = null;
+            kitabım.yılı = 2019;
+
+            document.getElementById ("*").innerHTML =
+                "Kitabın adı: " + kitabım.adı + "<br>" +
+                "Kitabın yazarı: " + kitabım.yazarı + "<br>" +
+                "Kitabın basım yeri: " + kitabım.şehir + "<br>" +
+                "Kitabın yayım yılı: " + kitabım.yılı + "<br>" +
+                "Kitabın fiyatı: " + kitabım.fiyatı + " TL";
+        } // fonk1() sonu...
+
+        function fonk2() {
+            var sayı = new Number (Math.round (Math.random()*10000));
+            document.getElementById ("*").innerHTML =
+                "Sayımız: " + sayı + "<br/>" +
+                "Sayı kurucu: " + sayı.constructor;
+        } // fonk2() sonu...
+
+        function fonk3() {
+            var sayı = new Number (Math.random()*10000);
+            document.getElementById ("*").innerHTML =
+                "Sayımız: " + sayı + "<br/>" +
+                "sayı.toExponential(): " + sayı.toExponential() + "<br/>" +
+                "sayı.toExponential(2): " + sayı.toExponential(2) + "<br/>" +
+                "sayı.toFixed(): " + sayı.toFixed() + "<br/>" +
+                "sayı.toFixed(2): " + sayı.toFixed(2) + "<br/>" +
+                "sayı.toLocaleString(): " + sayı.toLocaleString() + "<br/>" +
+                "sayı.toPrecision(): " + sayı.toPrecision() + "<br/>" +
+                "sayı.toPrecision(6): " + sayı.toPrecision(6) + "<br/>" +
+                "sayı.toPrecision(4): " + sayı.toPrecision(4) + "<br/>" +
+                "sayı.toPrecision(3): " + sayı.toPrecision(3) + "<br/>" +
+                "sayı.toPrecision(1): " + sayı.toPrecision(1) + "<br/>" +
+                "sayı.toString(): " + sayı.toString() + "<br/>" +
+                "sayı.toString(2): " + sayı.toString(2) + "<br/>" +
+                "sayı.toString(8): " + sayı.toString(8) + "<br/>" +
+                "sayı.toString(16): " + sayı.toString(16) + "<br/>" +
+                "sayı.toString(36): " + sayı.toString(36) + "<br/>" +
+                "Sayı'nın nesnesi değil ilkeli; sayı.valueOf(): " + sayı.valueOf() + "<br/>";
+        } // fonk3() sonu...
+
+    </script>
+</head>
+<body style="background:MediumSeaGreen;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk1()">Yeni bir kitap nesnesi yaratmak için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk2()">sayı.constructor() metodu için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk3()">Diğer sayı metodları için Tıkla</button>
+
+    <br/><p style="color:MediumVioletRed; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

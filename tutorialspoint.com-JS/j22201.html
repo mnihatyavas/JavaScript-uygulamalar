@@ -1,0 +1,48 @@
+<html (j22201.html: İkili nesnesi yaratma, özellikleri ve metodları örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+            var ikili = new Boolean (Math.round (Math.random()*2) -1); // (-, 0, null, NaN, undefined, "") ise false, + ise true...
+            document.getElementById ("*").innerHTML = "new Boolean() = " + ikili;
+        } // fonk1() sonu...
+
+        function fonk2() {
+            var ikili = new Boolean();
+            document.getElementById ("**").innerHTML = "ikili.constructor() = " + ikili.constructor;
+        } // fonk2() sonu...
+
+        function fonk3() {
+            var ikili = new Boolean (Math.round (Math.random()*2) -1);
+            Boolean.prototype.değer = "Yanlış"; // ikili nesnesini yaratan Boolean fonksiyonuna değer özelliği ilavesi...
+            if (ikili == true) ikili.değer = "Doğru";
+            document.getElementById ("*").innerHTML = "ikili.değer = " + ikili.değer;
+        } // fonk3() sonu...
+
+        function fonk4() {
+            function Yarat (sayı) {this.sayı = sayı;}
+            var ikili = new Yarat (Math.round (Math.random()*2) -1);
+            Yarat.prototype.değer = null;
+            if (ikili.sayı > 0) ikili.değer = "Doğru"; else ikili.değer = "Yanlış";
+            document.getElementById ("*").innerHTML =
+                "ikili.sayı = " + ikili.sayı +
+                "<br/>ikili.değer = " + ikili.değer +
+                "<br/>ikili.değer.toSource() = " + ikili.değer.toSource +
+                "<br/>ikili.değer.toString() = " + ikili.değer.toString() +
+                "<br/>ikili.değer.valueOf() = " + ikili.değer.valueOf();
+        } // fonk4() sonu...
+
+    </script>
+</head>
+<body style="background:Peru;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk1()">Yeni bir Boolean nesnesi yaratmak için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk2()">Boolean nesne tipini yaratan fonksiyon için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk3()">Boolean nesneye prototype/yeni özellik ilavesi için Tıkla</button>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk4()">Boolean nesneye birçok metod ilavesi için Tıkla</button>
+
+    <br/><p style="background:OldLace; width: 55%; color:Orchid; font-size:25; font-family:arial;" id="*"></p>
+    <p style="background:LightGrey; width: 85%; color:Orchid; font-size:25; font-family:arial;" id="**"></p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<DOCTYPE! html (j22402c.html: Array/Dizi nesnesi hazır metodları-3 örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizi1 = new Array ("elma", "armut", "şeftali", "kaysı", "kiraz", "üzüm", "erik", "ceviz", "nar", "hurma", "portakal", "mandalina");
+            var dizi2 = ["hıyar", "domates", "biber", "maydonoz", "soğan", "havuç", "marul", "kavun", "karpuz"];
+            var birleşik = dizi1.concat (dizi2);
+            var eleman1 = birleşik[Math.round (Math.random()*birleşik.length)]; // length.eleman olmayınca -1 döndürecektir...
+            uz = Math.round (Math.random()*100);
+            var dizi3 = new Array (uz)
+            for (i=0; i<=uz; i++) {dizi3[i]=Math.round (Math.random()*100);}
+            var eleman2 = dizi3[Math.round (Math.random()*uz)];
+            var dizi4 = new Array (uz)
+            for (i=0; i<=uz; i++) {dizi4[i]=dizi3[i]*Math.PI/180;}
+            var dizi4 = dizi4.map (Math.sin);
+            for (i=0; i<=uz; i++) {dizi4[i]=dizi4[i].toFixed (2);}
+            var silinen = ""
+            for (i=0; i<5; i++) {silinen = silinen + dizi2.pop() + ", ";}
+            document.getElementById ("*").innerHTML =
+                "Aranan eleman: " + eleman1 + ", Ve endeks no'su: " + birleşik.indexOf (eleman1) +
+                "<br/>Birleşik dizi elemanları birleşik.join('->') ayracı ile dizgeye dönüştürüldü: " + birleşik.join ("->") +
+                "<br/>" + uz + " adet gelişigüzel sayısal dizi elemanları: " + dizi3 +
+                "<br/>Aranan eleman: " + eleman2 + ", Ve ilk-->son endeks no'su: " + dizi3.indexOf (eleman2) + "-->" + dizi3.lastIndexOf (eleman2) +
+                "<br/>dizi3.map(Math.sin) ile 1->100 derecenin radyan sinüse çevrilen listesi: " + dizi4 +
+                "<br/>Son 5 elemanın dizi2 sonundan pop()'la silinmesi: " + silinen + " Ve kalan dizi2: " + dizi2 + 
+                "<br/>Pop'lanan son 5 elemanın dizi2 sonuna tekrar push'la eklenmesi: " + dizi2.push (silinen) + ", Ve sonuç dizi2: " + dizi2 +
+                "<br/>" + uz + " adet [0->100] tamsayılı dizi3 elemanların toplamı: " + dizi3.reduce (function (a,b) {return a+b}) +
+                "<br/>" + uz + " adet [0->100] tamsayılı dizi3 elemanların 2 kat sağdan toplamı: " + Number (dizi3.reduceRight (function (a,b) {return a+2*b}) + dizi3[uz]) +
+                "<br/>" + uz + " adet [0->1] küsüratlı dizi4 elemanların toplamı: " + dizi4.reduce (function (a,b) {return a*1+b*1}) +
+                "<br/>" + uz + " adet [0->1] küsüratlı dizi4 elemanların 2 kat sağdan toplamı: " +  dizi4.reduceRight (function (a,b) {return a*1+b*2}).toFixed(2);
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Olive;">
+    <h2><a  style="color:Plum;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:Navy; color:Gold; font-size:16;" type="button" onclick="fonk()">Çeşitli dizi metodları-3 için Tıkla</button>
+
+    <br/><p style="background:#eee8aa; color:OrangeRed; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

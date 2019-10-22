@@ -1,0 +1,60 @@
+<DOCTYPE! html (j33501.html: Tarayıcınızı ve sürümünü tespit etme örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk1() {
+           var ajans = navigator.userAgent;
+           var opera = (ajans.indexOf ('Opera') != -1);
+           var ie = (ajans.indexOf ('MSIE') != -1);
+           var gecko = (ajans.indexOf ('Gecko') != -1);
+           var netsape = (ajans.indexOf ('Mozilla') != -1);
+           var sürüm = navigator.appVersion;
+           var sonuç;
+
+            if (opera) {sonuç = "Opera temelli tarayıcı";
+            }else if (gecko) {sonuç = "Mozilla temelli tarayıcı";
+            }else if (ie) {sonuç = "MS IE temelli tarayıcı";
+            }else if (netscape) {sonuç = "Netscape temelli tarayıcı";
+            }else {sonuç = "Bilinmeyen marka bir tarayıcı kullanmaktasınız";}
+
+            document.getElementById("*").innerHTML =
+                "Aktüel kullanımdaki tarayıcınız: " + sonuç +
+                "<br />Ve sürüm bilgileri: " + sürüm;
+        } // fonk1() sonu...
+
+        function fonk2() {
+            document.getElementById("*").innerHTML =
+                "navigator.appCodeName/seyrüsefer.uygulamaKodAdı: " + navigator.appCodeName +
+                "<br/>navigator.appVersion/seyrüsefer.uygulamaSürümü: " + navigator.appVersion +
+                "<br/>navigator.language/seyrüsefer.lisanı: " + navigator.language +
+                "<br/>navigator.mimTypes[]/seyrüsefer.mimTipleri: " + navigator.mimTypes +
+                "<br/>navigator.platform[]/seyrüsefer.platformu: " + navigator.platform +
+                "<br/>navigator.plugins[0].name/seyrüsefer.fişler[0].adı: " + navigator.plugins[0].name +
+                "<br/>navigator.userAgent/seyrüsefer.kullanıcıAjansı: " + navigator.userAgent;
+        } // fonk2() sonu...
+
+        function fonk3() {
+            document.getElementById("*").innerHTML =
+                "navigator.javaEnabled()/seyrüsefer.javaEtkinleştirildiMi(): " + navigator.javaEnabled() +
+                "<br/>navigator.plugins.refresh/seyrüsefer.fişler.yenilensin: " + navigator.plugins.refresh +
+                "<br/>navigator.preference(ad,değer)/seyrüsefer.tercih(ad,değer): " + navigator.preference +
+                "<br/>navigator.taintEnabled()/seyrüsefer.bozumEtkin(): " + navigator.taintEnabled;
+        } // fonk3() sonu...
+    </script>
+    <style>
+        h2{background:LightGray; width:25%;}
+        h3 {color:Gold;}
+        p {color:Yellow; font-size:20px;}
+        input {background:Olive; color:OrangeRed; font-size:20px;}
+    </style>
+</head>
+<body style="background:MediumSeaGreen;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+    <input type="button" value="Tarayıcınız ve Sürümü" onclick="fonk1()">
+    <br/><input type="button" value="Tarayıcı Özellikleri" onclick="fonk2()">
+    <br/><input type="button" value="Tarayıcı Metodları" onclick="fonk3()">
+
+    <p id="*"></p>
+</body>
+</html>

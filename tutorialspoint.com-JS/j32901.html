@@ -1,0 +1,26 @@
+<DOCTYPE! html (j32901.html: JavaScript error/hata çeşitleri ve sebepleri örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            //window.print(;
+            //window.printYaz();
+            var mantıkHatası = (2+3 == 4); var mantıkHatasız = (2+2 == 4)
+            document.getElementById ("*").innerHTML =
+                "3 tür hata vardır: Syntax/yazılım, runtime/çalışma-esnasında ve logic/mantık hataları." +
+                "<br/>1) Yazılım hataları: 'window.print(;' yazılım hatasından dolayı script fonksiyonu çalışmayacaktır!" +
+                "<br/>2) Çalışmazamanı hataları: 'window.printYaz();' istisna yönetimsiz, olmayan metodu çağırma hatasından dolayı script fonksiyonu çalışmayacaktır!" +
+                "<br/>3) Mantıksal hatalar: Programın yanlış sonuçlar üretmesidir, programcının yanlış düşünme hatasıdır:" +
+                "(2+3==4) doğru mu? " + mantıkHatası + "; peki (2+2==4) doğru mu? " + mantıkHatasız;
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Maroon; color:Moccasin;">
+    <h2><a  style="color:MintCream;" href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <button style="background:MidnightBlue; color:Orange; font-size:16;" type="button" onclick="fonk()">Program hata çeşitleri için Tıkla</button>
+
+    <br/><p style="background:Peru; color:LightGreen; font-size:18; font-family:arial;" id="*"></p>
+</body>
+</html>

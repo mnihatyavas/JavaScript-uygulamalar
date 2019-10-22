@@ -1,0 +1,51 @@
+<html (j22302.html: Çeşitli dizge metodları örneği.)>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        function fonk() {
+            var dizge = new String ("JavaScript dizge nesnesi 1.2.3.5.4 metodları");
+            var dizge2 = new String ("JavaScript dizge nesnesi ve metodları");
+            var ek1 = "1.concat eklentisi"; var ek2 = "2.concat eklentisi";
+            var ifade1 = /(nesnesi \d+(\.\d)*)/i;
+            var ifade2 = /javascript/gi;
+            var ifade3 = /(\w+)\s(\w+)\s(\w+)\s(\w+)\s(\w+)/;
+            var yeniDizge = dizge2.replace (ifade3, "$2 $5 $3, $4 $1");
+            document.getElementById ("*").innerHTML =
+                "dizge: " + dizge +
+                "<br/>dizge.charAt(0): " + dizge.charAt (0) +
+                "<br/>dizge.charAt(dizge.length-1): " + dizge.charAt (dizge.length-1) +
+                "<br/>dizge.charCodeAt(0): " + dizge.charCodeAt (0) +
+                "<br/>dizge.charCodeAt(dizge.length-1): " + dizge.charCodeAt (dizge.length-1) +
+                "<br/>dizge.concat(ek1, ek2): " + dizge.concat (". Bunlar da ", ek1, " ve ", ek2, "'dir.") +
+                "<br/>dizge.indexOf('a'): " + dizge.indexOf ("a") +
+                "<br/>dizge.indexOf('a',dizge.indexOf('a')+1): " + dizge.indexOf ("a", dizge.indexOf ("a")+1) +
+                "<br/>dizge.lastIndexOf('a'): " + dizge.lastIndexOf ("a") +
+                "<br/>dizge.lastIndexOf('a',dizge.lastIndexOf('a')-1): " + dizge.lastIndexOf ("a", dizge.lastIndexOf ("a")-1) +
+                "<br/>dizge.localeCompare('Zeki'): " + dizge.localeCompare ("Zeki") +
+                "<br/>dizge.localeCompare('Bülent'): " + dizge.localeCompare ("Bülent") +
+                "<br/>dizge.localeCompare('JavaScript dizge nesnesi 1.2.5.4... metodları'): " + dizge.localeCompare ("JavaScript dizge nesnesi 1.2.5.4... metodları") +
+                "<br/>dizge.match(ifade1): " + dizge.match (ifade1) +
+                "<br/>dizge.replace(ifade2,'www.ecmascript.org'): " + dizge.replace (ifade2, "www.ecmascript.org") +
+                "<br/>dizge2.replace(ifade3,'$2 $5 $3, $4 $1'): " + yeniDizge +
+                "<br/>dizge.search(/script/gi): " + dizge.search (/script/gi) +
+                "<br/>dizge.slice/substring(4,10): " + dizge.slice (4, 10) +
+                "<br/>dizge.slice(10, -10): " + dizge.slice (10, -9) +
+                "<br/>dizge.split(' ',3): " + dizge.split (" ", 3) +
+                "<br/>dizge.substr(4,6): " + dizge.substr (4, 6) +
+                "<br/>dizge.substr(-9): " + dizge.substr (-9) +
+                "<br/>dizge.toLocaleLowerCase(): " + dizge.toLocaleLowerCase() +
+                "<br/>dizge.toLowerCase(): " + dizge.toLowerCase() +
+                "<br/>dizge.toLocaleUpperCase(): " + dizge.toLocaleUpperCase() +
+                "<br/>dizge.toUpperCase(): " + dizge.toUpperCase() +
+                "<br/>dizge.toString(): " + dizge.toString() +
+                "<br/>İlkel dizge = dizge.valueOf(): " + dizge.valueOf();
+        } // fonk() sonu...
+    </script>
+</head>
+<body style="background:Peru;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+    <br/><button style="background:MidnightBlue; color:yellow; font-size:16;" type="button" onclick="fonk()">Çeşitli dizge metodu için Tıkla</button>
+
+    <br/><p style="background:SlateGray; color:Lime; font-size:25; font-family:arial;" id="*"></p>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<DOCTYPE! html (j33103.html: Resmin üzerinde dışında ve tıklayınca değişmesi örneği.)>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe">
+    <script>
+        var resim1 = new Image(); resim1 = "resim/balık.jpg";
+        var resim2 = new Image(); resim2 = "resim/ördek.jpg";
+        var resim3 = new Image(); resim3 = "resim/kuş.jpg";
+    </script>
+</head>
+<body style="background:MidnightBlue; color:Orange;">
+    <h2><a href="javascript:location.reload (true)">Sayfayı Yenile</a></h2>
+
+    <p>Resmin üzerinde, dışında ve tıklayarak etkiyi görün:</p>
+    <a href="#"
+        onMouseOver = "document.resmim.src = resim2;"
+        onMouseUp = "document.resmim.src = resim3;"
+        onMouseOut = "document.resmim.src = resim1;">
+        <img name="resmim" src="resim/balık.jpg" width=400/>
+    </a>
+</body>
+</html>

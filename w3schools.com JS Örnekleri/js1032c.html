@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1032c.html: Fonksiyonla çıktı yazdırmak için yeni boş sayfada document.write örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk() {
+            document.write ("<body style='text-align:center; margin-top:3em; background-color:SaddleBrown; color: Red; font-size:70px;' />");
+            document.write ("5+6=", (5+6));
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h1>Benim Ağ Sayfam</h1>
+    <p>Bu bir html "p" paragrafıdır.</p>
+
+    <button onclick="fonk()">Tıklayın</button>
+</body>
+</html>

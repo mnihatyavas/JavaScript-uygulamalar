@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1081.html: JavaScript atama, aritmetik, kıyas ve tip işlemcileri örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:MintCream; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML =""}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x = 5; // 5 değerini x'e atar...
+        var y = 2; // 2 değerini y'ye atar...
+        var z = x + y; // (x + y) sonucu 7'yi z'ye atar...
+        var meyveler = ["elma", "şeftali", "üzüm"]
+
+        document.getElementById ("göster").innerHTML =
+            "Atama işlemcisi, sağdaki işlem sonuçlarını baştaki değişkene atar: " +
+            x + "+" + y + "=" + z +
+            "<br/><br/>Aritmetik işlemciler: +, -, *, /, **, %, +=, -=, *=, /=, **= ve %= " +
+            (x+y) + ", " + (x-y) + ", " + (x*y) + ", " + (x/y) + ", " + (x**y) + ", " + (x%y) +
+            ", " + (y+=x) + ", " + (y-=x) + ", " + (y*=x) + ", " + (y/=x) + ", " + (y**=x) + " ve " +
+            (x%=4) +
+            "<br/>Dizgeler için '+' ve '+=' ardışık eklemedir: " + ("M.Nihat" + " " + "Yavaş, ") +
+            (z+=" - Yeşilyurt") +
+            "<br/>Dizgeye eklenen sayı dizge, sayıya eklenen sayı ise sayıdır: " +
+            (5 + 5) + ", " + ("5" + 5) + ", " + ("Merhaba" + 5 + 5) +
+            "<br/><br/>Kıyas işlemcileri: == (eşittir), === (değer ve tipce eşittir), != (eşit değildir), \
+            !== (değer ve tipce eşit değildir), > (büyüktür), < (küçüktür), >= (büyük veya \
+            eşittir), <= (küçük veya eşittir), ? (üçleme): x=" + x + " ve y=" + y + " ise: " +
+            (x==y) + ", " + (x===y) + ", " + (x!=y) + ", " + (x!==y) + ", " + (x>y) + ", " + (x<y) +
+            ", " + (x>=y) + ", " + (x<=y) + ", " + (z = (x==y? 5 : 10)) +
+            "<br/><br/>Tip işlemcileri: typeof ve instanceof: " + (typeof z) + ", " +
+            (meyveler instanceof Array) + ", " + (meyveler instanceof Object) + ", " +
+            (meyveler instanceof Number) + ", " + (meyveler instanceof String);
+    </script>
+</body>
+</html>

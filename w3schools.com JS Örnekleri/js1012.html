@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1012.html: JS html özellik değerini değiştirebilir örneği.</title>
+    <style>
+        body {background-color: Teal; color: MintCream; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>JavaScript Ne Yapabilir?</h2>
+    <p>JavaScript HTML özellik değerlerini değiştirebilir.</p>
+
+    <p>Bu örnekte JavaScript bir resmin src/kaynak özelliğinin değerini (aç/kapa) değiştirmektedir.</p>
+
+    <button onclick="document.getElementById ('göster').src='resim/lambaAçık.gif'">Işığı aç</button>
+    <img id="göster" src="resim/lambaKapalı.gif" style="width:100px">
+    <button onclick="document.getElementById ('göster').src='resim/lambaKapalı.gif'">Işığı kapa</button>
+</body>
+</html>

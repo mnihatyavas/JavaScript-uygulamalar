@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1281.html: JavaScript tesadüfi kesirli ve tamsayı üretme metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function tesadüfiEksiArtı100 (enaz, ençok) { return Math.floor (Math.random() * (ençok - enaz + 1) ) + enaz;}
+
+        document.getElementById ("göster").innerHTML =
+            "1) 'Math.random()' fonksiyonu [0, 1) arası kesirli gelişigüzel değer üretir: " +
+            Math.random() +
+            "<br/>2) 'Math.random' ile 'Math.floor' birlikte kullanılarak (taban ve tavanı sınırlı) \
+            tamsayı tesadüfi sayılar üretilebilir (Örn [0, 100]): " + Math.floor (Math.random() * 101) +
+            "; [-50, 50]: " + Math.floor (Math.random() * -101 + 50) + "; [1, 100]: " +
+            (Math.floor (Math.random() * 100) + 1) +
+            "<br/>3) Parametrik fonksiyonla [enaz, ençok] arası tesadüfi tamsayı üretilebilir \
+            [100,100]: " + tesadüfiEksiArtı100 (-100, 100)
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1401.html: JS lokal, global ve window nesnesi kapsamları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {var x1 = 57; x2 = 67; return x1;}
+        fonk2();
+        var x1 = 62;
+
+        document.getElementById ("göster").innerHTML =
+            "1) Kapsam, erişmek istenilen (nesne ve fonksiyonlar da dahil) tüm \
+            değişkenlerin geçerlilik alanıdır." +
+            "<br/>2) Fonksiyon {} bloğu içi değişkenler lokal olup, dışında tanınmazken, \
+            fonksiyon dışı tanımlı değişken global olduğundan fonksiyon içlerinde de \
+            kullanılabilirler, dışarıya ancak return'le aktarılabilirler: " + fonk2 + "; Lokal x1=" +
+            fonk2() + "; Global x1=" + x1 +
+            "<br/>2) Ancak fonksiyon içinde 'var'sız tanımlı değişken otomatikmen \
+            global olarak bilinir ve fonksiyon adından sonra dışardan çağrılabilir. x2=" + x2 +
+            "<br/>3) Ayrıca tüm global değişkenler HTML window nesnesine aittir. \
+            window.x1=" + window.x1 + "; window.x2=" + window.x2 +
+            "<br/>4) Lokal değişkenler fonksiyondan, globaller de sayfadan çıkınca silinirler." +
+            "<br/>5) Argüman değerleri ve parametre değişkenleri ait oldukları fonksiyona \
+            lokaldirler."
+    </script>
+</body>
+</html>

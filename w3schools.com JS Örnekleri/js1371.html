@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1371.html: JavaScript bitvari işlemciler ve ondalık-ikilik çevrimi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function bitvari() {
+            var dizi = ["5 & 1", "5 | 1", "~ 5", "5 ^ 1", "5 << 1", "5 >> 1", "-5 >> 1", "5 >>> 1"];
+            var sonuç = "";
+            for (var i = 0; i < dizi.length; i++) sonuç = sonuç + dizi[i] + ":" + eval (dizi[i]) + ", ";
+            return sonuç;
+        } // func.. sonu...
+
+        function ondalıktanİkiliye (ondalık) {return ondalık.toString (2);}
+        function ikilidenOndalığa (ikili) {return parseInt (ikili, 2).toString (10);}
+
+        document.getElementById ("göster").innerHTML =
+            "<br/>1) Bitvari işlemler sonucu 32-bite sonra da ondalığa çevirirler, negatif \
+            sayılar ~NOT tersi + 1 sonucudur: " +
+            bitvari() +
+            "<br/>2) Ondalık sayının ikiliye çevrilmesi: ondalıktanİkiliye (39)=" +
+            ondalıktanİkiliye (39) +
+            "<br/>3) İkilinin ondalığa çevrilmesi: ikilidenOndalığa (100111)=" +
+            ikilidenOndalığa (100111)
+    </script>
+</body>
+</html>

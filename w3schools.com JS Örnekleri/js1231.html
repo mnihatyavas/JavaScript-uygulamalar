@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1231.html: JavaScript tarih metodu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) 'Date' metodu günün tarihini verir: " + Date() +
+            "<br/>2) 'new Date (içerik)'le içeriksiz, milisaniyeli veya _yıl,ay,gün,saat,dakika,saniye,milisaniye_ \
+            yada dizgesel argümanlı tarih nesnesi yaratabiliriz: " + (new Date()) + "; " +
+            (new Date (2019, 6, 22, 17, 32, 59, 999) ) + "; " + (new Date (1561218900000) ) + "=" +
+            (24*60*60*1000*365*(2019-1970) + (24*60*60*1000*184) + (60*60*15*1000) + (55*60*1000)) + " ms; " +
+            (new Date ("June 22 2019 17:56:45:999") ) +
+            "<br/>3) 'Date' çıktısı otomatikmen 'toString'e çevrilir, 'toUTCString'e, 'toDateString'e \
+            veya 'toTimeString'e de çevirebilirsiniz: " + new Date() + "; " + new Date().toString() + "; " +
+            new Date().toUTCString() + "; " + new Date().toDateString() + "; " + new Date().toTimeString()
+    </script>
+</body>
+</html>

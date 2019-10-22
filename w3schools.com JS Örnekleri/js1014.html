@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1014.html: JS html elementlerini saklar veya gösterir örneği.</title>
+    <style>
+        body {background-color: Teal; color: Tomato; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>JavaScript Ne Yapabilir?</h2>
+    <p>JavaScript HTML elementlerini saklar veya gösterir.</p>
+    <br/>
+    <p id="göster" style="color:Linen;">Merhaba JavaScript</p>
+
+    <button type="button" onclick="document.getElementById ('göster').style.display='none'">Gizle Beni!</button>
+    <button type="button" onclick="document.getElementById ('göster').style.display='block'">Göster Beni!</button>
+</body>
+</html>

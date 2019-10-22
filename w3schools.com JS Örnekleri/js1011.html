@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1011.html: JS html içeriğini değiştirebilir örneği.</title>
+    <style>
+        body {background-color: Teal; color: Orange; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: green; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>JavaScript Ne Yapabilir?</h2>
+    <p id="göster">JavaScript HTML içeriğini değiştirebilir.</p>
+
+    <button type="button" onclick='document.getElementById ("göster").innerHTML = "Merhaba JavaScript!"'>Tıkla Beni!</button>
+    <p id="göster"></p>
+</body>
+</html>

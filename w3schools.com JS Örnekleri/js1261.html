@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1261.html: JavaScript tarih koyma metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var t = new Date();
+
+        document.getElementById ("göster").innerHTML =
+            "1) Birkaç önemli tarih koyma metodları: setDate(), setMonth(), setFullYear(), \
+            setHours(), setMinutes(), setSeconds(), setMilliseconds() ve setTime(): " +
+            t + "; " + t.setDate (1) + "; " + t.setMonth(0) + "; " + t.setFullYear(2019) + "; " +
+            t.setHours(0) + "; " + t.setMinutes(0) + "; " + t.setSeconds(0) + "; " + 
+            t.setMilliseconds(0) + "; " + t +
+            "<br/>2) t.setFullYear() ile istenilen tam tarih ayarı yapılabilir: " +
+            t.setFullYear (2019, 5, 23) + "; " + t +
+            "<br/>3) Tarih ve zaman ayarları şimdiden artış/azalış şeklinde yapılabilir: " +
+            t.setDate (t.getDate() + 365) + "; " + t + "; " + t.setFullYear (t.getFullYear() - 4) +
+            "; " + t + "; " + t.setHours (t.getHours() + 240) + "; " + t
+    </script>
+</body>
+</html>

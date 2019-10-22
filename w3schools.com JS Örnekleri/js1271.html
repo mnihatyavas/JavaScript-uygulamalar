@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1271.html: JavaScript Math nesnesi ve metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var sayılar = (78, 3.14, 0, -56, 2.71);
+
+        document.getElementById ("göster").innerHTML =
+            "1) Math nesnesi sayılar üzerinde matematiksel metodlarla çeşitli işlemler \
+            gerçekleştirir." +
+            "<br/>Math.min ve Math.max verili argümalar listesindeki (dizi değil) enküçüğü \
+            ve enbüyüğü döndürür: " + Math.min (sayılar) + "; " + Math.max (34, -7, 0, 57) +
+            "<br/>2) Math.random metodu [0,1) arası tesadüfi küsürat üretir: " +
+            Math.random() +
+            "<br/>3) Math.round metodu verili sayıyı en yakın tamsayıya yuvarlar: " +
+            Math.round (5.49) + "; " + Math.round (5.4) + "; " + Math.round (5.5) + "; " +
+            Math.round (-5.4) + "; " + Math.round (-5.5) + "; " + Math.round (-5.6) +
+            "<br/>4) Math.ceil metodu verili sayıyı üst tamsayıya yuvarlar: " +
+            Math.ceil (5.00) + "; " + Math.ceil (5.01) + "; " + Math.ceil (-5.99) +
+            "<br/>5) Math.floor metodu verili sayıyı alt tamsayıya yuvarlar: " +
+            Math.floor (5.99) + "; " + Math.floor (-5.01) +
+            "<br/>Math.floor ve Math.random metodları birlikte tesadüfi tamsayı \
+            üretmek için kullanılırlar [0, 10]: " + Math.floor (Math.random() * 11) +
+            "; [-50, 50]: " + (Math.floor (Math.random() * 101) - 50) +
+            "<br/>6) Math.pow(y,x) metodu y^x sonucunu döndürür: " +
+            Math.pow (3.1, 2.89) + "; " + Math.pow (-2.7, -3) +"; " + Math.pow (27, -3.9) +
+            "<br/>7) Math nesnesi 8 matematiksel sabite sunar: E, PI, SQRT2, \
+            SQRT1_2, LN2, LN10, LOG2E, LOG10E: " + Math.E + "; " + Math.PI + "; " +
+            Math.SQRT2 + "; " + Math.SQRT1_2 + "; " + Math.LN2 + "; " +
+            Math.LN10 + "; " + Math.LOG2E + "; " + Math.LOG10E +
+            "<br/>8) Tüm Math nesnesi metodları listesi: " +
+            "<br/>abs(x), acos(x), asin(x), atan(x), atan2(y,x), ceil(x), cos(x),exp(x), \
+            floor(x), log(x), max(x,y,..n), min(x,y..n), pow(x,y), random(), round(x), \
+            sin(x), sqrt(x), tan(x)"
+    </script>
+</body>
+</html>

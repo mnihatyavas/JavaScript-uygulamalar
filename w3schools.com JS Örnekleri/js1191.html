@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1191.html: JavaScript diziler, elemanları ve tiplemesi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Cyan; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk() {return "M.N.Yavaş" + ", Yaş: " + (2019-1957);}
+
+        var isim = "M.Nihat Yavaş";
+        var arabalar = ["Saab", "Volvo", "BMW", "Toyoto", "Audi"];
+        var kişi = ["M.Nihat Yavaş", 1957, (2019-1957), "Malatya"];
+        var sözlük = {"ad":"M.Nihat", "soyad":"Yavaş", "yaş":(2019-1957)};
+        var dizim = ["Mahmut", isim, kişi, arabalar, fonk(), sözlük];
+        var metin = "<ul>";
+
+        for (var i = 0; i < arabalar.length; i++) metin += "<li>" + arabalar[i] + "</li>"; metin +="</ul>";
+
+        document.getElementById ("göster").innerHTML =
+            "Diziler tek değişkenle çoklu değer saklamada kullanılır: " + arabalar +
+            "<br/>Dizi elemanlarına [0->dizi.lenght] endeksleriyle erişilir veya değiştirilir: " +
+            arabalar[0] + ", " +  arabalar[arabalar.length - 1] + ", " + (arabalar[0] = "Ford") +
+            "<br/>Tavsiye edilmese de 'new Array'le de dizi nesnesi yaratılabilir: " +
+            (arabalar1 = new Array ("Saab", "Volvo", "BMW", "Toyoto", "Audi")) +
+            "<br/>Diziler nesne olduklarından eleman olarak değişken, dizi, nesne ve \
+            fonksiyon içerebilirler: " + dizim +
+            "<br/>Dizilerin hazır 'sort' ve 'length' gibi metod ve özellikleri vardır: " +
+            arabalar.sort() + ", " + arabalar.length +
+            "<br/>'for' döngüsüyle dizi elemanları kolayca taranırlar: " + metin +
+            "<br/>Dizi sonuna yeni eleman ekleme 'push' ve 'length'le kolayca yapılır: " +
+            arabalar.push ("Pegeou") + ", " + (arabalar[arabalar.length] = "Fiat") + ", " +
+            arabalar.length + ", Son içerik: " + arabalar +
+            "<br/>Eleman erişimi için diziler endeks numarası, sözlükler ise anahtarkelime \
+            kullanır: " + dizim[5] + ", " + dizim[dizim.length - 1]["yaş"] +
+            "<br/>'new Array' tek eleman sayı değerini dizi boyutu olarak yanlış algılar: " +
+            (dizi = [50, 60]).length + ", " + (dizi = [50]).length + ", " + (new Array (50, 60)).length +
+            ", " + (new Array (50)).length +
+            "<br/>Array ve Object'i ayırtetmek için 3 yöntem kullanılabilir: 1=" +
+            Array.isArray (arabalar) + ", 2=" + (arabalar.constructor.toString().indexOf ("Array") >= 0) +
+            ", 3=" + (arabalar instanceof Array)
+    </script>
+</body>
+</html>

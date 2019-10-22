@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1061.html: JavaScript tekli/çoklu satır yorumları örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster1 {color:Gold; font-size:55px; margin-top:2em; text-align:center;}
+    </style>
+    <script>
+        function fonk1() {// Bloklu ifadeler...
+        } // fonk1 sonu...
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h1 id="göster1">Başlık</h1>
+    <p id="göster2">Paragraf</p>
+
+    <script>
+        // var x = 5; // x değişkeni beyan edilip, 5 değeri atanır...
+        // var y = x + 2; // y değişkeni beyan edilip (x+2) sonuç değeri atanır...
+
+        /* Çoklu satır resmi belgeleme yorumu:
+            Aşağıdaki JS kodları sayfadaki
+            id = "göster1" ile başlığı ve
+            id = "göster2" ile de paragrafı
+            değiştirmektedir...
+         */
+        // Başlığı değiştirir:
+        document.getElementById ("göster1").innerHTML = "Yorumlar Başlığı";
+
+        // Paragrafı değiştirir:
+        document.getElementById ("göster2").innerHTML =
+            "Script içinde '//' ile tek satırlık yorum yapılır, js bunu işletmez...";
+    </script>
+</body>
+</html>

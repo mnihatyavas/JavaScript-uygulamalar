@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1221.html: JavaScript dizi taranabilirliği metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk1 (değer, endeks, dizi) {metin1 = metin1 + (endeks + 1) + ":" + değer + ", ";}
+        function fonk2 (değer) {metin2 = metin2 + değer + " ";}
+        function fonk3 (değer, endeks, dizi) {return (endeks + 1) + ":" + ((değer * 100) / 10);}
+        function fonk4 (değer) {return " " + ((değer * 100) / 10);}
+        function fonk5 (değer) {return değer > 5;}
+        function fonk6 (sonuç, değer, endeks, dizi) {return sonuç + (değer * 1);}
+        function fonk7 (sonuç, değer) {return sonuç - (değer * 1);}
+        function fonk8 (sonuç, değer) {return sonuç - (değer * 1);}
+        function fonk9 (sonuç, değer, endeks, dizi) {return sonuç + (değer * 10);}
+        function fonk10 (sonuç, değer) {return sonuç + (değer * 10);}
+
+        var metin1 = "", metin2 = "";
+        var sayılar = [45, 4, 9, 16, 25, 3.14, 2.73, 9];
+        sayılar.forEach (fonk1);
+        sayılar.forEach (fonk2);
+
+        document.getElementById ("göster").innerHTML =
+            "1) 'dizi.forEach' metodu bağlı dizinin ardışık herbir elemanı üzerinde fonksiyonda \
+            kodladığımız işlemleri gerçekleştirir: " + metin1 +
+            "<br/>Fonksiyona otomatikmen 'değer, endeks ve dizi' değerleri parametrik \
+            aktarılır, hepsi kullanılmayacaksa belirtmeye de gerek yoktur: " + metin2 +
+            "<br/>2) 'dizi.map' metodu da forEach gibidir, ancak orijinal diziyi değiştirmeden \
+            ardışık herbir elemanları üzerindeki işlem sonucunu virgüllerle ayrık olarak geri \
+            döndürür: " + sayılar.map (fonk3) +
+            "<br/>Burada da gereksiz argümanlar tanımlanmayabilir: " + sayılar.map (fonk4) +
+            "<br/>3) 'dizi.filter' metodu da map gibidir, orijinal diziyi değiştirmeden sadece \
+            if süzgeci sonucunu döndürür; değer, endeks ve dizi parametrelerinden hangileri \
+            kullanılacaksa onlar tanımlanabilir: " + sayılar.filter (fonk5) +
+            "<br/>4) 'dizi.reduce' metodu parametrelerden ilki üzerine yapılar ardışık işlemin \
+            tek sonucunu döndürür; gerekli parametrelerin tanımı yeterlidir; ancak işlemleri \
+            en sağdaki elemandan ardışık yaparak ensoldakine yükler, yani en soldaki \
+            eleman üzeride işlem yapmadan sadece yükleme yapar: " + sayılar.reduce (fonk6)
+            + "; Son 6 elemanı çıkarıp baştakine topladı: " + sayılar.reduce (fonk7) +
+            "<br/> İlk eleman üzerinde de aynı işlem yapılmak istenirse bir ilk değer gönderilir: "
+            + sayılar.reduce (fonk8, 0) +
+            "<br/>5) İşlemleri soldan sağa yaparak sonuncunun üzerine yığmak içinse \
+            'dizi.reduceRight' kullanılmalıdır: " + sayılar.reduceRight (fonk9) +
+            "<br/>En sağdakini de işleyeceksek ilk değer gönderelim: " + sayılar.
+            reduceRight (fonk10, 0) +
+            "<br/>6) 'sayılar.every' metodu dizi elemanlarını tek tek testden geçirir (Örn: \
+            sayı > 18): " + sayılar.every (function (değer, endeks, dizi) {return değer > 18;}) +
+            "; " + sayılar.every (function (sayı) {return sayı >= 2;}) +
+            "<br/>7) 'sayılar.some' metodu da every gibi test eder, ancak testten tüm geçiş \
+            değil enaz 1 geçer yeterlidir: " + sayılar.some (function (değer, endeks, dizi)
+            {return değer > 30;}) + "; " + sayılar.some (function (x) {return x <= 2.730;}) +
+            "<br/>8) 'dizi.indexOf' aranan elemanın (-/+ belirtilmişse o konumdan itibaren) \
+            mevcutsa ilk endeksini, değilse -1 döndürür: " + ["Elma", "Armut", "Şeftali", "Üzüm"]
+            .indexOf ("Üzüm") + "; " + sayılar.indexOf (3.141) + "; " + sayılar.indexOf (3.14, 3) +
+            "; " + sayılar.indexOf (3.14, -3) +
+            "<br/>9) 'dizi.lastIndexOf' aranan elemanın sondan (veya -/+ belirtilen konumdan) \
+            başa rastladığı ilkinin endeksini, yoksa -1 döndürür: " + sayılar.lastIndexOf (9) +
+            "; " + sayılar.lastIndexOf (9, -3) + "; " + sayılar.lastIndexOf (9.1) +
+            "<br/>10) 'dizi.find' metodu baştan sona tararken testi ilk geçenin değerini, \
+            yoksa 'undefined' döndürür: " + sayılar.find (function (a,b,c) {return a < 18;}) + "; " +
+            sayılar.find (function (a) {return a > 45;}) +
+            "<br/>11) 'dizi.findIndex' metodu baştan sona tararken testi ilk geçenin endeksini, \
+            yoksa -1 döndürür: " + sayılar.findIndex (function (a,b,c) {return a < 18;}) + "; " +
+            sayılar.findIndex (function (a) {return a > 45;})
+    </script>
+</body>
+</html>

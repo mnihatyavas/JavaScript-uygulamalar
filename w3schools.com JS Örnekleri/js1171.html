@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1171.html: JavaScript ilkel ve nesnesel sayılar örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Cyan; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var a = 2019, b = 2019.6, c = 2.019e4, d = 2019000e-6;
+        var f1 = 0xff, f2 = 0xa5;
+
+        document.getElementById ("göster").innerHTML =
+            "JS ilkel sayıları tam, ondalık veya üslü yazılabilir: " + a + ", " + b + ", " +
+            c + ", " + d +
+            "<br/>JS sayıları byte, short, int, long, float, double olarak ayrılmaz, sadece 64 \
+            bitlik çift hassasiyetli float kayannoktalı vardır." +
+            "<br/>Noktasız tamsayı hassasiyet hane sayısı 16'dır, sonrasını yuvarlar ve \
+            sıfırlarla gösterir: " + (x = 1234567890123456) + ", " + (x = 1234567890123456789) +
+            "<br/>Ondalık hassasiyet hane sayısı 17'dir: " + (x = 0.2 + 0.1) + "=" +
+            (x = (0.2 * 10 + 0.1 * 10) / 10) +
+            "<br/>Başında 0x varsa JS sayıyı onaltılık algılar; ancak sonuç yansıtmaları onluktur: " +
+            (f1 + f2) + ", " + (f1 * f2) + ", " + (f1 / f2) +
+            "<br/>Farklı tabanlı yansıtmalar için 'toString' kullanılmalıdır: " + a.toString (16) +
+            ", " + (f1 * f2).toString (16) + ", " + a.toString (8) + ", " + a.toString (2) +
+            ", Son: " + a.toString (36) +
+            "<br/>+/-Infinity sonsuz büyük/küçük sayı tipidir: " + (Infinity > 1e9) + ", Çelişki: " +
+            (Infinity > 1e999) + ", " + (Infinity > -Infinity) + ", " + (-1 / 0) + ", " + (typeof Infinity) +
+            "<br/>Sonuç sayı değilse NaN (NotaNumber) sayı tipi üretir: " + (a * "10elma") +
+            ", " + (typeof NaN) + ", " + (a * "10.10") +
+            "<br/>Tavsiye edilmese de 'new Number'la nesnesel sayı üretilebilir: " +
+            (a / new Number (10)) + ", " + (typeof (a * new Number (10))) + ", " +
+            (typeof new Number (a * new Number (10))) + ", " + (a == new Number (2019)) +
+            ", " + (a === new Number (2019)) + ", " + (new Number (2019) == new Number (2019))
+    </script>
+</body>
+</html>

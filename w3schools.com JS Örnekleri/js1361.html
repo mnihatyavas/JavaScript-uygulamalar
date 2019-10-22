@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1361.html: JavaScript sayı, dizge, ikili, nesne tip çevrimleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function sayıyaÇevir() {
+            var metin = "<br/>";
+            for (a of dizi) {metin = metin + a + ":" + Number (a) + " "; }
+            return metin
+        } // func.. sonu...
+
+        function dizgeyeÇevir() {
+            var metin = "<br/>";
+            for (a of dizi) {metin = metin + a + ":" + String (a) + " "; }
+            return metin
+        } // func.. sonu...
+
+        function ikiliyeÇevir() {
+            var metin = "<br/>";
+            for (a of dizi) {metin = metin + a + ":" + Boolean (a) + " "; }
+            return metin
+        } // func.. sonu...
+
+        var arabam;
+        var soyadım = "Yavaş";
+        var sayı = 3.14;
+        var dizi = [false, true, 0, 1, "0", "1", NaN, Infinity, -Infinity, "", "20", "yirmi",
+            [], [20], [10, 20], ["yirmi"], ["on", "yirmi"], function(){}, {}, null, undefined];
+
+        document.getElementById ("göster").innerHTML =
+            "1) Number() sayıya, String() dizgeye ve Boolean() da ikiliye çevirir. JS'de \
+            5 veri tipi vardır: sayı, dizge, ikili, nesne (nesne, dizi ve tarih) ve fonksiyon. \
+            Değer içermeyen veri tipleri: null/hiç ve undefined/tanımsız." +
+            "<br/>2) typeof işlemcisi değerin/değişkenin veri tipini döndürür. 'Nihat':" +
+            (typeof "Nihat") + "; 3.14:" + (typeof 3.14) + "; NaN:" + (typeof NaN) + "; false:" +
+            (typeof false) + "; [1,2,3,4]:" + (typeof [1,2,3,4]) + "; {ad:'Nihat', yaş:(2019-1957)}:" +
+            (typeof {ad:'Nihat', yaş:(2019-1957)}) + "; new Date():" + (typeof new Date()) +
+            "; function () {}:" + (typeof function () {}) + "; araba:" + (typeof araba) + "; arabam:" +
+            (typeof arabam) + "; soyadım:" + (typeof soyadım) + "; null:" + (typeof null) +
+            "<br/>3) constructor/kurucu özellik JS değişkeninin kurucu fonksiyonunu \
+            döndürür. 'Nihat':" + ("Nihat".constructor) + "; 3.14:" + (3.14.constructor) +
+            "; false:" + (false.constructor) + "; [1,2,3,4]:" + ([1,2,3,4].constructor) +
+            "; {ad:'Nihat', yaş:62}:" + ({ad:"Nihat", yaş:62}.constructor) + "; new Date():" +
+            (new Date().constructor) + "; function(){}:" + (function(){}.constructor) +
+            "<br/>4) constructor ile bir değişkenin Array veya Date içerdiği kontrol edilebilir. " +
+            "<br/>[1,2,3,4]:Array? " + ([1,2,3,4].constructor.toString().indexOf ("Array") > -1) +
+            "; new Date():Date? " + (new Date().constructor.toString().indexOf ("Date") > -1) +
+            "<br/>5) Değer veya değişkenler JS fonksiyonlarıyla veya otomatikmen \
+            başka bir veri tipine çevrilebilirler." +
+            "<br/>String() ve toString() sayıyı dizgeye çevirir. " + String (sayı) + "; " +
+            String (100 + 23) + "; " + String (3 + 0.14) +
+            "<br/>toExponential(), toFixed() ve toPrecision() sayıyı dizgeye çevirir: " +
+            sayı.toExponential() + "; " + Math.PI.toFixed(30) + "; " + Math.E.toPrecision(20) +
+            "<br/>String() ve toString() boolean/ikiliyi dizgeye çevirir: " + String (true) +
+            "; " + false.toString() +
+            "<br/>String() ve toString() Date()/tarihi dizgeye çevirir: " + String (Date() ) +
+            "; " + new Date().toString() +
+            "<br/>Number() dizgeyi sayıya çevirir: " + Number ("3.14") + "; " +
+            Number ("3 14") + "; " + Number (" ") + "; " + Number ("") +
+            "<br/>parseFloat() ve parseInt() dizgeyi küsürlüye ve tamsayıya çevirir: " +
+            parseFloat ("3.1415") + "; " + parseInt ("3.1415") +
+            "<br/>unary/topla + işlemcisi dizgeyi sayıya çevirir: " +
+            (typeof (x = + "3.1415") ) + "; " + (typeof (x = + "Nihat") ) +
+            "<br/>Number() ile boolean/ikili sayıya çevrilir: " + Number (true) + "; " +
+            Number (false) +
+            "<br/>Number() Date()/tarihi sayıya çevirir: " + Number (new Date() ) +
+            "<br/>6) Otomatik tip çevrimleri: " + (5 + null) + "; " + (5 + "null") + "; " +
+            ("5" + 2) + "; " + ("5" - 2) + "; " + ("5" * 2) + "; " + ("5" ** "2") +
+            "<br/>Çıktı işlemlerinde otomatik toString() dizgeye çevrim yapılır: " +
+            "<br/>6) Number() çevrimleri: " + sayıyaÇevir() +
+            "<br/>String() çevrimleri: " + dizgeyeÇevir() +
+            "<br/>Boolean() çevrimleri: " + ikiliyeÇevir()
+    </script>
+</body>
+</html>

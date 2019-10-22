@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1201.html: JavaScript dizi metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var meyveler = ["Erik", "Kiraz", "Şeftali", "Kayısı", "Üzüm", "Muz"];
+        var sebzeler = ["Kavun", "Karpuz", "Çilek", "Domates", "Hıyar", "Patlıcan"];
+
+        document.getElementById ("göster").innerHTML =
+            "1) 'toString' metodu diziyi virgüllerle ayrık dizgeye çevirir: " + meyveler[0] + "; " +
+            (dizge = meyveler.toString() ) + "; " + dizge[0] +
+            "<br/>2) 'join' de diziyi dizgeye çevirir, ancak ilaveten ayracı kendiniz değiştirebilirsiniz: " +
+            (dizge = meyveler.join (" * ") ) + "; " + dizge[5] +
+            "<br/>3) 'pop' dizinin son elemanını siler ve sildiğini döndürür,  'push' ise yeni elemanı \
+            sona ekler ve yeni uzunluğu döndürür: " + (silinen = meyveler.pop() ) + "; " +
+            (uzunluk = meyveler.push ("Kivi") ) + "; " + meyveler +
+            "<br/>4) 'shift ve unshift' de 'pop ve push' gibidir, ancak sona değil dizi başından \
+            siler ve ekler; döndürdükleri aynıdır: " + (silinen = meyveler.shift() ) + "; " +
+            (uzunluk = meyveler.unshift ("Mango") ) + "; " + meyveler +
+            "<br/>5) Dizi eleman içerikleri endeksleriyle kolayca değiştirilebilirler, ayrıca \
+            'length' endeksiyle sona yeni eleman da eklenebilir: " + (meyveler[3] = "Nar") +
+            "; " + (meyveler[meyveler.length] = "Armut") + "; " + meyveler +
+            "<br/>6) 'delete' işlemcisiyle istenilen dizi elemanı silinir, ancak yerinde 'undefined' \
+            boşluğu kalır; bu yüzden 'pop veya shift' tercih edilmelidir: " + (delete meyveler[0]) +
+            "; " + meyveler.length + "; " + (typeof meyveler[0]) + "; " + (silinen = meyveler.shift() ) +
+            "; " + meyveler +
+            "<br/>7) 'splice'la dizinin istenilen endeksinden itibaren, belirtilen sayıdaki elemanı \
+            silinirken, o konuma istenilen sayıda yeni eleman da eklenebilir: " +
+            meyveler.splice (3, 0, "Elma", "Ceviz") + meyveler + "; Silinenler: " + meyveler.splice (3, 2) +
+            "; Sonuç: " + meyveler +
+            "<br/>8) 'concat'le diziye yeni diziler eklenebilir: " + (meyveler = meyveler.concat (sebzeler)) +
+            "; " + (meyveler.concat (["Fasülye", "Nohut"], ["Bezelye"], ["Biber", "Maydanoz", "Pipirim"])) +
+            "; Silinenler: " + (silinenler = meyveler.splice (6, (meyveler.length - 5))) +
+            "; Sonuç:" + meyveler +
+            "<br/>9) 'slice' metodu 'splice'ın aksine orijinali değiştirmeden [ilk,son) endeksler \
+            arasınının kopyasını yeni bir diziye atar; son endeks yoksa, sona kadardır: " +
+            (sebze1 = sebzeler.slice (2)) + "; " + (sebze2 = sebzeler.slice (2, sebzeler.length-1))
+    </script>
+</body>
+</html>

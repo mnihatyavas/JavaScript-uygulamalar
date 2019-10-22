@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1421.html: JS use strict örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>"STRICT" KİPİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function toleranssız1() {
+            //var p1 = 3.1415; // "use strict" öncesi olduğundan hata verir...
+            "use strict"; // Tüm fonksiyon içinde geçerli...
+            try {p2 = 3.1415;} // "var"sız olduğundan hata verir...
+            catch (hata) {return hata;}
+        } // func.. sonu...
+
+        function toleranssız2() {
+            "use strict"; // Tüm fonksiyon içinde geçerli...
+            try {nesne = {adı:"Nihat", yaşı:62};} // "var"sız olduğundan hata verir...
+            catch (hata) {return hata;}
+        } // func.. sonu...
+
+        function toleranssız3() {
+            "use strict"; // Tüm fonksiyon içinde geçerli...
+            try {var pi = 3.1415; //delete pi; ==>delete kulllanılamaz artık...
+            }catch (hata) {return hata;}
+        } // func.. sonu...
+
+        var nesne1 = {};
+        Object.defineProperty (nesne1, "pi", {value:0, writable:false});
+        nesne1.pi = 3.1415;
+
+        x = 3.1415; // Kapsamda "use strict" olmadığından hata vermez...
+        document.getElementById ("göster").innerHTML =
+            "1) Strict/toleranssız kipte kapsam dahilinde beyansız değişken kullanılamaz: " +
+            x + "; " + toleranssız1() +
+            "<br/>2) 'use strict' kapsam başında (blok, fonksiyon veya script) tanımlanmazsa \
+            hata verir; kapsamın ilk ifadesi olmalıdır: " + toleranssız2() +
+            "<br/>3) 'use strict' kipinde değişken, nesne veya fonksiyon delete ile silinemez: " +
+            (delete x) + "; " + toleranssız3() +
+            "<br/>4)  'use strict' kipinde oktal/sekizli x=010 veya oktal esc x=\\010 kabul edilmez." +
+            "<br/>5)  'use strict' kipinde okunabilir nesne özelliği, sadece-alınabilir nesne özelliği \
+            silinemez özelliği silmek, eval'ı veya arguments'i değişken adı olarak kullanmak, \
+            with ifadesi, bazı ayrılmış kelimeler (implements, interface, let, package, private, \
+            protected, public, static, yield) değişken adı olarak kullanılamaz."
+    </script>
+</body>
+</html>

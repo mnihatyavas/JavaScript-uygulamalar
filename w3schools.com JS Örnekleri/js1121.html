@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1121.html: JavaScript parametreli ve parametresiz fonksiyon örneği.</title>
+    <style>
+        body {background-color:Green; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Salmon; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML =""}
+
+        function fonk2() {
+            var x = 7, y = 2;
+            document.getElementById ("göster").innerHTML =
+                "x=7 ve y=2 ise:" +
+                "<br/>Toplama: " + (x+y) +
+                "<br/>Çıkarma: " + (x-y) +
+                "<br/>Çarpma: " + (x*y) +
+                "<br/>Bölme: " + (x/y) +
+                "<br/>Üs: " + (x**y) +
+                "<br/>Kalan: " + (x%y) +
+                "<br/>Yüzde: %" + ((x-y)/y*100);
+        } // fonk2 sonu...
+
+        function fonk3 (liste) {
+            var C = liste, F = [];
+            for (i = 0; i < C.length; i++) {F[i] = [9/5*C[i]+32];}
+            document.getElementById ("göster").innerHTML =
+                "Selsiyüs dereceler: " + C +
+                "<br/>Fahrenhayt karşılıkları: " + F;
+        } // fonk3 sonu...
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+    <input type="button" value="Yedi işlem" onClick="fonk2()"><br/>
+    <input type="button" value="C->F çevrimi" onClick=
+        "fonk3 ([-273, 0, 10, 25, 35, 50, 100, 500])"> <!-- Veya fonk3([10]) -->
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function çevir (s) {return s*9/5+32;}
+        var sonuç = çevir (20);
+
+        document.getElementById ("göster").innerHTML =
+            "JavaScript fonksiyonu {} arasında işletilecek kodlar bloğudur. Fonksiyon \
+            adı function anahtar kelimesinden sonra gelir ve değişken ad kurallarına \
+            tabidir. Fonksiyon adı parantez içi boş veya virgüllerle ayrık parametrelerle \
+            doludur; parametreler fonksiyon içinde lokal değişken işlevi görürler. \
+            Parametrelere değerler çağıran fonksiyon adının argümanlarıyla atanır." +
+            "<br/>Fonksiyon adları 'onClick()' gibi olaylarla, JS kodlarıyla yada \
+            otomatikmen çağrılabilrler." +
+            "<br/>Fonksiyonlar 'return' ifadesiyle çağırana sonuç döndürür ve fonksiyon \
+            işlemini sonlandırırlar. Return hiç yada çok olabilir. Olmadığında fonksiyonun \
+            son kodundan sonra çağırana dönülür." +
+            "<br/>Fonksiyonlar bir kez yazılır ve (icabında farklı argümanlarla) tekrar \
+            tekrar işletilebilirler." +
+            "<br/>Fonksiyon adlarıyla değişkenler gibi işlem yapılabilir." +
+            "<br/>10, 20 ve 30 derece kaç fahrenhayttır? " + çevir (10) + ", " + sonuç +
+            " ve " + (sonuç + çevir (10));
+    </script>
+</body>
+</html>

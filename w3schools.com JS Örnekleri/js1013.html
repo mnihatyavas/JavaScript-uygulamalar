@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1013.html: JS html elementinin stilini değiştirebilir örneği.</title>
+    <style>
+        body {background-color: Teal; color: Linen; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>JavaScript Ne Yapabilir?</h2>
+    <p id="göster">JavaScript bir HTML elementinin/prgrf stilini/ebatını değiştirebilir.</p>
+
+    <button type="button" onclick="document.getElementById ('göster').style.fontSize='35px'">Büyüt Beni!</button>
+    <button type="button" onclick="document.getElementById ('göster').style.fontSize='10px'">Küçült Beni!</button>
+</body>
+</html>

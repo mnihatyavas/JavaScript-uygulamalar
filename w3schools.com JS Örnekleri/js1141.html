@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1141.html: JavaScript'le olayları yönetme örneği.</title>
+    <style>
+        body {background-color:Green; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Fuchsia; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+        function fonk2() {document.getElementById ("göster").innerHTML =Date();}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+    <button onclick='document.getElementById ("göster").innerHTML=Date()'>Güncel tarih ve saat?</button>
+    <button onclick="this.innerHTML=Date()">Zaman?</button>
+    <button onclick="fonk2()">Zaman?</button>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "Olaylar tarayıcı veya kullanıcı vasıtasıyla HTML elemanlarına (ağ sayfası \
+            yüklendi, yeni veri girişi yapıldı, düğme tıklandı gibi) olabilenlerdir. Bu HTML \
+            olaylarına JS kodlarıyla tepki verilebilir." +
+            "<br/><br/>Bazı HTML olayları: onChange, onClick, onMouseOver, \
+            onMouseOut, onKeyDown, onLoad, vb.";
+    </script>
+</body>
+</html>

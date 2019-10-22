@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1181.html: JavaScript sayı metodları ve özellikleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Cyan; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var a = 2019;
+        var d = (a / 7).toString();
+        
+        document.getElementById ("göster").innerHTML =
+            "Özellik ve metodlu nesnel sayısal işlemlerde JS ilkel sayılara nesneymişcesine \
+            davranır." +
+            "<br/>Sayılar 'toString'le dizgeye çevrilebilir: " + (a / 7).toString()[0] + ", " +
+            d[d.length - 1] + ", " + d.substr (0, 3) + ", " + d.substr (4) +
+            "<br/>Üslü e gösterim için 'toExponential' kullanılır; ondalık hassasiyet \
+            belirtildiği kadarıyla (yuvarlatılarak) gösterilir, belirtilmemişse hassasiyet rakamına \
+            kadarı üstleştirilir: " + a.toExponential (1) + ", " + a.toExponential (2) + ", " +
+            a.toExponential (5) + ", " + a.toExponential() + ", " + (123.45001).toExponential() +
+            "<br/>Ondalık gösterimin küsürat hanesi 'toFixed'le belirlenip dizgeleştirilir; \
+            küsurat uzunluğundan fazlaysa sıfırla dolgulanır: " + (1234.46789).toFixed() +
+            ", " + (1234.56789).toFixed (7) + ", " + (typeof a.toFixed()) +
+            "<br/>Tamsayı ve küsurat toplam hane sayısı hassasiyeti için 'toPrecision' \
+            kullanılır; tipi sayıdır; belirtilmezse hassasiyetler, eksikse üslü gösterilir; \
+            hassasiyet adedine ondalık nokta dahil edilmez: " + (1234.56789).toPrecision() +
+            ", " + (1234.56789).toPrecision (3) + ", " + (1234.56789).toPrecision (5) +
+            ", " + (1234.56789).toPrecision (10) +
+            "<br/>Nesne veya dizgeden ilkel sayısala çevrim 'valueOf'la yapılır; ancak \
+            işlemlerde JS bunu zaten içsel yapar: " + (d.valueOf() * 100) + ", " + (typeof
+            (d.valueOf() * 100)) +
+            "<br/>Sayısala çevirmenin diğer global metodları 'Number, parseInt ve \
+            parseFloat'dur: " + Number (true) + ", " + Number (false) + ", " +
+            Number (new Date()) + ", " + Number ("10") + ", " + Number ("10a") +
+            "<br/>, " + parseInt (d) + ", " + parseInt ("10yıl") + ", " + parseInt ("yıl10") +
+            "<br/>, " + parseFloat (d) + ", " + parseFloat ("2019.06.20.gün") + ", " +
+            parseFloat ("yıl1019") +
+            "<br/><br/>JS sayı özellikleri: \"MAX_VALUE, MIN_VALUE, NaN, \
+            POSITIVE_INFINITY ve NEGATIVE_INFINITY'dir: " + Number.MAX_VALUE +
+            ", " + Number.MIN_VALUE + ", " + Number.POSITIVE_INFINITY +
+            ", " + Number.NEGATIVE_INFINITY + ", " + Number.NaN
+    </script>
+</body>
+</html>

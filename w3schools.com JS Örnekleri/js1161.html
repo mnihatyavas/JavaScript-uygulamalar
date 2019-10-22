@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1161.html: JavaScript bazı dizge metodları uygulamalı örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Cyan; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var dizge1 = "M.Nihat Yavaş, 1957, Yeşilyurt - Malatya";
+
+        document.getElementById ("göster").innerHTML =
+            "Metod ve özellikler sadece nesnelere uygulanır. Bu yüzden JS, ilkel \
+            değişkenlere bunları uygularken otomatikmen nesneye çevirir." +
+            "<br/>Bir dizge ve uzunluğu: " + dizge1 + ": " + dizge1.length +
+            "<br/>Küçük L harfinin dizgemizdeki ilk endeks konumu: " + dizge1.indexOf ("l") +
+            "<br/>Küçük L harfinin dizgemizdeki son endeks konumu: " + dizge1.lastIndexOf ("l") +
+            "<br/>Büyük L harfinin dizgemizdeki ilk endeks konumu: " + dizge1.indexOf ("L") +
+            "<br/>Dizge endeksi 0'dan başlar. RegEx'de de kullanılan 'search' de 'indexOf' gibidir: " +
+            dizge1.search ("957") +
+            "<br/>'slice[ilk,son), substring ve substr' dizge'den ibare kopyalar: " + dizge1.slice (8, 13) +
+            "<br/>Eğer endeksler negatifse tersten sayar: " + dizge1.slice (-33, -27) +
+            "<br/>2.endeks verilmezse, ilk verilenden sona kopyalar: " + dizge1.slice (21) + ", " +
+            dizge1.slice (-19) +
+            "<br/>'substring' de 'slice' gibidir ancak negatif değerler alamaz: " + dizge1.substring (8, 13) +
+            ", " + dizge1.substring (21) +
+            "<br/>'substr' de 'slice'a benzer ancak 2.değer son endeks değil, kopyalanacak \
+            uzunluktur: " + dizge1.substr (8, 5) +
+            "<br/>İlk değer negatifse tersten sayılır, 2.değer uzunluk olduğundan negatif \
+            olamaz, 2.değer yoksa ilkinden sonuna kadar kopyalar: " + dizge1.substr (-32, 5) +
+            ", " + dizge1.substr (-32) +
+            "<br/>'replace' orijinal dizgenin belirtilen ilk ibaresini ikinciyle değiştirerek sonucu \
+            yeni bir dizgeye atar; orijinal dizge değişmez: " +
+            (dizge2 = dizge1.replace ("M.", "Mahmut ")) + ", " + dizge1 +
+            "<br/>'replace' sadece ilk eşleşmeyi değiştirir. Tüm eşleşmelerin değiştirilmesi \
+            için RegEx g/global eşleşme kullanılmalıdır: " + (dizge2 = dizge1.replace ("ş", "s") ) +
+            ", " + (dizge2 = dizge1.replace (/a/g, "ö")) +
+            "<br/>'toUpperCase ve toLowerCase' dizgeyi büyükharfe/küçükharfe çevirir \
+            ve yeni bir değişkene atar: " + (dizge2 = dizge1.toUpperCase()) + ", " +
+            (dizge2 = dizge2.toLowerCase()) +
+            "<br/>'concat', '+' gibi dizgeleri ardışık ekler: " + (dizge2 = "Mahmut" + " " +
+            "Nihat" + " " + "Yavaş") + ", " + (dizge2 = "Mahmut".concat (" ").concat ("Nihat").
+            concat (" ").concat ("Yavaş")) +
+            "<br/>'substr' ibareyi, 'charAt' ise belirtilen pozitif endeksteki karakteri \
+            döndürür: " + dizge1.substr (8, 1) + ", " + dizge1.charAt (8) +
+            "<br/>'charCodeAt' ise verili endeksteki karakterin ascii/unicode kod numarasını \
+            döndürür: " + dizge1.charAt (8) + "=" + dizge1.charCodeAt (8) +
+            "<br/>Dizge dizi değildir, ancak dizi gibi karakter endeksi kullanılabilir, 'split' \
+            dizgeyi belirtilen ayraçlarından diziye çevirerek atar: " + (dizge1[0] + dizge1[1] +
+            dizge1[dizge1.length - 1]) +
+            "<br/>" + (dizi1 = dizge1.split (" ") ) + "==>" + dizi1.length +
+            "<br/>" + (dizi1 = dizge1.split ("") )  + "==>" + dizi1.length +
+            "<br/>" + (dizi1 = dizge1.split (",") ) + "==>" + dizi1.length +
+            "<br/>Ayraç kullanılmaz yada bulunamazsa sonuç dizi tek elemanlıktır: " +
+            "<br/>" + (dizi1 = dizge1.split() ) + "==>" + dizi1.length +
+            "<br/>" + (dizi1 = dizge1.split ("|") ) + "==>" + dizi1.length;
+    </script>
+</body>
+</html>

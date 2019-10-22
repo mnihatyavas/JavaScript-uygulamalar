@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1381.html: JS RegExp search, replace, test ve exec metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) RegExp/Düzenliİfade verilen kalıba uygun karakteri/ibareyi metin içinde \
+            bulma veya değiştirme yöntemidir (değiştirici i:case-insensitive/küçük-büyük \
+            harf duyarsızlığı): " + "http://w3schools.com/js".search (/w3/i) +
+            "<br/>RegExp kalıbı yerine dizge de kullanılabilir: " + "http://w3schools.com/js".
+            search ("w3") +
+            "<br/>2) RegExp search() metodu yerine replace() metodu ile dizgede kalıba \
+            uyan ilk ibareyi verilenle değiştirir: " + "İlla Microsoft, hep microSoft!..".
+            replace (/microsoft/i, "w3schools") +
+            "<br/>g:global değiştirici tüm ibareleri kapsar: " + "İlla Microsoft, hep microSoft!.."
+            .replace (/microsoft/ig, "w3schools") +
+            "<br/>Kalıpta değiştiriciler m:multiline/çoklusatır eşleşmesi; [a-z]:herhangibir harf, \
+            [0-9]:herhangibir sayı; metakarakterler d/digit, s/space, b/beginning , \\uxxxx; \
+            miktarcılar n+/1 veçok, n*/0 ve çok, n?/0 veya 1 kez... kullanılabilir." +
+            "<br/>3) RegExp test() metodu kalıba dizgede uyan varsa true yoksa false \
+            döndürür: " + /ö/.test ("Kedi kÖpek dalaşı") + "; " + /ü/i.test ("Ürkek tavuk") +
+            "<br/>4) RegExp exec() metodu test() gibidir, ancak bulursa bulduğunu, \
+            yoksa null/hiç döndürür: " + /ü/.exec ("Ürkek tavuk") + "; " + /ü/i.exec ("Ürkek tavuk")
+    </script>
+</body>
+</html>

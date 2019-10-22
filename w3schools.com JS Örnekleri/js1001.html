@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1001.html: Aktüel tarih ve saatı öğrenme örneği.</title>
+    <style>
+        body {background-color: Teal; color: Gold;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: green; font-size:18px;}
+        p {margin-top:5em;}
+    </style>
+</head>
+<body>
+    <h2>Benim İlk JavaScript Örneğim</h2>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button"value="go(0) ile Yenile" onClick="history.go(0);"><br/>
+    <input type="button" value="href ile Yenile" onClick="window.location.href=window.location.href"><br/>
+
+    <button onclick="document.getElementById ('göster').innerHTML = Date()">
+        Aktüel tarih ve saatı görmek için beni tıklayın
+    </button>
+
+    <p id="göster"></p>
+</body>
+</html>

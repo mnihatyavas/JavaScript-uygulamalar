@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1311.html: JavaScript şartlı if-else örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function selam (zaman) {
+            if (zaman <= 12) return "Günaydın!..";
+            else if (zaman <= 18) return "Tünaydın!..";
+            else if (zaman <= 20) return "İyi Akşamlar!..";
+            else return "İyi Geceler!..";
+        } // func.. sonu...
+
+        function git() {
+            var seç = Math.floor (Math.random() * 4) + 1;
+            if (seç == 1) return '<a href="https://www.w3schools.com/js/default.asp" target="_">W3schools JS</a>';
+            else if (seç == 2) return '<a href="https://www.javatpoint.com/" target="_">Javatpoint</a>';
+            else if (seç == 3) return '<a href="https://www.tutorialspoint.com/index.htm" target="_">Tutorialspoint</a>';
+            else return '<a href="https://www.python-course.eu/" target="_">Python 3</a>';
+        } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Şartlı işlemler için if-else-else if veya switch kullanılır: " + new Date().getHours() +
+            ":" + new Date().getMinutes() + "; " + selam (new Date().getHours() + new Date().getMinutes() / 60) +
+            "<br/>2) Tesadüfi tamsayı üretimiyle 4 ayrı siteye yönlendirme: " + git()
+    </script>
+</body>
+</html>

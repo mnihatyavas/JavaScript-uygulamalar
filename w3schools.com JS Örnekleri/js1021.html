@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1021.html: JS script kodlamasıyla html içinde programlama örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <p id="göster"></p>
+    <script type="text/javascript">
+        //  js varsayılı olduğundan, artık type="text/javascript" gerekmez...
+        document.getElementById ("göster").innerHTML = "'onclick' event/olay'sız benim doğrudan ilk JavaScript 'script' örneğim.";
+    </script>
+</body>
+</html>

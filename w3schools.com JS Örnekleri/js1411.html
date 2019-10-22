@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1411.html: JS değişkenlerinin kapsamları tepesine yükseltilmesi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>KAPSAM</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        y = 2019;
+        var y;
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS'de değişkenler beyan edilmeden de kullanılabilirler, yani beyansız \
+            ilk kullanıldıkları anda beyan edilmiş de sayılarak yükseltilirler: " + (yaş = 62) +
+            "; 10 yıl öncesi: " + (yaş - 10) +
+            "<br/>Burada yükseltme, geçerlilik kapsamlarının (sayfa, kodlama fonksiyon \
+            veya blok) en tepesi anlamındadır." +
+            "<br/>2) Değişkenler beyanları esnesında ilk değer, veya önce beyan sonra \
+            ilk değer atanabilir, keza önce ilk değer atanıp sonra da beyan edilebilir, \
+            ilk beyansız değerini muhafaza eder: " + y +
+            "<br/>3) Değişkenler JS'de kullanıldıkları anda tanımlansalar da iyi bir \
+            programcı ilgili kapsamda kullanacağı değişkenleri öncelikle kapsam tepesinde \
+            'var' anahtarkelimesiyle beyan eder." +
+            "<br/>Ayrıca istenirse 'use strict' (katı kullanım) kipi ile beyansız değişken \
+            kullanımı kapatılabilir."
+    </script>
+</body>
+</html>

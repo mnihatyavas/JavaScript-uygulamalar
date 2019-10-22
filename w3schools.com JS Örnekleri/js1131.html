@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1131.html: JavaScript anahtarkelime-değer çiftli nesneler örneği.</title>
+    <style>
+        body {background-color:Green; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Cyan; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML =""}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var araba1 = "Mercedes";
+        var araba2 = {tipi:"Fiat", modeli:"500", rengi:"white", fiyatı: 20000};
+        var şahıs = {
+            adı:"M.Nihat",
+            soyadı:"Yavaş",
+            yaşı: (2019 - 1957),
+            gözRengi:"ela",
+            tamAdı: function() {return this.adı + " " + this.soyadı;} };
+
+        var x = new String ("M.Nihat Yavaş"); // Dizge nesnesi...
+        var y = new Number (2019 - 1957); // Sayı nesnesi...
+        var z = new Boolean (true); // İkili nesne...
+
+        document.getElementById ("göster").innerHTML =
+            "Nesneler de değişkenler gibidir, ancak Python sözlük özellikli, {} içinde, \
+            anahtar:değer veri çiftlerinden oluşurlar. Dizi elementlerine endeksiyle, \
+            nesne/sözlük elemanına ise anahtarkelimesiyle erişilebilir. " + araba1 +
+            ", " + araba2 + ", " + araba2.tipi + ", " + araba2["fiyatı"] +
+            "<br/>Nesnelerin herbir yegane anahtar-değer çiftleri birer özellik olup \
+            ':' ile ilişkilendirilir ve virgüllerle ardışıklandırılır. " + şahıs.yaşı + ", " +
+            şahıs["gözRengi"] +
+            "<br/>Metodlar nesneler üzerine işlevsel fonksiyonlardır. Nesne özellik \
+            değeri fonksiyon tanımlı metodla atanabilir ve anahtarkelime() metod adıyla \
+            çağrılabilir: " + şahıs.tamAdı() + // 'şahıs.tamAdı' değil...
+            "<br/>Nesne özelliğine './[]' ile erişilirken, metoduna sadece '.()' yöntemiyle \
+            erişilebilir: " + şahıs.yaşı + ", " + şahıs["yaşı"] + ", " + şahıs.tamAdı() + // şahıs["tamAdı"] değil...
+            "<br/>" + şahıs["tamAdı"] + ", " + şahıs["tamAdı()"] + ", " + şahıs.tamAdı +
+            "<br/>Basit sayı, dizge ve ikili'yi 'new' ile nesne olarak yaratmaktan kaçının, \
+            zira çok bellek harcar ve üzerlerindeki işlem hızını yavaşlatır, ayrıca ==/=== \
+            kıyas işlemlerinde karışıklık çıkarır: " + x + ", " + y + ", " + z + ", " +
+            ("M.Nihat Yavaş" == x) + ", " + ("M.Nihat Yavaş" === x)
+    </script>
+</body>
+</html>

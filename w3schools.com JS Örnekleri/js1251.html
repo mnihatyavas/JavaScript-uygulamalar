@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1251.html: JavaScript tarih alma metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var t = new Date();
+        var günler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+        var aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
+        document.getElementById ("göster").innerHTML =
+            "1) Birkaç önemli tarih alma metodu: getDate(), getDay(), getMonth(), \
+            getFullYear(), getHours(), getMinutes(), getSeconds(),  getMilliseconds(), \
+            getTime(): " + t.getDate() + "; " + t.getDay() + "; " + t.getMonth() + "; " +
+            t.getFullYear() + "; " + t.getHours() + "; " + t.getMinutes() + "; " +
+            t.getSeconds() + "; " + t.getMilliseconds() + "; " + t.getTime() +
+            "<br/>2) getDay ve getMonth sıfırdan başlar, gün ve ay dizi endeksi olarak \
+            kullanılabilir: " + günler[t.getDay()] + "; " + aylar[t.getMonth()] +
+            "<br/>3) Tarihi istediğiniz biçimde şekillendirebilirsiniz: " + t.getFullYear() +
+            " yılının " + (t.getMonth() + 1) + ".ıncı " + aylar[t.getMonth()] + " ayının " +
+            t.getDate() + ".üncü " + günler[t.getDay()] + " günü; Saat (" + (t.getHours() + 1) +
+            ":" + t.getMinutes() + ":" + t.getSeconds() + ")" +
+            "<br/><br/>4) Date.parse ile girdiğiniz tarihin 1.1.1970 arası milisaniyesini alır ve \
+            isterseniz bunu tekrar tarihe çevirebilirsiniz: " + (a = Date.parse ("Jun 23 2025")) +
+            "; " + (new Date (a)) +
+            "<br/>5) Tarihler arası kıyas yapabilirsiniz: " + (new Date() > new Date (2019, 5, 24) ) +
+            "; " + (new Date() > new Date().setFullYear (2019, 5, 22))
+    </script>
+</body>
+</html>

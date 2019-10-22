@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1391.html: JS hata yakalama/fırlatma try-catch-finally/throw örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Maroon; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+        function fonk2() {document.getElementById ("mesaj").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil Açıklama" onClick="fonk1()">
+    <input type="button" value="Sil Veri Girişi" onClick="fonk2()">
+    <h4>HATALAR</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function hata1() {
+            try {alert ("Merhaba, hata yakalayıcı!..");}
+            catch (hata) {return "HATA: " + hata.mesaj;}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata2() {
+            try {alertİkazı ("Merhaba, hata yakalayıcı!..");}
+            catch (hata) {return "HATA: " + hata;}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata3() {
+            var aylar = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran", "temmuz", "ağustos", "eylül", "ekim", "kasım", "aralık"];
+            var mesaj, x;
+            mesaj = document.getElementById ("mesaj");
+            mesaj.innerHTML = "";
+            x = document.getElementById ("göster1").value;
+            try {
+                if (x == "") throw "boş"; // Fırlatılan throw, catch->hata tarafından yakalanır...
+                else if (isNaN (x)) throw "sayı değil";
+                x = Number (x);
+                if (x < 1) throw "çok küçük";
+                else if (x > 12) throw "çok büyük";
+                else throw " yılın " + aylar[x-1] + " ayı karşılığıdır";
+            }catch (hata) {mesaj.innerHTML = "Girdiğiniz sayı " + hata + ".";
+            }finally {document.getElementById ("göster1").value = "";
+            } // try-catch-finally bloğu sonu...
+        } // func.. sonu...
+
+        function hata4() {
+            var sayı = 2019;
+            try {sayı.toPrecision (500);}
+            catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata5() {
+            var sayı1 = 2019;
+            try {sayı1 = sayı1 + sayı2;}
+            catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata6() {
+            var sayı = "10 Kasım 1938";
+            try {eval (sayı);}
+            catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata7() {
+            var sayı = 1923;
+            try {sayı.toUppercase();}
+            catch (hata) {return "HATA (" + hata + ")";}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata8() {
+            var mesaj = "%Nihat%";
+            var mesaj2;
+            try {mesaj2 = encodeURI (mesaj);}
+            catch (hata) {return "HATA (" + hata + ")";}
+            try {decodeURI (mesaj2);}
+            catch (hata) {return "HATA (" + hata + ")";}
+            return mesaj2 + " Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        function hata9() {
+            var mesaj = "%25Nihat%2";
+            try {decodeURI (mesaj);}
+            catch (hata) {return "HATA (" + hata + ")";}
+            return "Hata yakalanmadı!..";
+        } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Hata yakalayan try-catch-finally bloğu ve kullanıcıya özgü throw hataları. " +
+            hata1() + "; " + hata2() +
+            "<br/>2) finally try-catch bloğu sonunda ve hata yakalansın yakalanmasın \
+            işletilen son bloktur." +
+            "<br/>3) Hata nesnesinin 2 özelliği: ad ve mesaj'dır." +
+            "<br/>6 farklı hata adı vardır: EvalError=SyntaxError (eval() fonksiyon hatası), RangeError \
+            (sayı kapsam dışı hatası), ReferenceError (beyansızlık referans hatası), \
+            SyntaxError (kod sözdizim hatası), TypeError (veri tipi uyuşmazlığı hatası) ve \
+            URIError (encodeURI() çözümlenemeyen karakter hatası).<br/>" + hata4() + "<br/>" +
+            hata5() + "<br/>" + hata6() + "<br/>" + hata7() + "<br/>" + hata8() + "<br/>" +
+            hata9()
+    </script>
+
+    <input id="göster1" type="text">
+    <!-- Kontrollu veri girişi: <input id="göster1" type="number" min="1" max="12" step="1" -->
+    <button type="button" onclick="hata3()">Sayı Gir</button>
+    <p id="mesaj">1-12 arası bir tamsayı girin</p>
+</body>
+</html>

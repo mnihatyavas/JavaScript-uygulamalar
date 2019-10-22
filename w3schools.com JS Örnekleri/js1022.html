@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1022.html: JS script başlık içerisinde örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+
+    <script>
+        function fonksiyonum() {
+            document.getElementById ("göster").innerHTML = "Tıklama olayıyla paragrafı değiştirdiniz.";
+        } // fonksiyonum sonu...
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>JavaScript Head/başlık İçinde</h2>
+
+    <p id="göster">Bu bir html "p" paragrafıdır.</p>
+
+    <input type="button" onclick="fonksiyonum()" value="Tıklamayı deneyin" />
+</body>
+</html>

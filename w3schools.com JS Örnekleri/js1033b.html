@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1033b.html: Çıktı yazdırmak aynı sayfaiçinde tıklamalı innerHTML kullanılması örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk() {
+            document.getElementById ("göster").innerHTML =
+                "<p style='color:red; font-size:80px; text-align:center; margin-top:1.5em;'>" +
+                "5+6=" + (5 + 6) + "</p>";
+            }
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h1>Benim Ağ Sayfam</h1>
+
+    <input type="button" value="Tıkla" onClick="fonk()" /><br/><br/>
+
+    <p id="göster">Tıklayınca toplamın sonucu bu paragrafta ve stilli gösterilecektir.</p>
+</body>
+</html>

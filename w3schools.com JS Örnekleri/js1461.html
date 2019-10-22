@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1461.html: JS tek return ifadeli arrow fonksiyonu örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>arrow FONKSİYONU</h4>
+    <p id="göster">Paragraf</p>
+
+    <button id="slm6">Tıkla ve Selamla</button>
+    <button id="slm7">Arrow'la ve Selamla</button>
+
+    <script>
+        var selam1 = function() {return "Merhaba, JS dünyası!";}
+        var selam2 = () => {return "Merhaba, JS dünyası!..";};
+        var selam3 = () => "Merhaba, JS dünyası!...";
+        var selam4 = (değer) => "Merhaba, " + değer;
+        var selam5 = değer => "Merhaba, " + değer;
+        var selam6 = function() {document.getElementById ("göster1").innerHTML += this;}
+        var selam7 = () => document.getElementById ("göster2").innerHTML += this;
+
+        window.addEventListener ("load", selam6);
+        document.getElementById ("slm6").addEventListener ("click", selam6);
+
+        window.addEventListener ("load", selam7);
+        document.getElementById ("slm7").addEventListener ("click", selam7);
+
+        document.getElementById ("göster").innerHTML =
+            "1) Arrow fonksiyonu, JS fonksiyonlarının kısa pratik yazılımı içindir: " + selam1() +
+            "<br>" + selam2() +
+            "<br>2) Tek ifadeliyse return ve {} da gerekmez: " + selam3() +
+            "<br>3) Parametre aktarımı yapılabilir: " + selam4 ("hey ordaki JS'liler!") +
+            "<br>4) Parametre parantezsiz de aktarılabilir: " + selam5 ("hey ordakiler!") +
+            "<br>5) Normal fonksiyonda 'this' window ve buton'u işaret eder." +
+            "<br>Arrow'da ise 'this', window ve tekrar window'u işaret eder."
+    </script>
+
+    <p id="göster1"></p>
+    <p id="göster2"></p>
+</body>
+</html>

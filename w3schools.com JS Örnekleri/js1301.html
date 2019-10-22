@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1301.html: JavaScript karşılaştırma, mantıksal ve üçsel işlemciler örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function karşılaştır() {
+            var x = 5;
+            var dizi = ["x == 8", "x == 5", 'x == "5"', "x === 5", 'x === "5"', "x != 8",
+                "x !== 5", 'x !== "5"', "x !== 8", "x > 8", "x < 8", "x >= 8", "x <= 8"];
+            var sonuç = "";
+            for (var i = 0; i < dizi.length; i++) sonuç = sonuç + dizi[i] + ":" + Boolean (eval (dizi[i])) + ", ";
+            return sonuç;
+        } // func.. sonu...
+
+        function mantıksalKarşılaştır() {
+            var x = 6, y = 3;
+            var dizi = ["x < 10 && y > 1", "x == 5 || y == 5", "!(x == y)"];
+            var sonuç = "";
+            for (var i = 0; i < dizi.length; i++) sonuç = sonuç + dizi[i] + ":" + Boolean (eval (dizi[i])) + ", ";
+            return sonuç;
+        } // func.. sonu...
+
+        function oylama (yaş) {
+            yaş = Number (yaş);
+            if (isNaN (yaş)) return "Hatalı yaş girildi!..";
+            else return (yaş <18)? "Henüz reşit değil, oy kullanamaz!" : "Reşittir, oy kullanabilir.";
+        } // func.. sonu...
+
+        function farklıTipliKıyaslar() {
+            var dizi = ["2 < 12", "2 < '12'", "2 < 'Nihat'", "2 > 'Nihat'", "2 == 'Nihat'", "'2' < '12'", "'2' > '12'", "'2' == '12'"];
+            var sonuç = "";
+            for (var i = 0; i < dizi.length; i++) sonuç = sonuç + dizi[i] + ":" + Boolean (eval (dizi[i])) + ", ";
+            return sonuç;
+        } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Karşılaştırma işlemcileri Boolean true/false üretirler." +
+            "<br/>(x = 5 ise): " + karşılaştır() +
+            "<br/>2) Mantıksal işlemciler (&&:ve, ||:veya, !:değil) kıyas işlemcileriyle \
+            birlikte işlem sonucunda true/false üretirler." +
+            "<br/>(x = 6 ve y = 3 ise): " + mantıksalKarşılaştır() +
+            "<br/>3) Üçlü işlemcide kıyas olumluysa ilki değilse ikincisi atanır." +
+            "<br/>" + oylama (25) + "; " + oylama ("17") + "; " + oylama ("%20") +
+            "<br/>4) Farklı tipli veri kıyaslamalarında dikkatli olunmalıdır: " +
+            farklıTipliKıyaslar()
+    </script>
+</body>
+</html>

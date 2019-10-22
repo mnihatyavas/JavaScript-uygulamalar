@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1032a.html: Çıktı yazdırmak için document.write örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h1>Benim Ağ Sayfam</h1>
+    <p>Bu bir html "p" paragrafıdır.</p>
+
+    <script>
+        document.write ("<span style='color:red; font-size:50px;' />5+6=", (5+6), "</span>");
+    </script>
+</body>
+</html>

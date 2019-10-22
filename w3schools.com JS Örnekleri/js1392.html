@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1392.html: JS hata yakalama/fırlatma try-catch-finally/throw örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Maroon; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+        function fonk2() {document.getElementById ("mesaj").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil Açıklama" onClick="fonk1()">
+    <input type="button" value="Sil Veri Girişi" onClick="fonk2()">
+    <h4>HATALAR-2</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function hata1() {
+            try {naMevcutDeğişken;}catch {return "Bu aşamada bir hata yakalandı!..";}
+            return "Hata yakalanmadı.";
+        } // fonk sonu...
+
+        function hata2() {
+            try {naMevcutDeğişken;
+            }catch (istisna) {return `<br/>HATA (adı=${istisna.name}<br/>mesajı=${istisna.message}<br/>ve yığını=${istisna.stack})`;}
+            return "Hata yakalanmadı.";
+        } // fonk sonu...
+
+        function hata3 (yaş) {
+            try {if (yaş < 0) throw new Error ("Negatif yaş olmaz!");
+            }catch (ist) {return `<br/>HATA (adı=${ist.name}<br/>mesajı=${ist.message}<br/>ve yığını=${ist.stack})`;}
+            return "Hata yakalanmadı.";
+        } // fonk sonu...
+
+        function hata4 (yaş) {
+            try {if (yaş > 64) throw new Error ("TCDD ile %50 indirimli seyahat edebilirsiniz.");
+                else if (yaş > 59) throw new Error ("TCDD ile %20 indirimli seyahat edebilirsiniz.");
+                else if (yaş > 17) throw new SyntaxError ("Reşitler oy kullanabilir.");
+                else if (yaş > 0) throw new SyntaxError ("Çocuklar henüz oy kullanamaz.");
+                else throw new ReferenceError ("Henüz doğmamışsınız!");
+            }catch (ist) {if (ist.name == "ReferenceError") throw ist;
+                else return `<br/>HATA (adı=${ist.name}<br/>mesajı=${ist.message}<br/>ve yığını=${ist.stack})`;}
+            return "Hata yakalanmadı.";
+        } // fonk sonu...
+        try {hata4 ();}catch (ist) {alert ("Harici bir rethrow/tekrarfırlatma yakalandı: " + ist);}
+
+        function hata5() {
+            function fib (n) {return n <= 1 ? n : fib (n - 1) + fib (n - 2);
+            } // fonk sonu...
+            let ilk=0, son=0, süre, sonuç;
+            try {let sayı = +prompt ("Pozitif bir tamsayı girin?", 35)
+                if (sayı == NaN || sayı < 0 || Math.trunc (sayı) != sayı) throw new Error ("NaN, negatif veya küsüratlı sayı giremezsiniz.");
+                ilk = Date.now(); sonuç = fib (sayı); son = Date.now();
+            }catch (ist) {alert (ist); sonuç = 0;
+            }finally {süre = son - ilk;}
+            alert (sonuç || "Hata fırlatıldı");
+            alert (`İşlem süresi = ${süre} ms`);
+        } // fonk sonu...
+
+        window.onerror = function (mesaj, yurel, satır, sütun, hata) {
+            document.getElementById ("göster").innerHTML +=
+            "<br>Hata: " + hata + "<br>Mesaj: " + mesaj + "<br>Satır no: " + satır + "<br>Sütun no: " + sütun + "<br>Yurel: " + yurel;
+        }; // win.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS kodlama hataları try-catch'le yakalanmaz, tarayıcı yorumlama esnasında \
+            susar, hatayı F12 debugger/hataayıklayıcı'da görebiliriz. try-catch'le yakalanabilen \
+            hatalar kodlama/syntax/sözdizim değil, istisnalar da denilen çalışma zamanı \
+            hatalarıdır ve hata bu blok içinde oluşurken yakalanmalıdır: " + hata1() +
+            "<br/>2) Hata yakalandığında catch(hata)'nın name/ad, message/mesaj ve \
+            stack/yığın olmak üzere üç geridönüşü vardır: " + hata2() +
+            "<br/>3) Hata yakalandığında kendi hata nesnemizi de throw/fırlatabiliriz \
+            (new Error, new SyntaxError, new ReferenceError(mesaj)): " + hata3 (-20) +
+            "<br/>4) Bilinen ve throw'la yakalanan bir hata haricindeki tüm hatalar rethrow\
+            /tekrarfırlat'la dışardan yakalanabilir: " + hata4 (67) +
+            "<br/>5) try-catch-finally'da finally her halükarda işletilir: " + hata5() +
+            "<br/>6) catch'siz try-finally da kullanılabilir." +
+            "<br/>7) try-catch dışı her türlü çalışma zamanı hatalarını yakalamak için \
+            genel 'window.onerror' kullanılabilir: ";
+
+        function oku() {namevcut();}
+        oku();
+    </script>
+</body>
+</html>

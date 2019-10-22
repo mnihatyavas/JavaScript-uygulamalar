@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1431.html: JS this anahtarkelimesi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>"this" ANAHTARKELİMESİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function bu1() {
+            var kişi = {ad:"M.Nihat", soyad:"Yavaş", tcNo:43879313154,
+                tamİsim: function() {return this.ad + " " + this.soyad;} };
+            return kişi;
+        } // func.. sonu...
+
+        function bu2() {
+            var kişi = {ad:"M.Nihat", soyad:"Yavaş", tcNo:43879313154,
+                fonk: function() {return this;} };
+            return kişi;
+        } // func.. sonu...
+
+        function bu3() {
+            var kişi1 = {ad:"M.Nihat", soyad:"Yavaş", tcNo:43879313154,
+                tamİsim: function() {return this.ad + " " + this.soyad;} };
+            var kişi2 = {ad:"Mahmut", soyad:"Savaş", tcNo:43879313155,
+                tamİsim: function() {return this.ad + " " + this.soyad;} };
+            var kişi = kişi1.tamİsim.call (kişi2); 
+            return kişi;
+        } // func.. sonu...
+
+        function bu4() {
+            //"use strict"
+            return this;
+        } // func.. sonu...
+
+        var x = this;
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nesne içi fonksiyondaki 'this'/bu anahtarkelimesi, ilgili nesnedeki anahtarlara \
+            işaret eder: " + bu1().tamİsim() +
+            "<br>Yani bir metoddaki 'this' metodun sahibini işaret eder." +
+            "<br>2) Nesne içi fonksiyondaki yalın 'this', nesnenin sahibi kişi'ye aittir: " +
+            bu2().fonk() +
+            "<br>3) JS öntanımlı 'call' metoduyla bir nesne içinden diğer bir nesne \
+            argüman olarak çağrılabilir. Bu örnekte 'this' fonksiyonun ait olduğu kişi1'e \
+            değil, argüman olarak çağrılan kişi2'ye aittir: " + bu3() +
+            "<br>4) Yalın 'this' (toleranssız 'strict' kipinde de) window global nesnesini \
+            işaret eder: " + x +
+            "<br>5) Fonksiyon içinde yalın 'this' fonksiyonun varsayılı ait olduğu window \
+            global nesneyi işaret eder: " + bu4() +
+            "<br>Ancak 'use strict' kipinde var'sız varsayılı aidiyet kabul edilmediğinden \
+            undefined/tanımsızdır." +
+            "<br>6) HTML olay yönetiminde, 'this', olayı alan HTML elemanına aittir; \
+            örnekte 'button'a:"
+    </script>
+
+    <button onclick="this.style.display='none' ">Beni silmek için tıklayın!</button>
+</body>
+</html>

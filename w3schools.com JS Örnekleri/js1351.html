@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1351.html: JavaScript break, continue ve etikete referans örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function forBreak() {
+            var metin = "<br/>for-break: ";
+            for (i = 1; i < 100; i++) {metin = metin + i + " "; if (i == 10) break;}
+            return metin;
+        } // func.. sonu...
+
+        function forContinue() {
+            var metin = "<br/>for-continue: ";
+            for (i = 1; i < 100; i++) {
+                if (i > 5 && i <= 10) continue;
+                metin = metin + i + " ";
+                if (i == 15) break;
+            } // for sonu...
+            return metin;
+        } // func.. sonu...
+
+        function etiketliFor() {
+            var metin = "<br/>etiketli-for: ";
+            etiket1: for (i = 1; i < 100; i++) {
+                metin = metin + "<h3>" + i + "</h3>";
+                etiket2: for (j = 100; j > 0; j--) {
+                    if (j > 5) continue etiket2;
+                    metin = metin + j + " ";
+                } // for-j sonu...
+                if (i > 4) break etiket1;
+            } // for-i sonu...
+            return metin;
+        } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) break döngüyü kırar çıkar, continue döngü kalanını es geçerek devam \
+            eder. break daha önceden switch bloğunu kırıp çıkmakta kullanılmıştı." +
+            "<br/>for döngüsünde break: " + forBreak() +
+            "<br/>for döngüsünde continue: " + forContinue() +
+            "<br/>2) Etiketli/etiketsiz continue sadece döngüyü bir taratır; break ise \
+            etiketsiz döngüyü kırar çıkar, etiketlide de etikete atlar." +
+            "<br/>Etiketli iç-içe 2 for-döngüsü: " + etiketliFor()
+    </script>
+</body>
+</html>

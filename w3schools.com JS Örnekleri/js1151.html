@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1151.html: JavaScript dizgeleri ve özel karakterler örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Turquoise; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var araba = "Volvo XC60";
+        var selam = "O, bana gülümseyerek: 'Merhaba' dedi!";
+        var viking = "Biz kuzeyin \"Vikingleri\" diye çağrılılanlarıyız."
+
+        document.getElementById ("göster").innerHTML =
+            "JS dizgeleri tek/çift tırnak içindeki herşeydir. " + araba + ". " + selam +
+            "<br/>selam.lenght ile dizge uzunluğu bulunur: " + selam + "; uzunluğu: " +
+            selam.length +
+            "<br/>Özel karakterler önüne '\\' konularak aynen normal karaktermişcesine \
+            kullanılabilirler: " + viking +
+            "<br/>'\\' ve bazı özel karakterlerle özel işlemler yapılabilir: Örn. \\', \\, \\n, \
+            \\r, \\t, \\b, \\f gibi." +
+            "<br/>Uzun ifadeleri kırmanın en uygun yeri işlemci sonrasıdır. Ayrıca dizge \
+            içini de istediğiniz yerden \\ ile kırıp alt satırdan devam edebilirsiniz (aradaki \
+            boşluklar ihmal edilir). Veya tırnağı kapatıp sonrasında '+' ekleme yapılabilir." +
+            "<br/>Basit dizge yanısıra 'new' ile nesne dizge de (tavsiye edilmese de) \
+            yaratılabilir: Değerleri eşit mi? " + ("M. Nihat" == new String ("M. Nihat")) +
+            ", Tipleri aynı mı? " + ("M. Nihat" === new String ("M. Nihat")) +
+            ", İki ayrı yaratılan aynı nesne birbirine eşit mi? " +
+            (new String ("M. Nihat") === new String ("M. Nihat"));
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1441.html: JS blok içi lokal kapsamlı let örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>let ANAHTARKELİMESİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function let1() {return arabam1;}
+        function let2() {var arabam2 = "Citroen"; return arabam2;}
+        function let3() {var i=5, j=0;for (var i = 0; i < 11; i++) {j += i**2;}; return i;}
+        function let4() {var i=5, j=0;for (let i = 0; i < 11; i++) {j += i**2;}; return i;}
+
+        var arabam1 = "Volvo";
+        var yıl = 2019;
+        {var yaş1 = yıl - 1957;
+        let yaş2 = yıl - 1957;
+        let arabam2 = "Citroen";}
+
+        document.getElementById ("göster").innerHTML =
+            "1) 'script' içi tanımlı değişkenler global kapsamlıdır; dahili fonksiyonlarda da \
+            görülürler: " + arabam1 + "; " + let1() +
+            "<br/>2) Fonksiyon içi değişkenler ise lokaldir, fonksiyon dışından görülmezler: " +
+            let2() + "; " + (typeof arabam2) +
+            "<br/>3) {} blok dışı 'var' değişkenler global kapsamlıdır ve blok içinde de geçerlidir. \
+            {} blok lok içi 'var' değişkenler de globaldir veblok dışında da geçerlidir; ancak \
+            'let' ile tanımlanmışlarsa sadece blok içinde lokal geçerlidir: " + yaş1 + "; " +
+            (typeof yaş2) +
+            "<br/>4) Dış 'var' tanımlı değişken akabinde {} blok içi 'var'la tekrar tanımlanırsa \
+            yeniden global tanımlanmış sayılır ve sonraki değeri geçerlidir: " + let3() +
+            "<br/>{} blok için aynı değişken 'let' ile tanımlanırsa, blok dışındaki yeniden \
+            tanımlanmış olmaz ve değeri de değişmez: " + let4() +
+            "<br/>5) Global 'var' değişkenler window değişkenleridir, blok içi 'let'lerse \
+            değil: " + window.arabam1 + "; " + window.arabam2 +
+            "<br/>6) Fonksiyon içi let ve var tanımlı değişkenler lokaldirler; script içi \
+            ise her ikisi de global. JS kapsamı script çevresidir, HTML kapsamı da \
+            window nesnesi. JS var tanımlı değişkenler window nesnesidir, let tanımlılar \
+            ise değil. Yeniden tanımlama var ile yapılabilir, let ile değil."
+    </script>
+</body>
+</html>

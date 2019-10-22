@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1111.html: JavaScript sayı, dizge, ikili ve nesne veri tipleri örneği.</title>
+    <style>
+        body {background-color: Khaki; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Green; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML =""}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var boy = 170; // Number/sayı...
+        var isim = "M.Nihat Yavaş"; // String/dizge...
+        var arabalar = ["Saab", "Volvo", "BMW"]; // Array/dizi...
+        var kişi = {ad:"M.Nihat", soyad:"Yavaş", yaş:(2019-1957)}; // Object/nesne...
+
+        var y; // y şimdi tanımsızdır...
+        var y = 5; // y şimdi bir sayıdır...
+        var y = "İlk adım: 'Mahmut'dur."; // y şimdi bir dizgedir...
+
+        var x1 = 62;
+        var x2 = 62 + 2 / 12.0;
+        var x3 = 62e5;
+        var x4 = 62e-5;
+
+        var doğru = true;
+        var yanlış = false;
+
+        var tanımsız;
+        var boş = "";
+        var hiç = null;
+
+        document.getElementById ("göster").innerHTML =
+            "JS veri tipleri: String/Dizge, Number/Sayı, Boolean/İkili, Array/Dizi ve \
+            Object/Nesne'dir: " + boy + ", " + isim + ", " + arabalar + ", " + kişi.ad + ", " +
+            kişi["yaş"] + ", " + kişi.soyad +
+            "<br/>Sayı sonrası sayıysa toplar, dizgeyse ekler: " + (16+"Volvo") + ", " +
+            (10+4+2+"Volvo") + ", " + ("Volvo"+16) + ", " + ("Volvo"+10+4+2) +
+            "<br/>Değişken atanan son değerin tipini alır: " + y + ", " + (typeof y) +
+            "<br/>Dizge tek/çift tırnakla tanımlanır: " + isim + ", " + y +
+            "<br/>Sayılar ondalık, tam, üslü olabilir: " + x1 + ", " + x2 + ", " + x3 + ", " + x4 +
+            "<br/>İkililer true/false: doğru/yanlış olabilir: " + doğru + ", " + yanlış +
+            "<br/>Diziler virgülle ayrık elemanlardan oluşur: " + arabalar + ", " + arabalar[1] +
+            "<br/>Nesneler key:value/anahtar:değer çiftli elemanlardan oluşur: " +
+            kişi + ", " + kişi.ad + ", " + kişi["yaş"] +
+            "<br/>typeof işlemcisi veri tipini döndürür: " + (typeof "Nihat") + ", " + (typeof 3.14) +
+            ", " + (typeof false) + ", " + (typeof [1,2,3,4]) + ", " + (typeof {adı:'Nihat', yaşı:62}) +
+            "<br/>Değer atanmamış değişken ve tipi undefined/tanımsız'dır, yada değer \
+            içeren değişkene undefined atandığında tanımsızlaşır: " + tanımsız + ", " +
+            (typeof tanımsız) + ", " + (tanımsız="Nihat") + ", " + (tanımsız=undefined) +
+            "<br/>Boş değişken sadece değer içermez, lakin tipi vardır: " + boş + ", " +
+            (typeof boş) +
+            "<br/>Null değer hiç yok demektir, tipi nesnedir; değer içeren nesneye null \
+            atayıp hiçlenebilir: " + hiç + ", " + (typeof hiç) + ", " + (kişi=null) + ", " +
+            (typeof undefined) + ", " + (typeof null) + ", " + (null==undefined) + ", " +
+            (null===undefined);
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1041.html: JavaScript sabit, değişken ve işlemci sözdizimi örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:magenta; font-size:25px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk() {document.getElementById ("göster").innerHTML =}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <p id="göster"></p> <!-- Html çok satırlı yorum: Veriler bu noktada görüntülenir. -->
+
+    <script>
+        var xDeğişkeni = 5; // Tek satırlık yorum: var bir anahtarkelimedir...
+        var $y_değişkeni = 6;
+        var _z_değişkeni = xDeğişkeni + $y_değişkeni; /* Çok satırlık yorum: + aritmetik işlemci 2 değişkeni toplar */
+
+        document.getElementById ("göster").innerHTML =
+        "M.Nihat Yavaş" + "<br/>Yaş: " + (2019 - 1957) + "<br/>Değişkenler: z=x+y: " + _z_değişkeni +
+        "<br/>Aritmetik işlemciler ((1-2+0.5/2e-4**3)%5)=" + ((1-2+0.5/2e-4**3)%5) +
+        "<br/><br/>Değişken, anahtarkelime, fonksiyon, etiket adları tanıtıcılardır; ilk karakteri \
+        harf, _ veya $ olmalıdır, sonrası herhangibir rakam/karakter olabilir. Tanıtıcı adları \
+        büyük/küçük-harfe duyarlıdır. Çokkelimeli değişken adlarının adSoyad, ad-soyad \
+        (js '-' kullanmaz, çıkarma için ayrılmış kelimedir) veya ad_soyad şeklinde tanımlanması tercihidir.";
+    </script>
+</body>
+</html>

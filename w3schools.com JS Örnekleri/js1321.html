@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1321.html: JavaScript şartlı switch-case-default örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function gün (gün) {
+            switch (gün) {
+                case 0: return "Pazar"; break;
+                case 1: return "Pazartesi"; break;
+                case 2: return "Salı"; break;
+                case 3: return "Çarşamba"; break;
+                case 4: return "Perşembe"; break;
+                case 5: return "Cuma"; break;
+                case 6: return "Cumartesi"; break;
+                default: return "HATA"; break;
+            } // swi.. sonu...
+         } // func.. sonu...
+
+        function ay (ay) {
+            switch (ay) {
+                case 0: return "Ocak"; break;
+                case 1: return "Şubat"; break;
+                case 2: return "Mart"; break;
+                case 3: return "Nisan"; break;
+                case 4: return "Mayıs"; break;
+                case 5: return "Haziran"; break;
+                case 6: return "Temmuz"; break;
+                case 7: return "Ağustos"; break;
+                case 8: return "Eylül"; break;
+                case 9: return "Ekim"; break;
+                case 10: return "Kasım"; break;
+                case 11: return "Aralık"; break;
+                default: return "HATA"; break;
+            } // swi.. sonu...
+         } // func.. sonu...
+
+        function gün2 (gün) {
+            switch (gün) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                default: return "Haftasonuna henüz çok uzağız!.."; break;
+                case 5: return "Haftasonu arifesindeyiz!.."; break;
+                case 6:
+                case 0: return "Nihayet haftasonu molasındayız!..";
+            } // swi.. sonu...
+         } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) switch-case/break-default ile switch ifade sonucuna uyan case bloğu \
+            break'e kadar işletilir, uymazsa default bloğu işletilir." +
+            "<br/>Haftanın günü: " + ((t = new Date().getDay()) + 1) + "=" + gün (t) +
+            "<br/>Yılın ayı: " + ((a = new Date().getMonth()) + 1) + "=" + ay (a) +
+            "<br/>2) Bazen break özellikle kullanılmayıp çoklu seçenek bloğu oluşturulur." +
+            "<br/>Haftanın günü: " + (t + 1) + "=" + gün2 (t)
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1033.html: Çıktı yazdırmak aynı sayfaiçinde innerHTML kullanılması örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h1>Benim Ağ Sayfam</h1>
+    <p id="göster"></p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "<p style='color:red; font-size:80px; text-align:center; margin-top:2em;'>" +
+            "5+6=" + (5 + 6) + "</p>";
+    </script>
+</body>
+</html>

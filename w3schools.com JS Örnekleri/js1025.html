@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1025.html: JS kodlaması harici bir js yurel dosyası içerisinde örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>Harici JavaScript URL Dosyası</h2>
+
+    <p id="demo">Bu bir html "p" paragrafıdır.</p>
+
+    <button type="button" onclick="myFunction()">Tıklamayı Deneyin</button>
+
+    <p>(myFunction fonksiyonu harici bir yurel dosyası olan "myScript.js" içerisindedir.)
+        Bu yüzden bu program ancak çevrimiçi iseniz çalışır.
+    </p>
+
+    <script src="https://www.w3schools.com/js/myScript.js"></script>
+</body>
+</html>

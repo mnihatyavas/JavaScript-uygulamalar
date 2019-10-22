@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1071.html: JavaScript değişkenlerini tanımlama örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Gold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {// Bloklu ifadeler...
+        } // fonk1 sonu...
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x = 5;
+        var y = 6;
+        var z = x + y;
+
+        var fiyat1 = 5;
+        var fiyat2 = 6;
+        var toplam = fiyat1 + fiyat2;
+
+        var pi = 3.14; // Tırnaksız (float/kayannoktalı) sayı...
+        var kişi = "Muhammed Ali Göktürk"; // Çift tırnakla dizge...
+        var cevap = 'Evet, yeğenimdir!'; // Tek tırnakla dizge...
+
+        var arabaAdı1;
+        var arabaAdı2;
+        arabaAdı2 = "BMW";
+        var arabaAdı3 = "Volvo";
+        var şahıs = "Yücel Küçükbay", arabası = "Audi-2019", fiyatı = 35000;
+        var şahıs, arabası, fiyatı;
+
+        var ekleme1 = "M.Nihat" + " " + "Yavaş" + ", yaş: " + (2019 - 1957) + " - Yeşilyurt";
+        var ekleme2 = "Nihat " + 50 + 10 + 2 + " yaşındadır.";
+        var ekleme3 = 50 + 10 + 2 + " yaşındayım, " + 50 + 10 + 2 + " değil!..";
+
+        document.getElementById ("göster").innerHTML =
+            "Toplam fiyat: " + toplam +
+            "<br/><br/>JS değişken adları/tanımlayıcılar harf, _ veya $ ile başlayabilir, \
+            sonrasında '-' ve 'boşluk' hariç herhangibir rakam veya karakter kullanılabilir, \
+            küçük/büyükharfe duyarlıdır, ayrılmış/anahtarkelimeler kullanılamaz." +
+            "<br/><br/>'=' atama, '==' ise kıyas işlemcisidir: " + (z == (x + y)) +
+            "<br/><br/>" + kişi + "==>" + cevap +
+            "<br/>DaireninÇevresi / Çapı = " + pi +
+            "<br/><br/>'var' anahtarkelimeyle değişken tanımlanarak yaratılır. İlk değer \
+            atanmazsa 'undefined/tanımsız'dır. Yaratılırken veya sonradan değer atanabilir." +
+            "<br/>Araba adları: " + arabaAdı1 + ", " + arabaAdı2 + ", " + arabaAdı3 +
+            "<br/>Virgüllerle ayrık çoklu değişkenler ve değerleri tek satırda tanımlanıp \
+            atanabilir: " + şahıs + ", arabası: " + arabası + ", alış fiyatı: " + fiyatı + " TL" +
+            "<br/>Tanımlı değişken (ilk değersiz) tekrar tanımlanırsa önceki değeri \
+            kaybolmaz: " + şahıs + ", arabası: " + arabası + ", alış fiyatı: " + fiyatı + " TL" +
+            "<br/><br/>Dizge toplamı ardışık eklemedir: " + ekleme1 +
+            "<br/>Toplamada önce sayı varsa dizgeye kadar sayı farzedilir; baştaki \
+            dizgeyse sonrakiler tırnaksız sayı da olsa dizge farzedilir: " + ekleme2 +
+            " Hayır: " + ekleme3;
+    </script>
+</body>
+</html>

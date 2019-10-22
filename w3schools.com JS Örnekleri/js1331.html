@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1331.html: JavaScript for ve for-in döngüleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function tara1() {
+            var arabalar = ["Mercedes", "Toyoto", "Audi", "Chevraule", "Ford", "Fiat"];
+            var metin = "<ul>";
+            for (var i = 0; i < arabalar.length; i++) // ilkdeğer; şart; artış/azalış...
+                {metin = metin + "<li>" + arabalar[i] + "</li>";}
+            return metin + "</ul>";
+        } // func.. sonu...
+
+        function tara2() {
+            for (i = 200, uz = Math.floor (Math.random() * 100) + 101, metin = "<br/>"; i > uz; i--)
+                {metin = metin + i + " ";}
+            return metin;
+        } // func.. sonu...
+
+        function tara3() {
+            var arabalar = ["Mersedes", "Toyoto", "Audi", "Şevrole", "Fort", "Fiyat", "Pöjo"];
+            var metin = "<br/>", i = arabalar.length - 1;
+            for (;;) {metin = metin + " " + arabalar[i]; i--; if (i < 0) return metin;}
+        } // func.. sonu...
+
+        function tara4() {
+            var arabalar = ["Mersedes", "Toyoto", "Audi", "Şevrole", "Fort", "Fiyat", "Pöjo"];
+            var metin = "<br/>";
+            var şahıs = {ad:"Nihat", soyad:"Yavaş", yaş:(2019 - 1957), doğumYeri:"Yeşilyurt / Malatya"};
+            for (endeks in arabalar) metin = metin + arabalar[endeks] + ", ";
+            metin +="<br/>";
+            for (anahtarKelime in şahıs) metin = metin + şahıs[anahtarKelime] + "; ";
+            return metin;
+        } // func.. sonu...
+
+        function tara5() {
+            var şahıslar = [
+                ({ad:"Nihat", soyad:"Yavaş", yaş:(2019 - 1957), ikamet:"Mersin"}),
+                ({ad:"Sevim", soyad:"Yavaş", yaş:(2019 - 1963), ikamet:"Bursa"}),
+                ({ad:"Nihal", soyad:"Yavaş", yaş:(2019 - 1955), ikamet:"Antalya"}) ];
+            var metin = "<br/>";
+            for (endeks in şahıslar) {
+                for (anahtar in şahıslar[endeks]) {metin = metin + şahıslar[endeks][anahtar] + " ";}
+                metin +="<br/>";
+            } // dış-for sonu...
+            return metin;
+        } // func.. sonu...
+
+        function tara6() {
+            var arabalar = ["Mersedes", "Toyoto", "Audi", "Şevrole", "Fort", "Fiyat", "Pöjo"];
+            var metin = "<br/>";
+            for (araba of arabalar) metin = metin + araba + " ";
+            return metin;
+        } // func.. sonu...
+
+        function tara7() {
+            var dizge = "M.Nihat Yavaş", metin = "";
+            for (krk of dizge) metin = metin + krk + ":" + krk.charCodeAt (0) + " ";
+            return metin;
+        } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Araba dizisi elemanlarını tek tek işlemek yerine bir for-döngüsü içinde \
+            kolayca tarayabiliriz: " + tara1() +
+            "2) İlkdeğer virgüllerle ayrık çoklu ifadeli olabilir: " + tara2() +
+            "<br/>3) for ifadelerini usulünce ihmal edebiliriz: " + tara3() +
+            "<br/>4) for-in döngüsü taranabilirin baştan ardışık tüm elemanlarını, \
+            uzunluğunu bilmemiz gerekmeden sonuna kadar, endeks veya \
+            anahtarkelimeleriyle tarar: " + tara4() +
+            "<br/><br/>Çoklu nesne kayıtları for-in'le rahatlıkla taranabilir: " + tara5() +
+            "<br/>5) for-of döngüsü tekrarlanabilirin ardışık elemanlarını tarar: " + tara6() +
+            "<br/>for-of ile dizge karakterleri de taranabilir: " + tara7()
+    </script>
+</body>
+</html>

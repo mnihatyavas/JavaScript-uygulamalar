@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1341.html: JavaScript while ve do-while döngüleri örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function tekrar1() {
+            var sayı = 1, metin = "";
+            while (sayı < 11) {metin = metin + sayı + " "; sayı +=1;}
+            return metin;
+        } // func.. sonu...
+
+        function tekrar2() {
+            var sayı = 1, metin = "";
+            do {metin = metin + sayı + " "; sayı +=1;} while (sayı < 11);
+            return metin;
+        } // func.. sonu...
+           
+        function tekrar3() {
+            var sayı = 1, metin1 = "<br/>for: ", metin2 = "<br/>while: ";
+            for (; sayı < 11;) {metin1 = metin1 + sayı + " "; sayı +=1;}
+
+            sayı = 1;
+            while (sayı < 11) {metin2 = metin2 + sayı + " "; sayı +=1;}
+
+            return metin1 + metin2;
+        } // func.. sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Belirtilen şart true/doğru olduğu sürece while bloğu tekrarlanır." +
+            "<br/>'sayı < 10' olduğu sürece while bloğunu tekrarlar: " + tekrar1() +
+            "<br/>2) do-while'da ise önce do-bloğu işletilir, sonra şart test edilir, tru/doğru \
+            ise do-bloğu tekrar-tekrar işletilir." +
+            "<br/>'sayı < 10' olduğu sürece do-bloğunu tekrarlar: " + tekrar2() +
+            "<br/>3) for döngüsünde ifade-1 ve 3 yoksa while'la aynıdır." +
+            "<br/>Önce for, sonra da while döngüsü kullanılacaktır: " + tekrar3()
+    </script>
+</body>
+</html>

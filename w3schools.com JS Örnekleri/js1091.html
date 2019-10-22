@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1091.html: JavaScript aritmetik işlemciler ve öncelikleri örneği.</title>
+    <style>
+        body {background-color: MediumSpringGreen; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Maroon; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML =""}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x = 5;
+        document.getElementById ("göster").innerHTML =
+            "Aritmetik işlemciler: +, -, *, /, **, %, ++ ve --: " +
+            "<br/>Aritmetik işlemler sayısal sabit ve değişkenlerin aritmetik işlemcilerle \
+            sonuç değer elde etmesidir." +
+            "<br/>İşlem işlemci ve işlenenlerle gerçekleştirilir: " + (x + 5 - 2 + x*0.5**2.5 -
+            x%2 + x++ - x-- + ++x - --x) +
+            "<br/>Tüm JS işlemcilerinin öncelik sırası: ():(3+4), .:şahıs.isim, []:şahıs['isim'], \
+            ():fonk(), new:new Date(), ++:i++, --:i--, ++:++i, --:--i, !:!(x==y), typeof:typeof x, \
+            *:10*5, /:10/5, %:10%5, **:10**2, +:10+5, -:10-5, <<:x<<2, >>:x>>2, <:x<y, \
+            <=:x<=y, >:x>y, >=:x>=y, ==:x==y, ===:x===y, !=:x!=y, !==:x!==y, &&:x&&y, \
+            ||:x||y, =:x=y, +=:x+=y, -=:x-=y, *=:x*=y, /=:x/=y, %=:x%=y";
+    </script>
+</body>
+</html>

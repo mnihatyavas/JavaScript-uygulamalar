@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1241.html: JavaScript tarih biçimlendirme metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Genelde 4 çeşit tarih veri girişi standardı vardır: ISO ('YYYY-AA-GGTSS:DD:ss'), \
+            kısa ('AA/GG/YYYY'), uzun ('Aaa GG YYYY') ve tam ('Ggg Aaa GG YYYY SS:DD:ss \
+            GMT+0100 (...)') tarih: " + new Date ("2019-06-23") + "; " + new Date
+            ("2019-06-23T15:41:53") + "; " + new Date ("06/23/2019") + "; " + new Date
+            ("2019/6/23") + "; " + new Date ("Jun 23 2019") + "; " + new Date ("JANUARY, 23, 2019") +
+            "; " + new Date ("Sun Jun 23 2019 15:53:24 GMT+0100 (W. Europe StandardTime)") +
+            "; " + new Date ("Pazar Jun 23 2019 15:53:24 GMT+0500 (Tokyo Time)") +
+            "<br/>2) JS saat dilimlerini kabul eder (UTC=Coordinated Universal Time, GMT=\
+            Greenwich Mean Time, EDT=(US) Eastern Daylight Time, CDT=(US) Central \
+            Daylight Time, MDT=(US) Mountain Daylight Time, PDT=(US) Pacific Daylight Time, \
+            EST=(US) Eastern Standard Time, CST=(US) Central Standard Time, MST=(US) \
+            Mountain Standard Time, PST=(US) Pacific Standard Time). Tarih koyarken, \
+            saat dilimi belirtilmezse tarayıcı dilimi farzedilir; tarih alırken belirtilmezse, \
+            tarayıcınınkine çevrilir. " + new Date ("Sun Jun 23 2019 16:09:53 CDT+0100") +
+            "; Varsayılı: " + Date()
+    </script>
+</body>
+</html>

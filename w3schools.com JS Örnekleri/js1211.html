@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1211.html: JavaScript dizi sıralama metodları örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-weight:bold; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()"><br/><br/>
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var meyveler = ["Erik", "Kiraz", "Şeftali", "Kayısı", "Üzüm", "Muz"];
+        var sebzeler = ["Kavun", "Karpuz", "Çilek", "Domates", "Hıyar", "Patlıcan"];
+        var notlar = [57.85, 92.35, 8, 75, 42.45, 65, 82, 5];
+        var kardeşler = [
+            {isim:"Hatice Yavaş Kaçar", yaş:68, mezuniyet:"İlkokul"},
+            {isim:"Süheyla Yavaş Özbay", yaş:66, mezuniyet:"İlkokul"},
+            {isim:"Zeliha Yavaş Candan", yaş:64, mezuniyet:"İlkokul"},
+            {isim:"M.Nihat Yavaş", yaş:62, mezuniyet:"Üniversite4"},
+            {isim:"Songül Yavaş Göktürk", yaş:60, mezuniyet:"Üniversite0"},
+            {isim:"M.Nedim Yavaş", yaş:58, mezuniyet:"Üniversite1"},
+            {isim:"Sevim Yavaş", yaş:56, mezuniyet:"Üniversite2"} ];
+
+        document.getElementById ("göster").innerHTML =
+            "1) 'sort'la orijinal diziler (sayısal değil) alfabetik olarak küçükten büyüğe \
+            sıralanır: " + meyveler.sort() + "; " + notlar.sort() +
+            "<br/>2) 'reverse' ise (sıralı yada sırasız) diziyi tersine çevirir: " + sebzeler.reverse() +
+            "; " + notlar.reverse() +
+            "<br/>3) Sayısal artan veya azalan sıralama içinse kıyaslamalı artan/azalan 'sort' \
+            kullanılmalıdır (fonksiyonu sort içinde veya dışında kullanabilirsiniz): " + 
+            notlar.sort (function (a, b) {return a - b;}) + "; " +  notlar.sort (function (a, b) {return b - a;}) +
+            "<br/>4) Sayısal/dizgesel diziyi eleman değerlerine bakmaksızın 'Math.random' \
+            metoduyla her keresinde gelişigüzel karabilirsiniz: " +
+            meyveler.sort (function (a, b) {return 0.5 - Math.random();}) + "; " +
+            notlar.sort (function (a, b) {return 0.5 - Math.random();}) +
+            "<br/>5) Dizinin enküçük veya enbüyük elemanı artanın veya azalanın ilkidir: " +
+            "enküçük=" + notlar.sort (function (a, b) {return a - b;})[0] +
+            "; enbüyük=" + notlar.sort (function (a, b) {return b - a;})[0] +
+            "<br/>6) Dizi elemanları nesnel sözlükse sıralamada anahtarkelimeleri kullanılır \
+            (dizgesel karşılaştırma biraz detaylıdır): " +
+            kardeşler.sort (function (a, b) {return a.yaş - b.yaş;}) + "; " + kardeşler[0]["isim"] + "; " +
+            kardeşler.sort (function (a, b) {return b.yaş - a.yaş;}) + "; " + kardeşler[0]["isim"] + "; " +
+            kardeşler.sort (function (a, b) {var x=a.isim.toLowerCase(); var y=b.isim.toLowerCase(); if (x > y) return 1; if (x < y) return -1; return 0;}) + "; " + kardeşler[0]["isim"] + "; " +
+            kardeşler.sort (function (a, b) {var x=a.isim.toLowerCase(); var y=b.isim.toLowerCase(); if (x > y) return -1; if (x < y) return 1; return 0;}) + "; " + kardeşler[0]["isim"] + "; " +
+            kardeşler.sort (function (a, b) {var x=a.mezuniyet.toLowerCase(); var y=b.mezuniyet.toLowerCase(); if (x > y) return -1; if (x < y) return 1; return 0}) + "; " + kardeşler[0]["isim"] +
+            "<br/>7) Sayısal dizi enbüyüğü ve enküçüğü 'Math.max.apply'la bulunabilir: " +
+            Math.max.apply (null, notlar) + "; " + Math.min.apply (null, notlar)
+
+    </script>
+</body>
+</html>

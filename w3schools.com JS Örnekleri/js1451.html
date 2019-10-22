@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1451.html: JS yeniden tahsis edilemez const sabitesi örneği.</title>
+    <style>
+        body {background-color:OliveDrab; color: Cyan; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Yellow; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>const ANAHTARKELİMESİ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function sabite2() {
+            try {
+            const araba = {tipi:"Fiat", modeli:"500", rengi:"beyaz"};
+            araba = {tipi:"Volvo", modeli:"EX60", rengi:"kırmızı"};
+            }catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";
+            } // try-catch sonu...
+            return "Hata yakalanmadı";
+        } // func.. sonu...
+
+        function sabite1() {
+            try {
+                const PI = 3.141592653589793;
+                PI = 3.14;
+            }catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";
+            } // try-catch sonu...
+            return "Hata yakalanmadı";
+        } // func.. sonu...
+
+        function sabite3() {
+            try {
+                const arabalar = ["Saab", "Volvo", "BMW", "Audi"];
+                arabalar[0] = "Toyota";
+                arabalar.push ("Citroen");
+                arabalar.pop();
+            }catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";
+            } // try-catch sonu...
+            return "Hata yakalanmadı";
+        } // func.. sonu...
+
+        function sabite4() {
+            try {
+                const arabalar = ["Saab", "Volvo", "BMW", "Audi"];
+                arabalar = ["Citroen", "Toyoto", "Volvo", "BMW", "Audi"];
+            }catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";
+            } // try-catch sonu...
+            return "Hata yakalanmadı";
+        } // func.. sonu...
+
+        function sabite5() {
+            try {
+                //var PI = 3.14;//Uncaught SyntaxError: Identifier 'PI' has already been declared
+                const PI = 3.141592653589793;
+            }catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";
+            } // try-catch sonu...
+            return "Hata yakalanmadı";
+        } // func.. sonu...
+
+        function sabite6() {
+            try {
+                let PI = 3.14;
+                //const PI = 3.141592653589793;
+            }catch (hata) {return "HATA (" + hata.name + "=" + hata.message + ")";
+            } // try-catch sonu...
+            return "Hata yakalanmadı";
+        } // func.. sonu...
+
+
+        var yıl = 2019;
+        {const yıl = 1957;}
+
+        //PI = 3.14; // Hatalı...
+        const PI = 3.141592653589793;
+
+        const araba = {tipi:"Fiat", modeli:"500", rengi:"beyaz"}; // Nesnel sabite...
+        araba.rengi = "kırmızı"; // Özelliği değiştirilebilir...
+        araba.sahibi = "Nihat"; // Yeni bir özellik eklenebilir...
+
+        document.getElementById ("göster").innerHTML =
+            "1) const da let gibidir, ancak değişken değil sabite tanımlar ve kapsam \
+            içinde yeniden tahsis edilemezler. " + sabite1() +
+            "<br>2) Aynı adlı blok içi lokal const sabite blok dışı global değişkenle \
+            aynı değildir: " + yıl +
+            "<br>3) const sabitelere tanımlandıkları anda da değer atanmalıdır: " + PI +
+            "<br>4) İlkel const sabiteler değiştirilemez, fakat nesnel sabiteler değiştirilebilir: " +
+            araba.sahibi +
+            "<br>Nesnel sabitenin tek-tek özellikleri değiştiribilirse de, tüm sabite \
+            yeniden tahsis edilemez: " + sabite2() +
+            "<br>5) Nesnel sabite özellikleri gibi dizi sabite elemanları da değiştirilebilir: " +
+            sabite3() +
+            "<br>Keza dizi sabiteler de yeniden tahsislenemezler: " + sabite4() +
+            "<br>6) Tanımlı var veya let değişken adı const sabitesi olarak kullanılamaz: " +
+            sabite5() + "; " + sabite6() +
+            "<br>7) Aynı kapsam içinde aynı adlı sabiteye yeniden değer atanamaz, ancak \
+            farklı kapsamlarda aynı adlı farklı değerli sabiteler tanımlanabilir." +
+            "<br>8) Bir değişkene değer atanıp sonradan var ile tanımlanabilir, değeri \
+            kaybolmaz; ancak bir değişkene değer atayıp sonradan const beyanı \
+            yapılamaz, hata verir."
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1024.html: JS kodlaması harici bir .js dosyası içerisinde örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h2>Harici JavaScript Disk Dosyası</h2>
+
+    <p id="göster">Bu bir html "p" paragrafıdır.</p>
+
+    <button type="button" onclick="fonksiyonum()">Tıklamayı deneyin</button>
+
+    <p>(fonksiyonum "js1024x.js"" adlı harici bir disk dosyasındadır.)</p>
+
+    <script src="js1024.js"></script>
+</body>
+</html>

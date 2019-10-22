@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1101.html: JavaScript atama işlemcileri örneği.</title>
+    <style>
+        body {background-color: SaddleBrown; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:SpringGreen; font-size:18px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML =""}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+
+    <p id="göster">Paragraf</p>
+
+    <script>
+        var x = 5;
+        var y = 2;
+        document.getElementById ("göster").innerHTML =
+            "JS Atama işlemcileri: =:x=y, +=:x+=y, -=:x-=y, *=:x*=y, /=:x/=y, %=:x%=y, \
+            **=:x**=y: " +
+            "<br/>Örnekleri: " + (x=y+5) + ", " + (x+=y) + ", " + (x-=y) + ", " + (x*=y) + ", " + (x/=y) +
+            ", " + (x%=y) + ", " + (x**=y);
+    </script>
+</body>
+</html>

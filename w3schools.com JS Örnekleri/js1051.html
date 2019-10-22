@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1051.html: JavaScript ifadelerinin içerik kapsamı örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+        #göster {color:Gold; font-size:25px; margin-top:2em; text-align:ccenter;}
+    </style>
+    <script>
+        function fonk1() {// Bloklu ifadeler...
+            document.getElementById ("göster1").innerHTML = "Merhaba Arzu!";
+            document.getElementById ("göster2").innerHTML = "Nasılsınız?";
+            document.getElementById ("göster3").innerHTML = "Bugün çok gözkamaştırıcı görünüyorsunuz!";
+        } // fonk1 sonu...
+        function fonk2() {// Bloklu ifadeler...
+            document.getElementById ("göster1").innerHTML = "";
+            document.getElementById ("göster2").innerHTML = "";
+            document.getElementById ("göster3").innerHTML = "";
+        } // fonk2 sonu...
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <p id="göster"></p>
+
+    <script>
+        var x = 2019;
+        var y = 1957
+        var z = x - y;
+
+        document.getElementById ("göster").innerHTML =
+            "Merhaba M.Nihat Yavaş" + "<br/>Yaşınız: " + z +
+            "<br/><br/>JS ifadeleri tarayıcı tarafından yürütülecek program kodlaması \
+            direktifleridir. İfadeler genelde ';' ile sonlandırılır; tek satırda çoklu ifade \
+            yazılacaksa aralarında ';' bulunması zaruridir. İfade kelimeleri ve işlemcileri \
+            arasına/başına okunabilirlik bakımından enaz bir boşluk koymak tavsiye edilir." +
+            "<br/><br/>Birkaç JS anahtarkelimesi: break, continue, debugger, do...while, \
+            for, function, if...else, return, switch, try...catch...finally, var."
+    </script>
+
+    <input type="button" value="Selamla" onClick="fonk1()" />
+    <input type="button" value="Sil" onClick="fonk2()" />
+    <p id="göster1"></p>
+    <p id="göster2"></p>
+    <p id="göster3"></p>
+</body>
+</html>

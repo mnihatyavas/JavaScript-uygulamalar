@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js1032b.html: Doğrudan çıktı yazdırmak için yeni boş sayfada document.write örneği.</title>
+    <style>
+        body {background-color: Teal; color: Magenta; font-size:20px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: red; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+
+    <h1>Benim Ağ Sayfam</h1>
+    <p>Bu bir html "p" paragrafıdır.</p>
+
+    <button onclick='document.write ("<b><i>5+6=</i>", (5+6), "</b>");'>Tıklayın</button>
+</body>
+</html>

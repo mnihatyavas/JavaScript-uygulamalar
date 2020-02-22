@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10214.html: JS fonksiyonlarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Fonksiyonlar</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        let kullanýcý = "Nihat";
+        console.log (kullanýcý);
+        function selam() {return "Herkese Merhabalar!";}
+        function mesaj() {kullanýcý = "Selçuk"; let mesajým = "Selam, " + kullanýcý + "!"; return mesajým;}
+        function mesaj2() {let kullanýcý = "Atilla"; let mesajým = "Selam, " + kullanýcý + "!"; return mesajým;}
+        try {console.log (mesajým);}catch(ist){console.log (ist);}
+        let kimden = "Aynur";
+        console.log (kimden);
+        function mesaj3 (kimden, dizge) {kimden = "*" + kimden + "*"; return kimden + ': ' + dizge;}
+        function mesaj4 (kimden = "Nihat", dizge = "Deðer atamadýnýz!..") {kimden = "*" + kimden + "*"; return kimden + ': ' + dizge;}
+        function yaþ1 (son, ilk) {console.log ("Yaþýnýz: " + (son - ilk) ); }
+        function yaþ2 (son, ilk) {
+            return (
+                son - ilk);
+        } // func sonu...
+        function yaþKontrol (yaþ) {
+            if (yaþ > 18) {return true;
+            }else if (yaþ > 14) {return confirm ('Ebeveyninden onaylý iznin var mý?');
+            }else {return;} // return===undefined
+        } // func sonu...
+        function fonk2() {
+            if (yaþKontrol (yaþ2 (2019, 2004)) ) {return 'Siteye giriþ izni verilmiþtir.';
+            }else {return 'Giriþiniz onaylanmamýþtýr, bilesiniz!..';}
+        } // func sonu...
+        function ödev1 (yýl) {
+            if (yýl > 2023) {return true;}
+            //else
+            return false;
+        } // func sonu...
+        function ödev2 (yaþ) {
+            return yaþ >= 18 ? "Sitemizde alýþveriþ yapabilirsiniz." :
+                yaþ >= 14 ? "Ebeveyninizle sitemizde alýþveriþ yapabilirsiniz." :
+                yaþ >= 10 ? "Vasi kefaletiyle sitemizde alýþveriþ yapabilirsiniz." :
+                "Sitemizde alýþveriþ yapacak yaþta henüz deðilsiniz.";
+        } // func sonu...
+        function ödev3 (n1, n2, n3, n4, n5) {
+            dizi = [n1, n2, n3, n4, n5].sort();
+            return dizi [0];
+        } // func sonu...
+        function ödev4() {
+            function üs (x, n) {
+                let sonuç = x;
+                for (let i = 1; i < n; i++) {sonuç *= x;}
+                return sonuç;
+            } // iç-func sonu...
+            let x = +prompt ("+-küsüratlý x?", '2'); // Küsüratlý veya negatif olabilir...
+            let n = +prompt ("Doðal sayý n?", '20'); // Doðal sayý olmalýdýr...
+            if (n < 1) {console.log (`Negatif ${n} desteklenmiyor, sadece pozitif tamsayý girilmeli`);
+            }else {return üs (x, n);}
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nasýl ki döngüler ayný kodlama bloðunun tekrarlý iþletilmesinde gerekliyse \
+            fonksiyonlar da programýn herhangibir aþamasýnda iþletilmesini istediðimiz kodlama \
+            bloðunun hazirun çaðrýlabilmesidir. alert, prompt ve confirm gibi JS arþiv fonksiyonlarý \
+            yanýsýra kendi özel fonksiyonlarýmýz da yaratýlabilir." +
+            "<br>2) Çaðrýlacak fonksiyon öncelikle fonksiyon beyanýyla tanýmlanmalýdýr. Örneðin, \
+            selam() fonksiyonunu beyanen 2 kez çaðýralým: " + selam() + " " + selam() +
+            "<br>3) Bir fonksiyon içinde tanýmlý lokal deðiþkenler sadece o fonksiyon içinde \
+            geçerlidir; dýþýnda tanýnmazlar. Ancak dýþarda tanýmlý bir deðiþken fonksiyon içinde de \
+            tanýnýr, ve hatta deðiþtirilebilir. Þayet dýþarda tanýmlý deðiþken ayný adla fonksiyon \
+            içinde de tanýmlanýrsa, içerdeki lokaldir, dýþardakini deðiþtirmez: " + mesaj() + "; " +
+            kullanýcý + "; " + mesaj2() + "; " + kullanýcý +
+            "<br>4) Dýþardaki global deðiþkenler modern kodlamada pek fonksiyon içinde \
+            doðrudan kullanýlmazlar. Yerine ya lokal deðiþkenler yada parametrik argüman geçiþi \
+            tercih edilir. Geçirilen argüman deðiþken deðerinin fonksiyon içinde deðiþtirilmesi \
+            dýþardakini etkilemez: " + mesaj3 ("Nihat", "Merhabalar!..") + "; " +
+            mesaj3 (kimden, "Sana da Merhabalar! Ne var ne çok?") + "; " + kimden +
+            "<br>5) Parametreli fonksiyonlarda sonraki parametreye argüman atanmazsa \
+            deðeri undefined farzedilir: " + mesaj3 ("Aynur") +
+            "<br>Argüman atanmadýðýnda undefined görünmesini istemiyorsak, parametrelere \
+            varsayýlý deðer yada baþka bir fonksiyon dönüþünü atayabiliriz. Bu durumda deðer \
+            atanmadýðýnda varsayýlýyý, atandýðýnda ise atananý kullanýr: " + mesaj4 ("Aynur") +
+            "<br>6) Fonksiyonlar oluþturduklarý sonucu yansýtmak için alert, console.log, \
+            document.getElementById(kimlik).innerHTML kullanabilir yada çaðýrana tekli/çoklu \
+            return ifadesiyle geri döndürebilirler. Veya dönen sadece return/undefined/false olabilir: " +
+            yaþ1 (2019, 1957) + "; Yaþýnýz: " + yaþ2 (2019, 1957) + "<br>" + fonk2() +
+            "<br>7) Bazen return sonrasý gelecek ifade biralt satýra yazýlýr. JS bunu 'return;' \
+            olarak algýlar ve altsatýr ifadesini döndürmez. Altsatýr ifadesini döndürmek istiyorsak \
+            enazýndan 'return (' þeklinde parantezle ifadenin altsatýrdan devam edeceði ipucunu \
+            vermeliyiz. Yaþýnýz henüz: " + yaþ2 (2019, 2006) +
+            "<br>8) Fonksiyon adlarý yaptýðýyla anlamlý olmalýdýr. Ýngilizce fonksiyon adlarý genelde \
+            fiille (al, koy, hesapla, kontrolet, yarat, göster vb) baþlar; türkçeyle ise fiil sona gelecekse \
+            ya büyükharfle yada altçizgi_ kullanarak belirginleþtirilmelidir. Bazen tekkarakterli adlar da \
+            (jQuery için $, Lodash kütüphanesi için _) kullanýlýr. Dönen, deðer veya true/false olabilir." +
+            "<br>9) Fonksiyon yapýlarý modüler olmalýdýr, yani birçok iþi tek fonksiyonla yapmak \
+            yerine her anlamlý iþlem için ayrý birer fonksiyon tanýmlayýp, yeri geldikce bu modüller \
+            çaðrýlmalý yada icabýnda herbir modül baðýmsýz kullanýlabilmelidir. Örneði, önceki \
+            fonk2->yaþKontrol->yaþ2 üçlü modüler fonksiyonlardýr." +
+            "<br>10) Örnek.Kurulan yýl kontrol fonksiyonunda if-else yapýsýyla sade if yapýsý \
+            aynýdýr: " + ödev1 (2019) +
+            "<br>11) Örnek.Yukardaki yaþKontrol fonksiyonu benzerini if-else'siz ? iþlemcileriyle \
+            kurmayý deneyin: " + ödev2 (yaþ2 (2019, 2012) ) +
+            "<br>12) Örnek.Verilen 5 (veya her adet) sayýnýn enküçüðünü bulan bir fonksiyon kuralým: " +
+            ödev3 (2019, 2023, 2000, 1957, 2004) +
+            "<br>13) pow(x,n) veya x**n üsalma iþlemini sadece n doðal tamsayýlar [1->] için yapacak \
+            olan bir fonksiyon kuralým: " + ödev4()
+    </script>
+</body>
+</html>

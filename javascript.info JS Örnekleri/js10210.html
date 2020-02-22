@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10210.html: Þartlý iþlemcilerden if-else ve tekli/çoklu ? örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Þartlý Ýþlemciler: if?</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let yýl = prompt ("Hangi yýlda ECMAScript-2015 yeni özellikleri neþredildi? ", '2015');
+            if (yýl == 2015) console.log ('Tam isabet!'); // Bloksuz tek ifadenin iþletilmesi...
+
+            if (yýl == 2015) { // Bloklu çoklu ifadelerin iþletilmesi...
+                console.log ("Gerçekten de doðru!");
+                console.log ("Çok zekisin!");
+                console.log ("Nasýl da bildin?!..");
+            }else {console.log ("Tahmin edememeyi  nasýl becerebildin?!.."); }
+
+            if (yýl < 2015) {console.log ('Ýsabetsiz erken tarih...');
+            }else if (yýl > 2015) {console.log ('Ýsabetsiz geç tarih...');
+            }else {console.log ('Ýsabetli tarih...' ); }
+        } // func sonu...
+        function fonk3() {
+            let yaþ = prompt ("Lütfen yaþýnýzý girin:", "18");
+            console.log (sonuç = yaþ >= 18 ? "Reþitsin, oy kullanabilirsin." : "Henüz reþit deðilsin, oy kullanamazsýn.");
+
+            console.log ( (yaþ >= 65) ? "Tüm TCDD seyehatlerinizi %50 indirimli yapabilirsiniz." : "TCDD özel indirim kartýnýz yoksa tam bilet almalýsýnýz.");
+
+            console.log (sonuç = (yaþ < 3) ? "Ne yanaklarý okþanasý bebek!.." :
+                (yaþ < 18) ? "Ehliyet baþvurusu için henüz erken." :
+                (yaþ < 35) ? "Kariyer basamaklarýný hýzla týrmanýyor olmalýsýn." :
+                (yaþ < 60) ? "Artýk kamil denecek yaþtasýn, saðlýðýna dikkat et." :
+                (yaþ < 100) ? "Bu yaþta bu sportmenlik, hayretsin!.." :
+                "Hala nasýl yaþamayý beceriyorsun, sýrrýný bana da çýtlatsan!..");
+        } // func sonu...
+        function fonk4() {
+            let ad = prompt ("Lütfen JavaScript'in resmi adýný girin:", "ECMAScript");
+            if (ad.toLowerCase() == "ecmascript") {console.log ("Aferin, bildiniz!..");
+            }else {console.log ("Maalesef, bilemediniz!..");}
+        } // func sonu...
+        function fonk5() {
+            let sayý = prompt ("Lütfen herhangibir sayý girin", "0");
+            (sayý > 0) ? console.log ("Girilen sayý pozitif.") :
+            (sayý < 0) ? console.log ("Girilen sayý negatif.") :
+            console.log ("Girilen sayý sýfýr.")
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Farklý þartlarda farklý iþlemler yapmamýz gerektiðinde if-else veya ? iþlemcileri \
+            kullanýrýz." +
+            "<br>2) if parantez içi þart true/doðru olursa sonraki tek veya bloklu çoklu ifadeler \
+            iþletilir. Ancak okunabilirlik açýsýndan if sonrasý tek ifade de olsa hep eðri blok \
+            aç-kapa parantezlerin kullanýlmasý önerilir: " + fonk2() +
+            "<br>3) if parantez içi 0, '', false, undefined, null ve NaN yanlýþlayan, diðerleriyse \
+            doðrulayan deðerlerdir. if (0): yanlýþlayan, if (1) dorulayan. Ayrýca önceden-deðerli \
+            þartlar da kullanýlabilir: let þart = (yýl == 2015); // öncelikle deðerlendirilmiþ... ve \
+            if (þart)." +
+            "<br>4) if (þart) yanlýþlarsa ve takiben mevcutsa else ifade-leri iþletilir." +
+            "<br>5) Tek þartta if, ikili þartta if-else, çoklu þartlarda herbir farklý þart için else-if \
+            ve tercihen da son else kullanýlýr." +
+            "<br>6) ? þart iþlemcisine ternary/üçlemeli de denir, zira 3 iþleneni vardýr: Þart-ifadesi ? \
+            doðrulayan-ifade : yanlýþlayan-ifade. Þart ifadesinin (mecbur olmasa da) okunabilirlik \
+            bakýmýndan parantez içine alýnmasý tavsiye edilir: " + fonk3() +
+            "<br>7) ? iþlemcisi sadece üçlemez, istediðiniz kadar herbiri ? iþlemcili olmak \
+            üzere iþlenen sayýsýný artýrabilirsiniz (sýnýr yoktur)." +
+            "<br>8) ? iþlemcisi sonucunu illa ki bir deðiþkene atamanýz gerekmez." +
+            "<br>9) Örnek. if ('0') karakterli dizge doðrulayan sonuç üretir mi, deneyelim?.. " +
+            ( ("0") ? console.log ("Doðruladý.") : console.log ("Yanlýþladý.") ) +
+            "<br>10) Örnek. JavaScript'in resmi adý ECMAScript'i doðrulayan if-else kodlamasý yazalým: " + fonk4() +
+            "<br>11) Örnek. Girilen sayýnýn 0'dan büyük/küçük/eþit olduðunu kritikleyen kodlama yazýn: " + fonk5()
+    </script>
+</body>
+</html>

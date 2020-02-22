@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10502.html: JS'de sayýlar ve sayýsal Math metodlarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Sayýlar</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let milyar = 1e9;  // 1 milyar: 1 ve 9 sýfýr...
+            console.log (milyar);
+            console.log (1e3);
+            console.log (1.23e6);
+
+            let mikrosaniye = 0.000001;
+            console.log (mikrosaniye);
+            console.log (1e-6);
+            console.log (1 / 1000000);
+            console.log (1e-3, 1/1000);
+        } // func sonu...
+        function fonk3() {
+            console.log (0xff, 0xFF); // 255
+
+            let a = 0b11111111; // ikili 255
+            let b = 0o377; // sekizli255
+            console.log (a == b, b == 0xff );
+        } // func sonu...
+        function fonk4() {
+            let sayý = 2047;
+            for (let i = 2; i < 37; i++) {console.log ("10 tabanlý: 2047 = " + i + " tabanlý: " + sayý.toString (i) ); }
+
+            console.log (1234567890..toString (36) ); // sayýdan sonra ".." kullanýlmalýdýr,
+            console.log ( (1234567890).toString (36) ); // veya sayý paranteziçine alýnmalýdýr...
+        } // func sonu...
+        function fonk5() {
+            for (var n of [3.1, 3.6, -1.1, -1.6]) {console.log (Math.floor (n), Math.ceil (n), Math.round (n), Math.trunc (n) ); }
+        } // func sonu...
+        function fonk6() {
+            let sayý = 1.2345;
+            console.log (Math.floor (sayý * 100) / 100); // 1.23
+
+            console.log (sayý.toFixed (3) ); // "1.235" dizge...
+            console.log (sayý.toFixed (6) ); // "1.234500" dizge
+            console.log (+sayý.toFixed (6) ); // 1.2345
+        } // func sonu...
+        function fonk7() {
+            console.log ( (0.1 + 0.2) == 0.3); // false...
+            console.log (0.1 + 0.2);
+            console.log ((0.1 * 10 + 0.2 * 10) / 10);
+            console.log ( +(0.1 + 0.2).toFixed (2) );
+            console.log ( +(0.1 + 0.2).toFixed (2) == 0.3);
+
+            console.log ( 0/1, 0/-1, 0/1 == 0/-1 );
+        } // func sonu...
+        function fonk8() {
+            console.log (isNaN (NaN) ); // true
+            console.log (isNaN ("dizge") ); // true
+            console.log (NaN === NaN); // false, NaN nesnedir ve nesneler eþit deðildir...
+            console.log (Object.is (NaN, NaN) === true); // true
+            console.log (Object.is (0, -0) === false); // true
+
+            console.log (isFinite ("15") ); // true
+            console.log (isFinite ("dizge") ); // false, NaN
+            console.log (isFinite (Infinity) ); // false, sýnýrsýz
+
+            let sayý = +prompt ("Bir sayý girin", '1047');
+            console.log (isFinite (sayý) );
+        } // func sonu...
+        function fonk9() {
+            console.log (+"100px" ); // NaN
+
+            console.log (parseInt ('100px') ); // 100
+            console.log (parseFloat ('12.5em') ); // 12.5
+            console.log (parseInt ('12.3') ); // 12, sadecetamsayý kýsmý...
+            console.log (parseFloat ('12.3.4') ); // 12.3, ilk küsürat noktasý dahil...
+            console.log (parseInt ('a123') ); // NaN, ilk karakter sayý olmalýydý...
+
+            console.log (parseInt ('0xff', 16), (255).toString (16), 255..toString (16) ); // 255
+            console.log (parseInt ('ff', 16) ); // 255, 0x gerekmez...
+            console.log (parseInt ('2n9c', 36) ); // 123456
+        } // func sonu...
+        function fonk10() {
+            console.log (Math.random(), Math.random(), Math.random() ); // [0, 1)
+
+            console.log (Math.max (3, 5, -10, 0, 1) ); // 5
+            console.log (Math.min (1, 2, 2019, -0.95) ); // -0.95
+
+            console.log (Math.pow (2.745, -3.76), Math.pow (-5, 2), Math.pow (Math.PI, Math.E) );
+        } // func sonu...
+        function fonk11() {
+            let a = +prompt ("Ýlk sayýyý girin?", "2.5");
+            let b = +prompt ("Ýkinci sayýyý girin?", "8");
+            console.log ("Ýki sayýnýn toplamý:", a + b);
+        } // func sonu...
+        function fonk12() {
+            console.log (1.35.toFixed (1) ); // 1.4
+            console.log (6.35.toFixed (1) ); // 6.3
+            console.log (Math.round (6.35 * 10) / 10); // 6.4
+        } // func sonu...
+        function fonk13() {
+            function sayýGir() {
+                let sayý;
+                do {sayý = prompt ("Lütfen bir sayý girin?", 0);} while ( !isFinite (sayý) );
+                if (sayý === null || sayý === '') return null;
+                return +sayý;
+            } // func sonu...
+            console.log (`Girilen sayý: ${sayýGir()}`);
+        } // func sonu...
+        function fonk14() {
+            let i = 0;
+            while (i < 10.2) {// Hassasiyetlerde ==/=== eþitliklerden kaçýnýlmalýdýr...
+                i += 0.2;
+                if (i > 9.8 && i < 10.2) console.log (i);
+            } // while sonu...
+        } // func sonu...
+        function fonk15() {
+            function rasgele (enaz, ençok) {return enaz + (ençok - enaz) * Math.random();}
+            console.log (rasgele (1, 5) );
+            console.log (rasgele (-50, 150) );
+            console.log (rasgele (1957, 2019) );
+        } // func sonu...
+        function fonk16() {
+            let i, n, t=[], toplam;
+            function rasgele1 (enaz, ençok) {
+                let tesadüfi = enaz + Math.random() * (ençok - enaz);
+                return Math.round (tesadüfi);
+            } // func sonu...
+            for (i = 0; i < 11; i++) t [i] = 0; toplam = 0;
+            for (i = 0; i < 10000; i++) {n = rasgele1 (0, 10); t [n] +=1;}
+            for (i = 0; i < 11; i++) {console.log (i, t [i], Math.round (t [i] / 100) + "%"); toplam += t[i];}
+            console.log ("Toplam: " + toplam, Math.round (toplam / 100) + "%");
+            console.log ("Uç noktalar daha düþük ihtimalli!..");
+
+            function rasgele2 (enaz, ençok) {
+                let tesadüfi = enaz + Math.random() * (ençok + 1 - enaz);
+                return Math.floor (tesadüfi);
+            } // func sonu...
+            for (i = 0; i < 11; i++) t [i] = 0; toplam = 0;
+            for (i = 0; i < 10000; i++) {n = rasgele2 (0, 10); t [n] +=1;}
+            for (i = 0; i < 11; i++) {console.log (i, t [i], Math.round (t [i] / 100) + "%"); toplam += t[i];}
+            console.log ("Toplam: " + toplam, Math.round (toplam / 100) + "%");
+            console.log ("Tüm noktalar eþit ihtimalli.");
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS sayýlarý 64-bit formatta ve çift hassasiyetli kayan nokta olarak saklar." +
+            "<br>2) Fazla sýfýrlý (çok büyük yada çok küçük) sayýlarý 'e' formatlý tanýmlarýz. " + fonk2() +
+            "<br>3) Onaltýlý hexadecimal sayý 0x, sekizli octal sayý 0o, ikili binary sayý ise 0b \
+            önekiyle kullanýlýr. Bu 3 sayýsistemi dýþýndakiler içinse parseInt kullanýlýr. " + fonk3() +
+            "<br>4) sayý.toString(temel) metodu verili sayýyý temel tabanlý döndürür. 2->36 tabanlý \
+            sayý sembolleri olarak 10 adet 0->9 rakamlar ve 26 adet a->z latin harfleri kullanýlýr: " + fonk4() +
+            "<br>5) Sayýlarý yuvarlamak için Math.floor/taban, Math.ceil/tavan, Math.round/yakýn ve \
+            Math.trunc/kes arþiv metodlarý kullanýlabilir. " + fonk5() +
+            "<br>6) Küsüratlarýn istenilen adet küsüratýný dahil etmek için Math.floor'lu çarp ve böl \
+            yöntemini, veya sayý.toFixed(..) metodunu kullanabiliri: " + fonk6() +
+            "<br>7) Sayýlar 64-bit formatlý temsil edildiklerinden dolayý bazen istenmeyen hassasiyet \
+            hatalarý ortaya çýkmaktadýr. Bu hatalar çarp-böl ile kýsmen, sonuç.toFixed \
+            metoduyla da tamamen giderilebilir. Bazen iþlem sonucu 0 ve -0 farklý gibi görünse de \
+            JS bunlarý ayný kabul eder: " + fonk7() +
+            "<br>8) isFinite() sonlu sayý mý, isNaN() sayý deðil mi, kontrolu için kullanýlýr. \
+            Object.is(nene1,nesne2) metodu nesnel eþitliði test eder. " + fonk8() +
+            "<br>9) Artý+ veya Number() sayý dönüþtürücüleri, dizge ön/arka boþluk hariç sayýdan \
+            farklý tüm karakterlerde hata verir. '15px', '25€' gibi özel karaktere kadarki sayýlarý \
+            hatasýz çevirmek için parseInt/parseFloat kullanýlýr. parseInt(sayý,temel) ikinci argümaný \
+            verili temeldeki sayýyý ondalýða çevirir (sayý.toString(temel) ise verili ondalýk sayýyý \
+            belirtilen temele çevirir). " + fonk9() +
+            "<br>10) JS Math kütüphanesi birçok matematiksel metod arþivi barýndýrýr. Birkaçý: \
+            Math.random(), Math.max(..), Math.min(..), Math.pow(a,b): " + fonk10() +
+            "<br>Özellikler: Math.E, Math.LN10, Math.LN2, Math.LOG10E, Math.LOG2E, Math.PI, \
+            Math.SQRT1_2, Math.SQRT2" +
+            "<br>Metodlar: Math.abs(), Math.acos(), Math.acosh(), Math.asin(), Math.asinh(), \
+            Math.atan(), Math.atan2(), Math.atanh(), Math.cbrt(), Math.ceil(), Math.clz32(), Math.cos(), \
+            Math.cosh(), Math.exp(), Math.expm1(), Math.floor(), Math.fround(), Math.hypot(), \
+            Math.imul(), Math.log(), Math.log10(), Math.log1p(), Math.log2(), Math.max(), Math.min(), \
+            Math.pow(), Math.random(), Math.round(), Math.sign(), Math.sin(), Math.sinh(), Math.sqrt(), \
+            Math.tan(), Math.tanh(), Math.trunc()" +
+            "<br>11) Ödev1. Girilen 2 dizgesel sayýnýn toplamýný yansýtan kodlama: " + fonk11() +
+            "<br>12) Ödev2. (1.35).toFixed(1)=1.4 iken (6.35).toFixed(1)=6.3 döndürür. Çýktýnýn \
+            6.4 olmasý nasýl saðlanýr? " + fonk12() +
+            "<br>13) Ödev3. Sayý girilince yada boþ/Esc ile do..while döngüsünden çýkýlýp sayý/null \
+            yansýtýlsýn: " + fonk13() +
+            "<br>14) Ödev4. Ýkili sayý hassasiyeti nedeniyle (let i = 0; while (i != 10) {i += 0.2;}) \
+            döngüsü sonsuzdur; çözümünü kodlayýn: " + fonk14() +
+            "<br>15) Ödev5. Rasgele (enaz, ençok) fonksiyonuyla [enaz, ençok) arasý tesadüfi \
+            kayannoktalý sayý üreten kodlama yazýn: " + fonk15()
+            "<br>16) Ödev5. Rasgele (enaz, ençok) fonksiyonuyla [enaz, ençok) arasý eþit \
+            ihtimalli tesadüfi tamsayý üreten kodlama yazýn: " + fonk16()
+    </script>
+</body>
+</html>

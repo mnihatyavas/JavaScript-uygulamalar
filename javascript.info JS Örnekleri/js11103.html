@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11103.html: Çoklu vaat.then ile Promise zinciri örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Çoklu vaat.then Zinciri</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            new Promise (function (çözüm, red) {setTimeout ( () => çözüm (1), 1000);
+                }).then (function (sonuç) {console.log (sonuç); return sonuç * 2; // 1
+                }).then (function (sonuç) {console.log (sonuç); return sonuç * 2; // 2
+                }).then (function (sonuç) {console.log (sonuç); return sonuç * 2; // 4
+                }).then (function (sonuç) {console.log (sonuç); return sonuç * 2; // 8
+            }); // new sonu...
+
+            let vaat = new Promise (function (çözüm, red) {setTimeout ( () => çözüm (1), 1000);});
+            vaat.then (function (sonuç) {console.log (sonuç); return sonuç * 2;}); // 1
+            vaat.then (function (sonuç) {console.log (sonuç); return sonuç * 2;}); // 1
+            vaat.then (function (sonuç) {console.log (sonuç); return sonuç * 2;}); // 1
+        } // func sonu...
+        function fonk3() {
+            new Promise (function (a, b) {setTimeout ( () => a (1), 1000);
+                }).then (function (x) {console.log (x); return new Promise ( (a, b) => {setTimeout ( () => a (x * 2), 1000);});
+                }).then (function (x) {console.log (x); return new Promise ( (a, b) => {setTimeout ( () => a (x * 2), 1000);});
+                }).then (function (x) {console.log (x); return new Promise ( (a, b) => {setTimeout ( () => a (x * 2), 1000);});
+                }).then (function (x) {console.log (x);
+            }); // new sonu...
+
+            new Promise (function (a, b) {setTimeout ( () => a (1), 1000);
+                }).then (function (x) {console.log (x); return new Promise ( (a, b) => {setTimeout ( () => a (x * 5 ** 0.5), 1000);});
+                }).then (function (x) {console.log (x); return new Promise ( (a, b) => {setTimeout ( () => a (-Math.PI * x), 1000);});
+                }).then (function (x) {console.log (x); return new Promise ( (a, b) => {setTimeout ( () => a ((-1 * x) ** (1 / Math.E)), 1000);});
+                }).then (function (x) {console.log (x);
+            }); // new sonu...
+        } // func sonu...
+        function fonk4() {
+            function jsYükle (kaynak) {
+                return new Promise (function (çözüm, red) {
+                    var taslak = document.createElement ('script');
+                    taslak.src = kaynak;
+                    taslak.onload = () => çözüm (console.log (`${kaynak} baþarýyla yükledi`) );
+                    taslak.onerror = () => red (new Error (`${kaynak} yükleme hatasý`) );
+                    document.head.appendChild (taslak);
+                }); // ret sonu...
+            } // func sonu...
+
+            jsYükle ("js11103x1.js")
+                .then (function (taslak) {return jsYükle ("js11103x2.js");})
+                .then (function (taslak) {return jsYükle ("js11103x3.js");})
+                .then (function (taslak) {bir(), iki(), üç();
+            }); // js..sonu...
+
+            jsYükle ("js11103x1.js") // function yerine => kullanýlmasý...
+                .then (taslak => jsYükle ("js11103x2.js") )
+                .then (taslak => jsYükle ("js11103x3.js") )
+                .then (tasak => {// Yüklenen taslaklardaki fonksiyonlarý iþletmek...
+                    bir(); iki(); üç();
+            }); // js.. sonu...
+
+            jsYükle ("js11103x1.js").then (taslak1 => {// Ýçiçe jsYükle.then kullanýlmasý
+                jsYükle ("js11103x2.js").then (taslak2 => {
+                    jsYükle ("js11103x3.js").then (taslak3 => {
+                        bir(); iki(); üç();
+                    }); // js..sonu...
+                }); // js..sonu...
+            }); // js..sonu...
+
+            class Sonralanabilir {
+                constructor (sayý) {this.sayý = sayý;}
+                then (çözüm, red) {
+                    console.log (çözüm); // ƒ () { [native code] }
+                    setTimeout ( () => çözüm (this.sayý * Math.E), 100);
+                } // then sonu...
+            } // class sonu...
+            new Promise (çözüm => çözüm (1) )
+                .then (sonuç => {return new Sonralanabilir (sonuç);})
+                .then (console.log); // 2.718281828459045
+        } // func sonu...
+        function fonk5() {
+        function css (yurel) {
+            var s = document.createElement ('link');
+            s.type = 'text/css';
+            s.async = true;
+            s.src = yurel;
+            document.getElementsByTagName('head') [0].appendChild (s);
+        } // func sonu...
+
+        function js (yurel) {
+            var s = document.createElement ('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = yurel;
+            document.head.append (s)
+        } // func sonu...
+
+        js ('js11103x1.js');
+        js ('js11103x2.js');
+        js ('js11103x3.js');
+
+        //window.onload = function() {bir(); iki(); üç();}
+        window.onload = ( ()=> {bir(); iki(); üç();} )
+        } // func sonu...
+        function fonk6() {
+            const vaat1 = Promise.resolve (2020);
+            const vaat2 = 1957;
+            const vaat3 = new Promise (function (çözüm, red) {setTimeout (çözüm, 100, 'falan');
+});
+            Promise.all ( [vaat1, vaat2, vaat3] ).then (function (sonuç) {console.log (sonuç);
+}); [2020, 1957, "falan"]
+
+            const v1 = Promise.resolve (2020 - 1957);
+            const v2 = new Promise (function (olumlu, olumsuz) {setTimeout ( () => olumsuz (new Error ("HATA") ), 100);});
+            const v3 = Promise.resolve ("Nihat");
+            Promise.all ([
+                v1.catch (hata => {return hata;}),
+                v2.catch (hata => {return hata;}),
+                v3.catch (hata => {return hata;})]) // catch sonu...
+                .then (sonuç => {
+                    console.log (sonuç [0]);
+                    console.log (sonuç [1]);
+                    console.log (sonuç [2]);
+                }); // then sonu...
+
+            let p1 = new Promise (function (a, b) {setTimeout (a, 100, 'p1');
+});
+            
+let p2 = new Promise (function (a, b) {setTimeout (a, 100, 'p2');
+});
+            
+let p3 = new Promise (function (a, b) {setTimeout (a, 100, 'p3');
+});
+            
+let p4 = new Promise (function (a, b) {setTimeout (b, 100, "p4");
+});
+            
+let p5 = new Promise (function (a, b) {setTimeout (a, 100, 'p5');
+});
+            let vaat = Promise.all ([p1.catch (function(){}), p2.catch (function(){}), p3.catch (function(){}), p4.catch (function(){}), p5.catch (function(){})]);
+            vaat.then (function (kabul) {kabul.forEach (function (kabul) {console.log (kabul);});
+}).catch (function (red) {console.error ('HATA', red);
+});
+        } // func sonu...
+        function fonk7() {
+            var yükle = (function() {
+                function _yükle (fiþ) {
+                    return function (yurel) {
+                        return new Promise (function (çözüm, red) {
+                            var eleman = document.createElement (fiþ);
+                            var ebeveyn = 'body';
+                            var vasýf = 'src';
+                            // Yüklemenin olumlu yada olumsuz sonucu...
+                            eleman.onload = function() {çözüm (yurel);};
+                            eleman.onerror = function() {red (yurel);};
+                            // Farklý fiþlerle farklý vasýflar kullanýlacak...
+                            switch (fiþ) {
+                                case 'script': eleman.async = true; break;
+                                case 'link': eleman.type = 'text/css'; eleman.rel = 'stylesheet'; vasýf = 'href'; ebeveyn = 'head';
+                            } // switch sonu...
+                            // HTML içindeki yükleme konumlarý...
+                            eleman [vasýf] = yurel;
+                            document [ebeveyn].appendChild (eleman);
+                        }); // return sonu...
+                    }; // return sonu...
+                } // _func sonu...
+                return {
+                    css: _yükle ('link'),
+                    js: _yükle ('script'),
+                    img: _yükle ('img')
+                } // return sonu...
+            })(); // var sonu...
+
+            Promise.all ([
+                yükle.js ('js11103x1.js'),
+                yükle.js ('js11103x2.js'),
+                yükle.js ('js11103x3.js'),
+                yükle.css ('js11103x1.css'),
+                yükle.img ('resim/kelebek.jpg')
+            ]).then (function() {console.log ('Tüm dosyalar BAÞARIYLA yüklendi!');
+            }).catch (function() {console.log ('EYVAH, trajik yükleme baþarýsýzlýðý!');
+            }); // Pro..sonu...
+        } // func sonu...
+        function fonk8() {
+            fetch ("js11103x1.js")
+                .then (function (yurel) {return yurel.text();})
+                .then (function (text) {console.log (text);});
+
+            fetch ("js11103x2.js") // function yerine kýsaca =>
+                .then (yanýt => yanýt.text() )
+                //.then (metin => console.log (metin)); // Yada kýsaca...
+                .then (console.log);
+
+            //fetch ("js10101.html").then (a => a.text() ).then (console.log);
+
+            //fetch ("js11103x1.css").then (a => a.text() ).then (console.log);
+
+            fetch ("resim/balik.jpg")
+                .then ( ()=> {// .then (vaat => new Promise (çözüm, red) {
+                    let resim = document.createElement ('img');
+                    resim.src = "resim/balik.jpg";
+                    document.body.append (resim);
+                }); // then sonu...
+        } // func sonu...
+        function fonkö1() {
+            let vaat = new Promise (function (olumlu, olumsuz) {setTimeout ( () => olumsuz (new Error ("HATA!..") ), 2000);});
+
+            vaat.then (function (a) {console.log (a)} ).catch (function (a) {console.log (a)});
+            vaat.then (a=>console.log (a)).catch (a=>console.log (a));
+            vaat.then (a=>console.log (a), b=>console.log (b));
+
+            let vaat2 = new Promise (function (olumlu, olumsuz) {setTimeout ( () => olumlu ("Pi: " + Math.PI), 2000);});
+            vaat2
+                .then (function (a) {
+                    console.log (a); 
+                    return new Promise ((a,b)=>{setTimeout (()=>b(new Error ("HATA-2...") ), 2000);});})
+                .catch (function (a) {console.log (a)});
+            vaat2
+                .then (a => {
+                    console.log (a);
+                    return new Promise ((a,b)=>{setTimeout (()=>b(new Error ("HATA-2...") ), 2000)});
+                    }, b=>console.log (b) );
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Promise nesnesi yaratýlýrken ardýþýk ..then zinciriyle ve herbir halkadaki return deðerini birsonraki \
+            için deðiþtirerek çoklu vaat zinciri oluþturabiliriz." +
+            "<br/>2) Kesintili vaat.then zincir demek deðildir ve return deðerini deðiþtirmez. Pratikte tek vaat nesnesinin \
+            deðiþmez return deðerli çoklu yönetiminden ziyade çoklu vaat zincirinin deðiþir return deðerli yönetimi \
+            kullanýlmaktadýr. " + fonk2() +
+            "<br/>3) Vaat zincirinde sadece birsonraki return deðerini deðiþtirmek yerine yenibir Promise nesnesi \
+            ve (olumlu/olumsuz) deðeri de türetebiliriz. " + fonk3() +
+            "<br/>4) Birönceki konudaki Promise'li jsYükle fonksiyonunu .then ile çoklu yüklemeler için function-return'lü, \
+            =>'lu ve içiçe jsYükle.then'li uyarlayabiliriz. Sýnýf içi 2 argümanlý then fonksiyonuyla Promise then(çözüm/red) \
+            yöntemini baðdaþtýrabiliriz. " + fonk4() +
+            "<br/>5) Ayný yükleme iþlemini Promise'siz window.onload kontrollu da yapabiliriz. " + fonk5() +
+            "<br/>6) Çoklu Promise all. " + fonk6() +
+            "<br/>7) Herçeþit (css, js, img) dosyanýn Promise.all ile yüklenmesi. " + fonk7() +
+            "<br/>8) KomutÝletisi->cd C:\Users\bilgisayarim\Desktop\MyFiles\4. Dersler\javascript->python -m http.server \
+            kurduktan sonra:>http://localhost:8000/js11103.html olarak çalýþtýrýlmalýdýr." +
+            "<br/>Ýnternetten yada localhost'dan getir/fetch.then ile istenilen metni/resmi indirebiliriz. " + fonk8() +
+            "<br/>Ödev1) vaat.then(f1).catch(f2) icabýnda f1'de fýrlatýlan hatayý f2'de yakalar, fakat vaat2.then(f1,f2) \
+            yakalayamaz, ayný deðillerdir. " + fonkö1()
+    </script>
+</body>
+</html>

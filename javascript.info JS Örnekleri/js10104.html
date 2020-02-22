@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10104.html: JavaScript geliþtirici araçlarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>F12 Geliþtirici Araçlar</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        //console.log (Merhabalar);
+
+        document.getElementById ("göster").innerHTML =
+            "1) Çoðu tarayýcýlar Google Chrome'un F12 geliþtirici araçlarýný takip eder. \
+            Özellikle hata yakalama veya tarayýcý sayfasýna veya alert tarayýcý mesajýna \
+            deðil de F12 konsoluna program geliþtirici ara çýktýlar almak isteyebilirler." +
+            "<br>2) Yukardaki konsol kodlamasýný yorum dýþý iþletmeye çalýþýrsanýr program \
+            hata verecektir. F12 debugger/hataarýndýrýcý'yý açarsanýz hatanýn sebebi ve \
+            saðýnda program içi baðlantýsý gösterilecektir. Baðlantýyý týklarsanýz, source/kaynak \
+            yol-dosya-kodlama gösterilecektir. Konsoldaki mavi > sembolü icabýnda buradan \
+            sonu Enter'la tek satýrlý veya Shift-Enter'la çok satýrlý JS kodlamasý girilebileceðini \
+            belirtir."
+    </script>
+</body>
+</html>

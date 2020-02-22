@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10212.html: while ve for döngüleri örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Döngüler: while ve for</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let i = 0;
+            while (i < 3) {// 0, 1 ve 2'yi yansýtýr...
+                console.log (i);
+                i++;
+            } // while sonu...
+
+            i = 3;
+            while (i) {// i != 0/false
+                console.log (i);
+                i--;
+            } // while sonu...
+
+            i = 3;
+            while (i) console.log (i--);
+        } // func sonu...
+        function fonk3() {
+            let i = 0;
+            do {
+                console.log (i);
+                i++;
+            }while (i < 3);
+
+            i = 3;
+            do {console.log (i--); } while (i);
+        } // func sonu...
+        function fonk4() {
+            for (let i = 0; i < 3; i++) {// 0, 1 ve 2'yi gösterir...
+                console.log (i);
+            } // for sonu...
+            try{console.log (i);}catch(ist){console.log(ist);}
+
+            let i;
+            for (i = 0; i < 3; i++) {// 0, 1 ve 2'yi gösterir...
+                console.log (i);
+            } // for sonu...
+            try{console.log (i);}catch(ist){console.log(ist);}
+
+            i = 0;
+            for (; i < 3; i++) {// "ilk" gereksiz...
+                console.log (i);
+            } // for sonu...
+
+            i = 0;
+            for (; i < 3;) {console.log (i++);} // "ilk" ve "adým" gereksiz...
+
+            i = 0;
+            for (;;) {// "ilk", "þart" ve "adým" gereksiz...
+                console.log (i++);
+                if (i > 2) break;
+            } // for sonu...
+        } // func sonu...
+        function fonk5() {
+            let toplam = 0;
+            while (true) {// Sonsuz döngü...
+                toplam += Math.random()*100;
+                if (toplam > 1000) break;
+            } // while sonu...
+            console.log ('Toplam: ' + toplam);
+        } // func sonu...
+        function fonk6() {
+            for (let i = 0; i < 15; i++) {
+                if (i % 2 == 0) continue; // Çiftli sayýlarý es geç...
+                //(i > 5) ? console.log (i) : continue;
+                if (i > 5) {console.log (i);
+                }else {continue;}
+            } // for sonu...
+        } // func sonu...
+        function fonk7() {
+            dýþ1: for (let i = 0; i < 3; i++) {
+               dýþ2: for (let j = 0; j < 3; j++) {
+                    dýþ3: for (let k = 0; k < 3; k++) {
+                        console.log (`Koordinat no: (${i},${j},${k})`);
+                        if (j == 1) break dýþ1;
+                    } // for-k sonu...
+                } // for-j sonu...
+            } // for-i sonu...
+            console.log ('Ýþlem tamamlandý!');
+        } // func sonu...
+        function fonk8() {
+            let i = 3;
+            while (i) {console.log (i--);}
+            console.log ("Döngü sonrasý i=" + i);
+        } // func sonu...
+        function fonk9() {
+            let i = 0; while (++i < 5) console.log (i);
+            i = 0; while (i++ < 5) console.log (i); // farklýdýr...
+        } // func sonu...
+        function fonk10() {
+            for (let i = 0; i < 5; i++) console.log (i);
+            for (let i = 0; i < 5; ++i) console.log (i); // aynýdýr...
+        } // func sonu...
+        function fonk11() {
+            for (let i = 0; i <= 10; i++) if (! (i%2) ) console.log (i);
+        } // func sonu...
+        function fonk12() {
+            for (let i = 0; i < 3; i++) console.log (`Sayý: ${i}!`);
+            let i = 1; while (i++) {console.log (`Sayý: ${i-2}!`); if (i > 3) break;}
+        } // func sonu...
+        function fonk13() {
+            let sayý;
+            do {sayý = prompt ("100'den büyük sayý girin?", 100);} while (sayý <= 100 && sayý);
+        } // func sonu...
+        function fonk14() {
+            let n = 15;
+            asalsýz:
+            for (let i = 2; i <= n; i++) {
+                for (let j = 2; j < i; j++) {if (i % j == 0) continue asalsýz;}
+                console.log (i); // asal...
+            } // for sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Ayný kodlamayý (icabýnda bazý deðerlerini deðiþtirerek) tekrar-tekrar iþletmek \
+            istediðimizde döngü kurarýz." +
+            "<br>2) while (þart) {iþletilecek kodlamalar bloðu} döngüsünde þart true/doðru \
+            olduðu sürece kodlar bloðu biteviye iþletilir. Tek satýrlýk kodlamada {} olmasa da \
+            olur: " + fonk2() +
+            "<br>3) do {..} while (þart) döngüsünde þart baþta deðil sondadýr: " + fonk3() +
+            "<br>4) for (ilk; þart; adým) {..} döngüsünde 'ilk' sadece bir kez iþletilir, sonra her \
+            taramada 'adým' kadar artýrýlýr yada azaltýlýr, hala 'þart' true ise blok tekrar iþletilir. \
+            ilk'de let/var ile tanýmlanan deðiþken lokaldir ve blokdýþýnda tanýnmaz; ancak \
+            bu deðiþken önceden tanýmlanmýþsa blok dýþýnda da tanýnýr. ilk, þart ve adým'ýn \
+            herhangibiri ihmal edilebilir:  " + fonk4() +
+            "<br>5) Döngü çýkýþý þart'a tabi olsa da kodlama bloðu içinden heran tek yada çoklu \
+            break direktifiyle çýkýlabilir: " + fonk5() +
+            "<br>6) Döngü bloðu içinde kalan kodlamalarýn iþletilmeden tekrar þart kontroluna \
+            geçilmesini istiyorsak 'continue' direktifini kullanýrýz. if'le kullanýlabilen break/continue \
+            direktifi ? iþlemcisinde hata verir: " + fonk6() +
+            "<br>7) break/continue direktifi etiket adýyla kullanýldýðýnda, döngü içinden daha \
+            üst satýrlarlaki iç/dýþ döngü baþýna atlanabilir. break ilgili dýþ döngüyü kýrar, continue \
+            ise bir sonraki adýmý irdeler: " + fonk7() +
+            "<br>8) Örnek.console.log(i--) önce yansýtýr, sonra birazaltýr: " + fonk8() +
+            "<br>9) Örnek.(++i < 5) önce i'yi birartýrýr, sonra kýyaslar; (i++ < 5) ise öncekýyaslar, \
+            sonra i'yi birartýrýr: " + fonk9() +
+            "<br>10) Örnek.Birönceki örnek for döngüsünde nasýl iþler? " + fonk10() +
+            "<br>11) Örnek.for döngüsüyle [2,10] çift sayýlarý yansýtalým: " + fonk11() +
+            "<br>12) Örnek.Ayný sonuçlarý yansýtacak for yerine while döngüsünü kuralým: " + fonk12() +
+            "<br>13) Örnek.100'den büyük sayý girilmezse tekrar eden while döngüsü kuralým: " + fonk13() +
+            "<br>14) Örnek.1'den n'e kadar asal sayýlarý yansýtan kodlama yapalým: " + fonk14()
+    </script>
+</body>
+</html>

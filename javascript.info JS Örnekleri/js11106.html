@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11106.html: Baþka metodlarý Promise'leme veya Promise'le sarmalama örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Promise'leme</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+         function jsYükle (kaynak, geriçaðýr) {// Geriçaðýrmalý çift argümanlý fonksiyon...
+                let taslak = document.createElement ('script');
+                taslak.src = kaynak;
+                taslak.onload = () => geriçaðýr (taslak);
+                taslak.onerror = () => geriçaðýr (new Error(`${kaynak} programýný yükleme hatasý`));
+                document.head.append (taslak);
+            } // func sonu...
+            jsYükle ('js11103x1.js', function (kodlama) {
+                console.log (`Harika, ${kodlama.src} programý yüklendi, hadi baþka bir yükleme daha yapalým`);
+                jsYükle ('js11103x2.js', function (kod) {
+                    console.log (`Güzel, ${kod.src} 2.programý da yüklendi`);
+                    jsYükle ('js11103x3.js', function (kod) {
+                        console.log (`Ýyi gidiyor, ${kod.src} 3.programý da yüklendi`);
+                        bir(); iki(); üç();
+            }); }); }); // jsY..sonu...
+
+            function jsYükle2 (kaynak) {// Tek argümanlý Promise'lenmiþ fonksiyon...
+                return new Promise (function (çözüm, red) {
+                    var taslak = document.createElement ('script');
+                    taslak.src = kaynak;
+                    taslak.onload = () => çözüm (console.log (`${kaynak} baþarýyla yükledi`) );
+                    taslak.onerror = () => red (new Error (`${kaynak} yükleme hatasý`) );
+                    document.head.appendChild (taslak);
+                }); // ret sonu...
+            } // func sonu..
+            jsYükle2 ("js11103x1.js")
+                .then ( () => jsYükle2 ("js11103x2.js") )
+                .then ( () => jsYükle2 ("js11103x3.js") )
+                .then ( () => {bir(); iki(); üç();
+            }); // js.. sonu...
+
+            function vaatleme (f, çokluArgüman=false) {
+                return function (...argümanlar) {
+                    return new Promise ( (çöz, red) => {
+                        function geriçaðýr (hata, ...sonuçlar) {
+                            if (hata) {return red (hata);
+                            }else {çöz (çokluArgüman ? sonuçlar : sonuçlar [0] ); }
+                        } // func sonu...
+                        argümanlar.push (geriçaðýr);
+                        f.call (this, ...argümanlar);
+            }); }; }; // func sonu...
+            let f = vaatleme (jsYükle2, true);
+            //let f = vaatleme (jsYükle, true);
+            f ("js11103x1.js").then(()=>{bir()}); // Sarmalayýcý vaatleme tek geriçaðýrma yapar...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Promise'leme geriçaðýrmalý fonksiyonu daha uygun olan vaat döndüren fonksiyona çevirmedir." +
+            "<br/>2) Daha önceki jsYükle geriçaðýrmalý çift argümanlý fonksiyonu Promise'li tek argümanlýya \
+            dönüþtürüp iþletelim. Sonra da jsYükle fonksiyonunu sarmalayýcý bir Promise'leme fonksiyonuna \
+            gömelim. Sarmalayýcý vaatleme sadece ilk geriçaðýrmayý kaale alýr. " + fonk2()
+    </script>
+</body>
+</html>

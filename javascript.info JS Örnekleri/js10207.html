@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10207.html: JS matematiksel iþlemciler örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Ýþlemciler</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let x = 1, y = 3;
+            x = -x; // Birli/unary iþlenen...
+            console.log (y - x); // Ýkili/binary iþlenen...
+        } // func sonu...
+        function fonk3() {
+            let dizge = "M." + "Nihat" + "Yavaþ"; // ekleme...
+            console.log (dizge);
+            console.log ('"1" + 2:', ("1" + 2) ); // toplama...
+            console.log ('2 + "1":', (2 + "1") );
+            console.log ('2 + 2 + "1":', (2 + 2 + "1") );
+            console.log ('2 - "1":', (2 - "1") ); // çýkarma...
+            console.log ('"6" / "2":', ("6" / "2") ); // bölme...
+        } // func sonu...
+        function fonk4() {
+            let x = 1, y = -2;
+            console.log (+x); // sayýlarda etkisiz...
+            console.log (+y );
+            console.log ("+true:", +true); // sayýya çevirir...
+            console.log ('+"":', +"" );
+
+            let elmalar = "2";
+            let portakallar = "3";
+            console.log ("elmalar + portakallar:", (elmalar + portakallar) ); // ekleme...
+            console.log ("+elmalar + +portakallar:", (+elmalar + +portakallar) ); // toplama...
+            console.log ("Number(elmalar) + Number(portakallar):", (Number (elmalar) + Number (portakallar) ) ); // toplama...
+        } // func sonu...
+        function fonk5() {
+            console.log ("1+2*2:", (1 + 2 * 2) ); // önce çarpma...
+            console.log ("(1+2)*2:", ((1 + 2) * 2) ); // önce paranteziçi...
+            console.log ('+true + +false - +"":', (+true + +false - +"") ); // önce birli+...
+        } // func sonu...
+        function fonk6() {
+            let x = 1 + 2 * 2;
+            console.log ("x = 1 + 2 * 2", x); // önce çarpma, sonra toplama, enson atama...
+
+            let a, b, c;
+            a = b = c = 2 + 2 ** 3;
+            console.log (a, b, c);
+
+            let q = 1;
+            let y = 2;
+            let z = 3 - (q += y + 1); // atanan (4) döndürülür...
+            console.log (q);
+            console.log (z); // -1
+        } // func sonu...
+        function fonk7() {
+            console.log ('5 % 2:', (5 % 2) );
+            console.log ('8 % 3:', (8 % 3) );
+            console.log ('6 % 3:', (6 % 3) );
+            console.log ('Math.PI % Math.E:', (Math.PI % Math.E) );
+        } // func sonu...
+        function fonk8() {
+            console.log ("2**2:", 2 ** 2);
+            console.log ("2**3:", 2**3 );
+            console.log ("2**4:", 2**4);
+            console.log ("4 ** (1/2):", 4 ** (1/2) );
+            console.log ("8 ** (1/3):", 8 ** (1/3) );
+            console.log ("Math.pow(8,1/3):", Math.pow (8, 1/3) );
+        } // func sonu...
+        function fonk9() {
+            let sayaç = 2;
+            sayaç++;
+            console.log ("sayaç++:", sayaç);
+            console.log ("++sayaç:", ++sayaç);
+            console.log ("sayaç--:", sayaç--);
+            console.log ("--sayaç:", --sayaç);
+
+            console.log ("2*++sayaç:", 2*++sayaç, sayaç); // Önce birartýr, sonra çarp, yansýt...
+            console.log ("2*sayaç++:", 2*sayaç++, sayaç); // Önce çarp, sonra birartýr, yansýt...
+        } // func sonu...
+        function fonk10() {
+            let a = 9; // 1001
+            let b = 13; // 1101
+            console.log ("a & b:", a & b); // 5
+            console.log ("a | b:", a | b); // 13
+            console.log ("a ^ b:", a ^ b); // 4
+            console.log ("~a:", ~a); // -(256-246)=-10
+            console.log ("b >> 2:", b >> 2); // 3
+            console.log ("a << 1:", a << 1); // 18
+            console.log ("a & b:", a & b); // 5
+        } // func sonu...
+        function fonk11() {
+            let n = 2;
+            console.log ("n+=5:", n+=5);
+            console.log ("n*=5:", n*=5);
+            console.log ("n/=5:", n/=5);
+            console.log ("n-=5:", n-=5);
+            console.log ("n*=5+4/2:", n*=5+4/2); // Önce saðdakiler (7) sonra deðiþtir (14) ve ata...
+        } // func sonu...
+        function fonk12() {
+            let a = (1 + 2, 3 + 4, 5 + 6);
+            console.log ("a:", a);
+            a = 1 + 2, 3 + 4, 5 + 6;
+            console.log ("a:", a);
+            let sonuç = 0;
+            for (a = 1, b = 3, c = a * b, d = a / c ** b; a < 10; a++) {sonuç +=c;}
+            console.log (sonuç, a, b, c, d);
+        } // func sonu...
+        function fonk13() {
+            let a = 1, b = 1;
+            let c = ++a;
+            let d = b++;
+            console.log (a, b, c, d);
+
+            a = 2;
+            let x = 1 + (a *= 2);
+            console.log (x);
+        } // func sonu...
+
+
+        document.getElementById ("göster").innerHTML =
+            "1) Ýþlemciler toplama, çýkarma, çarpma, bölme, üs ve kalan gibi matematiksel \
+            iþlemleri gerçekleþtiren (+-*/**%) sembollerdir." +
+            "<br>2) Ýþlenen, iþlemcilerin uygulandýðý deðer veya deðiþkendir. Birli iþlemcide tek \
+            iþlenen, ikilide iki iþlenen vardýr: " + fonk2() +
+            "<br>3) Dizgesel + iþlemci, matematik toplamý deðil dizgelerin ardýþýk eklenmesini \
+            saðlar. Çoklu dizge ve sayýlar arasý + iþlemcide, dizge sað ve solundakiler eklemeye, \
+            öte sayýlar toplamaya tabidir. + iþlemci dýþýndaki diðer iþlemcilerde matematik \
+            kurallarý iþler: " + fonk3() +
+            "<br>4) Birli + iþlemde sayýnýn önündeki + sonucu etkilemez, ancak Number() \
+            fonksiyonu gibi önüne geldiðini sayýya çevirir: " + fonk4() +
+            "<br>5) Eðer bir matematiksel ifadede çoklu ve farklý iþlemciler varsa, öncelik \
+            kurallarý iþler. Önceliði yüksek olan önce hesaplanýr, ardýþýk ayný öncelikliler soldan \
+            saða hesaplanýr. Sýralama: paranteziçi, birli+, birli-, üs, çarpma, bölme, toplama, \
+            çýkarma, kalan ve atama: " + fonk5() +
+            "<br>6) Atama= düþük önceliklidir, bir iþlemcidir, saðýndakilerin hesap sonucunu \
+            soldaki deðiþkene atar. Atama iþlemcisi önce atar sonra atadýðýný döndürür: " + fonk6() +
+            "<br>7) Kalan % yüzde sembollüdür, ancak yüzdesini hesaplamaz, kalanýný verir: " +
+            fonk7() +
+            "<br>8) Üs ** JS'e yeni eklenen bir iþlemcidir. Math.pow() ile aynýdýr: " + fonk8() +
+            "<br>9) Birartýþ ++ ve birazalýþ -- iþlemcileri sayýsal sayaç deðiþkenini bir artýrýr/azaltýr. \
+            Ýþlemcinin önce ve sonra gelmesi sonucu deðil dönen deðeri etkiler. Öndeyse \
+            önce birartýrýr/birazaltýr sonra gösterir/atar, sondaysa önce gösterir/atar sonra \
+            birartýrýr/birazaltýr. Matematiksel iþlemcilerden daha önceliklidir: " + fonk9() +
+            "<br>10) Ýkili iþlemciler VE/AND/&, VEYA/OR/|, FARK/XOR/^, DEÐÝL/NOT/~, \
+            SOLAKAY/LEFTSHÝFT/<<, SAÐAKAY/RIGHTSHIFT/>>, SIFIRDOLDURSAÐAKAY/\
+            ZEROFILLRIGHTSHIFT/>>>: " + fonk10() +
+            "<br>11) DeðiþtirAta iþlemcileri tüm matematiksel iþlemcilere uygulanabilir. Önce \
+            saðdakiler hesaplanýr, sonra deðiþtir_ata yapýlýr: " + fonk11() +
+            "<br>12) Virgül iþlemcisi, parantez içiyse son virgül, parantezsizse ilk virgül sonucunu \
+            atama yapar, diðerlerini ihmal eder. Bazan for döngüsünde kullanýlýr: " + fonk12() +
+            "<br>13) Örnek.Önce/sonra birartýr, ve atama dönüþü: " + fonk13()
+    </script>
+</body>
+</html>

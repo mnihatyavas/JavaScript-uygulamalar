@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10305.html: Otomatik Mocha testi örneði.</title>
+    <style>
+        body {background-color:DarkKhaki; color: Blue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+        <!-- mocha.css stil ayarlarýna çevrimiçi baðlanalým -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+        <!-- mocha.js çerçeve kodlamasýný çevrimiçi alalým -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>
+        // bdd/BehaviourDrivenDevelopment-tarz testi kuralým...
+        mocha.setup ('bdd');
+    </script>
+    <!-- chai.jc kütüphanesini çevrimiçi alalým -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script>
+        // chai içeriði zengindir, biz þimdilik sadece assert/iddia'yý global yapalým...
+        let assert = chai.assert;
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Otomatik Moça Testi</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function üs (x, n) {
+            if (n < 0) return NaN;
+            if (Math.round (n) != n) return NaN;
+            let sonuç = 1;
+            for (let i = 0; i < n; i++) {sonuç *= x;}
+            return sonuç;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1).Test ihtiyacý: Bir fonksiyon yazarýz, geçirilen parametre deðerlerini, fonksiyon içi hesaplamalarý \
+            ve dönen çýktýyý tahayyül ederiz. Yetmez, genelde console.log ile tek-tek deðer aktarýr ve \
+            dönen sonuçlarý kontrol ederiz. Tahmin edilenle gerçek çýktý arasýndaki farklarý düzeltiriz. \
+            Fakat birini düzeltirken bu düzeltme birönceki isabetli çýktýyý bozmuþ olabilir. Bu böyle \
+            sürer gider. Bu itibarla esas kodlamamýzdan ayrý otomatik test kodlamamýz da olsun ve \
+            esas kodlamadaki her deðiþiklik sonrasý baþtan itibaren tüm verileri yeniden test etsin isteriz." +
+            "<br>2).Mocha ve Chai: Mocha, testi baþlatýr, describe ve it fonksiyonlarýný saðlar. Chai \
+            kütüphanesi örneðimizde assert.equal iddiasýný ileri sürer." +
+            "<br>==>mocha.css, mocha.js ve chai.js programlarýný link ve script src ile ya indirip \
+            programýmýza dahil etmeli yada çevrimiçi çaðýrmalýyýz. Sýk kullanýlacaksa indirme \
+            tercih edilir." +
+            "<br>==>Örnek olarak üs(x,n) fonksiyonumuzu, üs n negatif ve kayannoktalý sayýyla, \
+            sonra da n=3 için ve taban x=1,2,3,4,5 için test edelim."
+    </script>
+
+
+    <!-- mocha'nýn describe ve it, chai'nin assert.equal'i ile test kodlamamýzý yazýp dahil edelim -->
+    <script src="js10305x.js"></script>
+
+    <!-- Test sonuçlarýný bu bölümde yansýtalým -->
+    <div id="mocha"></div>
+
+    <!-- Otomatik mocha test modülünü koþturalým! -->
+    <script>
+        mocha.run();
+    </script>
+</body>
+</html>

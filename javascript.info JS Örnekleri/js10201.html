@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10201.html: Merhaba dünya JavaScript kodlamasý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Merhaba Dünya</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        alert ("Merhaba Dünya!");
+
+        document.getElementById ("göster").innerHTML =
+            "1) script etiketleri html sayfasýnýn herdangibir bir bölümüne konulabilir. Burada \
+            body sonuna koyalým ve alert'le selamýmýzý tarayýcý küçük mesaj penceresiyle \
+            yansýtalým." +
+            "<br>2) script etiketinin (artýk kullanýlmasa da) birkaç vasfý vardýr: type='text/javascript', \
+            language='javascript', tek satýrlý // veya çok satýrlý <!--...--> yorumlar." +
+            "<br>3) Þayet harici disk dosya.js kodlamasýný html'ye dahil edeceksek 2 aç-kapa script \
+            etiketiyle (script src='/yol/dosya.js') olarak beyan ederiz. Bu dosya çevrimiçi \
+            sunucu yurel adresi de olabilir, (script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js)'. \
+            Ýki ayrý dosya varsa (script src='dosya1.js') ve (script src='dosya2.js')." +
+            "<br>Hem src belirtip hem araya kodlama girersek, kodlamayý iþletmez. Dosyalarýn \
+            herbiri için ayrý birer script satýrý, kodlamalar için de ayrý ister. Yani (script src='dosya.js')\
+            alert(2019)(/script) mesajý yansýtmaz, alert(2019) için ayrýca aç-kapa script etiketi \
+            koymalýyýz." +
+            "<br>4) Konsola 'Ben JavaScript mesajýyým' çýktýsýný yazdýralým: " +
+            console.log ("Ben bir JavaScript konsol mesajýyým...") +
+            "<br>5) Þimdi de ayný konsol mesajýný harici bir js disk dosyasýný kaynak göstererek \
+            yapalým: "
+    </script>
+    <script src="js10201x.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+function bir() {console.log ("Birinci fonksiyon yüklendi ve iþletildi");}

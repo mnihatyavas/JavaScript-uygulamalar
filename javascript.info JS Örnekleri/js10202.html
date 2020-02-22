@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10202.html: JavaScript kodlama yapýsý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>JS Kodlama Yapýsý</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            console.log ("Merhaba JavaScript Dünyasý!..");
+            console.log ("Merhaba"); console.log ("JavaScript"); console.log ("Dünyasý!..");
+        } // func sonu...
+        function fonk3() {
+            console.log ("Merhaba JavaScript Dünyasý!..")
+            console.log (1 + 3 + 6 + 10)
+            console.log (1 +
+                3
+                + 6 +
+                10);
+            [1, 3, 6, 10].forEach (console.log);
+            console.log (1 + 3 + 6 + 10); // ; olmasaydý akýþý burada hata fýrlatarak kýracaktý...
+            [1, 3, 6, 10].forEach (console.log);
+        } // func sonu...
+        function fonk4() {
+            // Bu satýr tamamen yoruma ayrýlmýþtýr...
+            console.log ("M.Nihat Yavaþ"); // Bu satýr, bu noktadan itibaren yoruma ayrýlmýþtýr...
+            /* Bu çok satýrlý
+                yorum sembolü
+                ne zaman bitirilirse
+                tüm aralar yoruma ayrýlmýþtýr
+                
+                ...
+             */
+            console.log (1 + 3 + 6 + 10);
+            /* Ýcrasý þimdilik istenmeyen JS kodlarý da yorum içinde muhafaza edilebilir:
+                console.log (1 + 3 + 6 + 10);
+                console.log ("M.Nihat Yavaþ");
+            */
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Herbir JS kodlamasý genelde ayrý bir satýra yazýlýr ve sonuna ; konur. Ancak \
+            aralarýnda ; olmak koþuluyla ayný satýra çoklu JS komut ifadeleri de yazýlabilir: " + fonk2() +
+            "<br>2) Komut satýrý sonuna ; konulmadan alta geçilirse, JS bunu otomatikmen ; \
+            ile tamamlar. Ancak bu hep böyle olmayabilir de. Þayet bitmemiþ bir ifadeyse \
+            JS sona ; koymaz, ifadenin devamýna altta devam eder. Ancak bazan da hata yapar: " + fonk3() +
+            "<br>Genel tavsiye, her JS kodlama ifadesini ; ile sonlandýrmanýzdýr." +
+            "<br>3) Script içinde tek satýrlýk yorum, ister yalýn ister bir JS kod sonrasý olsun \
+            // sembolüdür (sadece JS'ye has). Çok satýrlý yorum içinse /*...*/ kullanýlýr (CSS style \
+            kýsmý için de geçerlidir). Ýçiçe /*.../*...*/...*/ çoklu yorum sembolu hata verir." +
+            "<br>Ayrýca yeri gelmiþken,  sadece html için (style CSS veya script JS kodlamalarý deðil) \
+            geçerli tek-çok satýrlý yorum (görünmeyen) <!--...--> sembolleridir: " + fonk4() +
+            "<br>Kodlama kalitesi için yorum satýrlarý ve kertikli yazýlým ihmal edilmemelidir."
+    </script>
+</body>
+</html>

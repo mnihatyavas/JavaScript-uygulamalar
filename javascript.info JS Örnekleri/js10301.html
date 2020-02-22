@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10301.html: Chrome ile JS kodlarýnda hata ayýklama F12 penceresi örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>F12 HataAyýklama</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            function selam (ad) {
+                let ibare = `Merhaba, ${ad}!`;
+                debugger;  // <-- debugger hataayýklayýcý bu komutla duraklar...
+                söyle (ibare);
+            } // iç-func sonu...
+            function söyle (selam) {console.log (selam);}
+            selam ("Nihat");
+        } // func sonu...
+        function fonk3() {
+            // Görmek için konsol açýlmalýdýr...
+            for (let i = 0; i < 5; i++) {console.log (i + ".deðer");}
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1).Kaynak: Chrome debugger hataayýklayýcý ekraný Google tarayýcýyý (boþ) açýp F12 veya \
+            Ctrl-Shift-I tuþ bileþeniyle  açýlýr kapanýr. Hataayýklayýcý üst satýrýndaki 'Source' týklanýrsa \
+            üçlü seyrüsefer, kodlama ve hataayýklayýcý pencere açýlýr. Seyrüseferdeki Filesystem altýndaki \
+            '+Add folder to workspace' vasýtasýyla istediðiniz klasörü seçip içindeki html, css veya \
+            js dosyasýný týklarsanýz üçlü pencere ortasýna js dosya kaynak kodlarý yansýr. Sað üst \
+            3 noktayý týklayýp 'Dock side' ilk mavi ikonuyla baðýmsýz hataayýklayýcý pencereyi tamekran \
+            ebatýnda açabilirsiniz." +
+            "<br>2).Konsol: Esc tuþu hataayýklayýcýnýn altýna console penceresini açar/kapar. Bu \
+            pencerede örneðin (>2+5-1%2) ile sonuç 6, (>(2+5-1)%2) ile sonuç 0, (>alert ('Merhaba')) \
+            ile tarayýcý ikaz mesaj kutusunda 'Merhaba'->Tamam yansýtabilirsiniz." +
+            "<br>3).Kýrýknoktalar: Üçlü'nün orta kaynak kodlarýnýn sol satýr numaralarýný týkladýðýnýzda \
+            o satýrbaþýnda mavi ==> sembolle kýrýlmanoktasý konulacaktýr. Programýn istediðiniz \
+            satýrbaþýna kýrýlmanoktasý koyabilirsiniz. Üçlü'nün son penceresinde kýrýlmanoktalarýnýn \
+            listesi yansýmaktadýr. Ýstediðinizi aktive çentikler yada deaktive çentiksizler veya \
+            saðok->remove/sil ile silebilirsiniz. Üstteki Pause/duraksat týklanýp programý reload \
+            yaptýðýnýzda ekran sýrayla kýrýlmanoktalarýnda duraksayacak, týklayarak birsonrakine \
+            geçecek ve böylece programýn adým adým çalýþmasýný, hangi deðerleri nasýl üretip \
+            yansýttýðýný kontrol edebilip, programý geliþtirme imkanýnýz olacaktýr." +
+            "<br>4).Debugger komutu: Program kaynak kodlarý satýrnumaralarýna kýrýlmanoktalarý \
+            koymak yerine JS kodlamasýnýn herhangibir yerine 'debugger' komutunu koyduðumuzda \
+            program çalýþmasý bu satýrda durur. 'Watch' penceresi console gibidir; anlýk satýrda \
+            gireceðiniz ifadenin sonucunu verir. 'Call Stack' penceresi son konuma hangi iç-içe \
+            fonksiyonlardan geldiðinizi gösterir. 'Scope' penceresi hangi fonksiyonun hangi \
+            lokal ve dýþardaki global deðiþkenleri yansýtýr. Duraksayan tarayýcý Resume ve Step-over \
+            seçeneklerine, duraksayan debugger penceresiyse Resume, Step-over, Step-in, \
+            Step-out ve Step adým adým iþleme seçeneklerine sahiptir. Duraksadýðýnda bir kaynak \
+            satýrýnda sað týklayýp Continue-to-here seçersek program aradaki satýrlarý atlar ve \
+            seçilen satýrdan iþlemeye devam eder. " + fonk2() +
+            "<br>5).console.log: Çýktýya veri yansýtmak için innerHTML veya alert yerine bu komutla \
+            F12 debugger açýlarak ve console yada Esc ile programýmýzdaki konsol çýktýlarýný \
+            görebiliriz: " + fonk3()
+    </script>
+</body>
+</html>

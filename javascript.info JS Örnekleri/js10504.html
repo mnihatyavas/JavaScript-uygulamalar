@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10504.html: JS'de diziler ve eleman ekleme/silme örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Diziler</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let meyveler = ["Elma", "Portakal", "Erik", "Nar", "Hurma", "Muz"];
+            console.log (meyveler);
+            console.log (meyveler [0] ); // Elma
+            console.log (meyveler [meyveler.length - 1] ); // Muz
+
+            // Karýþýk deðerler...
+            let dizi = [ "Elma", {ad: "Nihat"}, true, function() {console.log ("Herkese Merhabalar!");}, ];
+            console.log (dizi);
+
+            // Dizinin nesne tipli elemanýnýn deðeri...
+            console.log (dizi [1].ad); // Nihat
+
+            // Dizinin fonksiyon tipli elemanýna eriþim...
+            dizi [3] (); // Herkese Merhabalar!
+        } // func sonu...
+        function fonk3() {
+            // pop yýðýn sonundan çýkarýr...
+            let meyveler = ["Elma", "Portakal", "Erik", "Nar", "Hurma", "Muz"];
+            console.log (meyveler);
+            console.log (meyveler.pop() ); // Sondaki "Muz" çýkarýlýr, çýkarýlan döndürülür...
+            console.log (meyveler);
+
+            // push yýðýn sonuna ekler...
+            console.log (meyveler.push ("Armut") ); // Sona "Armut" ekler, artan dizi uzunluðu döndürülür...
+            console.log (meyveler);
+
+            // shift kuyruk baþýndan eksiltir...
+            console.log (meyveler.shift() ); // Baþtaki "Elma" çýkarýlýr, çýkarýlan döndürülür...
+            console.log (meyveler);
+
+            // unshift kuyruk baþýna ekler...
+            console.log (meyveler.unshift ("Þeftali") ); // Baþa "Þeftali" ekler, artan dizi uzunluðu döndürülür...
+            console.log (meyveler);
+
+            // push ve unshift eklemeleri çoklu da olabilir...
+            console.log (meyveler.unshift ("Üzüm", "Ýncir") ); // Baþa ekler, artan dizi uzunluðu döndürülür...
+            console.log (meyveler.push ("Limon", "Greyfurt") ); // Sona ekler, artan dizi uzunluðu döndürülür...
+            console.log (meyveler);
+        } // func sonu...
+        function fonk4() {
+            let meyveler = ["Muz"];
+            let dizi = meyveler; // Referansla kopyalama...
+            console.log (dizi === meyveler); // true
+            dizi.push ("Armut"); // Eklenti orijinalade de yansýr...
+            console.log (meyveler, dizi); // Herikisi de ayný adresi görür...
+
+            meyveler [99999] = 5;
+            meyveler.yaþ = 25;
+            console.log (meyveler);
+        } // func sonu...
+        function fonk5() {
+            let meyveler = ["Elma", "Portakal", "Armut"];
+            for (let i = 0; i < meyveler.length; i++) {console.log (meyveler [i]); }
+            for (let anahtar in meyveler) {console.log (meyveler [anahtar]); }
+            for (let meyve of meyveler) {console.log (meyve); }
+        } // func sonu...
+        function fonk6() {
+            let meyveler = [];
+            meyveler [123] = "Elma";
+            console.log (meyveler.length); // 124
+
+            let dizi = [1, 2, 3, 4, 5];
+            console.log (dizi);
+            dizi.length = 2; // 2 elemana keser...
+            console.log (dizi);
+            dizi.length = 5; // ilk uzunluðu...
+            console.log (dizi [3]); // undefined/atanmamýþ; ncekiler silinmiþ...
+        } // func sonu...
+        function fonk7() {
+            let dizi1 = new Array ("Elma", "Armut", "Erik");
+            console.log (dizi1, dizi1.length);
+
+            let dizi2 = new Array (2019, 1957); // 2 adet sayýsal elemanlý dizi...
+            console.log (dizi2, dizi2.length, dizi2 [0], dizi2 [1]);
+
+            let dizi3 = new Array (2); // 2 uzunluklu, henüz tipli deðer atanmamýþ (elemansýz) dizi...
+            console.log (dizi3, dizi3.length, dizi3 [0], dizi3 [1]);
+        } // func sonu...
+        function fonk8() {
+            let matris = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9] ];
+            console.log (matris, matris.length, matris [1] [1] ); // 1.satýr ve 1.sütun elemaný=5...
+        } // func sonu...
+        function fonk9() {
+            let dizi = [1, 2, 3];
+            console.log (dizi); // [1,2,3]
+            console.log (String (dizi) === "1,2,3" ); // true
+
+            console.log ([] + 1 ); // "" + " = "1"
+            console.log ([1] + 1 ); // "1" + " = "11"
+            console.log ([1,2] + 1 ); // "1,2" + " = "1,21"
+
+            console.log ("" + 1 ); // "1"
+            console.log ("1" + 1 ); // "11"
+            console.log ("1,2" + 1 ); // "1,21"
+        } // func sonu...
+        function fonk10() {
+            let meyveler = ["Elma", "Armut", "Portakal"];
+            let sepet = meyveler;
+            sepet.push("Muz");
+            console.log (meyveler, meyveler.length ); // 4
+        } // func sonu...
+        function fonk11() {
+            let tarzlar = ["Jazz", "Blues"];
+            console.log (tarzlar);
+            tarzlar.push ("Rock-n-Roll");
+            tarzlar [Math.floor ((tarzlar.length - 1) / 2)] = "Classics";
+            console.log (tarzlar.shift());
+            tarzlar.unshift ("Rap", "Reggae");
+            console.log (tarzlar);
+        } // func sonu...
+        function fonk12() {
+            let dizi = ["a", "b"];
+            dizi.push ( function() {console.log (this);} );
+            dizi [2](); // this dizi'ye iþaret eder: "console.log (dizi);"
+        } // func sonu...
+        function fonk13() {
+            function girileniTopla() {
+                let sayýlar = [];
+                while (true) {
+                    let girilen = prompt ("Lütfen bir sayý girin?", 0);
+                    if (girilen === "" || girilen === null || !isFinite (girilen) ) break;
+                    sayýlar.push (+girilen);
+                } // while sonu...
+                let toplam = 0;
+                for (let sayý of sayýlar) {toplam += sayý;}
+                console.log ("Girilen sayýlar:", sayýlar);
+                return toplam;
+            } // func sonu...
+            console.log ("Girilen sayýlarýn toplamý:", girileniTopla() );
+        } // func sonu...
+        function fonk14() {
+            // Yavaþ yöntem:
+            function azamiToplam1 (dizi) {
+                let azamiToplam = 0;
+                for (let i = 0; i < dizi.length; i++) {
+                    let ardýþýkTarama = 0;
+                    for (let j = i; j < dizi.length; j++) {
+                        ardýþýkTarama += dizi [j];
+                        azamiToplam = Math.max (azamiToplam, ardýþýkTarama);
+                    } // for sonu...
+                } // for sonu...
+                return azamiToplam;
+            } // func sonu...
+            console.log ("[-1, 2, 3, -9]:", azamiToplam1 ([-1, 2, 3, -9]) ); // 5
+            console.log ("[-1, 2, 3, -9, 11]:", azamiToplam1 ([-1, 2, 3, -9, 11]) ); // 11
+            console.log ("[-2, -1, 1, 2]:", azamiToplam1 ([-2, -1, 1, 2]) ); // 3
+            console.log ("[1, 2, 3]:", azamiToplam1 ([1, 2, 3]) ); // 6
+            console.log ("[100, -9, 2, -3, 5]:", azamiToplam1 ([100, -9, 2, -3, 5]) ); // 100
+
+            // Hýzlý yöntem:
+            function azamiToplam2 (dizi) {
+                let azamiToplam = 0;
+                let kýsmiToplam = 0;
+                for (let birim of dizi) {
+                    kýsmiToplam += birim;
+                    azamiToplam = Math.max (azamiToplam, kýsmiToplam);
+                    if (kýsmiToplam < 0) kýsmiToplam = 0;
+                } // for sonu...
+                return azamiToplam;
+            } // func sonu...
+            console.log ("[-1, 2, 3, -9]:", azamiToplam2 ([-1, 2, 3, -9]) ); // 5
+            console.log ("[-1, 2, 3, -9, 11]:", azamiToplam2 ([-1, 2, 3, -9, 11]) ); // 11
+            console.log ("[-2, -1, 1, 2]:", azamiToplam2 ([-2, -1, 1, 2]) ); // 3
+            console.log ("[100, -9, 2, -3, 5]:", azamiToplam2 ([100, -9, 2, -3, 5]) ); // 100
+            console.log ("[1, 2, 3]:", azamiToplam2 ([1, 2, 3]) ); // 6
+            console.log ("[-1, -2, -3]", azamiToplam2 ([-1, -2, -3]) ); // 0
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Diziler ardýþýk koleksiyonlarý depolar. Dizileri 'new Array()' veya daha ziyade \
+            içi boþ/dolu '[]' ilk atama beyanýyla yaratabiliriz. Dizi elemanlarý 0.konumdan baþlar; \
+            herhangibir elemana eriþmek için konum endeksini 'dizi[konum]' þeklinde belirtiriz. \
+            Ayný konumdaki elemaný deðiþtirebiliriz. Eleman veri tipi her türlü yalýn yada karma \
+            olabilir. Dizi son elemanýndan sonra atýl virgül olabilir: " + fonk2() +
+            "<br>2) Dizinin baþýna eleman eklemek için 'dizi.shift()', sonunaysa 'dizi.push()' \
+            metodlarý; tersine yani baþýndan veya sonundan eleman çýkarmak için de 'dizi.unshift()' \
+            ve 'dizi.pop()' kullanýlýr. Yani yýðýnlar push/pop LIFO (LastInFirstOut/SonGirenÝlkÇýkar), \
+            kuyruklarsa shift/unshift FIFO (FirstInFirstOut/ÝlkGirenÝlkÇýkar) yöntemiyle iþler. Eklemeler \
+            çoklu da olabilir: " + fonk3() +
+            "<br>3) Dizi, nesnenin özel bir çeþididir, ve nesne nasýl 'nesne[anahtar]' olarak eriþiliyorsa \
+            dizi de benzer þekilde 'dizi[konum]' olarak eriþilmektedir. Ayrýca dizi de nesne gibi \
+            referansla kopyalanmakta ve deðiþiklik herikisini de etkilemektedir. Diziye nesne gibi \
+            özellik atar veya araboþluklu konum sýralarsanýz JS dizi optimizasyon/eniyileme motoru \
+            þaþýrýr; bu itibarla illa ki anahtarlý özellik atanacaksa [] dizi deðil {} nesne olarak çalýþýlmalýdýr: " + fonk4() +
+            "<br>4) LIFO yýðýn metodlarý pop/push, FIFO kuyruk metodlarý shift/unshift'den çok \
+            hýzlýdýr; zira FIFO baþtan ekleme/çýkarma beraberinde tüm dizi sonuna kadarki eleman \
+            konumlarýný yeniden güncellemeyi gerektirmektedir." +
+            "<br>5) Diziler için for, for..of ve for..in döngüleri kullanýlabilir. Nesneler için olan for..in \
+            yavaþtýr ve dizi uzunluk, diðer özellikler gibi istenmeyenleri de yansýtabilir; bu yüzden \
+            diziler için for..of tercih edilmelidir: " + fonk5() +
+            "<br>6) Dizi uzunluðu length otomatikmen enbüyük konum+1 deðerini (arada boþluklar \
+            olsa bile) alýr. Kodlamayla length'e dahabüyük deðer atarsak birþey deðiþmez, fakat \
+            dahaküçük deðer atamasý dönüþümsüz sondakileri keserek siler. Bu itibarla bir dizi \
+            içeriklerinin tamamen silinmesi ya 'dizi=[]' ile yada 'dizi.length=0' ile yapýlabilir: " + fonk6() +
+            "<br>7) Dizi yaratma tercihen '[]' atamayla yada nadiren 'new Array()' ile yapýlýr. Ancak \
+            'new Array' kullanýrken dikkat edilmelidir: " + fonk7() +
+            "<br>8) Diziler çoklu boyutlu, örneðin 3x3'lik matris olarak yaratýlabilir: " + fonk8() +
+            "<br>9) Diziler 'toString()' metoduyla virgüllerle ayrýk dizgeye çevrilir: " + fonk9() +
+            "<br>Ödev1) Dizinin kopyasýna eklenen eleman orijinal diziyi etkiler mi? " + fonk10() +
+            "<br>Ödev2) 'Jazz, Blues' elemanlý dizi sonuna 'Rock'n Roll' ekle, ortadakini 'Classics' \
+            olarak deðiþtir, baþtaki elemaný düþ, baþa 'Rap, Reggae' ekle: " + fonk11() +
+            "<br>Ödev3) Örnekteki this neye iþaret eder? " + fonk12() +
+            "<br>Ödev4) Prompt ile girilen sayýsal verileri (sayýsal olmayan, boþ, iptal, yada Esc \
+            ile çýkýldýktan sonra - 0 deðil) toplayýp yansýtan kodlamayý yazýn: " + fonk13() +
+            "<br>Ödev5) Kýsmi ardýþýk toplamlarýn enbüyüðünü veren kombinasyonu kodlayýn, \
+            sonuç negatifse sýfýr addedin: " + fonk14()
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10205.html: JavaScript'in toplam 7 veri tipi örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Veri Tipleri</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let mesaj = "Merhaba dinamik tipli JS deðiþkenleri!..";
+            console.log ("mesaj = " + mesaj + "; tipi: " + (typeof mesaj) );
+            mesaj = 20191025;
+            console.log ("mesaj = " + mesaj + "; tipi: " + (typeof mesaj) );
+        } // func sonu...
+        function fonk3() {
+            let sayý; console.log (sayý, (typeof sayý) );
+            sayý = null; console.log (sayý, (typeof sayý) );
+            sayý = 20191025; console.log (sayý, (typeof sayý) );
+            sayý = 2019.1025; console.log (sayý, (typeof sayý) );
+            sayý = 1 / 0; console.log (sayý, (typeof sayý) );
+            sayý = -1 / 0; console.log (sayý, (typeof sayý) );
+            sayý = "Tarih" / 20191025; console.log (sayý, (typeof sayý) );
+        } // func sonu...
+        function fonk4() {
+            let dizge = "Merhaba, çift týrnaklý dizge!.."; console.log (dizge, (typeof dizge) );
+            dizge = 'Merhaba, tek týrnaklý dizge!..'; console.log (dizge, (typeof dizge) );
+            dizge = `Merhaba, geri týrnaklý dizge!..`; console.log (dizge, (typeof dizge) );
+            console.log (`Bu dizge içerisinde deðiþken (${dizge}) ve JS ifadesine (${Math.PI**Math.E%7}) izin verir!..`);
+        } // func sonu...
+        function fonk5() {
+            let ikili = true; console.log (ikili, (typeof ikili) );
+            ikili = Math.PI**Math.E%7 >= 2.0; console.log (ikili, (typeof ikili) );
+        } // func sonu...
+        function fonk6() {
+            let tanýmsýz; console.log (tanýmsýz, (typeof tanýmsýz) );
+            tanýmsýz = null; console.log (tanýmsýz, (typeof tanýmsýz) );
+            tanýmsýz = undefined; console.log (tanýmsýz, (typeof tanýmsýz) );
+            tanýmsýz = ""; console.log (tanýmsýz, (typeof tanýmsýz) );
+            tanýmsýz = 2019-1957; console.log (tanýmsýz, (typeof tanýmsýz) );
+        } // func sonu...
+        function fonk7() {
+            let nesne = null; console.log (nesne, (typeof nesne) );
+            nesne = {}; console.log (nesne, (typeof nesne) );
+            nesne = []; console.log (nesne, (typeof nesne) );
+            nesne = {yýl: 2019, ay: 10, gün: 25, tarih: "25 Ekim 2091, Cuma"}; console.log (nesne, (typeof nesne) );
+        } // func sonu...
+        function fonk8() {
+            let sembol = Symbol(); console.log (sembol, (typeof sembol) );
+            sembol = Symbol ("kimlik"); console.log (sembol, (typeof sembol) );
+            let kim = Symbol ("kimlik");
+            let kullanýcý = {isim: "M.Nihat Yavaþ", [kim]: 20191025};
+            kullanýcý.kim = "Nihat";
+            console.log (kim, kullanýcý.kim, [kim], kullanýcý [kim]);
+        } // func sonu...
+        function fonk9() {
+            console.log ("undefined:", typeof (undefined) );
+            console.log ("1957:", typeof (1957) );
+            console.log ("true:", typeof true);
+            console.log ('"M.Nihat Yavaþ":', typeof "M.Nihat Yavaþ");
+            console.log ('Symbol ("kimlik"):', typeof Symbol ("kimlik") );
+            console.log ("Math:", typeof Math);
+            console.log ("Math.PI:", typeof Math.PI);
+            console.log ("Math.random():", typeof Math.random() );
+            console.log ("Math.random:", typeof Math.random);
+            console.log ("null:", typeof null); // object==> JS dil hatasý...
+            console.log ("alert:", typeof alert); // function tip deðildir, nesne çeþididir...
+            //console.log ("alert():", typeof alert() ); // undefined
+            console.log ("console.log (2019):", typeof console.log (2019) );
+            console.log ("console.log:", typeof console.log);
+            console.log ("console.log():", typeof console.log() );
+        } // func sonu...
+        function fonk10() {
+            let isim = "M.Nihat Yavaþ";
+            console.log (`Merhaba, ${1957}`);
+            console.log (`Merhaba, Sayýn: ${"isim"}`);
+            console.log (`Merhaba, Sayýn: ${isim}`);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) 7 deðiþken tipi vardýr: sayý, dizge, ikili, null/hiç, undefined/tanýmsýz, nesne ve \
+            sembol. JS dinamik tip deðiþkenlidir, yani bir deðiþken ilk yaratýldýðý tipe baðlý \
+            olmayýp diðer tip veriler de atanabilir: " + fonk2() +
+            "<br>2) Sayýlar tamsayý ve kayannoktalýdýr. Özel sayýsal deðerler: +/-Infinity ve \
+            NaN/NotANumber/BirSayýDeðil. JS'te sayýsal iþlemler hata vermez, undefined \
+            veya NaN üretir ve akýþa devam eder: " + fonk3() +
+            "<br>3) Dizgeler tek/çift/geri týrnaklý olabilir. Geri týrnaklý dizgeler özeldir, ve ${..} \
+            notasyonuyla deðiþken ve JS ifadesi kullanýlmasýna izin verirler. Tek karakter \
+            char olarak ayrý bir tip deðildir: " + fonk4() +
+            "<br>4) Ýkili/boolean deðiþken sadece true/evet/doðru ve false/hayýr/yanlýþ \
+            deðerini alýr. Bu bir kýyas ifadesi sonucu da olabilir: " + fonk5() +
+            "<br>5) null/hiç/bilinmeyen özel bir nesne tipidir: " + (hiç=null) + "; " + hiç + "; " + (typeof hiç) +
+            "<br>6) undefined/tanýmsýz/atanmamýþ tip, henüz deðer atanmamýþ deðiþken tipidir.\
+            null gibi undefined da atanabilir ama atanabilir null'un aksine tavsiye edilmez: " + fonk6() +
+            "<br>7) Bahsedilen ilk 5 tip ilkel idi, ve ilkel deðiþkenler sadece tek tipli veri \
+            içerebilir. Nesne tipli deðiþken ise her tipten deðerler koleksiyonu olarak daha \
+            kompleks deðerler içerebilir: " + fonk7() +
+            "<br>8) Sembol tipli deðiþken ise nesneler için yegane tanýmlayýcý yaratmak için \
+            kullanýlýrlar: " + fonk8() +
+            "<br>9) (typeof x) veya typeof(x) x deðiþkeni veya deðerinin veri tipini gösterir: " + fonk9() +
+            "<br>10) Örnek: Çýktýlara dikkat edin: " + fonk10()
+    </script>
+</body>
+</html>

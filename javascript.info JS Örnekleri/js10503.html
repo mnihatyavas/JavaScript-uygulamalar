@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10503.html: JS'de dizgeler ve dizge metodlarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Dizgeler</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            dizge1 = 'Single quoted: Tek týrnaklý';
+            dizge2 = "Double quoted: Çift týrnaklý";
+            dizge3 = `Back ticked: Geri týrnaklý`; // AltGr-Virgül->Boþluk
+            console.log (dizge1, dizge2, dizge3);
+
+            function topla (a, b) {return a + b;}
+            console.log (`2019 + (-1957) = ${topla (2019, -1957)}.`);
+
+            let misafirListesi = `Misafirler:
+* Nihal ile Hamza
+* Songül ile Sefer
+* Hatice ile Nihat
+* Süleyha ile Adil`;
+            console.log (misafirListesi);
+        } // func sonu...
+        function fonk3() {
+            let misafirListesi = "Misafirler:\n* Nihal ile Hamza\n* Songül ile Sefer\n* Hatice ile Nihat\n* Süleyha ile Adil";
+            console.log (misafirListesi);
+
+            let dizge1 = "Merhaba\nDünya";
+            let dizge2 = `Merhaba
+Dünya`;
+            console.log (dizge1, "\n" + (dizge1 == dizge2) ); // true
+
+            console.log ("\u00A9" ); // © (UTF-15)
+            console.log ("\u{20331}" ); // ?, Çince karakter (UTF-32)
+            console.log ("\u{1F60D}" ); // ?? Gülen yüz (UTF-32)
+
+            console.log ('Nihat\'ýn Kafe\'si!');
+            console.log ("Nihat'ýn Kafe'si!");
+            console.log (`Nihat'ýn Kafe'si!`);
+        } // func sonu...
+        function fonk4() {
+            console.log ("".length); // 0
+            console.log ("Ben".length); // 3
+            console.log ("Ben'im".length); // 6
+            console.log ("Ben'im\n".length); // 7
+            console.log ("Ben'im\r\n".length); // 8
+            console.log ("Ben'im\r\n\u{1F60D}".length); // 10
+        } // func sonu...
+        function fonk5() {
+            let dizge = "Merhaba";
+            console.log (dizge + ", Ýlk karakteri: " + dizge [0] + " veya: " + dizge.charAt (0) );
+            console.log ("Son karakteri: " + dizge [dizge.length - 1] + " veya: " + dizge.charAt (dizge.length-1) );
+
+            console.log ("100.karakter: " + dizge [100] ); // undefined
+            console.log ("100.karakter: " + dizge.charAt (100) ); // "" boþ
+
+            for (let krk of dizge) {console.log (krk); }
+        } // func sonu...
+        function fonk6() {
+            let isim = "Nihat Yavaþ", i;
+            console.log (isim);
+
+            isim [6] = "S"; // Deðiþtirmedi...
+            console.log (isim);
+
+            let isim2 = "";
+            for (i = 0; i < isim.length; i++) {
+                if (i == 6) isim2 += "S"
+                else isim2 += isim [i];
+            } // for sonu...
+            console.log (isim2);
+        } // func sonu...
+        function fonk7() {
+            console.log ("Ýstanbul".toUpperCase() );
+            console.log ("Ýstanbul".toLowerCase() );
+
+            console.log ("Isparta" [0].toLowerCase() ); // Ýngilizcede I->i (->ý deðil)
+        } // func sonu...
+        function fonk8() {
+            let dizge = "Habire birer birer artýrýlýp tüm dizgedeki herbir ibare bulunabilir.";
+            console.log (dizge.indexOf ('Ha') ); // 0
+            console.log (dizge.indexOf ('ha') ); // -1
+            console.log (dizge.indexOf ("bir") ); // 2
+            console.log (dizge.indexOf ("bir", 3) ); // 7
+
+            // Baþtan sona tarama...
+            let aranan = 'bir';
+            let konum = 0;
+            while (true) {
+                let bulunanKonum = dizge.indexOf (aranan, konum);
+                if (bulunanKonum == -1) break;
+                console.log (`"bir" ibaresi ${bulunanKonum} no'lu endekste bulundu`);
+                konum = bulunanKonum + 1;
+            } // while sonu...
+
+            // Daha kýsa kodlu tarama...
+           konum = -1;
+           while ((konum = dizge.indexOf (aranan, konum + 1)) != -1) {console.log (`"bir" ibaresi ${konum} no'lu endekste bulundu`); }
+
+            // En son raslanan...
+            console.log (dizge.lastIndexOf ("bir") ); // 46
+
+            // Dikkatsiz if...
+            if (dizge.indexOf ("Ha") ) console.log ("Bulduk"); // 0/false
+            else console.log ("Bulamadýk"); // Hata...
+
+            // Dikkatli if...
+            if (dizge.indexOf ("Ha") != -1) console.log ("Bulduk");
+            else console.log ("Bulamadýk");
+
+            // Ýkili NOT/deðil ~ hilesi...
+            if (~dizge.indexOf ("Ha") ) console.log ("Bulduk"); // -(0+1)=-1 (true)
+            else console.log ("Bulamadýk");
+
+            console.log (dizge.includes ("Ha") ); // true
+            console.log (dizge.includes ("Ha", 3) ); // false
+            console.log ("Merhaba".includes ("Ha") ); // false
+            console.log ("Merhaba".includes ("ha", 3) ); // true
+
+            console.log (dizge.startsWith ("Ha") ); // true
+            console.log (dizge.endsWith ("bilir.") ); // true
+        } // func sonu...
+        function fonk9() {
+            let dizge = "3 ayrý metodla dizgeden ibare kopyalanabilir: slice, substring ve substr.";
+            console.log (dizge.slice (0, 1) ); // [0, 1) arasý ibare==> 3
+            console.log (dizge.slice (dizge.length - 4) ); // Sondan 4 krk==> str.
+            console.log (dizge.slice (- 4, -1) ); // Son öncesi 3 krk==> str
+            console.log (dizge.slice (0, 6) ); // [0, 6) arasý ibare==> 3 ayrý
+            console.log (dizge.slice (6, 0) ); // "" boþ
+
+            console.log (dizge.substring (0, 6) ); // [0, 6) arasý ibare==> 3 ayrý
+            console.log (dizge.substring (6, 0) ); // Aynen üstteki gibi==> 3 ayrý
+            console.log (dizge.substring (- 4) ); // -rakam 0 alýnýr...
+
+            console.log (dizge.substr (0, 5) ); // [0, 5adet] ibare==> 3 ayrý
+            console.log (dizge.substr (24, 5) ); // [24, 5adet] ibare==> ibare
+            console.log (dizge.substr (-7, 3) ); // [sondan7., 3adet] ibare==> sub
+        } // func sonu...
+        function fonk10() {
+            console.log ('a' > 'Z' ); // true
+            console.log ('Ýzmir' > 'Zonguldak' ); // true
+
+            console.log ("ÝZMÝR".codePointAt (0), "ÝZMÝR".codePointAt (1) ); // 304 ve 90
+            console.log (String.fromCodePoint (304), String.fromCodePoint (90) ); // Ý ve Z
+            console.log ("\u012d", "\u005a"); // 304=Ý ve 90=Z
+
+            // Ýlk 500 ünikod karakterlerin listesi:
+            let ünikod = '';
+            for (let i = 0; i <= 500; i++) {ünikod += i + "=" + String.fromCodePoint (i) + ", "; }
+            console.log (ünikod);
+
+            // Uluslararasý ECMA-402 karakter kýyasý:
+            console.log ('Ýzmir'.localeCompare ('Zonguldak') ); // -1
+            console.log ('Ýzmir'.localeCompare ('Isparta') ); // 1
+        } // func sonu...
+        function fonk11() {
+            // Surrogate karakterler:
+            console.log ('??'.length, '??'.length, '??'.length);
+            console.log ('??' [0], '??' [1]);
+            console.log ('??'.charCodeAt (0).toString (16), '??'.charCodeAt (1).toString (16) );
+            console.log ('??'.codePointAt (0) );
+
+            // Diacritical karakterler:
+            let krk1 = 'S\u0307\u0323'; // S·?, S + üst nokta + alt nokta
+            let krk2 = 'S\u0323\u0307'; // S?·, S + alt nokta + üst nokta
+            console.log (`krk1: ${krk1}, krk2: ${krk2}`);
+            console.log (krk1 == krk2); // false (ayný görünse de)...
+            console.log ("S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
+            console.log ("S\u0307\u0323".normalize() == "\u1e68" ); // true (3.karakter eþitliði)...
+        } // func sonu...
+        function fonk12 (dizge) {
+            if (!dizge) return dizge;
+            return dizge [0].toUpperCase() + dizge.slice (1);
+        } // func sonu...
+        function fonk13 (dizge) {
+            let dizge2 = dizge.toLowerCase();
+            if (dizge2.includes ('viagra') || dizge2.includes ('xxx') ) return "GEREKSÝZ";
+            return "SPAM DEÐÝL";
+        } // func sonu...
+        function fonk14 (dizge, uzun) {return (dizge.length > uzun) ? dizge.slice (0, uzun) + '…' : dizge;}
+        function fonk15 (dizge) {
+            if (dizge [0] == "$" || dizge [0] == "€")  return ( (+dizge.slice (1)) * 1.10).toFixed (2);
+            else return (+dizge * 1.10).toFixed (2);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Metin bilgileri dizge tiplidir. Bazý dillerdeki 'char' tipli tek karakter JS'de yoktur. \
+            Varsayýlý dizge formatý UTF-16'dýr." +
+            "<br>2) Dizge týrnaklarý tek, çift veya geri olabilir. Geri týrnak içine ${..} ile sarýlý \
+            JS ifadeleri sokulabilir; ayrýca çok satýrlý dizgeler mümkündür. " + fonk2() +
+            "<br>3) Tek-çift týrnaklý dizgelerle de, \n özel karakterleriyle (tek satýrla) çoklu satýr \
+            girilebilir. Diðer özel karakterler: \n, \r, \', \", \t, \b, \f, \v ve UTF-8 ile 16 ve 32 hex  \
+            karakterleri. Tüm özel karakterler tersbölü/esc ile girilmelidir. " + fonk3() +
+            "<br>4) Dizgenin uzunluðunu 'length' özelliði verir. " + fonk4() +
+            "<br>5) Dizgedeki tek bir karaktere eriþmek için dizge [konum] veya dizge.charAt (konum) \
+            kullanýlmalýdýr. Dizge karakterlerinin taranmasý for..of ile yapýlabilir: " + fonk5() +
+            "<br>6) JS dizgeleri deðiþtirilemezler. Ýllaki deðiþtirmek istiyorsak deðiþikliði yeni \
+            bir dizge üzerinde yapmalýyýz: " + fonk6() +
+            "<br>7) Dizge karakterlerini küçükharfe dizge.toLowerCase(), büyükharfe ise dizge.toUpperCase() \
+            metodu çevirir: " + fonk7() +
+            "<br>8) Karakter deðil ibare'nin dizgedeki konumu için dizge.indexOf(ibare, ilkkonum) \
+            metodu kullanýlýr; mevcutsa endeksi, deðilse -1 döndürür. Ýlkkonum tek tek artýrýlarak \
+            ibare'nin tüm raslanýlanlarý taranabilir. Son konum dizge.lastIndexOf(ibare, ilkkonum) \
+            metoduyla sondan baþa taranarak ilk raslanan bulunur. Dikkatsiz if mevcudu bulamayabilir. \
+            Yeni dizge.includes(ibare, konum) metodu true/false döndürür. Baþta mevcutsa \
+            dizge.startsWith(ibare), sonda mevcutsa dizge.endsWith(ibare) true döndürür: " + fonk8() +
+            "<br>9) Bir dizgeden 3 metodla ibare kopyalanabilir: dizge.slice(ilk [, son]) ([ilk, son) arasý \
+            kopyalanýr), dizge.substring(ilk [, son]) (slice'la ayný fakat ilk<->son yerdeðiþtirebilir) ve \
+            str.substr(ilk [, uzunluk]) (son yerine krk adedi). Tercih edilen daha ziyade slice'dýr. " + fonk9() +
+            "<br>10) Tüm karakterlerin UTF-16 tablosu konumu vardýr ve kýyaslar bu konumlarý \
+            kaale alýr. Verili dizge konumu  dizge.codePointAt(konum) metoduyla o karakterin \
+            UTF-16 tablo endeks rakamýný döndürür. String.fromCodePoint(kod) metoduysa \
+            verili UTF-16 kodun karakterini döndürür.  Verilen 'uXXXX' dörtlü onaltý tabanlý UTF-16 \
+            ünikod deðeri bize o kodun karakterini döndürür. Özel alfabe harfleri, latin alfabesi \
+            65->90=A->Z ve 97->122=a->z'lerden sonradýr ve kýyasen büyüklerdir. Tarayýcýlar \
+            dizge1.localeCompare(dizge2) ile -1:küçük, 1:büyük vey 0:eþit döndürür. " + fonk10() +
+            "<br>11) UTF-16 tablosundaki 65536 kombinasyon bazý sembollere yetersiz kaldýðýndan \
+            1 deðil 2 adet ünikod onaltý tabanlý kodlamayla gösterilirler (surrogate). Bazý karakterler \
+            temel karakterin üst ve/veya altýna iþaretlerle oluþturulur ve genelde UTF-16 tablosunda \
+            mevcut deðillerdir (diacritical). Ayný görünen farklý sýralamalý bu diakritik karakterler \
+            normalize() metoduyla aynýlaþtýrýlabilirler. " + fonk11() +
+            "<br>12) Dizge özellikleri: dizge, dizge.length" +
+            "<br>Dizge metodlarý: String.fromCharCode(), String.fromCodePoint(), dizge.anchor(), \
+            dizge.big(), dizge.blink(), dizge.bold(), dizge.charAt(), dizge.charCodeAt(), dizge.codePointAt(), \
+            dizge.concat(), dizge.endsWith(), dizge.fixed(), dizge.fontcolor(), dizge.fontsize(), \
+            dizge.includes(), dizge.indexOf(), dizge.italics(), dizge.lastIndexOf(), dizge.link(), \
+            dizge.localeCompare(), dizge.match(), dizge.matchAll(), dizge.normalize(), dizge.padEnd(), \
+            dizge.padStart(), dizge.quote(), dizge.repeat(), dizge.replace(), dizge.search(), dizge.slice(), \
+            dizge.small(), dizge.split(), dizge.startsWith(), dizge.strike(), dizge.sub(), dizge.substr(), \
+            dizge.substring(), dizge.sup(), dizge.toLocaleLowerCase(), dizge.toLocaleUpperCase(), \
+            dizge.toLowerCase(), dizge.toSource(), dizge.toString(), dizge.toUpperCase(), dizge.trim(), \
+            dizge.trimEnd(), dizge.trimStart(), dizge.valueOf(), dizge[@@iterator](), String.raw()" +
+            "<br><br>Ödev1. Dizgenin ilk karakterini büyükharf yapan kodlamayý yazýn: " + fonk13 ("nihat") +
+            "; " + fonk12 ("") + "; " + fonk12() +
+            "<br>Ödev2. Ýçinde küçük/büyükharf duyarsýz viagra veya xxx ibaresi barýndýran \
+            dizgeyi GEREKSÝZ olarak etiketleyelim: " + fonk13 ("Sen xxxxxx kaldýrmak için viagra tozu kullanýyorsun.") +
+            "; " + fonk13 ("Pamuk prenses ve 7 cüceler masalý.") +
+            "<br>Ödev3. Dizge belirtilenden uzunsa, artana '...' konup kýrpýlacak; deðilse aynen yansýtýlacak: " +
+            fonk14 ("Bu cümle 20 karakterden uzun olduðundan fazlasý kýrpýlmýþtýr.", 20) + "; " +
+            fonk14 ("Herkese Merhabalar!", 20) +
+            "<br>Ödev4. Þayet tutarýn baþýnda $ yada € varsa dahil etmeden %10 KDV ilavesiyle 2 hane \
+            küsüratlý olarak yansýtsýn: " + fonk15 ("$275") + "; " + fonk15 ("€483.75") + "; " + fonk15 ("369.63")
+    </script>
+</body>
+</html>

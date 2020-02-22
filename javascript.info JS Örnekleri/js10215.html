@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10215.html: JS fonksiyonlarýnýn beyaný, ifadesi ve oku örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Fonksiyon Beyaný, Ýfadesi, Oku</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            function selam() {// Beyan fonksiyonu...
+                console.log ("Herkese Merhabalar!..");
+            } // func sonu...
+            let selam1 = selam; // Beyan fonksiyonunu kopyalama...
+            let selam2 = function() {// Ýfade fonksiyonu...
+                console.log ("Herkese Merhabalar!..");
+            }; // ; ile ifade sonu...
+            let selam3 = selam2; // Ýfade fonksiyonunu kopyalama...
+
+            selam(); // fonksiyonu iþletme...
+            selam1();
+            selam2();
+            selam3();
+        } // func sonu...
+        function fonk3() {
+            function sor (soru, evet, hayýr) {
+                if (confirm (soru, "evet") ) {evet();
+                }else {hayýr();}
+            } // func sonu...
+            function onay() {console.log ("Soru onaylanmýþtýr.");}
+            function iptal() {console.log ("Soru onaysýz iptal edilmiþtir.");}
+
+            sor ("Soruyu onaylýyor musun?", onay, iptal);
+                // onay() ve iptal() geriçaðýran fonksiyonlar...
+            sor ("Soruyu onaylýyor musun?", function(){console.log ("Soru onaylanmýþtýr.");}, function(){console.log ("Soru onaysýz iptal edilmiþtir.");} );
+                // isimsiz anonim  geriçaðýran fonksiyonlar...
+        } // func sonu...
+        function fonk4() {
+            "use strict";
+            function topla1 (a, b) {return a + b;}
+            console.log (topla1 (5, 3) );
+
+           let topla2 = function (a, b) {return a + b;}; // Öncelikli ifadelendirmede hata vermez...
+           console.log (topla2 (2, 9) );
+           //let topla2 = function (a, b) {return a + b;}; // Sonraki ifade hata verir, öncelikli olmalýdýr...
+
+            let yaþ = 19;
+            if (yaþ < 18) {// Beyan fonksiyonu...
+                selam();
+                function selam() {console.log ("Merhabalar!..");}
+                selam();
+            }else {
+                selam();
+                function selam() {console.log ("Herkese Selamlar!..");}
+                selam();
+            } // else sonu...
+            //selam(); // "use strict" kipinde if-else bloðu dýþýnda tanýnmaz, hata verir...
+
+            yaþ = 16;
+            let selam; // Ýfade fonksiyonu...
+            if (yaþ < 18) {
+                selam = function() {console.log ("Merhabalar!..");};
+                selam();
+            }else {
+                selam = function() {console.log ("Herkese Selamlar!..");}
+                selam();
+            } // else sonu...
+            selam(); // "use strict" kipinde ifade fonksiyonu hata vermez...
+        } // func sonu...
+        function fonk5() {
+            function topla1 (a, b) {return a+b;} // Beyan fonksiyonu...
+            let topla2 = function (a, b) {return a+b;}; // Ýfade fonksiyonu...
+            let oklu1 = (a, b) => a + b; // Ok fonksiyonu...
+            let oklu2 = a => a**0.5;
+            let oklu3 = () => "Herkese Selamlar!";
+
+            console.log (topla1 (2, 7) );
+            console.log (topla2 (9, 3) );
+            console.log (oklu1 (Math.PI, Math.E) );
+            console.log (oklu2 (49) );
+            console.log (oklu3() );
+
+            let yaþ = 65;
+            let oklu4 = (yaþ < 18) ? ()=> console.log ('Merhaba...') : ()=> console.log ("Selamlar!");
+            oklu4();
+
+            let oklu5 = (a, b, c, d) => {// Çok satýrlý okluda {} blok sembolleri ve return kullanýlmalýdýr...
+                let sonuç1 = a + b;
+                let sonuç2 = c * d;
+                let sonuç = sonuç2 ** (1 / sonuç1);
+                return sonuç;
+            }; // let sonu...
+            console.log (oklu5 (1, 2, 3, 4) );
+        } // func sonu...
+        function fonk6() {
+            function onay (sunum, olumlu, olumsuz) {
+                if (confirm (sunum) ) olumlu()
+                else olumsuz();
+            } // func sonu...
+            onay (// Beyanlý geriçaðýran fonksiyon...
+                "Makamýnýza sunduðum atanma kararýmý onaylýyor musunuz?",
+                function() {console.log ("Haþmetbablarýnýz vezirazamlýðýmý onayladý."); },
+                function() {console.log ("Haþmetbablarýnýz idamýmý onayladý."); }
+            ); // onay sonu...
+            onay (// Oklu geriçaðýran fonksiyon...
+                "Projelerimi onaylýyor musun?",
+                ()=> console.log ("Projelerim onay lütfunuzu kazanmýþtýr."),
+                ()=> console.log ("Projelerim bu defa da çöpe atýlmýþtýr.")
+            ); // onay sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Beyan ve ifade fonksiyonu vardýr. Heriki çeþit de fonk() ile iþletilir ve fonk ile de \
+            fonksiyon deðerini aktarýr: " + fonk2() +
+            "<br>2) Geriçaðýran fonksiyon parametrik veya anonim adlarý vasýtasýyla içteki \
+            parametrik fonksiyonunu geri döndüren fonksiyondur: " + fonk3() +
+            "<br>3) Fonksiyon beyaný JS motoru tarafýndan kodlar iþletilmeden önce tanýmlanýr ve \
+            tanýmlandýðý bloðun her tarafýndan çaðrýlabilmeye hazýr hale getirilir. Fonksiyon ifadesi ise \
+            çaðrýlmadan önce atanmalýdýr, zira JS motoru onu ancak çaðrýldýðýnda atar, önceden \
+            deðil. Genelde kod okunabilirliði bakýmýndan beyan fonksiyonu kullanýlýr, ancak özellikle \
+            'use strict' kipinde blok dýþý fonksiyon kullanýmý sözkonusuysa ifade fonksiyonu \
+            tercih edilir: " + fonk4() +
+            "<br>4) Genelde tek satýrlýk fonksiyonlarda uzun uzun fonksiyon beyaný yerine anlýk ifade \
+            içi return'süz ()=> sembollü ok fonksiyonlar kullanýlýr. Ýþlevi beyan veya ifade fonksiyonla \
+            aynýdýr. Argüman yoksa yada 2 ve daha çok argümanlarda () mecburidir, ancak tek \
+            argümanlýda (n) yerine sadece n yeterlidir. Oklu fonksiyon tek deðil çok satýrlý olacaksa \
+            hem {} blok parantezi hem de {..return..} kullanma mecburiyeti vardýr: " + fonk5() +
+            "<br>5) Ödev1. Verili geriçaðýran beyan fonksiyonunu okluya çevirin: " + fonk6()
+    </script>
+</body>
+</html>

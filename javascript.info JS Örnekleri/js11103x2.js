@@ -1,0 +1,1 @@
+function iki() {console.log ("Ýkinci fonksiyon yüklendi ve iþletildi");}

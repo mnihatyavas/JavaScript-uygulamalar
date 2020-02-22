@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10103.html: JavaScript kodlama editörleri örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>Kodlama Editörleri</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Ýlla ki MS Notebook/Notdefteri demeyenler için daha geliþmiþ IDE (Integrated \
+            Development Environment) kod geliþtirme çevre-leri boldur. Önde gelen ikisi: \
+            ücretsiz Visual Studio Code ve ücretli WebStorm'dur." +
+            "<br>2) Hafifsiklet editörler olarak dikkat çekenler: Atom, Visual Studio Code, \
+            Sublime Text, Notepad++, Vim ve Emacs'dýr."
+    </script>
+</body>
+</html>

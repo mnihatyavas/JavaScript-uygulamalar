@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10203.html: JavaScript'in modern "use strict/sýký kullan" kipi örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>"use strict" Kipi</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Ýlk orijinal JS kodlamalarýnýn hala geçerliliði yanýsýra 2009 ECMAScript5(ES5) \
+            deðiþiklikleri, þayet kodlamanýzýn (veya fonksiyonunuzun) baþýna 'use strict' \
+            direktifini koymazsanýz, varsayýlý olarak kapalýdýr. Bu yeni kip geçerli kýlýnýnca \
+            ilgili program içinde tekrar eskiye dönüþ yoktur." +
+            "<br>2) class/sýnýf ve modül gibi bazý kullanýmlar 'use strict' kipini otomatikmen \
+            geçerliler." +
+            "<br>3) Gerçi yenilikler kullanýldýðýnda bu kip otomatik geçerlilik kazansa da \
+            eski arþiv fonksiyonlarý davranýþlarýnýn da yeniye deðiþebilmesi için genel tavsiye \
+            her JS kodlamasýna 'use strict' direktifiyle baþlamanýzdýr."
+    </script>
+</body>
+</html>

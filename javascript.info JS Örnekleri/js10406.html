@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10406.html: Çoklu nesne yaratmada kurucu "new Fonksiyon" kullanýmý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Nesne Kurucu Fonksiyon</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            function Kullanýcý (ad, yaþý) {
+                this.ad = ad;
+                this.yaþ = yaþý;
+                this.yöneticiMi = false;
+            } // func sonu...
+
+            let kullanýcý1 = new Kullanýcý ("Nihat", 2019-1957);
+            let kullanýcý2 = new Kullanýcý ("Yücel", 2019-1975);
+            let kullanýcý3 = new Kullanýcý ("Fatih", 2019-1979);
+            let kullanýcý4 = new Kullanýcý ("Zafer", 2019-1978);
+            let kullanýcý5 = new Kullanýcý ("Atilla", 2019-1984);
+
+            console.log (kullanýcý5.ad, kullanýcý5.yaþ, kullanýcý5.yöneticiMi);
+            console.log (kullanýcý1.ad, kullanýcý1.yaþ, kullanýcý1.yöneticiMi);
+            console.log (kullanýcý4.ad, kullanýcý4.yaþ, kullanýcý4.yöneticiMi);
+            console.log (kullanýcý2.ad, kullanýcý2.yaþ, kullanýcý2.yöneticiMi);
+            console.log (kullanýcý3.ad, kullanýcý3.yaþ, kullanýcý3.yöneticiMi);
+        } // func sonu...
+        function fonk3() {
+            function Kullanýcý1 (ad, yaþý) {
+                if (!new.target) {return new Kullanýcý1 (ad, yaþý);}
+                this.ad = ad;
+                this.yaþ = yaþý;
+                this.yöneticiMi = false;
+            } // func sonu...
+            let kullanýcý11 = new Kullanýcý1 ("Nihat", 2019-1957);
+            console.log (kullanýcý11.ad, kullanýcý11.yaþ, kullanýcý11.yöneticiMi);
+            let kullanýcý12 = Kullanýcý1 ("Nihat", 2019-1957);
+            console.log (kullanýcý12.ad, kullanýcý12.yaþ, kullanýcý12.yöneticiMi);
+
+            function Kullanýcý2 (ad, yaþý) {
+                if (!new.target) {return undefined;}
+                this.ad = ad;
+                this.yaþ = yaþý;
+                this.yöneticiMi = false;
+            } // func sonu...
+            let kullanýcý21 = new Kullanýcý2 ("Nihat", 2019-1957);
+            console.log (kullanýcý21.ad, kullanýcý21.yaþ, kullanýcý21.yöneticiMi);
+            let kullanýcý22 = Kullanýcý2 ("Nihat", 2019-1957); // undefined
+            console.log (kullanýcý22);
+        } // func sonu...
+        function fonk4() {
+            function BüyükKullanýcý() {
+                this.ad = "Nihat";
+                return {ad: "Godzilla" };
+            } // func sonu...
+            let kullanýcý1 = new BüyükKullanýcý();
+            console.log (kullanýcý1.ad);
+
+            function KüçükKullanýcý() {
+                this.ad = "Nihat";
+                return "Godzilla"; // yada sadece "return;"
+            } // func sonu...
+            let kullanýcý2 = new KüçükKullanýcý; // () olmasa da olur...
+            console.log (kullanýcý2.ad);
+        } // func sonu...
+        function fonk5() {
+            function Kullanýcý (adý, yaþý) {
+                this.ad = adý;
+                this.yaþ = yaþý;
+                this.selam = function() {console.log (this.ad + "'dan herkese Selamlar!"); };
+            } // func sonu...
+            let kullanýcý = new Kullanýcý ("Nihat", 2019-1957);
+            console.log (kullanýcý.ad, kullanýcý.yaþ,);
+            kullanýcý.selam();
+        } // func sonu...
+        function fonk6() {
+            let nesne = {};
+            function A() {return nesne;}
+            function B() {return nesne;}
+            console.log (new A() == new B()); // true
+        } // func sonu...
+        function fonk7() {
+            function HesapMakinesi() {
+                this.a; this.b;
+                this.oku = function() {
+                    this.a = +prompt ('a?', 1);
+                    this.b = +prompt ('b?', 1);
+                }; // this sonu...
+                this.topla = function() {return this.a + this.b;};
+                this.çýkar = function() {return this.a - this.b;};
+                this.çarp = function() {return this.a * this.b;};
+                this.böl = function() {return this.a / this.b;};
+                this.üs = function() {return this.a ** this.b;};
+                this.kalan = function() {return this.a % this.b;};
+            } // func sonu...
+            let hesapçý = new HesapMakinesi();
+            hesapçý.oku();
+            console.log ("Deðerler: a=" + hesapçý.a + "; b=" + hesapçý.b);
+            console.log ("Toplama=" + hesapçý.topla() );
+            console.log ("Çýkarma=" + hesapçý.çýkar() );
+            console.log ("Çarpma=" + hesapçý.çarp() );
+            console.log ("Bölme=" + hesapçý.böl() );
+            console.log ("Üs=" + hesapçý.üs() );
+            console.log ("Kalan=" + hesapçý.topla() );
+        } // func sonu...
+        function fonk8() {
+            function Toplayýcý (ilkDeðer) {
+                this.deðer = ilkDeðer;
+                this.oku = function() {this.deðer += +prompt ('Ýlkdeðere eklenecek sayýyý gir?', 0); };
+            } // func sonu...
+            let toplayýcý = new Toplayýcý (2019-1957);
+            toplayýcý.oku();
+            toplayýcý.oku();
+            toplayýcý.oku();
+            console.log ("Toplam deðer: " + toplayýcý.deðer);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nesne kurucu fonksiyon genellikle büyük harfle baþlar ve önünde 'new' anahtarkelimesi \
+            vardýr. Bir kere tanýmlanýr ve benzer özellikli çoklu nesneler yaratmada kullanýlýr: " + fonk2() +
+            "<br>2) Kurucu fonksiyonu new ile çaðrýlmamýþsa new.target özelliðiyle test edip undefined \
+            yapabiliriz. Yada yine ayný new.target özellik kontroluyla hem new ile hem de onsuz \
+            çaðrýldýðýnda ayný þekilde kurucu iþlemini saðlatabiliriz: " + fonk3() +
+            "<br>3) Normalde kurucu fonksiyonlar return kullanmaz, sadece this'leri yerleþtirirler; \
+            ancak kullanýlmýþsa ve döndürdüðü nesneyse geçerli, ilkelse geçersizdir. Ayrýca parametresiz \
+            fonksiyonlar çaðrýlýrken ()'ler kullanýlsa da olur kullanýlmasa da (new Kullanýcý veya \
+            new Kullanýcý() aynýdýr): " + fonk4() +
+            "<br>4) Kurucu fonksiyondaki this sadece deðiþken özelliði için deðil metod için de \
+            kullanýlabilir: " + fonk5() +
+            "<br>5) Ödev1: 2 farklý fonksiyonun new ile döndürdüðü ayný nesne birbirine eþittir: " + fonk6() +
+            "<br>6) Ödev2: Kurucu fonksiyonun this.oku, this.topla, this.çýkar, this.çarp, this.böl, \
+            this.üs ve this.kalan metodlarýyla müteþekkül bir hesap makinesi yapýn: " + fonk7() +
+            "<br>7) Ödev3: Ýlk kuruluþ deðerinden sonra okunan her deðeri üstüne toplayan kodlamayý \
+            yazýn: " + fonk8()
+    </script>
+</body>
+</html>

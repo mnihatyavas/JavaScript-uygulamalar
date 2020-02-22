@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10505.html: JS'de dizi metodlarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Dizi Metodlarý</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let dizi1 = ["Ben", "þimdi", "eve", "gidiyorum"];
+            console.log (dizi1, dizi1.length);
+            delete dizi1 [1]; // "þimdi" silinir...
+            console.log (dizi1 [1] ); // undefined
+            // dizi1 = ["Ben",  , "eve", "gidiyorum"];
+            console.log (dizi1, dizi1.length);
+
+            let dizi2 = ["Ben", "þimdi", "JavaScript", "çalýþýyorum"];
+            console.log (dizi2, dizi2.length);
+            let silinenler = dizi2.splice (1, 2); // Endeks 1'den itibaren 2 eleman siler, silinen eleman(lar)ý döndürür...
+            console.log (silinenler, dizi2, dizi2.length);
+
+            dizi2.splice (2, 0, "Sonra", "yemeðe", "çýkalým"); // Silmeden ekler...
+            console.log (dizi2, dizi2.length);
+
+            let dizi3 = [1, 2, 5];
+            console.log (dizi3, dizi3.length);
+            dizi3.splice (-1, 0, 3, 4); // Sondan bir önceye (silmeden) 2 yeni eleman ekler...
+            console.log (dizi3, dizi3.length);
+        } // func sonu...
+        function fonk3() {
+            let dizi1 = ["d", "e", "n", "e", "m", "e"];
+            console.log (dizi1, dizi1.length);
+            console.log (dizi1.slice (2, 5) ); // n, e, m
+            console.log (dizi1.slice (-2) ); // m, e
+            let tamKopya = dizi1.slice();
+            console.log (tamKopya, tamKopya.length );
+        } // func sonu...
+        function fonk4() {
+            let dizi1 = [1, 2];
+            console.log (dizi1.concat ([3, 4]) ); // 1,2,3,4
+            console.log (dizi1.concat ([3, 4], [5, 6]) ); // 1,2,3,4,5,6
+            let dizi2 = dizi1.concat ([3, 4], 5, 6);
+            console.log (dizi2);
+
+            let dizimsi = {0: "birþey", length: 1};
+            console.log (dizi1.concat (dizimsi) ); // 1,2,[object Object]
+
+            dizimsi = {0: "birþey", 1: "baþka", [Symbol.isConcatSpreadable]: true, length: 2};
+            console.log (dizi1.concat (dizimsi) ); // 1,2,birþey, baþka
+        } // func sonu...
+        function fonk5() {
+            ["Bilal", "Handan", "Nazlýgül"].forEach (console.log);
+
+            let dizi1 = ["Bilal", "Handan", "Nazlýgül"];
+            dizi1.forEach ( (birim, endeks, dizi) => {console.log (`${dizi} dizisinin ${endeks}.endeks elemaný: ${birim}.`); });
+        } // func sonu...
+        function fonk6() {
+            let dizi1 = [1, 0, false];
+            console.log (dizi1);
+            console.log (dizi1.indexOf (0) ); // 1
+            console.log (dizi1.indexOf (false) ); // 2
+            console.log (dizi1.indexOf (null) ); // -1
+            console.log (dizi1.includes (1) ); // true
+
+            const dizi2 = [NaN, 1, 0, false];
+            console.log (dizi2);
+            console.log (dizi2.indexOf (NaN) ); // -1 (0 olmalýydý, ancak === eþitlik nesnel NaN'da yanlýþtýr)
+            console.log (dizi2.includes (NaN) );// true (içerir)
+        } // func sonu...
+        function fonk7() {
+            let kullanýcýlar = [
+                {kimlikNo: 1, ad: "Nihat"},
+                {kimlikNo: 2, ad: "Yücel"},
+                {kimlikNo: 3, ad: "Fatih"} ];
+            let kullanýcý = kullanýcýlar.find (birim => birim.kimlikNo == 2);
+            console.log (kullanýcý.ad); // Yücel
+            console.log (kullanýcýlar.find (birim => birim.kimlikNo == 17) ); // undefined
+            console.log (kullanýcýlar.findIndex (birim => birim.ad == "Yücel") ); // 1
+
+            let bazýKullanýcýlar = kullanýcýlar.filter (birim => birim.kimlikNo < 3);
+            console.log (bazýKullanýcýlar, bazýKullanýcýlar.length, bazýKullanýcýlar [0].ad); // [Nihat, Yücel] 2
+            bazýKullanýcýlar = kullanýcýlar.filter (birim => birim.kimlikNo > 3);
+            console.log (bazýKullanýcýlar, bazýKullanýcýlar.length); // [] 0
+        } // func sonu...
+        function fonk8() {
+            let dizi1 = ["Bilal", "Handan", "Nazlýgül", "Zafer"];
+            console.log (dizi1);
+            let dizi2 = dizi1.map (a => a.length);
+            console.log (dizi2); // 5,6,8,5
+        } // func sonu...
+        function fonk9() {
+            let dizi1 = [1, 2, 15, 54, 365, 9, 1];
+            console.log (dizi1);
+            dizi1.sort(); // dizgesel artan sýralanýr...
+            console.log (dizi1);
+
+            function sayýsalArtan (a, b) {
+                if (a > b) return 1;
+                else if (a < b) return -1;
+                return 0;
+            } // func sonu...
+            dizi1.sort (sayýsalArtan);
+            console.log (dizi1);
+
+            console.log ([1, -2, 15, 2, 0, 8, 1].sort (function (a, b) {return a - b;} ) ); // Hýzlý sayýsal artan...
+
+            console.log ( [1, -2, 15, 2, 0, 8, 1].sort ( (a, b) => b - a) ); // Oklu sayýsal azalan...
+
+            dizi1 = [1, 2, 15, 54, -65, 365, 9, 1];
+            console.log (dizi1);
+            dizi1.reverse();
+            console.log (dizi1);
+            dizi1.sort ( (a, b) => a - b); // Sayýsal artan...
+            console.log (dizi1);
+            dizi1.reverse(); // Sayýsal azalan...
+            console.log (dizi1);
+        } // func sonu...
+        function fonk10() {
+            let dizge1 = "Bilal,Handan,Nazlýgül,Ayþegül,Atilla";
+            console.log (dizge1);
+            let dizi1 = dizge1.split (",");
+            console.log (dizi1);
+            let dizi2 = dizge1.split (",", 3); // Ýlk 3 elemanlý dizi...
+            console.log (dizi2);
+            let dizi3 = dizge1.split ("");
+            console.log (dizi3);
+
+            let dizge2 = dizi1.join ("; ");
+            console.log (dizge2);
+            let dizge3 = dizi1.join (" ");
+            console.log (dizge3);
+        } // func sonu...
+        function fonk11() {
+            let dizi1 = [1.5, 2.8, -3, 4.78, 5.92];
+            console.log (dizi1);
+            // ilk deðer verili...
+            let sonuç = dizi1.reduce ( (toplam, eleman) => toplam + eleman, 0); // ilk=0 üzerine tüm elemanlarý toplar...
+            console.log (sonuç); // 12
+
+            // ilk deðer olmadan...
+            sonuç = dizi1.reduce ( (toplam, eleman) => toplam + eleman); // toplam=dizi1[0] üzerine diðer tüm elemanlarý toplar...
+            console.log (sonuç); // 12
+
+            // reduceRight ile...
+            sonuç = dizi1.reduceRight ( (toplam, eleman) => toplam + eleman, 0); // ilk=0 üzerine saðdan sola tüm elemanlarý toplar...
+            console.log (sonuç); // 12
+        } // func sonu...
+        function fonk12() {
+            console.log (typeof {}); // object
+            console.log (typeof []); // object
+
+            console.log (Array.isArray ({}) ); // false
+            console.log (Array.isArray ([]) ); // true
+        } // func sonu...
+        function fonk13() {
+            let orduyaKatýlým = {
+                asgariYaþ: 18,
+                azamiYaþ: 27,
+                katýlabilirMi (baþvuranlar) {return baþvuranlar.yaþ >= this.asgariYaþ && baþvuranlar.yaþ < this.azamiYaþ;}
+            }; // let sonu...
+            let baþvuranlar = [
+                {yaþ: 16},
+                {yaþ: 20},
+                {yaþ: 23},
+                {yaþ: 30}
+            ]; // let sonu...
+            // katýlabilirMi'nin true döndürdüklerini bulalým...
+            let askerler = baþvuranlar.filter (orduyaKatýlým.katýlabilirMi, orduyaKatýlým);
+            console.log (askerler, askerler.length);
+            console.log (askerler [0].yaþ); // 20
+            console.log (askerler [1].yaþ); // 23
+
+            askerler = baþvuranlar.filter (baþvuranlar => orduyaKatýlým.katýlabilirMi (baþvuranlar) ); // Öncekiyle aynýdýr...
+            console.log (askerler, askerler.length);
+        } // func sonu...
+        function fonkö1 (dizge) {
+            console.log (dizge);
+            console.log (dizge
+                .split ("-") // -tireli dizgeyi elemanlý dizileþtir: ['benim', 'css', 'sýnýf', 'adým']
+                .map ( (kelime, endeks) => endeks == 0 ? kelime : kelime [0].toUpperCase() + kelime.slice (1) )
+                .join ("") ); // çevrilen dizi elemanlarýný dizgeleþtir: "benimCssSýnýfAdým"
+        } // func sonu...
+        function fonkö2 (dizi, a, b) {return dizi.filter (birim => (a <= birim && birim <= b)); }
+        function fonkö3 (dizi, a, b) {
+            for (let i = 0; i < dizi.length; i++) {
+                let deðer = dizi [i];
+                if (deðer < a || deðer > b) {
+                    dizi.splice (i, 1);
+                    i--;
+                } // if sonu...
+            } // for sonu...
+        } // func sonu...
+        function fonkö4() {
+            let dizi = [5, 2, 14, -10, 8, 9.5];
+            console.log (dizi);
+            dizi.sort ( (a, b) => b - a);
+            console.log (dizi);
+        } // func sonu...
+        function fonkö5() {
+            let dizi = ["Python", "JavaScript", "HTML", "CSS"];
+            let sýralýDizi = dizi.slice().sort(); // Orijinalini deðil kopyasýný varsayýlý dizgesel artan sýralar...
+            console.log (dizi);
+            console.log (sýralýDizi);
+        } // func sonu...
+        function fonkö6() {
+            function Hesapmakinesi() {
+                this.metodlar = {
+                    "-": (a, b) => a - b,
+                    "+": (a, b) => a + b
+                }; // this sonu...
+                this.hesapla = function (dizge) {
+                    let dizi = dizge.split (' '),
+                        a = +dizi [0],
+                        iþlemci = dizi [1],
+                        b = +dizi [2];
+                    if (!this.metodlar [iþlemci] || isNaN (a) || isNaN (b)) {return NaN;}
+                    return this.metodlar [iþlemci] (a, b);
+                }; // this sonu... 
+                this.metodEkle = function (ad, fonk) {this.metodlar [ad] = fonk;};
+            } // func sonu...
+
+            let hesmak = new Hesapmakinesi;
+            console.log ("3 + 7 = " + hesmak.hesapla ("3 + 7") ); // 10
+            console.log ("7 - 3 = " + hesmak.hesapla ("7 - 3") ); // 4
+
+            let ileri_hesmak = new Hesapmakinesi;
+            ileri_hesmak.metodEkle ("*", (a, b) => a * b);
+            ileri_hesmak.metodEkle ("/", (a, b) => a / b);
+            ileri_hesmak.metodEkle ("**", (a, b) => a ** b);
+            ileri_hesmak.metodEkle ("%", (a, b) => a % b);
+            let sonuç = ileri_hesmak.hesapla ("2 * 3");
+            console.log ("2 * 3 = " + sonuç); // 6
+            console.log ("12 + 3 = " + ileri_hesmak.hesapla ("12 / 3")); // 4
+            console.log ("2 + 4 = " + ileri_hesmak.hesapla ("2 ** 4")); // 16
+            console.log ("17.76 % 4 = " + ileri_hesmak.hesapla ("17.76 % 4").toFixed (2) ); // 1.76
+        } // func sonu...
+        function fonkö7() {
+            let adYaþ1 = {ad: "Nihat", yaþ: 62};
+            let adYaþ2 = {ad: "Fatih", yaþ: 44};
+            let adYaþ3 = {ad: "Yücel", yaþ: 43};
+            let kullanýcýlar = [adYaþ1, adYaþ2, adYaþ3];
+            let adYaþlar = kullanýcýlar.map (birim => birim.ad + "-" + birim.yaþ);
+            console.log (adYaþlar); // ["Nihat-62", "Fatih-44", "Yücel-43"]
+        } // func sonu...
+        function fonkö8() {
+            let kullanýcý1 = {ad: "Nihat", soyad:"Yavaþ", no: 1};
+            let kullanýcý2 = {ad: "Fatih", soyad:"Özbay", no: 2};
+            let kullanýcý3 = {ad: "Yücel", soyad:"Küçükbay", no: 3};
+            let kullanýcýlar1 = [kullanýcý1, kullanýcý2, kullanýcý3];
+            let kullanýcýlar2 = kullanýcýlar1.map (a => ({tamAd: `${a.ad} ${a.soyad}`, no: a.no}) );
+/*          kullanýcýlar2 = [
+                {tamAd: "Nihat Yavaþ", no: 1},
+                {tamAd: "Fatih Özbay", no: 2},
+                {tamAd: "Yücel Küçükbay", no: 3} ]
+*/
+            console.log (kullanýcýlar1, kullanýcýlar1 [0].ad);
+            console.log (kullanýcýlar2, kullanýcýlar2 [2].tamAd);
+        } // func sonu...
+        function fonkö9() {
+            function karýþtýr1 (dizi) {dizi.sort ( () => Math.random() - 0.5); }
+            function karýþtýr2 (dizi) {
+                for (let i = dizi.length - 1; i > 0; i--) {
+                    let j = Math.floor (Math.random() * (i + 1));
+                    [dizi [i], dizi [j] ] = [dizi [j], dizi [i] ];
+                } // for sonu...
+            } // func sonu...
+            //Tüm olasý dizilimlerin sayýsý...
+            let sayaç1 = {'123': 0, '132': 0, '213': 0, '231': 0, '321': 0, '312': 0};
+            let sayaç2 = {'123': 0, '132': 0, '213': 0, '231': 0, '321': 0, '312': 0};
+            for (let i = 0; i < 1000000; i++) {
+                let dizi1 = [1, 2, 3];
+                let dizi2 = [1, 2, 3];
+                karýþtýr1 (dizi1);
+                karýþtýr2 (dizi2);
+                sayaç1 [dizi1.join ("")]++;
+                sayaç2 [dizi2.join ("")]++;
+            } // for sonu...
+            // Gelen tüm olasý dizilim sayýlarýný görelim...
+            for (let anahtar in sayaç1) {console.log (`${anahtar}: ${sayaç1 [anahtar]}`); }
+            console.log ("");
+            for (let anahtar in sayaç2) {console.log (`${anahtar}: ${sayaç2 [anahtar]}`); }
+        } // func sonu...
+        function fonkö10() {
+            function yaþOrtalamasý (kullanýcýlar) {return kullanýcýlar.reduce ( (ilk, kullanýcý) => ilk + kullanýcý.yaþ, 0) / kullanýcýlar.length;}
+            let kullanýcý1 = {ad: "Hatice", yaþ: 2019-1951};
+            let kullanýcý2 = {ad: "Süleyha", yaþ: 2019-1953};
+            let kullanýcý3 = {ad: "Nihal", yaþ: 2019-1955};
+            let kullanýcý4 = {ad: "Nihat", yaþ: 2019-1957};
+            let kullanýcý5 = {ad: "Songül", yaþ: 2019-1959};
+            let kullanýcý6 = {ad: "Nedim", yaþ: 2019-1961};
+            let kullanýcý7 = {ad: "Sevim", yaþ: 2019-1963};
+            let kullanýcýlar = [kullanýcý1, kullanýcý2, kullanýcý3, kullanýcý4, kullanýcý5, kullanýcý6, kullanýcý7];
+            console.log ("Kullanýcýlarýn ortalama yaþý: " + yaþOrtalamasý (kullanýcýlar) ); // 62
+        } // func sonu...
+        function fonkö11() {
+            function yegane (dizi) {
+                let sonuç = [];
+                for (let eleman of dizi) {if (! sonuç.includes (eleman) ) sonuç.push (eleman); }
+                return sonuç;
+            } // func sonu...
+            let adlar = ["Hare", "Kezban", "Hare", "Kezban", "Kezban", "Kezban", "Hare", "Hare", "Nihat"];
+            console.log (yegane (adlar) ); // Hare, Kezban, Nihat
+        } // func sonu...
+        function fonkö12() {
+            function artanSýrala (dizi) {dizi.sort ( (a, b) => a.yaþ > b.yaþ ? 1 : -1);}
+            function azalanSýrala (dizi) {dizi.sort ( (a, b) => b.yaþ > a.yaþ ? 1 : -1);}
+            function karýþýkSýrala (dizi) {dizi.sort ( () => Math.random() - 0.5);}
+            let kullanýcý1 = {ad: "Hatice", yaþ: 2019-1951};
+            let kullanýcý2 = {ad: "Süleyha", yaþ: 2019-1953};
+            let kullanýcý3 = {ad: "Nihal", yaþ: 2019-1955};
+            let kullanýcý4 = {ad: "Nihat", yaþ: 2019-1957};
+            let kullanýcý5 = {ad: "Songül", yaþ: 2019-1959};
+            let kullanýcý6 = {ad: "Nedim", yaþ: 2019-1961};
+            let kullanýcý7 = {ad: "Sevim", yaþ: 2019-1963};
+            let kullanýcýlar = [kullanýcý1, kullanýcý2, kullanýcý3, kullanýcý4, kullanýcý5, kullanýcý6, kullanýcý7];
+            console.log ("Orijinal dizi: " + kullanýcýlar [0].ad + "==>" + kullanýcýlar [6].ad);
+            artanSýrala (kullanýcýlar);
+            console.log ("Artan yaþ sýralý dizi: " + kullanýcýlar [0].ad + "==>" + kullanýcýlar [6].ad);
+            azalanSýrala (kullanýcýlar);
+            console.log ("Azalan yaþ sýralý dizi: " + kullanýcýlar [0].ad + "==>" + kullanýcýlar [6].ad);
+            karýþýkSýrala (kullanýcýlar);
+            console.log ("Karýþýk yaþ sýralý dizi: " + kullanýcýlar [0].ad + "==>" + kullanýcýlar [6].ad);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Dizilere eleman eklemekte ve silmekte kullanýlan push/pop ve unshift/shift metodlarýný \
+            gördük. Diðer bazýlarý: delete, splice, slice ve concat'dir." +
+            "<br>2) Nesneler için 'delete nesne[anahtar]' nesnenin ilgili özelliðini siler, fakat diziler \
+            içinse, belirtilen dizi deðerini silerken, arasý boþ/undefined kalýr ve dizi uzunluðu \
+            eksilmez. 'dizi.splice(endeks[,silinecekAdet, eleman1,...,elemanN])' ekle metodu çok güçlüdür. \
+            Verili endeksten itibaren belirtilen adet elemaný siler; ayrýca girilmiþse bu konumdan itibaren de \
+            belirtilen elemanlarý ekler. Negatif endeks sondan baþa demektir: " + fonk2() +
+            "<br>3) 'dizi.slice([ilk],[son])' [ilk,son) elemanlarýn bir dilimini/kopyasýný döndürür. Negatif \
+            endeksler sondan baþa anlamýndadýr: " + fonk3() +
+            "<br>4) 'dizi.concat(arg1,arg2...)' metodu mevcut dizi'ye argümanlarý (deðer, dizi) ekler, \
+            yeni bir diziye atar (orijinal deðiþmez). Eklenen deðer/dizi deðil de nesne ise nesne \
+            olarak yansýr; ancak Symbol.isConcatSpreadable özelliðindeyse nesnenin sadece \
+            deðerleri alýnýr, kalaný atýlýr: " + fonk4() +
+            "<br>5) 'dizi.forEach(eleman, endeks, dizi){..}' dini elemanlarýný tek-tek tarar: " + fonk5() +
+            "<br>6) Araþtýrma metodlarý 'dizi.indexOf(birim,konum)==>ilkendeks/-1', \
+            'dizi.lastIndexOf(birim,konum)==>sonendeks/-1' ve 'dizi.includes(birim,konum)==>true/false' \
+            dizi içinde birim'in mevcudiyetini saptar: " + fonk6() +
+            "<br>7) 'dizi.find(function(birim,endeks,dizi){})==>true/false' ve 'dizi.findIndex(function(birim,endeks,dizi){})==>endeks/-1' \
+            metodlarý fonksiyonla birimi yada endeksini sorgular. " +
+            "<br> 'dizi.find' metodu bulunan ilk birimi döndürür, 'dizi.filter' ise bulunan çokelemanlý \
+            diziyi yada namevcutsa boþ diziyi döndürür: " + fonk7() +
+            "<br>8) Dizi dönüþtüren metodlar: map/haritala, sort/sýrala, reverse/terssýrala, split/dizileþtir, \
+            join/dizgeleþtir, reduce/solaindirge, reduceRight/saðaindirge." +
+            "<br>'dizi.map(function(birim,endeks,dizi){..})==>dönüþen birimler' ile dizi taranýr ve \
+            elemanlarý teker teker istenen yeni sonucuna çevrilir: " + fonk8() +
+            "<br>9) 'dizi.sort()' ile orijinal dizi varsayýlý dizgesel artan sýralanýr. Sayýsal artan için \
+            kendi karþýlaþtýrma kriterli fonksiyonumuzu kullanmalýyýz. Oklu fonksiyon en kestirmedir. \
+            'dizi.reverse()' diziyi terse çevirir: " + fonk9() +
+            "<br>10) 'dizge.split(ayraç,adet)' dizge metodu, verili dizgeyi, herbir ayraç karakterle \
+            adet elemanlý diziye dönüþtürüp yeni diziye atar. Ayraç boþsa tek tek tüm karakterleri \
+            dizileþtirir. 'dizi.join(ayraç)' dizi metodu ise ncekinin tersini, yani dizi elemanlarýný \
+            belirtilen ayraç karakterli tek bir birleþik dizgeye dönüþtürür: " + fonk10() +
+            "<br>11) 'dizi.reduce(function(öncekiDeðer, birim, endeks, dizi) {..},[ilk])' metodu, \
+            mevcutsa 'öncekiDeðer=ilk' üzerine dizinin taranan birimlerini tek tek iþler (örn.toplar, \
+            çýkarýr, çarpar vb) ve sonuçta tek deðer döndürür. Boþ dizi, ilk deðer yoksa hata \
+            verir; bu yüzden hemen daima ilkdeðer verilmesi tavsiye olunur. dizi.reduceRight \
+            aynýdýr, sadece saðdan sola iþlem yapar: " + fonk11() +
+            "<br>12) typeof metodu diziyi object/nesne gösterir; isArray metoduysa diziyse \
+            true, deðilse false döndürür: " + fonk12() +
+            "<br>13) find, filter ve map dizi metodlarý 'dizi.metod(fonk, argüman)' þeklinde \
+            'argüman=this' anlamýnda 2.argüman da kullanabilirler: " + fonk13() +
+            "<br>14) Dizi özelliði: dizi.length, dizi.özellik" +
+            "<br>Dizi metodlarý: dizi.from(), dizi.isArray(), dizi.observe(), dizi.of(), dizi.concat, \
+            dizi.copyWithin(), dizi.entries(), dizi.every(), dizi.fill(), dizi.filter(), dizi.find(), dizi.findIndex(), \
+            dizi.flat(), dizi.flatMap(), dizi.forEach(), dizi.includes(), dizi.indexOf(), dizi.join(), dizi.keys(), \
+            dizi.lastIndexOf(), dizi.map(), dizi.pop(), dizi.push(), dizi.reduce(), dizi.reduceRight(), \
+            dizi.reverse(), dizi.shift(), dizi.slice(), dizi.some(), dizi.sort(), dizi.splice(), dizi.toLocaleString(), \
+            dizi.toSource(), dizi.toString(), dizi.unshift(), dizi.values(), dizi.prototype[@@iterator](), \
+            dizi.unobserve(), get dizi[@@species]" +
+            "<br>Ödev-1) split ve join metodlarýný kullanarak aralarý -tireli CSS stil özelliklerini \
+            aralarý bitiþik ve Büyükharfle baþlayan JS özelliðine çeviren kodlamayý yazýn: " +
+            fonkö1 ("benim-css-sýnýf-adým") +
+            "<br>Ödev-2) süzgeçKapsamý(dizi,a,b) fonksiyonu, dizi elemanlarýndan varsa [a->b] \
+            arasý elemanlarý kopyalayýp yeni bir dizi olarak döndürecek, yani orijinal dizi deðiþmeyecek: " +
+            (dizi = [5,3,4,1,9]) + "; " + console.log (fonkö2 (dizi, 1, 4) ) + "; " + console.log (dizi) +
+            "<br>Ödev-3) Bir önceki ödevdeki sonuç döndürülmeyecek, orijinal diziyi deðiþtirecek: " +
+            (dizi = [5,3,4,1,9]) + "; " + console.log (fonkö3 (dizi, 1, 4) ) + "; " + console.log (dizi) +
+            "<br>Ödev-4) Sayýsal elemanlý diziyi azalan sýralama yapýp yansýtacak kodlama: " + fonkö4() +
+            "<br>Ödev-5) Dizinin dizgesel elemanlarýný, orijinalini deðiþtirmeden, artan sýralayýp \
+            yansýtacak kodlama: " + fonkö5() +
+            "<br>Ödev-6) Normal toplama ve çýkarmayý, ayrýca ekli ileri hesap makinesi metodlarýyla \
+            çarpma, bölme, üs ve kalaný hesaplayan kodlamayý yazýn: " + fonkö6() +
+            "<br>Ödev-7) Kullanýcýlarý ad-yaþ dizi elemanlarýna map/haritalandýran kodlamayý yazýn: " + fonkö7() +
+            "<br>Ödev-8) Kullanýcýlarý tamAd ve kimlikNo nesneli dizi elemanlaþtýran map/iliþkilendirme \
+            kodlamayý yazýn: " + fonkö8() +
+            "<br>Ödev-9) 'dizi=[1,2,3]' dizisini normal ve Fisher-Yates yöntemiyle 1000000 kez karýp \
+            herbir dizilimin kaçar kez rasgeldiðini karþýlaþtýran kodlamayý yazýn: " + fonkö9() +
+            "<br>Ödev-10) 'dizi.reduce' fonksiyonuyla mevcut kullanýcýlarýn yaþ ortalamasýný \
+            hesaplayan kodlamayý yazýn: " + fonkö10() +
+            "<br>Ödev-11) Dizi elemanlarýný tarayýp, yegane elemanlarý yeni bir diziye ekleyen \
+            kodlamayý yazýn: " + fonkö11() +
+            "<br>Ödev-12) Kullanýcýlarý yaþlarýna göre artan, azalan ve karýþýk sýralayan kodlamayý \
+            yazýn: " + fonkö12()
+    </script>
+</body>
+</html>

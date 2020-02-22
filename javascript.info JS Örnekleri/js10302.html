@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10302.html: JS ile düzgün program yazma sanatý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Kodlama Stili</h3>
+    <p id="göster">Paragraf</p>
+
+    <p id="göster2">
+        <img  src="resim/kodlamaStili.png" alt="Kodlama Stili" width="600" />
+    </p>
+
+    <script>
+        function fonk2() {
+            let dizge1 = `Ecma International's TC39 is a group of JavaScript 
+developers, implementers, academics, and more, collaborating 
+with the community to maintain and evolve the definition of JavaScript.`;
+            let dizge2 = "Ecma International's TC39 is a group of JavaScript \
+                developers, implementers, academics, and more, collaborating \
+                with the community to maintain and evolve the definition of JavaScript.";
+
+            console.log (dizge1);
+            console.log (dizge2);
+        } // func sonu...
+        function fonk3() {// 4'erli kertikleme: 5, 9, 13, 17, 21, 25, 29...
+            function üs (x, n) {
+                let sonuç = 1;
+                //              <--Boþ satýr
+                for (let i = 0; i < n; i++) {sonuç *= x;}
+                //              <--Boþ satýr
+                return sonuç;
+            } // iç-func sonu...
+            //              <--Boþ satýr
+            console.log ("Üs(2,5):", üs (2, 5) );
+            console.log ("pow(3.14,2.72):", Math.pow (Math.PI, Math.E) );
+        } // func sonu...
+        function fonk4() {
+            function üs (x,n)  // <- argümanlar arasý boþluk yok...
+            {  // <- fonksiyonun blok parantezi ayrý bir satýrda...
+                let sonuç=1;   // <- Atama = iþaretinden önce ve sonra birer boþluk yok...
+                for(let i=0;i<n;i++) {sonuç*=x;}   // <- Ara boþluklara hiç dikkat edilmemiþ...
+                // <- Arada boþ bir satýr býrakýlmalýydý...
+                return sonuç;
+            }
+
+            let x=prompt("x?",''), n=prompt("n?",'') // <-- teknik olarak mümkün...
+            // ama 2 ayrý satýra bölünmeliydi, ayrýca araboþluklar unutulmuþ...
+            if (n<0)  // <- ara boþluksuz, öncesinde de boþ bir satýr býrakýlmalýydý...
+            {   // <- if bloklamasý ayrý boþ bir satýrda kullanýlmýþ...
+                // Alttaki uzun satýrlar okunabilirliði artýrmak amacýyla birden fazla satýra bölünmeliydi...
+                alert(`${n} üs olarak desteklenmemektedir, lütfen sýfýrdan büyük bir tamsayý girin`);
+            }
+            else // <- Bir önceki satýrýn devamý olarak "} else {" þeklinde yazýlmalýydý...
+            {
+                alert(üs(x,n))  // Ara boþluklar ve ifaed sonu ; eksik...
+            }
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1).Sözdizim: Alttaki resimde þýk kodlama ipuçlarý gösterilmektedir." +
+            "<br>==>if (þart) {..} ifadesinde þartý paranteeziçine alma unutulmamalýdýr. Tek ve \
+            kýsa satýr için {} gerekmez, ama eniyisi hep {} kullanmaktýr." +
+            "<br>==>Kodlama satýr uzunluðu genel kanýyla 80-120 karakter arasýdýr. Uzun dizge \
+            deðerlerini geritýrnakla veya \ ile satýrlara bölebiliriz: " + fonk2() +
+            "<br>==>Okunabilirlik bakýmýndan iliþkili satýrlar 4 ve katlarýyla kertiklenir. Ayrýca \
+            anlamlý satýr gruplarý diðerinden 1 boþ ara satýrla ayrýlýr: " + fonk3() +
+            "<br>==>Satýr sonlarýna ; konmasa da bazen hata vermez ancak hataya açýktýr. \
+            Bu yüzden eniyisi tek-çok ifadeli satýrlarda, ifaed sonlarýna ; koymaktýr." +
+            "<br>==>Ýçiçe fazla derin kodlamalardan kaçýnmak gerektir. Örneðin if-else-else \
+            derinlik yerine, continue veya return'le kýsa kesmek daha pratiktir." +
+            "<br>2).Fonksiyon yerleþtirme: Genelde fonksiyon tanýmlarý Script baþýnda altalta \
+            topluca gruplandýrýlýr, sonra da onlarý gereksinen kodlama çaðýrmalarý gelir. Ancak \
+            kimisi önce çaðýran kodlamalarý, sonra ise fonksiyon beyanlarýný; bazýlarý da karýþýk \
+            olarak ihtiyaç anýnda çaðýran kodlama ve altýna fonksiyon beyaný, sonra tekrar \
+            çaðýran ve beyan yapabilirler. Ýlki daha tertipli görünmektedir." +
+            "<br>3).Stil rehberleri: Google JavaScript Stil Rehberi, Airbnb JavaScript Stil Rehberi, \
+            Idiomatic.JS, StandardJS vb çeþitleri mevcuttur. Þimdilik burda yazýlan kodlama \
+            kurallarý, yeni baþlayanlar için yeterlidir." +
+            "<br>4).Otomatik stilleyici: JSLint, JSHint ve ESLint gibi icabýnda kullandýðýnýz \
+            editörle de entegre olabilen JS kodlama stili tavsiyeci programlar mevcutttur. Kodlama \
+            ve sözdizim kurallarý bakýmýndan sizi yönlendirir, hatýrlatýr, yardýmcý olur." +
+            "<br>5).Ödev-1: Verili program kodlama stili yanlýþlarýna dikkat edin: " + fonk4()
+    </script>
+</body>
+</html>

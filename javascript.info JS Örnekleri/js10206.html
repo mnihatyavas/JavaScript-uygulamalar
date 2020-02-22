@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10206.html: JS ilkel veri tiplerine çevrimler örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Tiplere Çevrim</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let deðer = true;
+            console.log (deðer + " " + typeof (deðer) );
+            deðer = String (deðer);
+            console.log (deðer, typeof (deðer) );
+        } // func sonu...
+        function fonk3() {
+            console.log ( (sonuç = "6" / "2"), typeof (sonuç) );
+            let dizge = "12345";
+            console.log (dizge, typeof (dizge) );
+
+            let sayý = Number (dizge);
+            console.log (sayý, typeof (sayý) );
+
+            let yaþ = Number ("2019 - 1957");
+            console.log (yaþ, typeof (yaþ) );
+
+            console.log (Number ("   ") );
+            console.log (Number ("       1957   ") );
+            console.log (Number (" 1957 Nihat") );
+            console.log (Number (true) );
+            console.log (Number (false) );
+            console.log (Number (undefined) );
+            console.log (Number (null) );
+            console.log (Number (NaN) );
+
+            console.log ("1957" + 04 + 17);
+            console.log (1957 + "04" + 17);
+            console.log (1957 + 04 + "17");
+            console.log (1957 + 04 + 17);
+        } // func sonu...
+        function fonk4() {
+            console.log (1 + " = " + Boolean (1) );
+            console.log (0 + " = " + Boolean (0) );
+            console.log ("Merhaba" + " = " + Boolean ("Merhaba") );
+            console.log ("" + " = " + Boolean ("") );
+            console.log (" " + " = " + Boolean (" ") );
+            console.log ("0" + " = " + Boolean ("0") );
+            console.log (undefined + " = " + Boolean (undefined) );
+            console.log (null + " = " + Boolean (null) );
+            console.log (NaN + " = " + Boolean (NaN) );
+        } // func sonu...
+        function fonk5() {
+            console.log ( '("" + 1 + 0)' + " = " + ("" + 1 + 0) ); // Toplama deðil ekleme...
+            console.log ( '("" - 1 + 0)' + " = " + ("" - 1 + 0) ); // Çýkarma
+            console.log ( '(6 / "3")' + " = " + (6 / "3") ); // Bölme
+            console.log ( '("2" * "3")' + " = " + ("2" * "3") ); // Çarpma
+            console.log ( '(4 + 5 + "px")' + " = " + (4 + 5 + "px") ); // Toplama ve ekleme
+            console.log ( '("$" + 4 + 5)' + " = " + ("$" + 4 + 5) ); // Ekleme
+            console.log ( '("4" - 2)' + " = " + ("4" - 2) ); // Çýkarma
+            console.log ( '("4px" - 2)' + " = " + ("4px" - 2) ); // Çýkaramaz...
+            console.log ( '(7 / 0)' + " = " + (7 / 0) ); // Sýfýra bölüm
+            console.log ( '("  -9  " + 5)' + " = " + ("  -9  " + 5) ); // Ekleme
+            console.log ( '("  -9  " - 5)' + " = " + ("  -9  " - 5) ); // Çýkarma
+            console.log ( '(null + 1)' + " = " + (null + 1) ); // Toplama
+            console.log ( '(undefined + 1)' + " = " + (undefined + 1) ); // Toplayamaz...
+            console.log ( '(" \t \n" - 2)' + " = " + (" \t \n" - 2) ); // Çýkarma
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Çoðu fonksiyon ve iþlemciler otomatik tip çevrimi yaparlar. Örneðin alert \
+            metodu göstereceði verileri dizgeye, matematik iþlemcilerse sayýya çevirir. \
+            Ancak bazan da çevrim açýkca yapýlýr." +
+            "<br>Not: Bu örnekleme sadece ilkel veriler için olup, bilahere de nesneden ilkel \
+            verilere çevrim iþlenecektir." +
+            "<br>2) Dizgeye çevrimi console.log ve alert örtülü ve otomatikmen, String(..) \
+            fonksiyonuysa alenen ve manüel yapar: " + fonk2() +
+            "<br>3) Sayýsala çevrim matematiksel iþlem ve fonksiyonlarda otomatikmen, \
+            Number fonksiyonuylaysa alenen yapýlýr. Aleni çevrim daha ziyade sayýsal umduðumuz \
+            dizgelere uygulanýr; sayýya çeviremezse NaN döndürür: " + fonk3() +
+            "<br>Number çevrimi, true-false için 1-0; null için 0; undefined için NaN; dizge \
+            için 0-sayý-NaN döndürür." +
+            "<br>Toplama iþleminde toplananlardan hangisi dizgeyse, sonrasýnda dizgesel \
+            ekleme,  öncesindeyse matematiksel toplama yapar." +
+            "<br>4) Ýkiliye çevrim Boolean fonksiyonuyla yapýlýr. Aldýðý deðerler true veya \
+            false'dur. Otomatik çevrimde 0 ve 0 türeten dizgesel hiçlik, undefined, NaN, \
+            null false, diðerleri true'dur: " + fonk4() +
+            "<br>5) Örnek: Verili çevrim sonuçlarýný tahminleyin: " + fonk5()
+    </script>
+</body>
+</html>

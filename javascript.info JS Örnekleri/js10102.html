@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10102.html: JavaScript resmi dökümanlarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JS Dökümanlarý</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Manüel kullaným kýlavuzlarý: Öncelikle toplam 3 ana bölüm baþlýðý altýndaki \
+            bol örnekli bu manüel (www.javascript.info) gelmektedir. Sonra Mozilla-MDN'nin \
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference \
+            bol örnekli Manüeli vardýr. Bilahere http://msdn.microsoft.com \
+            Manüeli'ne baþvurulabilir." +
+            "<br>2) Örneksiz formüler resmi referans bildirimler https://tc39.es/ecma262, \
+            https://github.com/tc39/proposals ve www.w3.org sitelerinde bulunabilir." +
+            "<br>3) Tarayýcý uyumluluk tablolarýna http://caniuse.com ve https://kangax.github.io/compat-table \
+            sitelerinden ulaþýlabilir."
+    </script>
+</body>
+</html>

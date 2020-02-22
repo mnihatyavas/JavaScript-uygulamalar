@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10213.html: switch-case-default ifadesi örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>switch-case-default</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        let argüman;
+        function fonk2() {
+            let a = 2 + 2;
+            switch (a) {
+                case 0: case 1: case 2: case 3: console.log ('Çok küçük'); break;
+                case 4: console.log ('Tamý tamýna!'); break;
+                case 5: console.log ('Çok büyük'); break;
+                default: console.log ("Argüman deðeri neydi, unuttum!..");
+            } // swi.. sonu...
+
+            switch (a) {
+                case 0: case 1: case 2: case 3: console.log ('Çok küçük');
+                case 4: console.log ('Tamý tamýna!');
+                case 5: console.log ('Çok büyük');
+                default: console.log ("Argüman deðeri neydi, unuttum!..");
+            } // swi.. sonu...
+        } // func sonu...
+        function fonk3() {
+            let a = "1";
+            let b = 0;
+            switch (+a) {// dizge a, sayýsala çevrilir...
+                case (b + 1) * 1 - 5 + 5:
+                    console.log ("Bu oturum iþletilir, zira +a = 1 olup, tamamen (b + 1) * 1 - 5 + 5 = 1'e eþittir.");
+                    break;
+                default:
+                    console.log ("Bu koda ulaþýlmaz");
+            } // swi.. sonu...
+        } // func sonu...
+        function fonk4() {
+            let a = 2 + 2;
+            switch (a) {
+                case 3:
+                case -2019: // 3 farklý oturum gruplandýrýlmýþtýr...
+                case 5:
+                    console.log ('Yanlýþ!');
+                    console.log ("Neden bir matematik kursuna yazýlmýyorsun?");
+                    break;
+                case 4:
+                    console.log ('Tam isabet!');
+                    break;
+                default:
+                    console.log ('Bu sonuca ulaþýlmasý çok garip. Hakikaten.');
+            } // swi.. sonu...
+        } // func sonu...
+        function fonk5() {
+            argüman = prompt ("0->5 arasý bir sayý girin:", "5");
+            switch (argüman) {
+                case '0': case '1': console.log ('Sýfýr veya bir'); break;
+                case '2': case "3": console.log ('Ýki veya üç'); break;
+                case "4": console.log ('Dört'); break;
+                case 5: console.log ('Tip uyumsuzluðundan asla sayýsal 5 iþletilmez'); break;
+                default: console.log ('Tanýnmayan bir deðer giriþi');
+            } // swi.. sonu...
+        } // func sonu...
+        function fonk6() {
+            let tarayýcý = "Maxthon";
+            switch (tarayýcý) {
+                case 'Maxthon': console.log ("Hey, adamým!.. Sende de Maxthon var!"); break;
+                case 'Chrome':
+                case 'Firefox':
+                case 'Safari':
+                case 'Opera':
+                case 'Edge': console.log ('Tamam, bu tarayýcýlarý da destekliyoruz'); break;
+                default: console.log ('Maalesef baþkaca tarayýcýya destek vermiyoruz!');
+            } // swi.. sonu...
+
+            if (tarayýcý === 'Maxthon') {console.log ("Hey, adamým!.. Sende de Maxthon var!");
+            }else if (tarayýcý === 'Chrome'
+                || tarayýcý === 'Firefox'
+                || tarayýcý === 'Safari'
+                || tarayýcý === 'Opera'
+                || tarayýcý === 'Edge') {console.log ('Tamam, bu tarayýcýlarý da destekliyoruz');
+            }else {console.log ('Maalesef baþkaca tarayýcýya destek vermiyoruz!'); }
+        } // func sonu...
+        function fonk7() {
+            let a = +argüman;
+            if (a == 0) {console.log (0);
+            }else if (a == 1) {console.log (1);
+            }else if (a == 2 || a == 3) {console.log ("2, 3");
+            }else if (a == 4 || a == 5) {console.log ("4, 5");
+            }else {console.log ("Bilinmeyen sayý!..");}
+
+            switch (a) {
+                case 0: console.log (0); break;
+                case 1: console.log (1); break;
+                case 2: case 3: console.log ("2, 3"); break;
+                case 4: case 5: console.log ("4, 5"); break;
+                default: console.log ("Bilinmeyen sayý!..");
+            } // swi.. sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) switch-case-default bloðu çoklu if þartýnýn daha net þeklidir. switch argümaný \
+            takipeden herbir case uygunluðunda aranýr, tip ve deðer eþleþtiðinde case'i takibeden \
+            kodlar break veya switch bloðu sonuna kadar iþletilir, eþleþme yoksa ve mevcutsa \
+            default kodlarý iþletilir: " + fonk2() +
+            "<br>2) break yoksa, eþleþenden itibaren sona kadar olan (diðer case'ler de dahil) \
+            tüm kodlar iþletilir." +
+            "<br>3) switch argümaný her tipte deðer ve ifade olabilir: " + fonk3() +
+            "<br>4) case deðerlerinin sýralýlýðý aranmaz, ayrýca çoklu case deðerleri ayný kodlarýn \
+            iþletilmesi için gruplandýrýlabilir: " + fonk4() +
+            "<br>5) case argüman eþleþmesi için tip uyuþumu önemlidir: " + fonk5() +
+            "<br>6) Örnek.Önce verili örneði sonra da if-else karþýlýðýný inceleyin: " + fonk6() +
+            "<br>7) Örnek.Çoklu if yerine tek bir switch ifadesi kullanýn: " + fonk7()
+    </script>
+</body>
+</html>

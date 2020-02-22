@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10404.html: Nesne metodu ve "this" örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Nesne Metodu ve "this"</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let kullanýcý = {ad: "Nihat", yaþ: 30};
+            //kullanýcý.selam = function() {console.log ("Herkese Merhabalar!"); };
+            kullanýcý.selam = ()=>{console.log ("Herkese Merhabalar!"); };
+            console.log (kullanýcý);
+            kullanýcý.selam();
+        } // func sonu...
+        function fonk3() {
+            let kullanýcý = {ad: "Nihat", yaþ: 2019-1957, selam() {return this.ad + "'dan herkese Merhabalar!";} };
+            console.log (kullanýcý);
+            console.log (kullanýcý.selam() );
+        } // func sonu...
+        function fonk4() {
+            let kullanýcý1 = {ad: "Nihat"};
+            let kullanýcý2 = {ad: "Yavuz"};
+            function selam() {return this.ad + "'dan herkese Merhaba!";}
+            kullanýcý1.merhaba = selam;
+            kullanýcý2.merhaba = selam;
+            console.log (kullanýcý1.merhaba() );
+            console.log (kullanýcý2.merhaba() );
+            console.log (kullanýcý2 ["merhaba"]() );
+
+            console.log (selam() ); // undefined
+
+            function gülegüle() {return "Herkese Gülegüle!";}
+            //console.log ( (kullanýcý1.ad == "Nihat" ? kullanýcý1.merhaba : kullanýcý1.gülegüle)() ); // undefined
+            console.log ( (kullanýcý1.ad == "Nihat" ? kullanýcý1.merhaba() : kullanýcý1.gülegüle()) );
+        } // func sonu...
+        function fonk5() {
+            let kullanýcý1 = {ad: "Nihat", yaþ: 2019-1957, selam: ()=>{return this.ad + "'dan herkese Merhabalar!";} };
+            console.log (kullanýcý1);
+            console.log (kullanýcý1.selam() );
+
+            let kullanýcý2 = {
+                ad: "Nihat",
+                yaþ: 2019-1957,
+                selam() {
+                    let ok = ()=>{return this.ad + "'dan herkese Merhabalar!";};
+                    console.log (ok() );
+                } // sel.. sonu...
+            }; // let sonu...
+            console.log (kullanýcý2);
+            kullanýcý2.selam();
+        } // func sonu...
+        function fonk6() {
+            try {let kullanýcý = {ad: "Nihat", git: function() {console.log (this.ad + "'dan herkese Merhabalar!") } }
+                (kullanýcý.git) ();
+            }catch (ist) {console.log (ist);}
+
+            // Satýr sonuna unutulan ; koyalým...
+            let kullanýcý = {ad: "Nihat", git: function() {console.log (this.ad + "'dan herkese Merhabalar!") } };
+            (kullanýcý.git) ();
+        } // func sonu...
+        function fonk7() {
+            let nesne, metod;
+            nesne = {git: function() {console.log (this, this.toString() ); } };
+            nesne.git(); // (1) [object Object]
+            (nesne.git) (); // (2) [object Object]
+            (metod = nesne.git) (); // (3) [object Window]
+            (nesne.git || nesne.stop) (); // (4) [object Window]
+        } // func sonu...
+        function fonk8() {
+            function kullanýcýYap() {// Hatalý...
+                return {ad: "Nihat", dönen: this};
+            } // func sonu...
+            let kullanýcý = kullanýcýYap();
+            console.log (kullanýcý.dönen.ad);
+
+            function kullanýcýYap() {// Düzeltilen...
+                return {ad: "Nihat", dönen() {return this;} };
+            } // func sonu...
+            kullanýcý = kullanýcýYap();
+            console.log (kullanýcý.dönen(), kullanýcý.dönen().ad);
+        } // func sonu...
+        function fonk9() {
+            let hesapMakinesi = {
+                sayýlar() {return "a=" + this.a + "; b=" + this.b;},
+                topla() {return this.a + this.b;},
+                çýkar() {return this.a - this.b;},
+                çarp() {return this.a * this.b;},
+                böl() {return this.a / this.b;},
+                üs() {return this.a ** this.b;},
+                kalan() {return this.a % this.b;},
+                oku() {
+                    this.a = +prompt ('a? ', 1);
+                    this.b = +prompt ('b? ', 1);
+                } // oku sonu...
+            }; // let sonu...
+            hesapMakinesi.oku();
+            console.log (hesapMakinesi.sayýlar() );
+            console.log ("Toplamý:", hesapMakinesi.topla() );
+            console.log ("Çýkarýmý:", hesapMakinesi.çýkar() );
+            console.log ("Çarpýmý:", hesapMakinesi.çarp() );
+            console.log ("Bölümü:", hesapMakinesi.böl() );
+            console.log ("Üssü:", hesapMakinesi.üs() );
+            console.log ("Kalaný:", hesapMakinesi.kalan() );
+        } // func sonu...
+        function fonk10() {
+            let merdiven = {basamak: 0, çýk() {this.basamak++;}, in() {this.basamak--;}, göster: function() {console.log ("Kaçýncý basamak: " + this.basamak);} };
+            merdiven.çýk();
+            merdiven.çýk();
+            merdiven.çýk();
+            merdiven.in();
+            merdiven.göster(); // 2
+
+            let merdiven2 = {
+                basamak: 0, 
+                çýk() {
+                    this.basamak++;
+                    return this;},
+                in() {
+                    this.basamak--;
+                    return this;},
+                göster: function() {console.log ("Kaçýncý basamak: " + this.basamak);}
+            }; // let sonu...
+            merdiven2.çýk().çýk().in().göster(); // 1
+            merdiven2
+                .çýk()
+                .çýk()
+                .çýk()
+                .in()
+                .in()
+                .çýk()
+                .çýk()
+                .in()
+                .göster();
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nesneler gerçek dünyayý özelliklerle ve hareketleri de fonksiyonel özellik olan \
+            metodlarla betimler: " + fonk2() +
+            "<br>2) Nesne.fonk() özellikli metodda 'this', nokta öncesi nesneyi temsil eder (örneðimizde \
+            kullanýcý'yý) ve fonk nesnenin diðer özelliklerini kullanmak istediðinde 'this.özellik' der. \
+            Þayet this.özellik yerine kullanýcý.ad dersek, kopyalarda hata oluþur.  " + fonk3() +
+            "<br>3) Nesne metodlarýndaki 'this' o anda baðlý olduðu nesneyi temsil eder. Nesneye \
+            baðlanmayan this global nesne window'u temsil ederken strict kipte undefined döndürür. " + fonk4() +
+            "<br>4) Ok fonksiyonu this.ad'ý undefined döndürürken, harici kullanýlan nesne.fonk() \
+            ok fonksiyonu this.ad ile doðru özelliði döndürür: " + fonk5() +
+            "<br>5) Ödev1.Kodlamada hata neden oluþmaktadýr? " + fonk6() +
+            "<br>6) Ödev2.4 ayrý this kullanýmýnýn neyi döndürdüðünü inceleyin: " + fonk7() +
+            "<br>7) Ödev3.Kullanýcý adýný döndürmesi için kodlama hatasý nasýl düzeltilmeli? " + fonk8() +
+            "<br>8) Ödev4.Nesne özelliði olarak 2 sayý girip bunlarý toplayan, çýkaran, çarpan, \
+            bölen, üsleyen, kalanlayan ve girilen sayýlarý gösteren hesap makinesi kodlamasýný yazýn: " + fonk9() +
+            "<br>9) Ödev5.Merdiven basamaklarýný geliþigüzel çýkýp inen kiþinin sonuçta hangi \
+            basamakta olduðunu gösteren kodlamayý yazýn: " + fonk10()
+    </script>
+</body>
+</html>

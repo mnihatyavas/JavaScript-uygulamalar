@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10101.html: JavaScript'e giriþ örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h4>JS'e Giriþ</h4>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) JS'in önceliði að sayfalarýný canlandýrmaktý. Program kodlarýna script/taslak \
+            denilmekteydi. Kod taslaðý html sayfasýna yazýlýr ve hiçbir derleme vs gerektirmeksizin, \
+            týklanýnca tarayýcý tarafýndan çalýþtýrýlýr. Derleyicili Java dilinden tamamen farklýdýr. \
+            Ýlk adý LiveScript/LS/CanlýTaslak, sonra popüler biraderi Java'ya özenerek JavaScript/JS yapýldý, \
+            güncel teknik adý ise ECMAScript/ES'tir. Tarayýcýnýn gömülü sanal script motoru \
+            kodlamayý satýr-satýr yorumlar/derler, makine diline çevirir ve çalýþtýrýr, karþýlaþtýðý \
+            hatalarý da debugger/hata-ayýklayýcý/F12 konsoluna yansýtýr." +
+            "<br>2) Tarayýcadaki JS'in yapabildikleri: Sayfaya yeni html ilavesi, mevcudun içeriðini ve \
+            stilini deðiþtirme; fare týklamasý, imleç hareketi, tuþ basýmlarý gibi kullanýcý eylemlerine \
+            duyarlýlýk; uzak sunuculara að üzerinden talepler gönderme, AJAX'la yükleme ve \
+            indirme; çerezler alma, koyma, ziyaretçiye sorular sorma, mesajlar yansýtma; localStorage \
+            vasýtasýyla müþteri-tarafýnýn verilerini hatýrlama vb." +
+            "<br>3) Tarayýcý üzerine düþürülen dosyalar ve hazýr dosyalarý açma haricinde \
+            disk dosyalama yeteneði sýnýrlýdýr; OS komutlarýný kullanamaz, diðer sitelere \
+            hatta izinsiz diðer tab pencerelerine eriþemez. Ancak HTML/CSS'le tam entegrasyon \
+            halindedir, basit þeyleri kolayca halleder, varsayýlý olarak tüm modern tarayýcýlar \
+            desteklemektedir." +
+            "<br>4) JS benzerleri vardýr (Node, CoffeScript, MS TypeScript, Facebook Flow, \
+            Google Dart), ancak hepsi de tarayýcýda çalýþmadan önce JavaScript'e çevrilirler."
+    </script>
+</body>
+</html>

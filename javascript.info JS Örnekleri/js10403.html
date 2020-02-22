@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10403.html: Nesne yegane özelliði için ilkel sembol veri tipi örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Sembol Veri Tipi</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let kimlik1 = Symbol ("kimlik");
+            let kimlik2 = Symbol ("kimlik");
+            console.log ((kimlik1 == kimlik2) || (kimlik1 === kimlik2) ); // false
+
+            try {alert (kimlik1, kimlik2); // alert (kimlik1.toString(), kimlik2.toString() );
+            }catch (ist) {console.log (ist);}
+            console.log (kimlik1.toString() + ", " + kimlik2.toString() );
+            console.log (kimlik1.description + ", " + kimlik2.description);
+        } // func sonu...
+        function fonk3() {
+            let kullanýcý = {ad: "Nihat"};
+            let kimlik1 = Symbol ("kimlik");
+            kullanýcý [kimlik1] = 1;
+            console.log (kullanýcý [kimlik1] );
+
+            let kimlik2 = Symbol ("kimlik");
+            kullanýcý  [kimlik2] = 1;
+            console.log (kullanýcý [kimlik2] );
+
+            let kullanýcý2 = {ad: "Mahmut", yaþ:62, [kimlik1]: 123, [kimlik2]: 1957};
+            console.log (kullanýcý2);
+            console.log (kullanýcý2.ad, kullanýcý2.yaþ, kullanýcý2 [kimlik1]);
+
+            for (let anahtar in kullanýcý2) console.log (anahtar);
+            // Semboller için direk eriþim kullanýlmalýdýr...
+            console.log ("Direk eriþim: " + kullanýcý2 [kimlik1] + ", " + kullanýcý2 [kimlik2] );
+
+            console.log (Object.keys (kullanýcý2) );
+
+            let klon = Object.assign ({}, kullanýcý2);
+            console.log (klon);
+            console.log (klon [kimlik2], klon [kimlik1]);
+        } // func sonu...
+        function fonk4() {
+            let kimlik1 = Symbol.for ("kimlik"); // Eðer bu tasvirli  sembol yoksa yaratýlýr...
+            let kimlik2 = Symbol.for ("kimlik");
+            console.log (kimlik1 === kimlik2); // true
+
+            console.log (Symbol.for ("kimlik") );
+            console.log (Symbol.keyFor (kimlik1), Symbol.keyFor (kimlik2) );
+
+            let globalSembol = Symbol.for ("ad");
+            let lokalSembol = Symbol ("ad");
+            console.log (Symbol.keyFor (globalSembol) ); // ad, global...
+            console.log (Symbol.keyFor (lokalSembol) ); // undefined, global deðil...
+            console.log (lokalSembol.description ); // ad, lokal...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nesne anahtarlarý ya dizge yada sembol ilkel veri tipli olabilirler; sayý, ikili vb tipler \
+            otomatikmen dizgeleþtirilirler. Semboller yegane tanýtýcýlardýr. Ayný tasvirli de olsa \
+            iki sembol birbirine eþit deðildir. " + fonk2() +
+            "<br>2) Semboller alert'le otomatikmen dizgeye çevrilmezler, .toString() ile ayrýca \
+            çevrilmeleri gerekir." +
+            "<br>3) Semboller yegane olduklarýndan dolayý, ayný tasvirli de olsalar birdiðerini \
+            silmeden, nesne anahtarý olarak gizli/aleni kullanýlabilirler. Aksine sembol yerine dizge \
+            olsalardý, dizge özellikler yegane olmadýklarýndan öncekini silecekti. Sembol anahtarý \
+            nesne içinde kullanýldýðýnda yalýn deðil [sembolanahtarý] içinde gösterilmelidir. \
+            Nesne özellikleri for..in ile taranýrken semboller atlanýr. Object.keys(kullanýcý) da \
+            sembolleri esgeçer; ancak Object.assign sembolleri de kopyalar. " + fonk3() +
+            "<br>4) Tasviri ayný olan Symbol.for(tasvir) global sembol bir kere yaratýlýr ve programýn \
+            her yerinden eriþilir. Tersine Symbol.keyFor(sembol) ile de sembol adýyla tasvire \
+            ulaþýlýr. Symbol.for(tasvir) global sembol yaratýrken, Symbol(tasvir) lokal sembol \
+            yaratýr ve description ile tasvirine ulaþýlýr. " + fonk4() +
+            "<br>5) JS tarafýndan içsel kullanýlan bazý sistem sembolleri: Symbol.hasInstance, \
+            Symbol.isConcatSpreadable, Symbol.iterator, Symbol.toPrimitive vb."
+    </script>
+</body>
+</html>

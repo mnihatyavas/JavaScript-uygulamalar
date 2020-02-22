@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10204.html: JavaScript deðiþkenlerini tanýmlama kurallarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Deðiþkenler</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            "use strict"; // Bu direktifi baþa koymazsanýz geçerli olmayabiliyor...
+            let mesaj, kullanýcý, yaþ;
+            mesaj = "Bu deðiþken bu mesajý hafýzada saklar.";
+            console.log (mesaj);
+            kullanýcý = "M.Nihat Yavaþ";
+            yaþ = 2019 - 1957;
+            mesaj = "Kullanýcý yaþý güncel tarihten doðum yýlý çýkarýlarak hesaplanmaktadýr.";
+            console.log (mesaj);
+            console.log (kullanýcý + " kaç yaþýnda? " + yaþ);
+
+            let mesaj2 = mesaj;
+            console.log (mesaj2);
+
+            let $ = 2019, _ = 1957;
+            let adSoyad = "M.Nihat Yavaþ", doðum_yeri = "Yeþilyurt-Malatya";
+            console.log ("Yaþ: " + ($ - _) );
+
+            let aA = 2019, Aa = 1957;
+            console.log ("Yaþ: " + (aA-Aa) );
+
+            let çðýÝöþü = "Her dile özgü harfler deðiþken adý için kullanýlabilr, ancak iþlem süretini yavaþlatýr.";
+            console.log (çðýÝöþü);
+
+            let ad_soyad = "M.Nihat Yavaþ"; // let kullanýlmazsa hata verir...
+            console.log (ad_soyad)
+
+            const tarih = "24.10.2019";
+            console.log ("Bugünün tarihi: " + tarih);
+            //tarih = new Date(); // Hata verir...
+
+            const KIRMIZI_RENK = "#F00";
+            const YEÞÝL_RENK = "#0F0";
+            const MAVÝ_RENK = "#00F";
+            const TURUNCU_RENK = "#FF7F00";
+            console.log ("Turuncu renk kodu: " + TURUNCU_RENK);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Deðiþkenler program iþlem süresince saklanacak verileri içerir. JS deðiþkeni \
+            let anahtarkelimesiyle yaratýlýr. Deðiþken önce yaratýlýp, sonra deðer atanabilir, yada \
+            yaratýldýðý anda deðer atamasý da yapýlabilir. Tek bir let ile virgüllerle ayrýk çoklu \
+            deðiþkenler yaratýlabilir: " + fonk2() +
+            "<br>2) var anahtarkelimesi de eski usul deðiþken yaratýr. var ile let arasýnda küçük \
+            birtakým farklar vardýr." +
+            "<br>3) Deðiþken içerikleri istenildiði kadar deðiþtirilebilir. Bir deðiþkeni diðerine \
+            atayarak kopyasýný elde ederiz." +
+            "<br>4) Deðiþken ismi harf, rakam ve $ ile _ karakterlerinden oluþabilir; ilk karakteri \
+            rakam olamaz." +
+            "<br>Çok kelimeli deðiþkenlerin 2.den itibareni ya büyükharfle baþlatýlýr yada \
+            araya _ konur." +
+            "<br>Büyük-küçük harf farklýdýr." +
+            "<br>Her dile özgü harf sembolleri (çince, rusça, yunanca, arapça, türkçe vb) \
+            kullanýlabilir, ancak daha ziyade utf-8 (ilk 128 ascii ingilizce) harfleri tercih edilmelidir." +
+            "<br>5) Ayrýlmýþ kelimeler (let, for, if, class, function, return vb) deðiþken adý olarak \
+            kulanýlamaz." +
+            "<br>6) let/var olmadan da deðiþken tanýmý eski usülde hata vermez, fakat \
+            'use strict' kipinde verir." +
+            "<br>7) Ýçeriði hiç deðiþmeyecek deðiþkenler let yerine const (constant/sabite) \
+            anahtarkelmesiyle ve ilk deðer atamasýyla tanýmlanmalýdýr. Ýçeriðini deðiþtirmeye \
+            yeltendiðinizde hata verecektir." +
+            "<br>Genelde hatýrlanmasý zor ve sabit bilgiler const ile ve de büyükharfle \
+            tanýmlanýrlar. Örn.renk kodlarý gibi." +
+            "<br>const deðiþkenler ilk deðer atamasýz yaratýlamaz, hata verirler." +
+            "<br>8) Deðiþken adlarý kýsa ama anlamlý ve içerdiði bilgiyi tanýtýcý olmalýdýr. \
+            Farklý deðerler, kullanýlmayan boþ anlamsýz deðiþkenlere atanmamalýdýr." +
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10209.html: JS tarayýcý mesajlarý alert, prompt ve confirm örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Tarayýcý mesajlarý</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) alert('mesaj') ile JS öncelikli olarak tarayýcý penceresindeki verili mesajý \
+            yansýtýp OK/Tamam tuþuna basýlmasýný bekler. Basýlýnca JS akýþýna devam eder: " +
+            alert ("Lütfen program akýþýnýn devamý için Tamam'ý týklayýn.") +
+            "<br>2) prompt('mesaj','varsayýlý veri') ile JS sizden veri girmenizi bekler. Varsayýlý \
+            deðer belirtilmiþse onu verili cevap olarak yansýtýr. Ýptal veya Esc verisiz null'u, \
+            girilen veriyle Tamam'da ise bu dizge deðeri prompt'a eþitlenen deðiþkene atanýr: " +
+            (yaþ = prompt ("Lütfen doðum yýlýnýzý 4 basamaklý girin", "1957") ) + "; Yaþýnýz: " +
+            (2019 - yaþ) +
+            "<br>3) confirm('soru') ile sizden onay istenir. Tamam tuþu true, Ýptal/Esc ise false \
+            döndürür: " + (confirm ("Adýnýz Nihat mý?") ? alert ("Tanýþtýðýmýza memnun oldum NÝHAT Bey!..") :
+            alert ("Tanýþtýðýmýza memnun oldum ADSIZ Bey!..") )
+    </script>
+</body>
+</html>

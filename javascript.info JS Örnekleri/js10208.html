@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10208.html: JS karþýlaþtýrma iþlemcileri örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Kýyas Ýþlemcileri</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            console.log ("2 > 1:", 2 > 1);
+            console.log ("2 == 1:", 2 == 1);
+            console.log ("2 != 1:", 2 != 1);
+
+            let sonuç = 5 > 4;
+            console.log ("sonuç:", sonuç); 
+        } // func sonu...
+        function fonk3() {
+            console.log ("'Z' > 'z':", 'Z' > 'z');
+            console.log ("'Parýltý' > 'Parla':", 'Parýltý' > 'Parla');
+            console.log ("'Arý' > 'Ar':", 'Arý' > 'Ar');
+        } // func sonu...
+        function fonk4() {
+            console.log ('"2" > 5:', "2" > 5);
+            console.log ('"001" == 1:', "001" == 1);
+            console.log ("true == 1:", true == 1);
+            console.log ("false == 0:", false == 0);
+            console.log ("Boolean(0):", Boolean (0) );
+            console.log ("Boolean('0'):", Boolean ("0") ); // Karakterli dizge true'dur...
+            console.log ("'0' == 0:", '0' == 0);
+        } // func sonu...
+        function fonk5() {
+            console.log ("0 == false:", 0 == false);
+            console.log ('"" == false:', "" == false);
+            console.log ("0 === false:", 0 === false);
+            console.log ('"" !== false:', "" !== false);
+        } // func sonu...
+        function fonk6() {
+            console.log ("null === undefined:", null === undefined); // tip uyuþmazlýðý...
+            console.log ("null == undefined:", null == undefined);
+            console.log ("null >= undefined:", null >= undefined); // null=0'a, undefined==NaN'a çevrilir...
+
+            console.log ("null > 0:", null > 0); // sayýya çevrilen null=0
+            console.log ("null == 0:", null == 0); // sayýya çevrilmeyen null != 0
+            console.log ("null >= 0:", null >= 0); // sayýsal null=0
+
+            console.log ("undefined > 0:", undefined > 0); // sayýya çevrilen undefined=NaN
+            console.log ("undefined >= 0:", undefined >= 0); // sayýya çevrilen undefined=NaN
+            console.log ("undefined == 0:", undefined == 0); // sayýya çevrilmeyen undefined != 0
+            console.log ("undefined < 0:", undefined < 0); // sayýsal undefined=NaN
+            console.log ("undefined <= 0:", undefined <= 0); // sayýsal undefined=NaN
+        } // func sonu...
+        function fonk7() {
+            console.log ("5 > 4:", 5 > 4);
+            console.log ('"elma" > "ananas":', "elma" > "ananas");
+            console.log ('"2" > "12":', "2" > "12");
+            console.log ("undefined == null:", undefined == null);
+            console.log ("undefined === null:", undefined === null);
+            console.log ('null == "\n0\n":', null == "\n0\n");
+            console.log ('null === +"\n0\n":', null === +"\n0\n");
+            console.log ('+null === +"\n0\n":', +null === +"\n0\n");
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Matematiksel kýyas iþlemcileri: >, >=, <, <=, ==, !=" +
+            "<br>2) Kýyas iþlemleri daima true veya false döndürür: " + fonk2() +
+            "<br>3) Dizgesel kýyaslarda büyüklük ascii/unicode tablo sýralamasýyla belirlenir; \
+            örn.küçük harfler daha sonra gelir ve daha büyüktür: " + fonk3() +
+            "<br>4) Farklý tip kýyaslarda sayýsala çevrilir. Ancak bazan karýþýklýk olabilir: " + fonk4() +
+            "<br>5) Normal == kýyasýnda false, 0 ve '' eþittir. Bunu istemiyorsak === ve !== \
+            tip eþitliðini kullanmalýyýz. Boolean, sayý ve dizge farklý tiplerdir ve eþit deðildir: " + fonk5() +
+            "<br>6) null, undefined ve NaN kýyaslarýnda dikkatli olmalýyýz; konuya tam vakýf \
+            deðilsek sürpriz sonuçlara hazýrlýklý olmalýyýz: " + fonk6() +
+            "<br>7) Örnek.Kýyaslama sonuçlarýna tahmin yürütün: " + fonk7()
+    </script>
+</body>
+</html>

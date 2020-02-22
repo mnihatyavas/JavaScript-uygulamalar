@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11102.html: Üretenin ve tüketenin taleplerini karþýlayan promise/vaat nesnesi örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        .daireiçiMesaj {
+            font-size: 20px;
+            line-height: 200px;
+            text-align: center;
+            color: Orange;}
+        .daire {
+            transition-property: width, height, margin-left, margin-top;
+            transition-duration: 2s;
+            position: fixed;
+            transform: translateX(-50%) translateY(-50%);
+            background-color: Brown;
+            border-radius: 50%;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Promise/Vaat Nesnesi</h3>
+    <p id="göster">Paragraf</p>
+
+    <button onclick="fonkö3()">Daireiçi Mesaj</button>
+
+    <script>
+        function fonk2() {
+            let vaat = new Promise (function (çözüm, red) {setTimeout ( () => çözüm ("Baþarýyla tamamlandý!"), 2000);});
+            vaat.then (
+                sonuç => console.log (sonuç), // Baþarýyla tamamlandý!
+                hata => console.log (hata) // Buna sýra gelmez...
+            ); // vaat sonu...
+
+            let vaat2= new Promise (function (olumlu, olumsuz) {setTimeout ( () => olumsuz (new Error ("HATA: Olumsuz sonuçlandý!") ), 2000);});
+            vaat2.then (
+                argüman1 => console.log (argüman1), // Bu iþletilmez...
+                argüman2 => console.log (argüman2) // HATA: Olumsuz sonuçlandý!
+            ); // vaat sonu...
+
+            let söz = new Promise (function (arg1, arg2) {setTimeout ( () => arg1 ("Baþarýlý sonuç!"), 2000);});
+            söz.then (console.log); // Baþarýlý sonuç!
+
+            new Promise (a => a ("Anlýk çözüm!") ).then (console.log); // Pratik nesnel olumlu then yansýtmasý...
+        } // func sonu...
+        function fonk3() {
+            let vaat = new Promise ( (çözüm, red) => {setTimeout ( () => red (new Error ("HATA!") ), 2000);});
+            vaat.then (alert, console.log); // HATA!
+            vaat.catch (console.log); // HATA!
+        } // func sonu...
+        function fonk4() {
+            new Promise ( (a, b) => {setTimeout ( () => a ("Olumlu sonuç"), 2000)})
+                .finally ( () => console.log ("==>Promise sonuçlarý duyurulmaya hazýr:") )
+                .then (console.log); // Olumlu sonuç
+
+            new Promise ( (x, y) => {throw new Error ("HATA");}) // gecikmesiz sonuç...
+                .finally ( () => console.log ("==>Promise sonucu hazýr:") )
+                .catch (a => console.log ("Olumsuz sonuç: " + a));
+        } // func sonu...
+        function fonk5() {
+            function jsYükle (kaynak, geriçaðýr) {
+                let taslak = document.createElement ('script');
+                taslak.src = kaynak;
+                taslak.onload = () => geriçaðýr (null, taslak);
+                taslak.onerror = () => geriçaðýr (new Error (`${kaynak} için taslak yükleme hatasý`));
+                document.head.append (taslak);
+            } // func sonu...
+            jsYükle ('iþli/js10201x.js', function (hata, taslak) {// Tek bir hata yada taslak mesajý yansýtýlabilir...
+                if (hata) {console.log ("Hata yönetimi: " + hata);
+                }else {console.log (`Güzel, ${taslak.src} programý baþarýyla yüklendi`);}
+            }); // jsY..sonu...
+
+            function jsYükle2 (kaynak) {
+                return new Promise (function (çözüm, red) {
+                    let taslak = document.createElement ('script');
+                    taslak.src = kaynak;
+                    taslak.onload = () => çözüm (taslak);
+                    taslak.onerror = () => red (new Error (`${kaynak} yükleme hatasý`) );
+                    document.head.append (taslak);
+                }); // ret sonu...
+            } // func sonu...
+            let vaat = jsYükle2 ("iþli/js10305xx.js"); // iþli/js10305x.js
+            vaat.then (
+                kodlama => console.log (`${kodlama.src} baþarýyla yüklendi!`),
+                hata => console.log (`HATA: ${hata.message}`)
+            ); // vaat sonu...
+            vaat.then (taslak => console.log ('Baþka bir Promise nesnesi çözüm yöneticisi...'));
+            // Herbir aboneye farklý bir vaat.then mesajý yazabiliriz...
+            vaat.catch (hata => console.log ('Baþka bir Promise nesnesi hata yöneticisi...'));
+        } // func sonu...
+        function fonkö1() {
+            let vaat = new Promise (function (çözüm, red) {
+                çözüm (2020 - 1957);
+                setTimeout ( () => çözüm (2019 - 1957), 1000);
+            }); // let sonu...
+            vaat.then (console.log); // 63 <==Ýlk çözüm...
+        } // func sonu...
+        function fonkö2() {
+            function geciktir (ms) {return new Promise (çözüm => setTimeout (çözüm, ms) );}
+            geciktir (3000).then ( () => console.log ('Bu mesajý 3 sn sonra yansýtýr') );
+        } // func sonu...
+        function fonkö3() {
+            daireiçiMesajýGöster (250, 550, 100).then (bölüm => {
+                bölüm.classList.add ('daireiçiMesaj');
+                bölüm.append ("MERHABA, DÜNYA!");
+            }); // dai..sonu...
+            function daireiçiMesajýGöster (cx, cy, yarýçap) {
+                let bölüm = document.createElement ('div');
+                bölüm.style.width = 0;
+                bölüm.style.height = 0;
+                bölüm.style.left = cx + 'px';
+                bölüm.style.top = cy + 'px';
+                bölüm.className = 'daire';
+                document.body.append (bölüm);
+                return new Promise (çözüm => {
+                    setTimeout ( () => {
+                        bölüm.style.width = yarýçap * 2 + 'px';
+                        bölüm.style.height = yarýçap * 2 + 'px';
+                        bölüm.addEventListener ('transitionend', function yönet() {
+                            bölüm.removeEventListener ('transitionend', yönet);
+                            çözüm (bölüm);
+                        }); // böl.. sonu...
+                    }, 0); // set.. sonu...
+                })
+ // ret..sonu...
+            } // func sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) 'new Promise' kurucu fonksiyonla yaratýlan özel bir JS nesnesi olan promise/vaat üreticinin takvimli \
+            sonuçlarýný (ya olumlu yada olumsuz/hata) abone tüketicilere callback/geriçaðýrma yöntemiyle iletmek \
+            üzere tanýmlanýr." +
+            "<br/>2) 'new Promise' fonksiyonununun iki argümaný (çözüm, red), hangisi önce deðer alýrsa promise/vaat.then \
+            fonksiyonunda onun sonucu yansýr, diðeri gözardý edilir. Hatta sadece baþarýlý ilk sonuçla ilgileniyorsan, \
+            vaat.then'de ikinciyi kodlamayýz. " + fonk2() +
+            "<br/>3) Promise nesnesi olumsuz sonuçlanýrsa, ya önceki gibi vaat.then 2.argümanýný yansýtýr, yada \
+            then kullanmadan doðrudan vaat.catch ile olumsuz hatayý çýktýlarýz. " + fonk3() +
+            "<br/>4) try-catch-finally benzeri Promise nesnesinin de then-catch-finally fonksiyonlarý vardýr. finally \
+            hiçbir argüman içermez, genel çevre temizliði ve duyurularý bildirir, akabinde akýþý then/catch'e býrakýr. " + fonk4() +
+            "<br/>5) Birönceki callback/geriçaðýrma yöntemiyle (çift argümanlý) jsYükle fonksiyonunu tek argümanlave \
+            'new Promise'le de yapabiliriz. (ÝKAZ: Promise dosya yükleme Unicode'da çalýþmýyor; ANSI olmalý. )" + fonk5() +
+            "<br/>Ödev1) Promise'de çoklu çözüm/red sunulmuþsa çýktýda hangisi yansýr? " + fonkö1() +
+            "<br/>Ödev2) Bir geciktir fonksiyonu içindeki Promise çözümüyle 3 sn bekletelim. " + fonkö2() +
+            "<br/>Ödev3) Birönceki geriçaðýrmalý daireiçi mesaj animasyonunu Promise'le güncelleyin."
+    </script>
+</body>
+</html>

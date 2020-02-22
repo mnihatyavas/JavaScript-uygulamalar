@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10405.html: Nesneden ilkele çevrim yöntemleri örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Nesneden Ýlkele Çevrim</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let kullanýcý = {
+                ad: "Nihat",
+                para: 1000,
+                [Symbol.toPrimitive] (ipucu) {
+                    console.log (`Ýpucu: ${ipucu}`);
+                    return ipucu == "string" ? `{Ad: "${this.ad}"}` : this.para;
+                } // [.. sonu...
+            }; // let sonu...
+            alert (kullanýcý); // Ýpucu: string -> {ad: "Nihat"}
+            console.log (+kullanýcý); // Ýpucu: number -> 1000
+            console.log (kullanýcý + 500); // Ýpucu: default -> 1500
+        } // func sonu...
+        function fonk3() {
+            let kullanýcý = {
+                ad: "Nihat",
+                para: 1000,
+                toString() {return `{Ad: "${this.ad}"}`; }, // ipucu string...
+                valueOf() {return this.para;} // ipucu number veya default...
+            }; // let sonu...
+            alert (kullanýcý); // toString -> {ad: "Nihat"}
+            console.log (+kullanýcý); // valueOf -> 1000
+            console.log (kullanýcý + 500); // valueOf -> 1500
+        } // func sonu...
+        function fonk4() {
+            let nesne = {toString() {return "5";} };
+            console.log (nesne + 3); // ekleme=53...
+            console.log (+nesne + 3); // toplama=8...
+            console.log (nesne - 3); // çýkarma=2...
+            console.log (nesne * 3); // çarpma=15...
+            console.log (nesne / 3); // bölme=1.666...
+            console.log (nesne ** 3); // üs=125...
+            console.log (nesne % 3); // kalan=2...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Nesneler iþlemcilerle önce dizgeye veya sayýya çevrilirler. Ýkili/boolean için \
+            tüm nesneler true kabul edilir." +
+            "<br>2) Arþiv fonksiyonu nesne[Symbol.toPrimitive] = function(hint){..} verili ipucuyla \
+            dizge, sayý veya varsayýlý ilkele çevirir: " + fonk2() +
+            "<br>3) nesne[Symbol.toPrimitive] yokken, toString/valueOf metodlarý kullanýlýyordu: " + fonk3() +
+            "<br>4) 'nesne + sayý' ekleme, diðer iþlemciler aritmetik sonuç üretirler: " + fonk4()
+    </script>
+</body>
+</html>

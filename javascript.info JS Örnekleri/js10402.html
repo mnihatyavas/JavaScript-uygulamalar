@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10402.html: Programýn etrafa saçtýðý döküntüleri temizleme örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Döküntü Temizleme</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1) Kodlamanýn yarattýðý ve belleði kaplayan ilkel deðiþkenler, nesneler, fonksiyonlara \
+            ihtiyaç kalmadýðýnda JS bunlarý ne yapar?" +
+            "<br>2) Aktüel lokal fonksiyon deðiþkenleri, parametreleri, global deðiþkenler, nesnenin \
+            kopya veya içiçe nesne olarak referansladýðý bellek adresleri ulaþýlabilir, eriþilebilir ve \
+            kullanýlabilirdir. Eriþilemeyenler ise JS motorunun arka planýnda çalýþan çöp toplayýcý \
+            tarafýndan hafýzadan silinerek temizlenirler." +
+            "<br>3) Örneðin let kullanýcý = {ad: 'Nihat'}; nesnesinde kullanýcýnýn referansladýðý \
+            ad:'Nihat', þayet kullanýcý=null atanýrsa eriþilmez çöpe dönüþür ve JS bunu siler." +
+            "<br>4) JS motoru CPU boþ zamanýnda, iþlem hýzýný düþürmeden, optimizasyon \
+            teknikleriyle global kök deðiþkenler hariç diðer tüm eriþilemez hale dönüþenleri sürekli \
+            ve otomatikmen tarar ve temizler."
+    </script>
+</body>
+</html>

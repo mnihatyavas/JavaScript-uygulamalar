@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10401.html: JS veri tiplerinden nesneler örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Nesneler</h3>
+    <p id="göster">Paragraf</p>
+
+    <script src="js10401x.js"></script>
+    <script>
+        function fonk2() {
+            let kullanýcý = {isim: "M.NihatYavaþ", yaþ:62, anonimMi:true, "kuþlarý sever mi?":true, };
+            console.log (kullanýcý);
+            console.log (kullanýcý.isim);
+            console.log (kullanýcý["kuþlarý sever mi?"]);
+
+            delete kullanýcý.anonimMi;
+            delete kullanýcý ["kuþlarý sever mi?"];
+            console.log (kullanýcý);
+
+            let anahtar = "Kuþlarý sever mi?";
+            kullanýcý [anahtar] = true;
+            anahtar = "anonimMi";
+            kullanýcý [anahtar] = false;
+            console.log (kullanýcý);
+
+            let nesne = {for: 1, let: 2, return: 3};
+            console.log (nesne);
+            console.log (nesne.let, nesne.return, nesne.for);
+
+            let meyve1 = 'elma';
+            let meyve2 = 'fýstýk';
+            let sepet = {["tokat" + meyve1 + "sý"]: 5, ["antep" + meyve2]:20};
+            console.log (sepet);
+            console.log (sepet ["tokatelmasý"]);
+
+            function nesneYapýcý1 (isim, yaþ) {return {isim:isim, yaþ:yaþ}; }
+            function nesneYapýcý2 (isim, yaþ) {return {isim, yaþ}; }
+            function nesneYapýcý3 (isim, yaþ) {return {isim, yaþ:yaþ}; }
+            let kullanýcý2 = nesneYapýcý1 ("M.Nihat Yavaþ", 62);
+            console.log (kullanýcý2);
+            console.log (kullanýcý2.isim, kullanýcý2.yaþ);
+            let kullanýcý3 = nesneYapýcý2 ("Nihat Yavaþ", 61);
+            console.log (kullanýcý3);
+            console.log (kullanýcý3.isim, kullanýcý3.yaþ);
+            let kullanýcý4 = nesneYapýcý3 ("Nihat", 60);
+            console.log (kullanýcý4);
+            console.log (kullanýcý4.isim, kullanýcý4.yaþ);
+
+            console.log (kullanýcý2.isim === undefined);
+            console.log (kullanýcý2.böyleÖzellikYok === undefined);
+            console.log ("isim" in kullanýcý2);
+            kullanýcý2 = nesneYapýcý1 (undefined, 62);
+            console.log (kullanýcý2.isim === undefined);
+            anahtar = "isim";
+            console.log (anahtar in kullanýcý2);
+
+            kullanýcý = {isim: "Nihat", yaþ: 2019-1957, anonimMi:true, "kuþlarý sever mi?":true};
+            for (let anahtar in kullanýcý) {console.log (anahtar + "=" + kullanýcý [anahtar]); }
+
+            let ülkeKodlarý1 = {"49": "Almanya", "90":"Türkiye", "41": "Ýsviçre", "44": "Büyük Britanya", "1": "ABD"}; // tamsayýya çevrilebiliyor...
+            for (let kod in ülkeKodlarý1) {console.log (kod + "=" + ülkeKodlarý1 [kod]); }
+            let ülkeKodlarý2 = {49: "Almanya", 90:"Türkiye", 41: "Ýsviçre", 44: "Büyük Britanya", 1: "ABD"}; // tamsayý...
+            for (let kod in ülkeKodlarý2) {console.log (kod + "=" + ülkeKodlarý2 [kod]); }
+            let ülkeKodlarý3 = {"+49": "Almanya", "+90":"Türkiye", "+41": "Ýsviçre", "+44": "Büyük Britanya", "+1": "ABD"}; // dizge...
+            for (let kod in ülkeKodlarý3) {console.log (kod + "=" + ülkeKodlarý3 [kod]); }
+        } // func sonu...
+        function fonk3() {
+            let mesaj1 = "Selam!";
+            let mesaj2 = mesaj1;
+            console.log (mesaj1, mesaj2);
+            mesaj1 = "Merhaba";
+            console.log (mesaj1, mesaj2);
+
+            let kullanýcý1 = {ad: "Nihat"};
+            let kullanýcý2 = kullanýcý1;
+            console.log (kullanýcý1, kullanýcý2);
+            kullanýcý1.ad = "Mahmut";
+            console.log (kullanýcý1, kullanýcý2);
+
+            let a = {};
+            let b = a; // Referansla kopyalama...
+            console.log (a == b ); // doðru...
+            console.log (a === b ); // doðru...
+
+            let c = {};
+            let d = {}; // Ayný (boþ) deðerli 2 baðýmsýz nesne...
+            console.log (c == d ); // yanlýþ...
+            console.log (c === d ); // yanlýþ...
+
+            const kullanýcý = {ad: "Nihat"};
+            kullanýcý.yaþ = 25; // Hata yok...
+            console.log (kullanýcý.yaþ);
+            try {kullanýcý = {ad: "Mahmut"};
+            }catch (ist) {console.log (ist);}
+        } // func sonu...
+        function fonk4() {
+            let kullanýcý = {ad: "Nihat", yaþ: 62};
+            let klon = {}; // Yeni boþ nesne...
+            for (let anahtar in kullanýcý) {klon [anahtar] = kullanýcý [anahtar];}
+            console.log (kullanýcý, klon);
+            kullanýcý.ad = "Mahmut";
+            kullanýcý.yaþ = "61";
+            console.log (kullanýcý, klon);
+
+            let klon2 = {};
+            Object.assign (klon2, kullanýcý); // Baðýmsýz kopya...
+            console.log (kullanýcý, klon2);
+
+            let klon3 = {};
+            let izin1 = {okyabilirMi: true};
+            let izin2 = {deðiþtirebilirMi: true};
+            Object.assign (klon3, kullanýcý, izin1, izin2); // Baðýmsýz birleþtirme...
+            console.log (kullanýcý, izin1, izin2, klon3);
+
+            let klon4 = Object.assign ({}, kullanýcý); // Hýzlý baðýmsýz kopyalama...
+            console.log (klon4);
+        } // func sonu...
+        function fonk5() {
+            let kullanýcý = {ad: "Nihat", ölçüler: {boy: 170, kilo:55, ayakkabý:41} };
+            let klon = Object.assign ({}, kullanýcý);
+            console.log (kullanýcý.ölçüler === klon.ölçüler); // true; baðýmsýz kopyasý deðil referans adresi...
+            kullanýcý.ölçüler.kilo++;
+            console.log (kullanýcý.ölçüler.kilo, klon.ölçüler.kilo); 
+
+            let klon2 = _.cloneDeep (kullanýcý);
+            console.log (kullanýcý, klon2)
+            console.log (kullanýcý.ölçüler === klon2.ölçüler); // false; baðýmsýz kopya...
+            kullanýcý.ölçüler.kilo++;
+            console.log (kullanýcý.ölçüler.kilo, klon2.ölçüler.kilo); 
+
+            var nesne = [ { 'a': 1 }, { 'b': 2 } ];
+            var derinKopya = _.cloneDeep (nesne);
+            console.log (nesne, derinKopya)
+            console.log(derinKopya [0] === nesne [0]); // false; baðýmsýz kopya...
+        } // func sonu...
+        function fonk6() {
+            let kullanýcý = {};
+            kullanýcý.ad = "Nihat";
+            kullanýcý.soyad = "Yavaþ";
+            console.log (kullanýcý);
+
+            kullanýcý.ad = "Mahmut";
+            console.log (kullanýcý);
+
+            delete kullanýcý.ad;
+            console.log (kullanýcý);
+        } // func sonu...
+        function fonk7() {
+            function boþMu (nesne) {
+                for (let anahtar in nesne) {return false;} // Tek bir özellik varsa...
+                return true;
+            } // func sonu...
+            let yapýlacaklar = {};
+            console.log (boþMu (yapýlacaklar) ); // true...
+            yapýlacaklar ["8:30"] = "uyan";
+            console.log (boþMu (yapýlacaklar) ); // false...
+        } // func sonu...
+        function fonk8() {
+            const kullanýcý = {ad: "Nihat"};
+            kullanýcý.ad = "Mahmut";
+            kullanýcý.yaþ = 2019-1957; // Özellikleri deðiþtirilebilir...
+            try {kullanýcý = {}; // Nesne atamayla deðiþtirilemez...
+            }catch (ist) {console.log (ist);}
+        } // func sonu...
+        function fonk9() {
+            let maaþlar = {Nihat: 100, Nihal: 160, Canan: 130, Belkýs:750, Zafer:468};
+            let toplam = 0;
+            for (let anahtar in maaþlar) {toplam += maaþlar [anahtar]; }
+            console.log ("$" + toplam);
+        } // func sonu...
+        function fonk10() {
+            function sayýlarýÇarp (nesne) {
+                for (let anahtar in nesne) {
+                    if (typeof nesne [anahtar] == 'number') {nesne [anahtar] *= 3;}
+                } // for sonu...
+            } // func sonu...
+            let menü = {çorba: 9, pilav: 12, piliç: 14, tatlý: 8, salata: 5, baþlýk: "Menüm"};
+            console.log (menü);
+            sayýlarýÇarp (menü)
+            console.log (menü);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1).Nesne yaratma: 2 þekilde mümkündür:" +
+            "<br>'let kullanýcý = new Object();' veya 'let kullanýcý = {};' " +
+            "<br>Ýkincisi daha çok tercih edilir. Nesne özellikleri anahtar:deðer çiftlerinden oluþur. \
+            Özellikler eklenebilir, deðiþtirilebilir, silinebilir, okunabilir. Noktalý kullanýlacak anahtaradý \
+            deðiþken adý kurallarýna uymalýdýr, fakat (araboþluklu) çok kelimeli olacaksa köþeli \
+            parantez ve týrnakiçinde yazýlýr. Deðer ise çok çeþitli olabilir. " + fonk2() +
+            "<br>2) Özellik 'delete' ile silinir. Anahtaradý için deðiþken kullanýlacaksa köþeli parantezli \
+            olmalýdýr. Son özellikten sonra virgül gerekmez, ancak konulunca da hata vermez. \
+            Özellik anahtaradý ayrýlmýþ kelime olabilir. Köþeli parantezle karmaþýk özellikadý yaratýlabilir." +
+            "<br>3) Nesne anahtarýyla deðeri ayný adla olabilir ve kýsaca sadece anahtar adýyla \
+            gösterilebilir." +
+            "<br>4) Anahtarýn nesnedeki mevcudiyet kontrolu (yoksa) 'undefined' ve 'in' kontroluyla \
+            veya herikisi birlikte yapýlabilir." +
+            "<br>5) for..in döngüsü bir nesnenin içerdiði bütün anahtarlarý sýrasýyla tarar. Bütün \
+            anahtarlar tamsayýya çevrilebiliyorlarsa for..in artan sýralar, dizgeyse yaratýldýðý sýradadýr." +
+            "<br>6) Ýlkel deðiþkenler bir bütün olarak kopyalanýr, orijinalin deðiþmesi kopyayý etkilemez; \
+            nesne deðiþkenleri ise nesneleri deðil bellek adreslerini kopyalar/referanslar, orojinaldeki \
+            deðiþiklik kopyalarda da yansýr. Bir nesnenin diðerine deðer ve tip olarak eþitliði ancak \
+            birdiðerinin kopyasýysa, yani ayný adresi görüyorlarsa doðrudur; yoksa herikisinin de \
+            ayný deðerleri içeren farklý adresleri olmasý deðil. " + fonk3() +
+            "<br>7) const/sabit tipli nesnelerin özellik deðiþikliði hata vermez, ancak nesnenin \
+            kendisine yapýlacak yeni atama hata verecektir." +
+            "<br>8) Bir nesnenin ayný referanslý deðil baðýmsýz kopyasýný/klonunu çýkarmak \
+            istersek, hazýr arþiv fonksiyon yoktur, for..in döngüsüyle ilkinin tek tek anahtar ve \
+            deðerlerini yeni boþ bir nesneye atayarak mümkündür. Ayný baðýmsýz kopyalama veya \
+            merge/birleþtirmeyi Object.assign (hedef, kaynak1,..,kaynakn) metoduyla da yapabiliriz: " + fonk4() +
+            "<br>9) Özelliði ilkel deðer deðil nesne olan nesnelerin baðýmsýz kopyasý _.cloneDeep (nesneler) \
+            metoduyla (lodash.js) yapýlabilir: " + fonk5() +
+            "<br>10) Ödev1: Boþ nesneye ad ve soyad atayan, deðiþtiren, silen kodlama yazalým: " + fonk6() +
+            "<br>11) Ödev2: Nesnenin özellik içermediði ve sonra da içerdiðini kontrol edebilen bir \
+            fonksiyon yazalým: " + fonk7() +
+            "<br>12) Ödev3: const/sabit tipli bir nesne nasýl deðiþtirilir ve nasýl deðiþtirilmez? " + fonk8() +
+            "<br>13) Ödev4: Elemanlarýn maaþlarýný for..in'le toplayýp yansýtan bir nesne kodlamasý yazýn: " + fonk9() +
+            "<br>14) Ödev5: Nesne sayý tiplerini typeof'la tespit edip 3'le çarpýp yerinde deðiþtiren \
+            ve sonucu konsola yansýtan kodlamayý kuralým: " + fonk10()
+    </script>
+</body>
+</html>

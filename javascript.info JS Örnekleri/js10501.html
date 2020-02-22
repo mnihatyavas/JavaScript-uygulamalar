@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10501.html: Ýlkel deðerlerin metodlarý nasýl kullandýðý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Ýlkellerde Metodlar</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let nihat = {ad: "Nihat", yaþ: 2019-1957, selam: function() {console.log (this.ad +"'dan Herkese Selam!");} };
+            console.log (nihat, nihat.ad, nihat.yaþ);
+            nihat.selam();
+        } // func sonu...
+        function fonk3() {
+            let dizge = "Merhaba";
+            console.log (dizge.toUpperCase() ); // String (dizge).toUpperCase()...
+
+            let n = 1.23456789;
+            console.log (n.toFixed (4) ); // Number (n).toFixed (4)...
+        } // func sonu...
+        function fonk4() {
+            console.log (typeof 0 ); // "number"
+            console.log (typeof new Number (0) ); // "object"
+            console.log (typeof Number (0) );
+
+            let sýfýr = new Number (0);
+            if (sýfýr) {console.log ("new Number ile sýfýr, true doðrulayýcýdýr!?!" ); }
+            sýfýr = Number (0);
+            if (! sýfýr) {console.log ("Number ile sýfýr, false yanlýþlayýcýdýr." ); }
+        } // func sonu...
+        function fonk5() {
+            try {console.log (null.test); // Mümkün deðil...
+            }catch (ist) {console.log (ist);}
+
+            let dizge = new String ("dizge");
+            dizge.test = 5; // Mümkün...
+            console.log (dizge.test);
+
+            dizge = String ("dizge");
+            dizge.test = 5; // Mümkün, fakat sarmalayýcýsýz undefined...
+            console.log (dizge.test);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Toplam 6 adet ilkeller: dizge, sayý, ikili, sembol, null/hiç ve undefined/tanýmsýz/atanmasýz. \
+            Nesne ise anahtar-deðer çiftli çoklu özelliklidir, {} ile yaratýlýr, farklý çeþitte nesne vardýr \
+            (function, array, Date, NaN vb), fonksiyonlarý özellik olarak saklayabilir; fakat çok bellek \
+            iþgal eder ve iþlem hýzý düþüktür. " + fonk2() +
+            "<br>2) Ýlkellere metod uygulanýrken, ilgili ilkel, öncelikle String, Number, Boolean veya \
+            Symbol sarmalayýcýlarýyla nesneleþtirilir, metod bu nesneye uygulanýr, sonuç tekrar \
+            ilkele çevrilip sunulur. Ancak JS motor optimizasyonu bunu çok etkili ve hýzlý yapar. " + fonk3() +
+            "<br>3) new ile çevrilen ilkel nesnedir; tüm nesneler true'dur. Aksine new'siz çevrilen \
+            ilkel sonucu ilkeldir. Ýhtiyaç vukuunda daima new'sýz sarmalayýcý tercih edilmelidir. " + fonk4() +
+            "<br>4) null ve undefined ilkellerinin sarmalayýcýsý ve metodu yoktur." +
+            "<br>5) Ödev1. null.test ve dizge.test mümkün müdür? " + fonk5()
+    </script>
+</body>
+</html>

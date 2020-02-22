@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10216.html: JS giriþ konularýnýn kýsa bir tekrarý örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Giriþ Konularýnýn Tekrarý</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            console.log ('Merhaba'); console.log ('Dünya');
+
+            console.log ('Merhaba')
+            console.log ('Dünya')
+
+            console.log ("Bu mesajdan sonra ; konulmazsa hata oluþur");
+            [2019, 2018, 2017, 2016, 2015].forEach (console.log)
+        } // func sonu...
+        function fonk3() {
+            let x = "Nihat";
+            x = 2019 - 1957;
+
+            const KIRMIZI = "#ff0000";
+
+            for (let $_þ = 0; $_þ < 5; $_þ++) console.log ($_þ);
+
+            console.log (typeof x);
+            console.log (typeof (KIRMIZI) );
+            console.log (typeof (null) == "object");
+            console.log (typeof function(){} == "function");
+        } // func sonu...
+        function fonk4() {
+            let kullanýcý = prompt ("Kullanýcý adýný girin?", "Nihat");
+            let çayMý = confirm ("Bir bardak çay alýr mýydýnýz?");
+            alert ("Misafirimiz " + kullanýcý + " çay istedi mi? " + çayMý);
+        } // func sonu...
+        function fonk5() {
+            let yaþ = prompt ('Yaþýnýz?', 18);
+            switch (yaþ) {
+                case 18:
+                    console.log ("Bu çalýþmaz");
+                    break;
+                case "18":
+                    console.log ("Bu çalýþýr!");
+                    break;
+                default:
+                    console.log ("Yukardakilerle eþleþmeyen deðer");
+            } // swi.. sonu...
+        } // func sonu...
+        function fonk6() {
+            function topla1 (a, b) {// Beyan...
+                let sonuç = a + b;
+                return sonuç;
+            } // func sonu...
+            let topla2 = function (a, b) {// Ýfade...
+                let sonuç = a + b;
+                return sonuç;
+            }; // let sonu...
+            let topla3 = (a, b) => a + b; // Ok...
+            let topla4 = (a, b, c, d)=>{
+                let sonuç1 = a + b;
+                let sonuç2 = c * d;
+                let sonuç = sonuç2 ** (1 / sonuç1);
+                return sonuç;
+            }; // let sonu...
+            let selam = ()=> console.log ("Selam");
+            let karesi = n=> n * 2;
+
+            console.log (topla1 (3, 5) );
+            console.log (topla2 (2, 7) );
+            console.log (topla3 (5, 9) );
+            console.log (topla4 (1,2,3,4) );
+            console.log (karesi (5) );
+            selam();
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1).Kodlama Yapýsý: Her JS kodlamasý ; ile yada ; olmadan ifadelendirilir. Ancak \
+            ; olmadýðýda bazen hatalar oluþabilmektedir. {} bloklarý (function, switch, for, while) \
+            sonlarýna ; konulmasý gerekmez, ancak fazladan konulunca da hata vermez: " + fonk2() +
+            "<br>2).'use strict' kipi: Özellikle 2015 ES6 JS yeniliklerinin iþlevselliði için JS script \
+            fonksiyon veya blok baþýna 'use strict'; ifadesi eklenmelidir. Yoksa eski kip uyumlu \
+            sonuçlar üretir." +
+            "<br>3).Deðiþkenler: let, var veya const anahtarkelimeleriyle beyan edilir. const ile \
+            beyan sýrasýnda sabit ilk deðer atanýr ve sonradan deðiþtirilemez. Deðiþken adlarý \
+            harfle baþlar, rakam veya harfle devam eder, özel $ ve _ karakterleri de harf gibi \
+            kullanýlabilir. Tüm dünya alfabe ve hiyeroglif harf sembolleri de geçerlidir. Küçük/büyük \
+            harflere duyarlýdýr. Deðiþken beyaný dinamiktir, tip deðiþtirebilir. 7 veri tipi (sayý, dizge, \
+            ikili, nesne, sembol, null ve undefined) vardýr. typeof iþlemcisi veya metodu veri tipini \
+            döndürür: " + fonk3() +
+            "<br>4).Etkileþim: JS temel GUI/GraphicalUserInterface/GrafikKullanýcýArayüzü \
+            etkileþim modal pencere metodlarý: prompt, confirm ve alert'dir. Tüm kodlamalardan \
+            önce bu metodlar iþletilir ve sonra diðer JS kodlarýn iþletilmesine geçilir: " + fonk4() +
+            "<br>5).Ýþlemciler: Aritmetik (+, -, *, /, ** ve %), + (dizge ekleme), + (sayý tipine çevirme), \
+            önce/sonra birartýr/birazalt (++ ve  --), kendine ata (+=, -=, *=, /=), atama (= ve +=), \
+            bitvari (&, |, ^, ~, >>, <<), þart (if, else, ?), mantýksal (&&, ||, !), kýyas (===, ==, >, >=, \
+            <, <=) ve virgül iþlemcileri." +
+            "<br>6).Döngüler: for, while ve do..while döngüleri ve continue/break döngü kontrolleri." +
+            "<br>7).switch: Çoklu if === eþleþtirme bloðu: " + fonk5() +
+            "<br>8).Fonksiyonlar: 3 çeþit fonksiyon tanýmý vardýr: Beyan, ifade ve ok: " + fonk6()
+    </script>
+</body>
+</html>

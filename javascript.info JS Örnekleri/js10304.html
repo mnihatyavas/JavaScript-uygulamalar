@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js10304.html: JS program ninjasý, eleþtirmeni, acemisi, takipçisi, okuru olmanýn örneði.</title>
+    <style>
+        body {background-color:DarkGoldenRod; color: Cyan; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>JS Ninjasý</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        document.getElementById ("göster").innerHTML =
+            "1).Kýsalýk zekadýr. Kodlama ne kadar kýsaysa, programcýlýkta o derece zekisiniz \
+            demektir. Ninjanýn programý acemilerce veya eleþtirmenlerce kolayca anlaþýlýp \
+            deðiþtirilmemeli; hakeden, derin dalabilen, ince detay düþünebilenler belki." +
+            "<br>1).Tekharfli deðiþkenadlarý. Hýzlý program yazmanýn bir yöntemi de a, b, c gibi \
+            tekharfli deðiþkenadlarý kullanmaktýr. Bir ninja, for döngüsü sayacý için i ve j yerine \
+            daha egzotik olan x ve y deðiþkenlerini kullanýr." +
+            "<br>2).Kýsaltýlmýþ isimler: Þayet takýmýnýzýn kuralý tekharfli ve anlamsýz deðiþkenadlarý \
+            kullanmamaksa o zaman da kýsaltýlmýþ adlar (liste yerine lst, toplam yerine tpl, tarayýcý \
+            yerine trc vb) kullanýn ki programýnýzý ancak hakederek anlayabilen geliþtirmeye \
+            muvaffak olsun." +
+            "<br>3).Soyut ol: Deðiþken adlarýný soyut seç; nesne, veri, deðer, birim, eleman vb. \
+            Tiplerine uygun adlar kullanabilirsiniz; dizge, sayý, nesne, sembol, cevap, dizi, fonk vb. \
+            Peki böyle adlar tükenirse ne yapmalý? Sýnýr yok; dizge1, dizge2, sayý1, sayý2 vb." +
+            "<br>4).Dikkat testi: Birbirine benzer adlar kullanýn; data ve date gibi, ve içeriklerini de \
+            bazen karýþtýrýn ki derin düþünemeyenler, dikkatlerini yoðunlaþtýramayanlar çuvallasýn, \
+            herþeyi birbirine karýþtýrsýn, iþin içinden çýkamasýn." +
+            "<br>5).Yakýn adlar: Gerçekte ayný iþlemi yapan fonksiyonlara birbirine yakýn adlar \
+            verin; örneðin, mesajýGöster, ismiGöster, sonucuYansýt, verileriSun gibi. Diðerleri \
+            bunlarý (ayný olduðu halde) farklý sansýn. Bazen de farklý iþlemler aynýymýþ gibi \
+            yakýn adlar verin ki diðerleri ayný sansýn, farklý olabileceðini düþünmesin; yazýcýyaYansýt, \
+            ekrandaGöster, yenipenceredeSun gibi." +
+            "<br>6).Ayný deðiþkenleri kullan. Yeni deðiþkenlere gerek yok. Ýçeriði ve tipi ayný olsun \
+            olmasýn yeni deðiþken yerine mevcutlardan birini kullan. Fonksiyon parametresine \
+            her çaðýrýþta farklý tip deðerler geçir. Kodlama ortasýnda ayný içeriði klonlayýp baþka \
+            adla devam et." +
+            "<br>7).Keyfi altçizgi öneki. Deðiþken adlarýna geliþigüzel tek/iki altçizgi koy; _ad, \
+            __ad, hatta ___ad gibi. Sonra da bu öneklerden vazgeçip altçizgisiz adlara içeriði \
+            atayýp devam et. Diðerleri bunlara özel anlamlar atfetmeye çalýþsýn." +
+            "<br>8).Sevgini göster. Sihirli adlar kullanýn; süperEleman, megaÇerçeve, sihirliFonksiyon, \
+            hoþBirim gibi. Maaþlý okur bunlar üzerinde birkaç saat sihir arasýn." +
+            "<br>9).Global adlarý lokalda da aynen kullan: Fonksiyon dýþýnda 'let isim=kullanýcý1()' \
+            adýný hemen fonksiyon içinde de 'let isim=kullanýcý2()' olarak kullan. Takipçi heriki \
+            kullanýcý ismini de ayný sansýn." +
+            "<br>10).Heryerde yanetkiler: hazýrMý(), izninKontrolü(), bulunduMu() gibi true/false \
+            döndürerek program akýþýný tamamen deðiþtirebilecek kontrol ve hesap fonksiyonlarýný \
+            boþ geç, hep sadece senin bildiðin (varsayýlý) true yada false döndürsün; okur ise \
+            saatlarca kontroller arasýn. Yada tam tersi bu fonksiyonlarýn true/false döndüreceðini \
+            sanarken hiç ilgisiz karmaþýk bir nesnel data yýðýný döndürsün. Sen kullanabil, ama \
+            okur habire true/false arasýn." +
+            "<br>11).Güçlü fonksiyonlar: Fonksiyon adlarýný ad iþlemiyle sýnýrlamayýn, geniþ olun, \
+            yayýlýn. Takipci, fonksiyondan sadece adýna uygun dönüþ ve iþlemler umarken, sen \
+            ifþa etmediðin bütün örtülü iþlemlerini de o fonksiyon adýna göm. Okur ne olduðunu \
+            anlayýp sana soru dahi yöneltemesin. Böylece kodlamalarýn deðiþtirilemeden güvende \
+            kalýr, sen de huzur içinde ninja kodlama meditasyonunu sürdüredurursun." +
+            "<br>12). Peki bu durumlar çerçevesinde, Ninja, þayet maaþlý programcý deðilse \
+            hobi programcý olarak nasýl para kazanacak, kendisini ve varsa ailesini nasýl geçindirecek, \
+            mümkün mü?"
+           </script>
+</body>
+</html>

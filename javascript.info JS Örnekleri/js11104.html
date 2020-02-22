@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11104.html: Promise vaatlerde then-catch'lerle hata yönetimi örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Promise Then-Catch Hata Yönetimi</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            fetch ('https://böylebir_sunucu_yok.falanfilan') // red
+                .then (yanýt => yanýt.json() )
+                .catch (hata => console.log (hata)) // TypeError: Failed to fetch
+
+            fetch ('js11103x1.js')
+                .then (yanýt => yanýt.json() )
+                .then (kullanýcý => fetch (`https://api.github.com/users/${kullanýcý.ad}`))
+                .then (yanýt => yanýt.json() )
+                .then (githubUser => new Promise ( (çözüm, red) => {
+                    let resim = document.createElement ('img');
+                    resim.src = githubUser.avatar_yurel;
+                    resim.className = "vaat-avatar-örneði";
+                    document.body.append (resim);
+                    setTimeout ( () => {
+                        resim.remove();
+                        çözüm (githubUser);
+                    }, 1000);
+                })) // then sonu...
+                .catch (hata => console.log (hata.name + "==>" + hata.message) ); // SyntaxError==>Unexpected token u in JSON at position 1
+        } // func sonu...
+        function fonk3() {
+            new Promise ( (a, b) => {throw new Error ("Hoops HATA!");}) // Promise hatasý...
+                .catch (console.log); // Error: Hoops HATA!
+
+            new Promise ( (a, b) => {b (new Error ("Hoops: HATA!"));}) // Promise red hatasý...
+                .catch (console.log); // Error: Hoops: HATA!
+
+            new Promise ( (a, b) => {a  ("Tamam");}) // Hatasýz olumlu çözüm...
+                .then ( (a) => {throw new Error ("Hoops: HATA!..");}) // Promise, then Promise red hatasý...
+                .catch (console.log); // Error: Hoops: HATA!..
+
+            new Promise ( (a, b) => {a ("Tamam");}) // Hatasýz olumlu çözüm...
+                .then ( (a) => {falan_filan();}) // red'siz fonksiyon tanýmsýzlýk hatasý...
+                .catch (console.log); // ReferenceError: falan_filan is not defined
+        } // func sonu...
+        function fonk4() {
+            new Promise ( (a, b) => {throw new Error ("Hooops!");})
+                .catch (function (istisna) {console.log (istisna + "==>Hata yönetildi, normal akýþa devam...");}) // Error: Hooops!==>Hata yönetildi, normal akýþa devam...
+                .then ( () => console.log ("Birsonraki promise then yönetimi...")); // Birsonraki promise then yönetimi...
+
+            new Promise ( (a, b) => {throw new Error ("Hoooops!..");}) // Enyakýn catch'e hata fýrlatýldý...
+                .catch (function (a) {
+                    if (a instanceof URIError) {// Hata burada yakalanmaz, else'e geçer...
+                    }else {
+                        console.log ("URI harici hatalarý yönetemiyorum"); // URI harici hatalarý yönetemiyorum
+                        throw a; // re-throw (birsonraki enyakýn catch için)
+                }})
+               .then (function() {} ) // Birönce re-throw olduðundan, burasý iþlemez...
+                .catch (ist => {console.log (`Bilinmeyen istisna oluþtu: ${ist}`);}); // Bilinmeyen istisna oluþtu: Error: Hoooops!..
+        } // func sonu...
+        function fonk5() {
+            window.addEventListener ('unhandledrejection', function (olay) {// 2 özellikli (promise ve reason)
+                console.log (olay.promise); // Promise {<rejected>: Error: Hop hop hata var!...}
+                console.log (olay.reason); // Error: Hop hop hata var!
+            }); // win..sonu...
+
+            new Promise (function() {throw new Error ("Hop hop hata var!");})
+                .then(() => {}); // Olumlu çoklu then çözümleri...
+                // Ancak catch hata yönetimi yok...
+
+            console.log ("Normal program akýþýna devam..."); // Normal program akýþýna devam...
+        } // func sonu...
+        function fonkö1() {
+            new Promise (function (a, b) {setTimeout ( () => {throw new Error ("HopsHATA!");}, 1000);})
+            .catch (console.log);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Promise veya fetch reddinde program akýþý (arada çoklu then'ler olsa bile) doðrudan (varsa) \
+            catcht'li yada then(yanýt,red)'li hata yönetimine atlar." +
+            "<br/>2) Hata herhangibir satýrda olabileceðinden, catch yönetimi tüm çoklu then'lerden sonra \
+            konulmalýdýr. " + fonk2() +
+            "<br/>3) Promise içinde yada herhangibir then'de oluþabilecek hata içsel try-catch varmýþcasýna \
+            enyakýn catch hata yönetimine atlar. Hata sadece Promise reddinden kaynaklanmayabilir. " + fonk3() +
+            "<br/>4) Normal try-catch'de ilk hatayý yakalayan catch baþka bir re-throw fýrlatýrsa birsonraki (varsa) \
+            catch tarafýndan yakalanýr ve hata yönetildikten sonra akýþ devam eder. Aynýsý then-catch için de \
+            geçerli olup, hata yönetiminden sonra varsa baþka then akýþý sürdürülür veya re-throw ile tekrar akýþ \
+            birsonraki catch'e atlar. " + fonk4() +
+            "<br/>5) Oluþabilecek Promise red hatasý catch'le yakalanmazsa try-catch'le yakalanmayan hatadaki \
+            gibi program akýþý (konsol kýrmýzý ikazýyla) ölür/durur. Ancak window global unhandeledrejection \
+            olayDinleyiciyle/eventListener bu da yakalanabilir. " + fonk5() +
+            "<br/>Ödev1) Catch senkronize olup hatayý anlýk yakalar. setTimeout gecikmeliyse içinde fýrlatýlan \
+            hata asenkron gecikmeli (mevcut olsa da) catch tarafýndan yakalanamaz. " + fonkö1()
+    </script>
+</body>
+</html>

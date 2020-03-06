@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11302.html: Daha derinlemesine modül export ve import örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Export ve Import</h3>
+    <p id="göster">Paragraf</p>
+
+    <script type="module">
+        import * as getir from "../js11301x2.js"; // Desteli kod tüm exportlarý dahil eder...
+        console.log (getir.ad + "'ýn doðum ayý: " + getir.aylar [3]);
+    </script>
+    <script type="module">
+        import {ad, aylar} from "../js11301x2.js"; // Desteli kod sadece ad ve aylarý hahil edip diðerlerini eniyilemeyle desteden siler...
+        console.log (ad + "'ýn doðum ayý: " + aylar [3]);
+    </script>
+    <script type="module">
+        import {ad as a, aylar as b} from "../js11301x2.js";
+        console.log (a + "'ýn doðum ayý: " + b [3]);
+    </script>
+    <script type="module">
+        import {sene as yýl} from "../js11301x2.js";
+        console.log ("JS modüllerinin yýlý: " + yýl);
+    </script>
+    <script type="module">
+        import Kullanici from "../js11302x1.js";
+        console.log ("Kullanýcý adý: " + new Kullanici ("Hilal").ad);
+    </script>
+    <script type="module">
+        import Kullanýcým from "../js11302x2.js";
+        console.log ("Kullanýcý adý: " + new Kullanýcým ("Atilla").ad);
+    </script>
+    <script type="module">
+        import Kullanýcý from "../js11302x2.js";
+        //export Kullanýcý;
+        console.log ("Kullanýcý adý: " + new Kullanýcý ("Yücel").ad);
+    </script>
+
+    <script>
+        window.addEventListener ('unhandledrejection', olay => console.log (olay.reason) );
+        function fonk2() {
+            (async ()=>{
+                let {ad, selam} = await import ("../js11301x2.js");
+                console.log (ad);
+                selam ("Fatih");
+
+                //let nesne = await import ('../js11302x2.js');
+                //let Kullanýcý = nesne.default;
+                let {default: Kullanýcý} = await import ('../js11302x2.js'); // Tek satýrda...
+                console.log (new Kullanýcý ("Zafer").ad);
+            })() // asy..sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Modül export ve import direktifinin önceki basit kullanýmýndan daha farklýlarý da mevcuttur." +
+            "<br/>2) export'u deðiþken, fonksiyon yada sýnýf önünde kullanabiliriz. Fonksiyon ve sýnýf baþýna \
+            export gelince onu ifade yapmaz, bu itibarla sonuna ; konulmamasý uygundur." +
+            "<br/>export illaki baþýnda olacak þartý yoktur, topluca herhangibir yerde de bulunabilir." +
+            "<br/>Modül dosyasýndaki tüm export'larý '* as ad' ile tek kalemde import'layabiliriz; ancak budurumda \
+            tüm export isimleri baþýna artýk ad.selam() getirilmelidir." +
+            "<br/>as ile import adlarýný deðiþtirebiliriz." +
+            "<br/>as ile export adlarýný da deðiþtirebiliriz." +
+            "<br/>3) Þayet tek fonksiyon/sýnýflý bir modülde 'export default' kullanmýþsak, import için {..} gerekmez; \
+            hatta hiç adlandýrma da gerekmez, kendimiz import'da istediðimiz adlandýrmayý yapabiliriz." +
+            "<br/>4) import ve export ifadeleri statikdir. Yani 'import..from' yol dizgedir, dinamik deðiþken yada \
+            fonksiyon olamaz veya if þartlý import kullanamayýz. Ancak dinamik import ifadesi deðil dinamik \
+            import(..) fonksiyon benzeri normal script'de async()() içinde iþletilebilir " + fonk2()
+    </script>
+</body>
+</html>

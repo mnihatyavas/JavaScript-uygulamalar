@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11402.html: eval fonksiyonuyla dizgesel kodlamayý iþletme örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>eval</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let kod = 'console.log ("Merhabalar")';
+            eval (kod); // Merhabalar
+
+            let deðer = eval ('1+3 * Math.PI');
+            console.log (deðer); // 10.42477796076938
+
+            deðer = eval ('let i = 0; ++i');
+            console.log (deðer); // 1
+
+            let b = 5;
+            function f() {
+                let a = 2;
+                eval ('console.log (a * b - deðer)'); // 9
+            } // func sonu...
+            f();
+
+            eval ("deðer = 10; a = 5; b = 3; let x = Math.E; console.log (x**2)");
+            console.log (deðer, b, a);
+        } // func sonu...
+        let x = 1.75; // global x
+        function fonk3() {
+            { let x = 5;
+                eval ("console.log (x)"); // lokal x: 5
+                window.eval ("console.log (x)"); // global x: 1
+
+                let f = new Function ('a', 'console.log (a)');
+                f (5.01); // 5.01
+            } // blok sonu...
+        } // func sonu...
+        function fonkö1() {
+            let ifade = prompt ("Matematik ifadesinizi girin:", '2*3+2');
+            console.log (ifade + " = " + eval (ifade) );
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) eval fonksiyonu dizge içindeki iþletilebilir JS kodlamasýnýnýn sonucunu döndürür." +
+            "<br/>2) eval dizgesi uzun, çoklu kodlamalý, fonksiyon beyanlý, deðiþkenli vb olabilir. eval sonucu \
+            son deðerin sonucudur. Blok dýþý deðiþkenleri görür. Dýþ deðiþken deðerlerini deðiþtirebilir, ancak \
+            dýþarýya kendi deðiþken/fonksiyon/vb tanýmýný (strict kipte! dese de daima) sunamaz.  " + fonk2() +
+            "<br/>3) Modern JS pek eval kullanmaz, bazý sakýncalar taþýr. JS motoru deðiþken adlarýný optimizasyon \
+            adýna kýsaltýr, ama eval'de kullanýldýðýnda kýsaltamaz. Blok içi lokali deðil, dýþ global deðiþkeni kullanmasý \
+            istenirse window.eval kullanýlmalýdýr. Lokalý yansýtmasý isteniyorsa eval yerine 'new Function' kullanýlabilir \
+            ve lokal deðer dizge fonksiyonuna dizge argümaný olarak geçirilir. " + fonk3() +
+            "<br/>Ödev1) prompt ile gireceðiniz hertürlü aritmetik ifadenin sonucunu eval'le konsola yansýtýn. " + fonkö1()
+    </script>
+</body>
+</html>

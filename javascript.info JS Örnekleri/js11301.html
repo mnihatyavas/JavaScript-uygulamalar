@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11301.html: Kompleks Javascript taslaklarýnda uygulanan modüller örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px; display:none;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Modüllerin Fetch'i</h3>
+    <p id="göster">Paragraf</p>
+    <p id="göster2">Paragraf</p>
+    <button id="düðme">Düðme</button>
+
+    <script src="js11301x1.js"></script>
+
+    <script type="module">
+        import {ad, idareci, selam, idareci2, selam2} from "./js11301x2.js";
+        console.log (ad);
+
+        console.log (selam);
+        selam ('Erdal');
+        document.getElementById ("göster2").innerHTML = selam ('Yücel');
+
+        try {a = 5; // "use strict" kipi let/var'sýz hata verir...
+        }catch (ist) {console.log (ist);}
+
+        console.log (idareci.ad);
+        idareci.ad = "Neþe";
+
+        idareci2.ad = "Tülin";
+    </script>
+    <script type="module">
+        import {idareci, idareci2, selam2} from "../js11301x2.js";
+        console.log (idareci.ad);
+
+        selam2();
+
+        console.log (import.meta.url);
+
+        console.log (this); // undefined
+    </script>
+    <script type="module">
+        console.log ("modül düðme'nin tipi: " + typeof düðme); // modül düðme'nin tipi: object
+        // Modül script erteli olduðundan html sayfasý hazýr ve düðme görülmektedir...
+    </script>
+    <script async type="module">
+        import {ad, selam} from "./js11301x2.js";
+        selam ("M.Nihat Yavaþ");
+        console.log (ad);
+    </script>
+
+    <script>
+        window.addEventListener ('unhandledrejection', olay => console.log (olay.reason) );
+
+        console.log ("script düðme'nin tipi: " + typeof düðme); // script düðme'nin tipi: object
+        // Normal script'ler html sayfasýndan önce iþletilir, düðme henüz hazýr olamayabilir?!..
+
+        function fonk2() {
+            console.log (selam); // ƒ selam (kullanýcý) {console.log (`Merhaba, ${kullanýcý}; sitemize hoþgeldin!`);}
+            selam ('Nihat'); // Merhaba, Nihat; sitemize hoþgeldin!
+        } // func sonu...
+        function fonk3() {
+            console.log (this); // Window
+        } // func sonu...
+        function fonk4() {
+            console.log ("html içi düðme'nin tipi: " + typeof düðme); // html içi düðme'nin tipi: object
+            // Normal script'ler html sayfasýndan önce iþletilir, düðme henüz hazýr olamayabilir?!..
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Genelde modüller sýk ayný/farklý programlarca sýk kullanýlan sýnýflar ve fonksiyonlardan oluþur. \
+            Ýlkleri: require'ýn AMD, Node.js'in CommanJS ve herikisiyle de uyumlu UMD modül sistemleridir." +
+            "<br/>2) export anahtarkelimesi deðiþken yada fonksiyonun dýþardan kullanýlabileceðini etiketler, \
+            import ise kaynak modülden kullanýlacak fonksiyonu tanýmlar. Modül ancak Promise fetch ile çaðrýldýðýndan \
+            localhost:8000 kurulmalý, programlar unicode deðil ansi saklanmalý, harici modül deðiþkenleri ansi \
+            karakterli olmalý ve 'script type='module'' taslak bölümünde iþletilmelidir; yoksa hata verir. Ayrýca \
+            GoogleChrome tarayýcý bazan modül export'larýný tanýmýyor; Maxthon denenmeli. " + fonk2() + ", " +
+            selam ("Mahmut") +
+            "<br/>3) Modüller varsayýlý olarak daima 'use strict' kipindedir. Bir modül içi fonksiyon ve deðiþkenler global \
+            deðildir, dýþardan görülmezler. Ancak export ve importlarla diðer modüllerde kullanýlabilir; birinin \
+            yaptýðý deðiþiklik diðerlerince de algýlanýr. 'import.meta.url' mevcut çalýþmakta olan html yada http \
+            internet sayfasý adresini yansýtýr. Normal script içinde this window iken modül script'de undefined'dýr. " + fonk3() +
+            "<br/>4) Modül script'leri ertelidir, önce normal script iþlemleri, sonra tüm html sayfasý hazýrlanýr, \
+            ve en son da harici modül script iþlemleri gelir. Ancak async modül script diðerlerini beklemeden hazýrsa \
+            hemen iþletilir. Ayný kaynak src.js birden fazla modül script'den çaðrýlsa da sadece ilki geçerlidir. \
+            Normal script src='js11301x2.js' yeterliyken, modül import from '../js11302x2.js' göreceli yada tam \
+            yollu yurel adresi ister, yoksa hata verir. " + fonk4()
+    </script>
+</body>
+</html>

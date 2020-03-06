@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11403.html: curry ile argümanlarýn ayrýþtýrýlmasý örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>curry'yle Argüman Ayrýþtýrma</h3>
+    <p id="göster">Paragraf</p>
+
+    <script src="js10401x.js"></script>
+    <script>
+        function fonk2() {
+            function ayrýþtýr (f) {
+                return function (a) {
+                    return function (b) {return f (a, b);};
+                }; // ret..sonu...
+            } // func sonu...
+            function topla (x, y) {return x + y;}
+            let ayrýkToplam = ayrýþtýr (topla);
+            console.log (ayrýkToplam (5) (2.5) ); // 7.5
+            console.log (ayrýkToplam (5, 2.5) ); // Ýþlemez...
+
+            let lodaþTopla = _.curry (topla);
+            console.log (lodaþTopla (1.45, -12.87) );
+            console.log (lodaþTopla (1.45) (-12.87) );
+        } // func sonu...
+        function fonk3() {
+            function kütük (tarih, önem, mesaj) {console.log (`[${tarih.getHours()}:${tarih.getMinutes()}] [${önem}] ${mesaj}`);}
+            kütük = _.curry (kütük);
+            kütük (new Date(), "DEBUG", "Bazý hata ayýklama kurallarý");
+            kütük (new Date() ) ("DEBUG") ("Bazý ayrýk hata ayýklama kurallarý");
+
+            let kütük2 = kütük (new Date() ); // Ýlk argümaný daima içinde saklý...
+            kütük2 ("BÝLGÝ", "Bu bir bilgilendirme mesajýdýr");
+            kütük2 ("BÝLGÝ") ("Bu bir ayrýk bilgilendirme mesajýdýr");
+
+            kütük2 = kütük2 ("BÝLGÝ" ); // Heriki argümaný daima içinde saklý...
+            kütük2 ("Bu bir bilgilendirme mesajýdýr...");
+        } // func sonu...
+        function fonk4() {
+            function ayrýþtýr (f) {
+                return function ayrýk (...args) {
+                    if (args.length >= f.length) {return f.apply (this, args);
+                    }else {return function (...args2) {return ayrýk.apply (this, args.concat (args2) );} }
+                }; // ret..sonu...
+            } // func sonu...
+
+            function topla (a, b, c) {return a + b + c;}
+            topla = ayrýþtýr (topla);
+            console.log (topla (2, 3.5, 8.63) );
+            console.log (topla (2, 3.5) (8.63) );
+            console.log (topla (2) (3.5) (8.63) );
+
+            function topla2 (a, b, c, d, e) {return a + b + c + d + e;}
+            topla2 = ayrýþtýr (topla2);
+            console.log (topla2 (2, 3.5, 8.63, -3.75, +(Math.PI).toFixed (3)) );
+            console.log (topla2 (2, 3.5) (8.63) (-3.75, Math.PI) );
+            console.log (topla2 (2) (3.5) (8.63) (-3.75) (+(Math.PI).toFixed (3) ) );
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) curry/kaþaðýlama/ayrýþtýrma bir fonksiyon çaðýrmaz; sadece f(a,b,c)'yi f(a)(b)(c)'ye dönüþtürür." +
+            "<br/>2) Lodash fonksiyonu _.curry(f) f fonksiyonu hem normal hem de ayrýk argümanlý çaðýrabilmektedir. " + fonk2() +
+            "<br/>3) Ayrýþtýrmayý ilk kurarken istenilen sayýdaki argümaný içinde saklý kýlabiliriz. " + fonk3() +
+            "<br/>4) Ayrýþtýrýcý fonksiyonu önceki gibi 2 argümanlý deðil, her sayýdaki argümana uyacak þekilde \
+            genelleþtirebilir ve lodaþtaki gibi normal yada ayrýk çaðýrabiliriz. " + fonk4()
+    </script>
+</body>
+</html>

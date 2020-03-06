@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js11401.html: Proxy nesne sarýcý ve Reflect hazýr nesnesi örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Proxy ve Reflect</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            let hedef = {};
+            let vekil = new Proxy (hedef, {} ); // Boþ yönetici...
+            vekil.test1 = 2020-1957;
+            vekil.test2 = "Nihat";
+            console.log (hedef.test2 + ": " + hedef.test1);
+            console.log (vekil.test2 + " = " + vekil.test1);
+            for (let anahtar in hedef) console.log (anahtar);
+            for (let anahtar in vekil) console.log (anahtar);
+        } // func sonu...
+        function fonk3() {
+            let sayýlar = [2020, 1957, -450, 65];
+            let vekil = new Proxy (sayýlar, {// Farklý isimli sarýcý...
+                get (hedef, özellik) { // get/al metod trap/kapaný...
+                    if (özellik in hedef) {return hedef [özellik];
+                    }else {return 0;}
+                } // get sonu...
+            }); // vekil sonu...
+            console.log (sayýlar [1], sayýlar [4]);
+            console.log (vekil [1], vekil [4] );
+
+            let sözlük = {
+                'Merhaba': 'Hello',
+                'Nasýlsýnýz': 'How do you do',
+                "Tanýþtýðýmýza memnun oldum": "Glad to know you",
+                "Görüþmek üzere": "See you later"
+            }; // let sonu...
+            for (let a in sözlük) {console.log (a + " = " + sözlük [a]);}; console.log (sözlük ["Hoþça kalýn"]);
+            sözlük = new Proxy (sözlük, {// Ayný isimli sarýcý...
+                get (a, b) {// get kapaný...
+                    if (b in a) {return a [b];
+                    }else {return "Tercüme edilemedi: " + b;}
+                } // get sonu...
+            }); // söz..sonu...
+            for (let a in sözlük) {console.log (a + " = " + sözlük [a]);}; console.log (sözlük ["Hoþça kalýn"]);
+        } // func sonu...
+        function fonk4() {
+            let sayýlar = [];
+            sayýlar = new Proxy (sayýlar, {
+                set (dizi, eleman, deðer) {// set/koy metod trap/kapaný...
+                    if (typeof deðer == 'number') {dizi [eleman] = deðer; return true;
+                    }else {return false;}
+                } // set sonu...
+            }); // say..sonu...
+            sayýlar.push (2020-1957);
+            sayýlar.push (-450);
+            sayýlar.push (0);
+            sayýlar.push (2020);
+            sayýlar.push (-450);
+            sayýlar.push (1957);
+            console.log ("Dizi: " + sayýlar + "; Dizi eleman sayýsý: " + sayýlar.length);
+
+            try {sayýlar.push ("dizge");}catch (ist) {console.log ("HATA: " + ist);}
+            console.log ("Bir üst satýrda hata dönüþü itibarýyla buraya ulaþýlmaz!==> try-catch'le ulaþýlýr.");
+        } // func sonu...
+        function fonk5() {
+            let kullanýcý = {
+                ad: "Nihat",
+                yaþ: 2020-1957,
+                baba: "Memet",
+                ana: "Haným",
+                _kýzlýk_soyadý: "*******",
+                ikamet: "Mersin",
+                _þifre: "*******"
+            }; // let sonu...
+            for (let anahtar in kullanýcý) console.log (anahtar + "=" + kullanýcý [anahtar]);
+            kullanýcý = new Proxy (kullanýcý, {ownKeys (nesne) {return Object.keys (nesne).filter (anahtar => ! anahtar.startsWith ('_') );} });
+            for (let anahtar in kullanýcý) console.log (anahtar);
+            console.log (Object.keys (kullanýcý) );
+            console.log (Object.values (kullanýcý) );
+            console.log (Object.entries (kullanýcý) );
+
+            let kullanýcý2 = { };
+            vekil = new Proxy (kullanýcý2, {ownKeys (x) {return ['anahtar1', 'anahtar2', 'anahtar3'];} });
+            console.log (Object.keys (vekil), Object.keys (kullanýcý2) );
+
+            let kullanýcý3 = { };
+            kullanýcý3 = new Proxy (kullanýcý3, {
+                ownKeys (x) {return ['ad', 'yaþ', 'baba', "ikamet"];},
+                getOwnPropertyDescriptor (hedef, özellik) {return {enumerable: true, configurable:true};}
+            }); // kul..sonu...
+            console.log (Object.keys (kullanýcý3) );
+        } // func sonu...
+        function fonk6() {
+            let kullanýcý = {
+                ad: "Nihat",
+                yaþ: function() {return 2020 -1957},
+                baba: "Memet",
+                ana: "Haným",
+                _kýzlýk_soyadý: "*******",
+                ikamet: "Mersin",
+                _þifre: "*******"
+            }; // let sonu...
+            console.log (Object.entries (kullanýcý) );
+            console.log (kullanýcý.yaþ, kullanýcý.yaþ() );
+            kullanýcý = new Proxy (kullanýcý, {
+                get (özellik, anahtar) {
+                    if (anahtar.startsWith ('_') ) {throw new Error ("_Okuma eriþimi reddedildi");}
+                    let deðer = özellik [anahtar];
+                    return (typeof deðer === 'function') ? deðer.bind (özellik) () : deðer;
+                }, // get sonu...
+                set (özellik, anahtar, deðer) {
+                    if (anahtar.startsWith ('_') ) {throw new Error ("_Yazma eriþimi reddedildi");
+                    }else {özellik [anahtar] = deðer; return true;}
+                }, // set sonu...
+                deleteProperty (ö, a) {
+                    if (a.startsWith ('_') ) {throw new Error ("_Silme eriþimi reddedildi");
+                    }else {delete ö [a]; return true;}
+                }, // delete sonu...
+                ownKeys (özellik) {return Object.keys (özellik).filter (a => ! a.startsWith ('_') );}
+            }); // kul..sonu...
+            try {console.log (kullanýcý._þifre);} catch (ist) {console.log (ist.message);}
+            try {kullanýcý._kýzlýk_soyadý = "emanet";} catch (ist) {console.log (ist.message);}
+            try {delete kullanýcý._þifre;} catch (ist) {console.log (ist.message);}
+            for (let anahtar in kullanýcý) console.log (anahtar);
+            console.log (Object.keys (kullanýcý), Object.values (kullanýcý) );
+        } // func sonu...
+        function fonk7() {
+            let erim = {ilk: -3, son: 12};
+            let dizi = "";
+            for (let i=erim.ilk; i <= erim.son; i++) {dizi +=i+" ";}
+            console.log (dizi);
+            erim = new Proxy (erim, {has (özellik, anahtar) {return anahtar >= özellik.ilk && anahtar <= özellik.son} });
+            console.log ("-3: " + (-2 in erim) );
+            console.log ("12: " + (12 in erim) );
+            console.log ("22: " + (22 in erim) );
+        } // func sonu...
+        function fonk8() {
+            function geciktir (f, ms) {return function() {setTimeout ( () => f.apply (this, arguments), ms);}; }
+            function selam (kullanýcý) {console.log (`Merhaba, ${kullanýcý}!`);}
+            console.log (selam.length); // 1
+            selam = geciktir (selam, 1000);
+            console.log (selam.length); // 0 ==>dekoratör özellikleri kaybettirir...
+            selam ("Fatih");
+
+            function ertele (f, ms) {return new Proxy (f, {apply (fonk, thisArgüman, argümanlar) {setTimeout ( () => fonk.apply (thisArgüman, argümanlar), ms);} }); }
+            function merhaba (kullanýcý) {console.log (`Selam, ${kullanýcý}!`);}
+            console.log (merhaba.length); // 1
+            merhaba = ertele (merhaba, 1500);
+            console.log (merhaba.length); // 1 ==> vekil sarýcý özellikleri korur...
+            merhaba ("Zafer");
+        } // func sonu...
+        function fonk9() {
+            let kullanýcý = {};
+            Reflect.set (kullanýcý, 'ad', 'Mahmut');
+            Reflect.set (kullanýcý, 'soyad', 'Yavaþ');
+            console.log (kullanýcý.ad, kullanýcý.soyad, kullanýcý); // Mahmut Yavaþ
+            Reflect.deleteProperty (kullanýcý, "soyad");
+            console.log (kullanýcý);
+
+            let kullanýcý2 = {ad: "Hilal", soyad: "Göktürk"};
+            console.log (kullanýcý2);
+            kullanýcý2 = new Proxy (kullanýcý2, {
+                get (özellik, anahtar, alýcý) {
+                    console.log (`GET/AL ${anahtar} = ${özellik [anahtar]}`);
+                    return Reflect.get (özellik, anahtar, alýcý);
+                }, // get sonu...
+                set (özellik, anahtar, deðer, alýcý) {
+                    console.log (`SET/KOY ${anahtar} = ${deðer}`);
+                    return Reflect.set (özellik, anahtar, deðer, alýcý);
+                } // set sonu...
+            }); // kul..sonu...
+            let ad = kullanýcý2.ad; // GET ad =Hilal
+            kullanýcý2.ad = "Atilla"; // SET ad =Atilla
+            console.log (kullanýcý2);
+
+            let kullanýcý3 = {
+                _ad: "Misafir",
+                get ad() {return this._ad;}
+            }; // let sonu...
+            let kullanýcý3Vekili = new Proxy (kullanýcý3, {
+                get (özellik, anahtar, alýcý) {
+                    //return özellik [anahtar]; // *
+                    //return Reflect.get (özellik, anahtar, alýcý); // **
+                    return Reflect.get (...arguments); // **
+                } // get sonu...
+            }); // let sonu...
+            console.log (kullanýcý3Vekili.ad); // Misafir
+            let yönetici = {
+                __proto__: kullanýcý3Vekili, // ebeveyn...
+                _ad: "Yönetici"
+            }; // let sonu...
+            console.log (yönetici.ad); // * ile "Misafir" ==> ** ile "Yönetici"
+        } // func sonu...
+        function fonk10() {
+            let harita = new Map();
+            //let vekil = new Proxy (harita, {}); // Böyle olsaydý hata verecekti...
+            let vekil = new Proxy (harita, {
+                get (özellik, anahtar, alýcý) {
+                    let deðer = Reflect.get (...arguments);
+                    return typeof deðer == 'function' ? deðer.bind (özellik) : deðer;
+                } // get sonu...
+            }); // let sonu...
+            vekil.set ("özellik1", 2020-1957); vekil.set ("özellik2", "Nihat");
+            console.log (vekil.get ("özellik2"), vekil.get ("özellik1") ); // Nihat 63
+
+            class Kullanýcý {
+                #ad = "Sýnýf Misafiri";
+                adýAl() {return this.#ad;}
+            } // class sonu...
+            let kullanýcý = new Kullanýcý();
+            console.log (kullanýcý.adýAl() );
+/*          kullanýcý = new Proxy (kullanýcý, {});
+            console.log (kullanýcý.adýAl() ); // Hata verir
+*/
+            kullanýcý = new Proxy (kullanýcý, {
+                get (özellik, anahtar, alýcý) {
+                    let deðer = Reflect.get (...arguments);
+                    return typeof deðer == 'function' ? deðer.bind (özellik) : deðer;
+                } // get sonu...
+            }); // kul..sonu...
+            console.log (kullanýcý.adýAl() ); // Sýnýf Misafiri
+
+            let tümKullanýcýlar = new Set();
+            class Kullanýcý2 {
+                constructor (ad) {
+                    this.ad = ad;
+                    tümKullanýcýlar.add (this);
+                } // con..sonu...
+            } // class sonu...
+            let kullanýcý2 = new Kullanýcý2 ("Nur");
+            kullanýcý2 = new Kullanýcý2 ("Serap");
+            kullanýcý2 = new Kullanýcý2 ("Sema");
+            kullanýcý2 = new Kullanýcý2 ("Selda");
+            kullanýcý2 = new Kullanýcý2 ("Canan");
+            kullanýcý2 = new Kullanýcý2 ("Belkýs");
+            kullanýcý2 = new Kullanýcý2 ("Hilal");
+            console.log (kullanýcý2, tümKullanýcýlar);
+            console.log (tümKullanýcýlar.has (kullanýcý2)); // true
+            kullanýcý2 = new Proxy (kullanýcý2, {});
+            console.log (kullanýcý2);
+            console.log (tümKullanýcýlar.has (kullanýcý2)); // false
+        } // func sonu...
+        function fonk11() {
+            let iptaller = new WeakMap();
+            let nesne = {veri: "Kýymetli bilgi"};
+            let {proxy, revoke} = Proxy.revocable (nesne, {});
+            iptaller.set (proxy, revoke);
+            console.log (proxy.veri); // Kýymetli bilgi
+            /* epeyce iþlemden sonra... */
+            revoke = iptaller.get (proxy);
+            revoke(); // Artýk proxy iptal edilmiþtir...
+            try {console.log (proxy.veri);}catch (ist) {console.log (ist.message);}
+        } // func sonu...
+        function fonkö1() {
+            let kullanýcý = {ad: "Sevim", yaþ: (2020 - 1963)};
+            function sarýcý (nesne) {
+                return new Proxy (nesne, {
+                    get (nesne, anahtar, alýcý) {
+                        if (anahtar in nesne) {return Reflect.get (...arguments);
+                        }else {throw new ReferenceError (`HATA: Nesnede bu özellik yok = "${anahtar}"`)}
+                    } // get sonu...
+                }); // return sonu...
+            } // func sonu...
+            kullanýcý = sarýcý (kullanýcý);
+            console.log (kullanýcý.ad); // Sevim
+            try {console.log (kullanýcý.soyad);}catch (ist) {console.log (ist.message);}
+        } // func sonu...
+        function fonkö2() {
+            let dizi = [10, -2, 0.25];
+            dizi = new Proxy (dizi, {
+                get (dizi, endeks, alýcý) {
+                    if (endeks < 0) {endeks = +endeks + dizi.length;} // +endeks'le dizi sayýya çevrilir...
+                    return Reflect.get (...arguments);
+                } // get sonu...
+            }); // dizi sonu...
+            console.log (dizi [-1], dizi [-2], dizi [-3], dizi [2]); // 0.25 -2 10 0.25
+            console.log (dizi [-5], dizi [5]); // undefined undefined
+        } // func sonu...
+        function fonkö3() {
+            let yöneticiler = Symbol ('yöneticiler');
+            function gözlenebilirYap (nesne) {
+                nesne [yöneticiler] = [];
+                nesne.göster = function (yönetici) {this [yöneticiler].push (yönetici);};
+                return new Proxy (nesne, {
+                    set (nesne, anahtar, deðer, alýcý) {
+                        let baþarý = Reflect.set (...arguments);
+                        if (baþarý) {nesne [yöneticiler].forEach (yönetici => yönetici (anahtar, deðer) ); }
+                        return baþarý;
+                    } // set sonu...
+                }); // ret..sonu...
+            } // func sonu...
+            let kullanýcý = {};
+            kullanýcý = gözlenebilirYap (kullanýcý);
+            kullanýcý.göster ( (anahtar, deðer) => {console.log (`SET/KOY ${anahtar}=${deðer}`);});
+            kullanýcý.ad = "Nihat";
+            kullanýcý.soyad = "Yavaþ";
+            kullanýcý.yaþ = 2020-1957;
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Proxy herhangibir nesne/fonksiyon hedefinin etrafýný sarýp, yönetici nesnesi yoksa hedef üzerinde \
+            koy/al iþlemleri, varsa hedefin yönetimini ele alýr." +
+            "<br/>2) 'let vekil = new Proxy (hedef, yönetici)' sarýcýyý öncelikle yönetici'siz örnekleyelim. " + fonk2() +
+            "<br/>3) Vekil yöneticisi, çeþitli içsel nesne metodlarýný kullanarak hedef elemanlarý üzerinde yönlendirme \
+            yapabilir. Örn.normalen namevcut dizi elemaný undefined döndürürken, vekil sarýcý yönetici, get trap/kapanýyla \
+            mevcutsa elemaný, deðilse undefined yerine 0 döndürsün. Keza sözlükte olmayan kelime için de undefined \
+            deðil tercüme edilemeyen ibareyi döndürsün. " + fonk3() +
+            "<br/>4) Bu kez de vekil sarýcý set kapanýyla boþ diziye rakamsal veri koyup, konulmak istenen sayý \
+            tipli deðilse hata döndürsün. set kapanýnýn deðiþmez if-else return true/false'u unutulmamalýdýr. " + fonk4() +
+            "<br/>5) ownKey metodu kapanýyla _anahtar özellikleri hariç tutup, diðer vekil anahtarlarý için for-in, \
+            Object.keys ve Object.values taramasý yapalým. set metodu olmadan ownKey return ile anahtar olarak \
+            döndürülecek deðerler Object.keys (yalýn/vekilsarýlý) gerçek anahtarlarý deðildir. Ancak ayrýca \
+            getOwnPropertyDescriptor metod kapanýyla taranabilir/enumerable:true þekillendirilebilir/configurable:true \
+            kýlýnýrsa, vekil sarýcýnýn ownKey döndürdüðü anahtarlar gerçek olur. " + fonk5() +
+            "<br/>6) Kullanýcýlarýn nesnedeki _anahtarlarý get/alýrken, set/koyarken, deleteProperty/silerken \
+            hata vermesini ve ownKeys/listerken göstermemesini vekil sarýcýyla saðlayalým. " + fonk6() +
+            "<br/>7) -3->12 arasý erim nesnesini has metodlu kapanla vekil sarýcýya yeniden idareli nesneleyip \
+            in operatörüyle erim kapsamýný kontrol edelim. " + fonk7() +
+            "<br/>8) Vekil sarýcý sadece normal nesnelere deðil fonksiyon nesnelerine de uygulanabilir. Önceki \
+            geciktirmeli selamlama dekoratör sarýcý fonksiyonu hatýrlayýp, sonra da bunu dekoratör içi vekil \
+            sarýcýya uyarlayalým. " + fonk8() +
+            "<br/>9) Reflect/yansýt hazýr nesnesi Proxy'nin yaratýlmasýný basitleþtirir. al/get, koy/set, sil/deleteProperty \
+            ve kur/construct kolaylýkla yapýlýr. Proxy get/set metod kapanýný karþýlýk gelen Reflect.get/set fonksiyonlarýyla \
+            yapabiliriz. Eðer kullanýcý bir yönetici tarafýndan miraslanýrsa özellik[anahtar] ebeveyne takýlýrken \
+            Reflect.get(ö,a, alýcý)/Reflect.get(...arguments) fonksiyonundaki alýcý yavru yöneticiyi doðru yansýtacaktýr. " + fonk9() +
+            "<br/>10) Map, Set, Date, Promise vb hazýr nesnelerin özelliklendirilmesi ve bunun okunmasý (Map \
+            özel iç fonksiyonlarýný okuyabilen) Reflect ile yapýlmalýdýr. Benzer mevzu Sýnýf #özel alanlarý için de \
+            sözkonusudur. Proxy vekil nesnesi orijinal nesneye eþit deðildir, nesneler sadece kendilerine === eþittir. " + fonk10() +
+            "<br/>11) revocable Proxy vekili iptal edilebilir, geçersizlenebilir. revoke iptalleri WeakMap'e koyarak \
+            proxy referansý kalmadýðýnda otomatikmen çöpe atýlýr. " + fonk11() +
+            "<br/>Ödev1) Nesne özelliðini okuyan bir sarýcý, geri dönüþ Proxy ile, eðer özellik mevcutsa Reflect \
+            get okumasý, namevcutsa hata fýrlatmasý yapsýn. " + fonkö1() +
+            "<br/>Ödev2) Örn.python'da dizi[-1] sonuncu, dizi[-2] sondan ikinci vb elemaný döndürür. Benzerini \
+            Proxy sarýcýyla yapýn. " + fonkö2() +
+            "<br/>Ödev3) kullanýcý anahtar-deðer çifti özellikli nesnesini, gözlenebilirYap fonksiyonuyla Proxy \
+            set kapaný ve Reflect.set metoduyla yeni anahtar-deðer ekle ve bunlarý da göster fonksiyonuyla \
+            çýktýya yansýt. " + fonkö3()
+    </script>
+</body>
+</html>

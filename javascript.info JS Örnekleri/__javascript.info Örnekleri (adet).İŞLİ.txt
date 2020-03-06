@@ -1,193 +1,202 @@
-__javascript.info Örnekleri (adet)
+__javascript.info Ã–rnekleri (adet)
 ==============================
 
 1. The JavaScript Language
     1.01. An Introduction
         1.01.01. An Introduntion to JavaScript
-            js10101.html: JavaScript'e giriş örneği.
+            js10101.html: JavaScript'e giriÅŸ Ã¶rneÄŸi.
         1.01.02. Manuals and Specifications
-            js10102.html: JavaScript resmi dökümanları örneği.
+            js10102.html: JavaScript resmi dÃ¶kÃ¼manlarÄ± Ã¶rneÄŸi.
         1.01.03. Code Editors
-            js10103.html: JavaScript kodlama editörleri örneği.
+            js10103.html: JavaScript kodlama editÃ¶rleri Ã¶rneÄŸi.
         1.01.04. Developer console
-            js10104.html: JavaScript geliştirici araçları örneği.
+            js10104.html: JavaScript geliÅŸtirici araÃ§larÄ± Ã¶rneÄŸi.
     1.02. JavaScript Fundamentals
         1.02.01. Hello, World
-            js10201.html: Merhaba dünya JavaScript kodlaması örneği.
-            js10201x.js: Harici JS dosyasının çağrılması alt-örneği.
+            js10201.html: Merhaba dÃ¼nya JavaScript kodlamasÄ± Ã¶rneÄŸi.
+            js10201x.js: Harici JS dosyasÄ±nÄ±n Ã§aÄŸrÄ±lmasÄ± alt-Ã¶rneÄŸi.
         1.02.02. Code Structure
-            js10202.html: JavaScript kodlama yapısı örneği.
+            js10202.html: JavaScript kodlama yapÄ±sÄ± Ã¶rneÄŸi.
         1.02.03 The Modern Mode, "use strict"
-            js10203.html: JavaScript'in modern "use strict/sıkı kullan" kipi örneği.
+            js10203.html: JavaScript'in modern "use strict/sÄ±kÄ± kullan" kipi Ã¶rneÄŸi.
         1.02.04. Variables
-            js10204.html: JavaScript değişkenlerini tanımlama kuralları örneği.
+            js10204.html: JavaScript deÄŸiÅŸkenlerini tanÄ±mlama kurallarÄ± Ã¶rneÄŸi.
         1.02.05. Data types
-            js10205.html: JavaScript'in toplam 7 veri tipi örneği.
+            js10205.html: JavaScript'in toplam 7 veri tipi Ã¶rneÄŸi.
         1.02.06. Type Conversions
-            js10206.html: JS ilkel veri tiplerine çevrimler örneği.
+            js10206.html: JS ilkel veri tiplerine Ã§evrimler Ã¶rneÄŸi.
         1.02.07. Operators
-            js10207.html: JS matematiksel işlemciler örneği.
+            js10207.html: JS matematiksel iÅŸlemciler Ã¶rneÄŸi.
         1.02.08. Comparisons
-            js10208.html: JS karşılaştırma işlemcileri örneği.
+            js10208.html: JS karÅŸÄ±laÅŸtÄ±rma iÅŸlemcileri Ã¶rneÄŸi.
         1.02.09. Interaction: alert, prompt, confirm
-            js10209.html: JS tarayıcı mesajları alert, prompt ve confirm örneği.
+            js10209.html: JS tarayÄ±cÄ± mesajlarÄ± alert, prompt ve confirm Ã¶rneÄŸi.
         1.02.10. Conditional Operators: if, '?'
-            js10210.html: Şartlı işlemcilerden if-else ve tekli/çoklu ? örneği.
+            js10210.html: ÅartlÄ± iÅŸlemcilerden if-else ve tekli/Ã§oklu ? Ã¶rneÄŸi.
         1.02.11. Logical Operators
-            js10211.html: Mantıksal işlemcilerden AND/&&, OR/|| ve NOT/! örneği.
+            js10211.html: MantÄ±ksal iÅŸlemcilerden AND/&&, OR/|| ve NOT/! Ã¶rneÄŸi.
         1.02.12. Loops: while and for
-            js10212.html: while ve for döngüleri örneği.
+            js10212.html: while ve for dÃ¶ngÃ¼leri Ã¶rneÄŸi.
         1.02.13. The "switch" Statement
-            js10213.html: switch-case-default ifadesi örneği.
+            js10213.html: switch-case-default ifadesi Ã¶rneÄŸi.
         1.02.14. Functions
-            js10214.html: JS fonksiyonları örneği.
+            js10214.html: JS fonksiyonlarÄ± Ã¶rneÄŸi.
         1.02.15. Function Expressions and Arrows
-            js10215.html: JS fonksiyonlarının beyanı, ifadesi ve oku örneği.
+            js10215.html: JS fonksiyonlarÄ±nÄ±n beyanÄ±, ifadesi ve oku Ã¶rneÄŸi.
         1.02.16. JavaScript Specials
-            js10216.html: JS giriş konularının kısa bir tekrarı örneği.
+            js10216.html: JS giriÅŸ konularÄ±nÄ±n kÄ±sa bir tekrarÄ± Ã¶rneÄŸi.
     1.03. Code Quality
         1.03.01. Debugging in Chrome
-            js10301.html: Chrome ile JS kodlarında hata ayıklama F12 penceresi örneği.
+            js10301.html: Chrome ile JS kodlarÄ±nda hata ayÄ±klama F12 penceresi Ã¶rneÄŸi.
         1.03.02. Coding Style
-            js10302.html: JS ile düzgün program yazma sanatı örneği.
+            js10302.html: JS ile dÃ¼zgÃ¼n program yazma sanatÄ± Ã¶rneÄŸi.
         1.03.03. Comments
-            js10303.html: JS kodlamalarında kullanılan yorum yöntemleri örneği.
+            js10303.html: JS kodlamalarÄ±nda kullanÄ±lan yorum yÃ¶ntemleri Ã¶rneÄŸi.
         1.03.04. Ninja Code
-            js10304.html: JS program ninjası, eleştirmeni, acemisi, takipçisi, okuru olmanın örneği.
+            js10304.html: JS program ninjasÄ±, eleÅŸtirmeni, acemisi, takipÃ§isi, okuru olmanÄ±n Ã¶rneÄŸi.
         1.03.05. Automated Testing with Mocha
-            js10305.html: Otomatik Mocha testi örneği.
-            js10305x.js: Yarattığımız fonksiyonu doğru ve yanlış verilerle test etme alt-örneği.
+            js10305.html: Otomatik Mocha testi Ã¶rneÄŸi.
+            js10305x.js: YarattÄ±ÄŸÄ±mÄ±z fonksiyonu doÄŸru ve yanlÄ±ÅŸ verilerle test etme alt-Ã¶rneÄŸi.
         1.03.06. Polyfills
     1.04. Objects: The Basics
         1.04.01. Objects
-            js10401.html: JS veri tiplerinden nesneler örneği.
-            js10401x.js: lodash.js modülünden derin kopyalama _cloneDeep() fonksiyonu alt_örneği.
+            js10401.html: JS veri tiplerinden nesneler Ã¶rneÄŸi.
+            js10401x.js: lodash.js modÃ¼lÃ¼nden derin kopyalama _cloneDeep() fonksiyonu alt_Ã¶rneÄŸi.
         1.04.02. Garbage Collection
-            js10402.html: Programın etrafa saçtığı döküntüleri temizleme örneği.
+            js10402.html: ProgramÄ±n etrafa saÃ§tÄ±ÄŸÄ± dÃ¶kÃ¼ntÃ¼leri temizleme Ã¶rneÄŸi.
         1.04.03. Symbol Type
-            js10403.html: Nesne yegane özelliği için ilkel sembol veri tipi örneği.
+            js10403.html: Nesne yegane Ã¶zelliÄŸi iÃ§in ilkel sembol veri tipi Ã¶rneÄŸi.
         1.04.04. Object Methods, "this"
-            js10404.html: Nesne metodu ve "this" örneği.
+            js10404.html: Nesne metodu ve "this" Ã¶rneÄŸi.
         1.04.05. Object to Primitive Conversion
-            js10405.html: Nesneden ilkele çevrim yöntemleri örneği.
+            js10405.html: Nesneden ilkele Ã§evrim yÃ¶ntemleri Ã¶rneÄŸi.
         1.04.06. Constructor, Operator "new"
-            js10406.html: Çoklu nesne yaratmada kurucu "new Fonksiyon" kullanımı örneği.
+            js10406.html: Ã‡oklu nesne yaratmada kurucu "new Fonksiyon" kullanÄ±mÄ± Ã¶rneÄŸi.
     1.05. Data types
         1.05.01. Methods of Primitives
-            js10501.html: İlkel değerlerin metodları nasıl kullandığı örneği.
+            js10501.html: Ä°lkel deÄŸerlerin metodlarÄ± nasÄ±l kullandÄ±ÄŸÄ± Ã¶rneÄŸi.
         1.05.02. Numbers
-            js10502.html: JS'de sayılar ve sayısal Math metodları örneği.
+            js10502.html: JS'de sayÄ±lar ve sayÄ±sal Math metodlarÄ± Ã¶rneÄŸi.
         1.05.03. Strings
-            js10503.html: JS'de dizgeler ve dizge metodları örneği.
+            js10503.html: JS'de dizgeler ve dizge metodlarÄ± Ã¶rneÄŸi.
         1.05.04. Arrays
-            js10504.html: JS'de diziler ve eleman ekleme/silme örneği.
+            js10504.html: JS'de diziler ve eleman ekleme/silme Ã¶rneÄŸi.
         1.05.05. Array Methods
-            js10505.html: JS'de dizi metodları örneği.
+            js10505.html: JS'de dizi metodlarÄ± Ã¶rneÄŸi.
         1.05.06. Iterables
-            js10506.html: Dizi, liste, koleksiyon ve küme gibi nesnelerin taranabilirliği örneği.
+            js10506.html: Dizi, liste, koleksiyon ve kÃ¼me gibi nesnelerin taranabilirliÄŸi Ã¶rneÄŸi.
         1.05.07. Map and Set
-            js10507.html: Map/harita ve set/küme örneği.
+            js10507.html: Map/harita ve set/kÃ¼me Ã¶rneÄŸi.
         1.05.08. WeakMap and WeakSet
-            js10508.html: Zayıf harita ve zayıf küme örneği.
+            js10508.html: ZayÄ±f harita ve zayÄ±f kÃ¼me Ã¶rneÄŸi.
         1.05.09. Object Keys, Values, Entries
-            js10509.html: Nesne anahtarları, değerleri ve içerikleri örneği.
+            js10509.html: Nesne anahtarlarÄ±, deÄŸerleri ve iÃ§erikleri Ã¶rneÄŸi.
         1.05.10. Destructuring Assignment
-            js10510.html: Dizilerin veya nesnelerin yeniden yapılandırılması örneği.
+            js10510.html: Dizilerin veya nesnelerin yeniden yapÄ±landÄ±rÄ±lmasÄ± Ã¶rneÄŸi.
         1.05.11. Date and Time
-            js10511.html: Tarih ve zaman metodları örneği.
+            js10511.html: Tarih ve zaman metodlarÄ± Ã¶rneÄŸi.
         1.05.12. JSON Methods, to JSON
-            js10512.html: JSON metodları örneği.
+            js10512.html: JSON metodlarÄ± Ã¶rneÄŸi.
     1.06. Advanced Working with Functions
         1.06.01. Recursion and Stack
-            js10601.html: Özyinelemeli fonksiyonlar ve yığın adresi örneği.
+            js10601.html: Ã–zyinelemeli fonksiyonlar ve yÄ±ÄŸÄ±n adresi Ã¶rneÄŸi.
         1.06.02. Rest Parameters and Spread Operator
-            js10602.html: 3 noktalı artık parametreler ve yaygın işlemci örneği.
+            js10602.html: 3 noktalÄ± artÄ±k parametreler ve yaygÄ±n iÅŸlemci Ã¶rneÄŸi.
         1.06.03. Closure
-            js10603.html: Fonksiyon içinden çevre değişkenlere erişim ve kapatma örneği.
+            js10603.html: Fonksiyon iÃ§inden Ã§evre deÄŸiÅŸkenlere eriÅŸim ve kapatma Ã¶rneÄŸi.
         1.06.04. The Old "var"
-            js10604.html: Değişken tanımındaki let ile eski var arasındaki farklar örneği.
+            js10604.html: DeÄŸiÅŸken tanÄ±mÄ±ndaki let ile eski var arasÄ±ndaki farklar Ã¶rneÄŸi.
         1.06.05. Global Object
-            js10605.html: Her taraftan erişilebilen global nesne örneği.
+            js10605.html: Her taraftan eriÅŸilebilen global nesne Ã¶rneÄŸi.
         1.06.06. Function Object, NFE
-            js10606.html: Fonksiyon özellikleri ve adlı fonksiyon ifadesi örneği.
+            js10606.html: Fonksiyon Ã¶zellikleri ve adlÄ± fonksiyon ifadesi Ã¶rneÄŸi.
         1.06.07. The "new Function" Syntax
-            js10607.html: Fonksiyonları "new Function()" metoduyla yaratma örneği.
+            js10607.html: FonksiyonlarÄ± "new Function()" metoduyla yaratma Ã¶rneÄŸi.
         1.06.08. Scheduling: setTimeout and setInterval
-            js10608.html: Sonra işletilen setTimeout/Interval metodları örneği.
+            js10608.html: Sonra iÅŸletilen setTimeout/Interval metodlarÄ± Ã¶rneÄŸi.
         1.06.09. Decorators and Forwarding, call/apply
-            js10609.html: Sarmalayıcı dekoratör ve call/apply örneği.
+            js10609.html: SarmalayÄ±cÄ± dekoratÃ¶r ve call/apply Ã¶rneÄŸi.
         1.06.10. Function Binding
-            js10610.html: Kaybolan this için fonksiyon bind/bağlama örneği.
+            js10610.html: Kaybolan this iÃ§in fonksiyon bind/baÄŸlama Ã¶rneÄŸi.
         1.06.11. Arrow Functions Revisited
-            js10611.html: Oklu fonksiyonlar örneği.
+            js10611.html: Oklu fonksiyonlar Ã¶rneÄŸi.
     1.07. Object Properties Configuration
         1.07.01. Property Flags and Descriptors
-            js10701.html: Nesne özelliklerinin yazılabilir, taranabilir ve şekillendirilebilir vasıfları örneği.
+            js10701.html: Nesne Ã¶zelliklerinin yazÄ±labilir, taranabilir ve ÅŸekillendirilebilir vasÄ±flarÄ± Ã¶rneÄŸi.
         1.07.02. Property Getters and Setters
-            js10702.html: Nesnenin alıcı ve koyucu erişim özellikleri örneği.
+            js10702.html: Nesnenin alÄ±cÄ± ve koyucu eriÅŸim Ã¶zellikleri Ã¶rneÄŸi.
     1.08. Prototypes, Inheritance
         1.08.01. Prototypal Inheritance
-            js10801.html: Alttan üste hiyerarşik prototipsel miras örneği.
+            js10801.html: Alttan Ã¼ste hiyerarÅŸik prototipsel miras Ã¶rneÄŸi.
         1.08.02. F.Prototype
-            js10802.html: Kurucu fonksiyonda mirassal prototip referanslama örneği.
+            js10802.html: Kurucu fonksiyonda mirassal prototip referanslama Ã¶rneÄŸi.
         1.08.03. Native Prototypes
-            js10803.html: Hazır arşiv nesnelerine prototype ile yerli özellikler ekleme örneği.
+            js10803.html: HazÄ±r arÅŸiv nesnelerine prototype ile yerli Ã¶zellikler ekleme Ã¶rneÄŸi.
         1.08.04. Prototype Methods, Objects without __proto__
-            js10804.html: Eski __proto__'suz modern prototip metodları örneği.
+            js10804.html: Eski __proto__'suz modern prototip metodlarÄ± Ã¶rneÄŸi.
     1.09. Classes
         1.09.01. Class Basic Syntax
-            js10901.html: Sınıf/class kurucu şablonu ve nesneleri, özellikleri ve metodları örneği.
+            js10901.html: SÄ±nÄ±f/class kurucu ÅŸablonu ve nesneleri, Ã¶zellikleri ve metodlarÄ± Ã¶rneÄŸi.
         1.09.02. Class Inheritance
-            js10902.html: Sınıf ve ebeveyn/yavru miras ilişkisi örneği.
+            js10902.html: SÄ±nÄ±f ve ebeveyn/yavru miras iliÅŸkisi Ã¶rneÄŸi.
         1.09.03. Static Properties and Methods
-            js10903.html: Sınıfların statik özellik ve metodları örneği.
+            js10903.html: SÄ±nÄ±flarÄ±n statik Ã¶zellik ve metodlarÄ± Ã¶rneÄŸi.
         1.09.04. Private and Protected Properties and Methods
-            js10904.html: Nesnelerin özel ve korumalı metod ve özellikleri örneği.
+            js10904.html: Nesnelerin Ã¶zel ve korumalÄ± metod ve Ã¶zellikleri Ã¶rneÄŸi.
         1.09.05. Extending Built-in Classes
-            js10905.html: Hazır arşiv sınıfların extends'le miraslanması örneği.
+            js10905.html: HazÄ±r arÅŸiv sÄ±nÄ±flarÄ±n extends'le miraslanmasÄ± Ã¶rneÄŸi.
         1.09.06. Class Checking: "instanceof"
-            js10906.html: Yaratılan nesne tiplemelerinin instanceof ile ait olabilecekleri sınıfların kontrolu örneği.
+            js10906.html: YaratÄ±lan nesne tiplemelerinin instanceof ile ait olabilecekleri sÄ±nÄ±flarÄ±n kontrolu Ã¶rneÄŸi.
         1.09.07. Mixins
-            js10907.html: Tikel extends kalıtsallığına mixin çoklu metod karışımları örneği.
+            js10907.html: Tikel extends kalÄ±tsallÄ±ÄŸÄ±na mixin Ã§oklu metod karÄ±ÅŸÄ±mlarÄ± Ã¶rneÄŸi.
     1.10. Error Handling
         1.10.01. Error Handling, "try..catch"
-            js11001.html: Hata yakalayan try-catch-finally blokları örneği.
+            js11001.html: Hata yakalayan try-catch-finally bloklarÄ± Ã¶rneÄŸi.
         1.10.02. Custom Errors, Extending Error
-            js11002.html: Hata yakalamayı 'extends Error' ile genişletme örneği.
+            js11002.html: Hata yakalamayÄ± 'extends Error' ile geniÅŸletme Ã¶rneÄŸi.
     1.11. Promises, async/await
         1.11.01. Introduction: Callbacks
-            js11101.html: Fonksiyon argümanında içiçe geriçağırma ve hata yakalama örneği.
+            js11101.html: Fonksiyon argÃ¼manÄ±nda iÃ§iÃ§e geriÃ§aÄŸÄ±rma ve hata yakalama Ã¶rneÄŸi.
         1.11.02. Promise
-            js11102.html: Üretenin ve tüketenin taleplerini karşılayan promise/vaat nesnesi örneği.
+            js11102.html: Ãœretenin ve tÃ¼ketenin taleplerini karÅŸÄ±layan promise/vaat nesnesi Ã¶rneÄŸi.
         1.11.03. Promises Chaining
-            js11103.html: Çoklu vaat.then ile Promise zinciri örneği.
-            js11103x1.css: Stilleri içeren CSS kodlaması alt-örneği.
-            js11103x1.js: Programdan fetch/getir Promise'le çağrılan JS kodlaması alt-örneği.
-            js11103x2.js: Programdan fetch/getir Promise'le çağrılan JS kodlaması alt-örneği.
-            js11103x3.js: Programdan fetch/getir Promise'le çağrılan JS kodlaması alt-örneği.
+            js11103.html: Ã‡oklu vaat.then ile Promise zinciri Ã¶rneÄŸi.
+            js11103x1.css: Stilleri iÃ§eren CSS kodlamasÄ± alt-Ã¶rneÄŸi.
+            js11103x1.js: Programdan fetch/getir Promise'le Ã§aÄŸrÄ±lan JS kodlamasÄ± alt-Ã¶rneÄŸi.
+            js11103x2.js: Programdan fetch/getir Promise'le Ã§aÄŸrÄ±lan JS kodlamasÄ± alt-Ã¶rneÄŸi.
+            js11103x3.js: Programdan fetch/getir Promise'le Ã§aÄŸrÄ±lan JS kodlamasÄ± alt-Ã¶rneÄŸi.
         1.11.04. Error Handling with Promises
-            js11104.html: Promise vaatlerde then-catch'lerle hata yönetimi örneği.
+            js11104.html: Promise vaatlerde then-catch'lerle hata yÃ¶netimi Ã¶rneÄŸi.
         1.11.05. Promise API
-            js11105.html: Promise statik metodları (all, allSettled, race, resolve, reject) örneği.
+            js11105.html: Promise statik metodlarÄ± (all, allSettled, race, resolve, reject) Ã¶rneÄŸi.
         1.11.06. Promisification
-            js11106.html: Başka metodları Promise'leme veya Promise'le sarmalama örneği.
+            js11106.html: BaÅŸka metodlarÄ± Promise'leme veya Promise'le sarmalama Ã¶rneÄŸi.
         1.11.07. Microtasks
-            js11107.html: Asenkron Promise.then.catch.finally işlem sıralamasında öncelikli mikrogörevler  örneği.
+            js11107.html: Asenkron Promise.then.catch.finally iÅŸlem sÄ±ralamasÄ±nda Ã¶ncelikli mikrogÃ¶revler  Ã¶rneÄŸi.
         1.11.08. Async/await
-            js11108.html: Asenkron fonksiyonlarda kullanılan await promise sonuçlanmasını bekletme örneği.
+            js11108.html: Asenkron fonksiyonlarda kullanÄ±lan await promise sonuÃ§lanmasÄ±nÄ± bekletme Ã¶rneÄŸi.
     1.12. Generators, Advanced Iteration
         1.12.01. Generators
-            js11201.html: İstenildiği kadar ardışık değer döndürebilen yield/ürün üreteçleri örneği.
+            js11201.html: Ä°stenildiÄŸi kadar ardÄ±ÅŸÄ±k deÄŸer dÃ¶ndÃ¼rebilen yield/Ã¼rÃ¼n Ã¼reteÃ§leri Ã¶rneÄŸi.
         1.12.02. Async Iterators and Generators
-            js11202.html: Asenkron tekrarlayıcılar ve üreteçler örneği.
-    1.13. Modules
+            js11202.html: Asenkron tekrarlayÄ±cÄ±lar ve Ã¼reteÃ§ler Ã¶rneÄŸi.
+        1.13. Modules
         1.13.01. Modules, Introduction
+            js11301.html: Kompleks Javascript taslaklarÄ±nda uygulanan modÃ¼ller  Ã¶rneÄŸi.
+            js11301x1.js: Normal script src ile Ã§aÄŸrÄ±labilen fonksiyon alt-Ã¶rneÄŸi.
+            js11301x2.js: ModÃ¼ler script import ile Ã§aÄŸrÄ±labilen export fonksiyon/sÄ±nÄ±f/deÄŸiÅŸken/dizi alt-Ã¶rneÄŸi.
         1.13.02. Export and Import
+            js11302.html: Daha derinlemesine modÃ¼l export ve import Ã¶rneÄŸi.
+            js11302x1.js: Export default class KullanÄ±cÄ± sÄ±nÄ±fÄ± alt-Ã¶rneÄŸi.
+            js11302x2.js: Ä°simsiz export default class sÄ±nÄ±fÄ± alt-Ã¶rneÄŸi.
         1.13.03. Dynamic Imports
     1.14. Miscellaneous
         1.14.01. Proxy and Reflect
+            js11401.html: Proxy nesne sarÄ±cÄ± ve Reflect hazÄ±r nesnesi Ã¶rneÄŸi.
         1.14.02. Eval: Run a Code String
+            js11402.html: eval fonksiyonuyla dizgesel kodlamayÄ± iÅŸletme Ã¶rneÄŸi.
         1.14.03. Currying
+            js11403.html: curry ile argÃ¼manlarÄ±n ayrÄ±ÅŸtÄ±rÄ±lmasÄ± Ã¶rneÄŸi.
 
 2. Browser: Document, Events, Interfaces
     2.01. Document

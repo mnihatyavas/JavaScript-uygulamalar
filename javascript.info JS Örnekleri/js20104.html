@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20104.html: getElement ve querySelector ile html sayfasýnda DOM elemaný arama örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Eleman Arama</h3>
+    <p id="göster">Paragraf</p>
+
+    <div id="divElemaný">
+        <div id="divEleman-Ýçeriði">DIV Eleman Açýklamasý</div>
+    </div>
+
+    <ul><li>1.</li><li>2.</li></ul>
+    <ul><li>a.</li></ul>
+    <ul><li>a1.</li><li>a2.</li><li>a3.</li></ul>
+
+    <a href="https://github.com/mnihatyavas/Download-files/blob/master/epub.rar" target="_">epub.rar romanlarý</a>
+    <a href="https://github.com/mnihatyavas/JavaScript-uygulamalar"  target="_">JavaScript örnekleri</a>
+
+    <div class="içindekiler">
+        <ul class="kitap">
+            <li class="bölüm">Bölüm 1</li>
+            <li class="bölüm">Bölüm 2</li>
+        </ul>
+    </div>
+
+    <table id="tablom">
+        <tr>
+            <td>Yaþýnýz:</td>
+            <td>
+                <label>
+                    <input type="radio" name="yaþ" value="genç"> 18'den küçük
+                </label>
+                <label>
+                    <input type="radio" name="yaþ" value="yetiþkin"> 18 - 60 arasý
+                </label>
+                <label>
+                    <input type="radio" name="yaþ" value="yaþlý" checked> 60'dan büyük
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <form name="formum" id="forma">
+        <div class="makale">Makale</div>
+        <div class="kýsa makale">Kýsa Makale</div>
+    </form>
+
+    <hr/>
+    <form name="araþtýr">
+        <label>Siteyi araþtýrýn:
+            <input type="text" name="araþtýr">
+        </label>
+        <input type="submit" value="Araþtýrýn!">
+    </form>
+    <hr>
+    <form name="araþtýrýlan-þahýs">
+        Ziyaretçileri araþtýrýn:
+        <table id="yaþ-tablosu">
+            <tr>
+                <td>Yaþ:</td>
+                <td id="yaþ-listesi">
+                    <label><input type="radio" name="yaþ" value="Genç">18 yaþýndan küçük</label>
+                    <label><input type="radio" name="yaþ" value="Yetiþkin" checked>18 - 60 yaþ arasý</label>
+                    <label><input type="radio" name="yaþ" value="Yaþlý">60 yaþýndan büyük</label>
+                </td>
+            </tr>
+            <tr>
+                <td>Ýlaveten:</td>
+                <td>
+                    <input type="text" name="bilgi [0]">
+                    <input type="text" name="bilgi [1]">
+                    <input type="text" name="bilgi [2]">
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Araþtýr!">
+    </form>
+    <hr/>
+
+    <script>
+        function fonk2() {
+            let eleman = document.getElementById ('divElemaný');
+            eleman.style.backgroundColor = 'DarkRed';
+
+            window ["divElemaný"].style.color = 'Coral';
+
+            console.log (window ["divEleman-Ýçeriði"].innerHTML);
+
+            console.log (window ["divElemaný"]);
+            let divElemaný = 2020;
+            console.log (divElemaný);
+            try {divElemaný.style.color = 'Blue';}catch (ist) {console.log ("HATA: " + ist.message);}
+        } // func sonu...
+        function fonk3() {
+            let elemanlar = document.querySelectorAll ('ul > li:last-child');
+            for (let eleman of elemanlar) {console.log (eleman.innerHTML);} // "2.", "a.", "a3"
+
+            console.log (document.querySelectorAll ('ul > li:last-child') [0].innerHTML ); // 2.
+            console.log (document.querySelector ('ul > li:last-child').innerHTML ); // 2.
+        } // func sonu...
+        function fonk4() {
+            for (let eleman of document.querySelectorAll ('a') ) {
+                if (eleman.matches ('a[href$=".rar"]') ) {console.log ("Bulunan arþiv referansý: " + eleman.href);}
+            } // for sonu...
+        } // func sonu...
+        function fonk5() {
+            let bölüm = document.querySelector ('.bölüm'); // LI
+            console.log (bölüm.closest ('.kitap') ); // UL
+            console.log (bölüm.closest ('.içindekiler') ); // DIV
+            console.log (bölüm.closest ('h3') ); // nul <== h3 LI'nin ebeveyni deðildir...
+        } // func sonu...
+        function fonk6() {
+            let bölümler = document.getElementsByTagName ('div');
+            for (let bölüm of bölümler) {console.log (bölüm);}
+
+            let girdiler = tablom.getElementsByTagName ('input');
+            for (let girdi of girdiler) {console.log (girdi.value + ': ' + girdi.checked);}
+
+            tablom.getElementsByTagName ('input') [0].value = 5;
+            tablom.getElementsByTagName ('input') [0].checked = true;
+            console.log (tablom.getElementsByTagName ('input') [0].value + ': ' + tablom.getElementsByTagName ('input') [0].checked);
+
+            //let form0 = document.getElementsByName ('formum') [0];
+            let makaleler = forma.getElementsByClassName ('makale');
+            console.log (makaleler, makaleler.length); // 2
+        } // func sonu...
+        let bölümler = document.getElementsByTagName ('div');
+        console.log ("div adedi: " + bölümler.length); // 5
+        let bölümler2 = document.querySelectorAll ('div');
+        console.log ("div-2 adedi: " + bölümler2.length); // 5
+        function fonkö1() {
+            // 1. id="yaþ-tablosu" olan tabloyu bul...
+            let tablo = document.getElementById ('yaþ-tablosu');
+            // 2. Bu tablo içindeki tüm label elemanlarý göster...
+            console.log (tablo.getElementsByTagName ('label') ); // HTMLCollection(3) [label, label, label]
+            // yada...
+            console.log (document.querySelectorAll ('#yaþ-tablosu label') ); // NodeList(3) [label, label, label]
+            // 3. "Yaþ:" kelimesini içeren ilk td hücresini göster...
+            console.log (tablo.rows [0].cells [0] ); // <td>Yaþ:</td>
+            // yada...
+            console.log (tablo.getElementsByTagName ('td') [0] ); // <td>Yaþ:</td>
+            // yada..
+            console.log (tablo.querySelector ('td') ); // <td>Yaþ:</td>
+            // 4. "araþtýr" adlý formu bul...
+            // Dökümandaki ilk name="araþtýr" bulunsun...
+            let forma = document.getElementsByName ('araþtýr') [0];
+            // yada, daha vazih...
+            forma = document.querySelector ('form[name="araþtýr"]' );
+            // 5. Bu formadaki ilk input'u göster...
+            console.log (forma.getElementsByTagName ('input') [0] );
+            // yada...
+            console.log (forma.querySelector ('input') );
+            // 6. Bu formadaki son input'u göster...
+            let inputlar = forma.querySelectorAll ('input') // input'larýn tümünü bul...
+            console.log (inputlar [inputlar.length-1] ); // Sonuncuyu göster...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) DOM seyrüsefer özellikleri ardýþýk yumrularý aramada kullanýþlý olmasýna raðmen, geliþigüzel \
+            aramalarda yetersizdir ve baþka araþtýrma metolarýna gereksinim duyulur." +
+            "<br/>2) Eðer bir elemanýn id/kimlik adý varsa document.getElementById yada doðrudan aranabilir. \
+            id adýnda tire varsa window['a-b'] þeklinde eriþilebilir. id'le ayný adlý JS deðiþkeni olursa öncelik \
+            deðiþkendedir. Doðrudan id adý yerine document.getElementById tercih edilmelidir, zira deðiþken \
+            adlarýyla karýþtýrýlabilmektedir. Ayrýca ayný id adý farklý elemanlar için kullanýlmamalýdýr; geliþigüzel \
+            birine ulaþýlýr. " + fonk2() +
+            "<br/>3) document.querySelectorAll(css) verili CSS seçicisine uyanlarýn statik koleksiyonunu \
+            döndürür. querySelector(css) ise hýzlýca ilk rastladýðýný döndürür. " + fonk3() +
+            "<br/>4) eleman.matches(css) query gibi arayýp bulunaný yansýtmaz, sadece aranan css kriteri \
+            mevcutsa true, deðilse false döndürür. Benzer þekilde elamanA.contains(elemanB) yavrusu yada \
+            eþitse true döndürür. " + fonk4() +
+            "<br/>5) eleman.closest(css) aranan css kriterli elemanýn mevcutsa birüst ebeveynini deðilse null \
+            döndürür. " + fonk5() +
+            "<br/>6) Bugün güçlü document.querySelector varken diðerleri eski moda olmakla beraber konu \
+            gereði: eleman/document.getElementsByTagName/ClassName/Name. Bunlar koleksiyon olduðundan \
+            çoðul getElements yani s unutulmamalýdýr. Tekil eleman için endeksno kullanýlabilr. " + fonk6() +
+            "<br/>7) getElementsBy* koleksiyonu dinamik/canlý olup oto-güncellemelidir, querySelectorAll \
+            ise statik olup ilkden sonraki güncellemeleri deðiþtirmez. " +
+            "<br/>Ödev1) Heriki form örneðini ve kullanýlan açýklamalý aramalarý inceleyin. " + fonkö1()
+    </script>
+
+    <div>Ýlave div</div>
+    <script>
+        console.log ("div adedi: " + bölümler.length); // 6
+        console.log ("div-2 adedi: " + bölümler2.length); // 5
+    </script>
+</body>
+</html>

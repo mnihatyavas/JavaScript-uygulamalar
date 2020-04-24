@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20111.html: Elemanýn pencereye ve dökümana göre koordinatlarýný hesaplama örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        #örnek1 {
+            width: 300px;
+            height: 200px;
+            overflow: auto;
+            border: 25px solid #E8C48F;
+            padding: 20px;}
+
+        body {
+            padding: 20px 0 0 20px;
+            cursor: pointer;}
+        #saha {
+            overflow: hidden;
+            width: 200px;
+            height: 150px;
+            border-top: 10px solid black;
+            border-right: 10px solid gray;
+            border-bottom: 10px solid gray;
+            border-left: 10px solid black;
+            background-color: #00FF00;
+            font: 10px/1.2 monospace;}
+        .üçgenin-saðý {
+            position: relative;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 20px solid red;
+            text-indent: -20px;
+            font: 12px/1 monospace;}
+
+        .yüzerNot {
+            /* position: fixed; */ position: absolute;
+            z-index: 1000;
+            padding: 5px;
+            border: 1px solid black;
+            background: white;
+            text-align: center;
+            font: italic 14px serif;}
+        blockquote {
+            background: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 0 0 0 100px;
+            padding: .5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+            display: inline-block;
+            opacity: 0.8;
+            white-space: pre;}
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: .1em;
+            margin-right: .25em;
+            vertical-align: -.4em;}
+    </style>
+    <script>
+        document.onclick = function (o) {kordinatlar.innerHTML = "(" + o.clientX + ':' + o.clientY + ")";};
+</script>
+</head>
+<body style="margin-bottom:1000px;">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Elemanýn Koordinatlarý</h3>
+    <p id="göster">Paragraf</p>
+
+    <div id="örnek1">
+        <h3>Tanýtým</h3>
+        <br/>
+        <p>Bu Ecma Standardý, eniyi bilinenleri JavaScript (Netscape) ve JScript (Microsoft) olmak üzere birçok orijinal teknolojiler üzerine temellenmiþtir. JS programlama dili Netscape'deki Brendan tarafýndan icat edilmiþ ve ilk olarak ilgili þirketin Seyrüsefer 2.0 tarayýcýsýnda ortaya çýkarýlmýþtýr .
+            Müteakiben Netscape'in ve Internet Explorer 3.0'dan baþlayarak Microsoft'un tüm tarayýcýlarýnda kullanýlmýþtýr. Bu Standardýn geliþmesi 1996 Kasýmýnda baþlamýþtýr. Bu Ecma Standardýnýn ilk sürümü 1997 Haziran tarihli Ecma Genel Kurulunca benimsenmiþtir.</p>
+        <br/>
+        <p>That Ecma Standard was submitted to ISO/IEC JTC 1 for adoption under the fast-track procedure, and approved as international standard ISO/IEC 16262, in April 1998. The Ecma General Assembly of June 1998 approved the second edition of ECMA-262 to keep
+            it fully aligned with ISO/IEC 16262. Changes between the first and the second edition are editorial in nature.</p>
+        <br/>
+        <p>Standardýn üçüncü sürümü güçlü regex ifadelerini, daha iyi dizge yönetimini, yeni kontrol ifadelerini, try/catch istisna yönetimini, daha titiz hata tanýmýný, sayýsal çýktýlar biçimlenmesini ve geliþen uluslararasýlaþma olanaklar ile gelecekteki dil geliþimi beklentili küçük deðiþiklikleri
+            içermektedir. The third edition of the ECMAScript standard was adopted by the Ecma General Assembly of December 1999 and published as ISO/IEC 16262:2002 in June 2002.</p>
+    </div>
+    <input id="mesaj1" type="button" value="Týkla ve alta FIXED mesajý yansýt" onClick="fonk4();">
+    <input id="mesaj2" type="button" value="Týkla ve alta ABSOLUTE mesajý yansýt" onClick="fonk5();">
+    <br/><br/>
+    Pencere kordinatlarýný almak için herhangibir yere týklamanýz yeterlidir.
+    <br>
+    <div id="kordinatlar">(týklanan konum kordinatlarý burada görünecektir)</div>
+    <div id="saha">
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+    <div class="üçgenin-saðý" style="left:-20px; top:-176px">1</div>
+    <div class="üçgenin-saðý" style="left:-10px; top:-178px">3</div>
+    <div class="üçgenin-saðý" style="left:190px; top:-40px">4</div>
+    <div class="üçgenin-saðý" style="left:200px; top:-42px">2</div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+        esse sequi officia sapiente.</p>
+    <blockquote>
+        Teacher: Why are you late?
+        Student: There was a man who lost a hundred dollar bill.
+        Teacher: That's nice. Were you helping him look for it?
+        Student: No. I was standing on it.
+    </blockquote>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+        esse sequi officia sapiente.</p>
+
+    <script>
+        function fonk2() {
+            let domKutu = örnek1.getBoundingClientRect();
+            console.log ("Kaydýraçlý çerçevenin deðerleri: ", domKutu );
+            for (anahtar in domKutu) {console.log (anahtar + ": " + domKutu [anahtar]);}
+        } // func sonu...
+        function fonk3() {
+            let merkezX = document.documentElement.clientWidth / 2;
+            let merkezY = document.documentElement.clientHeight / 2;
+            let eleman = document.elementFromPoint (merkezX, merkezY);
+            eleman.style.background = "Brown";
+            console.log (eleman.tagName + "=(" + merkezX + ", " + merkezY + ")");
+
+            console.log (document.elementFromPoint (-5, merkezY) );
+            try {console.log (document.elementFromPoint (-5, merkezY).tagName);}catch (ist) {console.log (ist.message);}
+        } // func sonu...
+        function fonk4() {
+            function mesajýYarat (elm, dizge) {
+                let mesaj = document.createElement ('div');
+                mesaj.style.cssText = "position:fixed; color: DeepPink; font-weight:bold; font-size:50px;";
+                let kordinatlar = elm.getBoundingClientRect();
+                mesaj.style.left = kordinatlar.left + "px";
+                mesaj.style.top = kordinatlar.bottom + "px";
+                mesaj.innerHTML = dizge;
+                return mesaj;
+            } // func sonu...
+            let eleman = document.getElementById ("mesaj1");
+            let mesajým = mesajýYarat (eleman, "Merhabalar, Dünya!");
+            document.body.append (mesajým);
+            setTimeout ( () => mesajým.remove(), 5000)
+        } // func sonu...
+        function fonk5() {
+            function kordinatlarýAl (elm) {
+                let kutu = elm.getBoundingClientRect();
+                return {
+                    top: kutu.top + pageYOffset,
+                    left: kutu.left + pageXOffset
+                };
+            } // func sonu...
+            function mesajýYarat (elm, dizge) {
+                let mesaj = document.createElement ('div');
+                mesaj.style.cssText = "position:absolute; color: Orange; font-size:40px;";
+                let kordinatlar = kordinatlarýAl (elm);
+                mesaj.style.left = kordinatlar.left + "px";
+                mesaj.style.top = kordinatlar.top + 20 + "px";
+                mesaj.innerHTML = dizge;
+                return mesaj;
+            } // func sonu...
+            let eleman = document.getElementById ("mesaj2");
+            let mesajým = mesajýYarat (eleman, "Merhabalar, Dünyaya!..");
+            document.body.append (mesajým);
+            setTimeout ( () => mesajým.remove(), 5000)
+        } // func sonu...
+        function fonkö1() {
+            let sahaKordinatlarý = saha.getBoundingClientRect();
+            let cevap = [
+                [ // 1
+                    sahaKordinatlarý.left,
+                    sahaKordinatlarý.top],
+                [ // 2
+                    sahaKordinatlarý.right,
+                    sahaKordinatlarý.bottom],
+                [ // 3
+                    sahaKordinatlarý.left + saha.clientLeft,
+                    sahaKordinatlarý.top + saha.clientTop],
+                [ // 4
+                    sahaKordinatlarý.left + saha.clientLeft + saha.clientWidth,
+                    sahaKordinatlarý.top + saha.clientTop + saha.clientHeight]
+            ]; // let sonu...
+            console.log ("Sahanýn 1, 2, 3 ve 4.kordinatlarý: [" + cevap.join ('; ') + "]");
+        } // func sonu...
+        function fonkö2() {
+            function konumlandýr (bnot, knm, elm) {
+                let notKordinatlarý = bnot.getBoundingClientRect();
+                switch (knm) {
+                    case "üst":
+                        elm.style.left = notKordinatlarý.left + "px";
+                        elm.style.top = notKordinatlarý.top - elm.offsetHeight + "px";
+                        break;
+                    case "sað":
+                        elm.style.left = notKordinatlarý.left + bnot.offsetWidth + "px";
+                        elm.style.top = notKordinatlarý.top + "px";
+                        break;
+                    case "alt":
+                        elm.style.left = notKordinatlarý.left + "px";
+                        elm.style.top = notKordinatlarý.top + bnot.offsetHeight + "px";
+                        break;
+                    } // swi..sonu...
+                } // funk sonu...
+                function notuGöster (bnot, konum, yüzer) {
+                    let notum = document.createElement ('div');
+                    notum.className = "yüzerNot";
+                    notum.innerHTML = yüzer;
+                    document.body.append (notum);
+                    konumlandýr (bnot, konum, notum);
+                } // func sonu...
+                let alýntý = document.querySelector('blockquote');
+                notuGöster (alýntý, "üst", "YüzerNot: Üstte");
+                notuGöster (alýntý, "sað", "YüzerNot: Saðda");
+                notuGöster (alýntý, "alt", "YüzerNot: Altta");
+        } // func sonu...
+        function fonkö4() {
+            function bloknotKordinatlarýnýAl (b) {
+                let kutu = b.getBoundingClientRect();
+                return {
+                    top: kutu.top + pageYOffset,
+                    left: kutu.left + pageXOffset
+                }; // ret..sonu...
+            } // func sonu...
+            function yüzerNotuKonumlandýr (bn, knm, yn) {
+                let bloknotKordinatlarý = bloknotKordinatlarýnýAl (bn);
+                switch (knm) {
+                    case "üst-dýþarý":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top - yn.offsetHeight + "px";
+                        break;
+                    case "sað-dýþarý":
+                        yn.style.left = bloknotKordinatlarý.left + bn.offsetWidth + "px";
+                        yn.style.top = bloknotKordinatlarý.top + "px";
+                        break;
+                    case "alt-dýþarý":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top + bn.offsetHeight + "px";
+                        break;
+                    case "üst-içeri":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top + "px";
+                        break;
+                    case "sað-içeri":
+                        yn.style.width = '150px';
+                        yn.style.left = bloknotKordinatlarý.left + bn.offsetWidth - yn.offsetWidth + "px";
+                        yn.style.top = bloknotKordinatlarý.top + "px";
+                        break;
+                    case "alt-içeri":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top + bn.offsetHeight - yn.offsetHeight + "px";
+                        break;
+                } // swi..sonu...
+            } // func sonu...
+            function yüzerNotuGöster (bnot, konum, yüzerNot) {
+                let notum = document.createElement ('div');
+                notum.className = "yüzerNot";
+                notum.innerHTML = yüzerNot;
+                document.body.append (notum);
+                yüzerNotuKonumlandýr (bnot, konum, notum);
+            } // func sonu...
+            let bloknot = document.querySelector ('blockquote');
+            yüzerNotuGöster (bloknot, "üst-içeri", "YüzerNot: ÜstÝçeri");
+            yüzerNotuGöster (bloknot, "üst-dýþarý", "YüzerNot: ÜstDýþarý");
+            yüzerNotuGöster (bloknot, "sað-içeri", "YüzerNot: SaðÝçeri");
+            yüzerNotuGöster (bloknot, "sað-dýþarý", "YüzerNot: SaðDýþarý");
+            yüzerNotuGöster (bloknot, "alt-içeri", "YüzerNot: AltÝçeri");
+            yüzerNotuGöster (bloknot, "alt-dýþarý", "YüzerNot: AltDýþarý");
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Pencerenin sol-üstüne göreli (position:fixed) koordinatlarda clientX/clientY; dökümanýn sol-üstüne \
+            (position:absolute) görelilerde ise pageX/pageY kullanýlacaktýr. Döküman kaydýrmamýþsa bu özellikler ayný, \
+            kaydýrýlmýþsa, pencere ayný, fakat döküman clientY deðiþmiþtir." +
+            "<br/>2) eleman.getBoundingClientRect() metoduyla pencereye göreli x/y=left/top ile elemanýn \
+            width/height=en/boy deðerleri alýnýr. Bunlardan da sað=x+width ve alt=y+height türetilir. " + fonk2() +
+            "<br/>3) document.elementFromPoint(x,y) metodu kaydýrýlabilen dökümanýn belirtilen kordinatýndaki \
+            elemaný (BODY, HTML, DIV, vb) yakalar. Koordinatlar negatif yada görünür alan dýþýysa null döner. " + fonk3() +
+            "<br/>4) position:fixed ile sayfa kaysa da eleman hep pencerenin ayný konumunda sabit kalýr; sayfayla \
+            beraber kaymasý istenirse position:absolute yapýlmalýdýr." +
+            "<br/>5) Fixed yerine absolute kordinatlar istendiðinde sabit pencereye göre deðil, kayabilen dökümana \
+            göre pageYOffset ve pageXOffset eklenmelidir." +
+            "<br/>Ödev1) Sayfanýn týklanan her kordinatýný, saha kenarlarýna ait üçgen iþaretle gösterilen kordinatlarý \
+            yansýtan kodlamayý yazýn.  (Ancak body style margin deðerleri ve diðer sayfa elemanlarýnýn katkýsýný \
+            karýþtýrýyor, onlarýn telafisi de programýn genelleþmesini bozuyor...)" + fonkö1() +
+            "<br/>Ödev2) blockquote üst, alt ve saðýnda 3 adet küçük yüzer not iliþtirin. Kordinatlarýn yakalanmasý \
+            için bloknotun pencerede görünür olmasýna dikkat edin. " + fonkö2() +
+            "<br/>Ödev3) Ayný alýntýyý bu kez position:absolute dökümana ilintileyin. Sadece önceki programdaki \
+            CSS/style->yüzerNot->position:fixed yerine position:absolute deðiþtirin. (Aradaki diðer elemanlar \
+            nedeniyle yüzernotlar alýntýdan yukarda yansýr; istenirse y kordinatýna uygun ekleme yapýlabilir.)" +
+            "<br/>Ödev4) Yüzer notlarý daha teferruatlý üst-içeri/dýþarý, alt-içeri/dýþarý ve sað-içeri/dýþarý olmak \
+            üzere toplam 6 adet (absolute) konumlandýrýn. (Ýsterseniz ara eleman telafisini ayarlayýn.) " + fonkö4()
+    </script>
+</body>
+</html>

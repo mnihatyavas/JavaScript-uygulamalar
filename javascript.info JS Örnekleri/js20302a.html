@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js20302a.html: Saat göstergesi üzerindeki akýllý ipucu ödev alt-örneði.</title>
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <link rel="stylesheet" href="js20302a1.css">
+    <script src="js20302a2.js"></script>
+    <script src="js20302a3.js"></script>
+    <script src="js20302a4.js"></script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Akýllý Aletipucu</h3>
+    <p id="göster">Paragraf</p>
+
+    <div id="elem" class="clock">
+        <span class="hours">12</span> :
+        <span class="minutes">30</span> :
+        <span class="seconds">00</span>
+    </div>
+    <hr/>
+    <div id="tooltip" hidden>Tooltip</div>
+
+    <script>
+        function fonkö2() {
+            setTimeout (function() {
+                new HoverIntent ({
+                    elem,
+                    over() {
+                        tooltip.style.left = elem.getBoundingClientRect().left + 5 + 'px';
+                        tooltip.style.top = elem.getBoundingClientRect().bottom + 5 + 'px';
+                        tooltip.hidden = false;
+                    }, // over sonu...
+                    out() {tooltip.hidden = true;}
+                }); // new sonu...
+            }, 2000); // set..onu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "Ödev2) Saat üzerinden hýzlý geçilirse ipucu görünmez, yavaþ geçilir yada üzerinde durulursa \
+            ipucu görünecektir. Programýn diðer parçalarý link/src olarak baðlanacaktýr." + fonkö2()
+
+    </script>
+</body>
+</html>

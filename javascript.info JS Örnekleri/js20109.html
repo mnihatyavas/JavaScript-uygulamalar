@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20109.html: Taþýma ve konumlandýrmada gereken eleman ebatý ve taþan metni kaydýrma örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        * {margin: 0;
+            padding: 0;}
+        #örnek1 {
+            width: 300px;
+            height: 200px;
+            overflow: auto;
+            border: 25px solid #E8C48F;
+            padding: 20px;}
+        .anahtar {
+            cursor: pointer;
+            text-decoration: underline;}
+
+        #saha {
+            width: 300px;
+            border: 10px groove black;
+            background-color: #00FF00;
+            position: relative;}
+        #futbolTopu {position: absolute;}
+    </style>
+    <script></script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Eleman Ebatý ve Kaydýrma</h3>
+    <p id="göster">Paragraf</p>
+    <br/>
+
+    <div id="örnek1">
+        <h3>Tanýtým</h3>
+        <br/>
+        <p>Bu Ecma Standardý, eniyi bilinenleri JavaScript (Netscape) ve JScript (Microsoft) olmak üzere birçok orijinal teknolojiler üzerine temellenmiþtir. JS programlama dili Netscape'deki Brendan tarafýndan icat edilmiþ ve ilk olarak ilgili þirketin Seyrüsefer 2.0 tarayýcýsýnda ortaya çýkarýlmýþtýr .
+            Müteakiben Netscape'in ve Internet Explorer 3.0'dan baþlayarak Microsoft'un tüm tarayýcýlarýnda kullanýlmýþtýr. Bu Standardýn geliþmesi 1996 Kasýmýnda baþlamýþtýr. Bu Ecma Standardýnýn ilk sürümü 1997 Haziran tarihli Ecma Genel Kurulunca benimsenmiþtir.</p>
+        <br/>
+        <p>That Ecma Standard was submitted to ISO/IEC JTC 1 for adoption under the fast-track procedure, and approved as international standard ISO/IEC 16262, in April 1998. The Ecma General Assembly of June 1998 approved the second edition of ECMA-262 to keep
+            it fully aligned with ISO/IEC 16262. Changes between the first and the second edition are editorial in nature.</p>
+        <br/>
+        <p>Standardýn üçüncü sürümü güçlü regex ifadelerini, daha iyi dizge yönetimini, yeni kontrol ifadelerini, try/catch istisna yönetimini, daha titiz hata tanýmýný, sayýsal çýktýlar biçimlenmesini ve geliþen uluslararasýlaþma olanaklar ile gelecekteki dil geliþimi beklentili küçük deðiþiklikleri
+            içermektedir. The third edition of the ECMAScript standard was adopted by the Ecma General Assembly of December 1999 and published as ISO/IEC 16262:2002 in June 2002.</p>
+    </div>
+
+    <div id="fare-ambalajý">Fare koordinatlarý: <span id="fare">...</span></div>
+    <div id="bilgi"></div>
+
+    <u>scrollBottom (çift týkla):</u> <span id="örnek3"></span>
+    <br/><br/>
+    <img src="resim/element1.png" height="300" alt=""/>
+    <img src="resim/element2.png" height="300" alt=""/><br/>
+
+    <main style="position: relative" id="esas">
+        <article>
+            <div id="örnek2" style="position: absolute; left: 100px; top: 5px;">M.Nihat Yavaþ</div>
+        </article>
+    </main>
+    <br/><br/>
+    <div id="saha">
+        <img src="resim/top.png" width="100" height="100" id="futbolTopu"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script>
+        function fonk2() {
+            let özellikler = {
+                geometri: ['clientLeft', 'clientTop', 'clientWidth', 'clientHeight', 'offsetWidth', 'offsetHeight', 'scrollWidth', 'scrollHeight'],
+                kaydýraç: ['scrollLeft', 'scrollTop'],
+                ebeveynTelafisi: ['offsetParent', 'offsetLeft', 'offsetTop']
+            }; // let sonu...
+            bilgi.innerHTML = '<h3>Deðerleri görmek isterseniz týklayýn:</h3>';
+            for (let k in özellikler) {
+                bilgi.innerHTML += `<h4>${k}</h4>`;
+                let özellik = özellikler [k];
+                for (let i = 0; i < özellik.length; i++) {
+                    bilgi.innerHTML += "<span class='anahtar'>" + özellik [i] + '</span>: <span id="' + özellik [i] + '">&nbsp;</span>' + " "
+                    i++;
+                    if (i < özellik.length) {bilgi.innerHTML += "<span class='anahtar'>" + özellik [i] + '</span>: <span id="' + özellik [i] + '">&nbsp;</span>';}
+                    bilgi.innerHTML += "<br/>";
+                } // iç-for sonu...
+            } // dýþ-for sonu...
+            document.onclick = function (olay) {
+                let sonuç = olay.target;
+                if (! sonuç.classList.contains ('anahtar') ) return;
+                let özellik = sonuç.innerHTML;
+                let deðer = örnek1 [özellik];
+                deðer = deðer.tagName || deðer;
+                document.getElementById (özellik).innerHTML = deðer;
+            }; // doc..sonu...
+            document.onmousemove = function (o) {document.getElementById ('fare').innerHTML = Math.round (o.clientX) + ':' + Math.round (o.clientY);};
+        } // func sonu...
+        function fonk3() {
+            console.log (örnek2.offsetParent.id); // esas
+            console.log (örnek2.offsetLeft); // 100 (sayý deðil dizge "100px")
+            console.log (örnek2.offsetTop); // 20
+        } // func sonu...
+        function fonk4() {
+            function gizliMi (e) {return !e.offsetWidth && !e.offsetHeight;}
+            console.log ("Çerçeveli eleman gizli mi? " + gizliMi (örnek1) );
+
+            console.log ("Sað kaydýraçlý en: " + getComputedStyle (örnek1).width );
+
+            örnek1.style.height = `${örnek1.scrollHeight}px`; // Yüksekliði tüm metni göterecek þekilde artýrýr...
+            setTimeout ( ()=> {örnek1.style.height = "200px"; örnek1.scrollTop = "500";}, 5000);
+            console.log ("Kaydýraçsýz en: " + getComputedStyle (örnek1).width );
+        } // func sonu...
+        function fonkö1() {
+            document.ondblclick = function (o) {document.getElementById ("örnek3").innerHTML = 
+                (örnek1.scrollHeight - örnek1.scrollTop - örnek1.clientHeight);}
+        } // func sonu...
+        function fonkö2() {
+            let bölüm = document.createElement ('div');
+            bölüm.style.overflowY = 'scroll';
+            bölüm.style.width = '50px';
+            bölüm.style.height = '50px';
+            document.body.append (bölüm);
+            let kaydýraçEni = bölüm.offsetWidth - bölüm.clientWidth;
+            bölüm.remove();
+            console.log ("Kaydýraç eni: " + kaydýraçEni);
+        } // func sonu...
+        function fonkö3() {
+            futbolTopu.style.left = Math.round (saha.clientWidth / 2 - futbolTopu.offsetWidth / 2) + 'px';
+            futbolTopu.style.top = Math.round (saha.clientHeight / 2 - futbolTopu.offsetHeight / 2) + 'px';
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Elemanlarýn en, boy, vb özelliklerini veren, onlarý taþýmakta ve konumlamakta kullanýlan birçok \
+            JS DOM özelliði mevcuttur." +
+            "<br/>2) Bir elemanýn CSS ebatlarýný belirlerken en deðerinden, taþma durumunda sað kaydýraç \
+            için 17px düþülerek 300-17=283px alýnmalýdýr. Ayrýca 4 kenarda geniþliðe ilaveten 20'þer px tampon \
+            ve 25'þer px sýnýr çerçevesi eklenir. Örnekte margin kullanýlmamýþtýr. Ýlk resimdeki CSS width, \
+            padding, height, border ve sað kaydýraç enini inceleyin. Ýkinci resimdeki DOM özelliklerinden offsetLeft, \
+            offsetTop, offsetWidth, offsetHeight, clientTop, clientLeft, clientWidth, clientHeight, scrollWidth, \
+            scrollHeight, scrollTop deðerlerini inceleyin. " + fonk2() +
+            "<br/>3) Elementin birüstü offsetParent'dýr (body, html, display:none, position:fixed ise null); offsetLeft \
+            ve offsetTop deðerleri CSS left/top deðeriyle atanýr. " + fonk3() +
+            "<br/>4) offsetWidth ve offsetHeight elemanýn içerik, padding, kaydýraç ve sýnýrlar dahil dýþtan dýþa \
+            olan eni ile boyudur. Eleman gizliyse deðerleri sýfýrdýr. clientLeft ile clientTop elemanýn varsa dýþ sýnýr \
+            deðerlerini (ayrýca arapça ve ibraniceyse sol kaydýraç 16px aralýðýný da) verir. clientWidth ile clientHeight \
+            elemanýn padding dahil fakat kaydýraç hariç iç en ve boyunu verir. scrolledWidth kaydýraç 17px hariç \
+            padding dahil eni, scrolledHeight ise elemen metninin (yatay kaydýraç yoksa) üst ve altta görünmeyen \
+            kaydýrýlmýþ metin dahil tam yüksekliðidir. scrollLeft ile scrollTop, kaydýraçlar varsa soldan ve üstten \
+            kaydýrýlan mesafeyi gösterir; sadece okma deðil yenideðer atamadada kullanýlýr. getComputedStyle \
+            CSS vasýflarý bazen kaydýraç ve auto geniþlik durumlarýnda hata verebileceðinden DOM ebat \
+            özelliklerine itibar edilmelidir. " + fonk4() +
+            "<br/>Ödev1) scrollTop benzeri scrollBottom dipten yukarý kaydýrma deðerini çift týklatarak yansýtýn. " + fonkö1() +
+            "<br/>Ödev2) offsetWith tam eni, clientWidth ise kaydýraç hariç eni verdiðinden, border sýnýr olmayan \
+            bir div kutuda aradaki fark kullanýlan tarayýcýnýn saðkaydýraç enini verecektir; yansýtýn. " + fonkö2() +
+            "<br/>Ödev3) Bir sahanýn tam ortasýna futbol topu yerleþtirin; orta ölçüsünde sahanýn ve topun en-boy \
+            deðelerinin yarýsý toplanacak. Saha ve top ebatlarýný istediðinizce deðiþtirebilirsiniz. " + fonkö3()
+    </script>
+</body>
+</html>

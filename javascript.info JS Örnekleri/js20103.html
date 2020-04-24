@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20103.html: DOM yumrularý arasýnda gezinti örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        table {border-collapse: collapse;}
+        td {
+            border: 1px solid black;
+            padding: 3px 5px;}
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+        console.log ( "HEAD: " + document.body ); // null, henüz <body> okunmadý...
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>DOM Yumrularýnda Gezinti</h3>
+    <p id="göster">Paragraf</p>
+
+    <table id="tablom">
+        <tr>
+            <td>Bir</td><td>Ýki</td>
+        </tr>
+        <tr>
+            <td>Üç</td><td>Dört</td>
+        </tr>
+    </table>
+    <div>Kulanýcýlar:</div>
+        <ul>
+            <li>Atilla</li>
+            <li>Zafer</li>
+        </ul>
+
+    <table id="hücreler">
+        <tr>
+            <td>1:1</td>
+            <td>2:1</td>
+            <td>3:1</td>
+            <td>4:1</td>
+            <td>5:1</td>
+        </tr>
+        <tr>
+            <td>1:2</td>
+            <td>2:2</td>
+            <td>3:2</td>
+            <td>4:2</td>
+            <td>5:2</td>
+        </tr>
+        <tr>
+            <td>1:3</td>
+            <td>2:3</td>
+            <td>3:3</td>
+            <td>4:3</td>
+            <td>5:3</td>
+        </tr>
+        <tr>
+            <td>1:4</td>
+            <td>2:4</td>
+            <td>3:4</td>
+            <td>4:4</td>
+            <td>5:4</td>
+        </tr>
+        <tr>
+            <td>1:5</td>
+            <td>2:5</td>
+            <td>3:5</td>
+            <td>4:5</td>
+            <td>5:5</td>
+        </tr>
+    </table>
+
+    <script>
+        function fonk2() {
+            console.log (document);
+            console.log (document.documentElement);
+            console.log ( "BODY: " + document.body ); // HTMLBodyElement, þimdi okundu...
+            console.log (document.head);
+
+            for (let i = 0; i < document.body.childNodes.length; i++) {console.log (document.body.childNodes [i]); }
+
+            let elemanlar = document.body.childNodes;
+            console.log ( (elemanlar [0] === document.body.firstChild), document.body.firstChild); // true, #text
+            console.log ( (elemanlar [elemanlar.length - 1] === document.body.lastChild), document.body.lastChild); // true, script
+
+            for (let yumru of document.body.childNodes) {console.log (yumru); } // yukardaki for(..) ile aynýdýr...
+            console.log (document.body.childNodes.filter); // undefined
+            console.log (Array.from (document.body.childNodes).filter ); // ƒ filter() { [native code] }
+
+            let dizge=""; for (let yumru in document.body.childNodes) {dizge +=yumru + ", ";}; console.log (dizge);
+        } // func sonu...
+        function fonk3() {
+            console.log ("body'nin ebevyn yumrusu html döküman elemaný mýdýr? " + (document.body.parentNode === document.documentElement) ); // true
+            console.log ("head'in sonraki kardeþi body'nin önceki kardeþi midir? " + (document.head.nextSibling === document.body.previousSibling) ); // true
+            console.log ("body'nin önceki kardeþi head'in sonraki kardeþi midir? " + (document.body.previousSibling === document.head.nextSibling) ); // true
+        } // func sonu...
+        function fonk4() {
+            console.log ("head'in sonraki kardeþi kimdir? " + document.head.nextElementSibling); // [object HTMLBodyElement]
+            console.log ("body'nin önceki kardeþi kimdir? " + document.body.previousElementSibling); // [object HTMLHeadElement]
+
+            console.log (document.documentElement.parentNode ); // document
+            console.log (document.documentElement.parentElement ); // null
+
+            console.log (document.body.parentNode ); // html
+            console.log (document.body.parentElement ); // html
+
+            for (let eleman of document.body.children) {console.log (eleman);} // input, br, input, h3, p, script
+            // children yerine childNodes konulursa, eleman olmayan diðer #text ve #comment'ler de listelenecektir...
+        } // func sonu...
+        function fonk5() {
+            let göz = tablom.rows [0].cells [1]; // Ýki
+            göz.style.backgroundColor = "DarkRed";
+
+            göz = tablom.rows [1].cells [0]; // Üç
+            göz.style.color = "Orange";
+        } // func sonu...
+        function fonkö1() {
+            console.log (document.body.children [6], document.body.childNodes [12].innerHTML);
+            console.log (document.body.childNodes [14], document.body.children [7].innerHTML);
+            console.log (document.body.childNodes [14].lastElementChild, document.body.children [7].lastElementChild.innerHTML);
+        } // func sonu...
+        function fonkö2() {
+            let koleksiyon = document.body.childNodes;
+            console.log (koleksiyon, koleksiyon [0], koleksiyon [koleksiyon.length-1] );
+            console.log (document.body.children [0] );
+        } // func sonu...
+        function fonkö3() {
+            for (let i = 0; i < hücreler.rows.length; i++) {
+                let satýr = hücreler.rows [i];
+                satýr.cells [i].style.backgroundColor = 'red';
+                satýr.cells [i].style.color = 'orange';
+            } // for sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) DOM/DocumentObjectModül etiketli elemanlar üzerinde herþeyi yapabilmemizi saðlar, ancak \
+            öncelikle onlara eriþebilmemiz koþuluyla." +
+            "<br/>2) DOM yumrularý arasýnda gezinti rotasý: document->document.documentElement/HTML->\
+            document.body->ebeveynYumru->DIV->öncekiKardeþ/sonrakiKardeþ/Sibling->ilkYavru/sonYavru/Child.\
+            html ebeveyn/parent, body ve head ise yavru/child, onlarýn da altlarý varsa yavrular/children yada \
+            torunlardýr/descendants. childNodes dizi-benzeri taranabilir bir koleksiyondur, for-of çalýþýr, fakat \
+            dizi metodu olan filter süzgeçleme çalýþmaz; ancak Array.from ile dizi-benzeri dizileþtirilirse, bir \
+            dizi metodu olan filter bu defa çalýþýr. DOM koleksiyonlarý sadece-okunabilirdir, atamayla deðiþiklik \
+            yapýlamaz; baþka metodlar gereklidir. Koleksiyonlar canlýdýr, yani son güncellemeyi yansýtýrlar. for-in \
+            kullanmayýn, yumru endeksno'larý (0,1,2..) ve ekstra özellikleri sýralar. " + fonk2() +
+            "<br/>3) html, head ve body'nin ebeveyni/parent, onlar da çocuklardýr/child/children. head ve body \
+            birbirlerinin kardeþi/sibling; head sol/önceki kardeþ/previousSibling, body sað/sonraki kardeþtir/\
+            nextSibling. " + fonk3() +
+            "<br/>4) Önceki/sonraki çocuk/kardeþ aramasýnda metin ve yorum yumrularýný deðil sadece eleman \
+            yumrularýný isteyebiliriz. html'nin parentNode/ebeveyn yumrusu document iken parentElement/ebeveynElemaný \
+            null'dur, diðerlerindeyse aynýdýr. " + fonk4() +
+            "<br/>5) Bazý elemanlarýn örn.table ilave özgü özellikleri vardýr: table.rows (tr elemanlarý), table.caption/\
+            tHead/tFoot (açýklama, baþlýk, diplik), table.tBodies, tr.cells vb. " + fonk5() +
+            "<br/>Ödev1) Örnek kodlamadaki div, ul ve ikinci li dom elemanlarýna eriþip yansýtýn. " + fonkö1() +
+            "<br/>Ödev2) Eðer eleman herhangibir DOM element yumrusuysa eleman.lastChild.nextSibling \
+            daima null'dur. eleman.children[0].previousSibling null olmayabilir; 0.elementin önünde element \
+            olmayan yumru bulunabilir. " + fonkö2() +
+            "<br/>Ödev3) 5 satýr ve 5 sütunlu tr-td hücrelerinin 1:1->5:5 köþegen hücre renklerini deðiþtirin. " + fonkö3()
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20108.html: Bir elemaný class CSS ve style ile biçimleme örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        .dikkat {
+            position: fixed;
+            z-index: 1;
+            padding: 5px;
+            border: 2px solid black;
+            font-size: 20px;
+            text-align: center;}
+        .selam {
+            background: #b80000;
+            color: yellow;}
+    </style>
+    <script></script>
+</head>
+<body class="çerçeve elyazýsý gövde sayfa">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" id="buton" value="Sil" onClick="fonk1()">
+    <h3>CSS class ve style Biçimlemesi</h3>
+    <p id="göster">Paragraf</p>
+
+    <div id="bölüm1">Kutu</div>
+
+    <h2>Gözkýrpan not sað-üst köþededir</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum aspernatur quam ex eaque inventore quod voluptatem adipisci omnis nemo nulla fugit iste numquam ducimus cumque minima porro ea quidem maxime necessitatibus beatae labore soluta voluptatum
+        magnam consequatur sit laboriosam velit excepturi laborum sequi eos placeat et quia deleniti? Corrupti velit impedit autem et obcaecati fuga debitis nemo ratione iste veniam amet dicta hic ipsam unde cupiditate incidunt aut iure ipsum officiis soluta
+        temporibus. Tempore dicta ullam delectus numquam consectetur quisquam explicabo culpa excepturi placeat quo sequi molestias reprehenderit hic at nemo cumque voluptates quidem repellendus maiores unde earum molestiae ad.
+    </p>
+
+    <script>
+        function fonk2() {
+            console.log (document.body.className); // çerçeve elyazýsý gövde sayfa
+
+           document.body.classList.add ('madde');
+           document.body.classList.remove ("sayfa");
+           document.body.classList.toggle ("yeni"); // Yeni sýnýfý ekler...
+           document.body.classList.toggle ("gövde"); // Mevcutsa siler...
+            console.log (document.body.className); // çerçeve elyazýsý madde yeni<== Yanyana
+            console.log (document.body.classList.contains ("yeni") ); // true
+
+            for (let sýnýfAdý of document.body.classList) {console.log (sýnýfAdý);} //  çerçeve elyazýsý madde yeni<== Altalta...
+        } // func sonu...
+        function fonk3() {
+            document.body.style.backgroundColor = prompt ('Zemin rengi?', 'DarkGreen');
+            document.body.style.color = prompt ("Yazý rengi?", "DodgerBlue");
+
+            //buton.style.MozBorderRadius = '10px'; // -moz-border-radius = '10px';
+            buton.style.WebkitBorderRadius = '50%';
+            buton.style.fontSize = '30px';
+        } // func sonu...
+        function fonk4() {
+            document.body.style.display = "none"; // tüm sayfa kaybolur...
+            setTimeout ( ()=> document.body.style.display = "", 1000); // 1sn sonra normale döner...
+
+            bölüm1.style="color: red; width: 100px; font-size: 50px; font-family:Verdana";
+            setTimeout ( ()=> {bölüm1.style.cssText=`
+                color: red !important;
+                background-color: yellow;
+                width: 200px;
+                padding: 20px;
+                font-size: 3em;
+                font-family: segoe script;
+                text-align: center;`;}, 3000);
+            setTimeout ( ()=> bölüm1.setAttribute ('style', "font-family:segoe print; color:DeepPink;"), 5000);
+        } // func sonu...
+        function fonk5() {
+            document.body.style.margin = 20; // Birim unutuldu...
+            console.log (document.body.style.margin); // --boþ--
+            document.body.style.margin = '20px';
+            console.log (document.body.style.margin); // 20px
+            console.log (document.body.style.marginTop); // 20px==> margin'den çýkarýmsar...
+            console.log (document.body.style.marginLeft); // 20px
+        } // func sonu...
+        function fonk6() {
+            console.log (document.body.style.color); // --boþ--
+            console.log (document.body.style.backgroundColor); // --boþ--
+
+            let hesaplýStil = getComputedStyle (document.body);
+            console.log (hesaplýStil.fontSize); // 20px
+            console.log (hesaplýStil.color); // rgb(30, 144, 255)
+            console.log (getComputedStyle (document.body).backgroundColor); // rgb(0, 100, 0)
+        } // func sonu...
+        function fonkö1() {
+            function notuGöster ({üst = 0, sað = 0, sýnýfAdý, not}) {
+                let dikkat = document.createElement ('div');
+                dikkat.className = "dikkat selam";
+                //if (sýnýfAdý) {dikkat.classList.add (sýnýfAdý);}
+                dikkat.style.top = üst + 'px';
+                dikkat.style.right = sað + 'px';
+                dikkat.innerHTML = not;
+                document.body.append (dikkat);
+                setTimeout ( ()=> dikkat.remove(), 1500);
+            } // func sonu...
+            let i = 1;
+            setInterval ( ()=> {notuGöster ({üst: 10, sað: 10, not: 'Merhaba ' + i++, sýnýfAdý: "selam"});}, 3000);
+            // Selam notu her 3 sn'de bir ve 1.5 sn süreli gözkýrpar...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Bir elemaný stillemek için ya CSS kodlarýný .sýnýf adýyla oluþturur ve class='sýnýf' çaðrýsýyla, yada \
+            doðrudan style='...' kodlamasýyla gerçekleþtiririz. Dinamiksel gerekmedikce CSS sýnýf tercih edilmelidir." +
+            "<br/>2) CSS class'larý için className ve classList özellikleri kullanýlabilir. eleman.className'e \
+            yapýlacak bir atama tüm sýnýflarý kapsar; eleman.classList ile ise tek tek sýnýflarý add/remove/toggle \
+            yapabiliriz. classList for-of'la taranabilir. " + fonk2() +
+            "<br/>3) Örn. width:125px vasfýný JS style özellik kodlamasýyla eleman.style.width='125px' olarak \
+            kullanabiliriz; tireli çoklu kelime vasýflarý bitiþik büyükharfleþtirilir. Vasýf ön/ara tireler büyükharfle \
+            baþlatýlýr. " + fonk3() +
+            "<br/>4) Atanan bir önceki style özelliðini ='' ile iptal edip, orijinal ayarlarýna döndürebiliriz. Çoklu \
+            ayarlarý örn. bölüm.style='color: red; width: 100px' þeklinde, mevcut vasýflara ilaveten atayabilir; \
+            yada komple yeni silbaþtan blok olarak bölüm.style.cssText='...' kodlayabiliriz; ayný iþlem \
+            bölüm.setAttribute('style', 'color: red...') ile de yapýlabilir. " + fonk4() +
+            "<br/>5) CSS deðerlerini atarken gerekli ölçü birimleri unutulmamalýdýr (px, cm, em, 120%, in, vb)." + fonk5() +
+            "<br/>6) DOM style özelliðiyle atanan deðerleri okuyabildik, ancak CSS vasýflarý sadece getComputedStyle(eleman,lakap) \
+            metoduyla alýnabilir. " + fonk6() +
+            "<br/>Ödev1) Sayfanýn saðüst köþesine, html-üstü (z-index:1), kaydýraçtan etkilenmeyen (fixed), \
+            Merhaba notunun 1.5/3 sn aralýklarla gözkýrpmasýný saðla. " + fonkö1()
+    </script>
+</body>
+</html>

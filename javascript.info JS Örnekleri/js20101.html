@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20101.html: Tarayýcý çevresi ve özellikleri örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Tarayýcý Çevresi ve Özellikleri</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+            function selam() {console.log ("Global Merhaba");}
+            window.selam(); // global nesnenin global fonksiyonu...
+        function fonk2() {
+            function selam() {console.log ("Lokal Merhaba");}
+            selam(); // lokal fonksiyon...
+
+            console.log (window.innerHeight + "px"); // Ýç pencere yüksekliði (px)...
+        } // func sonu...
+        function fonk3() {
+            document.body.style.background = "black"; // sayfanýn zemin rengi siyah olsun...
+            setTimeout ( () => document.body.style.background = "", 1000); // 1sn sonra tekrar eski renge dönsün...
+        } // func sonu...
+        function fonk4() {
+            console.log ("Tarayýcý: " + navigator.userAgent);
+            console.log ("Ýþletim sistemi: " + navigator.platform);
+
+            console.log (location.href); // mevcut yurel...
+            if (confirm ("Çevrimiçiysen Wikipedia'ya gidelim mi?") ) {location.href = "https://www.wikipedia.org";}
+            if (confirm ("Çevrimiçiysen github'a gidelim mi?") ) {location.href = "https://www.github.com/mnihatyavas";}
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) JS baþta sadece að tarayýcýlarý için yaratýldý, sonradan çoklu kullaným ve platformlarda yorumlayýcýlý \
+            çalýþtýrýlabilen programlama diline geliþtirildi." +
+            "<br/>2) Platformlar, tarayýcý, að sunucusu yada ev olabilir. Tarayýcýdaki JS global kök nesnesi window \
+            olup DOM, BOM, CSSOM ve nüve JS'i kapsar. window nesnesine özgü çeþitli metod ve özellikler vardýr. " + fonk2() +
+            "<br/>3) DOM/DocumentObjectModel tarayýcý sayfasýndaki deðiþtirilebilen sayfa içerikleri nesneleridir.\
+            document nesnesiyle sayfadaki herþeyi deðiþtirebiliriz. " + fonk3() +
+            "<br/>4) BOM/BrowserObjectModel tarayýcý/ev çevresiyle ilgili document harici yapýlabileceklerin \
+            tümünü kapsar. Örneðin navigator/seyrüsefer tarayýcý zemini ve iþletim sistemiyle ilgili birçok özelliði \
+            döndürür. Veya location nesnesi mevcut sayfanýn yurelini gösterir, ve yeni sayfaya yönlendirir. \
+            alert, console.log, setTimeout, confirm ve prompt da BOM metodlarýdýr. " + fonk4()
+    </script>
+</body>
+</html>

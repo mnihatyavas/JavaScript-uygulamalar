@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20106.html: HTML eleman vasýflarý ile DOM nesne özelliklerinin karþýlaþtýrýlmasý örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        .sipariþ[data-sipariþ-durumu="yeni"] {color: yellow;}
+        .sipariþ[data-sipariþ-durumu="beklemede"] {color: navy;}
+        .sipariþ[data-sipariþ-durumu="iptal"] {color: red;}
+    </style>
+    <script>
+    </script>
+</head>
+<body id="gövde" type="gövde tipi" vasýf="gövde vasfý">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Vasýflar ve Özellikler</h3>
+    <p id="göster">Paragraf</p>
+
+    <input id="giriþ" type="text" value="mny" vasýf="input vasfý">
+    <div id="eleman1" konu="Zürafa"></div>
+    <input id="giriþ1" type="checkbox" checked> çentiklikutu
+    <br/>
+    <input><br/>
+    <div id="böl" style="color:red; font-size:120%">Merhaba</div>
+    <a id="çapa" href="#selam">baðlantý</a>
+
+    <div anahtar-kelime="ad"></div>
+    <div anahtar-kelime="yaþ"></div>
+    <div anahtar-kelime="öðrenciMi"></div>
+    <br/>
+    <div class="sipariþ" data-sipariþ-durumu="yeni">Yeni bir sipariþ.</div>
+    <div class="sipariþ" data-sipariþ-durumu="beklemede">Bekletilen bir sipariþ.</div>
+    <div class="sipariþ" data-sipariþ-durumu="iptal">Ýptal edilen bir sipariþ.</div><br/>
+    <div id="sipariþim" class="sipariþ" data-sipariþ-durumu="yeni">Yeni bir sipariþ.</div>
+    <br/>
+    <div data-bileþen-adý="menü">Cinsiyeti seçin</div>
+    <br/>
+    <ul>Harici (turuncu) ve diðer (mavi) baðlantýlar listesi:
+        <li><a href="http://google.com">http://google.com</a></li>
+        <li><a href="/tutorial">/tutorial.html</a></li>
+        <li><a href="local/path">local/path</a></li>
+        <li><a href="ftp://ftp.com/my.zip">ftp://ftp.com/my.zip</a></li>
+        <li><a href="http://nodejs.org">http://nodejs.org</a></li>
+        <li><a href="http://internal.com/test">http://internal.com/test</a></li>
+    </ul>
+
+    <script>
+        function fonk2() {
+            document.body.verilerim = {
+                ad: 'Sezar',
+                ünvan: 'Ýmparator'
+            }; // doc..sonu...
+            console.log (document.body.verilerim.ünvan); // Ýmparator
+
+            document.body.etiketiSöyle = function() {console.log (this.tagName);};
+            document.body.etiketiSöyle(); // BODY
+
+            Element.prototype.selam = function() {console.log (`Merhaba, Etiketim: ${this.tagName}`);};
+            document.documentElement.selam(); // Merhaba, Etiketim: HTML
+            document.body.selam(); // Merhaba, Etiketim: BODY
+        } // func sonu...
+        function fonk3() {
+            console.log (document.body.id, document.body.type, document.body.vasýf1); // gövde undefined undefined
+            console.log (document.body.getAttribute ("id"), document.body.getAttribute ("type"), document.body.getAttribute ("vasýf") ); // gövde gövde tipi gövde vasfý
+
+            console.log (giriþ.type, giriþ.value, giriþ.vasýf); // text mny undefined
+            console.log (giriþ.getAttribute ("type"), giriþ.getAttribute ("value"), giriþ.getAttribute ("vasýf") ); // text mny input vasfý
+
+            console.log (eleman1.getAttribute ('Konu') ); // Zürafa
+            eleman1.setAttribute ('Deneme', 1957);
+            console.log (eleman1.outerHTML ); // <div id="eleman1" konu="Zürafa" deneme="1957"></div>
+            for (let vasýf of eleman1.attributes) {console.log (`${vasýf.name} = ${vasýf.value}` );}
+        } // func sonu...
+        function fonk4() {
+            let girdi = document.querySelectorAll ('input'); girdi = girdi [girdi.length - 1];
+            // html vasfý => dom özelliði
+            girdi.setAttribute ('id', 'kimlik');
+            console.log (girdi.id); // kimlik
+            // özellik => vasýf
+            girdi.id = 'yeniKimlik';
+            console.log (girdi.getAttribute ('id') ); // yeniKimlik (güncelli)
+
+            // vasýf => özellik
+            girdi.setAttribute ('value', 'metin');
+            console.log (girdi.value); // metin
+            // OLUMSUZ özellik => vasýf
+            girdi.value = 'yeniMetin';
+            console.log (girdi.getAttribute ('value') ); // metin (güncelsiz!)
+        } // func sonu...
+        function fonk5() {
+            console.log (giriþ1.checked); // true <==özellik deðeri (boolean)
+            console.log (giriþ1.getAttribute ('checked') ); // boþ <==vasýf deðeri (dizge)
+
+            console.log (böl.getAttribute ('style')); // color:red; font-size:120% <==dizge style vasýf
+            console.log (böl.style); // [object CSSStyleDeclaration] <==nesne style özellik
+            console.log (böl.style.color); // red <== dizge style.color
+
+            console.log (çapa.getAttribute ('href') ); // #selam <==vasýf kýyma-dizge
+            console.log (çapa.href ); // file:///C:/Users/bilgisayarim/Desktop/MyFiles/4.%20Dersler/javascript/js20106.html#selam <==özellik tamyol-yurel-dizge
+        } // func sonu...
+        function fonk6() {
+            let kullanýcý = {
+                ad: "Nihat",
+                yaþ: 2020 - 1957,
+                öðrenciMi: true
+            }; // let sonu...
+            for (let bölüm of document.querySelectorAll ('[anahtar-kelime]') ) {
+                  let alan = bölüm.getAttribute ('anahtar-kelime');
+                  bölüm.innerHTML = kullanýcý [alan];
+            } // for sonu...
+
+            console.log (sipariþim.dataset.sipariþDurumu); // yeni
+            setTimeout ( ()=>{sipariþim.dataset.sipariþDurumu = "beklemede"; console.log (sipariþim.dataset.sipariþDurumu);}, 2000);
+            setTimeout ( ()=>{sipariþim.dataset.sipariþDurumu = "iptal"; console.log (sipariþim.dataset.sipariþDurumu);}, 4000);
+        } // func sonu...
+        function fonkö1() {
+            let eleman = document.querySelector ('[data-bileþen-adý]');
+            console.log ("Dom özelliði: " + eleman.dataset.bileþenAdý);
+            console.log ("HTML vasfý: " + eleman.getAttribute ('data-bileþen-adý') );
+        } // func sonu...
+        function fonkö2() {
+            let baðlantýlar = document.querySelectorAll ('a');
+            for (let bað of baðlantýlar) {
+                let hrf = bað.getAttribute ('href');
+                if (! hrf) continue; // href'sizse geç...
+                if (! hrf.includes ('://') ) continue; // protokolsuzsa geç...
+                if (hrf.startsWith ('http://internal.com') ) continue; // dahiliyse geç...
+                bað.style.color = 'orange';
+            } // for sonu...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML sayfasýný okuyan tarayýcý, içerdiði tüm etiket vasýflarýný DOM nesnesine çevirir. Örn. \
+            (body id='sayfa') vasfý body.id='sayfa' olur. Bu çevirme herzaman birebir olmayabilir." +
+            "<br/>2) Hazýr DOM özellik ve metodlarýna kendimiz de katkýlayabiliriz. " + fonk2() +
+            "<br/>3) Her etiketli elemanýn standart vasýflarý özellik olarak eriþilirken, standart olmayanlar için \
+            eleman.has/get/set/removeAttribute kullanýlýr. " + fonk3() +
+            "<br/>4) Cüzi istisnalar (input id senkronize, fakat input value deðil) dýþýnda, vasýf ve özellik senkronizasyonu \
+            vardýr; yani birindeki deðiþiklik otomatikmen diðerine de yansýr. " + fonk4() +
+            "<br/>5) DOM özellikleri daima dizge deðildir; örn. input.checked boolean/ikili, style nesne, href \
+            tamyol adrestir. " + fonk5() +
+            "<br/>6) Tüm html vasýflarý standart deðildir. Örn. özel html vasýflarýný nesne anahtarý olarak JS \
+            özelliðine geçirebilir, yada bir sipariþin style vasfýný deðiþtirebiliriz. data-sipariþ-durumu style vasfýný \
+            dataset.sipariþDurumu özelliðine çevirebiliyoruz. " + fonk6() +
+            "<br/>Ödev1) data-bileþen-adý div vasfýna html vasfý ve dom özelliðiyle eriþin. " + fonkö1() +
+            "<br/>Ödev2) a-href baðlantýlar href'siz, :// protokolsuz ve ://internal'sýzsa haricidir ve turuncu renge \
+            deðiþtirin. " + fonkö2()
+    </script>
+</body>
+</html>

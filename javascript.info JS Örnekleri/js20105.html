@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20105.html: Yumru özellikleri; tip, etiket, içerik ve daha fazlasý örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+Merhabalar!..
+<!-- Yorum --><br/>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Yumru Özellikleri</h3>
+    <p id="göster">Paragraf</p>
+
+    <div id="eleman1">Merhaba <b>DÜNYA</b>!</div>
+
+    <div id="haberler">
+        <h1>BAÞLIK!</h1>
+        <p><b><i>Marslýlar insanlara saldýrýyor!</i></b></p>
+    </div>
+
+    <div>Alttaki heriki div elemaný da gizlidir</div>
+    <div hidden>"hidden" vasfýyla gizli</div>
+    <div id="eleman2">JavaScript'in "hidden" özellik atamasýyla gizli</div>
+    <div id="eleman3">Gözkýrpan eleman</div>
+
+    <input type="text" id="eleman4" value="dizge deðer giriþi"><br/>
+    <a id="eleman5" href="http://www.github.com/mnihatyavas" target="_">www.github.com/mnihatyavas</a>
+
+   <ul>
+        <li>Hayvanlar<ul><li>Memeliler<ul><li>Ýnek</li><li>Eþek</li><li>Köpek</li><li>Kaplan</li></ul></li><li>Diðerleri<ul><li>Yýlan</li><li>Kertenkele</li><li>Kuþ</li></ul></li></ul></li>
+        <li>Balýklar<ul><li>Akvaryum<ul><li>Melekbalýðý</li></ul></li><li>Deniz<ul><li>Köpekbalýðý</li><li>Denizalabalýðý</li></ul></li></ul></li>
+    </ul>
+
+    <script>
+        function fonk2() {
+            console.log (document.body); // <body>...</body>
+            console.dir (document.body); // >body
+            console.log (document.body.toString() ); // [object HTMLBodyElement]
+            console.log (document.body.constructor); // ƒ HTMLBodyElement() { [native code] }
+            console.log (document.body.constructor.name); // HTMLBodyElement
+
+            console.log (document.body instanceof HTMLBodyElement ); // true
+            console.log (document.body instanceof HTMLElement ); // true
+            console.log (document.body instanceof Element ); // true
+            console.log (document.body instanceof Node ); // true
+            console.log (document.body instanceof EventTarget ); // true
+            console.log (document.body instanceof Object ); // true
+        } // func sonu...
+        function fonk3() {
+            let eleman = document.body;
+            console.log (eleman.nodeType); // 1 => element
+            console.log (eleman.firstChild.nodeType); // 3 => text
+
+            console.log (document.nodeType ); // 9
+        } // func sonu...
+        function fonk4() {
+            console.log (document.body.nodeName ); // BODY
+            console.log (document.body.tagName ); // BODY
+
+            console.log (document.body.firstChild.tagName ); // undefined (eleman deðil, yumru)
+            console.log (document.body.firstChild.nodeName ); // #text
+            console.log (document.tagName ); // undefined (döküman eleman deðildir)
+            console.log (document.nodeName ); // #document
+        } // func sonu...
+        function fonk5() {
+            let dizge = ""; for (let i=0; i < 25; i++) {dizge +=document.body.innerHTML [i] ;}; console.log (dizge);
+            let yanýt = confirm ("Gövde içeriði deðiþsin mi?");
+            if (yanýt) {
+                document.body.innerHTML = "<b style='font-size:100px; color:Brown;'><i>Deðiþen yeni BODY gövdesi!";  // </i></b> oto-tamamlar...
+                document.body.innerHTML += "<img src='resim/kelebek.jpg'/>";
+            } // if sonu...
+        } // func sonu...
+        function fonk6() {
+            console.log (eleman1.innerHTML); // Merhaba <b>DÜNYA</b>!
+
+            let bölüm1 = document.querySelector ('div');
+            console.log (bölüm1.outerHTML); // <div id="eleman1">Merhaba <b>DÜNYA</b>!</div>
+
+            bölüm1.outerHTML = "<span>Yeni bir ara eleman</span>";
+            console.log (bölüm1.outerHTML); // Hala ayný; deðiþmedi...
+
+            let bölüm2 = document.querySelector ('span');
+            console.log (bölüm2.outerHTML); // Þimdi deðiþti==> <span>Yeni bir ara eleman</span>
+        } // func sonu...
+        function fonk7() {
+            let metin = document.body.firstChild;
+            console.log (metin.data); // Merhabalar!..
+            console.log (metin.nodeValue); // Merhabalar!..
+
+            let yorum = metin.nextSibling;
+            console.log (yorum.data); // Yorum
+        } // func sonu...
+        function fonk8() {
+            console.log (haberler.textContent);
+            console.log (haberler.innerHTML);
+        } // func sonu...
+        function fonk9() {
+            eleman2.hidden = true;
+            setTimeout ( ()=>eleman2.style.display="block", 5000); // 5 sn sonra görünecek...
+
+            setInterval ( ()=> eleman3.hidden = !eleman3.hidden, 1000); // Her saniye gözkýrpar...
+        } // func sonu...
+        function fonk10() {
+            console.log (eleman4.type); // "text"
+            console.log (eleman4.id); // "eleman4"
+            console.log (eleman4.value); // dizge deðer giriþi
+            console.log (eleman5.href); // http://www.github.com/mnihatyavas
+
+            console.dir (eleman5); // >a#eleman5
+        } // func sonu...
+        function fonkö1() {
+            for (let liste of document.querySelectorAll ('li') ) {
+                console.log (liste.firstChild.data);
+                console.log ("Alt eleman sayýsý: " + liste.getElementsByTagName ('li').length);
+            } // for sonu...
+        } // func sonu...
+        function fonkö2() {
+            console.log ("Gövde son eleman yumru tip no'su: " + document.body.lastChild.nodeType); // script elementi...
+        } // func sonu...
+        function fonkö3() {
+            console.log ("<!--" + document.body.tagName + "-->"); // <!--BODY-->
+            console.log (document.body.firstChild.nextSibling.data); // Yorum
+        } // func sonu...
+        function fonkö4() {
+            console.log (document, document.toString(), document.nodeType); // [object HTMLDocument]
+            console.log (document.constructor.name); // HTMLDocument
+
+            console.log (HTMLDocument.prototype.constructor.name); // HTMLDocument
+            console.log (HTMLDocument.prototype.__proto__.constructor.name); // Document
+            console.log (HTMLDocument.prototype.__proto__.__proto__.constructor.name); // Node
+            console.log (HTMLDocument.prototype.__proto__.__proto__.__proto__.constructor.name); // EventTarget
+            console.log (HTMLDocument.prototype.__proto__.__proto__.__proto__.__proto__.constructor.name); // Object
+            try {console.log (HTMLDocument.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.constructor.name);}catch (ist) {console.log ("HATA: " + ist.message);}
+
+            console.dir (document); // __proto__ açýlýrsa hiyerarþideki yeri görünür...
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Herbir DOM yumru ve elementlerinin hem kendilerine özgü, hem de genel özellikleri vardýr. \
+            Yumrularýn ait olduklarý arþiv sýnýflarý vardýr. Yukardan aþaðýya: Object, EventTarget, Node, Element, \
+            HTMLElement (HTMLBodyElement, HTMLInputElement, HTMLAnchorElement vb). Alt yumrular \
+            kendi ve hiyerarþik üst sýnýflarýn özellik ve metodlarýný miraslar. " +
+            "<br/>2) Elemanlarýn constructor/kurucu fonksiyonlarý ve constructor.name/adlarý vardýr. " + fonk2() +
+            "<br/>3) nodeType özelliði 1:elementNode, 2:textNode, 9:documentObject, toplamda 12 farklý \
+            tipleme bulunur. " + fonk3() +
+            "<br/>4) nodeName tüm yumru/elemanlar için, tagName ise sadece etiketli eleman adlarý için \
+            kullanýlýr. " + fonk4() +
+            "<br/>5) .innerHTML özelliði elaman içeriðini dizge olarak döndürür, atamayla deðiþtirir. innerHTML+= \
+            kullanýmý (silinmediyse) önceki içeriðin arkasýna yeni ilaveyi ekler. " + fonk5() +
+            "<br/>6) .outerHTML özelliði eleman dizge içeriðini ve elemanýn kendisini de gösterir. outerHTML \
+            içeriðinin deðiþtirilmesi önceki bulunaný deðiþtirmez, yeni arama yapýlmalýdýr. " + fonk6() +
+            "<br/>7) .innerHTML elemanlar için, .nodeValue veya .data yumru içerikleri içindir. " + fonk7() +
+            "<br/>8) .textContent sade (html ayarsýz) metin içeriðini sunar. " + fonk8() +
+            "<br/>9) hidden özelliði elementi gizler, style='display:none' gibidir. " + fonk9() +
+            "<br/>10) id, value, href vb daha pekçok DOM özellikleri vardýr. console.dir(eleman) izlenebilir. " + fonk10() +
+            "<br/>Ödev1) ul-li düzenleyip içerilen li baþlýklarýný ve herbir kademe li eleman sayýsýný yansýtýn. " + fonkö1() +
+            "<br/>Ödev2) body lastChild gövde son elemanýnýn yumru tipi no'yu yansýtýn. " + fonkö2() +
+            "<br/>Ödev3) BODY etiketini yorum sembolü içinde ve gövdenin 2.yumru verisini/data yansýtýn. " + fonkö3() +
+            "<br/>Ödev4) document elementinin yumru tip no'sunu, kurucu adýný ve hiyerarþideki yerini bulun. " + fonkö4()
+    </script>
+</body>
+</html>

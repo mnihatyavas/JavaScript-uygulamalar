@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20107.html: DOM'la canlý html sayfasý deðiþikliði örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+        .selam-ayarlarý {
+            padding: 15px;
+            border: 2px solid #d6e9c6;
+            border-radius: 5px;
+            color: #3c763d;
+            background-color: #dff0d8;}
+
+        table {border-collapse: collapse;    }
+        td, th {
+            border: 2px solid black;
+            padding: 3px;
+            text-align: center;}
+        th {
+            font-weight: bold;
+            background-color: #E6E6E6;}
+        td {
+            color:yellow;
+            background-color: sienna;}
+
+        .saat {color: red}
+        .dakika {color: orange}
+        .saniye {color: cyan}
+        .saat, .dakika, .saniye {font-size: 50px;}
+    </style>
+    <script></script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Dökümanýn Deðiþtirilmesi</h3>
+    <div id="ilkKonum">Ýlk konum...</div>
+    <p id="göster">Paragraf</p>
+    <div id="sonKonum">Son konum...</div>
+
+    <div class="selam-ayarlarý" id="bölüm3">
+        <strong>Selam herkese!</strong> Çok önemli bir HTML mesajý okudunuz.
+    </div>
+
+    <ol id="oliste">
+        <li>2018</li>
+        <li>2019</li>
+        <li>2020</li>
+    </ol>
+
+    <div id="bölüm1"></div>
+    <div id="bölüm2"></div>
+
+    <ul id="uliste"></ul>
+
+    <div id="eleman1"></div>
+    <div id="eleman2"></div>
+    <div id="eleman3"></div>
+
+    <ol id="eleman4">
+        <li>Merhaba</li>
+        <li>Sana</li>
+        <li>Ey</li>
+        <li>Dünya</li>
+    </ol>
+
+    <table id="tablo1">
+        table dýþý
+        <tr><td>Deneme</td></tr>
+    </table>
+
+    <div id="kab1"></div>
+    <div id="kab2"></div>
+
+    <ul>
+        <li>Hayvanlar
+            <ul>
+                <li>Memeliler
+                    <ul>
+                        <li>Ýnekler</li>
+                        <li>Eþekler</li>
+                        <li>Köpekler</li>
+                        <li>Kaplanlar</li>
+                    </ul>
+                </li>
+                <li>Diðerleri
+                    <ul>
+                        <li>Yýlanlar</li>
+                        <li>Kuþlarlar</li>
+                        <li>Kertenkeleler</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Balýklar
+             <ul>
+                <li>Akvaryum balýklarý
+                    <ul>
+                        <li>Saydam balýk</li>
+                        <li>Melek balýðý</li>
+                    </ul>
+                </li>
+                <li>Deniz balýklarý
+                    <ul>
+                        <li>Deniz alabalýðý</li>
+                        <li>Somon balýðý</li>
+                    </ul>
+                </li>
+      </ul>
+        </li>
+    </ul>
+
+    <div id="takvim"></div>
+
+    <div id="saatým">
+        <span class="saat">SS</span>:<span class="dakika">dd</span>:<span class="saniye">ss</span>
+    </div>
+
+    <ul>
+        <li id="bir">1</li>
+        <li>4</li>
+    </ul>
+
+    <table id="tablo2">
+        <tr>
+            <th>Adý</th>
+            <th>Soyadý</th>
+            <th>Yaþý</th>
+        </tr>
+        <tr>
+            <td>Hatice</td>
+            <td>Kaçar</td>
+            <td>69</td>
+        </tr>
+        <tr>
+            <td>Süheyla</td>
+            <td>Özbay</td>
+            <td>67</td>
+        </tr>
+        <tr>
+            <td>Zeliha</td>
+            <td>Candan</td>
+            <td>65</td>
+        </tr>
+        <tr>
+            <td>Nihat</td>
+            <td>Yavaþ</td>
+            <td>63</td>
+        </tr>
+        <tr>
+            <td>Songül</td>
+            <td>Göktürk</td>
+            <td>61</td>
+        </tr>
+        <tr>
+            <td>Nedim</td>
+            <td>Yavaþ</td>
+            <td>59</td>
+        </tr>
+        <tr>
+            <td>Sevim</td>
+            <td>Yavaþ</td>
+            <td>57</td>
+        </tr>
+      </table>
+
+    <script>
+        function fonk2() {
+            let bölüm = document.createElement ('div');
+            bölüm.className = "selam-ayarlarý";
+            bölüm.innerHTML = "<strong>Selam herkese!</strong> Çok önemli bir JS DOM mesajý okudunuz.";
+            document.body.append (bölüm);
+
+            oliste.before ('before/önce'); // <ol> öncesi
+            oliste.after ('after/sonra'); // <ol> sonrasý
+            let liÝlk = document.createElement ('li');
+            liÝlk.innerHTML = 'prepend/önekoy';
+            oliste.prepend (liÝlk); // <ol> içindeki ilk <li> önüne koy
+            let liSon = document.createElement ('li');
+            liSon.innerHTML = 'append/sonaekle';
+            oliste.append (liSon); // <ol> içindeki son <li> arkasýna ekle
+
+            bölüm1.before (document.createElement ('br'), document.createElement ('br'), '<b>Merhabalar!..</b>', document.createElement ('hr'), document.createTextNode ("<i>Nasýlsýnýz?..</i>") );
+        } // func sonu...
+        function fonk3() {
+            bölüm2.insertAdjacentHTML ('beforebegin', '<b>Merhabalar!..</b>');
+            bölüm2.insertAdjacentHTML ('afterend', "<i>Nasýlsýnýz?..</i>");
+
+            document.body.insertAdjacentHTML ("beforeend",
+                `<div class="selam-ayarlarý">
+                    <strong>Hey ordakiler!</strong> Çok önemli bir insertAdjacent mesajý okudunuz.
+                </div>`);
+        } // func sonu...
+        function fonk4() {
+            let bölüm1 = document.createElement ('div');
+            bölüm1.className = "selam-ayarlarý";
+            bölüm1.innerHTML = "<strong>Selam dostlara!</strong> Bu önemli mesaj 5 sn sonra silinecek.";
+            document.body.prepend (bölüm1);
+            setTimeout ( () => bölüm1.remove(), 5000);
+
+            setTimeout ( ()=> sonKonum.after (ilkKonum), 3000);
+        } // func sonu...
+        function fonk5() {
+            let bölüm = bölüm3.cloneNode (true); // Derin klonlama...
+            bölüm.querySelector ('strong').innerHTML = 'Bay bay herkese!'; // Kýsmi içerik deðiþtirme...
+            bölüm3.after (bölüm); // Orijinal bölüm arkasýna koyma...
+        } // func sonu...
+        function fonk6() {
+            function listeyiParçayaEkle() {
+                let parça = new DocumentFragment();
+                for (let i=1; i<=3; i++) {
+                    let liste = document.createElement ('li');
+                    liste.append (Math.sqrt (i * Math.E).toFixed (4) );
+                    parça.append (liste); // Parça nesnesine ekle...
+                } // for sonu...
+                return parça;
+            } // func sonu...
+            uliste.append (listeyiParçayaEkle() );
+
+            function listeyiDiziyeEkle() {
+                let sonuç = [];
+                for (let i=1; i<=3; i++) {
+                    let liste = document.createElement ('li');
+                    liste.append ((i*Math.E**Math.PI**(1/3) ).toFixed (4) );
+                    sonuç.push (liste); // Diziye ekle...
+                } // for sonu...
+                return sonuç;
+            } // func sonu...
+            uliste.append (...listeyiDiziyeEkle() ); // Dizi argümanlarýný ul'la sarmala...
+        } // func sonu...
+        function fonk7() {
+            let liste1 = document.createElement ('li');
+            liste1.innerHTML = "Dünya'ya Selam!";
+            uliste.appendChild (liste1);
+
+            let liste2 = document.createElement ('li');
+            liste2.innerHTML = "Selam Dünya!";
+            uliste.insertBefore (liste2, uliste.children [1] );
+
+            let liste3 = document.createElement ('li');
+            liste3.innerHTML = "Selam Dünya!..";
+            uliste.insertBefore (liste3, uliste.firstChild);
+
+            let liste4 = uliste.firstElementChild;
+            setTimeout ( ()=> uliste.removeChild (liste4), 6000);
+        } // func sonu...
+        function fonk8() {
+            document.write ("<b style='font-size:30px; color: coral;'>JS'den Herkese Merhabalar</b>");
+            //setTimeout ( ()=> document.write ('<body style="font-size:40px; color:sienna; background:DodgerBlue;">...Böylece, öncekiler tamamen silindi.</body>'), 7000);
+        } // func sonu...
+        function fonkö1() {
+            let dizge = '<b><i>Selamlar</i></b>';
+            eleman1.append (document.createTextNode (dizge) );
+            eleman2.innerHTML = dizge; // Yalýn metin deðil...
+            eleman3.textContent = dizge;
+        } // func sonu...
+        function fonkö2() {
+            //function sil (e) {for (let i=0; i < e.childNodes.length; i++) {e.childNodes [i].remove();} } // HATA: siler ve sýfýrlar...
+            //function sil (e) {while (e.firstChild) {e.firstChild.remove();} } // Çalýþýr...
+            function sil (e) {e.innerHTML='';} // En sadesi...
+            setTimeout ( ()=>sil (eleman4), 3000);
+        } // func sonu...
+        function fonkö3() {
+            console.log (tablo1); // "table dýþý" burda görünmez...
+            tablo1.remove(); // "table dýþý" silinmez...
+        } // func sonu...
+        function fonkö4() {
+            let uliste = document.createElement ('ul');
+            document.body.append (uliste);
+            while (true) {
+                let veri = prompt ("Liste elemanýný gir", "");
+                if (! veri) {break;} // Esc yada Ýptal ise çýk...
+                let liste = document.createElement ('li');
+                liste.textContent = veri; // metin...
+                uliste.append (liste);
+            } // while sonu...
+        } // func sonu...
+        function fonkö5() {
+            let veri = {
+                "Balýklar": {
+                    "alabalýk": {},
+                    "somon balýðý": {}
+                },
+                "Aðaçlar": {
+                    "Dev aðaçlar": {
+                        "sekoya": {},
+                        "meþe": {}
+                    },
+                    "Çiçekaçanlar": {
+                        "elma aðacý": {},
+                        "manolya": {}
+                    }
+                }
+            }; // let sonu...
+            function ulisteYarat (kb, nesne) {kb.innerHTML = listeYarat (nesne);}
+            function listeYarat (nesne) { // özyinelenen fonksiyon...
+                let liste = '';
+                let uliste;
+                for (let anahtar in nesne) {liste += '<li>' + anahtar + listeYarat (nesne [anahtar]) + '</li>';}
+                if (liste) {uliste = '<ul>' + liste + '</ul>'}
+                return uliste || "";
+            } // func sonu...
+            function ulisteYaratDOM (kb, nesne) {kb.append (listeYaratDOM (nesne) );}
+            function listeYaratDOM (nesne) { // özyinelenen fonksiyon...
+                if (! Object.keys (nesne).length) return;
+                let uliste = document.createElement ('ul');
+                for (let anahtar in nesne) {
+                    let liste = document.createElement ('li');
+                    liste.innerHTML = anahtar;
+                    let yavrular = listeYaratDOM (nesne [anahtar]);
+                    if (yavrular) {liste.append (yavrular);}
+                    uliste.append (liste);
+                } // for sonu...
+                return uliste;
+            } // func sonu...
+            ulisteYarat (kab1, veri); // HML yöntemi...
+            let kab = document.getElementById ('kab2');
+            ulisteYaratDOM (kab, veri); // DOM yöntemi...
+        } // func sonu...
+        function fonkö6() {
+            let liste = document.getElementsByTagName ('li'); // Tüm örneklerdeki "li" etiketleri...
+            for (let lis of liste) {
+                let yavruSayýsý = lis.getElementsByTagName ('li').length;
+                if (! yavruSayýsý) continue;
+                lis.firstChild.data += ' [' + yavruSayýsý + ']';
+            } // for sonu...
+        } // func sonu...
+        function fonkö7() {
+            function takvimYarat (divElemaný, yýl, a) {
+                let ay = a - 1; // JS aylarý 0..11;  1..12 deðil
+                let g = new Date (yýl, ay);
+                let aylar = ["Ocak", "Þubat", "Mart", "Nisan", "Mayýs", "Haziran", "Temmuz", "Aðustos", "Eylül", "Ekim", "Kasým", "Aralýk"];
+                let tablo = `Yýl:${yýl} - Ay:${aylar [ay]}`;
+                tablo +='<table><tr><th>PT</th><th>SA</th><th>ÇA</th><th>PE</th><th>CU</th><th>CT</th><th>PA</th></tr><tr>';
+                for (let i = 0; i < günüAl (g); i++) {tablo += '<td></td>';} // Baþlangýçtaki boþ günleri boþ geç...
+                while (g.getMonth() == ay) {
+                    tablo += '<td>' + g.getDate() + '</td>';
+                    if (günüAl (g) % 7 == 6) {tablo += '</tr><tr>';} // Son pazar günden sonra yeni satýr...
+                    g.setDate (g.getDate() + 1);
+                } // while sonu...
+                if (günüAl (g) != 0) {for (let i = günüAl (g); i < 7; i++) {tablo += '<td></td>';} } // Aysonu boþ günleri boþ geç...
+                tablo += '</tr></table>';
+                divElemaný.innerHTML = tablo;
+            } // func sonu...
+            function günüAl (gün) { // Günler pazartesi=0..pazar=6 olacak
+                let gn = gün.getDay();
+                if (gn == 0) gn = 7; // Pazar (0) son gün (7) olacak...
+                return gn - 1;
+            } // func sonu...
+            takvimYarat (takvim, 2020, 3);
+        } // func sonu...
+        function fonkö8() {
+            let zamanlayýcý;
+            function güncelle() {
+                let saatým = document.getElementById ('saatým');
+                let tarih = new Date();
+                let saat = tarih.getHours();
+                if (saat < 10) saat = '0' + saat;
+                saatým.children [0].innerHTML = saat;
+                let dakika = tarih.getMinutes();
+                if (dakika < 10) dakika = '0' + dakika;
+                saatým.children [1].innerHTML = dakika;
+                let saniye = tarih.getSeconds();
+                if (saniye < 10) saniye = '0' + saniye;
+                saatým.children [2].innerHTML = saniye;
+            } // func sonu...
+            function baþlat() {
+                zamanlayýcý = setInterval (güncelle, 1000);
+                güncelle(); // <--  1 sn beklemeden þimdiden baþlat...
+            } //func sonu...
+            //function durdur() {clearInterval (zamanlayýcý);}
+            baþlat();
+        } // func sonu...
+        function fonkö9() {
+            bir.insertAdjacentHTML ('afterend', '<li>2</li><li>3</li>');
+        } // func sonu...
+        function fonkö10() {
+            let sýralýSatýrlar = Array.from (tablo2.rows)
+                .slice (1)
+                //.sort ( (satýrA, satýrB) => satýrA.cells [0].innerHTML > satýrB.cells [0].innerHTML ? 1 : -1); // Ad'a göre artan
+                //.sort ( (satýrA, satýrB) => satýrA.cells [1].innerHTML > satýrB.cells [1].innerHTML ? 1 : -1); // Syad'a göre artan
+                .sort ( (satýrA, satýrB) => satýrA.cells [2].innerHTML > satýrB.cells [2].innerHTML ? 1 : -1); // Yaþ'a göre artan
+            tablo2.tBodies [0].append (...sýralýSatýrlar);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) Canlý html sayfasý yaratmanýn anahtarý JS kodlamasýyla DOM deðiþikliðidir." +
+            "<br/>2) HTML ve css ayarlarýyla sayfada renkli bir selamlama div kutusu yaratalým. Sonra da aynýsýný \
+            JS kodlamasýyla deneyelim. Verilen document.body.append benzeri: yumru.prepend, \
+            yumru.append, yumru.before, yumru.after, yumru.replaceWith(yumrular/dizgeler) metodlaru ol/li \
+            örneðinde inceleyebilirsiniz. Bu metodlar çoklu dizge ve yumrular da koyabilir. " + fonk2() +
+            "<br/>3) createTextNode yerine HTML ayarlý element.insertAdjacentHTML(nereye, html) metoduyla \
+            nereye için: beforebegin/ilköne, afterbegin/ilkarkaya, beforeend/sonöne, afterend/sonarkaya \
+            kullanýlabilir. " + fonk3() +
+            "<br/>4) yumru.remove() metoduyla adýgeçen yumru sayfadan silinir. Yumruyu taþýrken \
+            sonKonum.after(ilkKonum) metoduyla ilkini silmeden sonun arkasýna taþýnýr. " + fonk4() +
+            "<br/>5) eleman.cloneNode(true) ile derin (vasýflar ve altelemanlar dahil) klonlama, eleman.cloneNode(false) \
+            ile ise sýð klonlama (yavrusuz) yapýlabilir. " + fonk5() +
+            "<br/>6) 'new DocumentFragment()' ile nesneleri ekleyebilir, sonra da bunu baþka bir dýþ nesne içine \
+            sokarak sarmalatabiliriz. Fragment yerine ayný maksatla bir diziyi de kullanabiliriz. " + fonk6() +
+            "<br/>7) Yeni metodlar olan append, prepend, before, after, remove, replaceWith yerine eski \
+            ebeveyn.appendChild(yumru)/yavruyuEkle, ebeveyn.insertBefore(yumru, sonrakiKardeþ)/yavruyuÖncülle, \
+            ebeveyn.replaceChild(yumru, eskiYavru)/yavruyuYerdeðiþtir ve ebeveyn.removeChild(yumru)/yavruyuSil \
+            metodlarýný da hatýrlayalým. Kullanýlmak istenirse tüm bu metodlar eklenen/silinen/vb yumrularý döndürür. " + fonk7() +
+            "<br/>8) DOM öncesinden kalma dinamik document.write sayfa yüklenmeden öncüllenir; geciktirirsek \
+            öncekileri siler. " + fonk8() +
+            "<br/>Ödev1) 3 ayrý yansýtmadan sadece biri yalýn metin deðildir. " + fonkö1() +
+            "<br/>Ödev2) ol elemanýnýn li yavrularýný gecikmeli silen bir fonksiyon yazýn. " + fonkö2() +
+            "<br/>Ödev3) table etiketi içinde ama etiketsiz metin dýþa konulduðundan silinmez, deneyin. " + fonkö3() +
+            "<br/>Ödev4) Prompt ile (body sonuna) ul içine dinamik li ekleyin. " + fonkö4() +
+            "<br/>Ödev5) Çift derinlikli bir listelemeyi HTML ve DOM yöntemleriyle oluþturun. " + fonkö5() +
+            "<br/>Ödev6) ul-li listelerindeki alt-eleman/yavrular sayýsýný (varsa) yansýtýn. " + fonkö6() +
+            "<br/>Ödev7) Ýstenilen yýlýn ayýný Pazartesi..Pazar olarak takvimleyin. " + fonkö7() +
+            "<br/>Ödev8) SS:dd:ss formatlý hakiki zamanlý renkli saatý kur. " + fonkö8() +
+            "<br/>Ödev9) ul-li listenin id='bir' elemaný sonrasý araya 2 ve 3 sok. " + fonkö9() +
+            "<br/>Ödev10) Tablo2 listesini ad, soyad ve yaþ'a göre artan sýralayýn. " + fonkö10()
+    </script>
+</body>
+</html>

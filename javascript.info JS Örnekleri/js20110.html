@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20110.html: Window pencere ebat ve kaydýrma özellikleri örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+    <script></script>
+</head>
+<body style="height:2000px; margin-top:1000px;">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Pencere Ebatý ve Kaydýrma</h3>
+    <p id="göster">Paragraf</p>
+
+    <input type="button" value="10 üste" onClick="window.scrollBy (0, 10);">
+    <input type="button" value="10 alta" onClick="window.scrollBy (0, -10);">
+    <input type="button" value="enüste" onClick="window.scrollTo (0, 0);">
+    <input type="button" value="enalta" onClick="window.scrollTo (0, 5000);">
+    <br/>
+    <input type="button" value="düðme tavanda" onClick="this.scrollIntoView();"><br/>
+    <input type="button" value="düðme tabanda" onClick="this.scrollIntoView (false);">
+    <br/>
+    <input type="button" value="kaymayý dondur" onClick="document.body.style.overflow='hidden';">
+    <input type="button" value="kaymayý saðla" onClick="document.body.style.overflow='';">
+
+    <script>
+        function fonk2() {
+            console.log ("Tarayýcý yüksekliði: " + document.documentElement.clientHeight); // Kaydýraç hariç...
+            console.log ("Tarayýcý geniþliði: " + document.documentElement.clientWidth);
+
+            console.log ("Tarayýcý yüksekliði: " + window.innerHeight); // Kaydýraç dahil...
+            console.log ("Tarayýcý geniþliði: " + window.innerWidth);
+        } // func sonu...
+        function fonk3() {
+            let kayanYükseklik = Math.max (
+                document.body.scrollHeight, document.documentElement.scrollHeight,
+                document.body.offsetHeight, document.documentElement.offsetHeight,
+                document.body.clientHeight, document.documentElement.clientHeight
+            ); // let sonu...
+            let kayanGeniþlik = Math.max (
+                document.body.scrollWidth, document.documentElement.scrollWidth,
+                document.body.offsetWidth, document.documentElement.offsetWidth,
+                document.body.clientWidth, document.documentElement.clientWidth
+            ); // let sonu...
+            console.log ("Kayan dahil döküman yüksekliði: " + kayanYükseklik);
+            console.log ("Kayan dahil döküman geniþliði: " + kayanGeniþlik);
+        } // func sonu...
+        function fonk4() {
+            console.log ("Üstten kayan aralýk: " + window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+            console.log ("Soldan kayan aralýk: " + window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) html etiketine karþýlýk gelen document.documentElement ile tarayýcý ebatlarý okunabilir, JS DOM \
+            özellikleriyle sayfa kaydýrýlabilir." +
+            "<br/>2) document.documentElement.clientHeight/Width bize tarayýcý yüksekliðini/enini verir. \
+            !DOCTYPE html baþta tanýmlanmazsa hata sürprizleri olabilir. " + fonk2() +
+            "<br/>3) Kayabilen metne baðlý olarak döküman ebatý deðiþebileceðinden dolayý, eniyisi bu özelliklerin \
+            max sonucunu yansýtmaktýr. " + fonk3() +
+            "<br/>4) Dökümanýn soldan kayan mesafesini window.pageXOffset, üstteni ise window.pageYOffset \
+            özellikleri verir. " + fonk4() +
+            "<br/>5) Sayfayý göreceli kaydýrma window.scrollBy(x,y), mutlak kaydýra ise window.scrollTo(x,y) \
+            metodlarýyla yapýlabilir." +
+            "<br/>6) eleman.scrollIntoView(a) metodunda a=true ise eleman daima sayfa tavanýnda, a=false \
+            ise tabanýnda görünür kalýr. " +
+            "<br/>7) eleman.body.style.overflow='hidden' elemanýn kaymasýný (kaydýracý iptal ederek) dondurur, \
+            eleman.body.style.overflow='' ise tekrar kaydýrýlabilir (kaydýracý görünür kýlarak) yapar."
+    </script>
+</body>
+</html>

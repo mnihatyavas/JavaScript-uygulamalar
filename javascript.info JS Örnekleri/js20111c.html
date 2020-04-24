@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20111c.html: Yüzer notlarýn absolute ve üst/alt/sað-içeri/dýþarý 6 adet konumlandýrýlmasý ödev3 alt-örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        .yüzerNot {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px;
+            border: 2px solid red;
+            background-color: yellow;
+            color:DodgerBlue;
+            text-align: center;
+            font: italic 14px serif;}
+        blockquote {
+            background-color: #a9a9a9;
+            color:DarkRed;
+            border-left: 15px solid #444;
+            margin: 0 0 0 100px;
+            padding: .5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+            display: inline-block;
+            white-space: pre;}
+        blockquote:before {
+            color: #eee;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;}
+    </style>
+    <script></script>
+</head>
+<body style="margin-bottom:1000px;">
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>Elemanýn Koordinatlarý</h3>
+    <p id="göster">Paragraf</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+        esse sequi officia sapiente.</p>
+    <blockquote>
+        Öðretmen: Derse neden geciktin?
+        Öðrenci: Yüz dolarlýk bankonotunu kaybeden bir adam gördüm.
+        Öðretmen: Güzel. Demek onun parasýný bulmasýna yardým ettin?!..
+        Öðrenci: Hayýr, gidinceye kadar bankanotun üzerinde durdum.
+    </blockquote>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+        esse sequi officia sapiente.</p>
+
+    <script>
+        function fonkö4() {
+            function bloknotKordinatlarýnýAl (b) {
+                let kutu = b.getBoundingClientRect();
+                return {
+                    top: kutu.top + pageYOffset + 46, // Üstteki ara elemanlar telafisi: 46
+                    left: kutu.left + pageXOffset
+                }; // ret..sonu...
+            } // func sonu...
+            function yüzerNotuKonumlandýr (bn, knm, yn) {
+                let bloknotKordinatlarý = bloknotKordinatlarýnýAl (bn);
+                switch (knm) {
+                    case "üst-dýþarý":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top - yn.offsetHeight + "px";
+                        break;
+                    case "sað-dýþarý":
+                        yn.style.left = bloknotKordinatlarý.left + bn.offsetWidth + "px";
+                        yn.style.top = bloknotKordinatlarý.top + "px";
+                        break;
+                    case "alt-dýþarý":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top + bn.offsetHeight + "px";
+                        break;
+                    case "üst-içeri":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top + "px";
+                        break;
+                    case "sað-içeri":
+                        yn.style.width = '150px';
+                        yn.style.left = bloknotKordinatlarý.left + bn.offsetWidth - yn.offsetWidth + "px";
+                        yn.style.top = bloknotKordinatlarý.top + "px";
+                        break;
+                    case "alt-içeri":
+                        yn.style.left = bloknotKordinatlarý.left + "px";
+                        yn.style.top = bloknotKordinatlarý.top + bn.offsetHeight - yn.offsetHeight + "px";
+                        break;
+                } // swi..sonu...
+            } // func sonu...
+            function yüzerNotuGöster (bnot, konum, yüzerNot) {
+                let notum = document.createElement ('div');
+                notum.className = "yüzerNot";
+                notum.innerHTML = yüzerNot;
+                document.body.append (notum);
+                yüzerNotuKonumlandýr (bnot, konum, notum);
+            } // func sonu...
+            let bloknot = document.querySelector ('blockquote');
+            yüzerNotuGöster (bloknot, "üst-içeri", "YüzerNot: ÜstÝçeri");
+            yüzerNotuGöster (bloknot, "üst-dýþarý", "YüzerNot: ÜstDýþarý");
+            yüzerNotuGöster (bloknot, "sað-içeri", "YüzerNot: SaðÝçeri");
+            yüzerNotuGöster (bloknot, "sað-dýþarý", "YüzerNot: SaðDýþarý");
+            yüzerNotuGöster (bloknot, "alt-içeri", "YüzerNot: AltÝçeri");
+            yüzerNotuGöster (bloknot, "alt-dýþarý", "YüzerNot: AltDýþarý");
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "<br/>Ödev4) Yüzer notlarý daha teferruatlý üst-içeri/dýþarý, alt-içeri/dýþarý ve sað-içeri/dýþarý olmak \
+            üzere toplam 6 adet (absolute) konumlandýrýn. (Ýsterseniz ara eleman '+46' telafisini ayarlayýn.) " + fonkö4()
+    </script>
+</body>
+</html>

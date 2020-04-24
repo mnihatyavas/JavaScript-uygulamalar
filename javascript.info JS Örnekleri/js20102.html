@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js20102.html: DOM ile sayfadaki tüm html etiket ve metin nesnelerinin deðiþtirilebilmesi örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: DodgerBlue; font-size:20px; margin:10px;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+
+    </style>
+    <script>
+        function fonk1() {document.getElementById ("göster").innerHTML ="";}
+    </script>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Sil" onClick="fonk1()">
+    <h3>DOM Aðacý</h3>
+    <p id="göster">Paragraf</p>
+
+    <script>
+        function fonk2() {
+            document.body.style.background = 'DarkRed';
+            setTimeout ( () => document.body.style.background = '', 2000);
+        } // func sonu...
+
+        document.getElementById ("göster").innerHTML =
+            "1) HTML dökümanýnýn omurgasý etiketlerdir. DOM/DocumentObjectModule document tüm etiket \
+            ve içerdiði metin nesnelerine eriþebilen JS að sayfasýný deðiþtirebilir." +
+            "<br/>2) body etiketiyle sayfa zemin rengini 2 saniyeliðine kýzartabiliriz. " + fonk2() +
+            "<br/>3) DOM html aðacýný HTML->HEAD->BODY ana iskeletiyle kurar. Eksiklerini kendisi tamamlar. \
+            BODY sonrasý metinleri otomatikmen içe alýr. Genelde dizge ön/arka ve etiketler arasý boþluðu \
+            yok sayar. Etiket sonlarý unutulmuþsa kapatýr. Tabloyu HTML table->tr->td... olarak dizerken, DOM \
+            table->tbody->tr->td... olarak düzenler." +
+            "<br/>4) document giriþ, etiketli eleman ve #text metin yumrularýndan baþka #comment yorum \
+            yumrusu da vardýr. Gerçekte 12 farklý DOM yumrusu mevcuttur. F12 debugger Elements ile mevcut \
+            sayfanýn etiket elemanlarý görülmektedir. Ayrýca tarayýcý sayfasýnýn herhangibir elemaný üzerinde \
+            saðtýkla->inspect/incele ile ilgili debugger Elements yumrusu ýþýldar." +
+            "<br/>5) Debugger Elements'de herhangibir elemaný týklarsanýz ==$0 görünür. Akabinde Console \
+            imlecinde örn. >$0.style.background='red' o yumru zeminini kýrmýzýlaþtýrýr; >$0.style.background='' \
+            ile eski renge dönülür."
+    </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-9 Türkçe" />
+    <title>js30403f.html: Mozilla MDN ile "input-File" dosya seçen indexedDB örneği.</title>
+    <style>
+        body {background-color:Olive; color: DarkRed; font-size:20px; margin:1em;}
+        input {background-color:Navy; color:orange;}
+        button {background-color: MidnightBlue; color: Gold; font-size:15px;}
+        #göster {color:Yellow; font-size:18px;}
+
+        body {
+            font-size: 0.8em;
+            font-family: Sans-Serif;}
+        form {
+            background-color: DarkKhaki;
+            border-radius: 0.3em;
+            display: inline-block;
+            padding: 1em;
+            margin-bottom: 0.5em;}
+        table {border-collapse: collapse;}
+        input {
+            padding: 0.3em;
+            border-color: #ccc;
+            border-radius: 0.3em;}
+        .gerekli:after {
+            content: "*";
+            color: red;}
+        .düğme-panosu {margin-top: 1em;}
+        #dosya-gösterici {
+            float: right;
+            width: 48%;
+            height: 20em;
+            border: solid #d092ff 0.1em;
+            margin-bottom:1em;
+            background-color:SlateGray;}
+        #dosya-gösterici iframe {
+            width: 100%;
+            height: 100%;}
+        #kitap-listesi {
+            width: 42%;
+            background-color: #bbb;
+            border-radius: 0.3em;}
+        #kitap-listesi li {
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-right: 0.5em;}
+        #mesaj {margin-bottom: 1em;}
+        .kaydetme-başarılı {
+            padding: 0.5em;
+            color: #00d21e;
+            background-color: Yellow;
+            border-radius: 0.2em;}
+        .kaydetme-başarısız {
+            padding: 0.5em;
+            color: #ff1408;
+            background-color: Yellow;
+            border-radius: 0.2em;}
+        .not {font-size: smaller;}
+        .imhacı {
+            background-color: orange;
+            color:Brown;}
+        .imhacı:hover {
+            background-color: #ff8000;
+            color:DarkRed;}
+        .imhacı:active {background-color: red;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Veri tabanını SİL" onClick="fonk2()">
+    <h4>indexedDB</h4>
+
+    <script src="js30403f.js"></script>    
+
+    <h1>IndexedDB Gösterisi: damla yükleme, ekitap kaydetme</h1>
+    <div class="not">
+        <p>Şu tarayıcılarla test edilmiştir:</p>
+        <div id="uyumlu"></div>
+    </div>
+
+    <div id="mesaj"></div>
+
+    <form id="kaydetme-formu">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="kitap-başlığı" class="gerekli">Kitap başlığı:</label></td>
+                    <td><input type="text" id="kitap-başlığı" name="kitap-başlığı" /></td>
+                </tr>
+                <tr>
+                    <td><label for="kaynakça-no" class="gerekli">Kaynakça no:<br/><span class="not">(ISBN, ISSN, vb.)</span></label></td>
+                    <td><input type="text" id="kaynakça-no" name="kaynakça-no"/></td>
+                </tr>
+                <tr>
+                    <td><label for="yayın-yılı">Yayın yılı:</label></td>
+                    <td><input type="number" id="yayın-yılı" name="yayın-yılı" /></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td><label for="kayıt-dosyası">Kayıt dosyası:</label></td>
+                    <td><input type="file" id="kayıt-dosyası"/></td>
+                </tr>
+                <tr>
+                    <td><label for="yurel-kayıt-dosyası">Çevrimiçi URL kayıt dosyası:<br/><span class="not">(orijinal URL dosyası)</span></label></td>
+                    <td><input type="text" id="yurel-kayıt-dosyası" name="yurel-kayıt-dosyası"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="düğme-panosu">
+            <input type="button" id="ekle-düğmesi" value="Kitap kaydını ekle" />
+            <!--"Kaydı değiştir" yerine değiştirilecek kaydı sil ve yenisini ekle-->
+            <input type="reset" id="kaydetme-formunu-sıfırla"/>
+        </div>
+    </form>
+
+    <form id="silme-formu">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="silinecek-kaynakça-no">Kaynakça no:<br/><span class="not">(ISBN, ISSN, vb.)</span></label></td>
+                    <td><input type="text" id="silinecek-kaynakça-no" name="silinecek-kaynakça-no" /></td>
+                </tr>
+                <tr>
+                    <td><label for="silinecek-anahtar">Anahtar:<br/><span class="not">(örneğin 1, 2, 3, vb.)</span></label></td>
+                    <td><input type="text" id="silinecek-anahtar" name="silinecek-anahtar" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="düğme-panosu">
+            <input type="button" id="sil-düğmesi" value="Kitap kaydını sil" />
+            <input type="button" id="depoyu-temizle-düğmesi" value="Tüm depoyu temizle" class="imhacı" />
+        </div>
+    </form>
+
+    <form id="listeleme-formu">
+        <div class="düğme-panosu">
+            <input type="button" id="tümünü-göster-düğmesi" value="Depodaki tüm kayıtları göster" />
+        </div>
+    </form>
+
+    <div>
+        <div id="kitap-mesajı"></div>
+        <div id="dosya-gösterici"></div>
+        <ul id="kitap-listesi"></ul>
+    </div>
+
+    <script>
+        (function () {// window.onload = function() {
+            var UYUMLU_TARAYICILAR = [
+                    ['Firefox', ">= 16.0"],
+                    ['Google Chrome', ">= 24.0 (Google Chrome Canary gerekebilir), Damla depolama desteksiz"]
+            ]; // var sonu...
+            var uyumlu = $ ('#uyumlu');
+            uyumlu.empty();
+            uyumlu.append ('<ul id="uyumlu-liste"></ul>');
+            UYUMLU_TARAYICILAR.forEach (function (değer, endeks, dizi) {$ ('#uyumlu-liste').append ('<li>' + değer [0] + ': ' + değer [1] + '</li>'); });
+            const VT_ADI = 'mdn-demo-indexedDB-kitaplar';
+            const VT_SÜRÜMÜ = 1;
+            const VT_DEPO_ADI = 'kitaplar';
+            var vt;
+            var aktüel_kitap_anahtarı;
+
+            function açVT() {
+                console.log ("açVT()...");
+                var talep = indexedDB.open (VT_ADI, VT_SÜRÜMÜ);
+
+                talep.onsuccess = function (olay) {
+                    vt = this.result; // "vt = talep.result", veya "vt=olay.target.result" ile aynı...
+                    console.log ("açVT() BAŞARILI");
+                }; // tal.. sonu...
+
+                talep.onerror = function (olay) {console.error ("açVT() HATA:", olay.target.errorCode); };
+
+                talep.onupgradeneeded = function (olay) {
+                    console.log ("açVT().onupgradeneeded");
+                    var depo = olay.currentTarget.result.createObjectStore (VT_DEPO_ADI, {keyPath: 'kn', autoIncrement: true }); // kn:kimlik no=id...
+                    depo.createIndex ('kaynakçakn', 'kaynakçakn', {unique: true}); // kaynakça kimlik no...
+                    depo.createIndex ('başlık', 'başlık', {unique: false});
+                    depo.createIndex ('yıl', 'yıl', {unique: false});
+                }; // tal.. sonu...
+            } // func sonu...
+
+            function nesneDeposunuAl (depo_adı, kipi) {
+                var işlem = vt.transaction (depo_adı, kipi);
+                return işlem.objectStore (depo_adı);
+            } // func sonu...
+
+            function damlayıAl (anahtar, depo, başarılı_geridönüş) {
+                var talep = depo.get (anahtar);
+                talep.onsuccess = function (olay) {
+                    var değer = olay.target.result;
+                    if (değer) başarılı_geridönüş (değer.damla);
+                }; // tal.. sonu...
+            } // func sonu...
+
+            function yeniGörüntüÇerçevesi() {
+                var gösterici = $ ('#dosya-gösterici');
+                gösterici.empty();
+                var çerçeve = $ ('<iframe />');
+                gösterici.append (çerçeve);
+                return çerçeve;
+            } // func sonu...
+
+            function görüntüyüKur (anahtar) {
+                console.log ("görüntüyüKur(..) argümanları:", arguments);
+                anahtar = Number (anahtar);
+                if (anahtar == aktüel_kitap_anahtarı) return;
+                aktüel_kitap_anahtarı = anahtar;
+                var depo = nesneDeposunuAl (VT_DEPO_ADI, 'readonly');
+                damlayıAl (anahtar, depo, function (damla) {
+                    console.log ("görüntüyüKur(..) damla:", damla);
+                    var çerçeve = yeniGörüntüÇerçevesi();
+                    if (damla.type == 'text/html') {// metin ve html dosyalarını göstermeliydi...
+                        var okuyucu = new FileReader();
+                        okuyucu.onload = function (olay) {
+                            var html = olay.target.result;
+                            çerçeve.load (function() {$(this).contents().find ('html').html (html); });
+                        }; // oku.. sonu...
+                        okuyucu.readAsText (damla);
+                    }else if (damla.type.indexOf ('image/') == 0) { // Resmi de pdf gibi görüntülrmeliydi...
+                        çerçeve.load (function() {
+                            var resim_kn = 'image-' + anahtar;
+                            var resim = $ ('<img kn="' + resim_kn + '"/>');
+                            $ (this).contents().find ('body').html (resim);
+                            var yurel_nesnesi = window.URL.createObjectURL (damla);
+                            $ (this).contents().find ('#' + resim_kn).attr ('src', yurel_nesnesi);
+                            window.URL.revokeObjectURL (yurel_nesnesi);
+                        }); // çer.. sonu...
+                    }else if (damla.type == 'application/pdf') {// Sadece pdf'yi gösteriyor...
+                        $ ('*').css ('imleç', 'wait');
+                        var yurel_nesnesi = window.URL.createObjectURL (damla);
+                        çerçeve.load (function() {$ ('*').css ('imleç', 'auto'); });
+                        çerçeve.attr ('src', yurel_nesnesi);
+                        window.URL.revokeObjectURL (yurel_nesnesi);
+                    }else {// Hiçbiri değilse bu mesajı yansıtmalıydı...
+                        çerçeve.load (function() {$ (this).contents().find ('body').html ("Gösterecek birşey yok"); });
+                    } // else sonu...
+                }); // dam.. sonu...
+            } // func sonu...
+
+            function tümünüGöster (depo) {
+                console.log ("tümünüGöster(..)...");
+                if (typeof depo == 'undefined') depo = nesneDeposunuAl (VT_DEPO_ADI, 'readonly');
+                var kayıtSayısı_mesajı = $ ('#kitap-mesajı');
+                kayıtSayısı_mesajı.empty();
+                var kitapKayıtları_listesi = $ ('#kitap-listesi');
+                kitapKayıtları_listesi.empty();
+                yeniGörüntüÇerçevesi(); // Görüntülenen dosya varsa,pencere silinir...
+                var talep;
+                talep = depo.count();
+                talep.onsuccess = function (olay) {kayıtSayısı_mesajı.append ('<p>Nesne deposunda toplam <strong>' + olay.target.result + '</strong> adet kitap kaydı mevcuttur.</p>'); };
+                talep.onerror = function (olay) {
+                    console.error ("Kitap sayacı HATASI:", this.error);
+                    kaydetmeBaşarısızlığı (this.error);
+                }; // tal.. sonu...
+                var i = 0;
+                talep = depo.openCursor();
+                talep.onsuccess = function (olay) {
+                    var imleç = olay.target.result;
+                    if (imleç) {
+                        console.log ("tümünüGöster(..) imleçi:", imleç);
+                        talep = depo.get (imleç.key);
+                        talep.onsuccess = function (olay) {
+                            var değer = olay.target.result;
+                            var liste_birimi = $('<li>' +'[' + imleç.key + '] ' + '(kaynakçakn: ' + değer.kaynakçakn + ') ' + değer.başlık + '</li>');
+                            if (değer.yıl != null) liste_birimi.append (' - ' + değer.yıl);
+                            if (değer.hasOwnProperty ('damla') && typeof değer.damla != 'undefined') {
+                                var bağlantı = $ ('<a href="' + imleç.key + '">Dosya</a>');
+                                bağlantı.on ('click', function() {return false;}); // Tıklanmaya değil üzerindeye duyarlı...
+                                bağlantı.on ('mouseover', function (olay) {görüntüyüKur (olay.target.getAttribute ('href')); });
+                                liste_birimi.append (' / ');
+                                liste_birimi.append (bağlantı);
+                            }else {liste_birimi.append (" / Ekli dosya yok"); }
+                            kitapKayıtları_listesi.append (liste_birimi);
+                        }; // iç-tal sonu...
+                        imleç.continue(); // bir sonraki kayda geç...
+                        i++; // Haybeye...
+                    }else {console.log ("Başka kayıt kalmadı"); }
+                }; // dış-tal sonu...
+            } // func sonu...
+
+            function yurelliKaydıEkle (kaynakçakn, başlık, yıl, yurel) {
+                console.log ("yurelliKaydıEkle(..) argümanları:", arguments);
+                var xhr = new XMLHttpRequest(); // xhr: XmlHttpRequest...
+                xhr.open ('GET', yurel, true);
+                xhr.responseType = 'blob';
+                xhr.onload = function (olay) {
+                    if (xhr.status == 200) {
+                        console.log ("Blob damla dosyası alındı");
+                        var damla = xhr.response;
+                        console.log ("Blob damlası:", damla);
+                        kaydıEkle (kaynakçakn, başlık, yıl, damla);
+                    }else {console.error ("yurelliKaydıEkle(..) HATASI:", xhr.responseText, xhr.status); }
+                }; // xhr sonu...
+                xhr.send();
+            } // func sonu...
+
+            function kaydıEkle (kaynakçakn, başlık, yıl, damla) {
+                console.log ("kaydıEkle(..) argümanları:", arguments);
+                var kayıtNesnesi = {kaynakçakn: kaynakçakn, başlık: başlık, yıl: yıl};
+                if (typeof damla != 'undefined') kayıtNesnesi.damla = damla;
+                var depo = nesneDeposunuAl (VT_DEPO_ADI, 'readwrite');
+                var talep;
+                try {talep = depo.add (kayıtNesnesi);
+                }catch (olay) {
+                    if (olay.name == 'DataCloneError') kaydetmeBaşarısızlığı ("Bu motor bir Blob damlanın nasıl klonlanacağını bilmiyor, " + "Firefox'u kullan");
+                    throw olay;
+                } // catch sonu...
+                talep.onsuccess = function (olay) {
+                    console.log ("VT içine sokulma başarılıdır");
+                    kaydetmeBaşarısı();
+                    tümünüGöster (depo);
+                }; // tal.. sonu...
+                talep.onerror = function() {
+                    console.error ("kaydıEkle(..) HATA:", this.error);
+                    kaydetmeBaşarısızlığı (this.error);
+                }; // tal.. sonu...
+            } // func sonu...
+
+            function nesneDeposunuTemizle() {
+                var cevap = prompt ("Nesne deponuz, içerdiği tüm kayıtlarla silinecek.\nEmin misin [e/h]: ", "h");
+                if (cevap.toLowerCase() != "e") return;
+                var depo = nesneDeposunuAl (VT_DEPO_ADI, 'readwrite');
+                var talep = depo.clear();
+                talep.onsuccess = function (olay) {
+                    kaydetmeBaşarısı ("Kitap deposu temizlendi");
+                    tümünüGöster (depo);
+                }; // tal.. sonu...
+                talep.onerror = function (olay) {
+                    console.error ("nesneDeposunuTemizle() HATASI:", olay.target.errorCode);
+                    kaydetmeBaşarısızlığı (this.error); // olay.target.error...
+                }; // tal.. sonu...
+            } // func sonu...
+
+            function kaynakçalıKaydıSil (kaynakçakn) {
+                console.log ("kaynakçalıKaydıSil(..) argümanları:", arguments);
+                var depo = nesneDeposunuAl (VT_DEPO_ADI, 'readwrite');
+                var talep = depo.index ('kaynakçakn');
+                talep.get (kaynakçakn).onsuccess = function (olay) {
+                    if (typeof olay.target.result == 'undefined') {
+                        kaydetmeBaşarısızlığı ("Bu kaynakça numaralı kitap kaydı mevcut değil");
+                        return;
+                    } // if sonu...
+                    kaydıSil (olay.target.result.kn, depo);
+                }; // tal.. sonu...
+                talep.onerror = function (olay) {console.error ("kaynakçalıKaydıSil(..) HATASI:", olay.target.errorCode); };
+            } // func sonu...
+
+            function kaydıSil (anahtar, depo) {
+                console.log ("kaydıSil(..) argümanları:", arguments);
+                if (typeof depo == 'undefined') depo = nesneDeposunuAl (VT_DEPO_ADI, 'readwrite');
+                var talep = depo.get (anahtar);
+                talep.onsuccess = function (olay) {
+                    var kayıt = olay.target.result;
+                    console.log ("Silinecek kayıt:", kayıt);
+                    if (typeof kayıt == 'undefined') {
+                        kaydetmeBaşarısızlığı ("Bu anahtar numaralı kitap kaydı mevcut değil");
+                        return;
+                    } // if sonu...
+                    talep = depo.delete (anahtar);
+                    talep.onsuccess = function (olay) {
+                        console.log ("olay:", olay);
+                        console.log ("olay.target:", olay.target);
+                        console.log ("olay.target.result:", olay.target.result);
+                        console.log ("delete successful");
+                        kaydetmeBaşarısı("kaydıSil(..): Silme başarılı");
+                        tümünüGöster (depo);
+                    }; // iç-tal.. sonu...
+                    talep.onerror = function (olay) {console.error ("kaydıSil(..) HATASI:", olay.target.errorCode); };
+                }; // dış-tal.. sonu...
+                talep.onerror = function (olay) {console.error ("kaydıSil(..) get(..) HATASI:", olay.target.errorCode); };
+            } // func sonu...
+
+            function kaydetmeBaşarısı (mesaj) {
+                mesaj = (typeof mesaj != 'undefined' ? "Başarılı: " + mesaj : "Başarılı");
+                $ ('#mesaj').html ('<span class="kaydetme-başarılı">' + mesaj + '</span>');
+            } // func sonu...
+
+            function kaydetmeBaşarısızlığı (mesaj) {
+                mesaj = (typeof mesaj != 'undefined' ? "Başarısız: " + mesaj : "Başarısız");
+                $ ('#mesaj').html ('<span class="kaydetme-başarısız">' + mesaj + '</span>');
+            } // func sonu...
+
+            function kayıtFormunuSıfırla() {
+                console.log ("kayıtFormunuSıfırla()...");
+                $ ('#mesaj').empty();
+                console.log ("kayıtFormunuSıfırla() TAMAMLANDI");
+            } // func sonu...
+
+            function ekleOlayDinleyicileri() {
+                console.log ("ekleOlayDinleyicileri()...");
+
+                $ ('#kaydetme-formunu-sıfırla').click (function (olay) {kayıtFormunuSıfırla(); });
+
+                $ ('#ekle-düğmesi').click (function (olay) {
+                    console.log ("$-ekle...");
+                    var başlık = $ ('#kitap-başlığı').val();
+                    var kaynakçakn = $ ('#kaynakça-no').val();
+                    if (! başlık || ! kaynakçakn) {
+                        kaydetmeBaşarısızlığı ("Gereken alan(lar) eksik");
+                        return;
+                    } // if sonu...
+                    var yıl = $ ('#yayın-yılı').val();
+                    if (yıl != '') {
+                        if (isNaN (yıl))  {
+                            kaydetmeBaşarısızlığı ("Geçersiz yıl");
+                            return;
+                        } // iç-if sonu...
+                        yıl = Number (yıl);
+                    }else {yıl = null;}
+                    var kaydın_dosyası = $ ('#kayıt-dosyası');
+                    var seçilen_dosya = kaydın_dosyası.get (0).files [0];
+                    console.log ("Seçilen dosya:", seçilen_dosya);
+                    var kaydın_yureli = $ ('#yurel-kayıt-dosyası').val();
+                    if (seçilen_dosya) {kaydıEkle (kaynakçakn, başlık, yıl, seçilen_dosya);
+                    }else if (kaydın_yureli) {yurelliKaydıEkle (kaynakçakn, başlık, yıl, kaydın_yureli);
+                    }else {kaydıEkle (kaynakçakn, başlık, yıl);}
+                }); // $-ekle sonu...
+
+                $ ('#sil-düğmesi').click (function (olay) {
+                    console.log ("$-sil...");
+                    var kaynakçakn = $ ('#silinecek-kaynakça-no').val();
+                    var anahtar = $ ('#silinecek-anahtar').val();
+                    if (kaynakçakn != '') {kaynakçalıKaydıSil (kaynakçakn);
+                    }else if (anahtar == "") {console.log ("kaydıSil(..) anahtar numarası YOK!.."); return;}
+                        else {if (isNaN (anahtar)) {
+                            kaydetmeBaşarısızlığı ("Geçersiz anahtar");
+                            return;
+                        } // iç-if sonu...
+                        anahtar = Number (anahtar);
+                        kaydıSil (anahtar);
+                    } // else sonu...
+                }); // $-sil sonu...
+
+                $ ('#depoyu-temizle-düğmesi').click (function (olay) {nesneDeposunuTemizle(); });
+
+                var döküm_düğmesi = $ ('#tümünü-göster-düğmesi');
+                döküm_düğmesi.click (function (olay) {tümünüGöster(); });
+            } // func sonu...
+
+            açVT();
+            ekleOlayDinleyicileri();
+        })(); // DerhalYürütülenFonksiyonİfadesi(DYFİ)=Immediately-Invoked Function Expression (IIFE)
+
+        function fonk2() {
+            let ad = prompt ("Silinecek veri tabanı adını girin:", "mdn-demo-indexedDB-kitaplar");
+            let cevap = prompt ("Tüm veri tabanınız, içerdiği depolar ve kayıtlarla silinecek.\nEmin misin [e/h]: ", "h");
+            if (cevap.toLowerCase() != "e") return;
+            vt.close();
+            let talep = indexedDB.deleteDatabase (ad);
+            talep.onerror = function() {console.error ("HATA: " + talep.error); };
+            talep.onsuccess = function() {console.log ("Veritabanı silinmiştir"); };
+        } // func sonu...
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>js30403a.html: Asenkron sarıcı indexedDB/idb ile kitaplar veritabanı örneği.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <script src="js30403a.js"></script>
+    <style>
+        body {background-color:DarkKhaki; color: Navy; font-size:20px; margin:10px;}
+        button, select {background-color: DarkRed; color: yellow; font-size:15px;}
+        input {background-color:Navy; color:orange;}
+     </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/><br/>
+    <button onclick="kitapEkle()">Bir kitap EKLE</button>
+    <button onclick="tekKitabıSil()">Tek bir kitabı SİL</button>
+    <button onclick="tümKitaplarıSil()">Tüm kitapları SİL</button>
+    <h3 style="text-decoration:underline;">Kitap listesi:</h3>
+    <ul id="listeElemanı"></ul>
+
+    <script>
+        let vt; // veritabanı
+        başlat();
+
+        async function başlat() {
+            vt = await idb.openDb ("kitaplarVT", 1, vt => {vt.createObjectStore ("kitaplar", {keyPath: "ad"} ); });
+            listele();
+        } // afunc sonu...
+
+        async function listele() {
+            let işlem = vt.transaction ("kitaplar");
+            let kitapDeposu = işlem.objectStore ("kitaplar");
+            let kitaplar = await kitapDeposu.getAll();
+            if (kitaplar.length) {
+                listeElemanı.innerHTML = kitaplar.map (kitap => `<li>Kitabın adı: ${kitap.ad}, fiyatı: ${kitap.fiyat}</li>`).join ("");
+            }else {listeElemanı.innerHTML = '<li>Henüz hiç kitap yok. Lütfen ekleyin.</li>'}
+        } // afunc sonu...
+
+        async function kitapEkle() {
+            let ad = prompt ("Kitabın adı?");
+            if (ad == "") {return;}
+            let fiyat = +prompt ("Kitabın fiyatı?");
+            let işlem = vt.transaction ("kitaplar", "readwrite");
+            try {await işlem.objectStore ("kitaplar").add ({ad, fiyat});
+                await listele();
+            }catch (ist) {
+                if (ist.name == "ConstraintError") {alert ("Bu isimdeki kitap mevcuttur", ist); await kitapEkle();
+                }else {throw ist;}
+            } // try-catch sonu...
+        } // afunc sonu...
+
+        async function tekKitabıSil() {
+            let kitapAdı = prompt ("Kitap adı?");
+            if (kitapAdı == "") {return;}
+            let kitaplık = await vt.transaction ("kitaplar").objectStore ("kitaplar").getAll (kitapAdı);
+            if (kitaplık.length) {
+                let cevap = prompt ("DİKKAT... Bu kitap kütüphanenizden silinecek.\nEmin misiniz [e/h]:", "h");
+                if (cevap.toLowerCase() == "e") {
+                    try {await vt.transaction ("kitaplar", "readwrite").objectStore ('kitaplar').delete (kitapAdı);
+                    }catch (ist) {alert ("HATA: Bu kitabı silemedim\n" + ist);}
+                } // if sonu...
+                await listele();
+            }else {listeElemanı.innerHTML = "Silmek istediğiniz kitap kütüphanenizde mevcut değil.";}
+        } // func sonu...
+
+        async function tümKitaplarıSil() {
+            let cevap = prompt ("Tüm kitaplar silinecek, eminmisin [e/h]: ", "h");
+            if (cevap.toLowerCase() != "e") {return;}
+            let işlem = vt.transaction ("kitaplar", "readwrite");
+            await işlem.objectStore ("kitaplar").clear();
+            await listele();
+        } // afunc sonu...
+
+        window.addEventListener ("unhandledrejection", olay => {alert ("HATA: " + olay.reason.message); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <title>js30403h.html: Olay-temelli indexedDB'de  veritabanýnda IDBKeyRange anahtar kapsamý örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        html, body {margin: 0;
+            font-family: sans-serif;
+            font-size: 10px;}
+        html {background-color: SlateGray;}
+        body {max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+            background: linear-gradient(to bottom, rgba(255,150,150,0.8), rgba(100,100,100,0.6));}
+        h1 {text-align: center;
+            font-family: "Bevan", cursive;
+            font-size: 4rem;
+            color: Khaki;
+            text-shadow: -2px -2px 2px black;}
+        ul {text-align: center;
+            list-style-type: none;
+            padding: 2rem 1rem;
+            float: left;
+            width: 40%;
+            background: white linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+            box-shadow: 3px 3px 10px brown;}
+        li {font-size: 2rem;
+            padding-bottom: 1rem;}
+        form {float: right;
+            width: 55%;
+            font-size: 1.7rem;
+            margin-top: 1rem;}
+        form > div {
+            margin-bottom: 3rem;
+            padding: 1rem 1rem 2rem;
+            background: white linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+            box-shadow: 3px 3px 10px brown;}
+        form div div {clear: both;
+            margin-top: 1rem;}
+        form div label {width: 55%;
+            clear: both;}
+        form div input {float: right;}
+        form div input[type="text"] {width: 30%;}
+        form div input[type="radio"] {margin-right: 10px;}
+        button {background-color: DarkRed;
+            color: yellow;
+            display: block;
+            width: 30%;
+            margin: 0 auto;
+            font-size: 1.7rem;
+            line-height: 1.5;
+            box-shadow: 3px 3px 3px pink;}
+        input {background-color:Navy;
+            color:orange;}
+    </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/>
+    <input type="button" value="Veri tabanýný SÝL" onClick="sil()">
+
+    <h1>Temel IDBKeyRange örneði<br>(Birkaç favorilerimin listesi)</h1>
+
+    <ul></ul>
+
+    <form>
+        <div>
+            <div>
+                <label for="tümü">Kayýtlar kesinlikle filitrelenmeyecek</label>
+                <input type="radio" name="deðer" value="tümü" id="tümü" checked>
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="tek"><strong>Sadece</strong> tek bir kayýt bulunacak</label>
+                <input type="radio" name="deðer" value="tek" id="tek">
+            </div>
+            <div>
+                <label for="tekFavori">Tek kayýtlýk seçim için anahtar deðer</label>
+                <input type="text" name="tekFavori" id="tekFavori">
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="range">Deðerlerin bir <strong>kapsamý</strong> bulunacak</label>
+                <input type="radio" name="deðer" value="kapsam" id="kapsam">
+            </div>
+            <div>
+                <label for="kapsamýnÝlkFavorisi">Kapsam için ilk sýnýr</label>
+                <input type="text" name="kapsamýnÝlkFavorisi" id="kapsamýnÝlkFavorisi">
+            </div>
+            <div>
+                <label for="kapsamýnSonFavorisi">Kapsam için son sýnýr</label>
+                <input type="text" name="kapsamýnSonFavorisi" id="kapsamýnSonFavorisi">
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="lower">Bir <strong>düþük</strong> sýnýrla deðerler bulunacak</label>
+                <input type="radio" name="deðer" value="düþük" id="düþük">
+            </div>
+            <div>
+                <label for="lowerboundtext">Sonuçlar için düþük sýnýr</label>
+                <input type="text" name="düþükSýnýrDizgesi" id="düþükSýnýrDizgesi">
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="upper">Bir <strong>yüksek</strong> sýnýrla deðerler bulunacak</label>
+                <input type="radio" name="deðer" value="yüksek" id="yüksek">
+            </div>
+            <div>
+                <label for="upperboundtext">Sonuçlar için yüksek sýnýr</label>
+                <input type="text" name="yüksekSýnýrDizgesi" id="yüksekSýnýrDizgesi">
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="radio" name="filitreEndeksi" value="favoriAdý" id="fAd" checked>
+                <label for="fAd">Favori adlarýyla filitrele</label>
+            </div>
+            <div>
+                <input type="radio" name="filitreEndeksi" value="favoriDerecesi" id="fDerece">
+                <label for="fDerece">Favori dereceleriyle filitrele</label>
+            </div>
+        </div>
+
+        <button>Sorgula</button>
+        <br/>
+    </form>
+
+    <script>
+        let vt;
+
+        let favoriler = [
+            { favoriAdý: 'Drum kit', favoriDerecesi: 10 },
+            { favoriAdý: 'Family', favoriDerecesi: 10 },
+            { favoriAdý: 'Batman', favoriDerecesi: 9 },
+            { favoriAdý: 'Brass eye', favoriDerecesi: 9 },
+            { favoriAdý: 'The web', favoriDerecesi: 9 },
+            { favoriAdý: 'Mozilla', favoriDerecesi: 9 },
+            { favoriAdý: 'Firefox OS', favoriDerecesi: 9 },
+            { favoriAdý: 'Curry', favoriDerecesi: 9 },
+            { favoriAdý: 'Paneer cheese', favoriDerecesi: 8 },
+            { favoriAdý: 'Mexican food', favoriDerecesi: 8 },
+            { favoriAdý: 'Chocolate', favoriDerecesi: 7 },
+            { favoriAdý: 'Heavy metal', favoriDerecesi: 10 },
+            { favoriAdý: 'Monty Python', favoriDerecesi: 8 },
+            { favoriAdý: 'Aphex Twin', favoriDerecesi: 8 },
+            { favoriAdý: 'Gaming', favoriDerecesi: 7 },
+            { favoriAdý: 'Frank Zappa', favoriDerecesi: 9 },
+            { favoriAdý: 'Open minds', favoriDerecesi: 10 },
+            { favoriAdý: 'Hugs', favoriDerecesi: 9 },
+            { favoriAdý: 'Ale', favoriDerecesi: 9 },
+            { favoriAdý: 'Christmas', favoriDerecesi: 8 },
+            { favoriAdý: 'Trekking', favoriDerecesi: 7 },
+            { favoriAdý: 'Jogging', favoriDerecesi: 6 },
+            { favoriAdý: 'Swimming', favoriDerecesi: 8 },
+            { favoriAdý: 'Biking', favoriDerecesi: 9 },
+            { favoriAdý: 'Dieting', favoriDerecesi: 6 },
+            { favoriAdý: 'Epub Debugging', favoriDerecesi: 10 },
+        ]; // let sonu...
+
+        let liste = document.querySelector ('ul');
+        let düðme = document.querySelector ('button');
+        let tekKayýt = document.querySelector ('#tekFavori');
+        let kapsamýnÝlkDizgesi = document.querySelector ('#kapsamýnÝlkFavorisi');
+        let kapsamýnSonDizgesi = document.querySelector ('#kapsamýnSonFavorisi');
+        let altSýnýrDizgesi = document.querySelector ('#düþükSýnýrDizgesi');
+        let üstSýnýrDizgesi = document.querySelector ('#yüksekSýnýrDizgesi');
+
+        window.onload = function() {
+            window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+            window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+            window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+            let vtAçmaTalebi = window.indexedDB.open ('veritabaný2', 1);
+
+            vtAçmaTalebi.onsuccess = function (olay) {
+                vt = vtAçmaTalebi.result; // olay.target.result
+                kayýtlarýYükle();
+            }; // vt..sonu...
+
+            vtAçmaTalebi.onupgradeneeded = function (olay) {
+                let vt = olay.target.result;
+                vt.onerror = function (olay) {liste.innerHTML += '<li>Veritabanýný yükleme hatasý.</li>'; };
+                let nesneDeposu = vt.createObjectStore ('depo2', { keyPath: 'favoriAdý' });  
+                nesneDeposu.createIndex ('favoriDerecesi', 'favoriDerecesi', { unique: false });
+            }; // vt..sonu...
+
+            function kayýtlarýYükle() {
+                let iþlem = vt.transaction (['depo2'], 'readwrite');
+                let nesneDeposu = iþlem.objectStore ('depo2');
+                for(i = 0; i < favoriler.length ; i++) {let talep = nesneDeposu.put (favoriler [i]);};
+                iþlem.oncomplete = function() {kayýtlarýGöster();}
+            } // func sonu...
+
+            let anahtarKapsamýDeðeri = null;
+
+            function kayýtlarýGöster() {
+                let çentikliDeðer = document.querySelector ('input[name="deðer"]:checked').value;
+                let süzgeçEndeksi = document.querySelector ('input[name="filitreEndeksi"]:checked').value;
+
+                if (süzgeçEndeksi=="favoriAdý") {
+                    if (çentikliDeðer == "tümü") {anahtarKapsamýDeðeri = null;
+                    }else if (çentikliDeðer == "tek") {anahtarKapsamýDeðeri = IDBKeyRange.only (tekKayýt.value);
+                    }else if (çentikliDeðer == "kapsam") {anahtarKapsamýDeðeri = IDBKeyRange.bound (kapsamýnÝlkDizgesi.value, kapsamýnSonDizgesi.value, false, false);
+                    }else if (çentikliDeðer == "düþük") {anahtarKapsamýDeðeri = IDBKeyRange.lowerBound (altSýnýrDizgesi.value);
+                    }else if (çentikliDeðer == "yüksek") {anahtarKapsamýDeðeri = IDBKeyRange.upperBound (üstSýnýrDizgesi.value); }
+                }else { //süzgeçEndeksi=="favoriDerecesi"
+                    if (çentikliDeðer == "tümü") {anahtarKapsamýDeðeri = null;
+                    }else if (çentikliDeðer == "tek") {anahtarKapsamýDeðeri = IDBKeyRange.only (parseFloat (tekKayýt.value) );
+                    }else if (çentikliDeðer == "kapsam") {anahtarKapsamýDeðeri = IDBKeyRange.bound (parseFloat (kapsamýnÝlkDizgesi.value), parseFloat (kapsamýnSonDizgesi.value), false, false);
+                    }else if (çentikliDeðer == "düþük") {anahtarKapsamýDeðeri = IDBKeyRange.lowerBound (parseFloat (altSýnýrDizgesi.value) );
+                    }else if (çentikliDeðer == "yüksek") {anahtarKapsamýDeðeri = IDBKeyRange.upperBound (parseFloat (üstSýnýrDizgesi.value) ); }
+                } // if-else sonu...
+
+                if (anahtarKapsamýDeðeri != null) {
+                    console.log ("Ýlk kapsam: " + anahtarKapsamýDeðeri.lower);
+                    console.log ("Son kapsam: " + anahtarKapsamýDeðeri.upper);
+                    console.log ("Alt sýnýr açýk mý? " + anahtarKapsamýDeðeri.lowerOpen);
+                    console.log ("Üst sýnýr açýk mý? " + anahtarKapsamýDeðeri.upperOpen);
+                }; // if sonu...
+
+                liste.innerHTML = '';
+                let nesneDeposu = vt.transaction (['depo2'], 'readonly').objectStore ('depo2');
+
+                let saymaTalebi = nesneDeposu.count();
+                let adet = 0;
+                //saymaTalebi.onsuccess = function() {adet = +saymaTalebi.result;}
+
+                if (süzgeçEndeksi=="favoriDerecesi") {nesneDeposu = nesneDeposu.index ("favoriDerecesi");}
+
+                nesneDeposu.openCursor (anahtarKapsamýDeðeri).onsuccess = function (olay) {
+                    let izlek = olay.target.result;
+                    if (izlek) {// Kayýtlar bitinceye dek...
+                        let listeBirimi = document.createElement ('li');
+                        listeBirimi.innerHTML = '<strong>' + izlek.value.favoriAdý + '</strong>, ' + izlek.value.favoriDerecesi;
+                        liste.appendChild (listeBirimi);
+                        adet +=1;
+                        izlek.continue();
+                    }else {console.log ("Toplam: " + adet + " adet kayýt gösterildi.");}
+                }; // nes..sonu...
+            } // func sonu...
+
+            düðme.onclick = function (o) {
+                o.preventDefault();
+                kayýtlarýGöster();
+            }; // düð..sonu...
+        }; // win.sonu...
+
+        function sil() {
+            let ad = prompt ("Silinecek veri tabaný adýný girin:", "veritabaný2");
+            if (ad == "") return false;
+            let cevap = prompt ("Tüm veri tabanýnýz, içerdiði depolar ve kayýtlarla silinecek.\nEmin misin [e/h]: ", "h");
+            if (cevap.toLowerCase() != "e") return;
+            vt.close();
+            let talep = indexedDB.deleteDatabase (ad);
+            talep.onerror = function() {console.error ("HATA: " + talep.error); };
+            talep.onsuccess = function() {console.log ("Veritabaný silinmiþtir.\nÇalýþtýrmak için 'reload' týklayýn."); };
+        } // func sonu...
+    </script>
+</body>
+</html>

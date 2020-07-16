@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js30102b.html: Pencereler arasý iframe mesajlaþma html alt-örneði.</title>
+</head>
+<body>
+    <p style="color:DarkRed;">Tarayýcý alert penceresinden alýnacak mesaj için üstteki Gönder'i týklayýn:</p>
+    <script>
+        window.addEventListener ("message", function (olay) {// onmessage olayý...
+            alert (`${olay.origin}'den alýnan mesaj: [${olay.data}]`);
+        }); // win..sonu...
+    </script>
+</body>
+</html>

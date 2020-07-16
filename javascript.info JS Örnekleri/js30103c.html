@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe" />
+    <title>js30103c.html: Altta görünmeyen sitelere korsantýklamaya karþý koruyucu alt-örneði.</title>
+    <style>
+        #koruyucu {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 9;}
+    </style>
+</head>
+<body>
+    <div id="koruyucu"><a href="/" target="_blank">Siteye git</a></div>
+    <script>if (top.document.domain == document.domain) {koruyucu.remove();}</script>
+    Bu metin daima görünürdür.
+    Ama sayfa farklý bir site yurelinden açýlýrsa, koruma bu sayfayý etkinsizleþtirir.
+    <button onclick='alert ("Ayný orijinli site korumasýyla týklama iþlevseldir.")'>Orijin farklýysa alert çalýþmayacaktýr</button>
+</body>
+</html>

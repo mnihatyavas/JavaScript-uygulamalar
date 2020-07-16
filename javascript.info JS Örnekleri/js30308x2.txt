@@ -1,0 +1,35 @@
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "ad": "Mahmut", 
+    "g\u00f6bekad": "Nihat", 
+    "g\u00f6rev": "\u00d6\u011frenci", 
+    "soyad": "Yava\u015f"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip, deflate, br", 
+    "Accept-Language": "tr,en-GB;q=0.9,en-US;q=0.8,en;q=0.7", 
+    "Content-Length": "439", 
+    "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundarykZqJHiYqkPCSvEVD", 
+    "Host": "httpbin.org", 
+    "Origin": "http://localhost:8000", 
+    "Referer": "http://localhost:8000/js30308.html", 
+    "Sec-Fetch-Dest": "empty", 
+    "Sec-Fetch-Mode": "cors", 
+    "Sec-Fetch-Site": "cross-site", 
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36", 
+    "X-Amzn-Trace-Id": "Root=1-5eec01d1-dd043ec55cf5acfc7db91b3b", 
+    "X-B3-Parentspanid": "c20bf32c29234fa5", 
+    "X-B3-Sampled": "0", 
+    "X-B3-Spanid": "d83ee3e067fd7e31", 
+    "X-B3-Traceid": "c663454a5d8af651c20bf32c29234fa5", 
+    "X-Envoy-External-Address": "5.176.56.68", 
+    "X-Forwarded-Client-Cert": "By=spiffe://cluster.local/ns/httpbin-istio/sa/httpbin;Hash=1ec59067af90555f0f4bda8cd82e6c76cf3c32d9a23e3d6f58fd4b66504a3847;Subject=\"\";URI=spiffe://cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account"
+  }, 
+  "json": null, 
+  "origin": "5.176.56.68,10.100.91.201", 
+  "url": "https://httpbin.org/post"
+}

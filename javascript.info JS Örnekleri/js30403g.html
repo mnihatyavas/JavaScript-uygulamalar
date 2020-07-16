@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+    <title>js30403g.html: Olay temelli isim-yaþ-eposta kayýtlý indexedDB veritabaný örneði.</title>
+    <meta charset="iso:8859-9 Türkçe" />
+    <style>
+        body {background-color:DarkGreen; color: Navy; font-size:20px; margin:10px;}
+        button, select {background-color: DarkRed; color: yellow; font-size:15px;}
+        input {background-color:Navy; color:orange;}
+     </style>
+</head>
+<body>
+    <input type="button" value="reload() ile Yenile" onClick="window.location.reload();"><br/><br/>
+
+    <button onclick = "birKayýtOku()">Bir kayýt oku</button><br/>
+    <button onclick = "tümKayýtlarýOku()">Tüm kayýtlarý oku</button><br/>
+    <button onclick = "birKayýtEkle()">Bir kayýt ekle</button><br/>
+    <button onclick = "birKayýtDeðiþtir()">Bir kayýt deðiþtir</button><br/>
+    <button onclick = "birKayýtSil()">Bir kayýt sil</button><br/>
+    <button onclick = "kayýtDeposunuSil()">Kayýt deposunu sil</button><br/>
+    <button onclick = "veritabanýnýSil()">Veritabanýný sil</button><br/>
+
+    <h4>NOT: Ýþlem sonuçlarýný F12-konsol çýktýlarýndan takip edebilirsiniz.</h4>
+
+    <script>
+        window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+        window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+        window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+        if (! window.indexedDB) {console.log ("Tarayýcýnýz listeli  indexedDB sürümlerinden hiçbirini desteklemektedir.");}
+
+        const elemanKaydý = [
+            { no: "00-01", isim: "M.Nihat Yavaþ", yaþ: (2020-1957), eposta: "mnyavas@hotmail.com" },
+            { no: "00-02", isim: "M.Nedim Yavaþ", yaþ: (2020-1961), eposta: "mnyavas@gmail.com" },
+            { no: "00-03", isim: "Sevim Yavaþ", yaþ: (2020-1963), eposta: "sevimyavas@hotmail.com" } ];
+        let vt;
+        let talep = window.indexedDB.open ("veritabaný1", 1);
+        talep.onerror = function (olay) {console.log ("HATA: " + talep.error); }; // Yada olay.target.error
+        talep.onsuccess = function (olay) {vt = talep.result; console.log ("Baþarý: " + vt); };
+        talep.onupgradeneeded = function (olay) {
+            let vt = olay.target.result; // Yada talep.result
+            let nesneDeposu = vt.createObjectStore ("depo1", {keyPath: "no"});
+            for (let i in elemanKaydý) {nesneDeposu.add (elemanKaydý [i]); }
+        } // tal..sonu...
+
+        function birKayýtOku() {
+            let kno = prompt ("Okunacak kaydýn no'sunu girin: ", "00-01");
+            if (kno == "") return false;
+            let talep = vt.transaction (["depo1"], "readonly").objectStore ("depo1").get (kno);
+            talep.onerror = function (olay) {consol.log ("Okuma hatasý: " + olay.target.error); };
+            talep.onsuccess = function (olay) {
+                if (talep.result) {console.log ("Ýsim: " + talep.result.isim + ", Yaþ: " + talep.result.yaþ + ", Eposta: " + talep.result.eposta);
+                }else {console.log ("Aradýðýnýz kayýt veritabaný deposunda mevcut deðil!"); }
+            }; // tal..sonu...
+        } // func sonu...
+
+        function tümKayýtlarýOku() {
+            let talep = vt.transaction (["depo1"], "readonly").objectStore ("depo1");
+            talep.openCursor().onsuccess = function (olay) {
+                let izlek = olay.target.result;
+                if (izlek) {console.log ("Kayýt no: " + izlek.key + ", Ýsim: " + izlek.value.isim + ", Yaþ: " + izlek.value.yaþ + ", Eposta: " + izlek.value.eposta); izlek.continue();
+                }else {console.log ("Mevcut tüm kayýtlar listelendi!"); }
+            }; // vt.sonu...
+        } // func sonu...
+
+        function birKayýtEkle() {
+            let kno = prompt ("Eklenecek kaydýn no'sunu girin: ", "00-01");
+            if (kno == "") return false;
+            let mevcutMu = vt.transaction (["depo1"], "readonly").objectStore ("depo1").get (kno);
+            mevcutMu.onsuccess = function (olay) {
+                if (mevcutMu.result == undefined) {
+                    let eklemeTalebi = vt.transaction (["depo1"], "readwrite").objectStore ("depo1").add ({no: kno,
+                        isim: prompt ("Eklenecek kaydýn ad ve soyadýný girin: "),
+                        yaþ: prompt ("Eklenecek kaydýn yaþýný girin: "),
+                        eposta: prompt ("Eklenecek kaydýn epostasýný girin: ") } );
+                    eklemeTalebi.onsuccess = function() {console.log ("Kaydýnýzýn veritabaný deposuna eklendi."); };
+                    eklemeTalebi.onerror = function() {console.log ("Kayýt ekleme hatasý: " + eklemeTalebi.error);}
+                }else {console.log ("Bu kayýt halihazýrda dosyada mevcut!..");}
+            }; // mev..sonu...
+        } // func sonu...
+
+        function birKayýtDeðiþtir() {
+            let kno = prompt ("Deðiþecek kaydýn no'sunu girin: ", "00-01");
+            if (kno == "") return false;
+            let mevcutMu = vt.transaction (["depo1"], "readonly").objectStore ("depo1").get (kno);
+            mevcutMu.onsuccess = function (olay) {
+                if (mevcutMu.result == undefined) {console.log ("Deðiþtirilecek kayýt dosyada mevcut deðil!.."); return false;}
+                let deðiþtirmeTalebi = vt.transaction (["depo1"], "readwrite").objectStore ("depo1").put ({no: kno,
+                    isim: prompt ("Deðiþecek kaydýn ad ve soyadýný girin: "),
+                    yaþ: prompt ("Deðiþecek kaydýn yaþýný girin: "),
+                    eposta: prompt ("Deðiþecek kaydýn epostasýný girin: ") } );
+                deðiþtirmeTalebi.onsuccess = function() {console.log ("Kaydýnýzýn deðiþtirildi."); };
+                deðiþtirmeTalebi.onerror = function() {console.log ("Kayýt deðiþtirme hatasý: " + deðiþtirmeTalebi.error);}
+            }; // mev..sonu...
+            mevcutMu.onerror = function (olay) {console.log ("Bu kayýt dosyada mevcut deðil!.."); };
+        } // func sonu...
+
+        function birKayýtSil() {
+            let kno = prompt ("Silinecek kaydýn no'sunu girin: ", "00-01");
+            if (kno == "") return false;
+            let cevap = prompt ("DÝKKAT... Bu eleman dosyadan silinecek.\nEmin misiniz [e/h]:", "h");
+            if (cevap.toLowerCase() != "e") return false;
+            let talep = vt.transaction (["depo1"], "readwrite").objectStore ("depo1").delete (kno);
+            talep.onsuccess = function (olay) {console.log (kno + " no'lu kayýt veritabaný deposundan silinmiþtir."); };
+            talep.onerror = function (olay) {console.log ("Silme hatasý: " + talep.error); };
+        } // func sonu...
+
+        function kayýtDeposunuSil() {
+                let cevap = prompt ("Nesne deponuz, içerdiði tüm kayýtlarla silinecek.\nEmin misin [e/h]: ", "h");
+                if (cevap.toLowerCase() != "e") return false;
+                var talep = vt.transaction (["depo1"], "readwrite").objectStore ("depo1").clear();
+                talep.onsuccess = function (olay) {console.log ("Veritabaný deposu temizlendi."); };
+                talep.onerror = function (olay) {console.error ("Nesne deposunu temizleme hatasý: " + talep.error); };
+        } // func sonu...
+
+        function veritabanýnýSil() {
+            let ad = prompt ("Silinecek veri tabaný adýný girin:", "veritabaný1");
+            if (ad == "") return false;
+            let cevap = prompt ("Tüm veri tabanýnýz, içerdiði depolar ve kayýtlarla silinecek.\nEmin misin [e/h]: ", "h");
+            vt.close(); // Veritabaný silinmeden önce kapatýlmalýdýr, yoksa silinmez, bloklama hatasý verir...
+            if (cevap.toLowerCase() != "e") return false;
+            let talep = window.indexedDB.deleteDatabase (ad);
+            talep.onsuccess = function() {console.log ("Veritabaný silinmiþtir."); };
+            talep.onerror = function() {console.error ("Veritabaný silme hatasý: " + talep.error); };
+            talep.onblocked = function (olay) {console.log ("Bloklanan iþlem nedeniyle veritabaný silinemedi.");};
+        } // func sonu...
+    </script>
+</body>
+</html>

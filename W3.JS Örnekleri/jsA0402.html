@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0402.html: JS sözdizim kurallarından sayılar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>JS sözdizim kuralları: Sayılar</h2>
+    <p>Sayılar <b>küsüratlı,</b> yada <b>tamsayı</b> olarak yazılabilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var x, y, z;
+    x = 5;
+    y = 6.25;
+    z = x * y;
+    document.getElementById ("gösteri").innerHTML = `x=${x} ve y=${y} ise <b>z=x*y=${z}</b>'dir.`;
+</script>
+</html>

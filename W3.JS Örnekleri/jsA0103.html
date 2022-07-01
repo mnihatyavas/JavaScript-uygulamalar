@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0103.html: HTML p-paragraf elemanının ebat ve renk stillerini değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        button:hover {background-color: black;}
+    </style>
+</head>
+<body>
+    <h2>JavaScript ne yapabilir?</h2>
+    <p id="gösteri">JavaScript bir HTML elemanının stilini değiştirebilir.</p>
+    <button type="button" onclick="document.getElementById ('gösteri').style.fontSize='35px'; document.getElementById ('gösteri').style.color='blue'">Tıkla beni!</button>
+    <button type="button" onclick="document.getElementById ('gösteri').style.fontSize='25px'; document.getElementById ('gösteri').style.color='lime'">Tıkla beni!</button>
+</body>
+</html>

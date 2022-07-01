@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0410.html: JS anahtarkelimesi var'ın değişkenler yaratması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Anahtarkelime: var</h2>
+    <p>Anahtarkelime <b>"var-iable"</b> değişkenler yaratmak için kullanılırlar.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var x, y;
+    x = 5 + 6;
+    y = x * 10;
+    document.getElementById ("gösteri").innerHTML = `var x = 5 + 6, y = x * 10;<br/>x = ${x}<br/>y = ${y}`;
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0404.html: JS sözdizim kurallarından değişkenler örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>JS sözdizim kuralları: Değişkenler</h2>
+    <p>Değişkenlere <b>sayısal, dizgesel, mantıksal</b> yada <b>nesnel değerler</b> atanabilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var gün = 7, ay = 8, yıl = 1955;
+    var tarih = gün + "/" + ay + "/" + yıl;
+    document.getElementById ("gösteri").innerHTML = "Ablamın doğum yılı: <b>" + tarih + "</b>'dir.";
+</script>
+</html>

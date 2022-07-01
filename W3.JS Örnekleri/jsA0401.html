@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0401.html: JS sözdizim kurallarından ifadeler örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: lime;}
+    </style>
+</head>
+<body>
+    <h2>JS sözdizim kuralları: İfadeler</h2>
+    <p>Bir <b>JavaScript programı,</b> bilgisayar tarafından işletilecek olan <b>ifadeler</b> listesidir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var x, y, z; // 3 değişken beyanı...
+    x = 5; // x değişkenine 5 atanır...
+    y = 6; // y değişkenine 6 atanır...
+    z = x + y; // İki değişkenin toplamı z değişkenine atanır...
+    document.getElementById ("gösteri").innerHTML = `x=${x} ve y=${y} ise <b>z=x+y=${z}</b>'dir.`;
+</script>
+</html>

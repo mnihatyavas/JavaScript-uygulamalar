@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0101.html: HTML p-paragrafını js kodlamasıyla değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        i {color:blue; font-size:20px;}
+    </style>
+</head>
+<body>
+    <h2>JavaScript ne yapabilir?</h2>
+    <p id="gösteri">JavaScript HTML içeriğini değiştirebilir.</p>
+    <button type="button" onclick='document.getElementById ("gösteri").innerHTML = "<i>Merhaba, JavaScript!</i>"'>Tıkla beni!</button>
+    <button type="button" onclick='document.getElementById ("gösteri").innerHTML = ""'>Tıkla beni!</button>
+</body>
+</html>

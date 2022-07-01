@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0502.html: Bilgisayar tarafından işletilecek program olan JS ifadeleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>JS program ifadeleri</h2>
+    <p>JS programı, <b>bilgisayar</b> tarafından işletilecek ifadeler listesidir.</p>
+    <P id="gösteri"></P>
+</body>
+<script>
+    let x, y, z;  // İfade 1
+    x = 5;        // İfade 2
+    y = 6;        // İfade 3
+    z = x + y;    // İfade 4
+    document.getElementById ("gösteri").innerHTML = `x=5, y=6 ve z=x+y ise z = <b>${z}</b>'dir.`
+</script>
+</html>

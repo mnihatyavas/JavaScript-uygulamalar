@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0501.html: Tarayıcıya komut olan JS ifadeleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>JS ifadeleri tarayıcıya komutlardır</h2>
+    <p>HTML içinde, JS ifadeleri <b>tarayıcı</b> tarafından işletilirler.</p>
+    <P id="gösteri"></P>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML = "Merhaba, Merilyn Monroe!..";
+    window.alert ("Merhaba, Merilyn Monroe!..");
+    console.log ("Merhaba, Merilyn Monroe!..");
+</script>
+</html>

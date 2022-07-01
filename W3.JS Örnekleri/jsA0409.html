@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0409.html: JS'te değişkenler kullanan tabirler örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Değişkenli tabirler</h2>
+    <p>Aritmetik işlemci tabirleri <b>değişkenler</b> kullanabilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var dyıl = 1957;
+    var isim = "M.Nihat Yavaş";
+    document.getElementById ("gösteri").innerHTML = "İsim: " + isim + "<br/>Yaş: " + (2022 - dyıl);
+</script>
+</html>

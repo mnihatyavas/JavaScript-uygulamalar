@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0105.html: Saklı bir HTML p-paragraf elemanının görünür kılınması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        button:hover {background-color: black;}
+    </style>
+</head>
+<body>
+    <h2>JavaScript ne yapabilir?</h2>
+    <p>JavaScript saklı bir HTML elemanını görünür kılabilir.</p>
+    <p id="gösteri" style="display: none; font-size: 40px; color: cyan">Merhaba JavaScript!</p>
+    <button type="button" onclick="document.getElementById ('gösteri').style.display='block'">Göster beni!</button>
+</body>
+</html>

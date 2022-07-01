@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0411.html: İşletilmeyen tek ve çok satırlı yorumlar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Tek ve çoksatırlı yorumlar</h2>
+    <p>Teksatırlı JS yorumu için <b>//</b>, çoksatırlı içinse <b>/*...*/</b> kullanılır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let yaş, isim;
+    yaş = 2022 - 1957;
+    // yaş = 6; Bu yorum satırı işletilmez...
+    isim = "Mahmut Nihat Yavaş";
+    /*
+      isim = "Mustafa Nedim Yavaş";
+      Çoklu yorum içindeki son "isim" ataması geçerli değildir.
+    */
+    document.getElementById ("gösteri").innerHTML = `- Kaç yaşındasın, ${isim}?<br/>- ${yaş}!..`;
+</script>
+</html>

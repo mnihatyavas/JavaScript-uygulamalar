@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0505.html: Kodlama grubunda {} ile bloklanan {} ile bloklanan JS ifadeleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri1, #gösteri2, #gösteri3 {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>{} ile bloklanan JS ifadeleri</h2>
+    <p>Kodlama grubundaki çoklu JS ifadeleri <b>{ ve }</b> ile bloklanır.</p>
+    <button onclick="fonk1()">Tıkla beni!</button>
+    <p id="gösteri1"></p>
+    <p id="gösteri2"></p>
+    <p id="gösteri3"></p>
+</body>
+<script>
+    function fonk1() {
+        document.getElementById ("gösteri1").innerHTML = "Merhaba, Sevgi!";
+        document.getElementById ("gösteri2").innerHTML = "Bugün nasısın?";
+        document.getElementById ("gösteri3").innerHTML = "Neden daha sık görüşemiyoruz?";
+    } // fonk1 sonu...
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0102.html: Resmin img-src kaynak vasfını js kodlamasıyla değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        button:hover {background-color: black;}
+        b {color:red; font-size:25px;}
+        i {color:blue; font-size:20px;}
+    </style>
+</head>
+<body>
+    <h2>JavaScript ne yapabilir?</h2>
+    <p>JavaScript HTML vasıf değerlerini değiştirebilir.</p>
+    <p>Bu örnekte JS bir img-resmin src (source: kaynak) vasfını değiştirmektedir.</p>
+    <button onclick="document.getElementById ('resmim').src='resim/lambaAçık.gif'"><b>Lambayı yak</b></button>
+    <img id="resmim" src="" style="width:100px" alt="LAMBAYI YAK/SÖNDÜR">
+    <button onclick="document.getElementById ('resmim').src='resim/lambaKapalı.gif'"><i>Lambayı söndür</i></button>
+</body>
+</html>

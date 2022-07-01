@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0602.html: Aynı satırda, işletilen JS ifadesinden sonra yorum örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>İşletilen ifade sonrası yorum</h2>
+    <p>Aynı satırda, işletilebilir JS ifadesinden sonra işletilmeyen <b>// yorumu</b> gelebilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 5; // x değişkenine beyanen 5 değerinin atanması...
+    let y = x + 2; // y değişkenine beyanen, x+2 değerinin atanması...
+    // y'nin son değerini "gösteri" kimlikli paragrafta yansıtalım:
+    document.getElementById ("gösteri").innerHTML = `x=5; y=x+2 = ${y}`;
+</script>
+</html>

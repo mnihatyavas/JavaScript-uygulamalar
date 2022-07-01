@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0302.html: JS document.getElementById('id').innerHTML çıktısının yazdırılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: blue;}
+    </style>
+    <script>function fonk1() {gösteri4.innerHTML = "<span style='font-size: 25px; color: green;'>4) 5 + 6 = " + (5+6) + "</span>";}</script>
+</head>
+<body>
+    <h2>JS çıktısını nerelere yazabilir?</h2>
+    <p>"script" içinde "document.getElementById('id').innerHTML" ile bir (p, ul-li, table-td) HTML elemanına yazabilir.</p>
+    <p id="gösteri1"></p>
+    <ul><li id="gösteri2"></li></ul>
+    <table><td id="gösteri3"></td></table>
+    <p id="gösteri4"></p>
+
+    <button onclick="document.getElementById ('gösteri3').textContent = '3) 5 + 6 = ' + (5+6);">Tıkla beni</button>
+    <button onclick="fonk1();">Tıkla beni</button>
+
+    <script>document.getElementById ("gösteri1").innerHTML = "1) 5 + 6 = " + (5+6);</script>
+</body>
+    <script>document.getElementById ("gösteri2").textContent = "2) 5 + 6 = " + (5+6);</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0412.html: JS değişken adlarının büyük-küçük harflere duyarlılığı örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<BODY>
+    <h2>Büyük-küçük harf duyarlılığı</h2>
+    <p>HTML eleman adları duyarsızken, JS anahtarkelimeleri ve kullanıcı tanımlı özel <b>değişkenadları küçük-büyük harfe duyarlıdır.</b></p>
+    <P id="gösteri"></P>
+</bOdY>
+<script>
+    const soyad = "Yavaş";
+    const soyAd = "Küçükbay";
+    const SOYAD = "Kaçar";
+    document.getElementById ("gösteri").innerHTML = `Hatice'nin soyadı <b>${soyad}</b> mı, yoksa <b>${soyAd}</b> mı, yada <b>${SOYAD}</b> mı?`;
+</SCRIPT>
+</html>

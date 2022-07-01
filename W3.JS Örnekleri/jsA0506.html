@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0506.html: Uzunluğundan dolayı çoklu satırlara kırılan JS ifadesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri1, #gösteri2, #gösteri3 {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Altsatıra kırılan JS ifadesi</h2>
+    <p>Uzun bir JS ifadesini altsatırlara kırmanın enuygun yerleri ifadedeki <b>işlemci veya virgül</b> işaretleridir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML =
+        "Bu köşe yaz köşesi,\
+        şu köşe kış köşesi,\
+        o köşe ne köşesi?";
+</script>
+</html>

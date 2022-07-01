@@ -1,0 +1,33 @@
+    <script>alert ("1) 5 + 6 = " + (5+6));</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0303.html: JS window.alert çıktısının script ve button'la yazdırılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: blue;}
+    </style>
+    <script>window.alert ("2) 5 + 6 = " + (5+6));</script>
+    <script>function fonk1() {alert ("7) 5 + 6 = " + (5+6));}</script>
+</head>
+<body>
+    <h2>JS çıktısını nerelere yazabilir?</h2>
+    <p>"script" içinde "window.alert" ile tarayıcı kutusuna yazabilir.</p>
+
+    <button onclick="window.alert ('6) 5 + 6 = ' + (5+6));">Tıkla beni</button>
+    <button onclick="fonk1();">Tıkla beni</button>
+
+    <script>window.alert ("3) 5 + 6 = " + (5+6));</script>
+</body>
+    <script>window.alert ("4) 5 + 6 = " + (5+6));</script>
+</html>
+    <script>window.alert ("5) 5 + 6 = " + (5+6));</script>

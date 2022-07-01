@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0601.html: İçeriği işletilmeyen tek satırlık JS yorumu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2 id="başlık"></h2>
+    <p id="paragraf"></p>
+</body>
+<script>
+    // Başlığı değiştirelim:
+    document.getElementById ("başlık").innerHTML = "Tek satırlık JS yorumu";
+    // Paragrafı değiştirelim:
+    document.getElementById ("paragraf").innerHTML = "<b>//</b> ile içeriği işletilmeyen ve çalışan programda görülmeyen tek satırlık yorum yapılabilir.";
+</script>
+</html>

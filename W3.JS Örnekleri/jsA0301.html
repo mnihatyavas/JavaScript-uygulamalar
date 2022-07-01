@@ -1,0 +1,39 @@
+    <script>document.write ("1) 5 + 6 = " + (5+6));</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0301.html: JS document.write çıktısının script ve button'la yazdırılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: blue;}
+    </style>
+    <script>document.write ("<br/>2) 5 + 6 = " + (5+6));</script>
+    <script>
+        function fonk1() {
+            document.write ("<body style='text-align:center; margin-top:3em; background-color:SaddleBrown; color: Red; font-size:70px;' />");
+            document.write ("5+6=", (5+6));
+        } // fonk1 sonu...
+    </script>
+</head>
+<body>
+    <h2>JS çıktısını nerelere yazabilir?</h2>
+    <p>"script" içinde "document.write" ile HTML sayfasına yazabilir.</p>
+
+    <p>Buton tıklamayla yapılan JS document.write çağrılar, ilk yüklenen sayfayı silecektir. Ana sayfa için tarayıcı reload sembolünü tıklayın.</p>
+    <button onclick="document.write ('<br/>5 + 6 = ' + (5+6));">Tıkla beni</button>
+    <button onclick="fonk1();">Tıkla beni</button>
+
+    <script>document.write ("<br/>3) 5 + 6 = " + (5+6));</script>
+</body>
+    <script>document.write ("<br/>4) 5 + 6 = " + (5+6));</script>
+</html>
+    <script>document.write ("<br/>5) 5 + 6 = " + (5+6));</script>

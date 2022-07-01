@@ -1,0 +1,1 @@
+function fonksiyonum() {document.getElementById ("gösteri").innerHTML = "<code>Bu paragraf 'işli/jsA0205x.js' klasör içi harici disk dosyasındaki JS kodlamasıyla değiştirildi.</code>";}

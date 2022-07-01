@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0603.html: Çoklu satırlı JS /*...*/ yorumları örneği.</title>
+    <style>
+        /*
+          Bu iki yorum sembolleri arasında
+          istenilen satırlık CSS yorumları yapılabilir.
+        */
+
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2 id="başlık"></h2>
+    <p id="paragraf"></p>
+
+    <!--
+      Bu semboller arasında da istediğiniz
+      satırlık HTML yorumları yapabilirsiniz.
+    -->
+</body>
+<script>
+    /*
+      Alttaki JS kodları
+      "baslık" kimlikli h2-başlığı ve
+      "paragraf" kimlikli p-paragrafı değiştirecektir.
+    */
+    document.getElementById ("başlık").innerHTML = "JS ve CSS Çoklu satır yorumu";
+    document.getElementById ("paragraf").innerHTML = "JS ve CSS bölümlerinde <b>/* ve */</b> arasında istenilen satır sayılık yorumlar yapılabilir.";
+</script>
+</html>

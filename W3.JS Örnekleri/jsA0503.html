@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0503.html: Herbiri diğerinden noktalıvirgülle ayrılan JS ifadeleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>JS ifade ayracı noktalıvirgül</h2>
+    <p>Herbir JS ifadesi, diğerinden <b>noktalıvirgül=;</b> işaretiyle ayrılmalıdır.</p>
+    <P id="gösteri"></P>
+</body>
+<script>
+    let a, b, c;  // İfade 1
+    a = 5;        // İfade 2
+    b = 6;        // İfade 3
+    c = a + b;    // İfade 4
+    document.getElementById ("gösteri").innerHTML = `5+6 sonucu <b>${c}</b>'dir.`
+</script>
+</html>

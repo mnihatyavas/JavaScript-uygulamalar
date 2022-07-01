@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0405.html: JS sözdizim kurallarından işlemciler örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>JS sözdizim kuralları: İşlemciler</h2>
+    <p>Aritmetik işlemciler <b>+: toplama, -: çıkarma, *: çarpma, /: bölme, **: üs, %: kalan</b>'dır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML = "(3 + 5 - 2 * 2.5 / 1.65) **16 % 2 = 138445400097.33304 % 2 = <b>" + (3+5-2*2.5/1.65)**16%2 + "</b>'dir.";
+</script>
+</html>

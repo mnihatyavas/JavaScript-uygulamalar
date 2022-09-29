@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1506.html: Uzun dizgeyi kıran AltGr-\'nin kodlamada kullanılamaması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri1, #gösteri2 {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Uzun kodlamanın AltGr-\ ile kırılamaması</h2>
+    <p>Uzun dizgeyi kıran <b>"\"</b>, uzun kodlamaların kırılmasında kullanılanaz, hata verir.</p>
+
+    <p id="gösteri1"></p>
+    <p id="gösteri2">HATA</p>
+</body>
+<script>
+    let dizge1 = "ABCDEFGHIJK\
+LMNOPQRSTUVWXYZ";
+    let dizge2 = "abcçdefgğıijkl\
+mnoöprsştuüvyz";
+    let dizge3 = "Mahmut \
+Nihat \
+Yavaş";
+
+    document.getElementById ("gösteri1").innerHTML = `"${dizge1}"<br/>"${dizge2}"<br/>"${dizge3}"`;
+    try {
+        document.getElementById ("gösteri2").innerHTML = \
+"JS kod satırı kırma hatası";
+    }catch (hata) {document.getElementById ("gösteri2").innerHTML = hata;}
+</script>
+</html>

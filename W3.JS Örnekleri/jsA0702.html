@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0702.html: JS değişken değerlerinin matematiksel işlemlerde kullanılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Değişkenlerle matematksel işlemler</h2>
+    <p>Matematiksel işlemlerdeki <b>"const"</b> sadece ilk değer alırken <b>var ile let</b> değer değiştirebilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const tabanFiyat = 17205;
+    const tavanFiyat = +prompt ("Doların güniçi enyüksek kurunu girin", 17578);
+    let ortalamaFiyat = ((tabanFiyat + tavanFiyat) / 2).toFixed (2);
+    document.getElementById ("gösteri").innerHTML = `Güniçi ortalama 1$ = ₺${ortalamaFiyat}'dir.`;
+</script>
+</html>

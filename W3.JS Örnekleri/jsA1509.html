@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1509.html: Bir ibarenin dizgedeki uyanların "replace" ile değiştirilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>İbarenin değiştirilmesi: replace()</h2>
+    <p>Bir ibarenin dizgedeki uyumlularınının ilkini <b>"replace()"</b>, hepsini <b>replaceAll() ile değiştirebilirsiniz.</p>
+
+    <button onclick="ziyaret ('ilk')">replace</button>
+    <button onclick="ziyaret ('hep')">replaceAll</button>
+    <p id="gösteri">Lütfen sadece <span style="color: red;">Microsoft</span>'u, daima <i>Microsoft</i>'u, illa ki <code>Microsoft</code>'u ziyaret edin!</p>
+</body>
+<script>
+    function ziyaret (ilkHep) {
+        let cümle = document.getElementById ("gösteri").innerHTML; // "innerHTML <==> innerText" değişirse stillemeler geçersizlenir...
+        if (ilkHep == "ilk") document.getElementById ("gösteri").innerHTML = cümle.replace ("Microsoft", "W3Schools");
+        else {document.getElementById ("gösteri").innerHTML = cümle.replaceAll ("Microsoft", "W3Schools");}
+    } // ziyaret sonu...
+</script>
+</html>

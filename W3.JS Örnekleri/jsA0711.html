@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0711.html: Dizge ve sayıların çeşitli karma toplamları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Dizge ve sayıların toplamı</h2>
+    <p>Dizge ve sayıların toplamında, <b>dizgelerin eklentisi</b> ve <b>gruplanan sayıların hasılası</b> elde edilir.</b></p>
+    <p id="gösteri1"></p>
+    <p id="gösteri2"></p>
+    <p id="gösteri3"></p>
+    <p id="gösteri4"></p>
+</body>
+<script>
+    let toplam1 = "5" + "4" + 3 + 2 + 1;
+    let toplam2 = "5" + "4" + (3 + 2 + 1);
+    let toplam3 = 5 + 4 + "3" + 2 + 1;
+    let toplam4 = 5 + 4 + "3" + (2 + 1);
+    document.getElementById ("gösteri1").innerHTML = `"5" + "4" + 3 + 2 + 1 = ${toplam1}`;
+    document.getElementById ("gösteri2").innerHTML = `"5" + "4" + (3 + 2 + 1) = ${toplam2}`;
+    document.getElementById ("gösteri3").innerHTML = `5 + 4 + "3" + 2 + 1 = ${toplam3}`;
+    document.getElementById ("gösteri4").innerHTML = `5 + 4 + "3" + (2 + 1) = ${toplam4}`;
+</script>
+</html>

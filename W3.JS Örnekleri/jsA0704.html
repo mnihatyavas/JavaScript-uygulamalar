@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0704.html: Let/var değişkene tanım anında yada sonradan değer atanması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Değerin ilkanda yada sonradan değişkene atanması</h2>
+    <p>Değişkene değer atanması <b>beyanda yada sonradan</b> yapılabilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var araba1 = "Volvo";
+    let araba2;
+    araba2 = 'Audi';
+    document.getElementById ("gösteri").innerHTML = `${araba1}'yu mu, yoksa ${araba2}'yi mi tercih edersin?`;
+</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1102.html: Sayıların -+, tamsayı, küsüratlı veya e-üslü girilebilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Sayı tipli değişken</h2>
+    <p>Hesaplamalarda kullanılmak üzere -+, tamsayı, küsüratlı yada e-üslü girilebilen veri tipi <b>sayı</b>'dır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayı1 = Math.E;
+    let sayı2 = 2022;
+    let sayı3 = 3.14;
+    let sayı4 = 2.2e3;
+    document.getElementById ("gösteri").innerHTML = `${sayı1} -->${--sayı1}<br/>${sayı2--} -->${sayı2}<br/>${sayı3} -->${++sayı3}<br/>${sayı4++} -->${sayı4}`;
+</script>
+</html>

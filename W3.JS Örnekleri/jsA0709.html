@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0709.html: Tırnaksız sayıların toplamının kümülatifi vermesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Sayıların toplamı</h2>
+    <p>Sayıların toplamı bize onların <b>kümülatif hasılasını</b> verir.</b></p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let toplam = 5 + 4 + 3 + 2 + 1;
+    document.getElementById ("gösteri").innerHTML = `5+4+3+2+1 = ${toplam}`;
+</script>
+</html>

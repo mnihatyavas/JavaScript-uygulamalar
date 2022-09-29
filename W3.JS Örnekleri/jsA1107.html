@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1107.html: Henüz değer atanmamış değişken undefined/tanımsız'dır örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Değer atanmamış ile atanmışın farkı</h2>
+    <p>Beyan edilen fakat henüz değer atanmayan değişken <b>undefined/tanımsız</b> iken, atanan değer yada tabir <b>veri tipini</b> belirler.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let isim;
+    document.getElementById ("gösteri").innerHTML = `Değer atanmayan "isim" değişkeni ve tipi: ${isim}, ${typeof isim}`;
+    isim = "";
+    document.getElementById ("gösteri").innerHTML += `<br/>Boş değerli "isim" değişkeni ve tipi: ${isim}, ${typeof isim}`;
+    isim = "Muhammed Ali Clay";
+    document.getElementById ("gösteri").innerHTML += `<br/>Tam ad-soyad atanmış "isim" değişkeni ve tipi: ${isim}, ${typeof isim}`;
+    isim = {adı: "Muhammed", göbekadı: "Ali", soyadı: "Clay"};
+    document.getElementById ("gösteri").innerHTML += `<br/>Tam ad-soyad atanmış "isim" değişkeni ve tipi: ${isim.adı} ${isim.göbekadı} ${isim.soyadı}, ${typeof isim}`;
+</script>
+</html>

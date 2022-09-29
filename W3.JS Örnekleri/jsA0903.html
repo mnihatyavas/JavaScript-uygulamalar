@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0903.html: JS atama operatörlerden -= ile değişkene değer azaltma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>"-=" atama operatörle AZALT ATA</h2>
+    <p>JS aritmetik operatörlerden <b>"-=" ile değişkenin mevcut değerinde azaltma</b> yapılır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = Math.PI + 15;
+    x -= 5;
+    document.getElementById ("gösteri").innerHTML = `(x=pi+15) -= 5 = ${x}`;
+</script>
+</html>

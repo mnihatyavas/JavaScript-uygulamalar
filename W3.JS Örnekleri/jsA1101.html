@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1101.html: Tırnaklı ilkdeğer atanarak beyan edilen dizgesel değişken örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Dizge tipli değişken</h2>
+    <p>Tek/çift-tırnaklı ilkdeğer atanarak beyan edilen değişken tipi <b>dizge</b>'dir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge1 = "N'haber dostum!..";
+    let dizge2 = "Benim adım 'Mahmut'dur.";
+    let dizge3 = 'Göbekadım ise "Nihat".';
+    let dizge4 = "Soyadım da ´Yavaş´.";
+    document.getElementById ("gösteri").innerHTML = `${dizge1}<br/>${dizge2}<br/>${dizge3}<br/>${dizge4}`;
+</script>
+</html>

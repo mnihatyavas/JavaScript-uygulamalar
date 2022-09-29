@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1201.html: Bir değişken yaratıp, ona tabirsel tip kazandırma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Yaratılan değişkene tip atfetme</h2>
+    <p>Yaratılan bir <b>undefined/tanımsız</b> değişkene tabirsel sembollerle <b>tip</b> atfedilebilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let araba;
+    document.getElementById ("gösteri").innerHTML = `Tip'siz değişken: ${typeof araba}`;
+    araba = "";
+    document.getElementById ("gösteri").innerHTML += `<br/>Boş "" tabirli değişken tipi: ${typeof araba}`;
+    araba = {};
+    document.getElementById ("gösteri").innerHTML += `<br/>Nesne {} tabirli değişken tipi: ${typeof araba}`;
+</script>
+</html>

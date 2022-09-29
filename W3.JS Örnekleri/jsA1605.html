@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1605.html: Toplamın sayı veya dizge olması nüansları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Toplamın sayı veya dizge olması</h2>
+    <p>İki sayının toplamı <b>sayı</b> iken, ikisinden herhangi biri yada ikisi dizgeyse toplam peşpeşe birleşik <b>dizge</b>'dir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = 20 + 22;
+    let x2 = "20" + 22;
+    let x3 = 20 + "22";
+    let x4 = "20" + "22";
+    let x5 = "04" + 20 + 22;
+    let x6 = 20 + 22 + "04";
+    let x7 = 20 + 22 + (+"04");
+
+    document.getElementById ("gösteri").innerHTML =
+`Toplamlar ve veri tipi:<br/>\
+20 + 22 = ${x1}: ${typeof x1}<br/>\
+"20" + 22 = ${x2}: ${typeof x2}<br/>\
+20 + "22" = ${x3}: ${typeof x3}<br/>\
+"20" + "22" = ${x4}: ${typeof x4}<br/>\
+"04" + 20 + 22 = ${x5}: ${typeof x5}<br/>\
+20 + 22 + "04" = ${x6}: ${typeof x6}<br/>\
+20 + 22 + (+"04") = ${x7}: ${typeof x7}`;
+</script>
+</html>

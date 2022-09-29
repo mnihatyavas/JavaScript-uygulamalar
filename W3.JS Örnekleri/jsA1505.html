@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1505.html: Uzun dizgeye altsatırdan devam etmek için AltGr-\ ile kırma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Uzun dizgeyi AltGr-\ ile kırma</h2>
+    <p>Uzun bir dizgeyi istediğiniz yerden kırıp biralt satır-lardan devam etmek için <b>"\"</b> kullanabilirsiniz.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge1 = "ABCDEFGHIJK\
+LMNOPQRSTUVWXYZ";
+    let dizge2 = "abcçdefgğıijkl\
+mnoöprsştuüvyz";
+    let dizge3 = "Mahmut \
+Nihat \
+Yavaş";
+
+    document.getElementById ("gösteri").innerHTML = `"${dizge1}"<br/>"${dizge2}"<br/>"${dizge3}"`;
+</script>
+</html>

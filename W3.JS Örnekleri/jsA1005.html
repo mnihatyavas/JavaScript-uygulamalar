@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1005.html: Dizgeyle sayının toplanmasının çesitli durumları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Bir dizgeyle bir sayının eklenme durumları</h2>
+    <p>Bir dizgeyle bir sayı eklenirken <b>öncelik ve tırnakiçilik</b> gözetilmelidir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML = `5 + 4 = ${5+4}<br/>"5" + 4 = ${"5"+4}<br/>+"5" + 4 = ${+"5"+4}<br/>5 + "4" = ${5+"4"}<br/>5 + (+"4") = ${5+(+"4")}<br/>`;
+</script>
+</html>

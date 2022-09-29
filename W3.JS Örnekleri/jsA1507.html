@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1507.html: Bir ibarenin dizgedeki ilk konumunun "indexOf()" ile tespiti örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>İbarenin dizgedeki ilk konumu: indexOf()</h2>
+    <p>Bir ibarenin dizgedeki ilk konumunu bulan <b>"indexOf()", bulamazsa -1 döndürür.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge = 'Lütfen "kon" ibaresinin dizgedeki endeks konumunu konumlandırınız!';
+    document.getElementById ("gösteri").innerHTML = `${dizge} = [${dizge.indexOf ("kon")}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `İkinci konumu = [${dizge.indexOf ("kon", 9)}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `Son konumu = [${dizge.lastIndexOf ("kon")}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `"kom" = [${dizge.indexOf ("kom")}]`;
+</script>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1511.html: Dizgeden diziye "split()" ile veya diziden dizgeye "slice()" ile çevirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizgeden diziye: split(), tersi: slice()</h2>
+    <p>Dizgeyi belirteceğiniz ayraçla diziye çevirmek için <b>"split()"</b>, diziden dizgeyeyse <b>slice()</b> yada <b>join()</b> metodunu kullanabilirsiniz.</p>
+
+    <button onclick="çevir ('diziye')">Dizgeden diziye</button>
+    <button onclick="çevir ('dizgeye')">Diziden dizgeye</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function çevir (diziyeDizgeye) {
+        let dizge1 = "a b c ç d e f g ğ h ı i j k l m n o ö p r s ş t u ü v y z";
+        let dizi = dizge1.split (" ");
+        let dizge2 = dizi.slice();
+        let dizge3 = dizi.join (" ");
+        let dizge4 = dizi.join (" - ");
+        if (diziyeDizgeye == "diziye") {document.getElementById ("gösteri").innerHTML = "[" + dizi + "]";}
+        else {document.getElementById ("gösteri").innerHTML = dizge2 +"<br/>" + dizge3 +"<br/>" + dizge4;}
+    } // çevir sonu...
+</script>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1707.html: Dizgesel veri tip ve değerini sayısala dönüştüren global "parseInt() ve parseFloat()" metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"parseInt()" ve "parseFloat() global metodları</h2>
+    <p>Dizgesel veri tip ve değerini sayısala ayrıştırann global "parseInt() ve parseFloat()" metodları, değer (ilkleri) sayısal değilse NaN döndürürler.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let yıl1 = "1957.0417Nihat";
+    let yıl2 = "Nihal1955.0807";
+
+    document.getElementById ("gösteri").innerHTML =
+`yıl1 = "1957.0417Nihat", yıl2 = "Nihal1955.0807" ise parse/çöz ve tip:<br/>\
+parseInt (yıl1) = ${parseInt (yıl1)}, ${typeof parseInt (yıl1)}<br/>\
+parseFloat (yıl1) = ${parseFloat (yıl1)}, ${typeof parseFloat (yıl1)}<br/>\
+parseInt (yıl2) = ${parseInt (yıl2)}, ${typeof parseInt (yıl2)}<br/>\
+parseFloat (yıl2) = ${parseFloat (yıl2)}, ${typeof parseFloat (yıl2)}<br/><br/>\
+parseInt ("-10") = ${parseInt ("-10")}, parseFloat ("-10") = ${parseFloat ("-10")}<br/>\
+parseInt ("-10.157") = ${parseInt ("-10.157")}, parseFloat ("-10.157") = ${parseFloat ("-10.157")}<br/>\
+parseInt ("+10") = ${parseInt ("+10")}, parseFloat ("+10") = ${parseFloat ("+10")}<br/>\
+parseInt ("10.157") = ${parseInt ("10.157")}, parseFloat ("10.157") = ${parseFloat ("10.157")}<br/>\
+parseInt ("10 157") = ${parseInt ("10 157")}, parseFloat ("10 157") = ${parseFloat ("10 157")}`;
+</script>
+</html>

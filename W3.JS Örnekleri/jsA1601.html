@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1601.html: Sayıların tamsayı, küsüratlı yada e-üslü girilebilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Sayılar: tamsayı, küsüratlı, e-üslü</h2>
+    <p>JS kodlamasında sabit sayı girişlerini <b>tamsayı, küsüratlı</b> yada <b>e-üslü</b> girebilirsiniz.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = Math.PI;
+    let y = 3;
+    let z = 6283185.307179586 / 2e6;
+
+    document.getElementById ("gösteri").innerHTML = x + "<br>" + y + "<br>" + z;
+</script>
+</html>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1508.html: Bir ibarenin dizgedeki uyanların RegEx-"match" ile tespiti örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>İbarenin dizgedeki eşleşenleri: RegEx-match()</h2>
+    <p>Bir ibarenin dizgedeki uyumlularını bulan RegExp<b>"match()"</b>, g-lobal ve i-nsensitive bayrakları kullanabilir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge = 'Lütfen "koN" ibaresinin dizgedeki eşleşen koNumunu konumlandırınız!';
+    document.getElementById ("gösteri").innerHTML = `${dizge}<br/>Tüm eşleşenler = [${dizge.match (/KON/gi)}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `İlk eşleşen = [${dizge.match (/koN/i)}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `Büyük-küçük harf "koN" ile duyarlı eşleşenler = [${dizge.match (/koN/g)}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `Büyük-küçük harf "kon" ile duyarlı eşleşenler = [${dizge.match (/kon/g)}]<br/>`;
+    document.getElementById ("gösteri").innerHTML += `"KON" ile hiç eşleşmeyenler = [${dizge.match (/KON/g)}]<br/>`;
+</script>
+</html>

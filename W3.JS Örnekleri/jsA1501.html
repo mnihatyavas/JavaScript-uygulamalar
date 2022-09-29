@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1501.html: Dizge değerlerinin tek-çift tırnak içinde gösterilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizgenin tırnakiçinde gösterilmesi</h2>
+    <p>Dizge değerleri <b>tek-tırnak, çift-tırnak yada AltGr-tırnak içinde</b> gösterilebilir.</p>
+    <p>Kurallarına uyularak bu üç tırnak işareti aynı dizge için kullanılabilir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    var araba1 = "Volvo XC60"; // Çift-tırnak
+    var araba2 = 'Volvo XC60'; // Tek-tırnak
+    var araba3 = `Volvo XC60`; // AltGr-tırnak
+    var araba4 = `<b>"Volvo"</b>-<i>"XC'60"</i>`; // AltGr-, Çift-, tek-tırnak
+
+    document.getElementById ("gösteri").innerHTML = araba1 + "<br/>" + araba2 + "<br/>" + araba3 + "<br/>" + araba4;
+</script>
+
+</html>

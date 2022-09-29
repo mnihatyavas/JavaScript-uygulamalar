@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1306.html: Fonksiyon çağrılırken () sembolü kullanılmazsa sonuç yerine tanımın görülmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Fonksiyonun () olmadan çağrılması</h2>
+    <p>Aşağıdaki <b>"Tıkla beni"</b> düğmesi fonksiyonu, girilen Celcius dereceyle çağırmaktadır.</p>
+    <p>Fonksiyon, her tıklamada, düğmenin altına altalta girilen derecelerin Fahrenheit ve Kelvin karşılıklarını yansıtmak yerine () kullanılmadığından fonksiyonların tanımını yansıtacaktır.</p>
+    <button onclick="çevir()">Tıkla beni</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function çevir() {
+        function  derecedenFahreheita (x) {return x*9/5+32;}
+        function  derecedenKelvine (x) {return x+273.15;}
+
+        let derece = +prompt ("Celsius dereceyi girin", "0");
+        if (derece < -273.15) derece = -273.15;
+        document.getElementById ("gösteri").innerHTML += `${derece} Celsius derece = ${derecedenFahreheita} Fahrenheit ve ${derecedenKelvine} Kelvin derecedir.<br/>`;
+    } // çevir sonu...
+</script>
+</html>

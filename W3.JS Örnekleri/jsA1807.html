@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1807.html: Selsiyüs, Fahrenhayt ve Kelvin ısı çevrimleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        input {background-color: blue; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <h2>Celsiyüs, Fahrenhayt, Kelvin çevrimleri</h2>
+    <p>Aşağıdaki hangi kutuya sayısal derece girerseniz, diğer kutularda anlık çevrimleri görülecektir.</p>
+    <p>C'den F'ye çevrim için: C*9/5+32; tersi için: (F-32)*5/9; K=C+273.15 formülleri kullanılmaktadır. x.toFixed(2) küsüratları 2 haneye yuvarlamaktadır.</p>
+
+    <p><input id="s" onkeyup="çevir ('s')"> Selsiyüs derece</p>
+    <p><input id="f" onkeyup="çevir ('f')"> Fahrenhayt derece</p>
+    <p><input id="k" onkeyup="çevir ('k')"> Kelvin derece</p>
+</body>
+<script>
+    function çevir (derece) {
+        var x;
+        if (derece == "s") {
+            x = +document.getElementById ("s").value;
+            if (x < -273.15) {x = -273.15; document.getElementById ("s").value = -273.15;}
+            document.getElementById ("f").value = (x * 9 / 5 + 32).toFixed (2);
+            document.getElementById ("k").value = (x + 273.15).toFixed (2);
+        } else if (derece == "f") {
+            x = document.getElementById ("f").value;
+            if (x < -459.669) {x = -459.669; document.getElementById ("f").value = -459.67;}
+            document.getElementById ("s").value = ((x - 32) * 5 / 9).toFixed (2);
+            document.getElementById ("k").value = (((x - 32) * 5 / 9) + 273.15).toFixed (2);
+        } else {
+            x = document.getElementById ("k").value;
+            if (x < 0) {x = 0; document.getElementById ("k").value = 0;}
+            document.getElementById ("s").value = (x - 273.15).toFixed (2);
+            document.getElementById ("f").value = ((x - 273.15) * 9 / 5 + 32).toFixed (2);
+        } // else sonu...
+    } // func sonu...
+</script>
+</html>

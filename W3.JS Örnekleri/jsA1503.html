@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1503.html: Tırnak önündeki \, tırnağı dizge tabirinden farklı kılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Tırnak önündeki \</h2>
+    <p>Dizge tırnağıyla aynısı dizge içinde kullanılacaksa önünü AltGr-\ konulmalıdır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge1 = 'N\'aber Berna?';
+    let dizge2 = "Onun adı \"Berna\"dır.";
+    let dizge3 = "\"Onun adı \"Berna\"dır.\"";
+
+    document.getElementById ("gösteri").innerHTML = dizge1 + "<br/>" + dizge2 + "<br/>" + dizge3;
+</script>
+</html>

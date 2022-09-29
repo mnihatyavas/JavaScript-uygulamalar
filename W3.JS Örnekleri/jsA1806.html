@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1806.html: Sayısal argümanlardam enbüyüğünü/enküçüğünü döndüren Math.max()/min() metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Math.max(), Math.min()" metodları</h2>
+    <p>Sayısal çoklu -+argümanlar içinden enbüyüğü Math.max(), enküçüğünü ise Math.min() metodu seçer ve döndürür.</p>
+    <p>Her tarayıcı reload/yeniden-çalıştır tıklamada, konsol ve HTML sayfada farklı sayılar görülecektir.</p>
+
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = [];
+    for (let i = 0; i < 10; i++) {x [i] = (Math.random() * 200 - 100).toFixed (2); console.log (x [i]);}
+
+    document.getElementById ("gösteri").innerHTML =
+`10 adet rasgele [-100, 100] sayılar = ${x}<br/><br/>\
+Math.max (..x) = ${Math.max (x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], "0.786")}<br/>\
+Math.min (..x) = ${Math.min (x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], parseFloat ("-0.786Nihat"))}`;
+</script>
+</html>

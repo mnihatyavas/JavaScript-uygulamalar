@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1609.html: Tipi sayı olan Ifinity'nin, atamayla, sıfıra bölümle yada işlenilebileni taşırınca üretilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>-+Infinity detayları</h2>
+    <p>Tipi sayı olan -+<b>Ifinity'yi, atamayla, sıfıra bölümle yada işlenilebileni taşırarak</b> üretebilirsiniz.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 2;
+    let y1 = x / 0;
+    let y2 = -x / 0;
+    let z1 = -Infinity;
+    let z2 = 1.7976e308;
+    let z3 = -1.7976e308;
+    let a = x + " ";
+
+    while (x != Infinity) {x *=x; a += x + " ";}
+
+    document.getElementById ("gösteri").innerHTML =
+`x = 2'yi taşırarak +Infinity üretimi = ${a}<br/><br/>\
++-Infinity'den birönceki işlenebilen sayılar: ${z2}, ${z3}<br/><br/>\
+Sıfıra bölerek üretme: y1 = x / 0 = ${y1}<br/>\
+y2 = -x / 0 = ${y2}<br/></br>\
+z1 = -Infinity'yi atayarak üretme ve tipi: ${z1}, ${typeof z1}`;
+</script>
+</html>

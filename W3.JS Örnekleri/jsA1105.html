@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1105.html: Değişken yada tabirin tipini döndüren "typeof" örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Değişkenin/tabirin tipini döndüren "typeof"</h2>
+    <p>"typeof" işlemcisi önündeki değişkenin, değerin yada tabirin (veri) <b>tipini döndürür.</b></p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = 0, x2 = "", x3 = {}, x4 = [];
+    document.getElementById ("gösteri").innerHTML =
+        typeof x1 + ", " + typeof x2 + ", " + typeof x3 + ", " + typeof x4 + "<br>" +
+        typeof "" + "<br>" +
+        typeof "Nihat Yavaş" + "<br>" +
+        typeof Math.PI + "<br>" +
+        typeof 3.14 + "<br>" +
+        typeof false + "<br>" +
+        typeof (undefined);
+</script>
+</html>

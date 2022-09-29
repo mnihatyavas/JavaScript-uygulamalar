@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1710.html: Number.NaN özelliğinin atama veya sayısal olmayan aritmetik işlemlerden türetilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Number.NaN" özelliği</h2>
+    <p>Number.NaN (NotANumber) özelliği atamayla veya sayısal olmayayanlarla aritmetik işlemler yapılmasıyla yaratılır.</p>
+    <p>"Number.NaN" sayı özelliği olduğundan, Number yerine değişken, değer yada tabir kullanılırsa "undefined"/tanımsız değer ve tip üretir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = Number.NaN;
+    let y1 = 15 * "Nihat";
+    let y2 = 2022 - {ad: "Nihat"};
+    let y3 = 1955.0807 / [,,2022];
+    let y4 = 1957 + NaN;
+
+
+    document.getElementById ("gösteri").innerHTML =
+`Atamayla NaN ve tipi: ${x}, ${typeof x}<br/>\
+Aritmetik işlemle: y1 = 15 * "Nihat" = ${y1}<br/>\
+Aritmetik işlemle: y2 = 2022 - {ad: "Nihat"} = ${y1}<br/>\
+Aritmetik işlemle: y3 = 1955.0807 / [,,2022] = ${y3}<br/>\
+Aritmetik işlemle: y3 = 1957 + NaN = ${y4}`;
+</script>
+</html>

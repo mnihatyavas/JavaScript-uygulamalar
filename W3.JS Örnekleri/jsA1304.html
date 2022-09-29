@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1304.html: Girilen iki sayının çarpımını veren fonksiyon örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Girilen iki sayının çarpımı</h2>
+    <p>Aşağıdaki <b>"Tıkla beni"</b> düğmesi fonksiyonu, girilen çift sayısal argümanla çağırmaktadır.</p>
+    <p>Fonksiyon, her tıklamada, düğmenin altına altalta girilen sayıların çarpımını yansıtacaktır.</p>
+    <button onclick="çarpım()">Tıkla beni</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function çarpım() {
+        function  sonuç (x, y) {return x * y;}
+
+        let sayı1 = +prompt ("İlk sayıyı girin", "0");
+        let sayı2 = +prompt ("İkinci sayıyı girin", "0");
+        document.getElementById ("gösteri").innerHTML += `${sayı1} * ${sayı2} = ${sonuç (sayı1, sayı2)}<br/>`;
+    } // çarpım sonu...
+</script>
+</html>

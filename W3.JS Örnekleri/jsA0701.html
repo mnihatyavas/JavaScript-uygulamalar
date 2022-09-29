@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0701.html: JS değişken değerleri program içinde değiştirilebilir örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Değişken değerinin değişebilmesi</h2>
+    <p>Program içinde lokal <b>"let"</b> ve global <b>"var"</b> değişken değerleri değişebilirken <b>"const"</b> değiştirilemez, hata verir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let yıl = 1900;
+    const dtarih = 1957;
+    //dtarih = 1955; // Hata verir...
+    yıl = +prompt ("4 haneli yıl girin", 2022);
+    document.getElementById ("gösteri").innerHTML = `${yıl} yılındaki yaşınız: ${yıl-dtarih}'dir.`;
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1001.html: İki dizgenin "+" ile birleştirilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>"+" ile iki dizgeyi birleştir</h2>
+    <p>İki dizge <b>"+" ile</b> ardışık (araları boşluksuz) birleşir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge1 = "Bugün, ne güzel";
+    let dizge2 = "bir gün, böyle!..";
+    document.getElementById ("gösteri").innerHTML = `${dizge1 + dizge2}`;
+</script>
+</html>

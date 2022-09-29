@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1703.html: Sayısal veri tipini dizgeye çeviren "toExponential()" metodunun bilimsel e-gösterimi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"toExponential()" metodu</h2>
+    <p>Sayısal veri tipini dizgeye çeviren "toExponential()" metodu, bilimsel e-gösteriminin küsürat hanesini belirtilen adede yuvarlar.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = Math.PI * 1e6;
+    let y = 1955.0807;
+    let z1 = x.toExponential();
+    let z2 = x.toExponential (2);
+    let z3 = y.toExponential();
+    let z4 = y.toExponential (6);
+    let z5 = y.toExponential (9);
+
+    document.getElementById ("gösteri").innerHTML =
+`x = Math.PI * 1e6, y = 1955.0807; toExponential'ın sonuç ve tipleri:<br/>\
+z1 = x.toExponential(): ${z1}, ${typeof z1}<br/>\
+z2 = x.toExponential (2): ${z2}<br/><br/>\
+z3 = y.toExponential(): ${z3}<br/>\
+z4 = y.toExponential (6): ${z4}<br/>\
+z5 = y.toExponential (9): ${z5}`;
+</script>
+</html>

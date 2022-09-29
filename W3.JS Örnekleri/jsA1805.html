@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1805.html: Radyan cinsinden girilenin Math.sin(x)/cos(x)/tan(x)'ını döndüren metodlar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Math.sin(), Math.cos(), Math.tan()" metodları</h2>
+    <p>Radyan cinsinden girilenin sinüsünü [-1, +1], cosinüsünü [-1, +1] veya tanjantını [-INFINITY, +INFINITY] döndürürler.
+    <br/>Çevrimler: Radyan=Derece*PI/180 ve Derece=Radyan*180/PI</p>
+    <p>Tersi, yani arc-sinüs yada Math.asin(x) ise radyan cinsinden Math.sin(x) sonucunu, tekrar radyan ve çevrimle de derece açıya döndürür.</p>
+
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = 0 * Math.PI / 180; // 0 derece
+    let x2 = 45 * Math.PI / 180; // 45 derece
+    let x3 = 90 * Math.PI / 180; // 90 derece
+    let x4 = -45 * Math.PI / 180; // -45 veya +315 derece
+    let x5 = 315 * Math.PI / 180;
+    let x6 = -90 * Math.PI / 180; // -90 veya +270 derece
+    let x7 = 270 * Math.PI / 180;
+
+    document.getElementById ("gösteri").innerHTML =
+`0 derece yada ${x1.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x1).toFixed (4)}<br/>\
+45 derece yada ${x2.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x2).toFixed (4)}<br/>\
+90 derece yada ${x3.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x3).toFixed (4)}<br/>\
+-45 derece yada ${x4.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x4).toFixed (4)}<br/>\
+315 derece yada ${x5.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x5).toFixed (4)}<br/>\
+-90 derece yada ${x6.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x6).toFixed (4)}<br/>\
+270 derece yada ${x7.toFixed (4)} radyan için Math.sin(x) = ${Math.sin (x7).toFixed (4)}<br/><br/>\
+0 derece için Math.cos(x) = ${Math.cos (x1).toFixed (4)}<br/>\
+45 derece için Math.cos(x) = ${Math.cos (x2).toFixed (4)}<br/>\
+90 derece için Math.cos(x) = ${Math.cos (x3).toFixed (4)}<br/>\
+-45 derece için Math.cos(x) = ${Math.cos (x4).toFixed (4)}<br/>\
+315 derece için Math.cos(x) = ${Math.cos (x5).toFixed (4)}<br/>\
+-90 derece için Math.cos(x) = ${Math.cos (x6).toFixed (4)}<br/>\
+270 derece için Math.cos(x) = ${Math.cos (x7).toFixed (4)}<br/><br/>\
+0 derece için Math.tan(x) = ${Math.tan (x1).toFixed (4)}<br/>\
+45 derece için Math.tan(x) = ${Math.tan (x2).toFixed (4)}<br/>\
+90 derece için Math.tan(x) = ${Math.tan (x3).toFixed (4)}<br/>\
+-45 derece için Math.tan(x) = ${Math.tan (x4).toFixed (4)}<br/>\
+315 derece için Math.tan(x) = ${Math.tan (x5).toFixed (4)}<br/>\
+-90 derece için Math.tan(x) = ${Math.tan (x6).toFixed (4)}<br/>\
+270 derece için Math.tan(x) = ${Math.tan (x7).toFixed (4)}<br/><br/>\
+90 derece için Math.asin (1) = ${Math.asin (1).toFixed (4)} radyan veya ${(Math.asin (1) * 180 / Math.PI).toFixed (2)} derece<br/>\
+90 derece için Math.acos (0) = ${Math.acos (0).toFixed (4)} radyan veya ${(Math.acos (0) * 180 / Math.PI).toFixed (2)} derece<br/>\
+90 derece için Math.atan (INFINITY) = ${Math.atan (Number.POSITIVE_INFINITY).toFixed (4)} radyan veya ${(Math.atan (Number.POSITIVE_INFINITY) * 180 / Math.PI).toFixed (2)} derece'dir.`;
+</script>
+</html>

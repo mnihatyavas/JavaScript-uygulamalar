@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1701.html: Diğer veri tiplerini dizgeye çeviren "toString()" metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"toString()" metodu</h2>
+    <p>Diğer veri tiplerini dizgeye çeviren "toString()" metodu, ayrıca ondalık sayıyı 2->36 tabanlı (dizge tipli) sayılara çevirir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 2022;
+    let y = new Number (2022);
+    let z1 = x.toString();
+    let z2 = y.toString();
+    let z3 = x.toString (16);
+
+    document.getElementById ("gösteri").innerHTML =
+`x = 2022, y = new Number (2022); toString'in sonuç ve tipleri:<br/>\
+z1 = x.toString(): ${z1}, ${typeof z1}<br/>\
+z2 = y.toString(): ${z2}, ${typeof z2}<br/>\
+z3 = x.toString (16): ${z3}, ${typeof z3}`;
+</script>
+</html>

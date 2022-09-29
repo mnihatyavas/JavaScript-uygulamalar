@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1705.html: Sayısal veri değerinin tamsayı ve küsüratlı toplam adedini belirleyen "toPrecision()" metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"toPrecision()" metodu</h2>
+    <p>Sayısal veri değerinin tamsayı ve küsüratlı toplam adedini yuvarlayan ve dizge tipine çeviren "toPrecision()" metodu, bu adede ondalık noktayı dahil etmez.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = Math.PI;
+    let y = 1955.0807;
+    let z1 = x.toPrecision();
+    let z2 = x.toPrecision (1);
+    let z3 = x.toPrecision (3);
+    let z4 = x.toPrecision (5);
+    let z5 = y.toPrecision();
+    let z6 = y.toPrecision (1);// 0 adet hata verir...
+    let z7 = y.toPrecision (3);
+    let z8 = y.toPrecision (5);
+    let z9 = y.toPrecision (7);
+    let z10 = y.toPrecision (10);
+
+    document.getElementById ("gösteri").innerHTML =
+`x = Math.P, y = 1955.0807; toPrecision'ın sonuç ve tipi:<br/>\
+z1 = x.toPrecision(): ${z1}, ${typeof z1}<br/>\
+z2 = x.toPrecision (1): ${z2}<br/>\
+z3 = x.toPrecision (3): ${z3}<br/>\
+z4 = x.toPrecision (5): ${z4}<br/><br/>\
+z5 = y.toPrecision(): ${z5}<br/>\
+z6 = y.toPrecision (1): ${z6}<br/>\
+z7 = y.toPrecision (3): ${z7}<br/>\
+z8 = y.toPrecision (5): ${z8}<br/>\
+z9 = y.toPrecision (7): ${z9}<br/>\
+z10 = y.toPrecision (10): ${z10}`;
+</script>
+</html>

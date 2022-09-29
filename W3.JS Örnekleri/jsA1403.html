@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1403.html: Tıklanınca/onclick olayının harici bir fonksiyonu çağırması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        button:hover {background-color: black; color: magenta;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Tıklama olayının harici fonksiyon çağırması</h2>
+    <p>Tıklama olayı, harici bir fonksiyonu çağırarak p-HTML elemanının içeriğini değiştirebilir.</p>
+
+    <button onclick="tarihiGöster()">Burada saat kaç?</button>
+    <p id="gösteri">p-HTML elemanı</p>
+</body>
+<script>
+    function tarihiGöster() {document.getElementById ("gösteri").innerHTML += `Günün yerel tarih ve zamanı = [${Date()}]<br/>`;}
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1709.html: Number.POZITIVE_INFINITY ve NEGATIVE_INFINITY özelliklerin atama veya taşmayla yaratılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Number.POZITIVE_INFINITY" ve "NEGATIVE_INFINITY" özellikleri</h2>
+    <p>Number.POZITIVE_INFINITY ve Number.NEGATIVE_INFINITY özellikleri atamayla veya taşmayla yaratılır.</p>
+    <p>"Number.POZITIVE_INFINITY" ve "Number.NEGATIVE_INFINITY" sayı özellikleri olduğundan, Number yerine değişken, değer yada tabir kullanılırsa "undefined"/tanımsız değer ve tip üretir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = Number.POSITIVE_INFINITY;
+    let x2 = 1 / 0;
+    let y1 = Number.NEGATIVE_INFINITY;
+    let y2 = -1 / 0;
+
+
+    document.getElementById ("gösteri").innerHTML =
+`Atamayla +sonsuz ve tipi: ${x1}, ${typeof x1}<br/>\
+Taşmayla (1/0) +sonsuz = ${x2}<br/><br/>\
+Atamayla -sonsuz ve tipi: ${y1}, ${typeof y1}<br/>\
+Taşmayla (-1/0) -sonsuz = ${y2}<br/>`;
+</script>
+</html>

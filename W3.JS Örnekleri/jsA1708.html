@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1708.html: Number.MAX_VALUE ve MIN_VALUE özelliklerinin pozitif enbüyük ve enküçük değerleri döndürmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"MAX_VALUE" ve "MIN_VALUE" özellikleri</h2>
+    <p>"MAX_VALUE" ve "MIN_VALUE" Number/sayı özellikleri JS'te mümkün pozitif enbüyük ve enküçük değerleri döndürür.</p>
+    <p>"Number.MAX_VALUE" ve "Number.MIN_VALUE" sayı özellikleri olduğundan, Number yerine değişken, değer yada tabir kullanılırsa "undefined"/tanımsız değer ve tip üretir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let enbüyük = Number.MAX_VALUE;
+    let x = 15;
+
+    document.getElementById ("gösteri").innerHTML =
+`JS'teki enbüyük pozitif e-üslü sayı ve tipi: ${enbüyük}, ${typeof enbüyük}<br/>\
+JS'teki enküçük pozitif e-üslü sayı ve tipi: ${Number.MIN_VALUE}, ${typeof Number.MIN_VALUE}<br/><br/>\
+1.7976931348623159e+308 = ${1.7976931348623159e+308}<br/>\
+2e-324 = ${2e-324}<br/><br/>\
+x=15 için: x.MAX_VALUE = ${x.MAX_VALUE}, veri tipi = ${typeof x.MAX_VALUE}<br/>
+x.MIN_VALUE = ${x.MIN_VALUE}, veri tipi = ${typeof x.MIN_VALUE}`;
+</script>
+</html>

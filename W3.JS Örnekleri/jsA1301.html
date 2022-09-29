@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1301.html: Düğme tıklanınca çağrılan argümansız basit bir fonksiyon örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Argümansız basit bir fonksiyon</h2>
+    <p>Aşağıdaki <b>"Tıkla beni"</b> düğmesi bir fonksiyonu çağırmaktadır.</p>
+    <p>Fonksiyon, her tıklamada, düğmenin altına altalta bir mesaj yansıtacaktır.</p>
+    <button onclick="fonk1()">Tıkla beni</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function fonk1() {document.getElementById ("gösteri").innerHTML += "Beni tıklayana en derin saygılarımı sunuyorum!..<br>";}
+</script>
+</html>

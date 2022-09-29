@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0703.html: Değişkenlere dizgelerin tek/çift tırnaklı, sayılarınsa yalın atanması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Dizgerlerin tırnaklı, sayıların yalınlığı</h2>
+    <p>Değişkene atanan <b>dizgeler tek yada çift tırnak içinde, sayılarsa yalın</b> olmalıdır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const pi = 3.14;
+    let şahıs = "M.Nihat Yavaş";
+    let cevap = 'Evet, ben"im!';
+    document.getElementById ("gösteri").innerHTML = `Alo, ${şahıs}'la mı konuşuyorum?<br/>${cevap}<br/>Herhangi bir çember çevresinin çapına bölümünün ${pi} olduğunu biliyor muydunuz?`;
+</script>
+</html>

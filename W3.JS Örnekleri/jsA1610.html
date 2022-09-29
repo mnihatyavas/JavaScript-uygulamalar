@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1610.html: 0b-0o-0x ve toString() ile farklı tabanlı sayılar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>2-->36 tabanlı sayılar</h2>
+    <p>0b-0c-0x ile ikili/0->1, sekizli/0->7 ve onaltılı/0->f <b>binary-octal-hexadecimal</b> değerler atayabilir; <b>sayı.toString(t)</b> ile ondalık sayıyı 2->36 (0->9 ve a-z) tabanlılara çevirebilirsiniz.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = 0b11111111;
+    let x2 = 0o377;
+    let x3 = 0xff; // yada 0xFF
+    let y = 1295;
+
+    document.getElementById ("gösteri").innerHTML =
+`İkili/binary: x1 = 0b11111111 = ${x1}<br/>\
+Sekizli/octal: x2 = 0o377 = ${x2}<br/>\
+Onaltılı/hexadecimal: x3 = 0xff = ${x3}<br/><br/>\
+y = 1295 için: Otuzaltılı taban = ${y.toString (36)}<br/>\
+Otuzikili taban = ${y.toString (32)}<br/>\
+Onaltılı taban = ${y.toString (16)}<br/>\
+Onikili taban = ${y.toString (12)}<br/>\
+Onlu taban = ${y.toString (10)}<br/>\
+Sekizli taban = ${y.toString (8)}<br/>\
+Beşli taban = ${y.toString (5)}<br/>\
+İkili taban = ${y.toString (2)}`;
+</script>
+</html>

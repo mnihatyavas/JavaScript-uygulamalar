@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1704.html: Sayısal veri değerinin küsürat adedini belirleyen "toFixed()" metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"toFixed()" metodu</h2>
+    <p>Sayısal veri değerinin küsürat adedini yuvarlayan ve dizge tipine çeviren "toFixed()" metodu, özellikle para birimlerindeki çift kuruş gösterimlerinde kullanışlıdır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = Math.E;
+    let y = 1955.0807;
+    let z1 = x.toFixed (0);
+    let z2 = x.toFixed (2);
+    let z3 = x.toFixed (4);
+    let z4 = y.toFixed (0);
+    let z5 = y.toFixed (1);
+    let z6 = y.toFixed (3);
+    let z7 = y.toFixed (6);
+
+    document.getElementById ("gösteri").innerHTML =
+`x = Math.E, y = 1955.0807; toFixed'ın sonuç ve tipi:<br/>\
+z1 = x.toFixed (0): ${z1}, ${typeof z1}<br/>\
+z2 = x.toFixed (2): ${z2}<br/>\
+z3 = x.toFixed (4): ${z3}<br/><br/>\
+z4 = y.toFixed (0): ${z4}<br/>\
+z5 = y.toFixed (1): ${z5}<br/>\
+z6 = y.toFixed (3): ${z6}<br/>\
+z7 = y.toFixed (6): ${z7}`;
+</script>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1206.html: Nesne metodunun bir fonksiyon tanımı olması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Fonksiyon tanımlı nesne metodu</h2>
+    <p>Bir nesne özelliği olan <b>metod</b>'un değeri, gerçekte bir <b>fonksiyon</b> tanımıdır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = {
+        tip: "Ford",
+        model: "17M Taunus",
+        renk: "yeşil",
+        açıklama: "makaslı steyşın",
+        tümce: function() {
+            return `Onun ${this.model} model, ${this.renk} renkli bir ${this.açıklama} ${this.tip}'u var.`
+        } // tümce sonu...
+    }; // araba sonu...
+    document.getElementById ("gösteri").innerHTML = araba.tümce();
+</script>
+</html>

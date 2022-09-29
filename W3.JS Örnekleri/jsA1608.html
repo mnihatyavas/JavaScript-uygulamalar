@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1608.html: Tipi sayı, değeri sayı olmayan NaN detayları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>NaN detayları</h2>
+    <p>Bir sayının NaN olduğu <b>isNaN()</b> metoduyla test edilebilir. NaN'ın başka sayıyla toplamının sonucu NaN, dizgeyle ise peşpeşeliktir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = NaN;
+    let y = "Yavaş";
+    let z = 2022;
+
+    document.getElementById ("gösteri").innerHTML =
+`x=NaN değişkeni NaN mıdır? ${isNaN (x)}<br/>\
+y="Yavaş" değişkeni NaN mıdır? ${isNaN (y)}<br/>\
+z=2022 değişkeni NaN mıdır? ${isNaN (z)}<br/>\
+typeof x: ${typeof x}<br/>\
+typeof y: ${typeof y}<br/>\
+typeof z: ${typeof z}<br/>\
+x + z = ${x+z}<br/>\
+x + y = ${x+y}`;
+</script>
+</html>

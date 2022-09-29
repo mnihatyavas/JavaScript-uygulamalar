@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1611.html: Basit ve nesnel sayının farkı örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Basit ve nesnel sayılar</h2>
+    <p>Basit sayılar tırnaksız doğrudan atanırken, nesnel sayılar <b>"new Number()"</b> gerektirir. Aynı değerli ne basit ve nesnel sayı, ne de iki nesnel sayı <b>eşit değiller</b>'dir. Nesne sadece kendisine eşittir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 2022;
+    let y = new Number (2022);
+    let z = new Number (2022);
+
+    document.getElementById ("gösteri").innerHTML =
+`x = 2022, y = new Number (2022), z = new Number (2022)'nin değer ve tipleri:<br/>\
+${x}: ${typeof x}, ${y}: ${typeof y}, ${z}: ${typeof z}<br/><br/>\
+(x === y)? ${x === y}<br/>\
+(y === z)? ${y === z}<br/>\
+(y === y)? ${y === y}`;
+</script>
+</html>

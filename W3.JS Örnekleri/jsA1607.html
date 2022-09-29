@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1607.html: Sayının sayısal dizgeyle dizgesel dizgeye bölünme farkı örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Sayısal ve dizgesel dizgeyle bölünme farkı</h2>
+    <p>Bir sayının sayısal dizgeye bölünme sonucu <b>normal sayı</b>'yken, dizgesel dizgeyle sonucu <b>NaN sayı</b> (NotANumber: BirSayıDeğil)'dır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = 10 / "06";
+    let x2 = 10 / "Nihat";
+
+    document.getElementById ("gösteri").innerHTML =
+`Dizgeyle bölüm ve sonuç veri tipi:<br/>\
+10 / "06" = ${x1}: ${typeof x1}<br/>\
+10 / "Nihat" = ${x2}: ${typeof x2}<br/>`;
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0806.html: JS aritmetik operatörlerden ++ ile birartan örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>"++" aritmetik operatörle BİRARTAN</h2>
+    <p>JS aritmetik operatörlerden <b>"++" ile sayısal önce/sonra-birartan</b> yapılır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 2022;
+    let y = x++;
+    let z = ++x;
+    document.getElementById ("gösteri").innerHTML = `x=2022<br/>y=x++=${y}<br/>z=++x=${z}`;
+</script>
+</html>

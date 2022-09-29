@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1504.html: Dizge özelliği "length"in dizgenin uzunluğunu döndürmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizge özelliği "length"</h2>
+    <p>Dizgenin uzunluğunun tespiti <b>"dizge.length"</b> özelliğiyle sağlanır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let dizge1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let dizge2 = "abcçdefgğıijklmnoöprsştuüvyz";
+    let dizge3 = "Mahmut Nihat Yavaş";
+
+    document.getElementById ("gösteri").innerHTML = `"${dizge1}".length = ${dizge1.length}<br/>"${dizge2}".length = ${dizge2.length}<br/>"${dizge3}".length = ${dizge3.length}`;
+</script>
+</html>

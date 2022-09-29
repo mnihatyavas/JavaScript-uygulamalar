@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1106.html: Ardışık sayılarla dizgelerin toplanmasındaki sürpriz sonuçlar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Sayılarla dizgelerin toplanma sürprizleri</h2>
+    <p>Ardışık sayılar soldan-sağa <b>toplanırken,</b> ilk dizgeden sonra <b>birleştirilirler.</b></p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML =
+        `1955 + 09 + 28 + "Nahide" = ${1955+09+28+"Nahide"}<br/>"Nahide" + 1955 + 09 + 28 = ${"Nahide"+1955+09+28}`;
+</script>
+</html>

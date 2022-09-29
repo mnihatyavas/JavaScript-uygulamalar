@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0805.html: JS aritmetik operatörlerden % ile kalan örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>"%" aritmetik operatörle KALAN</h2>
+    <p>JS aritmetik operatörlerden <b>"%" ile sayısal kalan</b> yapılır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 2022;
+    let y = Math.PI;
+    let z = x % y;
+    document.getElementById ("gösteri").innerHTML = `2022%pi = ${z}`;
+</script>
+</html>

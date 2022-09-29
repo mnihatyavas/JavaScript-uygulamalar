@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1706.html: Diğer veri tiplerini ve değerlerini sayısala dönüştüren global "Number()" metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Number()" global metodu</h2>
+    <p>Diğer veri tiplerini ve değerlerini sayısala dönüştüren global "Number()" metodu, değer sayı değilse NaN döndürür.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let tarih1 = new Date();
+    let tarih2 = new Date ("2022-08-06T14:01:59.987");
+    let tarih3 = new Date (1955,08, 07, 14, 35, 51, 129);
+
+    document.getElementById ("gösteri").innerHTML =
+`Boolean Number (true) = ${Number (true)}, ${typeof Number (true)}<br/>\
+İkili Number (false) = ${Number (false)}<br/><br/>\
+String Number ("10") = ${Number ("10")}, ${typeof Number ("10")}<br/>\
+Dizge Number ("  10") = ${Number ("  10")}<br/>\
+Dizge Number ("-10  ") = ${Number ("-10  ")}<br/>\
+Dizge Number (" +10  ") = ${Number (" +10  ")}<br/>\
+Dizge Number ("10.33") = ${Number ("10.33")}<br/>\
+Dizge Number ("10,33") = ${Number ("10,33")}<br/>\
+Dizge Number ("10 33") = ${Number ("10 33")}<br/>\
+Dizge Number ("Canan") = ${Number ("Canan")}<br/>\
+Dizge Number ("1975 Canan") = ${Number ("1975 Canan")}<br/><br/>\
+Number Number (2022.0608) = ${Number (2022.0608)}, ${typeof Number (2022.0608)}<br/>\
+Sayı Number (-.0608) = ${Number (-.0608)}<br/><br/>\
+Date tarih = [${tarih1}], Number (tarih) = ${Number (tarih1)}, ${typeof Number (tarih1)}<br/>\
+Tarih tarih = [${tarih2}], Number (tarih) = ${Number (tarih2)}<br/>\
+Tarih tarih = [${tarih3}], Number (tarih) = <b>${Number (tarih3)}</b>`;
+</script>
+</html>

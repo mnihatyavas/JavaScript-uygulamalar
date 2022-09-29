@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1606.html: İki dizgenin çarpım, bölüm ve çıkarmasında sayıya çevrilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Çarpma, bölme ve çıkarmada sayıya çevirme</h2>
+    <p><b>İki dizge</b>'nin çarpma, bölme, çıkarma ve kalan'da <b>sayıya çevrilirken</b>, toplamada <b>çevrilmez</b>'ler.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x1 = "10" * "03";
+    let x2 = "10" / "003";
+    let x3 = "10" - "0.3";
+    let x4 = "10" % "03";
+    let x5 = "10" + "0.003";
+
+    document.getElementById ("gösteri").innerHTML =
+`Dizgeli aritmetik işlemler ve sonuç veri tipi:<br/>\
+"10" * "03" = ${x1}: ${typeof x1}<br/>\
+"10" / "003" = ${x2}: ${typeof x2}<br/>\
+"10" - "0.3" = ${x3}: ${typeof x3}<br/>\
+"10" % "03" = ${x4}: ${typeof x4}<br/>\
+"10" + "0.003" = ${x5}: ${typeof x5}`;
+</script>
+</html>

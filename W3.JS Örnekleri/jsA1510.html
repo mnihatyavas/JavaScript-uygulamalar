@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1510.html: Dizgenin büyükharfe "toUpperCase()" ile veya küçükharfe "toLowerCase()" ile çevrilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Büyükharfe: toUpperCase(), küçükharfe: toLowerCase()</h2>
+    <p>Dizgeyi tümden büyükharfe çevirmek için <b>"toUpperCase()"</b>, küçükharfeyse <b>toLowerCase()</b> metodunu kullanabilirsiniz.</p>
+
+    <button onclick="çevir ('küçük')">Küçükharfe çevir</button>
+    <button onclick="çevir ('büyük')">Büyükharfe</button>
+    <p id="gösteri">Merhaba, Sayın Mahmut Nihat Yavaş!..</p>
+</body>
+<script>
+    function çevir (küçükBüyük) {
+        let selam = document.getElementById ("gösteri").innerHTML;
+        if (küçükBüyük == "küçük") {document.getElementById ("gösteri").innerHTML = selam.toLowerCase();}
+        else {document.getElementById ("gösteri").innerHTML = selam.toUpperCase();}
+    } // çevir sonu...
+</script>
+</html>

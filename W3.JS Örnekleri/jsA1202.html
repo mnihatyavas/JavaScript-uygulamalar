@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1202.html: Anahtar:değer verili bir nesnel değişken yaratma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Anahtar:değer verili nesne yaratma</h2>
+    <p>Bir değişken yaratıp aynı anda <b>nesnel {...} tabirle anahtar:değer verileri</b> atayabiliriz.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = {tip: "Ford", model: "17M Taunus", renk: "yeşil", açıklama: "makaslı steyşın"};
+    document.getElementById ("gösteri").innerHTML = `Onun ${araba.model} model, ${araba.renk} renkli bir ${araba.açıklama} ${araba.tip}'u var.`;
+</script>
+</html>

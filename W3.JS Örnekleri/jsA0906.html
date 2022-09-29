@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0906.html: JS atama operatörlerden %= ile değişkene değerinin bölüm kalanı örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>"%=" atama operatörle BÖL KALANI ATA</h2>
+    <p>JS aritmetik operatörlerden <b>"%=" ile değişkene mevcut değerinin bölüm kalanı atanır</b>.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let gün = +prompt ("2022 yılının gününü gir (azami: 365)", 365) - 1;
+    gün %= 7;
+    let günadı = ["Cumartesi", "Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
+    document.getElementById ("gösteri").innerHTML = `Haftanın gün adı = ${günadı [gün]}`;
+</script>
+</html>

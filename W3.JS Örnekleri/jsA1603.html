@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1603.html: Tamsayı duyarlılığının azami 16 basamaklı olması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Azami tamsayı duyarlığı 16 hane</h2>
+    <p>JS kodlamasında azami tamsayı duyarlılığı <b>16 basamak</b>'lı olmakla beraber sonrasını yuvarlayarak <b>21 hane</b>'yi gösterebilmektedir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 1234567890123456;
+    let y = 123456789012345678901;
+    let z = y - x * 1e5;
+
+    document.getElementById ("gösteri").innerHTML = x + "<br>" + y + "<br>Hatalı (78901) kuyruk: " + z;
+</script>
+</html>

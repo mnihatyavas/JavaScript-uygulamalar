@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0803.html: JS aritmetik operatörlerden * ile çarpma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>"*" aritmetik operatörle ÇARPMA</h2>
+    <p>JS aritmetik operatörlerden <b>"*" ile sayısal çarpma</b> yapılır.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 0.05;
+    let y = 6;
+    let z = x * y * 7 * Math.PI;
+    document.getElementById ("gösteri").innerHTML = `0.05*6*7*pi = ${z}`;
+</script>
+</html>

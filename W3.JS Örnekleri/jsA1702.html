@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1702.html: Diğer veri tiplerinin değerlerini döndüren "valueOf()" metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"valueOf()" metodu</h2>
+    <p>Diğer veri tiplerinin de değerlerini döndüren "valueOf()" metodu, veri tiplerini değiştirmez.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 2022;
+    let y = new Number (x);
+    let z = "2022";
+    let s1 = x.valueOf();
+    let s2 = y.valueOf();
+    let s3 = z.valueOf();
+    let s4 = "1955Nihal08".valueOf();
+    let s5 = ((2022 - 1955) * 365 + 7 * 30 + 7).valueOf();
+
+    document.getElementById ("gösteri").innerHTML =
+`x = 2022, y = new Number (x), z = "2022"; valueOf'un sonuç ve tipleri:<br/>\
+s1 = x.valueOf(): ${s1}, ${typeof s1}<br/>\
+s2 = y.valueOf(): ${s2}, ${typeof s2}<br/>\
+s3 = z.valueOf(): ${s3}, ${typeof s3}<br/>\
+s4 = "1955Nihal08".valueOf(): ${s4}, ${typeof s4}<br/>\
+s5 = ((2022 - 1955) * 365 + 7 * 30 + 7).valueOf(): ~${s5} gün, ${typeof s5}`;
+</script>
+</html>

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1801.html: Math.PI ve Math.E özelliklerinin detayları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Math.PI" ve "Math.E" özellikleri</h2>
+    <p>Math.PI, daire çevresinin çapına oranı olan, irrasyonal/oransız evrensel bir sayıdır.</p>
+    <p>Math.E, doğal logaritma tabanı 10 yerine 2.718 olan matematiksel exp(1) yada e**1 irrasyonal/oransız evrensel sayısıdır.</p>
+    <p>Ln() yada Math.log()'a doğal logaritma denilmesinin sebebi, doğadaki tüm irkileç ve sığaç zaman sabitesi her 1T=L/R=RC zamanda
+        kalanın 1-exp(-1)=%63.2'sini şarj yada deşarj etmesi, 5T zamandaysa %99.3 yani yaklaşık tamamen şarj/deşarj etmesidir.
+        Nasıl ki Math.PI evrendeki tüm ideal dairelerin çevresinin çapına oranının değişmez (3.14...) sabitesiyse, Math.E de evrendeki
+        tüm ideal sığaç ve irkileçlerin değişmez logaritmik ve üssel taban sabitesi (1-1/Math.E=%63.2...)'dir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML =
+`Math.PI değeri ve tipi: ${Math.PI}, ${typeof Math.PI}<br/>\
+Tüm dairelerin çevresi / çapı= pi = ${10 / 3.183098861837907}<br/><br>\
+Math.E değeri ve tipi: ${Math.E}, ${typeof Math.E}<br/>\
+Exp(1) ve tersi Ln(e): ${Math.exp (1)}, ${Math.log (Math.E)}`;
+</script>
+</html>

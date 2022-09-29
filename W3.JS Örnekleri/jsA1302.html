@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1302.html: Düğme tıklanınca çağrılan tek argümanlı fonksiyon örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Tek argümanlı fonksiyon</h2>
+    <p>Aşağıdaki <b>"Sabahleyin" ile "Akşamleyin"</b> düğmeleri aynı fonksiyonu farklı argümanlarla çağırmaktadır.</p>
+    <p>Fonksiyon, her tıklamada, düğmenin altına altalta <b>"Günaydın" yada "İyi Akşamlar"</b> mesajını yansıtacaktır.</p>
+    <button onclick='fonk1 ("Günaydın!..")'>Sabahlayin</button>
+    <button onclick="fonk1 ('İyi Akşamlar!..')">Akşamleyin</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function fonk1 (cevap) {document.getElementById ("gösteri").innerHTML += cevap + "<br>";}
+</script>
+</html>

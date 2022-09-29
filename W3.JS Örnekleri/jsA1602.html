@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1602.html: Çok büyük/küçük sayıların bilimsel e-üslü notasyonda girilebilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Bilimsel e-üslü gösterim</h2>
+    <p>JS kodlamasında genelde çok büyük yada küçük sayılar <b>bilimsel e-üslü notasyonda</b> gösterilirler.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let x = 1.79e308;
+    let y = 0.25e-323;
+    let z = x / y;
+
+    document.getElementById ("gösteri").innerHTML = "Enbüyük +sayı: " + x + "<br>Enküçük +sayı: " + y + "<br>" + z;
+</script>
+</html>

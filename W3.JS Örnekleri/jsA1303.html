@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1303.html: Düğme tıklanınca çağrılan çok argümanlı fonksiyon örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Çok argümanlı fonksiyon</h2>
+    <p>Aşağıdaki <b>"Tıkla beni"</b> düğmesi fonksiyonu çoklu argümanlarla çağırmaktadır.</p>
+    <p>Fonksiyon, her tıklamada, düğmenin altına altalta aynı mesajı yansıtacaktır.</p>
+    <button onclick='fonk ("Ford", "17M Taunus", "yeşil", "makaslı steyşın")'>Tıkla beni</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function fonk (model, tip, renk, açıklama) {document.getElementById ("gösteri").innerHTML += `Onun ${model} model, ${renk} renkli bir ${açıklama} ${tip}'u var.<br/>`;}
+</script>
+</html>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1803.html: Sayının pozitifini ve karekökünü döndüren Math.abs() ve Math.sqrt() metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Math.abs()" ve "Math.sqrt()" metodları</h2>
+    <p>Math.abs() metodu, negatif yada pozitif ondalıklı yada tamsayının pozitifini aynen; Math.sqrt() ise sadece pozitif tam/ondalık-sayıların yine pozitif karekökünü döndürür. Negatiflerin sqrt sonucu NaN'dır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML =
+`Math.abs (4.7) = ${Math.abs (4.7)}, ${typeof Math.abs (4.7)}<br/>\
+Math.abs (-4.7) = ${Math.abs (-4.7)}<br/><br/>\
+Math.sqrt (4.7) = ${Math.sqrt (4.7)}<br/>\
+Math.sqrt (-4) = ${Math.sqrt (-4)}`;
+</script>
+</html>

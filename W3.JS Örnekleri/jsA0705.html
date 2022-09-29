@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA0705.html: Tek satırda çoklu değişken beyanı yapılabilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+    </style>
+</head>
+<body>
+    <h2>Tek satırda çoklu değişken beyanı</h2>
+    <p>Birden çok değişkenin beyanı ve ilkdeğer atamaları <b>tek satırda</b> yapılabilir.</p>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var şahıs = "M.Nihat Yavaş", araba = "Volvo", fiyat;
+    fiyat = +prompt ("İkinci el Volvo'nun fiyatını girin", 10000);
+    document.getElementById ("gösteri").innerHTML = `${şahıs} ikinciel ${araba}'sunu ₺${fiyat}'e satın aldı.`;
+</script>
+</html>

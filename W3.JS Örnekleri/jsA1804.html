@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1804.html: Sayının x üssü y yada x**y'sini döndüren Math.pow(x,y) metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Math.pow()" metodu</h2>
+    <p>Math.pow-er(x,y) metodu, -+x sayısının -+y üssünü (geçersizse NaN) döndürür.
+        Negatif x'lerin negatif küsüratlı 1/y üsleri NaN'dır. -y ise 1/(x**y) hükmündedir.
+        Python: from math import * >>>ondalık -x ** ondalık -y hesapları mümkündür.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML =
+`Math.pow (4, 2) = ${Math.pow (4, 2)}, ${typeof Math.pow (4, 2)}<br/>\
+Math.pow (-4, 2) = ${Math.pow (-4, 2)}<br/>\
+Math.pow (-4, -2) = ${Math.pow (-4, -2)}<br/>\
+Math.pow (-4, 3) = ${Math.pow (-4, 3)}<br/>\
+Math.pow (-4, -3) = ${Math.pow (-4, -3)}<br/>\
+Math.pow (9, 1/2) = ${Math.pow (9, 1/2)}<br/>\
+Math.pow (-9, 1/2) = ${Math.pow (-9, 1/2)}<br/>\
+Math.pow (27, 1/3) = ${Math.pow (27, 1/3)}<br/>\
+Math.pow (27, -1/3) = ${Math.pow (27, -1/3)}<br/>\
+Math.pow (-27, -1/3) = ${Math.pow (-27, -1/3)}<br/>\
+Math.pow (-4.65, -2.125) = ${Math.pow (-4.65, -2.125)}<br/>\
+js: 4.65 ** 2.125 = ${4.65**2.125}<br/>\
+python>>> -4.65 ** -2.125 = -0.03816475467934627`;
+</script>
+</html>

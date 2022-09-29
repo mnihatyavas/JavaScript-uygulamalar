@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2901.html: For döngüsü örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        h1, h2, h3, h4, h5, h6 {margin: 0; line-height: 0.3;}
+    </style>
+</head>
+<body>
+    <h2>For döngüsü</h2>
+    <hr/>
+    <p>"for (let i=ilk; i <= son; i++) {ifadeler}" döngüde "i" dışarda tanımlanıp, içerde "let" kullanılmazsa, son değerini yansıtır; yoksa yansıtmaz.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sonuç1 = "", sonuç2 = "", sonuç3 = "", i, j;
+    for (i = 0; i < 5; i++) {sonuç1 += "Sayı = [" + i + "]<br>";}
+
+    const arabalar = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
+    for (let i = 0; i < arabalar.length; i++) {sonuç2 += (i+1) + ".araba = [" + arabalar [i] + "]<br>";}
+
+    for (j = 1; j <= 6; j++) {sonuç3 += "<h" + j + "> Başlık = [h" + j + "]</h" + j + "><br>";}
+
+    document.getElementById ("gösteri").innerHTML =
+        `[0, ${i-1}] üretilen sıralı sayılar:<br>${sonuç1}<br>\
+        [1, ${arabalar.length}] ardışık dizi arabaları:<br>${sonuç2}<br>\
+        [1, ${j-1}] HTML başlıkları:<br><br>${sonuç3}`;
+</script>
+</html>

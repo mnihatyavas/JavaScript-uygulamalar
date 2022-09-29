@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3301.html: JS nesne özelliklerine anahtarlı erişim örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JS nesne özelliğine erişim</h2>
+    <hr/>
+    <p>Nesne özelliğine "nesne.anahtar", "nesne ['anahtar'] veya "(for anahtar in nesne) nesne [anahtar]" yöntemleriyle erişebilirsiniz.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let şahıs = {
+        adı: "M.Nihat",
+        soyadı: "Yavaş",
+        yaşı: 2022 - 1957,
+        boyu: 1.69,
+        kilosu: 65
+    }; // şahıs sonu...
+    let cümle = "Anahtarlı özellikler: ";
+    for (let x in şahıs) {cümle += x + ": " + şahıs [x] + ", ";}
+
+    document.getElementById ("gösteri").innerHTML = 
+    `${şahıs.adı} ${şahıs.soyadı}'ın yaşı ${şahıs.yaşı}, boyu ${şahıs.boyu}m ve kilosu ${şahıs.kilosu}kg'dır.<br>\
+    ${şahıs ["adı"]} ${şahıs ["soyadı"]}'ın yaşı ${şahıs ["yaşı"]}, boyu ${şahıs ["boyu"]}m ve kilosu ${şahıs ["kilosu"]}kg'dır.<br>\
+    ${cümle}...`;
+</script>
+</html>

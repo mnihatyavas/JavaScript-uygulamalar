@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3605.html: JSON dizge tarihinin JS tarih nesnesine doğrudan fonksiyonla ayrıştırılması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JSON dizgesinden JS tarih nesnesine fonksiyonla çevrim</h2>
+    <hr/>
+    <p>JSON dizgesi JS nesnesine  "JSON.parse (jsonDizgesi)" ile çevrilirken içindeki tarih değeri "new Date (jsNesnesi.dTarih)" ile JS tarih nesnesine, diğerleriyse normal dizgesel değerlerine döndürülür.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const jsonDizgesi = '{"isim": "M.Nedim Yavaş", "dTarih": "1961-04-14", "dYeri": "Yeşilyurt-Malatya"}';
+    const jsNesnesi = JSON.parse (jsonDizgesi, function (anahtar, değer) {
+        if (anahtar == "dTarih") {return new Date (değer);
+        }else {return değer;}
+    }); // jsNesnesi sonu...
+    document.getElementById ("gösteri").innerHTML =
+        `JSON dizgesi = [${jsonDizgesi}]<br>\
+        Tarih nesneli JS nesnesi = [${jsNesnesi.dTarih} doğum tarihli ${jsNesnesi.isim}'ın doğum yeri ${jsNesnesi.dYeri}'dır.]`;
+</script>
+</html>

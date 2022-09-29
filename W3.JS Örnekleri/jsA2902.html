@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2902.html: For-in döngüsüyle nesne anahtar ve özellikleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>For-in döngüsü</h2>
+    <hr/>
+    <p>"for (let x in nesne) {nesne [x] ifadeleri}" döngüde nesnenin sıralı özellikleri "x" ile yakalanıp "nesne [x]" özelliğine ulaşılmaktadır.</p>
+    <p>"dizi.length" benzeri "nesne.length" olmadığından özellik sayısı için for-in içinde i-sayacı kullanılabilir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sonuç1 = "", sonuç2 = "", i = 0, j = 0;
+    const nihal = {ad:"Zeliha", soyad: "Candan", yaş: 2022-1955, boy: 165, kilo: 90};
+    for (let x in nihal) {sonuç1 += x + " = [" + nihal [x] + "]<br>"; i++}
+
+    const hilal = {ad:"Hilal", soyad: "Göktürk", yaş: 2022-1982, boy: 175, kilo: 60};
+    for (let x in hilal) {sonuç2 += x + " = [" + hilal [x] + "]<br>"; ++j}
+
+    console.log (nihal, hilal);
+    document.getElementById ("gösteri").innerHTML =
+        `Nihal'in toplam [${i}] adet özellikleri:<br>${sonuç1}<br>\
+        Dr.Hilal'in toplam [${j}] adet özellikleri:<br>${sonuç2}`;
+</script>
+</html>

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2003.html: Güncel dijital saat ve toplam milisaniye örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue; font-size: 50px; font-weight: bold; font-family: arial; text-align: center;}
+    </style>
+</head>
+<body onload="saatıBaşlat()">
+    <h2>Çalışan dijital saat</h2>
+    <p>"new Date()" metoduyla, günün varsayılı tarih ve zamanını nesnel tiplemeyle görüntüleyebilirsiniz.</p>
+    <p>Mevcut tarihin tek tek saat, dakika ve saniyesini alıp istenilen düzende işleyen saat kurulabilir. 0->9 arası 00->09 düzeninde olacaktır.</p>
+    <p>Altta ise 1.1.1970 başından şimdiye değin geçen toplam milisaniye işlemektedir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    function saatıBaşlat() {
+        const tarih = new Date();
+        let milisaniye = tarih.getTime()
+        let S = tarih.getHours();
+        let d = tarih.getMinutes();
+        let s = tarih.getSeconds();
+        d = kontrol (d);
+        s = kontrol (s);
+
+        document.getElementById ("gösteri").innerHTML =  S + ":" + d + ":" + s + "<br/><code style='color:green;'>" + milisaniye + "</code>";
+        setTimeout (saatıBaşlat, 1);
+    } // func sonu..
+
+    function kontrol (i) {if (i < 10) {i = "0" + i}; return i;}
+</script>
+</html>

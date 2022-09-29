@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2103.html: Mevcut bir dizi elemanını değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizi elemanını değiştirme</h2>
+    <p>Değiştirilmek istenen dizi elemanına endeksiyle erişilip yeni değeri atanır.</p>
+    <p>Veri girişlerinde dizi sınırları aşılmamalıdır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = ["Pejo", "Röno", "Mersedes", "Fiyat", "Şevrole"];
+    document.getElementById ("gösteri").innerHTML = `Orijinal dizi elemanları: [${araba}]`;
+    const uzunluk = araba.length;
+    var endeks;
+
+    while (true) {
+        endeks = +prompt ("Erişeceğiniz endeks no'yu [0, " + (uzunluk-1) + "] girin [son: 99].", 0);
+        if (endeks == 99) {break;}
+        if (endeks < 0 | isNaN (endeks) == true) {endeks = 0;} if (endeks >= uzunluk) {endeks = uzunluk-1;}
+        araba [endeks] = prompt ("[" + araba [endeks] + "] için yeni değeri girin:", "");
+        document.getElementById ("gösteri").innerHTML += `<br/>Değişen dizi elemanları: [${araba}]`;
+    } // while sonu...
+</script>
+</html>

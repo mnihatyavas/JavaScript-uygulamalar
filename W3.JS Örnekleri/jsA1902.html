@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA1902.html: Math.random() metodunun farklı sınırlar arassı rasgele sayı üretmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"Math.random()" ve sınırlar</h2>
+    <p>Math.random() metodu, n çarpan, -+m toplayan ve Math.floor() ile Math.ceil() metodlarıyla istenilen -+sınırlar arasında rasgele sayı üretebilmektedir.</p>
+    <p>Belirtilen farklı üretimler için aşağıdaki butonları tıklayın.</p>
+
+    <button onclick='rasgele (n=10, m=0, s=0)'>[0, 9]</button>
+    <button onclick='rasgele (n=11, m=0, s=0)'>[0, 10]</button>
+    <button onclick='rasgele (n=100, m=0, s=0)'>[0, 99]</button>
+    <button onclick='rasgele (n=101, m=0, s=0)'>[0, 100]</button>
+    <button onclick='rasgele (n=10, m=0, s=1)'>[1, 10]</button>
+    <button onclick='rasgele (n=100, m=0, s=1)'>[1, 100]</button>
+    <button onclick='rasgele (n=21, m=-10, s=0)'>[-10, 10]</button>
+    <button onclick='rasgele (n=0, m=0, s=2)'>Gir: [alt, üst)</button>
+    <button onclick='rasgele (n=0, m=1, s=2)'>Gir: [alt, üst]</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    function rasgele (n, m, s) {
+        var rasgele;
+        if (s == 0) {rasgele = Math.floor (Math.random() * n + m);
+        }else if (s == 1) {rasgele = Math.ceil (Math.random() * n + m);
+        }else {
+            let alt = +prompt ("Alt sınırı gir:", 0);
+            let üst = +prompt ("Üst sınırı gir:", 10);
+            if (alt > üst) {alt = üst}
+            rasgele = Math.floor (Math.random() * (üst - alt + m) + alt);
+        } // else sonu...
+        document.getElementById ("gösteri").innerHTML = `Rasgele sayınız = ${rasgele}`;
+    } // func sonu...
+</script>
+</html>

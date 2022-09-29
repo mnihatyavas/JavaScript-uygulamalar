@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3702.html: JS nesnesini JSON dizgesine dönüştürürken Date ve function çözümleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JSON dizgeleştirmede Date ve function</h2>
+    <hr/>
+    <p>"new Date().toString()" sonuçlandırılıp dizgeleştirilir. "nesne.yaş.toString()" ile fonksiyon, "nesne.yaş()" ile de fonksiyon sonuç yaş değeri dahil edilir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const jsNesnesi1 = {isim: "Atilla Göktürk", yaş: new Date ("1984-12-31"), dYeri: "Malatya"};
+    const jsNesnesi2 = {isim: "Atilla Göktürk", yaş: function() {return 2022 - 1985;}, dYeri: "Malatya"};
+    console.log (jsNesnesi1.yaş, jsNesnesi2.yaş, jsNesnesi2.yaş()); // function dahili için "yaş", sonuç değeri içinse "yaş()" kullanılmalıdır...
+    const jsonDizgesi1 = JSON.stringify (jsNesnesi1); // JSON.Stringify() Date çevrimleri yapmaz...
+    const jsonDizgesi2 = JSON.stringify (jsNesnesi2); // JSON.Stringify() tüm içeri function'ları iptal eder...
+
+    document.getElementById ("gösteri").innerHTML =
+    `JS Nesnesi-1 = [${jsNesnesi1.dYeri}, ${jsNesnesi1.yaş} doğumlu Dr.${jsNesnesi1.isim}.<br>\
+    JSON Dizgesi-1 = [${jsonDizgesi1}]<br><br>\
+    JS Nesnesi-2 = [${jsNesnesi2.dYeri} doğumlu, ${jsNesnesi2.yaş} yaşındaki Dr.${jsNesnesi2.isim}.<br>\
+    JSON Dizgesi-2 = [${jsonDizgesi2}]`;
+
+    jsNesnesi1.yaş = new Date ("1984-12-31").toString(); // Date çevrimi yapılır...
+    const jsonDizgesi3 = JSON.stringify (jsNesnesi1);
+    jsNesnesi2.yaş = jsNesnesi2.yaş.toString() + "=" + jsNesnesi2.yaş(); // function, dizgeye dahil edilir...
+    const jsonDizgesi4 = JSON.stringify (jsNesnesi2);
+
+    document.getElementById ("gösteri").innerHTML +=
+    `<br><br>JSON Dizgesi-3 = [${jsonDizgesi3}]<br>\
+    JSON Dizgesi-4 = [${jsonDizgesi4}]`;
+</script>
+</html>

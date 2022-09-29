@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2102.html: Diziye tümden yada bir elemanına endeksiyle erişim örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizi elemanına erişim</h2>
+    <p>Dizi adıyla tümden, yada mevcut endeksiyle herhangibir elemanına erişilebilir.</p>
+    <p>Dizinin ilk endeksli elemanı "dizi[0]", sonuncusuysa "dizi[dizi.length-1]"dir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = ["Pejo", "Röno", "Mersedes", "Fiyat", "Şevrole"];
+    const uzunluk = araba.length;
+
+    document.getElementById ("gösteri").innerHTML =
+`Dizi eleman sayısı: [${uzunluk}]<br/>\
+Tüm dizi elemanlarına erişim: [${araba}]<br/>\
+İlk dizi elemanına erişim: [${araba [0]}]<br/>\
+Son dizi elemanına erişim: [${araba [uzunluk - 1]}]<br/>\
+Orta dizi elemanına erişim: [${araba [Math.floor (uzunluk / 2)]}]<br/>\
+İstenilen dizi elemanına erişim: [${araba [+prompt ("Erişeceğiniz endeks no'yu [0, 4] girin.", 0)]}]`;
+</script>
+</html>

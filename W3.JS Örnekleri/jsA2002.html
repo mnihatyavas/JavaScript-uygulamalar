@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2002.html: Güncel tarihin gelişigüzel değiştirilme metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"new Date()" ve değiştirme metodları</h2>
+    <p>"new Date()" metoduyla, günün varsayılı tarih ve zamanını nesnel tiplemeyle görüntüleyebilirsiniz.</p>
+    <p>Mevcut tarihin tek tek yıl, ay, gün, saat, dakika, saniye ve milisaniyesini geşigüzel yada prompt ile manüel değiştirebilirsiniz.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let tarih1 = new Date();
+    document.getElementById ("gösteri").innerHTML = tarih1;
+    let tarih2 = new Date (tarih1.setFullYear (Math.round (Math.random() * 2030)) );
+    let tarih3 = new Date (tarih1.setMonth (Math.round (Math.random() * 11)) );
+    let tarih4 = new Date (tarih1.setDate (Math.round (Math.random() * 30)) );
+    let tarih5 = new Date (tarih1.setHours (Math.round (Math.random() * 23)) );
+    let tarih6 = new Date (tarih1.setMinutes (Math.round (Math.random() * 59)) );
+    let tarih7 = new Date (tarih1.setSeconds (Math.round (Math.random() * 59)) );
+    let tarih8 = new Date (tarih1.setMilliseconds (Math.round (Math.random() * 999)) );
+
+    document.getElementById ("gösteri").innerHTML += 
+`<br/>Yılı rasgele değiştirilen tarih ve zaman = [${tarih2}]<br/>\
+Ayı da rasgele değiştirilen tarih ve zaman = [${tarih3}]<br/>\
+Günü da rasgele değiştirilen tarih ve zaman = [${tarih4}]<br/>\
+Saatı da rasgele değiştirilen tarih ve zaman = [${tarih5}]<br/>\
+Dakikası da rasgele değiştirilen tarih ve zaman = [${tarih6}]<br/>\
+Saniyesi de rasgele değiştirilen tarih ve zaman = [${tarih7}], [${tarih7.getMilliseconds()}]<br/>\
+Milisaniyesi de rasgele değiştirilen tarih ve zaman = [${tarih8}], [${tarih8.getMilliseconds()}]`;
+</script>
+</html>

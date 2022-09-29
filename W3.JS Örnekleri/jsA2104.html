@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2104.html: Dizi elemanlarını baştan-sona yada sondan-başa tarama örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizi elemanlarını tarama</h2>
+    <p>"for" yada "while" döngüsüyle tüm dizi elemanları tarananilir.</p>
+    <p>Taranan elemanlar "ul-li" ile alt-alta sıralanabilir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = ["Pejo", "Röno", "Mersedes", "Fiyat", "Şevrole"];
+    const uzunluk = araba.length;
+    var metin1 = "<ul>", metin2 = "</ul>";
+
+    for (let i = 0; i < uzunluk; i++) {
+        metin1 = metin1 + "<li>" + araba [i] + "</li>";
+        metin2 = "<li>" + araba [i] + "</li>" + metin2;
+        console.log (araba [i]);
+    } // for sonu...
+
+    metin1 += "</ul>"; metin2 = "<ul>" + metin2;
+
+    document.getElementById ("gösteri").innerHTML =
+        `Baştan-sona dizi elemanları listesi: ${metin1}<br/>\
+        Sondan-başa dizi elemanları listesi: ${metin2}`;
+</script>
+</html>

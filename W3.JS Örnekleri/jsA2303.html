@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2303.html: Dizi elemanlarını alfabetik, nümerik artan-azalan ve rasgele sıralayan sort() metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Alfabetik, nümerik ve rasgele "dizi.sort()" metodları</h2>
+    <p>Bir dizinin orijinalini ardışık alfabetik, nümerik artan-azalan ve rasgele (sayısal) sıralamak için farklı "dizi.sort()" metodları kullanılır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    function rasgele() {return Math.floor (Math.random() * 1000);}
+    const dizi = [rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele()];
+
+    document.getElementById ("gösteri").innerHTML =
+        `Alfabetik artan sayılar: [${dizi.sort()}]<br/>\
+        Alfabetik azalan sayılar: [${dizi.reverse()}]<br/><br/>\
+        Nümerik artan sayılar: [${dizi.sort ((a, b)=>{return a - b;})}]<br/>\
+        Nümerik azalan sayılar: [${dizi.sort ((a, b)=>{return b - a;})}]<br/><br/>\
+        Nümerik rasgele sayılar: [${dizi.sort ((a, b)=>{return 0.5 - Math.random();})}]<br/>\
+        Nümerik rasgele sayılar: [${dizi.sort ((a, b)=>{return Math.random() - 0.5;})}]`;
+</script>
+</html>

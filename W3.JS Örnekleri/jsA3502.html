@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3502.html: JSON nesneli dizi içi dizi elemanlarına for-in döngülü erişim örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        h3, h4 {margin:0;}
+    </style>
+</head>
+<body>
+    <h2>JSON dizi içi dizide for-in döngülü erişim</h2>
+    <hr/>
+    <p>"JSON.parse (JSONNesnesi)" ile JS nesnesine çevirdikten sonra, herhangibir içiçe dizi endeksine "JSNesnesi.arabalar [endeks1].modelleri [endeks2]", veya içiçe for-i-j döngüsünde "JSNesnesi.arabalar [i].modelleri [j]" yöntemiyle erişilebilir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const JSONNesnesi = '{"isim": "Atilla Göktürk", "yaş": 37, "arabalar": [{"adı": "Ford", "modelleri": ["Fiesta", "Focus", "Mustang"]}, {"adı": "BMW", "modelleri": ["320", "X3", "X5"]}, {"adı": "Fiat", "modelleri": ["500", "Panda"]} ]}';
+    const JSNesnesi = JSON.parse (JSONNesnesi);
+
+    let sonuç = "";
+    for (let i in JSNesnesi.arabalar) {
+        sonuç += "<h4>" + JSNesnesi.arabalar [i].adı + "</h4>";
+        for (let j in JSNesnesi.arabalar [i].modelleri) {sonuç += JSNesnesi.arabalar [i].modelleri [j] + "<br>";}
+    } // for sonu...
+
+    document.getElementById ("gösteri").innerHTML = 
+    `JSON nesnesi = ${JSONNesnesi}<br><br>\
+    <h3>JS içiçe dizisi:</h3>${sonuç}`;
+</script>
+</html>

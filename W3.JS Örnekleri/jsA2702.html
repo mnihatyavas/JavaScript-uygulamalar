@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2702.html: Çeşitli eşitsizlik kıyaslamaları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JS eşitsizlik kıyaslamaları</h2>
+    <hr/>
+    <p>Değer atama tek "=" ile, eşitsiz değer kıyaslama "!=" ile, eşitsiz değer ve tip kıyaslamaysa "!==" ile yapılır.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const x = 5, y = "5";
+
+    document.getElementById ("gösteri").innerHTML =
+        `"x = 5" ve 'y = "5"' ise:<br>\
+        x != 8? [${x != 8}]<br>\
+        x != 5? [${x != 5}]<br>\
+        y != "5"? [${y != "5"}]<br>\
+        y != 5? [${y != 5}]<br>\
+        y != +"5"? [${y != +"5"}]<br>\
+        x !== 5? [${x !== 5}]<br>\
+        x !== "5"? [${x !== "5"}]<br>\
+        x !== +"5"? [${x !== +"5"}]<br>\
+        y !== "5"? [${y !== "5"}]<br>\
+        y !== 5? [${y !== 5}]<br>\
+        y !== +"5"? [${y !== +"5"}]<br>\
+        y !== String (5)? [${y !== String (5)}]<br>\
+        Number (y) !== 5? [${Number (y) !== 5}]<br>\
+        Number (y) !== +"5"? [${Number (y) !== +"5"}]`;
+</script>
+</html>

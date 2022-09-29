@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2305.html: Dizi elemanlarının enküçüğünü/enbüyüğünü farklı yöntemlerle bulma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 70%;
+            min-width: 500px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Sayısal dizi elemanlarının en-küçüğünü/büyüğünü bulma</h2>
+    <p>Sayısal bir dizinin enküçük elemanı: (a,b)=>{return a-b} ve dizi[0] ile, Math.min.apply(null,dizi) ile, yada dizi.forEach((a)=>{if(a&lt;küçük)küçük=a;}) ile bulunur.</p>
+    <p>Sayısal bir dizinin enbüyük elemanı: (a,b)=>{return b-a} ve dizi[0] ile, Math.max.apply(null,dizi) ile, yada dizi.forEach((a)=>{if(a&gt;büyük)büyük=a;}) ile bulunur.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    function rasgele() {return Math.floor (Math.random() * 1000) - 500;}
+    const dizi = [rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele()];
+
+    var enküçük = Infinity, küçük = enküçük, enbüyük = -Infinity, büyük = enbüyük;
+    dizi.forEach ((a)=>{if (a < enküçük) enküçük = a;});
+    dizi.forEach ((a)=>{if (a > enbüyük) enbüyük = a;});
+
+    document.getElementById ("gösteri").innerHTML =
+        `Rasgele sayısal elemanlı dizi: [${dizi}]<br/>\
+        Math.min ile enküçük eleman: [${Math.min.apply (null, dizi)}]<br/>\
+        Math.max ile enbüyük eleman: [${Math.max.apply (null, dizi)}]<br/><br/>\
+        forEach ile enküçük eleman: [${enküçük}]<br/>\
+        forEach ile enbüyük eleman: [${enbüyük}]<br/><br/>`;
+
+    dizi.sort ((a, b)=>{return a - b;}); küçük = dizi [0];
+    document.getElementById ("gösteri").innerHTML +=
+        `Artan sıralı dizi: [${dizi}]<br/>\
+        "return a-b" ile enküçük dizi[0] eleman: [${enküçük}]<br/>`;
+
+    dizi.sort ((a, b)=>{return b - a;}); büyük = dizi [0];
+    document.getElementById ("gösteri").innerHTML +=
+        `Azalan sıralı dizi: [${dizi}]<br/>\
+        "return b-a" ile enbüyük dizi[0] eleman: [${enbüyük}]<br/>`;
+</script>
+</html>

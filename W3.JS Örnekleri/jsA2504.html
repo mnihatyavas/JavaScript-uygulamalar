@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2504.html: Dizi ve tarih nesnelerinin typeof, instanceof ve constructor ile kontrolu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"typeof", "instanceof" ve "constructor"</h2>
+    <hr/>
+    <p>Dizinin veritipi "typeof" metoduyla, Array tiplemesi "instanceof" metoduyla, kurucu özelliğinde Array içerildiği dizgesel endeks-no'yla tespit edilebilmektedir.</p>
+    <p>Tarihin veritipi "typeof" metoduyla, Date tiplemesi "instanceof" metoduyla, kurucu özelliğinde Date içerildiği dizgesel endeks-no'yla tespit edilebilmektedir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const dizi = ["Muz", "Portakal", "Elma"];
+    const tarih = new Date();
+
+    document.getElementById ("gösteri").innerHTML =
+        `Dizi = [${dizi}]:<br>\
+        Veri tipi nedir? [${typeof dizi}]<br>\
+        Tiplemesi dizi midir? [${dizi instanceof Array}]<br>\
+        Kurucu fonksiyonu nedir? [${dizi.constructor}]<br>\
+        Kurucu özelliğinde "Array" var mıdır? [${dizi.constructor.toString().indexOf ("Array") > -1}]<br><br>\
+        Tarih = [${tarih}]:<br>\
+        Veri tipi nedir? [${typeof tarih}]<br>\
+        Tiplemesi tarih midir? [${tarih instanceof Date}]<br>\
+        Kurucu fonksiyonu nedir? [${tarih.constructor}]<br>\
+        Kurucu özelliğinde "Date" var mıdır? [${tarih.constructor.toString().indexOf ("Date") > -1}]`;
+</script>
+</html>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3003.html: Hata yakalamada onerror olay yönetimi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        input {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <h2>Hata'da "onerror" olay yönetimi</h2>
+    <hr/>
+    <p>Sayfada oluşan hata "onerror" ile yakalanıp yönetilmekte; hata mesajı, yurel adresi ve hatanın oluştuğu satır-no sunulmakta, sonra normal program akışına devam etmek için alert-Tamam tuşuna basılması istenmektedir.</p>
+    <hr/>
+    <input type="button" value="Hata mesaj olayı" onclick="mesaj()" />
+</body>
+<script>
+    onerror = olayıYönet;
+    var metin;
+    function olayıYönet (hataMesajı, yurelAdresi, satırNo) {
+        metin = "Bu sayfada bir hata olayı var.\n";
+        metin += "HATA: [" + hataMesajı + "]\n";
+        metin += "YUREL: [" + yurelAdresi + "]\n";
+        metin += "Satır no: [" + satırNo + "]\n\n";
+        metin += "Devam için 'Tamam' tıklayın.";
+        alert (metin);
+        return true;
+    } // func sonu...
+
+    function mesaj() {alerttt ("Hoşgeldiniz sayın misafirim!");}
+</script>
+</html>

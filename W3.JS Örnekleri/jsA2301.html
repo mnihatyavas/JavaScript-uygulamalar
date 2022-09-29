@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2301.html: Dizi elemanlarını alfabetik artan ve azalan sıralayan sort() ve reverse() metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 90%;
+            min-width: 950px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"dizi.sort()" ve "dizi.reverse()" metodları</h2>
+    <p>Bir dizinin orijinalini alfabetik/dizgesel (nümerik/sayısal değil) artan sıralamak için "dizi.sort()", azalanda ise "dizi.reverse()" metodu kullanılır.</p>
+    <p>Sadece azalan için de olsa, önce sort'la artan, sonra reverse'le tersine çevrilmelidir.</p>
+    <p>Türkçe özel harfler UTF-8 İngiliz harflerinden sonra, artan [A-Z, a-z, Ç,Ö,Ü,ç,ö,ü,Ğ,ğ,İ,ı,Ş,ş] sıralamasıyla gelir.</p>
+    <p>Sayıların alfabetik sıralanmasında sayısal değerleri değil, ilk sayıların kıyasen büyüklüğü kaale alınır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const meyve = ["Hurma", "Muz", "Üzüm", "Şeftali", "Armut", "Ceviz", "İncir"];
+    const alfabe = ["a","b","c","ç","d","e","f","g","ğ","h","ı","i","j","k","l","m","n","o","ö","p","q","r","s","ş","t","u","ü","v","w","x","y","z","A","B","C","Ç","D","E","F","G","Ğ","H","I","İ","J","K","L","M","N","O","Ö","P","Q","R","S","Ş","T","U","Ü","V","W","X","Y","Z"];
+    const sayılar = [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 150];
+
+    document.getElementById ("gösteri").innerHTML =
+        `Orijinal meyve dizisi: [${meyve}]<br/>\
+        Alfabetik artan sıralı: [${meyve.sort()}]<br/>\
+        Alfabetik azalan sıralı: [${meyve.reverse()}]<br/><br/>\
+        Orijinal alfabe dizisi: [${alfabe}]<br/>\
+        Alfabetik artan sıralı: [${alfabe.sort()}]<br/>\
+        Alfabetik azalan sıralı: [${alfabe.reverse()}]<br/><br/>\
+        Alfabetik artan sayılar: [${sayılar.sort()}]<br/>\
+        Alfabetik azalan sayılar: [${sayılar.reverse()}]`;
+</script>
+</html>

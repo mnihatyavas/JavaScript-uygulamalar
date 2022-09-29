@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3201.html: JS nesnesi yaratma çeşitleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JS nesnesi yaratma</h2>
+    <hr/>
+    <p>Nesne yaratmak için "{}", "new Object()", "kurucu fonksiyon" yöntemlerinden biri kullanılabilir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let şahıs1 = "M.Nihat Yavaş";
+    let şahıs2 = {// {} ile nesne yaratma...
+        adı: "M.Nihat",
+        soyadı: "Yavaş",
+        yaşı: 2022 - 1957,
+        boyu: 1.69,
+        kilosu: 65
+    }; // şahıs2 sonu...
+    let şahıs3 = {adı: "Z.Nihal", soyadı: "Candan", yaşı: 2022 - 1955, boyu: 1.61, kilosu: 90};
+    let şahıs4 = new Object(); // new Object() ile nesne yaratma...
+    şahıs4.adı = "Hilal";
+    şahıs4.soyadı = "Göktürk";
+    şahıs4.yaşı = 2022 - 1984;
+    şahıs4.boyu = 1.75;
+    şahıs4.kilosu = 59;
+
+    function Şahıs (ad, soyad, yaş, boy, kilo) { // Nesne kurucu fonksiyon
+        this.adı = ad;
+        this.soyadı = soyad;
+        this.yaşı = yaş;
+        this.boyu = boy;
+        this.kilosu = kilo;
+    } // func sonu...
+    let dedem = new Şahıs ("Bekir", "Yavaş", "1974-1889", 1.75, 70); // Kurucu fonksiyon Şahıs() ile nesne yaratma...
+    let babam = new Şahıs ("Memet", "Yavaş", "2018-1933", 1.62, 85);
+
+    console.log (şahıs1, şahıs2, şahıs3, şahıs4, dedem, babam);
+
+    document.getElementById ("gösteri").innerHTML = 
+    `Dizge değişkeni "şahıs1" = [${şahıs1}, ${typeof şahıs1}]<br>\
+    Nesne1 değişkeni "şahıs2" = [${şahıs2}, ${typeof şahıs2}]<br>\
+    Nesne1 anahtar-değer'leri = [${şahıs2.adı} ${şahıs2.soyadı}, ${şahıs2.yaşı}, ${şahıs2.boyu}, ${şahıs2.kilosu}]<br>\
+    Nesne2 anahtar-değer'leri = [${şahıs3.adı} ${şahıs3.soyadı}, ${şahıs3.yaşı}, ${şahıs3.boyu}, ${şahıs3.kilosu}]<br>\
+    Nesne3 anahtar-değer'leri = [${şahıs4.adı} ${şahıs4.soyadı}, ${şahıs4.yaşı}, ${şahıs4.boyu}, ${şahıs4.kilosu}]<br>\
+    Nesne4 anahtar-değer'leri = [${dedem.adı} ${dedem.soyadı}, ${dedem.yaşı}, ${dedem.boyu}, ${dedem.kilosu}]<br>\
+    Nesne5 anahtar-değer'leri = [${babam.adı} ${babam.soyadı}, ${babam.yaşı}, ${babam.boyu}, ${babam.kilosu}]`;
+</script>
+</html>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2501.html: Veri tiplerinin "typeof" ile tespiti örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"typeof" ile veri tipleri</h2>
+    <hr/>
+    <p>Değişken, nesne, fonksiyon ve ibarelerin tiplerini "typeof()" döndürür.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const arabam = "Ford"; let arabam2;
+
+    document.getElementById ("gösteri").innerHTML =
+        `Veri tiplemeleri:<br>\
+        "Nihat": [${typeof "Nihat"}]<br>\
+        3.14: [${typeof 3.14}]<br>\
+        Math.PI: [${typeof Math.PI}]<br>\
+        NaN: [${typeof NaN}]<br>\
+        undefined: [${typeof undefined}]<br>\
+        null: [${typeof null}]<br>\
+        false: [${typeof false}]<br>\
+        [1,2,3,4]: [${typeof [1,2,3,4]}]<br>\
+        {ad:'Nihat', yaş:2022-1957}: [${typeof {ad:'Nihat', yaş:2022-1957}}]<br>\
+        new Date(): [${typeof new Date()}]<br>\
+        function () {}: [${typeof function () {}}]<br>\
+        arabam = "Ford": [${typeof arabam}]<br>\
+        arabam2 (tanımlı, ilkdeğersiz): [${typeof arabam2}]<br>\
+        arabam3 (tanımsız): [${typeof arabam3}]<br>\
+        (2 * Math.PI * 12.5): [${typeof (2 * Math.PI * 12.5)}]`;
+</script>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2801.html: Şartlı if-else-if şartlı ifadeleri örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JS if-else-if şart ifadesi</h2>
+    <hr/>
+    <p>Program rasgele [1, 4] tamsayılar üretip, farklı if-else-if şartlı ifadelerle farklı gün içi selamlaşmaları sunacaktır.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let selam = "Merhabalar!", saat = new Date().getHours(), rasgele = Math.floor (Math.random() * 4) + 1, şart;
+
+    switch (rasgele) {
+        case 1:
+            şart = "if{}";
+            if (saat < 18) {selam = "İyi günler!";}
+            break;
+        case 2:
+            şart = "if{} else{}";
+            if (saat < 18) {selam = "İyi günler!";
+            }else {selam = "İyi akşamlar!";}
+            break;
+        case 3:
+            şart = "if{} else-if{} else{}";
+            if (saat < 10) {selam = "Günaydın!";
+            }else if (saat < 18) {selam = "Tünaydın!";
+            }else {selam = "İyi akşamlar!";}
+            break;
+        case 4:
+            şart = "if{} else-if{} else-if{} else{}";
+            if (saat < 10) {selam = "Günaydın!";
+            }else if (saat < 18) {selam = "Tünaydın!";
+            }else if (saat < 22) {selam = "İyi akşamlar!";
+            }else {selam = "İyi geceler!"}
+    } // switch sonu...
+
+    document.getElementById ("gösteri").innerHTML =
+        `Günün saatı = [${saat}]<br>\
+        Rasgele şart no = [${rasgele}]<br>\
+        Uygulanan şart = [${şart}]<br>\
+        Selamlama türü = [${selam}]`;
+</script>
+</html>

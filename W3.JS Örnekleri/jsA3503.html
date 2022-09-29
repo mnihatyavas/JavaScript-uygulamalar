@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3503.html: JSON nesneli dizi elemanını değiştirme, silme ve ekleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JSON dizide değişiklik, silme ve ekleme</h2>
+    <hr/>
+    <p>"JSON.parse (JSONNesnesi)" ile JS nesnesine çevirdikten sonra, herhangibir dizi elemanını değiştirmek için "JSNesnesi.arabalar [endeks] = 'Mercedes'", silmek için "delete JSNesnesi.arabalar [i]" ve eklemek içinse "JSNesnesi.arabalar [JSNesnesi.arabalar.length] = 'Jaguar'" yöntemleri uygulanabilir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const JSONNesnesi = '{"isim": "Atilla Göktürk", "yaş": 37, "arabalar": ["Ford", "BMW", "Fiat"]}';
+    const JSNesnesi = JSON.parse (JSONNesnesi);
+
+    let sonuç1 = "", sonuç2 = "", sonuç3 = "", sonuç4 = "";
+    for (let i in JSNesnesi.arabalar) {sonuç1 +=JSNesnesi.arabalar [i] + ", ";} sonuç1 = sonuç1.slice (0, sonuç1.length - 2);
+    document.getElementById ("gösteri").innerHTML = `JSON nesnesi = ${JSONNesnesi}<br>\
+    ${JSNesnesi.yaş} yaşındaki ${JSNesnesi.isim}'ün arabaları: [${sonuç1}]`;
+
+    JSNesnesi.yaş = 38; JSNesnesi.arabalar [2] = "Mercedes";
+    for (let i in JSNesnesi.arabalar) {sonuç2 +=JSNesnesi.arabalar [i] + ", ";} sonuç2 = sonuç2.slice (0, sonuç2.length - 2);
+    document.getElementById ("gösteri").innerHTML +=`<br>${JSNesnesi.yaş} yaşındaki ${JSNesnesi.isim}'ün arabaları: [${sonuç2}]`;
+
+    JSNesnesi.yaş = 39; delete JSNesnesi.arabalar [0];
+    for (let i in JSNesnesi.arabalar) {sonuç3 +=JSNesnesi.arabalar [i] + ", ";} sonuç3 = sonuç3.slice (0, sonuç3.length - 2);
+    document.getElementById ("gösteri").innerHTML +=`<br>${JSNesnesi.yaş} yaşındaki ${JSNesnesi.isim}'ün arabaları: [${sonuç3}]`;
+
+    JSNesnesi.yaş = 40; JSNesnesi.arabalar [JSNesnesi.arabalar.length] = "Jaguar"; JSNesnesi.arabalar [JSNesnesi.arabalar.length] = "Limuzin";
+    for (let i in JSNesnesi.arabalar) {sonuç4 +=JSNesnesi.arabalar [i] + ", ";} sonuç4 = sonuç4.slice (0, sonuç4.length - 2);
+    document.getElementById ("gösteri").innerHTML +=`<br>${JSNesnesi.yaş} yaşındaki ${JSNesnesi.isim}'ün arabaları: [${sonuç4}]`;
+</script>
+</html>

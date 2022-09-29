@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2204.html: Diziyi dizgeye çeviren toString() ve ayraçlı join() metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"dizi.toString()" ve "dizi.join()" metodları</h2>
+    <p>Dizi elemanlarını, aralarında boşluksuz virgülle dizgeye çevirmek için "dizi.toString()" metodu kullanılır.</p>
+    <p>Diziyi, elemanları arasında istenilen ayraçla dizgeye çevirmek için de "dizi.join (ayraç)" metodunu kullanmak gerekir.</p>
+    <p>Dizge tekrar diziye çevrilecekse de, bir dizge metodu olan "dizge.split (ayraç)" kullanılmalıdır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const dizi = ["Hurma", "Muz", "Üzüm", "Şeftali", "Armut"];
+    const dizge1 = dizi.toString(), dizi1 = dizge1.split();
+    const dizge2 = dizi.join (" * "), dizi2 = dizge2.split (" * ");
+
+    document.getElementById ("gösteri").innerHTML =
+        `Orijinal dizi: [${dizi}], dizi mi? ${dizi instanceof Array}<br/>\
+        toString() ile dizge: "${dizge1}", tipi? ${typeof dizge1}<br/>\
+        join() ile dizge: "${dizge2}", tipi? ${typeof dizge2}<br/><br/>\
+        toString()'den tekrar diziye: [${dizi1}], dizi mi? ${dizi1 instanceof Array}<br/>\
+        join()'den tekrar diziye: [${dizi2}], dizi mi? ${dizi2 instanceof Array}`;
+</script>
+</html>

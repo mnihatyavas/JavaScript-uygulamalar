@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2703.html: Çeşitli büyük-küçük kıyaslamaları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JS büyük-küçük kıyaslamaları</h2>
+    <hr/>
+    <p>Değer atama tek "=" ile, küçük değer kıyaslama "<" ile, küçük-veya-eşit kıyaslamaysa "<=" ile yapılır.</p>
+    <p>Büyükük değer kıyaslama ">" ile, büyük-veya-eşit kıyaslamaysa ">=" ile yapılır.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const x = 5;
+
+    document.getElementById ("gösteri").innerHTML =
+        `"x = 5 ise:<br>\
+        x < 5? [${x < 5}]<br>\
+        x <= 5? [${x <= 5}]<br><br>\
+        x > 5? [${x > 5}]<br>\
+        x >= 5? [${x >= 5}]`;
+</script>
+</html>

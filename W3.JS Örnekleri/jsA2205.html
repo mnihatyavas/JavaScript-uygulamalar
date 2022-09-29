@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2205.html: Orijinalini değiştirmeden altdiziler dilimleyen slice() metodu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"dizi.slice()" metodu</h2>
+    <p>Orijinal diziyi değiştirmeksizin alt diziler dilimlemek için "dizi.slice (ilk, son)" metodu kullanılır.</p>
+    <p>Burada [ilk, son), ilk endeks dahil, son hariç anlamındadır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const meyve = ["Hurma", "Muz", "Üzüm", "Şeftali", "Armut", "Ceviz", "GAFıstık"];
+    const uz = meyve.length, orta = Math.floor (uz / 2);
+
+    document.getElementById ("gösteri").innerHTML =
+        `Orijinal dizi: [${meyve}]<br/>\
+        İlk 3 dilimi: [${meyve.slice (0, 3)}]<br/>\
+        Son 3 dilimi: [${meyve.slice (uz-3, uz)}]<br/>\
+        Orta 3 dilimi: [${meyve.slice (orta-1, orta+2)}]`;
+</script>
+</html>

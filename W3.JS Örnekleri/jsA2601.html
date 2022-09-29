@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2601.html: Sıfırdan farklı her Boolean ibarenin true-doğruluğu örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>True Boolean</h2>
+    <hr/>
+    <p>Hiçlik olmayan dizgeler ve sıfır üretmeyen sayıların İkili-Boolean değeri "true"-doğru'dur.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    document.getElementById ("gösteri").innerHTML =
+        `True-doğru Boolean-İkili değerler:<br>\
+        10 > 9 = [${10 > 9}]<br>\
+        Boolean (10 > 9) = [${Boolean (10 > 9)}]<br>\
+        Boolean (true) = [${Boolean (true)}]<br>\
+        Boolean (100) = [${Boolean (100)}]<br>\
+        Boolean (3.14) = [${Boolean (3.14)}]<br>\
+        Boolean (Math.PI) = [${Boolean (Math.PI)}]<br>\
+        Hiçlik olmayan her dizge: [${Boolean ("Hiç")}]<br>\
+        Boş dizge: [${Boolean (" ")}]<br>\
+        Hatta "false" dizge bile: [${Boolean ("false")}]<br>\
+        Sıfır üretmeyen her aritmetik ibare: [${Boolean (1 * 0.7 + 3.14 - Math.E)}]`;
+</script>
+</html>

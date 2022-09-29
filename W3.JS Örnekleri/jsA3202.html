@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3202.html: Tüm JS veri tiplerini "new Tip()" veya basit tip ibaresiyle yaratma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Veri tiplerini "new" yada sembolle yaratma</h2>
+    <hr/>
+    <p>Basit veri tipleri yaratmak için "new" yerine sembolik ibareleri olan: {}, "", 0, false, [], /()/ ve function{} tercih edilmelidir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var x1 = new Object(); // Yeni bir Object/Nesne nesnesi
+    var x2 = new String(); // Yeni bir String/Dizge nesnesi
+    var x3 = new Number(); // Yeni bir Number/Sayı nesnesi
+    var x4 = new Boolean(); // Yeni bir Boolean/İkili nesnesi
+    var x5 = new Array(); // Yeni bir Array/Dizi nesnesi
+    var x6 = new RegExp(); // Yeni bir RegExp/Düzenliİbare nesnesi
+    var x7 = new Function(); // Yeni bir Function/Fonksiyon nesnesi
+    var x8 = new Date(); // Yeni bir Date/Tarih nesnesi
+    var x9 = Symbol(); // Bir Symbol/Sembol nesnesi
+
+    var y1 = {};
+    var y2 = "";
+    var y3 = 0;
+    var y4 = false;
+    var y5 = [];
+    var y6 = /()/;
+    var y7 = function(){};
+
+    document.getElementById ("gösteri").innerHTML = 
+    `"x1 = new Object()" tipi = [${typeof x1}], tiplemesi "object" mi? [${x1 instanceof Object}]<br>\
+    "x2 = new String()" tipi = [${typeof x2}], tiplemesi "String" mi? [${x2 instanceof String}]<br>\
+    "x3 = new Number()" tipi = [${typeof x3}], tiplemesi "Number" mi? [${x3 instanceof Number}]<br>\
+    "x4 = new Boolean()" tipi = [${typeof x4}], tiplemesi "Boolean" mi? [${x4 instanceof Boolean}]<br>\
+    "x5 = new Array()" tipi = [${typeof x5}], tiplemesi "Array" mi? [${x5 instanceof Array}]<br>\
+    "x6 = new RegExp()" tipi = [${typeof x6}], tiplemesi "RegExp" mi? [${x6 instanceof RegExp}]<br>\
+    "x7 = new Function()" tipi = [${typeof x7}], tiplemesi "Function" mi? [${x7 instanceof Function}]<br>\
+    "x8 = new Date()" tipi = [${typeof x8}], tiplemesi "Date" mi? [${x8 instanceof Date}]<br>\
+    "x9 = Symbol()" tipi = [${typeof x9}], tiplemesi "Symbol" mi? [${x9 instanceof Symbol}]<br><br>\
+    "y1 = {}" tipi = [${typeof y1}], tiplemesi "object" mi? [${y1 instanceof Object}]<br>\
+    "y2 = ''" tipi = [${typeof y2}], tiplemesi "String" mi? [${y2 instanceof String}]<br>\
+    "y3 = 0" tipi = [${typeof y3}], tiplemesi "Number" mi? [${y3 instanceof Number}]<br>\
+    "y4 = false" tipi = [${typeof y4}], tiplemesi "Boolean" mi? [${y4 instanceof Boolean}]<br>\
+    "y5 = []" tipi = [${typeof y5}], tiplemesi "Array" mi? [${y5 instanceof Array}]<br>\
+    "y6 = /()/" tipi = [${typeof y6}], tiplemesi "RegEyp" mi? [${y6 instanceof RegExp}]<br>\
+    "y7 = function(){}" tipi = [${typeof y7}], tiplemesi "Function" mi? [${y7 instanceof Function}]`;
+</script>
+</html>

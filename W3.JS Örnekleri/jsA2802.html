@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2802.html: Haftaiçi yerel günadlarının switch-case ile sunulması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Switch-case şart ifadesi</h2>
+    <hr/>
+    <p>Haftanın gününü [0=Pazar, 6=Cumartesi] "new Date().getDay()" ile tespit edip switch-case şart irdelemesiyle bu rakamlara denk düşen yerel gün adı sunulmaktadır.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let günAdı, günNo = new Date().getDay();
+
+    switch (günNo) {
+        case 0: günAdı = "Pazar"; break;
+        case 1: günAdı = "Pazartesi"; break;
+        case 2: günAdı = "Salı"; break;
+        case 3: günAdı = "Çarşamba"; break;
+        case 4: günAdı = "Perşembe"; break;
+        case 5: günAdı = "Cuma"; break;
+        case 6: günAdı = "Cumartesi"; break;
+        default: günAdı = "İmkansız HATA";
+    } // switch sonu...
+
+    document.getElementById ("gösteri").innerHTML =
+        `Gün no = [${günNo}]<br>\
+        Yerel gün adı = [${günAdı}]`;
+</script>
+</html>

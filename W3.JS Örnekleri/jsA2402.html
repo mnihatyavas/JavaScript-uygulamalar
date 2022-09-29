@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2402.html: Dizi endeks ve eleman bulma metotları olan indexOf, lastIndexOf, find ve findIndex örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 70%;
+            min-width: 600px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizi endeks bulma metotları: indexOf, lastIndexOf, find ve findIndex</h2>
+    <hr/>
+    <p>"dizi.indexOf ('eleman')" ile mevcutsa elemanın ilk endeksi döner.<br/>
+      "dizi.lastIndexOf ('eleman')" ile mevcutsa elemanın son endeksi döner.<br/>
+      "dizi.find (fonk)" ile fonksiyon şartını sağlayan ilk eleman döner.<br/>
+      "dizi.findIndex (fonk)" ile fonksiyon şartını sağlayan ilk eleman endeksi döner.<br/></p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function rasgele() {return Math.floor (Math.random() * 11);}
+    const dizi = []; for (let i=0; i < 100; i++) {dizi [i] = rasgele();}
+    console.log (dizi);
+
+    const aranan = rasgele(), ilkEndeks = dizi.indexOf (aranan), sonEndeks = dizi.lastIndexOf (aranan);
+    const bulunanEleman = dizi.find ((a)=>{return a >= 9;}), bulunanEndeks = dizi.findIndex ((a)=>{return a >= 9;});
+
+    document.getElementById ("gösteri").innerHTML =
+        `100 adet rasgele [0, 10] ilk-son 20'lik dizi: [${dizi.slice (0,20)}...${dizi.slice (80,dizi.length)}]<br/><br/>\
+        "indexOf" ile aranan [${aranan}] İLK endeks = [${ilkEndeks}]<br/>\
+        "lastIndexOf" ile aranan [${aranan}] SON endeks = [${sonEndeks}]<br/><br/>\
+        "find" ile ">= 9" bulunan ilk ELEMAN = [${bulunanEleman}]<br/>\
+        "findIndex" ile ">= 9" bulunan ilk ENDEKS = [${bulunanEndeks}]`;
+</script>
+</html>

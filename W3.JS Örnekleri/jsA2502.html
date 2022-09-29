@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2502.html: Constructor özelliğinin ilişik değişken veya sabitin kurucu fonksiyonunu döndürmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"constructor" ile kurucu fonksiyon</h2>
+    <hr/>
+    <p>Değişken, nesne, fonksiyon ve ibarelerin varsayılı kurucu fonksiyonunu "constructor" özelliği döndürür.</p>
+    <p>Tanımsız veya ilkdeğersiz değişkenin; undefined ve null'un kurucu fonksiyonu olmaz.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    const arabam = "Ford"; let arabam2;
+
+    document.getElementById ("gösteri").innerHTML =
+        `Veri kurucu fonksiyonları:<br>\
+        "Nihat": [${"Nihat".constructor}]<br>\
+        3.14: [${(3.14).constructor}]<br>\
+        Math.PI: [${(Math.PI).constructor}]<br>\
+        NaN: [${NaN.constructor}]<br>\
+        false: [${true.constructor}]<br>\
+        [1,2,3,4]: [${[1,2,3,4].constructor}]<br>\
+        {ad:'Nihat', yaş:2022-1957}: [${{ad:'Nihat', yaş:2022-1957}.constructor}]<br>\
+        new Date(): [${new Date().constructor}]<br>\
+        function () {}: [${function () {}.constructor}]<br>\
+        arabam = "Ford": [${arabam.constructor}]<br>\
+        (2 * Math.PI * 12.5): [${(2 * Math.PI * 12.5).constructor}]`;
+</script>
+</html>

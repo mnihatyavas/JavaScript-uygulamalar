@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2203.html: İki yada daha çok dizinin concat() metoduyla birleştirilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"dizi1.concat (dizi2)" metodu</h2>
+    <p>İki diziyi birleştirmek için "dizi1.concat (dizi2)", üç diziyiyse "dizi1.concat (dizi2, dizi3)" metodları kullanılır. Çoklu diziler "[].concat (dizi1, dizi2,.. ,dizin)" şeklinde de birleştirilebilir.</p>
+    <p>Birleşmeler, orijinal dizileri etkilemez, birleşik dizi yeni bir diziye atanmalıdır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const meyve1 = ["Hurma", "Muz"], meyve2 = ["Üzüm", "Şeftali"], meyve3 = ["Armut"];
+    document.getElementById ("gösteri").innerHTML = `Orijinal diziler: [${meyve1}]: ${meyve1.length}, [${meyve2}]: ${meyve2.length}, [${meyve3}]: ${meyve3.length}`;
+
+    const birleşik1 = meyve1.concat (meyve2);
+    document.getElementById ("gösteri").innerHTML +=`<br/>İlk 2 dizi birleşik: [${birleşik1}]: ${birleşik1.length}`;
+
+    const birleşik2 = meyve1.concat (meyve2, meyve3);
+    document.getElementById ("gösteri").innerHTML +=`<br/>3 dizi birleşik: [${birleşik2}]: ${birleşik2.length}`;
+
+    const birleşik3 = [].concat (meyve1, meyve2, meyve3, ["elma", "erik"]);
+    document.getElementById ("gösteri").innerHTML +=`<br/>4 dizi birleşik: [${birleşik3}]: ${birleşik3.length}`;
+</script>
+</html>

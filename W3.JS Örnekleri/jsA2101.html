@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2101.html: Dizi ibaresi [] ile dizi nesnesi yaratıp ilk-elemanlar atama örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Bir [] dizi yaratmak</h2>
+    <p>Veri tipi nesne ve tiplemesi Array olan bir dizi [] ibaresiyle yada new Array() ile yaratılır.</p>
+    <p>Dizi yaratılırken ilk-elemanlar da atanabilir.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = ["Pejo", "Röno", "Mersedes"];
+    const meyve = [
+        "Üzüm",
+        "İncir",
+        "Muz",
+        "Portakal"
+    ]; // meyve sonu...
+    const şahıs = new Array ("Zafer", 2022-1978, "Ankara", 175, 80);
+
+    gösteri.innerHTML = 
+`Dizi elemanları, tipi, dizi tiplemesi mi?, dizi mi?<br/>\
+[${araba}], [${typeof araba}], [${araba instanceof Array}], [${Array.isArray (araba)}]<br/>\
+[${meyve}], [${typeof meyve}], [${meyve instanceof Array}], [${Array.isArray (meyve)}]<br/>\
+[${şahıs}], [${typeof şahıs}], [${şahıs instanceof Array}], [${Array.isArray (şahıs)}]`;
+</script>
+</html>

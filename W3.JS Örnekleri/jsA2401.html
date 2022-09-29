@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2401.html: Dizi tarama metotları olan forEach, map, filter, reduce, every ve some örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 70%;
+            min-width: 500px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Dizi tarama metotları: forEach, map, filter, reduce, every ve some</h2>
+    <hr/>
+    <p>"dizi.forEach ((value, index, array)=>{...})" ile tek-tek dizi elemanlarının toplamı hesaplanacak.<br/>
+      "dizi.map ((value, index, array)=>{...})" ile herbir dizi elemanı 2*Math.PI çarpımıyla yeni bir dizi yaratılacak.<br/>
+      "dizi.filter ((value, index, array)=>{...})" ile "&gt; 50" elemanlar süzgeçlenip yeni bir dizi yaratılacak.<br/>
+      "dizi.reduce ((total, value, index, array)=>{...})" ile herbir elemanın kareköklerinin toplamı hesaplanacak.<br/>
+      "dizi.every ((value, index, array)=>{...})" ile BÜTÜN elemanların "&gt; 50" kontrolu test edilecek.<br/>
+      "dizi.some ((value, index, array)=>{...})" ile BAZI elemanların "&gt; 50" kontrolu test edilecek.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function rasgele() {return Math.floor (Math.random() * 101);}
+    const dizi = [rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele(), rasgele()];
+
+    var toplam = 0; dizi.forEach ((a)=>{toplam +=a;});
+    let dizi2 = dizi.map ((a)=>{return (2 * Math.PI * a).toFixed (2);});
+    let dizi3 = dizi.filter ((a)=>{return a > 50;});
+    var toplam2 = dizi.reduce ((t, a)=>{return t + Math.sqrt (a);});
+    var toplam3 = dizi.reduceRight ((t, a)=>{return t + a**2;});
+    var hepsimi50üstü = dizi.every ((a)=>{return a > 50;});
+    var bazısımı50üstü = dizi.some ((a)=>{return a > 50;});
+
+    document.getElementById ("gösteri").innerHTML =
+        `10 rasgele [0, 100] dizi: [${dizi}]<br/>\
+        "forEach" ile elemanların toplamı = [${toplam}]<br/>\
+        "map" ile yarıçaplı daire çevreleri = [${dizi2}]<br/>\
+        "filter" ile "> 50" elemanlı dizi = [${dizi3}]<br/>\
+        "reduce" ile kareköklerin toplamı = [${toplam2}]<br/>\
+        "reduceRight" ile sağ elemana diğerlerinin kareleri toplamı = [${toplam3.toFixed (2)}]<br/>\
+        "every" ile HEPSİ "> 50" kontrolu = [${hepsimi50üstü}]<br/>\
+        "some" ile BAZISI "> 50" kontrolu = [${bazısımı50üstü}]`;
+</script>
+</html>

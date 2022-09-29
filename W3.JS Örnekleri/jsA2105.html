@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2105.html: Dizi sonuna yeni elemanlar ekleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>Diziye elemanlar ekleme</h2>
+    <p>"dizi.length" ile sona yeni elemanlar eklenir.</p>
+    <p>Mevcut endekse ekleme öncekini değiştirir; "dizi.length"i aşma ise arada "undefined-tanımsız" delikler yaratır.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    const araba = ["Pejo", "Röno", "Mersedes", "Fiyat", "Şevrole"];
+    document.getElementById ("gösteri").innerHTML = `Orijinal dizi elemanları: [${araba}]`;
+
+    while (true) {let eleman = prompt ("Dizi sonuna [" + araba + "] yeni eleman girin:", "q"); if (eleman == "q") {break;} araba [araba.length] = eleman;}
+
+    araba [Math.floor (Math.random() * araba.length * 2)] = "Son araba";
+    document.getElementById ("gösteri").innerHTML += `<br/>Tesadüfi eklenen ${araba.length}.elemanlı dizi: [${araba}]`;
+    //araba.forEach (function f(a) {gösteri.innerHTML +="<br/>" + a; console.log (a);});
+    //araba.forEach ((a)=>{gösteri.innerHTML +="<br/>" + a; console.log (a);}); // "undefined" belirtilmez...
+    for (let i=0; i<araba.length; i++) {gösteri.innerHTML +="<br/>" + araba [i]; console.log (araba [i]);}
+</script>
+</html>

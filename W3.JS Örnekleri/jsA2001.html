@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA2001.html: Günün varsayılı tarihi için "new Date()" ve detay metodları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>"new Date()" ve detay metodları</h2>
+    <p>"new Date()" metoduyla, günün varsayılı tarih ve zamanını nesnel tiplemeyle görüntüleyebilirsiniz.</p>
+    <p>Mevcut tarihin tek tek yıl, ay, gün, saat, dakika, saniye ve milisaniyesini alabilir, özel ayarlar uygulayabilirsiniz.</p>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let tarih = new Date();
+    let aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    let günler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+    let yılgünü = [31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
+    var günToplamı = yılgünü [tarih.getMonth()-1] + tarih.getDate();
+    if (tarih.getDate() % 4 == 0 & tarih.getMonth() > 1) {günToplamı +=1;}
+
+    document.getElementById ("gösteri").innerHTML = 
+`Güncel tarih ve zaman = [${tarih}]<br/>\
+Veri tipi = [${typeof tarih}]<br/>\
+UTC tarih dizgesi = [${tarih.toUTCString()}]<br/>\
+Tarihin yılı = [${tarih.getFullYear()}]<br/>\
+Yılın kaçıncı ayı = [${tarih.getMonth()}+1: ${aylar [tarih.getMonth()]}]<br/>\
+Haftanın kaçıncı günü = [${tarih.getDay()}+1: ${günler [tarih.getDay()]}]<br/>\
+Ayın kaçıncı günü = [${tarih.getDate()}]<br/>\
+Yılın kaçıncı günü = [${günToplamı}]<br/>\
+Tarihin saatı, dakikası, saniyesi, milisaniyesi = [${tarih.getHours()}, ${tarih.getMinutes()}, ${tarih.getSeconds()}, ${tarih.getMilliseconds()}]`;
+</script>
+</html>

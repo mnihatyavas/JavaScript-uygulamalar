@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsA3403.html: JSON nesne özelliğini . ve [] özellikle değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+</head>
+<body>
+    <h2>JSON değerini . ve [] özellikle değiştirme</h2>
+    <hr/>
+    <p>"JSON.parse (JSONNesnesi)" ile JS nesnesine çevirdikten sonra, herhangibir içiçe değerini "nesne.özellik1.özellik2" veya "nesne ['özellik1'] ['özellik2']" yöntemleriyle değiştirebilirsiniz.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let JSONNesnesi = '{"isim": "Atilla Göktürk", "yaş": 35, "arabalar": {"araba1": "Ford", "araba2": "BMW", "araba3": "Fiat"} }';
+    let JSNesnesi = JSON.parse (JSONNesnesi);
+    let sonuç1 = "", sonuç2 ="", sonuç3 = "";
+
+    for (let x in JSNesnesi.arabalar) {sonuç1 += JSNesnesi.arabalar [x] + ", ";} sonuç1 = sonuç1.slice (0, sonuç1.length - 2);
+    document.getElementById ("gösteri").innerHTML = `${JSNesnesi.yaş} yaşındaki ${JSNesnesi.isim}'ün orijinal arabaları: [${sonuç1}]`;
+
+    JSNesnesi.yaş = 38; JSNesnesi.arabalar.araba3 = "Mercedes";
+    for (let x in JSNesnesi.arabalar) {sonuç2 += JSNesnesi.arabalar [x] + ", ";} sonuç2 = sonuç2.slice (0, sonuç2.length - 2);
+    document.getElementById ("gösteri").innerHTML += `<br>${JSNesnesi.yaş}'indeki ilk değişen arabaları: [${sonuç2}]`;
+
+    JSNesnesi ["yaş"] = 40; JSNesnesi ["arabalar"] ["araba1"] = "Jaguar";
+    for (let x in JSNesnesi.arabalar) {sonuç3 += JSNesnesi.arabalar [x] + ", ";} sonuç3 = sonuç3.slice (0, sonuç3.length - 2);
+    document.getElementById ("gösteri").innerHTML += `<br>${JSNesnesi.yaş}'ındaki ikinci değişen arabaları: [${sonuç3}]`;
+</script>
+</html>

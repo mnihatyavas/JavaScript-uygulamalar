@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsF0501.html: Tarayıcı seyrüsefer nesnesi özellik ve fonksiyonları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+</head>
+<body>
+    <h1>Tarayıcının seyrüsefer nesnesi</h1>
+    <hr/>
+    <p>Ziyaretçi tarayıcınızın çerez ve JS izni, seçilen dil, mevcut kod ve ürün adı, ajansı ve sürümü, çalıştırdığı işletim sistemi (windows, gnu/linux, apple Mac) sergilenmektedir.</p>
+    <hr/>
+        <button onclick="seyrüsefer1()">Çerez izni</button>
+        <button onclick="seyrüsefer2()">JS izni</button>
+        <button onclick="seyrüsefer3()">Uygulama kod adı</button>
+        <button onclick="seyrüsefer4()">Ürün-motor adı</button>
+        <button onclick="seyrüsefer5()">Uygulama sürümü</button>
+        <button onclick="seyrüsefer6()">Kullanıcı ajansı</button>
+        <button onclick="seyrüsefer7()">Tarayıcı platformu</button>
+        <button onclick="seyrüsefer8()">Ayarlı lisan</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function seyrüsefer1() {gösteri.innerHTML = `Tarayıcı çerezlere izin veriyor mu? = [${window.navigator.cookieEnabled}]`;} // Brave için "false"dur
+    function seyrüsefer2() {gösteri.innerHTML = `Tarayıcı JavaScript'e izin veriyor mu? = [${window.navigator.javaEnabled()}]`;} // "false" deseler de artık hepsi de JS kodlamasını (varsayılı) tanıyor
+    function seyrüsefer3() {gösteri.innerHTML = `Tarayıcınızın uygulama kod adı = [${window.navigator.appCodeName}]`;} // Maxthon, Chrome, Brave, Opera, Safari vb tümden "Mozilla" der
+    function seyrüsefer4() {gösteri.innerHTML = `Tarayıcınızın ürün adı = [${window.navigator.product}]`;} // Hepsinin de "Gecko" dediğine kanma
+    function seyrüsefer5() {gösteri.innerHTML = `Tarayıcınızın uygulama sürümü = [${window.navigator.appVersion}]`;}
+    function seyrüsefer6() {gösteri.innerHTML = `Sunucuya gönderilen kullanıcı ajans başlığı = [${window.navigator.userAgent}]`;}
+    function seyrüsefer7() {gösteri.innerHTML = `Tarayıcının çalıştığı işletim sistemi = [${window.navigator.platform}]`;}
+    function seyrüsefer8() {gösteri.innerHTML = `Tarayıcının ayarlanan ülke lisanı = [${window.navigator.language}]`;} // Brave için "en-US"
+</script>
+</html>

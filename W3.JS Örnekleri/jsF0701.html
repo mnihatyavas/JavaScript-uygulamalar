@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsF0701.html: Settimeout ve set/clearInterval ile zamanlayıcılar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+        .stil {font-size: 50px; background-color: black; color: magenta; padding: 10px; font-weight: 800; text-align: center;}
+    </style>
+</head>
+<body>
+    <h1>Zamanlayıcılar nesnesi</h1>
+    <hr/>
+    <p>"setTimeout", fonksiyonunu saptanan mS sonra (bir kez) çalıştırır; "setInterval" ise fonksiyonunu saptanan mS aralığıyla "reload()/🔃" yada "clearInterval" ile sonlandırılmadıkca biteviye çalıştırır.</p>
+    <hr/>
+        <button onclick="zamanlayıcı1()">Gecikmeli ikaz</button>
+        <button onclick="zamanlayıcı2()">Gecikmeli mesajlar</button>
+        <button onclick="zamanlayıcı3()">Sonsuz sayaç</button><br/>
+        <button onclick="zamanlayıcı4()">Sayacı başlat</button>
+        <button onclick="clearInterval (saat1); kontrol1 = false;">Sayacı durdur</button><br/>
+        <button onclick="zamanlayıcı5()">Bilgisayar saatı-1</button><br/>
+        <button onclick="zamanlayıcı6()">Bilgisayar saatı-2</button>
+        <button onclick="clearInterval (saat2)">Saatı durdur</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayaç1 = 0, sayaç2 = 0, kontrol1 = false, saat1=saat2=saat3 = 0;
+    function zamanlayıcı1() {setTimeout (()=>{alert ("Merhaba, ben 3 sn geciltirmeli zamanlayıcıyım.");}, 3000); gösteri.innerHTML = `"setTimeout" ile 3 sn geciktirmeli alert/ikaz zamanlayıcısı.`;}
+    function zamanlayıcı2() {
+        setTimeout (()=>{gösteri.innerHTML = `Ben "setTimeout" ile 2 sn geciktirmeli İLK mesajım.`;}, 2000);
+        setTimeout (()=>{gösteri.innerHTML = `Ben "setTimeout" ile 4 sn geciktirmeli İKİNCİ mesajım.`;}, 4000);
+        setTimeout (()=>{gösteri.innerHTML = `Ben "setTimeout" ile 6 sn geciktirmeli ÜÇÜNCÜ ve SON  mesajım.`;}, 6000);
+    } // func sonu...
+    function zamanlayıcı3() {setInterval (()=>{gösteri.innerHTML = `Ben, ancak reload()/🔃 ile durdurulabilen ve her tıklamada daha da hızlanan sonsuz sayacım = [${++sayaç1}]`}, 1000);} // Kontrolsuz sayaç1 her tıklamada hızlanır
+    function zamanlayıcı4() {if (kontrol1) {return;} saat1 = setInterval (()=>{gösteri.innerHTML = `Saat-1 = [${++sayaç2}]`}, 1000); kontrol1 = true;} // "kontrol1=false/true" denetimiyle her tıklamada sayaç2 hızlanmaz
+    function zamanlayıcı5() {if (saat2) return; saat3 = 1; // Ya "Bilgisayar saatı-1" çalışır yada "Bilgisayar saatı-2"
+        function sıfırKontrolu (i) {if (i < 10) {i = "0" + i}; return i;}
+        const tarih = new Date();
+        let S = tarih.getHours();
+        let d = tarih.getMinutes();
+        let s = tarih.getSeconds();
+        d = sıfırKontrolu (d);
+        s = sıfırKontrolu (s);
+        gösteri.innerHTML =  "<div class='stil'>" + S + ":" + d + ":" + s + "</div>";
+        setTimeout (zamanlayıcı5, 1000);
+    } // func sonu...
+    function zamanlayıcı6() {if (saat3) return; saat2 = setInterval (()=>{gösteri.innerHTML = "<div class='stil'>" + new Date().toLocaleTimeString() + "</div>";}, 1000);}
+</script>
+</html>

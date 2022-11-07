@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsB0102.html: Dökümanın HTML sayfa içeriklerini değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <h2>Döküman içeriklerini değiştirme</h2>
+    <hr/>
+    <p>Döküman nesnesi (disk dosyasıymışcasına) "open-replace" ile açılıp, "write" ile yeni içerik yazılıp, "close" ile kapatılabilinmektedir.</p>
+    <p>"html/body-style" CSS stillemeleriyle, yeni sayfa tasarımını isteğinizce düzenleyebilirsiniz.</p>
+    <hr/>
+    <button onclick="değiştir()">Mevcut dökümanı değiştir</button><br/>
+    <button onclick="yeniPencere()">Yeni döküman penceresi aç</button>
+</body>
+<script>
+    function değiştir() {
+        document.open ("html", "replace");
+        document.write ("<html style='font-size:35px; font-weight: 800; text-align:center; background-color: #58b; color: deepPink; margin-top:5em;'>HTML DOM öğrenimi tam bir eğlence!</html>");
+        document.close();
+    } // func sonu...
+
+    function yeniPencere() {
+        var yPen = window.open();
+        yPen.document.open();
+        yPen.document.write ("<body style='font-size:45px; font-weight: 800; text-align:center; background-color: #b85; color: darkBlue; margin-top:5em;'>HTML DOM öğrenimi tam bir eğlence!</body>");
+        yPen.document.close();
+    } // func sonu...
+</script>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsC0101.html: Buton tıklamasının etkinsiz veya etkin kılınması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color: DarkRed; color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Butonun etkinsizleme ve etkinleme</h2>
+    <hr/>
+    <p>Butonu etkinsizleme "düğme_id.disabled=true" ile, etkinleme ise "düğme_id.disabled=false" ile yapılır.</p>
+    <p>Etkinsiz düğme kenarsız silik ve tıklanmaya duyarsız, etkinli ise kenarlı parlak ve tıklanınca "form-action"ı çalıştırır.</p>
+    <hr/>
+    <form id="form1" action="_/sayfa.php">
+        <button id="düğme1" name="ders1" type="submit" value="w3school_HTML">HTML</button>
+        <button id="düğme2" name="ders2" type="submit" value="w3school_CSS">CSS</button>
+        <button id="düğme3" name="ders3" type="submit" value="w3school_JS">JS</button>
+    </form>
+    <hr/>
+    <button onclick="tıkla1()">JS düğmesini etkinSİZle</button>
+    <button onclick="tıkla2()">JS düğmesini etkinle</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function tıkla1() {document.getElementById ("düğme3").disabled = true; document.getElementById ("gösteri").innerHTML = "JS düğmesi ETKİNSİZ!.."}
+    function tıkla2() {düğme3.disabled = false; gösteri.innerHTML = "JS düğmesi ETKİN!.."}
+</script>
+</html>

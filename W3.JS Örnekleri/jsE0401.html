@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsE0401.html: Nesne yükleme olaylarına duyarlılık örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body onload="gösteri.innerHTML='1) HTML sayfası YÜKLENDİ.';" onresize="ebatlar()" onunload="alert ('w3school.com sayfasını ziyaret ettiğiniz için teşekkürler. Tekrar bekleriz.');">
+    <h1>Nesne yükleme olayları</h1>
+    <hr/>
+    <p>Nesnenin (HTML sayfası veya resim) tamamlanan yüklenmesi "onload", yüklenme hatası "onerror", tarayıcı ebat değişikliği nesne içi "body-onresize" olaylarıyla yakalanırken, HTML sayfalı tarayıcı penceresi kapatılırken "onunload" olayı yakalamadı.</p>
+    <hr/>
+        <p style="text-align:center;"><img border="1" src="resim/w3logo.gif" onload="console.log ('2) w3logo.gif resmi YÜKLENDİ.');" alt="w3 logosu"><br/>w3school.com logosu</p>
+        <p style="text-align:center;"><img border="1" src="resim/w3loggo.gif" onload="console.log ('3) w3logo.gif resmi YÜKLENDİ.');" onerror="console.log ('3) w3logo.gif resmi YÜKLENEMEDİ.');" alt="w3 logosu"><br/>w3school.com logosu</p>
+        <p style="color: blue;">F12 hariç, pencere ebatını değiştirmeyi deneyin.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function ebatlar() {gösteri.innerHTML = `Pencerenin en ve boyu = (${window.outerWidth}, ${window.outerHeight})`;}
+</script>
+</html>

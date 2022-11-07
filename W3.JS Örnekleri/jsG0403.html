@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0403.html: Adıyla seçilen HTML elemanına sınıf ekleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+        .süslü {
+            font-size: 25px;
+            padding: 0.1px 10px;
+            color: DeepPink;
+            font-family: arial;
+            font-weight: bolf;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="elemanSeç();">
+    <h1>Adıyla seçilen HTML elemanına sınıf ekle</h1>
+    <hr/>
+    <p>Sayfa ilk yüklenirken "prompt" ileti kutusuyla HTML elemanı seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.addClass(tagName,'sınıf')" fonksiyonuyla seçilen elemana sınıf eklenmektedir.</p>
+    <hr/>
+        <div id="Londra" class="şehir">
+            <h2>Londra</h2>
+            <p>Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="şehir">
+            <h2>Paris</h2>
+            <p>Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="şehir">
+            <h2>Tokyo</h2>
+            <p>Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="şehir">
+            <h2>Ankara</h2>
+            <p>Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr/>
+    <button onclick="stilEkle()">Seçilen HTML elemanına STİL EKLE</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let elemanlar = ["h1", "h2", "p", "div"], seçilenEleman; 
+    function elemanSeç() {
+        let elemanNo = +prompt ("Elemanno'yu gir [1=h1, 2=h2, 3=p, 4=div]:", "4");
+        if (elemanNo < 1 || elemanNo > 4 || isNaN (elemanNo)) elemanNo = 4; // console.log (elemanNo);
+        seçilenEleman = elemanlar [elemanNo - 1];
+    } // func sonu...
+    function stilEkle(){
+        w3.addClass (seçilenEleman, "süslü");
+        gösteri.innerHTML=`${seçilenEleman}'ye "süslü" SINIF EKLENDİ.`;
+    } // func sonu...
+</script>
+</html>

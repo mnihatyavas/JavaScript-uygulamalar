@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsC0302.html: Form-select-option'a dair özellikler ve vasıflar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, select {background-color: DarkRed; color: yellow;}
+        input, option {background-color:Navy; color:orange; margin-bottomm: 5px;}
+    </style>
+</head>
+<body>
+    <h2>Form-select-option'a ait özellikler ve vasıflar</h2>
+    <hr/>
+    <p>Sarkanliste uzunluğu "select_id.length", form kimliği "select_id.form.id", seçili endeksi "select_id.selectedIndex", seçili tercih metni "select_id.options[select_id.selectedIndex].text, tüm sarkanliste metni "sonuç+=select_id.options[i].text+', '", görünen ebat değişikliği "select_id.size=+prompt()", çokluseçimin etkinleştirilmesi/etkinsizleştirilmesi "select_id.multiple=true/false", ve sarkanlistenin etkinsizleştirilip/etkinleştirilmesi de "select_id.disabled=true/false" ile gerçekleştirilir.</p>
+    <hr/>
+    <form id="form1">
+        Favori oyununu seç:
+        <select id="seçimim">
+            <option>Hearts</option>
+            <option>Spider Solitaire</option>
+            <option>Tavla</option>
+            <option>Poker</option>
+            <option>Okey</option>
+            <option>Briç</option>
+            <option>King</option>
+        </select>
+    </form>
+    <button onclick="tıkla1()">Option SAYISI</button>
+    <button onclick="tıkla2()">Sarkanliste FORM_ID</button>
+    <button onclick="tıkla3()">SEÇİLİ tercih ENDEKSİ</button>
+    <button onclick="tıkla4()">SEÇİLİ tercih metni</button>
+    <button onclick="tıkla5()">TÜM tercihler metni</button>
+    <button onclick="tıkla6()">Görünen İLK EBATI değiştir</button>
+    <button onclick="tıkla7()">Çoklu seçimi ETKİNLEŞTİR</button>
+    <button onclick="tıkla8()">Çoklu seçimi ETKİNSİZLEŞTİR</button>
+    <button onclick="tıkla9()">Sarkanlisteyi ETKİNSİZLEŞTİR</button>
+    <button onclick="tıkla10()">Sarkanlisteyi ETKİNLEŞTİR</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var uz = seçimim.length;
+    function tıkla1() {gösteri.innerHTML = `Select listesindeki option adedi = [${uz}];`}
+    function tıkla2() {gösteri.innerHTML = `Sarkanlistenin form_id = [${seçimim.form.id}];`}
+    function tıkla3() {gösteri.innerHTML = `SEÇİLİ tercih ENDEKSİ = [${seçimim.selectedIndex}];`}
+    function tıkla4() {gösteri.innerHTML = `SEÇİLİ tercih metni = [${seçimim.options [seçimim.selectedIndex].text.toUpperCase()}];`}
+    function tıkla5() {let sonuç = ""; for (let i=0; i < uz; i++) {sonuç +=seçimim.options [i].text + ", ";} gösteri.innerHTML = `TÜM tercihler metni = [${sonuç.slice (0, -2)}];`}
+    function tıkla6() {let ebat = +prompt ("İlk görünecek liste ebadını gir"); if (ebat < 1 | ebat > uz | isNaN (ebat)) {ebat = 1;} seçimim.size = ebat; gösteri.innerHTML = `Görünen İLK liste EBATı = [${seçimim.size}];`}
+    function tıkla7() {seçimim.multiple = true; gösteri.innerHTML = `Çoklu seçim etkin mi? = [${seçimim.multiple}];`}
+    function tıkla8() {seçimim.multiple = false; gösteri.innerHTML = `Çoklu seçim etkin mi? = [${seçimim.multiple}];`}
+    function tıkla9() {seçimim.disabled = true; gösteri.innerHTML = `Sarkanliste etkisizleştirildi mi? = [${seçimim.disabled}];`}
+    function tıkla10() {seçimim.disabled = false; gösteri.innerHTML = `Sarkanliste etkisizleştirildi mi? = [${seçimim.disabled}];`}
+</script>
+</html>

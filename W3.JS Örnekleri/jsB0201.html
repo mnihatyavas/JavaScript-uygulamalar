@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsB0201.html: Dökümandaki "anchors" eleman sayısını ve "innerHTML" içeriğini sunma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color: DarkRed; color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Çapa sayısı ve innerHTML içeriği</h2>
+    <hr/>
+    <p>Döküman çapa nesne sayısı "document.anchors.length" ile, herhangibir n.inci çapa içeriği de "document.anchors[n-1].innerHTML" ile sunulur.</p>
+    <hr/>
+        <a name="html">HTML Eğitimi</a><br>
+        <a name="css">CSS Eğitimi</a><br>
+        <a name="js">JS Eğitimi</a><br>
+        <a name="xml">XML Eğitimi</a><br>
+        <a name="php">PHP Eğitimi</a><br>
+    <hr/>
+    <button onclick="sayı()">Kaç çapa var?</button>
+    <button onclick="içerik()">Kaçıncının içeriğini göreceksin?</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    console.log (document.anchors);
+    function sayı() {document.getElementById ("gösteri").innerHTML = document.anchors.length;}
+    function içerik() {
+        var n = +prompt ("Kaçıncı [1,5]?");
+        if (n < 1 | n > 5 | isNaN (n)) n = 1;
+        document.getElementById ("gösteri").innerHTML = document.anchors [n - 1].innerHTML;
+    } // func sonu...
+</script>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0201.html: Resme dair alan vasıfları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h2>Resmin alan vasıfları</h2>
+    <hr/>
+    <p>Resimle bağlantılı alan'ın tıklama butonlarında görülen vasıf içerikleri sunulmaktadır. Bunlardan "venüs.target='_blank'/'_self'" bağlantıya geçişi ayrı/aynı pencerede yapar. Protokol çevrimdışı "file:", çevrimiçi "http:" veya "https:".</p>
+    <hr/>
+    <img src="resim/gezegenler.gif" width="146" height="126" usemap="#gezegen_haritası" title="Venüs ve uydularından bir kesit">
+    <map name="gezegen_haritası">
+        <area id="venüs" shape="daire" coords="124,58,8" alt="Güzel bir gezegen" href="jsD0201.html?id=venüs#tasvir" target="_blank">
+    </map><br/>
+    <button onclick="tıkla1()">venüs.alt</button>
+    <button onclick="tıkla2()">venüs.coords</button>
+    <button onclick="tıkla3()">venüs.shape</button>
+    <button onclick="tıkla4()">venüs.href</button>
+    <button onclick="tıkla5()">venüs.protocol</button> <!-- Lokal çevrimiçi için: "python -m http.server" ve "localhost:8000" dene -->
+    <button onclick="tıkla6()">venüs.hostname</button>
+    <button onclick="tıkla7()">venüs.port</button>
+    <button onclick="tıkla8()">venüs.pathname</button>
+    <button onclick="tıkla9()">venüs.search</button>
+    <button onclick="tıkla10()">venüs.hash</button>
+    <button onclick="tıkla11()">venüs.target</button>
+    <button onclick="tıkla12()">img.title</button>
+    <hr/>
+    <p id="gösteri"></p>
+
+</body>
+<script>
+    function tıkla1() {gösteri.innerHTML = `Resimli alanın alternatif metni = [${venüs.alt}]`;}
+    function tıkla2() {gösteri.innerHTML = `Resimli alanın kordinatları = [${venüs.coords}]`;}
+    function tıkla3() {gösteri.innerHTML = `Resimli alanın şekli = [${venüs.shape}]`;}
+    function tıkla4() {gösteri.innerHTML = `Resimli alanın referansı = [${venüs.href}]`;}
+    function tıkla5() {gösteri.innerHTML = `Resimli alanın protokolü = [${venüs.protocol}]`;} // "file:" veya "http:"
+    function tıkla6() {gösteri.innerHTML = `Resimli alanın sunucu adı = [${venüs.hostname}]`;} // "" veya "localhost"
+    function tıkla7() {gösteri.innerHTML = `Resimli alanın çıkış kapı no'su = [${venüs.port}]`;} // "" veya "8000"
+    function tıkla8() {gösteri.innerHTML = `Resimli alanın yol adı = [${venüs.pathname}]`;}
+    function tıkla9() {gösteri.innerHTML = `Resimli alanın araştırma kimliği = [${venüs.search}]`;}
+    function tıkla10() {gösteri.innerHTML = `Resimli alanın kıyma ibaresi = [${venüs.hash}]`;}
+    function tıkla11() {gösteri.innerHTML = `Resimli alanın hedef penceresi = [${venüs.target}]`;}
+    function tıkla12() {gösteri.innerHTML = `Resimli alanın üzerindeyken beliren başlık = [${document.images [0].title}]`;} // yada "document.getElementsByTagName("img")[0].title
+</script>
+</html>

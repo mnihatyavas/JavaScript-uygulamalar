@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0504.html: Resmin usemap ve alanının name vasıflarının bulunması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h2>Resmin ve alanının bağlantı vasfı</h2>
+    <hr/>
+    <p>Resmin "usemap" vasfını JS'te "gezegenler.useMap" olarak tanımlamak, ayrıca "map_id" kullanmadığımızdan "document.getElementsByTagName('map')[0].name" arama kalıbı gerekmektedir.</p>
+    <hr/>
+        <img id="gezegenler" src="resim/gezegenler.gif" usemap="#gezegenharitalama" title="Venüs gezegeni ve uydularından bir kesit">
+        <map name="gezegenharitalama">
+            <area id="venüs" shape="circle" coords="124,58,8" alt="Güzel venüs gezegeni">
+        </map>
+    <hr/>
+    <button onclick="tıkla1()">Resim X Alan bağlantısı</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>console.log (gezegenler.src, gezegenler.useMap);
+    function tıkla1() {gösteri.innerHTML = `Resmin "usemap" ve haritanın "name" vasıfları = [${gezegenler.useMap} - ${document.getElementsByTagName ("map")[0].name}]`;}
+</script>
+</html>

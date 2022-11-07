@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0504.html: TagName'le seçilen HTML eleman-larının CSS stil sınıfını silme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        pp {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="elemanSeç();">
+    <h1 class="w3-orange">"TagName"le seçilen elemanın CSS sınıfını silme</h1>
+    <hr/>
+    <p class="w3-text-amber">Sayfa ilk yüklenirken "prompt" ileti kutusuyla HTML elemanı seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.removeClass(tagName,'sınıf')" fonksiyonuyla CSS sınıfı silinmektedir.</p>
+    <hr/>
+        <div id="Londra" class="w3-panel w3-border">
+            <h2 class="w3-red">Londra</h2>
+            <p class="w3-text-amber">Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="w3-panel w3-border">
+            <h2 class="w3-red">Paris</h2>
+            <p class="w3-text-amber">Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="w3-panel w3-border">
+            <h2 class="w3-red">Tokyo</h2>
+            <p class="w3-text-amber">Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="w3-panel w3-border">
+            <h2 class="w3-red">Ankara</h2>
+            <p class="w3-text-amber">Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr/>
+    <button onclick="sınıfSil()">Seçilen elemanın stilli SINIF SİL</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let elemanlar = ["h1", "h2", "p", "div"], seçilenEleman, elemanNo; 
+    function elemanSeç() {
+        elemanNo = +prompt ("Eleman no'yu gir [1=h1, 2=h2, 3=p, 4=div]:", "4");
+        if (elemanNo < 1 || elemanNo > 4 || isNaN (elemanNo)) elemanNo = 4; // console.log (elemanNo);
+        seçilenEleman = elemanlar [elemanNo - 1];
+    } // func sonu...
+    function sınıfSil(){
+        switch (elemanNo) {
+            case 1: w3.removeClass (seçilenEleman, "w3-orange"); break;
+            case 2: w3.removeClass (seçilenEleman, "w3-red"); break;
+            case 3: w3.removeClass (seçilenEleman, "w3-text-amber"); break;
+            case 4: w3.removeClass (seçilenEleman, "w3-panel"); w3.removeClass (seçilenEleman, "w3-border");
+        } // switch sonu..
+        gösteri.innerHTML=`${seçilenEleman}'ye ait CSS SINIF SİLİNDİ.`;
+    } // func sonu...
+</script>
+</html>

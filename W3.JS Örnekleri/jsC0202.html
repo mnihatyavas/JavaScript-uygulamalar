@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsC0202.html: Form ve elemanlarının vasıfları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color: DarkRed; color: yellow; margin-bottom: 5px;}
+        input {background-color:Navy; color:orange; margin-bottom: 5px;}
+    </style>
+</head>
+<body>
+    <h2>Form ve elemanlarının vasıfları</h2>
+    <hr/>
+    <p>Form eleman sayısı, eleman değerleri; formun: adı, hedefl, aksiyonu, metodu, karakter kümesi ve kodlama tipi özellik/vasıf metodları tıklanacak butonda yazılmış; tıklanınca da sonuçları alt satırda yansıtılmıştır.</p>
+    <hr/>
+    <form id="form1" name="ilk_formum" action="/sayfa.php" target="_blank" method="post" accept-charset="ISO-8859-9 Türkçe">
+        İsim......: <input type="text" name="isim" value="M.Nihat Yavaş"><br>
+        GSM Tlf: <input type="text" name="telefon" value="+90551-555-95-85"><br>
+        Eposta..: <input type="text" name="eposta" value="mahmut957@gmail.com"><br>
+        <p style="text-align: center;"><input type="submit" value="GÖNDER"></p>
+    </form>
+    <hr/>
+    <button onclick="tıkla1()">form1.length</button>
+    <button onclick="tıkla2()">form1.elements[i].value</button>
+    <button onclick="tıkla3()">form1.name</button>
+    <button onclick="tıkla4()">form1.target</button>
+    <button onclick="tıkla5()">form1.action</button>
+    <button onclick="tıkla6()">form1.method</button>
+    <button onclick="tıkla7()">form1.acceptCharset</button>
+    <button onclick="tıkla8()">form1.enctype</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var uz = form1.length;
+    function tıkla1() {gösteri.innerHTML = `Form içi eleman sayısı = [${uz}]`;}
+    function tıkla2() {let sonuç = ""; for (let i = 0; i < uz ;i++) {sonuç +=(i+1) + ":" + form1.elements [i].value + ", ";} gösteri.innerHTML = `Form içi eleman değerleri = [${sonuç.slice (0, -2)}]`;}
+    function tıkla3() {gösteri.innerHTML = `Formun adı = [${form1.name}]`;}
+    function tıkla4() {gösteri.innerHTML = `Formun hedef penceresi = [${form1.target}]`;} // _blank yada _self
+    function tıkla5() {gösteri.innerHTML = `Formun aksiyon sayfası = [${form1.action}]`;}
+    function tıkla6() {gösteri.innerHTML = `Form gönderme metodu = [${form1.method}]`;} // post yada get
+    function tıkla7() {gösteri.innerHTML = `Form kabul karakter serisi = [${form1.acceptCharset}]`;}
+    function tıkla8() {gösteri.innerHTML = `Form kodlama tipi = [${form1.enctype}]`;}
+</script>
+</html>

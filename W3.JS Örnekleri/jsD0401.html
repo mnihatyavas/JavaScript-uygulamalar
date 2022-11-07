@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0401.html: iFrame iç pencerenin zemin rengi ve içerik kaynağını değiştirme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h2>iFrame'in renk ve "src" değişikliği</h2>
+    <hr/>
+    <p>Zeminrengi değişimi rasgele "rgba(n,n,n,m)" kalıbı kullanılarak her tıklayışta farklı şeffaflıkta renk üretilmiştir. İççerçeve "iframe" "src" kaynak olarak bir HTML metni ve bir de ASP internet sayfası alınmıştır. Kaynak vasfının iki dosya arasında ardışık değişimi ise "if (++sayaç % 2 == 1)" kontroluyla sağlanmıştır.</p>
+    <hr/>
+        <iframe id="içÇerçeve" src="jsD0401x.html">
+            <p>Aktüel tarayıcınız iframe'leri desteklemiyor.</p>
+        </iframe>
+    <hr/>
+    <button onclick="tıkla1()" alternatif="tıkla2()">Zemin rengini değiştir</button>
+    <button onclick="tıkla3()" alternatif="tıkla4()">Kaynağı değiştir</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var sayaç = 0, aspMi = true;
+    function tıkla1() {
+        function rasgeleRenk() {return "rgba(" + rasgele(256) + "," + rasgele(256) + "," + rasgele(256) + "," + Math.random().toFixed (3) +")";}
+        function rasgele(n) {return Math.floor (Math.random() * n);}
+        let zeminRengi = rasgeleRenk();
+        içÇerçeve.style.backgroundColor = zeminRengi;
+        gösteri.innerHTML = `İç çerçevenin zemin rengi her tıklayışta RASGELE = [${zeminRengi}]`;
+    } // tıkla1 sonu...
+    function tıkla2() {
+        let hexDizi = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"];
+        function rasgeleRenk() {return "#" + rasgele() + rasgele() + rasgele();}
+        function rasgele() {return hexDizi [Math.floor (Math.random() * 16)];}
+        let zeminRengi = rasgeleRenk();
+        içÇerçeve.style.backgroundColor = zeminRengi;
+        gösteri.innerHTML = `İç çerçevenin zemin rengi her tıklayışta RASGELE = [${zeminRengi}]`;
+    } // tıkla2 sonu...
+    function tıkla3() {if (++sayaç % 2 == 1) {içÇerçeve.src = "jsD0401y.asp";} else {içÇerçeve.src = "jsD0401x.html";} gösteri.innerHTML = `Yeni kaynak = [${içÇerçeve.src}]`;}
+    function tıkla4() {if (aspMi) {içÇerçeve.src = "jsD0401y.asp"; aspMi = false} else {içÇerçeve.src = "jsD0401x.html"; aspMi= true;} gösteri.innerHTML = `Yeni kaynak = [${içÇerçeve.src}]`;}
+</script>
+</html>

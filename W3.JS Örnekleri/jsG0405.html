@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0405.html: Seçilen sınıfa CSS sınıf ekleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+        .süslü {
+            background-color: orange;
+            font-size: 25px;
+            padding: 0.1px 10px;
+            color: DeepOrange;
+            border: 2px solid blue;
+            border-radius: 5px;
+            text-align: center;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="sınıfSeç();">
+    <h1 class="başlık1">Seçilen sınıfa CSS sınıf ekle</h1>
+    <hr/>
+    <p class="paragraf">Sayfa ilk yüklenirken "prompt" ileti kutusuyla sınıf seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.addClass(.class,'sınıf')" fonksiyonuyla seçilen sınıfa CSS stilli sınıf eklenmektedir.</p>
+    <hr/>
+        <div id="Londra" class="şehir">
+            <h2 class="başlık2">Londra</h2>
+            <p class="paragraf">Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="şehir">
+            <h2 class="başlık2">Paris</h2>
+            <p class="paragraf">Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="şehir">
+            <h2 class="başlık2">Tokyo</h2>
+            <p class="paragraf">Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="şehir">
+            <h2 class="başlık2">Ankara</h2>
+            <p class="paragraf">Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr/>
+    <button onclick="stilEkle()">Seçilen şehre STİL EKLE</button>
+                                           
+    <p id="gösteri" class="paragraf"></p>
+</body>
+<script>
+    let sınıflar = ["şehir", "başlık1", "başlık2", "paragraf"], seçilenSınıf; 
+    function sınıfSeç() {
+        let sınıfNo = +prompt ("Sınıf no'yu gir [1=şehir, 2=başlık1, 3=başlık2, 4=paragraf]:", "1");
+        if (sınıfNo < 1 || sınıfNo > 4 || isNaN (sınıfNo)) sınıfNo = 4; // console.log (sınıfNo);
+        seçilenSınıf = "." + sınıflar [sınıfNo - 1];
+    } // func sonu...
+    function stilEkle(){
+        w3.addClass (seçilenSınıf, "süslü");
+        gösteri.innerHTML=`${seçilenSınıf}'ya "süslü" SINIF EKLENDİ.`;
+    } // func sonu...
+</script>
+</html>

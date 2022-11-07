@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsE0301.html: Farenin tek/çift tıklaması olaylarına duyarlılık örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h1>Fareyle tek/çift tıklama olayları</h1>
+    <hr/>
+    <p>Tek tıklama olayı "onclick", çifttıklamaysa "ondblclick"le yakalanıp ilgili fonksiyonu çağrılır. Tek buton elemanı hem tek hem de çift-tıklamayı barındıramıyor; daima teklisi yakalanıyor; bu yüzden herbiri ayrı buton'larla tanımlanmalıdır. "alert" aynı fonksiyonun son satırı da olsa öncelik onundur.</p>
+    <hr/>
+        <button type="button" onclick="olay1()">Günün tarihi</button>
+        <button type="button" onclick="olay2a()">Tek Tıkla</button>
+        <button type="button" ondblclick="olay2b()">Çift Tıkla</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayaç1 = sayaç2 = 0;
+    function olay1() {gösteri.innerHTML = Date();}
+    function olay2a() {++sayaç1; gösteri.innerHTML = `${sayaç1}.nci kez Merhabalar!`; console.log (`${sayaç1}.nci kez Merhabalar!`); alert (`${sayaç1}.nci kez Merhabalar!`);}
+    function olay2b() {++sayaç2; gösteri.innerHTML = `${sayaç2}.nci kez Nasılsınız!`; console.error (`${sayaç2}.nci kez Nasılsınız!`); alert (`${sayaç2}.nci kez Nasılsınız!`);}
+</script>
+</html>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0101.html: Bağlantı çapasının çeşitli vasıfları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h2>Bağlantı çapa nesnesi vasıfları</h2>
+    <hr/>
+    <p>Bağlantı a-href'in tıklama butonlarında görülen vasıf içerikleri sunulmaktadır. Bunlardan "href.target='_blank'/'_self'" bağlantıya geçişi ayrı/aynı pencerede yapar. Sonuncu "href.download" ise bağlantı dosyalarını tümden indirirken varsa atanmış adı, yoksa orijinal adını kullanır.</p>
+    <hr/>
+    <p><a id="çapam" href="https://github.com/mnihatyavas" target="_blank" hreflang="tr-TR Türkçe" rel="reklamsız@takipcisiz@bağışcısız" type="text/html" download="mnyavaş">Ana sayfa</a></p>
+    <button onclick="tıkla1()">çapam.href</button>
+    <button onclick="tıkla2()">çapam.target</button>
+    <button onclick="tıkla3()">çapam.hreflang</button>
+    <button onclick="tıkla4()">çapam.id</button>
+    <button onclick="tıkla5()">çapam.rel</button>
+    <button onclick="tıkla6()">çapam.type</button>
+    <button onclick="tıkla7()">çapam.download</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function tıkla1() {gösteri.innerHTML = `Bağlantı çapamın HREF vasfı = [${çapam.href}]`;}
+    function tıkla2() {gösteri.innerHTML = `Bağlantı çapamın TARGET vasfı = [${çapam.target}]`;}
+    function tıkla3() {gösteri.innerHTML = `Bağlantı çapamın HREFLANG vasfı = [${çapam.hreflang}]`;}
+    function tıkla4() {gösteri.innerHTML = `Bağlantı çapamın ID vasfı = [${çapam.id}]`;}
+    function tıkla5() {gösteri.innerHTML = `Bağlantı çapamın REL vasfı = [${çapam.rel}]`;}
+    function tıkla6() {gösteri.innerHTML = `Bağlantı çapamın TYPE vasfı = [${çapam.type}]`;}
+    function tıkla7() {gösteri.innerHTML = `Bağlantı çapamın DOWNLOAD vasfı = [${çapam.download}]`;}
+</script>
+</html>

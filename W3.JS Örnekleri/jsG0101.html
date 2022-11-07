@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0101.html: Kimlik-id'le seçilen HTML elemanının saklanması/görünmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="şehirSeç();">
+    <h1>HTML elemanını id'le sakla/göster</h1>
+    <hr/>
+    <p>Sayfa ilk yüklenirken "prompt" ileti kutusuyla şehir seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.hide(id)" ve "w3.show(id)" fonksiyonlarıyla listeden çıkarılarak gizlenmekte veya tekrar listeye dahilen görünür kılınmaktadır.</p>
+    <hr/>
+        <div id="Londra" class="şehir">
+            <h2>Londra</h2>
+            <p>Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="şehir">
+            <h2>Paris</h2>
+            <p>Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="şehir">
+            <h2>Tokyo</h2>
+            <p>Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="şehir">
+            <h2>Ankara</h2>
+            <p>Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr/>
+    <button onclick="w3.hide (seçilenŞehir); gösteri.innerHTML=`${seçilenŞehir.substring (1,)} SAKLANDI.`;">Seçilen şehri SAKLA</button>
+    <button onclick="w3.show (seçilenŞehir); gösteri.innerHTML=`${seçilenŞehir} GÖRÜNDÜ.`;">GÖSTER</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    let şehirler = ["Londra", "Paris", "Tokyo", "Ankara"], seçilenŞehir; 
+    function şehirSeç() {
+        let şehirNo = +prompt ("Şehirno'yu gir [1=Londra, 2=Paris, 3=Tokyo, 4=Ankara]:", "4");
+        if (şehirNo < 1 || şehirNo > 4 || isNaN (şehirNo)) şehirNo = 4; // console.log (şehirNo);
+        seçilenŞehir = "#" + şehirler [şehirNo - 1];
+    } // func sonu...
+</script>
+</html>

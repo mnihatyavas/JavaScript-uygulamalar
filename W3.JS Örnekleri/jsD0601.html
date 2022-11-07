@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0601.html: Tablonun sınır, tampon, başlık ve hücre içeriğinin değiştirilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+        td {border: 1px solid magenta; padding: 3px;}
+        caption {color: navy; font-family: arial; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h2>Tablo sınır, tampon, başlık ve hücre-içeriği değişikliği</h2>
+    <hr/>
+    <p>Tablo sınır kalınlığı değişikliği "table_id.style.border='5px solid red'" ile, tampon değişiklği "table_id.style.padding='5px'", başlık değişiklği "table_id.createCaption().innerHTMİ='kapşon'" ve hücre içeriği değişikliği ise "table_id.rows[i].cells[j].innerHTML='içerik'" ile yapılır.</p>
+    <hr/>
+        <table id="tablom" style="border: 4px solid blue; background-color: yellow; color: green;">
+            <tr>
+                <td>Satır1 Hücre1</td>
+                <td>Satır1 Hücre2</td>
+            </tr>
+            <tr>
+                <td>Satır2 Hücre1</td>
+                <td>Satır2 Hücre2</td>
+            </tr>
+            <tr>
+                <td>Satır3 Hücre1</td>
+                <td>Satır3 Hücre2</td>
+            </tr>
+        </table>
+    <hr/>
+    <button onclick="tıkla1()">Tablo sınır kalınlığını değiştir</button><br/>
+    <button onclick="tıkla2()">Tablo tampon mesafesini değiştir</button><br/>
+    <button onclick="tıkla3()">Hücre içeriğini değiştir</button><br/>
+    <button onclick="tıkla4()">Yeni tablo başlığı yarat</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function tıkla1() {
+        let x = +prompt ("Sınır kalınlığını gir [0,20]");
+        if (x < 0 | x > 20 | isNaN (x)) {x = 2;}
+        tablom.style.border = x + "px solid red";
+        gösteri.innerHTML = `Tablo güncel sınır değeri = [${tablom.style.border}]`;
+    } // func sonu...
+    function tıkla2() {
+        let x = +prompt ("Tampon aralığını gir [0,20]");
+        if (x < 0 | x > 20 | isNaN (x)) {x = 2;}
+        tablom.style.padding = x + "px";
+        gösteri.innerHTML = `Güncel tablo tampon değeri = [${tablom.style.padding}]`;
+    } // func sonu...
+    function tıkla3() {
+        let satırNo = +prompt ("Satır no'yu gir [1,3]");
+        if (satırNo < 1 | satırNo > 3 | isNaN (satırNo)) {satırNo = 1;}
+        let hücreNo = +prompt ("Hücre no'yu gir [1,2]");
+        if (hücreNo < 1 | hücreNo > 2 | isNaN (hücreNo)) {hücreNo = 1;}
+        let içerik = prompt ("Hücre içeriğini gir");
+        tablom.rows [satırNo-1].cells [hücreNo-1].innerHTML = içerik;
+        gösteri.innerHTML = `Güncel (${satırNo},${hücreNo}) hücre içeriği = [${tablom.rows[satırNo-1].cells[hücreNo-1].innerHTML}]`;
+    } // func sonu...
+    function tıkla4() {
+        let kapşon = prompt ("Yeni tablo başlığını gir").toUpperCase();
+        tablom.createCaption().innerHTML = kapşon;
+        gösteri.innerHTML = `Tablonun güncel başlığı = [${tablom.caption.innerHTML}]`;
+    } // func sonu...
+</script>
+</html>

@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsE0201.html: Çeşitli fare tıklama ve hareket olaylarına duyarlılık örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        input {background-color:DodgerBlue; color:Yellow; margin-bottom:3px;}
+        button {background-color:DarkRed; color:Yellow;}
+        h1 {padding: 10px;}
+    </style>
+</head>
+<body onmouseup="olay3 (event)">
+    <h1>Fare olayları</h1>
+    <hr/>
+    <p>Bu sayfada nereyi tıklarsanız ait olduğu enyakın eleman adını ikaz eder: body, h1, h2, div, p, hr, img ve area. Tüm fare olayları ya üzerinde/uzakta, ya hareket kordinatları, ya fare düğmeleri, ya tıklama, ya resmi büyütme/küçültme, açıklanmalı alana odaklanma, ya zemin-yazı renk değişimler duyarlığına sahiptir. Duyarlık duyuruları ya tarayıcı kutusuyla yada altta HTML açıklamasıyla sunulmaktadır.</p>
+    <hr/>
+        <h2 onmouseover="style.backgroundColor='red'; style.color='yellow'; olay1a();" onmouseout="style.backgroundColor='black'; style.color='lime'; olay1b();">Farenizi bu metnin üzerinden geçirin</h2>
+        <h2 onmousedown="olay2a (this,'red', 'yellow')" onmouseup="olay2b (this, 'black', 'lime')">Farenizi bu metnin üzerinde tıklayın</h2>
+        <div onmousedown="olay4 (event);">Herhangi bir fare düğmesini (sol/orta/sağ) BURADA tıklayın
+            <p> 0: Sol fare düğmesini belirtir<br>
+                1: Orta fare düğmesini belirtir<br>
+                2: Sağ fare düğmesini belirtir
+            </p>
+        </div>
+        <p style="text-align:center;"><img  onmouseover="olay6a (this)" onmouseout="olay6b (this)"border="1" src="resim/tebessüm.gif" width="20" alt="Smiley"><br/>Fareyle üzerinden geçin yada tıklayın</p>
+        <div style="width: 350px; height: 100px; border:3px solid; background-color: #020; color: dodgerblue;" onmousemove="olay5a (event)" onmouseout="olay5b()">Kutu içinde hareketli fare kordinatlarını izleyin.</div>
+        <p style="text-align:center;"><img src ="resim/gezegenler.gif" width ="146" height ="126" alt="Gezegenler" usemap="#gezegenharitası" title="Güneş, Mars ve Venüs"/><br/>Fareyle gezegenlere yaklaşın yada tıklayın</p>
+        <map name="gezegenharitası">
+            <area shape ="rect" coords ="0,0,82,126"
+                onmouseover="gösteri.innerHTML='Güneş ve Jüpiter gibi gazlı dev gezegenler güneş sistemimizin enbüyük nesneleridir.';"
+                href ="güneş.html" target ="_blank" alt="Güneş" />
+            <area shape ="circle" coords ="90,58,3"
+                onmouseover="gösteri.innerHTML='Dünyadan Merkür incelemesi çok zordur, zira güneşe çok yakındır.';"
+                href ="merkür.html" target ="_blank" alt="Merkür" />
+            <area shape ="circle" coords ="124,58,8"
+                onmouseover="gösteri.innerHTML='1960´lara değin, Venüs dünyanın ikiz kızkardeşi olarak düşünülüyordu. zira hem bize enyakın hem de pekçok ortak özellikleri paylaştığımız yegane gezegendi.';"
+                href ="venüs.html" target ="_blank" alt="Venüs" />
+        </map>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function olay1a() {gösteri.innerHTML = "Şimdi fareniz h1 başlıklı 1.metnin ÜZERİNDE/onmouseover.";}
+    function olay1b() {gösteri.innerHTML = "Şimdi fareniz h1 başlıklı 1.metnin DIŞINDA/onmouseout.";}
+    function olay2a (eleman, zmnRenk, yazRenk) {eleman.style.backgroundColor = zmnRenk; eleman.style.color = yazRenk; gösteri.innerHTML = "Şimdi fareniz h1 başlıklı 2.metni BASTIRDI/onmousedown.";}
+    function olay2b (eleman, zmnRenk, yazRenk) {eleman.style.backgroundColor = zmnRenk; eleman.style.color = yazRenk; gösteri.innerHTML = "Şimdi fareniz h1 başlıklı 2.metni BIRAKTI/onmouseup.";}
+    function olay3 (o) {
+        var hedef, hedefAdı;
+        if (!o) {var o = window.event;}
+        if (o.target) {hedef = o.target;
+        }else if (o.srcElement) {hedef = o.srcElement;}
+        hedefAdı = hedef.tagName;
+        alert ("Siz şu anda bir [" + hedefAdı + "] elemanı tıkladınız.");
+    } // func sonu...
+    function olay4 (o) {alert ("Bastığınız fare düğme no = [" + o.button + "]");}
+    function olay5a (o) {let x = o.clientX, y = o.clientY; gösteri.innerHTML = "Kordinatlar: (" + x + ", " + y + ")";}
+    function olay5b() {gösteri.innerHTML = "";}
+    function olay6a (x) {x.style.height = "96px"; x.style.width = "96px"; gösteri.innerHTML = "Resim üç minli büyüklükte";}
+    function olay6b (x) {x.style.height = "32px"; x.style.width = "32px"; gösteri.innerHTML = "Resim normal büyüklükte";}
+</script>
+</html>

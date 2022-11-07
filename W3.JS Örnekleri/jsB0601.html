@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsB0601.html: Dökümandaki bir elemanın görünürlüğü ve zemin renginin değiştirilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        button {background-color: DarkRed; color: yellow;}
+    </style>
+</head>
+<body>
+    <h2>Eleman görünürlüğü ve zeminrengi değişimi</h2>
+    <hr/>
+    <p>CSS stillemeyle görünürlük buton tıklamalı "eleman{visibility:visible/hidden}" ile, ve zeminrengi değişimi fare-üzerinde/dışarda duyarlı "document.body.style.backgroundColor='renk'" ile değiştirilir.</p>
+    <p>CSS "visibility" elemanı görünür ve mevcut görünmez kılarken, "display" ise görünür ve namevcut görünmez kılar.</p>
+    <hr/>
+    <h3 id="gösterGizle1">Zemin renginin değiştirilmesi</h3>
+    <button onclick="document.getElementById ('gösterGizle1').style.visibility='hidden'">Gizle</button>
+    <button onclick="document.getElementById ('gösterGizle1').style.visibility='visible'">Göster</button>
+    <br/>
+    <p id="gösterGizle2">Fareyle renkli kutuları gezinin!</p>
+    <button onclick="document.getElementById ('gösterGizle2').style.display='none'">Gizle</button>
+    <button onclick="document.getElementById ('gösterGizle2').style.display='block'">Göster</button>
+
+    <table style="width:300px; height:100px">
+        <tr>
+            <td onmouseover="değiştir (this.style.backgroundColor)" 
+                onmouseout="değiştir ('#a97')"
+                style="background-color: Khaki">
+            </td>
+            <td onmouseover="değiştir (this.style.backgroundColor)" 
+                onmouseout="değiştir ('transparent')"
+                style="background-color: PaleGreen">
+            </td>
+            <td onmouseover="değiştir (this.style.backgroundColor)" 
+                onmouseout="değiştir ('#a97')"
+                style="background-color: Silver">
+            </td>
+        </tr>
+    </table>
+    <hr/>
+</body>
+<script>
+    function değiştir (zRenk) {document.body.style.backgroundColor = zRenk;     console.log (document.body.style.backgroundColor);}
+</script>
+</html>

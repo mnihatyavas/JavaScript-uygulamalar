@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsF0801.html: Çerezle aynı kullanıcıyı tarayıcının tanıması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+        .stil {font-size: 50px; background-color: black; color: magenta; padding: 10px; font-weight: 800; text-align: center;}
+    </style>
+</head>
+<body onload="çerezKontrolu()">
+    <!-- ">>python -m http.server" ve "http://www.localhost:8000/jsF0801.html" gerekmekte. -->
+    <h1>Çerez nesnesi</h1>
+    <hr/>
+    <p>"document.cookie=kullanıcıAdı;itfaTarihi;yol" yaratılan azami 30 krk'li çerezin, aynı kullanıcının tekrar girişinde "document.cookie" ile okunup tanınması sağlanmaktadır. CTRL-H ile tüm tarayıcı geçmişi silinerek çerezler de temizlenebilir.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function çerezKontrolu() {
+        let kullanıcı = çereziOku ("kullanıcıAdı");
+        if (kullanıcı != "") {alert ("Tekrar hoşgeldiniz, Sn." + kullanıcı);
+        }else {
+            kullanıcı = prompt ("Lütfen isminizi girin:", "Nihat Yavaş");
+            if (kullanıcı != "" && kullanıcı != null) {çerezYarat ("kullanıcıAdı", kullanıcı, 30);} // 30 gün sonunda, ctrl-h ile temizlenmemişse itfaen silinecek
+        } // else sonu...
+        gösteri.innerHTML = "Kullanıcının çerezi yoksa yaratıldı, varsa okundu.";
+    } // func sonu...
+    function çereziOku (çAd) {
+        let ad = çAd + "=";
+        let dekodluÇerez = decodeURIComponent (document.cookie);
+        let ça = dekodluÇerez.split (";"); console.log(ça);
+        for (let i = 0; i < ça.length; i++) {
+            let ç = ça [i];
+            while (ç.charAt (0) == " ") {ç = ç.substring (1);}
+            if (ç.indexOf (ad) == 0) {return ç.substring (ad.length, ç.length);}
+        } // for sonu...
+        return "";
+    } // func sonu...
+    function çerezYarat (çad, çdeğer, itfagün) {
+        const t = new Date();
+        t.setTime (t.getTime() + (itfagün * 24 * 60 * 60 * 1000)); // 30*24*60*60*1000=2592000000 ms
+        let itfaGün = "itfa=" + t.toUTCString();
+        document.cookie = çad + "=" + çdeğer + ";" + itfaGün + ";yol=/";
+    } // func sonu...
+</script>
+</html>

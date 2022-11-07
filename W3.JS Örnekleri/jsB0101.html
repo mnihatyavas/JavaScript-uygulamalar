@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsB0101.html: Döküman nesnesinin çerez, alan, tarih, başlık ve yurel örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color: DarkRed; color: yellow; font-size:15px;}
+    </style>
+</head>
+<body>
+    <h2>Döküman nesnesi özellikleri</h2>
+    <hr/>
+    <p>Döküman nesnesi özelliklerinden "document.cookie/domain/lastModified/title/url" seçenekli olarak görüntülenmektedir.</p>
+    <p>Dökümanı hem "file:///c:/örnek.html", hem yerel sunuculu "http://localhost:8000/örnek.html", hem de çevrimiçi "https://www.w3schools.com/örnek.html" kipinde çalıştırarak özellikle çerez, alan ve yurel farklılıklarına dikkat edin.</p>
+    <hr/>
+    <button onclick="çerezler()">Çerezler</button>
+    <button onclick="alan()">Sunucu alanı</button>
+    <button onclick="tarih()">Son değişim tarihi</button>
+    <button onclick="başlık()">Döküman başlığı</button>
+    <button onclick="yurel()">Yurel adresi</button>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function çerezler() {document.getElementById ("gösteri").innerHTML = `Bu dökümanla ilintili çerezler = [${document.cookie}]`;}
+    function alan() {document.getElementById ("gösteri").innerHTML = `Bu dökümanın sunucu alanı = [${document.domain}]`;}
+    function tarih() {document.getElementById ("gösteri").innerHTML = `Dökümanın son değişiklik tarihi = [${document.lastModified}]`;}
+    function başlık() {document.getElementById ("gösteri").innerHTML = `Döküman başlığı = [${document.title}]`;}
+    function yurel() {document.getElementById ("gösteri").innerHTML = `Dökümanın çalıştırılan yurel adresi = [${document.URL}]`;}
+</script>
+</html>

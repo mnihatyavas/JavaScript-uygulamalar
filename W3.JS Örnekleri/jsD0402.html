@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0402.html: iFrame iç çerçeve nesnesinin vasıflarını bulma örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h2>"iframe" nesnesinin vasıfları</h2>
+    <hr/>
+    <p>İççerçevenin en, boy, ad ve kaynak vasıflarına "iframe_id.width", "iframe_id.height", "iframe_id.name" ve "iframe_id.src" ile ulaşılır.</p>
+    <hr/>
+        <iframe id="içÇerçeve" name="iframe_a" src="jsD0401y.asp" width="350" height="200">
+            <p>Aktüel tarayıcınız iframe'leri desteklemiyor.</p>
+        </iframe>
+    <hr/>
+    <button onclick="tıkla1()">İççerçevenin eni ve boyu</button>
+    <button onclick="tıkla2()">İççerçevenin adı</button>
+    <button onclick="tıkla3()">İççerçevenin kaynağı</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function tıkla1() {gösteri.innerHTML = `İç çerçevenin eni ve boyu = [${içÇerçeve.width} - ${içÇerçeve.height}]`;}
+    function tıkla2() {gösteri.innerHTML = `İç çerçevenin adı = [${içÇerçeve.name}]`;}
+    function tıkla3() {gösteri.innerHTML = `İç çerçevenin kaynağı = [${içÇerçeve.src}]`;}
+</script>
+</html>

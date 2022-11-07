@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0704.html: Kimlik-id'li tablo kayıtlarını w3-CSS'li süzgeçleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        input {background-color:navy; color:Yellow; margin-bottom:2px;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>"id"li tabloyu w3-CSS'li süzgeçleme</h1>
+    <hr/>
+    <p>"input-oninput"la girilen "this.value" değeri, "w3.filterHTML("#tablo1", "kayıt-satırı", değer) fonksiyonuyla tabloyu w3-CSS'li süzgeçleyerek, içinde sadece (büyük/küçük-harf) değer ibaresi bulunan satırları sergilemekte, geri silmeyle de tablo tekrar orijinal boyuna ermektedir.</p>
+    <hr/>
+        <table id="tablo1" class="w3-table-all" border="1">
+            <caption>BİZİM TABLO</caption>
+            <tr>
+                <th>Müşteri</th>
+                <th>Şehir</th>
+                <th>Ülke</th>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Alfreds Futterkiste</td>
+                <td>Berlin</td>
+                <td>Germany</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Berglunds snabbköp</td>
+                <td>Lule </td>
+                <td>Sweden</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Centro comercial Moctezuma</td>
+                <td>México D.F.</td>
+                <td>Mexico</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Ernst Handel</td>
+                <td>Graz</td>
+                <td>Austria</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>FISSA Fabrica Inter. Salchichas S.A.</td>
+                <td>Madrid</td>
+                <td>Spain</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Galería del gastrónomo</td>
+                <td>Barcelona</td>
+                <td>Spain</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Island Trading</td>
+                <td>Cowes</td>
+                <td>UK</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Königlich Essen</td>
+                <td>Brandenburg</td>
+                <td>Germany</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Laughing Bacchus Wine Cellars</td>
+                <td>Vancouver</td>
+                <td>Canada</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Bergamo</td>
+                <td>Italy</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>North/South</td>
+                <td>London</td>
+                <td>UK</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Paris spécialités</td>
+                <td>Paris</td>
+                <td>France</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Rattlesnake Canyon Grocery</td>
+                <td>Albuquerque</td>
+                <td>USA</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Simons bistro</td>
+                <td>København</td>
+                <td>Denmark</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>The Big Cheese</td>
+                <td>Portland</td>
+                <td>USA</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Vaffeljernet</td>
+                <td>Århus</td>
+                <td>Denmark</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Wolski Zajazd</td>
+                <td>Warszawa</td>
+                <td>Poland</td>
+            </tr>
+        </table>
+    <hr/>
+    <input oninput="süzgeçle (this.value);" placeholder="Tablodan ara..."  class="w3-input"/>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    function süzgeçle (a) {w3.filterHTML ("#tablo1", ".kayıt-satırı", a); gösteri.innerHTML=`Tablo, girilen [${a}] ile filitrelenmiştir...`;}
+</script>
+</html>

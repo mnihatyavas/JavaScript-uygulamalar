@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsF0401.html: Tarayıcı geçmiş nesnesi özellik ne fonksiyonları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+</head>
+<body>
+    <h1>Tarayıcının geçmiş nesnesi</h1>
+    <hr/>
+    <p>Henüz silinmemiş olan tarayıcı geçmişinin uzunluğu "history.length" ile, tarayıcı listesinde (mevcutsa) 2 sayfa geriye atlama "history.go (-2)" ile, bu liste konumundayken arkada kalan yurel listesi "history.back()", önde kalansa "histoty.forward()" ile sergilenir.</p>
+    <hr/>
+        <button onclick="geçmiş1()">Geçmiş liste uzunluğu</button>
+        <button onclick="geçmiş2()">Listede 2 sayfa geriye atlama</button>
+        <button onclick="geçmiş3()">Önde kalan bakiye liste</button>
+        <button onclick="geçmiş4()">Arkada kalan bakiye liste</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function geçmiş1() {gösteri.innerHTML = `Tarayıcı geçmiş liste uzunluğu = [${window.history.length}]`;}
+    function geçmiş2() {let n = 2; window.history.go (-n); gösteri.innerHTML = `Listede kaç sayfa geriye atlandı? = [${n}]`;}
+    function geçmiş3() {gösteri.innerHTML = `Önde kalan yurel geçmiş uzunluğu = [${window.history.forward()}]`;}
+    function geçmiş4() {gösteri.innerHTML = `Arkada kalan yurel geçmiş uzunluğu = [${+window.history.back()}]`;}
+</script>
+</html>

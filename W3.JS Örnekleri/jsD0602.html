@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0602.html: Tablonun satırını ekleme ve silme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+        td {border: 1px solid magenta; padding: 3px;}
+        caption {color: navy; font-family: arial; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h2>Tablo satırını ekleme ve silme</h2>
+    <hr/>
+    <p>Tablonun başına satır (ve beraberinde hücre ve içerik) ekleme "tablom.createRow(0).createCell(0)/createCell(1).innerHTML='Yeni Hücre'" ile, baştan (0 satır kalıncaya değin) satır silmeyse "tablom.deleteRow(0)" ile yapılır. Aktüel satır sayısı "tablom.rows.length" ile tespit edilir.</p>
+    <hr/>
+        <table id="tablom" style="border: 4px solid blue; background-color: yellow; color: green;">
+            <caption>Satır ekleme & silme</caption>
+            <tr>
+                <td>Satır1 Hücre1</td>
+                <td>Satır1 Hücre2</td>
+            </tr>
+            <tr>
+                <td>Satır2 Hücre1</td>
+                <td>Satır2 Hücre2</td>
+            </tr>
+            <tr>
+                <td>Satır3 Hücre1</td>
+                <td>Satır3 Hücre2</td>
+            </tr>
+        </table>
+    <hr/>
+    <button onclick="tıkla1()">Tablo satırını ekleme</button>
+    <button onclick="tıkla2()">Tablo satırını silme</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function tıkla1() {
+        let x = tablom.insertRow (0), y = x.insertCell (0), z = x.insertCell (1);
+        y.innerHTML = z.innerHTML = "Yeni Hücre";
+        gösteri.innerHTML = `Tablonun güncel satır sayısı = [${tablom.rows.length}]`;
+    } // func sonu...
+    function tıkla2() {
+        if (tablom.rows.length == 0) return;
+        tablom.deleteRow (0);
+        gösteri.innerHTML = `Tablonun kalan satır sayısı = [${tablom.rows.length}]`;
+    } // func sonu...
+</script>
+</html>

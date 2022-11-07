@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsE0501.html: Diğer çeşitli olaylara duyarlılık örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+        input {background-color:DodgerBlue; color:Yellow; margin-bottom:3px;}
+    </style>
+</head>
+<body onkeyup="olay1a (event)" onkeydown="olay3b (event)">
+    <h1>Çeşitli olaylar</h1>
+    <hr/>
+    <p>"event.charCode" sadece "onkeypress", "event.keyCode" ise "onkeypress, onkeydown, onkeyup" ile çalışır ve ilki unicode büyük/küçük-harfleri gösterirken, sonraki sadece ascii büyük-harf kodunu gösterir. "body" tuşlamada "input" kutuya girmeseniz de algılar. Müşteri ve ekran en-boy kordinatları "onmousedown/up" olaylarıyla algılanıp, "event.clientX" ve "event.screenY" olay özellikleriyle saptanır.</p>
+    <p>Özel "shift, ctrl, alt ve capsLock" tuşları ya "onkeyup/down" ile ve "event.shift/ctrl/alt" kontroluyla yada diğer olaylarla (onclick, onmousedown/up) ve "event.keyCode==16/17/18/20:capsLock" kontroluyla sergilenmelidir. Olay tipleri "event.type" ile her olayla birlikte sunulmaktadır.</p>
+    <hr/>
+        <input type="text" onkeydown="olay1b (event)" onkeypress="olay1c (event)">
+        <p style="background-color: black; padding: 100px 10px;" onmousedown="olay2a (event)" onmouseup="olay2b (event)">Müşteri ve ekran kordinatlarını görmek isterseniz bu paragrafı tıklayın yada seçin. "EkranX - MüşteriX = 0" ve "EkranY - MüşteriY = 71"</p>
+        <p style="background-color: navy; padding: 5px;" onnmousedown="olay3a (event)">shift, ctrl, alt ve caps" tuşlarını algılatmak için önce o tuşlardan birine basıp sonra da bu paragrafı tıklayın.</p>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function olay1a (o) {gösteri.innerHTML += `Bastığınız "body" tuşun BÜYÜKHARFLİ ascii kodu = [${o.keyCode}, ${o.type}]<br/>`;}
+    function olay1b (o) {gösteri.innerHTML += `<br/>Bastığınız "input" tuşun BÜYÜKHARFLİ ascii kodu = [${o.keyCode}, ${o.type}]<br/>`;}
+    function olay1c (o) {gösteri.innerHTML += `Bastığınız "input" tuşun KÜÇÜK/BÜYÜKHARFLİ unicode kodu = [${o.charCode}, ${o.type}]<br/>`;}
+    function olay2a (o) {gösteri.innerHTML += `Müşteri (X, Y) = (${o.clientX}, ${o.clientY}), ${o.type}<br/>`;}
+    function olay2b (o) {gösteri.innerHTML += `Ekran (X, Y) = (${o.screenX}, ${o.screenY}), ${o.type}<br/>`;}
+    //function olay3a (o) {console.log(o.keyCode); let x="diğer"; if (o.shiftKey) {x="shift";}else if (o.ctrlKey) {x="ctrl";}else if (o.altKey) {x="alt"}else if (+o.keyCode == 20) {x="capsLock";} gösteri.innerHTML = `Basılan tuş = [${x}, ${o.type}]<br/>`;}
+    function olay3b (o) {let x="diğer"; if (o.keyCode == 16) {x="shift";}else if (o.keyCode == 17) {x="ctrl";}else if (o.keyCode == 18) {x="alt"}else if (o.keyCode == 20) {x="capsLock";} gösteri.innerHTML = `Basılan tuş = [${x}, ${o.type}]<br/>`;}
+</script>
+</html>

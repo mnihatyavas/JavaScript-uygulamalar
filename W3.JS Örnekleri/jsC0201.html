@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsC0201.html: Form verilerini gönderme ve sıfırlama örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color: DarkRed; color: yellow;}
+        input {background-color:Navy; color:orange; margin-bottom: 5px;}
+    </style>
+</head>
+<body>
+    <h2>Formu gönderme ve sıfırlama</h2>
+    <hr/>
+    <p>Formu, doğrudan form içindeki "input type='submit'" ile, yada form içindeki/dışındaki "input type='button' onclick='gönder()'" ve "form_id.submit()" ile "target='_blank'" ayrı bir pencereyle "action='/sayfa.php'"ye gönderebilirsiniz. Gönderilen veriler tarayıcı adres kutusundan takip edilebilir.</p>
+    <p>Form verigiriş içeriklerinin temel "value=" veya "placeholder="leri üzerine gireceğiniz yeni verileri, (gönderdikten sonra) "form_id.reset()" ile temizleyebilirsiniz.</p>
+    <hr/>
+    <form id="form1" action="/sayfa.php" target="_blank">
+        İsim......: <input type="text" name="isim" value="M.Nihat Yavaş"><br>
+        GSM Tlf: <input type="text" name="telefon" placeholder="+90551-555-95-85"><br>
+        Eposta..: <input type="text" name="eposta" placeholder="mahmut957@gmail.com"><br>
+        <input type="submit" onclick="gönder1()" value="input-submit'le GÖNDER">
+    </form>
+    <hr/>
+    <input type="button" onclick="gönder2()" value="input-button-form-submit()'le GÖNDER"><br>
+    <button onclick="temizle()">Form verilerini temizle</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function gönder1() {gösteri.innerHTML = "input-submit'le gönderildi.";}
+    function gönder2() {document.getElementById ("form1").submit(); gösteri.innerHTML = "input-button-form-submit()'le gönderildi.";}
+    function temizle() {form1.reset(); gösteri.innerHTML = "Form verileri silindi.";}
+</script>
+</html>

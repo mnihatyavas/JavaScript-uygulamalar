@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0701.html: Kimlik-id'li liste kayıtlarını süzgeçleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        input, ul {background-color:navy; color:Yellow; margin-bottom:2px; padding: 5px 50px;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>"id"li listeyi süzgeçleme</h1>
+    <hr/>
+    <p>"input-oninput"la girilen "this.value" değeri, "w3.filterHTML("#id", "li", değer) fonksiyonuyla listeyi süzgeçleyerek, içinde sadece (büyük/küçük-harf) değer ibaresi bulunan kayıtları sergilemekte, geri silmeyle de liste tekrar orijinal uzunluğuna ermektedir.</p>
+    <hr/>
+        <ul id="liste1">BİZİM LİSTE<hr/>
+            <li>Alfreds Futterkiste</li>
+            <li>Berglunds snabbköp</li>
+            <li>Centro comercial Moctezuma</li>
+            <li>Ernst Handel</li>
+            <li>FISSA Fabrica Inter. Salchichas S.A.</li>
+            <li>Galería del gastrónomo</li>
+            <li>Island Trading</li>
+            <li>Königlich Essen</li>
+            <li>Laughing Bacchus Wine Cellars</li>
+            <li>Magazzini Alimentari Riuniti</li>
+            <li>North/South</li>
+            <li>Paris spécialités</li>
+        </ul>
+    <hr/>
+    <input oninput="süzgeçle (this.value);" placeholder="Listeden ara..." />
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    function süzgeçle (a) {w3.filterHTML ("#liste1", "li", a); gösteri.innerHTML=`Liste, girilen [${a}] ile filitrelenmiştir...`;}
+</script>
+</html>

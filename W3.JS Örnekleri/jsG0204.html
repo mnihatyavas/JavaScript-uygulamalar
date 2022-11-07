@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0204.html: Adıyla seçilen CSS stilli HTML elemanının açKapa(saklanması/görünmesi) örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="elemanSeç();">
+    <h1>CSS stilli HTML elemanını ad'la toggle(sakla/göster)</h1>
+    <hr/>
+    <p>Sayfa ilk yüklenirken "prompt" ileti kutusuyla eleman seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.toggleShow(id)" fonksiyonuyla tek sayılı tıklamada (++sayaç%2) tüm elemanlar sayfadan çıkarılarak gizlenmekte, çift sayılı tıklamadaysa tekrar sayfaya dahilen görünür kılınmaktadırlar. Şehirler, jsGw3.css dosyasındaki hazır .sınıf stillerden "w3-panel" ve "w3-red" ile görselleştirilmişlerdir.</p>
+    <hr/>
+        <div id="Londra" class="w3-panel w3-red şehir">
+            <h2>Londra</h2>
+            <p>Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="w3-panel w3-red şehir">
+            <h2>Paris</h2>
+            <p>Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="w3-panel w3-red şehir">
+            <h2>Tokyo</h2>
+            <p>Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="w3-panel w3-red şehir">
+            <h2>Ankara</h2>
+            <p>Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr/>
+    <button onclick="saklaGöster()">Seçilen elemanları SAKLA/GÖSTER</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let elemanlar = ["h1", "h2", "p", "hr"], seçilenEleman, sayaç = 0; 
+    function elemanSeç() {
+        let elemanNo = +prompt ("Eleman no'yu gir [1=h1, 2=h2, 3=p, 4=hr]:", "2");
+        if (elemanNo < 1 || elemanNo > 4 || isNaN (elemanNo)) elemanNo = 2; // console.log (elemanNo);
+        seçilenEleman = elemanlar [elemanNo - 1];
+    } // func sonu...
+    function saklaGöster(){
+        w3.toggleShow (seçilenEleman);
+        if (++sayaç % 2) {gösteri.innerHTML=`${seçilenEleman} SAKLANDI.`;
+        }else {gösteri.innerHTML=`${seçilenEleman} GÖRÜNDÜ.`;}
+    } // func sonu...
+</script>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsD0301.html: Başlık temel eleman vasıfları örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+    <base id="htmldom" target="_blank" href="https://www.github.com/mnihatyavas/">
+</head>
+<body>
+    <h2>"head-base" nesne vasıfları</h2>
+    <hr/>
+    <p>Tüm bağlantılar için temel oluşturacak "href" ve "target" tanımlanır. Artık, tek tek belirtilmeden, tüm bağlantıların hedefi "_blank" yeni_pencere ve href'i de sadece temel üstü belirtmek (örn.href="makerspaces") yeterli olacaktır.</p>
+    <p><a href="makerspaces">https://www.github.com/mnihatyavas/makerspaces</a></p>
+    <p><a href="linux">https://www.github.com/mnihatyavas/linux</a></p>
+    <hr/>
+    <button onclick="tıkla1()">htmldom.href</button>
+    <button onclick="tıkla2()">htmldom.target</button>
+    <hr/>
+    <p id="gösteri"></p>
+
+</body>
+<script>
+    function tıkla1() {gösteri.innerHTML = `Temel elemanın referansı = [${htmldom.href}]`;}
+    function tıkla2() {gösteri.innerHTML = `Tüm bağlantıların temel hedefi = [${htmldom.target}]`;}
+</script>
+</html>

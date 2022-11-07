@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsC0301.html: Form içi select-option'ı değiştirme, silme ve ekleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        input, select {background-color: DarkRed; color: yellow;}
+        button, option {background-color:Navy; color:orange; margin-bottomm: 5px;}
+    </style>
+</head>
+<body>
+    <h2>Sarkanlisteden option değiştirme, silme ve ekleme</h2>
+    <hr/>
+    <p>Değişiklik için "select_id.options[select_id.selectedIndex].text=promp()"; silmek için "select_id.remove(select_id.selectedIndex)"; ve eklemek için de 3 aşamalı: 1) "let tercih=document.createElement('option')", 2) "tercih.text=prompt()" ve 3) "select_id.add(tercih)" uygulanmalıdır.</p>
+    <p>DİKKAT: Form içinde input-type-button yerine doğrudan button kullanırsanız değiştir-sil-ekle yapamazsınız?!...</p>
+    <hr/>
+    <form id="form1">
+        Favori oyununu seç:
+        <select id="seçimim">
+            <option>Hearts</option>
+            <option>Spider Solitaire</option>
+            <option>Tavla</option>
+            <option>Poker</option>
+            <option>Okey</option>
+            <option>Briç</option>
+            <option>King</option>
+        </select>
+        <br><br>
+        <input type="button" onclick="değiştir()" value="Seçili oyunu DEĞİŞTİR">
+        <input type="button" onclick="sil()" value="Seçili oyunu SİL">
+        <input type="button" onclick="ekle()" value="Sona yeni oyun EKLE">
+    </form>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    function değiştir() {seçimim.options [seçimim.selectedIndex].text = prompt ("Seçili oyunu değiştir"); gösteri.innerHTML = "Seçili oyun DEĞİŞTİRİLDİ.";}
+    function sil() {seçimim.remove (seçimim.selectedIndex); gösteri.innerHTML = "Seçili oyun SİLİNDİ.";}
+    function ekle() {let tercih = document.createElement ("option"); tercih.text = prompt ("Listeye yeni oyun ekle"); seçimim.add (tercih); gösteri.innerHTML = "Listeye yeni oyun EKLENDİ.";}
+</script>
+</html>

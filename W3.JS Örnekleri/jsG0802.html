@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0802.html: Kimlik-id'li W3-CSS stilli liste kayıtlarını artan/azalan sıralama örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>W3-CSS stilli "id"li listeyi sıralama</h1>
+    <hr/>
+    <p>Düğme tıklanınca, "w3.sortHTML("#id", "li") fonksiyonuyla W3-CSS stilli liste almaşık olarak artan/azalan sıralanmaktadır.</p>
+    <hr/>
+        <ul id="liste1" class="w3-ul w3-red">BİZİM LİSTE<hr/>
+            <li>Ankara</li>
+            <li>İstanbul</li>
+            <li>İzmir</li>
+            <li>Konya</li>
+            <li>Bursa</li>
+            <li>Adana</li>
+            <li>Mersin</li>
+            <li>Samsun</li>
+            <li>Malatya</li>
+            <li>Diyarbakır</li>
+            <li>Van</li>
+            <li>Zonguldak</li>
+            <li>Antalya</li>
+            <li>Trabzon</li>
+            <li>Erzurum</li>
+        </ul>
+    <hr/>
+    <button onclick="sırala();" class="w3-button w3-black">W3-CSS stilli listeyi artan/azalan sırala</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayaç = 0;
+    function sırala() {w3.sortHTML ("#liste1", "li"); if (++sayaç%2) {gösteri.innerHTML=`Liste, ARTAN sıralanmıştır.`;}else {gösteri.innerHTML=`Liste, AZALAN sıralanmıştır.`;} }
+</script>
+</html>

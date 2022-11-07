@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0402.html: Kimlik-id'le seçilen CSS stilli şehre sınıf ekleme örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+        .süslü {
+            font-size: 25px;
+            padding: 0.1px 16px;
+            color: brown;
+            border: 10px solid blue;
+            border-radius: 20px;
+            text-align: center;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="şehirSeç();">
+    <h1>Seçilen CSS stilli şehre id'le sınıf ekle</h1>
+    <hr/>
+    <p>Sayfa ilk yüklenirken "prompt" ileti kutusuyla şehir seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.addClass(id,'sınıf')" fonksiyonuyla seçilen şehre sınıf eklenmektedir. Tüm şehirler "w3-red" CSS ön stille zemin-renklendirilmiştir. </p>
+    <hr/>
+        <div id="Londra" class="w3-red şehir">
+            <h2>Londra</h2>
+            <p>Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="w3-red şehir">
+            <h2>Paris</h2>
+            <p>Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="w3-red şehir">
+            <h2>Tokyo</h2>
+            <p>Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="w3-red şehir">
+            <h2>Ankara</h2>
+            <p>Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr/>
+    <button onclick="stilEkle()">Seçilen şehre STİL EKLE</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let şehirler = ["Londra", "Paris", "Tokyo", "Ankara"], seçilenŞehir; 
+    function şehirSeç() {
+        let şehirNo = +prompt ("Şehirno'yu gir [1=Londra, 2=Paris, 3=Tokyo, 4=Ankara]:", "4");
+        if (şehirNo < 1 || şehirNo > 4 || isNaN (şehirNo)) şehirNo = 4; // console.log (şehirNo);
+        seçilenŞehir = "#" + şehirler [şehirNo - 1];
+    } // func sonu...
+    function stilEkle(){
+        w3.addClass (seçilenŞehir, "süslü");
+        gösteri.innerHTML=`${seçilenŞehir.substring (1,)}'ya "süslü" SINIF EKLENDİ.`;
+    } // func sonu...
+</script>
+</html>

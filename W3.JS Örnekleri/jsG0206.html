@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0206.html: Sınıf adıyla seçilen CSS stilli HTML elemanının açKapa(saklanması/görünmesi) örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body onload="sınıfSeç();">
+    <h1 class="başlık">CSS stilli HTML elemanını .class'la toggle(sakla/göster)</h1>
+    <hr class="çizgi"/>
+    <p class="paragraf">Sayfa ilk yüklenirken "prompt" ileti kutusuyla sınıf seçilmekte, sonra jsGw3.js dosyasının içerdiği hazır "w3.toggleShow(class)" fonksiyonuyla tek sayılı tıklamada (++sayaç%2) sınıf elemanları sayfadan çıkarılarak gizlenmekte, çift sayılı tıklamadaysa tekrar sayfaya dahilen görünür kılınmaktadırlar. Şehirler, jsGw3.css dosyasındaki hazır .sınıf stillerden "w3-panel" ve "w3-red" ile görselleştirilmişlerdir.</p>
+    <hr class="çizgi"/>
+        <div id="Londra" class="w3-panel w3-red şehir">
+            <h2 class="başlık">Londra</h2>
+            <p class="paragraf">Londra İngiltere'nin başşehridir.</p>
+        </div>
+        <div id="Paris" class="w3-panel w3-red şehir">
+            <h2 class="başlık">Paris</h2>
+            <p class="paragraf">Paris Fransa'nın başşehridir.</p> 
+        </div>
+        <div id="Tokyo" class="w3-panel w3-red şehir">
+            <h2 class="başlık">Tokyo</h2>
+            <p class="paragraf">Tokyo Japonya'nın başşehridir.</p>
+        </div>
+        <div id="Ankara" class="w3-panel w3-red şehir">
+            <h2 class="başlık">Ankara</h2>
+            <p class="paragraf">Ankara Türkiye'nin başşehridir.</p>
+        </div>
+    <hr class="çizgi"/>
+    <button onclick="saklaGöster()">Seçilen sınıfı SAKLA/GÖSTER</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sınıflar = ["şehir", "başlık", "paragraf", "çizgi"], seçilenSınıf, sayaç = 0; 
+    function sınıfSeç() {
+        let sınıfNo = +prompt ("Sınıf no'yu gir [1=şehir, 2=başlık, 3=paragraf, 4=çizgi]:", "1");
+        if (sınıfNo < 1 || sınıfNo > 4 || isNaN (sınıfNo)) sınıfNo = 4; // console.log (sınıfNo);
+        seçilenSınıf = "." + sınıflar [sınıfNo - 1];
+    } // func sonu...
+    function saklaGöster(){
+        w3.toggleShow (seçilenSınıf);
+        if (++sayaç % 2) {gösteri.innerHTML=`${seçilenSınıf.substring (1,)} SAKLANDI.`;
+        }else {gösteri.innerHTML=`${seçilenSınıf} GÖRÜNDÜ.`;}
+    } // func sonu...
+</script>
+</html>

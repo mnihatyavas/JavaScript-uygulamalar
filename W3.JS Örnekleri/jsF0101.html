@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsF0101.html: Pencere nesnesine dair çeşitli fonksiyonlar örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color:DarkRed; color:Yellow; margin-bottom:2px;}
+    </style>
+</head>
+<body>
+    <h1>Window pencere nesnesi</h1>
+    <hr/>
+    <p>Pencere nesnesine dair: "window.open()/close()/blur()/focus()/moveBy-To()/resizeBy-To()/scrollBy-To()/print()" fonksiyonları örneklenmiştir. Görünmeyen JS Ayrılmış-Kelimeler listesinin de yazıcı çıktısı alınmak isteniyorsa önce "Yazdır" butonu tıklnıp, 5 sn bekleme dahilinde "Kaydır" düğmesi de tıklanırsa, tüm listeli sayfa yazdırılabilir.</p>
+    <hr/>
+        <button onclick="pencere1a()">Varsayılı Pencere Aç</button>
+        <button onclick="pencere1b()">Kontrollu Pencere Aç</button><br/>
+        <button onclick="pencere2a()">Yavru Pencere Aç</button>
+        <button onclick="pencere2b()">Pencereye Odaksızlan</button>
+        <button onclick="pencere2c()">Pencereye Odaklan</button>
+        <button onclick="pencere2d()">Pencereyi Kapat</button>
+        <button onclick="pencere2e()">Kontrol</button><br/>
+        <button onclick="pencere2f()">Göreceli +Taşı</button>
+        <button onclick="pencere2g()">Mutlak Taşı</button><br/>
+        <button onclick="pencere2h()">Göreceli -Ebatla</button>
+        <button onclick="pencere2i()">Mutlak Ebatla</button><br/>
+        <button onclick="pencere3a()" style="position: sticky; top: 0;">Göreceli +Kaydır</button>
+        <button onclick="pencere3b()" style="position: sticky; top: 0;">Mutlak Kaydır</button><br/>
+        <button onclick="pencere4()">Bu Sayfayı Yazdır</button>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    var pencerem, kapalıMı = false, sayaç = 0;
+    function pencere1a (o) {window.open ("https://www.github.com/mnihatyavas", "_self"); gösteri.innerHTML = `"github.com/mnihatyavas" yurelli yeni pencere açıldı.`;}
+    function pencere1b (o) {window.open ("https://www.github.com/mnihatyavas", "_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=400, height=400"); gösteri.innerHTML = `"github.com/mnihatyavas" yurelli yeni KONTROLLU pencere açıldı.`;}
+    function pencere2a() {
+        if (pencerem && !kapalıMı) {return;}
+        kapalıMı = false; sayaç++;
+        pencerem = window.open ("", "", "width=400, height=200");
+        gösteri.innerHTML = `Yeni pencerem YARATILDI.`; // İlk ana pencere mesajı
+        setTimeout (()=>{pencerem.opener.gösteri.innerHTML = `400X200 ebatlı ${sayaç}.inci pencerem YARATILDI.`;}, 2000); // Gecikmeli ikinci ebeveyn pencere mesajı
+        pencerem.document.getElementsByTagName ("body") [0].innerHTML = `<p style="background-color: blue; color: DeepPink; text-align: center; padding: 75px 10px; font-size: 25px;">${sayaç}.inci <b>M.Nihat Yavaş</b></p>`; // Stilli yavru pencere mesajı
+    } // func sonu...
+    function pencere2b() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.blur(); gösteri.innerHTML = `Açık pencerem ODAKSIZLANDI.`;}
+    function pencere2c() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.focus(); gösteri.innerHTML = `Açık pencerem ODAKLANDI.`;}
+    function pencere2d() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.close(); kapalıMı = true; gösteri.innerHTML = `Açık pencerem KAPANDI.`;}
+    function pencere2e() {
+        let mesaj = "";
+        if (!pencerem) {mesaj = "henüz yaratılmamış";
+        }else {if (pencerem.closed) {mesaj = "kapatılmış";
+            }else {mesaj = "halen açık";}
+  
+        } // if-else sonu...
+        gösteri.innerHTML = `Pencerem [${mesaj.toUpperCase()}].`;
+    } // func sonu...
+    function pencere2f() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.moveBy (50, 50); pencerem.focus(); gösteri.innerHTML = `Yavru pencere GÖRECELİ (+50, +50) taşındı.`;} // Sınırlara değin ilerler
+    function pencere2g() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.moveTo (300, 200); pencerem.focus(); gösteri.innerHTML = `Yavru pencere MUTLAK (300, 200) konumuna taşındı.`;}
+    function pencere2h() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.resizeBy (-20, -10); pencerem.focus(); gösteri.innerHTML = `Yavru pencere GÖRECELİ (-20, -10) ebatlandı.`;} //Parmak ebatına değin
+    function pencere2i() {if (!pencerem) {return;} if (pencerem.closed) {return;} pencerem.resizeTo (300, 150); pencerem.focus(); gösteri.innerHTML = `Yavru pencere MUTLAK (300, 150) büyüklüğe ebatlandı.`;}
+    function pencere3a() {window.scrollBy (0, 10);
+        gösteri.innerHTML = `<h2>Ayrılmış kelimeler</h2>
+<hr>
+<p>Ayrılmış kelimeler asla, değişken, etiket veya fonksiyon adları olarak kullanılamaz:</p>
+<hr>
+<br>abstract<br><br>arguments<br><br>boolean<br><br>break<br><br>byte<br><br>case<br><br>catch<br><br>char<br><br>class<br><br>const<br><br>continue<br><br>debugger<br><br>default<br><br>delete<br><br>do<br><br>double<br><br>else<br><br>enum<br><br>eval<br><br>export<br><br>extends<br><br>false<br><br>final<br><br>finally<br><br>float<br><br>for<br><br>function<br><br>goto<br><br>if<br><br>implements<br><br>import<br><br>in<br><br>instanceof<br><br>int<br><br>interface<br><br>let<br><br>long<br><br>native<br><br>new<br><br>null<br><br>package<br><br>private<br><br>protected<br><br>public<br><br>return<br><br>short<br><br>static<br><br>super<br><br>switch<br><br>synchronized<br><br>this<br><br>throw<br><br>throws<br><br>transient<br><br>true<br><br>try<br><br>typeof<br><br>var<br><br>void<br><br>volatile<br><br>while<br><br>with<br><br>yield<br><br>`;
+     } // func sonu...
+    function pencere3b() {window.scrollTo (0, 1500);
+        gösteri.innerHTML = `<h2>Ayrılmış kelimeler</h2>
+<hr>
+<p>Ayrılmış kelimeler asla, değişken, etiket veya fonksiyon adları olarak kullanılamaz:</p>
+<hr>
+<br>abstract<br><br>arguments<br><br>boolean<br><br>break<br><br>byte<br><br>case<br><br>catch<br><br>char<br><br>class<br><br>const<br><br>continue<br><br>debugger<br><br>default<br><br>delete<br><br>do<br><br>double<br><br>else<br><br>enum<br><br>eval<br><br>export<br><br>extends<br><br>false<br><br>final<br><br>finally<br><br>float<br><br>for<br><br>function<br><br>goto<br><br>if<br><br>implements<br><br>import<br><br>in<br><br>instanceof<br><br>int<br><br>interface<br><br>let<br><br>long<br><br>native<br><br>new<br><br>null<br><br>package<br><br>private<br><br>protected<br><br>public<br><br>return<br><br>short<br><br>static<br><br>super<br><br>switch<br><br>synchronized<br><br>this<br><br>throw<br><br>throws<br><br>transient<br><br>true<br><br>try<br><br>typeof<br><br>var<br><br>void<br><br>volatile<br><br>while<br><br>with<br><br>yield<br><br>`;
+     } // func sonu...
+    function pencere4() {gösteri.innerHTML = `DİKKAT: Bu sayfa 5 sn sonra yazdırılıyor!.`; setTimeout (()=>{window.print();}, 5000);}
+</script>
+</html>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsE0101.html: Çeşitli verigiriş olaylarına duyarlılık örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 70%;
+            min-width: 600px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        input {background-color:DodgerBlue; color:Yellow; margin-bottom:3px;}
+        button {background-color:DarkRed; color:Yellow;}
+    </style>
+</head>
+<body>
+    <h2>Verigiriş olayları</h2>
+    <hr/>
+    <p>Tipi "input-type:text" olan verigirişlerinde "onblur: uzaklaşınca", "onfocus: odaklanınca", "onchange: değişince", "onselect: seçilince" ve "onkeydown/up/press: tuşaşağı/yukarı/basınca" bu olaylarla bağlantılı fonksiyonlar çağrılmaktadır.</p>
+    <hr/>
+        Verigiriş-1: <input type="text" id="vg1" onblur="olay1()"> Uzaklaşıldığında büyükharfe<br/>
+        Verigiriş-2: <input type="text" id="vg2" onchange="olay2()"> Enter yada uzaklaşıldığında büyükharfe<br/>
+        Verigiriş-3: <input type="text" id="vg3" onfocus="olay3()"> Odaklanıldığında zemin yeşile<br/>
+        Verigiriş-4: <input type="text" onselect="olay4()" value="Merhaba Dünya!" style="background-color:black;"> Metnin seçilmesine duyarlı<br/>
+        Verigiriş-5: <input type="text" onkeydown="olay5()"> İçerde tuşlanmaya duyarlı<br/>
+        Verigiriş-6: <input type="text" onkeypress="olay6()"> İçerde tuşlanmaya duyarlı<br/>
+        Verigiriş-7: <input type="text" id="vg7" onkeyup="olay7()"> Herbir tuşlama bittiğinde büyükharfe<br/>
+        Verigiriş-8: <input type="text" id="vg8" onkeyup="olay8()"> Herbir tuşlama bittiğinde Verigiriş-1'e<br/>
+        Verigiriş-9: <input type="text" id="vg9" onkeydown="olay9 ('red')" onkeyup="olay9 ('black')"> Herbir tuşlamada zemin kırmızı gözkırpar<br/>
+    <hr/>
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayaç1 = 0, sayaç2 = 0, sayaç3 = 0;
+    function olay1() {vg1.value = vg1.value.toUpperCase(); gösteri.innerHTML = `İçerik "onblur" ile büyükharfe dönüştü = [${vg1.value}]`;}
+    function olay2() {vg2.value = vg2.value.toUpperCase(); gösteri.innerHTML = `İçerik "onchange" ile büyükharfe dönüştü = [${vg2.value}]`;}
+    function olay3() {vg3.style.backgroundColor = "green"; gösteri.innerHTML = `Zeminrengi "onfocus" ile yeşile dönüştü = [${vg3.style.backgroundColor}]`;}
+    function olay4() {gösteri.innerHTML = `Seçilen metin "onselect" ile algılandı.`;}
+    function olay5() {gösteri.innerHTML = `${++sayaç1}.nci tuşlamanız "onkeydown" ile algılandı.`;}
+    function olay6() {gösteri.innerHTML = `${++sayaç2}.nci tuşlamanız "onkeypress" ile algılandı.`;}
+    function olay7() {vg7.value = vg7.value.toUpperCase(); gösteri.innerHTML = `İçerik herbir tuşlama sonunda "onkeyup" ile büyükharfe dönüştü = [${vg7.value}]`;}
+    function olay8() {vg1.value = vg8.value.toUpperCase(); gösteri.innerHTML = `İçerik herbir tuşlama sonunda "onkeyup" ile büyükharfle ilk kutuya taşındı = [${vg1.value}]`;}
+    function olay9 (renk) {vg9.style.backgroundColor = renk; if (renk == "red") gösteri.innerHTML = `${++sayaç3}.nci tuşlamada zeminrengi kırmızı gözkırptı`;}
+</script>
+</html>

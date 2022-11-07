@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0902.html: Her 5sn'de otomatikmen değişen W3-CSS stilli resimli slayt örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body class="w3-container">
+    <h1 class="w3-panel w3-border w3-orange w3-text-blue">W3-CSS stilli otomatik slayt</h1>
+    <hr/>
+    <p>"w3.slideshow('.dağlar',5000)" fonksiyonu "dağlar" sınıfına haiz tüm W3-CSS stilli "img" resimleri 5'er sn arayla devridaimli gösterecektir. Altta ise hangi resmin sergilendiğini "setInstance(()=>{gösteri},5000)" zamanlama kontrollu fonksiyon açıklamaktadır.</p>
+    <hr/>
+        <img class="dağlar" src="resim/dağlar1.jpg" width="100%">
+        <img class="dağlar" src="resim/dağlar2.jpg" width="100%">
+        <img class="dağlar" src="resim/dağlar3.jpg" width="100%">
+    <hr/>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayaç = 0;
+    w3.slideshow (".dağlar", 5000); gösteri.innerHTML=`GÖLLÜ dağ görülmektedir.`;
+    setInterval (()=>{sayaç++;
+        if (sayaç%3==0) {gösteri.innerHTML=`GÖLLÜ dağ görülmektedir.`;
+        }else if (sayaç%3==1){gösteri.innerHTML=`KARLI dağ görülmektedir.`;
+        }else {gösteri.innerHTML=`MAKİLİ dağ görülmektedir.`;}
+    }, 5000);
+</script>
+</html>

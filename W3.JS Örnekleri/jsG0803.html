@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG0803.html: Kimlik-id'li tablo kolonlarını artan/azalan sıralama örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        table {background-color: #113; color:Yellow; margin: 0 auto;}
+        th {cursor: pointer;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>"id"li tablo kolonlarını sıralama</h1>
+    <hr/>
+    <p>Tablo başlığının müşteri, şehir ve ülke alanlarında, fare imleci ok'laştığında tıklanınca, "w3.sortHTML("#id", "tr", "td:nth-child(1/2/3)") fonksiyonuyla herbir tablo alanlı kolon almaşık olarak artan/azalan sıralanmaktadır.</p>
+    <hr/>
+        <table id="tablo1" border="1">
+            <caption>BİZİM TABLO</caption>
+            <tr>
+                <th onclick="sırala1()">Müşteri</th>
+                <th onclick="sırala2()">Şehir</th>
+                <th onclick="sırala3()">Ülke</th>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Alfreds Futterkiste</td>
+                <td>Berlin</td>
+                <td>Germany</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Berglunds snabbköp</td>
+                <td>Lule </td>
+                <td>Sweden</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Centro comercial Moctezuma</td>
+                <td>México D.F.</td>
+                <td>Mexico</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Ernst Handel</td>
+                <td>Graz</td>
+                <td>Austria</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>FISSA Fabrica Inter. Salchichas S.A.</td>
+                <td>Madrid</td>
+                <td>Spain</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Galería del gastrónomo</td>
+                <td>Barcelona</td>
+                <td>Spain</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Island Trading</td>
+                <td>Cowes</td>
+                <td>UK</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Königlich Essen</td>
+                <td>Brandenburg</td>
+                <td>Germany</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Laughing Bacchus Wine Cellars</td>
+                <td>Vancouver</td>
+                <td>Canada</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Bergamo</td>
+                <td>Italy</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>North/South</td>
+                <td>London</td>
+                <td>UK</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Paris spécialités</td>
+                <td>Paris</td>
+                <td>France</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Rattlesnake Canyon Grocery</td>
+                <td>Albuquerque</td>
+                <td>USA</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Simons bistro</td>
+                <td>København</td>
+                <td>Denmark</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>The Big Cheese</td>
+                <td>Portland</td>
+                <td>USA</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Vaffeljernet</td>
+                <td>Århus</td>
+                <td>Denmark</td>
+            </tr>
+            <tr class="kayıt-satırı">
+                <td>Wolski Zajazd</td>
+                <td>Warszawa</td>
+                <td>Poland</td>
+            </tr>
+        </table>
+    <hr/>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let sayaç1 = sayaç2 = sayaç3 = 0;
+    function sırala1() {w3.sortHTML ("#tablo1", ".kayıt-satırı", "td:nth-child(1)"); if (++sayaç1%2) {gösteri.innerHTML=`Tablo, MÜŞTERİ adıyla ARTAN sıralanmıştır.`;}else {gösteri.innerHTML=`Tablo, MÜŞTERİ adıyle AZALAN sıralanmıştır.`;} }
+    function sırala2() {w3.sortHTML ("#tablo1", ".kayıt-satırı", "td:nth-child(2)"); if (++sayaç2%2) {gösteri.innerHTML=`Tablo, ŞEHİR adıyla ARTAN sıralanmıştır.`;}else {gösteri.innerHTML=`Tablo, ŞEHİR adıyle AZALAN sıralanmıştır.`;} }
+    function sırala3() {w3.sortHTML ("#tablo1", ".kayıt-satırı", "td:nth-child(3)"); if (++sayaç3%2) {gösteri.innerHTML=`Tablo, ÜLKE adıyla ARTAN sıralanmıştır.`;}else {gösteri.innerHTML=`Tablo, ÜLKE adıyle AZALAN sıralanmıştır.`;} }
+</script>
+</html>

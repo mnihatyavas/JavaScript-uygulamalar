@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1001.html: Sayfaya haricen dahiledilen/gizlenen HTML örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, ol {background-color: red; color: yellow;}
+        ol {margin: 1em auto; width:200px;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <!-- "w3.includeHTML()" ">>python -m http.server" ve "http://localhost:8000" dahili sunucuyu gerektirmektedir.-->
+    <h1>Dahiledilen/Gizlenen HTML</h1>
+    <hr/>
+    <p>JS "w3.includeHTML()" fonksiyonu HTML p-paragraf içindeki "w3-include-html="jsG1001x.html" atıflı dosyayı birkez yükleyip belirtilen HTML sayfasını o konuma dahil etmektedir. Sonrasındaysa "id.style.visibility='visible'/'hidden'"le görünürlüğü göstermekte/gizlemektedir.</p>
+    <hr/>
+        <p id="görünürlük" w3-include-html="jsG1001x.html"></p>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button>
+                                           
+    <p id="gösteri"></p>
+</body>
+<script>
+    let yüklüMü = false;
+    function göster() {if (!yüklüMü) {w3.includeHTML(); yüklüMü = true;}else {görünürlük.style.visibility = "visible";} gösteri.innerHTML=`Dahiledilen "jsG1001x.html" içerikleri GÖRÜLMEKTEDİR.`;}
+    function gizle() {görünürlük.style.visibility = "hidden"; gösteri.innerHTML=`Dahiledilen "jsG1001x.html" içerikleri GİZLENMEKTEDİR.`;}
+</script>
+</html>

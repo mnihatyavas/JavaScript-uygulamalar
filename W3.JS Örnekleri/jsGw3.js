@@ -1,4 +1,4 @@
-/* W3.JS 1.04 April 2019 by w3schools.com */
+﻿/* W3.JS 1.04 April 2019 by w3schools.com */
 "use strict";
 var w3 = {};
 w3.hide = function (sel) {

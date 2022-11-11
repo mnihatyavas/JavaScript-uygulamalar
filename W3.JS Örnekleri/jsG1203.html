@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1203.html: Bir ol-li liste kayıtlarının http.server sunucudan okunması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, ol {background-color: red; color: yellow;}
+        ol {margin: 0 auto; width:280px; display: none; padding: 10px 50px;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <!-- "w3.getHttpObject()"; ">>python -m http.server" ve "http://localhost:8000" dahili sunucuyu gerektirmektedir.-->
+    <h1>Bir liste kayıtlarının okunması</h1>
+    <hr/>
+    <p>"w3.getHttpObject("dosya.js",yükle)" w3.js hazır fonksiyonuyla JSON disk dosya kayıtları "new XMLHTTPRequest()" ile okunup "w3.displayObject("id",object)"la "li" içindeki çoklu "{{Müşteriİsmi}}" nesne özelliğiyle ilişkilendirilmekte, ayrıca buton tıklaması ve "id.style.display='block'/'none'" ile de bu nesne bilgili ol-liste görünür yada gizli kılınmaktadır. Görünürlük açıklaması alttadır.</p>
+    <hr/>
+        <ol id="liste1">LİSTEM<hr/>
+            <li w3-repeat="müşteriler">{{Müşteriİsmi}}</li>
+        </ol>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    w3.getHttpObject ("jsG1201x.js", yükle);
+    function yükle (nesne) {w3.displayObject ("liste1", nesne); console.log (nesne);}
+
+    function göster() {liste1.style.display = "block"; gösteri.innerHTML = "Sunucudan alınan liste kayıtları GÖRÜLMEKTEDİR.";}
+    function gizle() {liste1.style.display = "none"; gösteri.innerHTML = "Sunucudan alınan liste kayıtları GİZLENMEKTEDİR.";}
+</script>
+</html>

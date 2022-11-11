@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1106.html: Bir table tablosunun gösterilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 70%;
+            min-width: 500px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, table {background-color: red; color: yellow;}
+        table {display: none; width: 480px; margin: 10px auto;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>Bir tablonun gösterilmesi</h1>
+    <hr/>
+    <p>"w3.displayObject("id",nesnem)" w3.js hazır fonksiyonuyla "tr" içindeki "müşteriler"in tekrarlayan çoklu "td" içindeki "{{Müşteriİsmi}}", "{{Şehir}}" ve "{{Ülke}}" nesne özelliği nesnem'le ilişkilendirilmekte, ayrıca buton tıklaması ve "id.style.display='block'/'none'" ile de bu nesne bilgili tablo görünür yada gizli kılınmaktadır. Görünürlük açıklaması alttadır.</p>
+    <hr/>
+        <table id="tablo1" border="1">
+            <caption>MÜŞTERİ TABLOSU</caption>
+            <tr>
+                <th>Müşteri</th>
+                <th>Şehir</th>
+                <th>Ülke</th>
+            </tr>
+            <tr w3-repeat="müşteriler">
+                <td>{{Müşteriİsmi}}</td>
+                <td>{{Şehir}}</td>
+                <td>{{Ülke}}</td>
+            </tr>
+        </table>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    var nesnem= {müşteriler:[
+        {Müşteriİsmi: "Alfreds Futterkiste", Şehir: "Berlin", Ülke: "Germany"},
+        {Müşteriİsmi: "Berglunds snabbköp", Şehir: "Luleå", Ülke: "Sweden"},
+        {Müşteriİsmi: "Centro comercial Moctezuma", Şehir: "México D.F.", Ülke: "Mexico"},
+        {Müşteriİsmi: "Ernst Handel", Şehir: "Graz", Ülke: "Austria"},
+        {Müşteriİsmi: "FISSA Fabrica Inter. Salchichas S.A.", Şehir: "Madrid", Ülke: "Spain"},
+        {Müşteriİsmi: "Galería del gastrónomo", Şehir: "Barcelona", Ülke: "Spain"},
+        {Müşteriİsmi: "Island Trading", Şehir: "Cowes", Ülke: "UK"},
+        {Müşteriİsmi: "Königlich Essen", Şehir: "Brandenburg", Ülke: "Germany"},
+        {Müşteriİsmi: "Laughing Bacchus Wine Cellars", Şehir: "Vancouver", Ülke: "Canada"},
+        {Müşteriİsmi: "Magazzini Alimentari Riuniti", Şehir: "Bergamo", Ülke: "Italy"},
+        {Müşteriİsmi: "North/South", Şehir: "London", Ülke: "UK"},
+        {Müşteriİsmi: "Paris spécialités", Şehir: "Paris", Ülke: "France"},
+        {Müşteriİsmi: "Rattlesnake Canyon Grocery", Şehir: "Albuquerque", Ülke: "USA"},
+        {Müşteriİsmi: "Simons bistro", Şehir: "København", Ülke: "Denmark"},
+        {Müşteriİsmi: "The Big Cheese", Şehir: "Portland", Ülke: "USA"},
+        {Müşteriİsmi: "Vaffeljernet", Şehir: "Århus", Ülke: "Denmark"},
+        {Müşteriİsmi: "Wolski Zajazd", Şehir: "Warszawa", Ülke: "Poland"}
+    ]}; // nesnem sonu...
+    w3.displayObject ("tablo1", nesnem);
+    console.log (nesnem);
+
+    function göster() {tablo1.style.display = "block"; gösteri.innerHTML = "Müşteri tablosu GÖRÜLMEKTEDİR.";}
+    function gizle() {tablo1.style.display = "none"; gösteri.innerHTML = "Müşteri tablosu GİZLENMEKTEDİR.";}
+</script>
+</html>

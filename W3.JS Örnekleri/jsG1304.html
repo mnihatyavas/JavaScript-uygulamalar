@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1304.html: Bir w3-CSS'li table-tr-td kayıtlarının http.server sunucudan alışveriş toplamı kontrollu okunması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button {background-color: red; color: yellow;}
+        table {}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body class="w3-container">
+    <!-- "w3.getHttpObject()"; ">>python -m http.server" ve "http://localhost:8000" dahili sunucuyu gerektirmektedir.-->
+    <h1>Alışverişler toplamlı w3-CSS'li tablo</h1>
+    <hr/>
+    <p>"w3.getHttpObject("dosya.js",yükle)" w3.js hazır fonksiyonuyla JSON disk dosya kayıtları "new XMLHTTPRequest()" ile okunup "w3.displayObject("id",object)"la "td" içindeki çoklu "{{Müşteriİsmi}}" ve "{{Alışveriş}} nesne özelliğiyle ilişkilendirilmekte, ayrıca buton tıklaması ve "id.style.display='block'/'none'" ile de bu nesne bilgili w3-CSS'li table-tr-td görünür yada gizli kılınmaktadır. For döngüsü içinde tüm müşterilerin yıllık alışverişleri toplanıp tablo sonuna eklenmektedir. Görünürlük açıklaması alttadır.</p>
+    <hr/>
+        <table id="tablo1" border="1" class="w3-table-all w3-text-deep-purple w3-red" style="margin: 0 auto; width:430px; display: none; padding: 5px;">
+            <caption>YILLIK ALIŞVERİŞ TABLOSU</caption>
+            <tr>
+                <th>Müşteri Adı</th>
+                <th>Alışveriş/yıl</th>
+            </tr>
+            <tr w3-repeat="müşteriler">
+                <td>{{Müşteriİsmi}}</td>
+                <td>{{Alışveriş}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{toplam}}</td>
+            </tr>
+        </table>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button></br/>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    w3.getHttpObject ("jsG1201x.js", yükle);
+    function yükle (nesne) {
+        let i, toplam = 0, dizi = nesne.müşteriler;
+        for (i = 0; i < dizi.length; i++) {toplam +=Number (dizi [i].Alışveriş);}
+        nesne.toplam = toplam.toFixed (2);
+        w3.displayObject ("tablo1", nesne); console.log (nesne);
+    } // func sonu...
+    function göster() {tablo1.style.display = "block"; gösteri.innerHTML = "Sunucudan alınan w3-CSS'li tablo kayıtları GÖRÜLMEKTEDİR.";}
+    function gizle() {tablo1.style.display = "none"; gösteri.innerHTML = "Sunucudan alınan w3-CSS'li tablo kayıtları GİZLENMEKTEDİR.";}
+</script>
+</html>

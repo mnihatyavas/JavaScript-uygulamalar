@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1101.html: Bir JS nesnesinin HTML sayfasında gösterilmesi örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, div {background-color: red; color: yellow;}
+        div {margin: 1em auto; width:220px; display: none; padding: 10px;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>Bir nesnenin gösterilmesi</h1>
+    <hr/>
+    <p>"w3.displayObject("id",şahısNesnesi)" w3.js hazır fonksiyonuyla "div" içindeki "{{özellik}}" nesne özelliği şahısNesnesi'yle ilişkilendirilmekte, ayrıca buton tıklaması ve "id.style.display='block'/'none'" ile de bu nesne bilgili div-bölüm görünür yada gizli kılınmaktadır. Görünürlük açıklaması alttadır.</p>
+    <hr/>
+        <div id="nesne1">
+            İsim: {{adı}} {{soyadı}}<br/>
+            Yaş: {{yaşı}}<br/>
+            İkamet: {{ikameti}}
+        </div>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    var şahısNesnesi = {adı: "M.Nihat", soyadı: "Yavaş", yaşı: 2022-1957, ikameti: "Toroslar - MERSİN"};
+    w3.displayObject ("nesne1", şahısNesnesi);
+    console.log (şahısNesnesi.adı, şahısNesnesi.soyadı, şahısNesnesi ["yaşı"], şahısNesnesi.ikameti);
+
+    function göster() {nesne1.style.display = "block"; gösteri.innerHTML = "Şahıs nesnesi GÖRÜLMEKTEDİR.";}
+    function gizle() {nesne1.style.display = "none"; gösteri.innerHTML = "Şahıs nesnesi GİZLENMEKTEDİR.";}
+</script>
+</html>

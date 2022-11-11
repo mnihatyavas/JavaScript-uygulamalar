@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1111.html: Bir w3-CSS'li tablo satır renk sınıflarının tanımlanması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, caption {background-color: red; color: yellow;}
+        td {padding: 10px;}
+    </style>
+    <link rel="stylesheet" href="jsGw3.css">
+    <script src="jsGw3.js"></script>
+</head>
+<body class="w3-container">
+    <h1>Bir w3-CSS'li table-tr renk sınıfı</h1>
+    <hr/>
+    <p>w3-CSS'li "w3.displayObject("id",nesnem)" w3.js hazır fonksiyonuyla "table->tr->td" içindeki çoklu "{{Müşteriİsmi}}" ve "{{checked}}" nesne özellikleri nesnem'le ilişkilendirilmekte, ayrıca buton tıklaması ve "id.style.display='block'/'none'" ile de bu nesne bilgili çentikli tablo görünür yada gizli kılınmaktadır. Görünürlük açıklaması alttadır.</p>
+    <hr/>
+        <table id="tablo1" class="w3-table-all" style="display: none; margin: 0 auto; width: 296px;">
+            <caption>RENKLİ TABLO</caption>
+            <tr w3-repeat="müşteriler" class="{{renk}}">
+                <td>{{Müşteriİsmi}}</td>
+            </tr>
+        </table>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    var nesnem= {müşteriler:[
+        {Müşteriİsmi: "Alfreds Futterkiste", renk: "w3-yellow"},
+        {Müşteriİsmi: "Ana Trujillo Emparedados y helados", renk: "w3-green"},
+        {Müşteriİsmi: "Antonio Moreno Taquer a", renk: "w3-red"},
+        {Müşteriİsmi: "Around the Horn", renk: "w3-blue"},
+        {Müşteriİsmi: "B's Beverages", renk: "w3-pink"}
+    ]}; // nesnem sonu...
+    w3.displayObject ("tablo1", nesnem);
+    console.log (nesnem);
+
+    function göster() {tablo1.style.display = "block"; gösteri.innerHTML = "Renkli tablo GÖRÜLMEKTEDİR.";}
+    function gizle() {tablo1.style.display = "none"; gösteri.innerHTML = "Renkli tablo GİZLENMEKTEDİR.";}
+</script>
+</html>

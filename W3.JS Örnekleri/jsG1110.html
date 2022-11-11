@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso:8859-9 Türkçe">
+    <title>jsG1110.html: Bir tablo satır renk sınıflarının tanımlanması örneği.</title>
+    <style>
+        html {background-color: #152; font-family: sans-serif; font-size: 17px;}
+        body {
+            background-color: #a97;
+            max-width: 60%;
+            min-width: 400px;
+            padding: 20px;
+            margin: 2em auto;
+            border: 5px solid tomato;}
+        p {color: cyan;}
+        #gösteri {color: blue;}
+        button, caption {background-color: red; color: yellow;}
+        table {display: none; margin: 0 auto; width: 300px;}
+        td {padding: 10px;}
+        .kırmızı {background-color: DarkRed;}
+        .yeşil {background-color: green;}
+        .mavi {background-color: blue;}
+        .sarı {background-color: yellow;}
+        .magenta {background-color: magenta;}
+    </style>
+    <script src="jsGw3.js"></script>
+</head>
+<body>
+    <h1>Bir table-tr renk sınıfı</h1>
+    <hr/>
+    <p>"w3.displayObject("id",nesnem)" w3.js hazır fonksiyonuyla "table->tr->td" içindeki çoklu "{{Müşteriİsmi}}" ve "{{checked}}" nesne özellikleri nesnem'le ilişkilendirilmekte, ayrıca buton tıklaması ve "id.style.display='block'/'none'" ile de bu nesne bilgili çentikli tablo görünür yada gizli kılınmaktadır. Görünürlük açıklaması alttadır.</p>
+    <hr/>
+        <table id="tablo1">
+            <caption>RENKLİ TABLO</caption>
+            <tr w3-repeat="müşteriler" class="{{renk}}">
+                <td>{{Müşteriİsmi}}</td>
+            </tr>
+        </table>
+    <hr/>
+    <button onclick="göster()">Göster</button>
+    <button onclick="gizle()">Gizle</button>
+
+    <p id="gösteri"></p>
+</body>
+<script>
+    var nesnem= {müşteriler:[
+        {Müşteriİsmi: "Alfreds Futterkiste", renk: "kırmızı"},
+        {Müşteriİsmi: "Ana Trujillo Emparedados y helados", renk: "yeşil"},
+        {Müşteriİsmi: "Antonio Moreno Taquer a", renk: "mavi"},
+        {Müşteriİsmi: "Around the Horn", renk: "sarı"},
+        {Müşteriİsmi: "B's Beverages", renk: "magenta"}
+    ]}; // nesnem sonu...
+    w3.displayObject ("tablo1", nesnem);
+    console.log (nesnem);
+
+    function göster() {tablo1.style.display = "block"; gösteri.innerHTML = "Renkli tablo GÖRÜLMEKTEDİR.";}
+    function gizle() {tablo1.style.display = "none"; gösteri.innerHTML = "Renkli tablo GİZLENMEKTEDİR.";}
+</script>
+</html>
